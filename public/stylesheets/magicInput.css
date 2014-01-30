@@ -1,0 +1,37 @@
+/*****************
+ *   THE MAGIC
+ *   *****************/
+input:focus {
+  box-shadow: 0 0 3000px 3000px rgba(151, 125, 48, 0.3);
+  position: relative;
+  z-index: 99999;
+}
+/*****************
+ *   END MAGIC
+ *   *****************/
+
+
+/* Optional Demo Styles */
+
+body {
+  background: #EFEFEF;
+  font-weight: bold;
+  font-family: "Lucida Grande", sans-serif;
+  padding: 20px;
+  color: #333;
+  font-size: 12px;
+  letter-spacing: -1px;
+}
+input {
+  font-size: 21px;
+  font-weight: bold;
+  display: block;
+  margin: 20px 0;
+  outline:0;
+  border:0;
+  padding: 10px 10px;
+  font-size: 13px;
+  width: 300px;
+  border-radius: 4px;
+  box-shadow:inset 0 0 2px rgba(0,0,0,0.5);
+}

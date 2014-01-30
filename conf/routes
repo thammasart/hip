@@ -1,0 +1,21 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+POST    /                           controllers.Application.authenticate()
+GET		/home						controllers.Application.home()
+GET     /PSD                        controllers.Application.perceptionSignalDetection()
+GET     /PCB                        controllers.Application.perceptionChangeBlindness()
+GET     /PCBIframe                  controllers.Application.perceptionChangeBlindnessIframe()
+GET     /PCBProc                    controllers.Application.perceptionChangeBlindnessProc()
+GET     /PCBProcIframe              controllers.Application.perceptionChangeBlindnessProcIframe()
+GET     /STMBtProc                  controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskProc()
+GET     /STMBtProcIframe            controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskProcIframe()
+GET     /STMBt                      controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTask()
+GET     /STMBtIframe                controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskIframe()
+GET     /STMBtExp                   controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskExp()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

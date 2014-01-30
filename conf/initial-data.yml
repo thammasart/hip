@@ -1,0 +1,15 @@
+
+# Users
+
+- &sak !!models.User
+    id:      5109650498
+    password:   zxcvb
+
+- &peat !!models.User
+    id:      5109650456
+    password:   abc123
+
+- &nick !!models.User
+    id:      5209610210
+    password:   qwerty
+
