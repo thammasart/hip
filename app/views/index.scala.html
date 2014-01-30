@@ -24,9 +24,9 @@
             
 <!-- Login Right Panel : Username form --> 
 
-            <form action="@routes.Application.authenticate()" method="post"> 
+            <form action="@routes.Application.home()" method="post"> 
             <div class="form-group">
-              <input name="id" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
+              <input name="username" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
               <label class="login-field-icon fui-user" for="login-name"></label>
             </div>
             
@@ -39,7 +39,7 @@
 <!-- Login Right Panel : Login Button -->           
           <br> 
                      
-           <button class="btn btn-block  btn-lg btn-success" type="submit"> 
+           <button class="btn btn-block btn-lg btn-success" type="submit"> 
             Login
             </button> 
             </form>

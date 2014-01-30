@@ -42,7 +42,7 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
 	public static Result home(){
-        return ok(home.render(User.find.byId(request().username())));
+        return ok(home.render());
     }
 	
 	public static Result authenticate() {

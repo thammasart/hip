@@ -9,12 +9,27 @@
     </div>
 
 <!-- Content -->
+<div class="questionBox">
+      <div align="center" class="questionWord" id="word1">1234567890</div>
+      <div align="center" class="questionWord" id="word2">123</div>
+      <div align="center" class="questionWord" id="word3">123456</div>
+</div>
+<div class="rabbitContainer">
+  <div id="hopRabbit"class="rabbit"></div>
+  <div id="cloud" class="clouds"></div>
+  <div id="counter" class="counterText" align="center"></div>
+</div>
 <div class="answerBox">
-    <h5> คำตอบ </h5>
+    
+  <span class="headerBox">คำตอบ</span>
+  <span class="headerNumberBox">ใส่ตัวเลข</span>
         <form>
-          <input type="text" placeholder="คำที่ 1" disabled />
-          <input type="text" placeholder="คำที่ 2" disabled />  
-          <input type="text" placeholder="คำที่ 3" disabled />
+          <input class="inputBox" id = "text1" type="text" placeholder="      คำตอบ" disabled />
+          <input class="inputBox" id = "text2" type="text" placeholder="      คำตอบ" disabled />  
+          <input class="inputBox"id = "text3" type="text" placeholder="      คำตอบ" disabled />
+          <input class="inputNumberBox" id = "text4" type="text" placeholder="  เลข" disabled />
+
+          <input type="submit" class="sbutton" disabled name="Submit" value="ยืนยัน" />
         </form>
 </div>
 @footer()
