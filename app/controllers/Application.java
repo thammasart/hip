@@ -5,6 +5,8 @@ import play.mvc.*;
 import play.data.*;
 import views.html.*;
 import views.html.iframe.*;
+import views.html.signalDetection.*;
+import views.html.changeBlindness.*;
 import models.*;
 
 public class Application extends Controller {

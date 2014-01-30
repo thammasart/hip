@@ -3,7 +3,7 @@ package controllers;
 import play.*;
 import play.mvc.*;
 import play.data.*;
-import views.html.*;
+import views.html.brownPeterson.*;
 import views.html.iframe.*;
 
 public class BrownPeterson extends Controller {
