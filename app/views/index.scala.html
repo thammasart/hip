@@ -24,9 +24,9 @@
             
 <!-- Login Right Panel : Username form --> 
 
-            <form action="@routes.Application.home()" method="post"> 
+            <form action="@routes.Application.authenticate()" method="post"> 
             <div class="form-group">
-              <input name="username" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
+              <input name="id" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
               <label class="login-field-icon fui-user" for="login-name"></label>
             </div>
             
