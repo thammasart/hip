@@ -5,8 +5,14 @@
 # Home page
 GET     /                           controllers.Application.index()
 POST    /                           controllers.Application.authenticate()
+<<<<<<< HEAD
 GET		/logout						controllers.Application.logout()
 GET		/home						controllers.Application.home()
+=======
+GET     /home                       controllers.Application.home()
+GET     /about                      controllers.Application.about()
+GET		/						controllers.Application.logout()
+>>>>>>> 09b91abf33f0d4e781fdadb2311fa8a67df887fe
 GET     /PSD                        controllers.Application.perceptionSignalDetection()
 GET     /PCB                        controllers.Application.perceptionChangeBlindness()
 GET     /PCBIframe                  controllers.Application.perceptionChangeBlindnessIframe()

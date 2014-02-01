@@ -1,0 +1,16 @@
+<!-- Page Header -->
+    <div class="">
+        <div class="login-bar" ><span>@session().get("username")  </span>
+            <button type="button" class="btn btn-default btn-xs"><a href="@routes.Application.logout()">logout</a></button>
+        </div>
+          <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+         <!-- Page Header Menu-->
+          <h6 align="center" class="topMenu">
+               <a href="@routes.Application.home()">หน้าแรก</a>&nbsp; | &nbsp;
+               <a href="@routes.Application.about()">เกี่่ยวกับ HIP Lab</a>&nbsp; | &nbsp;
+               <a href="#">ผลการทดลอง</a>
+          </h6>
+          <!-- Dashed line-->
+          <div class="titleLine"></div>
+    </div>
+<br>

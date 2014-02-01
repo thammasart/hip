@@ -46,6 +46,7 @@ public class Application extends Controller {
     }
 
     public static Result logout() {
+<<<<<<< HEAD
         return TODO;
     }
 	
@@ -59,6 +60,29 @@ public class Application extends Controller {
     		session("username", userForm.get().username);
     		return redirect(routes.Application.home());
     	}
+=======
+        session().clear();
+        flash("success", "You've been logged out");
+        return redirect(
+            routes.Application.index()
+        );
+    }
+
+	public static Result authenticate() {
+        Form<UserForm> userForm = Form.form(UserForm.class).bindFromRequest();
+        if(userForm.hasErrors()) {
+            return badRequest(index.render(userForm));
+        }
+        else {
+            session().clear();
+            session("username", userForm.get().username);
+            return redirect(routes.Application.home());
+        }
+    }
+
+    public static Result about() {
+        return ok(about.render());
+>>>>>>> 09b91abf33f0d4e781fdadb2311fa8a67df887fe
     }
 
 }

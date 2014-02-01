@@ -183,8 +183,15 @@ width:631px;
     color:#34495E;
     background:#BDC3C7;
     padding:20px 100px;
+    margin-top: 0px;
     
-    
+}
+.login-bar{
+    margin-bottom: 0px;
+    text-align: right;
+}
+.login-bar span{
+    font-size: 14px;
 }
 .titleLine{
     color:#34495E;
