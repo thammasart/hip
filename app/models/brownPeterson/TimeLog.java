@@ -17,9 +17,18 @@ public class TimeLog extends Model{
 	@ManyToOne
 	public Trial trial;
 
+	public TimeLog(Date startTime){
+		this.startTime = startTime;
+	}
 	public TimeLog(Date startTime, Date endTime){
 		this.startTime = startTime;
 		this.endTime = endTime;
+	}
+	public static TimeLog create(Date startTime, User user, Trial trial){
+		TimeLog timeLog = new TimeLog(startTime);
+		timeLog.user = user;
+		timeLog.trial = trial;
+		return timeLog;
 	}
 
 	public static TimeLog create(Date startTime, Date endTime, User user, Trial trial){

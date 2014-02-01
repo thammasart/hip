@@ -4,6 +4,7 @@ import models.brownPeterson.Question;
 import models.brownPeterson.Quiz;
 import models.brownPeterson.Answer;
 import models.brownPeterson.Trial;
+import models.brownPeterson.TimeLog;
 import models.User;
 import models.ExperimentSchedule;
 import play.*;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import views.html.brownPeterson.*;
 import views.html.iframe.*;
+import java.util.Date;
 
 public class BrownPeterson extends Controller {
     public static List<Answer> answerList = new ArrayList<Answer>();
@@ -36,14 +38,18 @@ public class BrownPeterson extends Controller {
             return ok(brown_peterson_proc_iframe.render());
         }
         public static Result taskExperiment(long trialId){
-            List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trialId).findList();
+            
             User user = User.find.where().eq("username", session().get("username")).findUnique();
+            List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trialId).findList();
             questions = Question.findInvolving(quizzes);
 
             Form<Answer> filledForm = Form.form(Answer.class);
             Answer answer = filledForm.bindFromRequest().get();
             if (questionNumber > 0){
                 answerList.add(answer);
+            }
+            if(questionNumber == 0){
+                TimeLog.create(new Date(),user, Trial.findById((int)trialId)).save();
             }
             if (questionNumber+1 <= questions.size())
                 return ok(brown_peterson_exp.render(questions.get(questionNumber),quizzes.get(questionNumber++).initCountdown, trialId));

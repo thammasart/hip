@@ -83,6 +83,7 @@ public class UserTest extends WithApplication{
         	new User("100","1234").save();
         	
         }
+
 }
 
 
