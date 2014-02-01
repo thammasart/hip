@@ -3,7 +3,7 @@
     name:           Ex1
     noOfTrial:      3
     startDate:      2014-01-30
-    expireDate:        2014-02-07
+    expireDate:        2015-02-07
 
 #Question
 - &Question1 !!models.brownPeterson.Question
@@ -73,6 +73,10 @@
 - &pae !!models.User
     username:               s551
     password:               1234
+
+- &nick !!models.User
+    username:               s552
+    password:               1111
 #Trial
 - &round1 !!models.brownPeterson.Trial
     trigramLanguage:       english

@@ -1,7 +1,7 @@
 var questionTime = 5000;
 var countDownTime = 5000;
 var flashTime = 5000;
-var answerTime = 10000;
+var answerTime = 30000;
 var startTimer = setInterval(function() {startTimerFunction()},3000);
 var countdownTimer = 0;
 var flashTimer = 0;

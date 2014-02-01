@@ -1,10 +1,11 @@
-@(question : models.brownPeterson.Question,count : Integer)
+@(question : models.brownPeterson.Question,count : Integer, trialId : Long)
 @header("Human Information Processing Lab :: Home Page")
 <body>
 
 <!-- Page Header -->
     <div class="">
           <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+          <p>Count : @count - trial id : @trialId</p>
           <!-- Dashed line-->
           <div class="titleLine"></div>
     </div>
@@ -24,7 +25,7 @@
     
   <span class="headerBox">คำตอบ</span>
   <span class="headerNumberBox">ใส่ตัวเลข</span>
-        <form action="@routes.BrownPeterson.renderShortTermMemoryBrownPetersonTaskExp()" method="post">
+        <form action="@routes.BrownPeterson.taskExperiment(trialId)" method="post">
           <input class="inputBox" id = "firstWord" name = "firstWord" type="text" placeholder="      คำตอบ" disabled />
           <input class="inputBox" id = "secondWord" name = "secondWord" type="text" placeholder="      คำตอบ" disabled />
           <input class="inputBox" id = "thirdWord" name = "thirdWord" type="text" placeholder="     คำตอบ"  disabled />
