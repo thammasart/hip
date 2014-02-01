@@ -16,6 +16,11 @@
          <br><br>
          <h4 class="tile-title">Hello and welcome!</h4>
          <small style="font-size:14px;">Type-in your username and password to login</small>
+         @if(flash.contains("success")) {
+            <p class="success">
+                @flash.get("success")
+            </p>
+        }
     </div >
 
 <!-- Login Right Panel -->
@@ -26,7 +31,7 @@
 
             <form action="@routes.Application.authenticate()" method="post"> 
             <div class="form-group">
-              <input name="id" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
+              <input name="username" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
               <label class="login-field-icon fui-user" for="login-name"></label>
             </div>
             
