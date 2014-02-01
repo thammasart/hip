@@ -1,12 +1,12 @@
 package models;
 
 public class UserForm {
-	public String id;
+	public String username;
 	public String password;
 	
-	public String validate() {
-	    if (User.authenticate(id, password) == null) {
-	      return "Invalid user or password";
+	public String valusernameate() {
+	    if (User.authenticate(username, password) == null) {
+	      return "Invalusername user or password";
 	    }
 	    return null;
 	}

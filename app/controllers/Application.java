@@ -44,6 +44,10 @@ public class Application extends Controller {
 	public static Result home(){
         return ok(home.render());
     }
+
+    public static Result logout() {
+        return TODO;
+    }
 	
 	public static Result authenticate() {
     	Form<UserForm> userForm = Form.form(UserForm.class).bindFromRequest();
@@ -52,7 +56,7 @@ public class Application extends Controller {
     	}
     	else {
     		session().clear();
-    		session("id", userForm.get().id);
+    		session("username", userForm.get().username);
     		return redirect(routes.Application.home());
     	}
     }

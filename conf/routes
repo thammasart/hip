@@ -5,6 +5,7 @@
 # Home page
 GET     /                           controllers.Application.index()
 POST    /                           controllers.Application.authenticate()
+GET		/logout						controllers.Application.logout()
 GET		/home						controllers.Application.home()
 GET     /PSD                        controllers.Application.perceptionSignalDetection()
 GET     /PCB                        controllers.Application.perceptionChangeBlindness()
