@@ -47,22 +47,7 @@ width:631px;
     margin: 15px auto 30px 40px;
 }
 /*-----------------------Animation ------------------------------------------------------------*/
-.animation{
-    background:white;
-    -webkit-animation:test 1s infinite;
-}
 
-@-webkit-keyframes test{
-    form{background:white;}
-    to{background:gray;}
-}
-
-.answerBox{
-    margin:auto;
-    margin-bottom:2em;
-    height:82px;
-    width:720px;
-}
 /*---------------------home -------------------------------------------------------------------*/
 
 .homeMenu1{
@@ -70,12 +55,13 @@ width:631px;
     padding:20px 20px 30px 20px;
     border:none;size:200px 200px;
     margin:auto ;
+    margin-left:1em;
 }
 
 .homeMain{
     height:305px;
-    width:631px;
-    margin:auto ;
+    width:700px;
+    margin:0px auto;
 }
 .divSlideContainer{
     margin:auto;
@@ -109,8 +95,8 @@ width:631px;
 .divPngInfo{
      margin-left: 14px ;
      padding:15px 50px 15px 50px;
-     width:220px;
-     height:140px;
+     width:70%;
+     height:60%;
      border-width:0px;
 
 }
@@ -123,7 +109,7 @@ width:631px;
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .infoContainer{
-     width:900px;
+     width:950px;
      height:350px;
      margin: 50px auto 50px auto;
      
@@ -140,7 +126,7 @@ width:631px;
 }
 .procButtonContainer{
      width:900px;
-     height:200px;
+     height:100px;
      margin-top:1em;
 }
 .procButtonGreen{
@@ -161,8 +147,7 @@ width:631px;
 
 .infoButton{
      float:left;
-     margin-left: 30px;
-     width:250px;
+     width:450px;
      height:350px;
 }
     
@@ -176,22 +161,96 @@ width:631px;
      font-family:Tahoma, 'Microsoft Sans Serif', AngsanaUPC, CordiaUPC;
 }
 .procNotification{
+     margin-left:1em;
+     margin-right:1em;
      color:#CC3300;
 }
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.infoButtonContainer{
+    position:relative;
+    bottom:10px;
+    right:-35px;
+    width:450px;
+}
+.infoRedButton{
+    float:left;
+    width:130px;
+}
+.infoGreenButton{
+    float:left;
+    margin-left: 25px;
+    width:250px;
+}
+/*-------------------------------------Experiment Page------------------------------------------------------------------------------------------------------*/
+.answerBox{
+    margin:auto;
+    margin-bottom:2em;
+    height:180px;
+    width:1500px;
+}
+
+.rabbitContainer{
+    width:300px;
+    height:200px;
+    padding-top:1em;
+    padding-right:1em;
+    margin:auto;
+    margin-top:1em;
+    margin-bottom:2em;
+}
+.questionBox{
+    width:60em;
+    height:50px;
+    font-size:20px;
+    margin:auto;
+    margin-top:2em;
+    margin-bottom:2em;
+}
+.counterText{
+    visibility:hidden;
+    width:100px;
+    height:50px;
+    font-size:50px;
+}
+.questionWord{
+    float:left;
+    width:7em;
+    height:50px;
+    font-size:40px;
+    margin-left:2em;
+}
+.inputBox{
+    width:8em;
+    padding:0px;
+    font-size:2em;
+    border: 2px solid #185daa;
+    margin:20px auto;
+    margin-right:1em;
+}
+.inputNumberBox{
+    width:3em;
+    padding:0px;
+    font-size:2em;
+    border: 2px solid green;
+    margin:20px auto;
+    margin-right:1em;
+    margin-left:2em; 
+}
+
+.headerBox{
+    font-size: 40px;
+    margin-left:5%;
+}
+
+.headerNumberBox{
+    font-size: 40px;
+    margin-left:832px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------*/
 .hipTitle{
     color:#34495E;
     background:#BDC3C7;
     padding:20px 100px;
-    margin-top: 0px;
-    
-}
-.login-bar{
-    margin-bottom: 0px;
-    text-align: right;
-}
-.login-bar span{
-    font-size: 14px;
 }
 .titleLine{
     color:#34495E;
@@ -243,3 +302,33 @@ height:4em;
 .center{
 padding-top:8em;
 }
+
+
+/*-----------------------------------------------*/
+
+
+
+.sbutton {
+
+    -webkit-transform: translateY(-8%);
+    -ms-transform: translateY(-8%);
+    transform: translateY(-8%); 
+  text-align: center;
+  border-radius:4px;
+  text-decoration: none;
+  background: #69c773;
+  background-color: rgb(105, 199, 115);
+  -webkit-box-shadow: 0 4px 0 0 #51a65f;
+  -moz-box-shadow: 0 4px 0 0 #51a65f;
+  box-shadow: 0 4px 0 0 #51a65f;
+  font-size: 20px !important;
+  padding: 15px 20px;
+  width: 250px;
+  color: #FFF;
+}
+.sbutton:hover {
+  cursor: pointer;
+  color: #51A65F;
+}
+
+
