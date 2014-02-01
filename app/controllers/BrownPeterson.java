@@ -2,17 +2,16 @@ package controllers;
 
 import models.brownPeterson.Question;
 import models.brownPeterson.Quiz;
+import models.brownPeterson.Answer;
 import play.*;
 import play.mvc.*;
 import play.data.*;
-import views.html.*;
-import views.html.iframe.*;
 
-import models.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import models.brownPeterson.*;
+import views.html.brownPeterson.*;
+import views.html.iframe.*;
 
 public class BrownPeterson extends Controller {
     public static List<Answer> answerList = new ArrayList<Answer>();
