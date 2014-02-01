@@ -10,8 +10,11 @@ import java.util.ArrayList;
 public class Question extends Model {
 	@Id
 	public Long id;
+	@Column(nullable=false, length=20)
 	public String firstWord;
+	@Column(nullable=false, length=20)
 	public String secondWord;
+	@Column(nullable=false, length=20)
 	public String thirdWord;
 
 	public Question (String firstWord, String secondWord,String thirdWord){
@@ -38,7 +41,16 @@ public class Question extends Model {
 		}
 		return null;
 	}
-        
+
+	public static List<Question> findInvolving(List<Quiz> quizzes){
+		List<Question> questions = new ArrayList<Question>();
+		for(Quiz quiz : quizzes){
+			questions.add(quiz.question);
+		}
+		return questions;
+	}
+    
+    @SuppressWarnings("unchecked")
 	public static Finder<Long,Question> find = new Finder(Long.class,Question.class);
 
 }

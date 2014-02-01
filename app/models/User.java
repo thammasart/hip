@@ -1,23 +1,39 @@
 package models;
 
-import javax.persistence.*;
+import models.brownPeterson.TimeLog;
+import models.brownPeterson.Answer;
+import java.util.List;
+import java.util.ArrayList;
 import play.db.ebean.*;
-import com.avaje.ebean.*;
-
+import javax.persistence.*;
 @Entity
-public class User extends Model {
+public class User extends Model{
+
 	@Id
-	public String id;
+	@Column(length=20)
+	public String username;
+	@Column(nullable=false, length=20)
 	public String password;
+	public UserRole status = UserRole.STUDENT;
 
-	public User(String id, String password) {
-		this.id = id;
-		this.password = password;
+	@OneToMany
+	List<Answer> answers = new ArrayList<Answer>();
+	@OneToMany
+	List<TimeLog> timeLogs = new ArrayList<TimeLog>();
+
+	public User(String username,String password){
+		this.username = username;
+		this.password =password;
 	}
 
-	public static User authenticate(String id, String password) {
-		return find.where().eq("id", id).eq("password", password).findUnique();
+	public static List<User> getAllUser(){
+		return find.all();
 	}
 
-	public static Finder<String, User> find = new Finder<String,User>(String.class, User.class);
+	public static User authenticate(String username, String password) {
+		return find.where().eq("username", username).eq("password", password).findUnique();
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Finder<String,User> find = new Finder(String.class,User.class);
 }

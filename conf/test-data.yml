@@ -68,11 +68,7 @@
 #User
 - &ohm !!models.User
     username:              s550
-    password:              password
-
-- &pae !!models.User
-    username:               s551
-    password:               1234
+    password:               password
 #Trial
 - &round1 !!models.brownPeterson.Trial
     trigramLanguage:       english
@@ -159,17 +155,17 @@
     user: *ohm                 
     quiz: *quiz1           
 - &answer2 !!models.brownPeterson.Answer
-    firstWord:              q2w3                
+    firstWord:              wrong                
     secondWord:             q2w2
-    thirdWord:              q2w1
+    thirdWord:              q2w3
     usedTime:                   15
     countdownResult:        100
     user: *ohm                 
     quiz: *quiz2
 - &answer3 !!models.brownPeterson.Answer
-    firstWord:              q3w2                
-    secondWord:             q3w2
-    thirdWord:              q3w2
+    firstWord:              q3w1                
+    secondWord:             wrong
+    thirdWord:              q3w3
     usedTime:                   10
     countdownResult:        49
     user: *ohm                 
@@ -178,35 +174,35 @@
     usedTime:                   10
     countdownResult:        85
     user: *ohm                 
-    quiz: *quiz4           
+    quiz: *quiz1           
 - &answer5 !!models.brownPeterson.Answer
     firstWord:              wrong                
     thirdWord:              q5w3
     usedTime:                   15
     countdownResult:        100
     user: *ohm                 
-    quiz: *quiz5
+    quiz: *quiz2
 - &answer6 !!models.brownPeterson.Answer
     firstWord:              q6w1                
     usedTime:                   10
     countdownResult:        49
     user: *ohm                 
-    quiz: *quiz6
+    quiz: *quiz3
 - &answer7 !!models.brownPeterson.Answer
     firstWord:              q7w1                
     secondWord:             q7w2
     thirdWord:              q7w3
     usedTime:                   5
     user: *ohm                 
-    quiz: *quiz7           
+    quiz: *quiz1           
 - &answer8 !!models.brownPeterson.Answer
     firstWord:              wrong                
     secondWord:             q8w2
     thirdWord:              wrong
     usedTime:                   15
     user: *ohm                 
-    quiz: *quiz8
+    quiz: *quiz2
 - &answer9 !!models.brownPeterson.Answer
     usedTime:                   10
     user: *ohm                 
-    quiz: *quiz9
+    quiz: *quiz3

@@ -44,17 +44,29 @@ public class Application extends Controller {
 	public static Result home(){
         return ok(home.render());
     }
-	
+
+    public static Result logout() {
+        session().clear();
+        flash("success", "You've been logged out");
+        return redirect(
+            routes.Application.index()
+        );
+    }
+
 	public static Result authenticate() {
-    	Form<UserForm> userForm = Form.form(UserForm.class).bindFromRequest();
-    	if(userForm.hasErrors()) {
-    		return badRequest(index.render(userForm));
-    	}
-    	else {
-    		session().clear();
-    		session("id", userForm.get().id);
-    		return redirect(routes.Application.home());
-    	}
+        Form<UserForm> userForm = Form.form(UserForm.class).bindFromRequest();
+        if(userForm.hasErrors()) {
+            return badRequest(index.render(userForm));
+        }
+        else {
+            session().clear();
+            session("username", userForm.get().username);
+            return redirect(routes.Application.home());
+        }
+    }
+
+    public static Result about() {
+        return ok(about.render());
     }
 
 }

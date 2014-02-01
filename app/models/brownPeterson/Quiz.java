@@ -9,7 +9,9 @@ import java.util.ArrayList;
 public class Quiz extends Model{
 	@Id
 	public long id;
-	public int countdown = 100;
+	@Column(length=3)
+	public int initCountdown = 100;
+	@Column(length=20)
 	public int flashTime =5;
 
 	@ManyToOne
@@ -18,13 +20,16 @@ public class Quiz extends Model{
 	@ManyToOne
 	public Question question;
 
-	public Quiz(int countdown, int flashTime){
-		this.countdown = countdown;
+	@OneToMany
+	public List<Answer> answers = new ArrayList<Answer>();
+
+	public Quiz(int initCountdown, int flashTime){
+		this.initCountdown = initCountdown;
 		this.flashTime = flashTime;
 	}
 
-	public static Quiz create(int countdown, int flashTime, Trial trial, Question question){
-		Quiz quiz = new Quiz(countdown, flashTime);
+	public static Quiz create(int initCountdown, int flashTime, Trial trial, Question question){
+		Quiz quiz = new Quiz(initCountdown, flashTime);
 		quiz.trial = trial;
 		quiz.question = question;
 		return quiz;
@@ -33,6 +38,7 @@ public class Quiz extends Model{
 	public static List<Quiz> findInvolving(Trial trial){
 		return find.where().eq("trial", trial).findList();
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	public static Finder<Long, Quiz> find = new Finder(Long.class, Quiz.class);
 }
