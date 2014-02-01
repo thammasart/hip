@@ -4,10 +4,7 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-POST    /                           controllers.Application.authenticate()
-GET     /home                       controllers.Application.home()
-GET     /about                      controllers.Application.about()
-GET		/						controllers.Application.logout()
+POST    /                           controllers.Application.home()
 GET     /PSD                        controllers.Application.perceptionSignalDetection()
 GET     /PCB                        controllers.Application.perceptionChangeBlindness()
 GET     /PCBIframe                  controllers.Application.perceptionChangeBlindnessIframe()
@@ -18,6 +15,7 @@ GET     /STMBtProcIframe            controllers.BrownPeterson.renderShortTermMem
 GET     /STMBt                      controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTask()
 GET     /STMBtIframe                controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskIframe()
 GET     /STMBtExp                   controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskExp()
+POST    /STMBtExp                   controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskExp()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

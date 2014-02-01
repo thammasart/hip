@@ -1,0 +1,64 @@
+
+@-webkit-keyframes fill {
+  to { width: 100%; }
+}
+@-moz-keyframes fill {
+  to { width: 100%; }
+}
+@-o-keyframes fill {
+  to { width: 100%; }
+}
+@keyframes fill {
+  to { width: 100%; }
+}
+
+/* Button */
+.submitButton {
+  background: rgba(0,0,0,0.0);
+  color: #FFF;
+  border: 0;
+  width: 185px;
+  height: 60px;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 100;
+  position: relative;
+  z-index: 20;
+}
+
+.submitButtonContainer{
+    background: #33B679;
+    height: 60px;
+    position: relative;
+    width: 185px;
+    z-index:10;
+}
+
+.submitButtonContainer:before {
+    height: 100%;
+    line-height: 3.1;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.submitButtonContainer:after {
+    background: rgba(0,0,0,0.15);
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 0;
+}
+
+.submitButtonContainer.animation {
+}
+
+.submitButtonContainer.animation:after {
+    -webkit-animation: fill .5s forwards ease-out;
+    -moz-animation: fill .5s forwards ease-out;
+    -o-animation: fill .5s forwards ease-out;
+    animation: fill .5s forwards ease-out;
+    left: 0;
+    top: 0;
+    z-index: 5;
+}
