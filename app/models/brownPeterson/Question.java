@@ -29,13 +29,12 @@ public class Question extends Model {
 
 	public static List<Question> getQuestionListBy(int amount){
 		List<Question> allQuestion = new ArrayList<Question>();
-        	List<Question> questionList = new ArrayList<Question>();
-                allQuestion = find.all();
-      
-                if(allQuestion.size() >= amount){
-	            Collections.shuffle(allQuestion);
+        List<Question> questionList = new ArrayList<Question>();
+        allQuestion = find.all();
+        if(allQuestion.size() >= amount){
+	        Collections.shuffle(allQuestion);
 			for(int i = 0;i < amount;i++){
-	        		questionList.add(allQuestion.get(i));
+	        	questionList.add(allQuestion.get(i));
 			}
 			return questionList;
 		}

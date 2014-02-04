@@ -22,3 +22,11 @@ $(document).ready(function(){
     $("#panel03").slideToggle("fast");
   });
 });
+
+$(function() {
+  $( "#startDate" ).datepicker();
+});
+
+$(function() {
+  $( "#expireDate" ).datepicker();
+});
