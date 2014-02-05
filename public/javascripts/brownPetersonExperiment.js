@@ -1,10 +1,10 @@
 var questionTime = 5000;
 var countDownTime = 5000;
 var flashTime = 5000;
-var answerTime = 10000;
+var answerTime = 30000;
 var startTimer = setInterval(function() {startTimerFunction()},3000);
 var countdownTimer = 0;
-var flashTimer = 0;
+var flashTimer;
 var answerTimer = 0;
 var finTimer = 0;
 var expDuration = 0;
@@ -32,6 +32,7 @@ function flashTimerFunction(){
         clearInterval(flashTimer);
         document.getElementById("counter").style.visibility = "hidden";
         document.getElementById("hopRabbit").style.visibility = "visible";
+        flashTime = document.getElementById("flashTime").value;
     	answerTimer = setInterval(function() {answerTimerFunction()},flashTime);
 }
 

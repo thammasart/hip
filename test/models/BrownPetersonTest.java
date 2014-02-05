@@ -16,7 +16,6 @@ public class BrownPetersonTest extends WithApplication {
 	public void setUp() {
 		start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
 		Ebean.save((List) Yaml.load("test-data.yml"));
-
 	}
 
 	@Test
@@ -69,5 +68,18 @@ public class BrownPetersonTest extends WithApplication {
 		Trial trial = Trial.find.where().eq("id", 1).findUnique();
 		List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trial.id).findList();
 		assertEquals(3, quizzes.size());
+	}
+
+	@Test
+	public void check_user_used_to_take_the_trial_by_timelog_success(){
+		User user = User.find.where().eq("username", "s550").findUnique();
+		Trial trial = Trial.find.where().eq("id", 1).findUnique();
+		assertTrue(TimeLog.isRepeatTrial(user, trial));
+	}
+	@Test
+	public void check_user_used_to_take_the_trial_by_timelog_fail(){
+		User user = User.find.where().eq("username", "s551").findUnique();
+		Trial trial = Trial.find.where().eq("id", 1).findUnique();
+		assertFalse(TimeLog.isRepeatTrial(user, trial));
 	}
 }

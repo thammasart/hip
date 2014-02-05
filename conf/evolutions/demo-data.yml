@@ -7,19 +7,19 @@
 
 #Question
 - &Question1 !!models.brownPeterson.Question
-    firstWord:                q1w1
-    secondWord:               q1w2
-    thirdWord:                q1w3  
+    firstWord:                finger
+    secondWord:               cake
+    thirdWord:                report 
 
 - &Question2 !!models.brownPeterson.Question
-    firstWord:                q2w1
-    secondWord:               q2w2
-    thirdWord:                q2w3
+    firstWord:                image
+    secondWord:               graph
+    thirdWord:                address
 
 - &Question3 !!models.brownPeterson.Question
-    firstWord:                q3w1
-    secondWord:               q3w2
-    thirdWord:                q3w3
+    firstWord:                monkey
+    secondWord:               leaf
+    thirdWord:                mangosteen
 - &Question4 !!models.brownPeterson.Question
     firstWord:                q4w1
     secondWord:               q4w2
@@ -76,6 +76,21 @@
 
 - &nick !!models.User
     username:               s552
+    password:               1111
+- &demo1 !!models.User
+    username:               s553
+    password:               1111
+- &demo2 !!models.User
+    username:               s554
+    password:               1111
+- &demo3 !!models.User
+    username:               s555
+    password:               1111
+- &demo4 !!models.User
+    username:               s556
+    password:               1111
+- &demo5 !!models.User
+    username:               s557
     password:               1111
 #Trial
 - &round1 !!models.brownPeterson.Trial
@@ -136,81 +151,3 @@
     flashTime:                 3
     trial: *round3
     question: *Question11
-
-#TimeLog
-- &timelog1 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-15
-    endTime: 2014-01-30
-    user: *ohm
-    trial: *round1
-- &timelog2 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-30
-    endTime: 2014-01-30
-    user: *ohm
-    trial: *round2
-- &timelog3 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-19
-    endTime: 2014-01-30
-    user: *ohm
-    trial: *round3
-#Answer
-- &answer1 !!models.brownPeterson.Answer
-    firstWord:              q1w1                
-    secondWord:             q1w2
-    thirdWord:              q1w3
-    usedTime:                  5
-    countdownResult:        85
-    user: *ohm                 
-    quiz: *quiz1           
-- &answer2 !!models.brownPeterson.Answer
-    firstWord:              q2w3                
-    secondWord:             q2w2
-    thirdWord:              q2w1
-    usedTime:                   15
-    countdownResult:        100
-    user: *ohm                 
-    quiz: *quiz2
-- &answer3 !!models.brownPeterson.Answer
-    firstWord:              q3w2                
-    secondWord:             q3w2
-    thirdWord:              q3w2
-    usedTime:                   10
-    countdownResult:        49
-    user: *ohm                 
-    quiz: *quiz3
-- &answer4 !!models.brownPeterson.Answer
-    usedTime:                   10
-    countdownResult:        85
-    user: *ohm                 
-    quiz: *quiz4           
-- &answer5 !!models.brownPeterson.Answer
-    firstWord:              wrong                
-    thirdWord:              q5w3
-    usedTime:                   15
-    countdownResult:        100
-    user: *ohm                 
-    quiz: *quiz5
-- &answer6 !!models.brownPeterson.Answer
-    firstWord:              q6w1                
-    usedTime:                   10
-    countdownResult:        49
-    user: *ohm                 
-    quiz: *quiz6
-- &answer7 !!models.brownPeterson.Answer
-    firstWord:              q7w1                
-    secondWord:             q7w2
-    thirdWord:              q7w3
-    usedTime:                   5
-    user: *ohm                 
-    quiz: *quiz7           
-- &answer8 !!models.brownPeterson.Answer
-    firstWord:              wrong                
-    secondWord:             q8w2
-    thirdWord:              wrong
-    usedTime:                   15
-    user: *ohm                 
-    quiz: *quiz8
-- &answer9 !!models.brownPeterson.Answer
-    usedTime:                   10
-    user: *ohm                 
-    quiz: *quiz9
