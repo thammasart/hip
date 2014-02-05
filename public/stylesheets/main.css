@@ -366,3 +366,8 @@ padding-top:8em;
   color: #51A65F;
 }
 
+/* Admin Panel */
+.admin-name{
+    color: #999;
+    margin-right: 10px;
+}
