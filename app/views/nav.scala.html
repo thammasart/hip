@@ -1,6 +1,11 @@
+@(user : User)
 <!-- Page Header -->
-    <div class="">
-        <div class="login-bar" ><span>@session().get("username")  </span>
+    <div class="nav navbar">
+        <div class="login-bar" >
+          @if(user.status == UserRole.ADMIN){
+            <a href="@routes.Admin.index()">&#91;admin&#93;</a>
+          }
+          <span>@request().username()  </span>
             <button type="button" class="btn btn-default btn-xs"><a href="@routes.Application.logout()">logout</a></button>
         </div>
           <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>

@@ -1,6 +1,6 @@
-@(score : Integer,totalUsedTime: Double, totalScore : Integer,title : String)
+@(score : Integer,totalUsedTime: Double, totalScore : Integer,title : String, user : User)
 @header(title)
-@nav()
+@nav(user)
 <body>
 <div class="container report">
     <h3>คะแนน : @score/@totalScore </h3>
