@@ -40,6 +40,7 @@ public class BrownPeterson extends Controller {
     public static Result taskExperiment(long trialId){
             
         User user = User.find.where().eq("username", session().get("username")).findUnique();
+        Trial trial = Trial.find.where().eq("id", trialId).findUnique();
         List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trialId).findList();
         questions = Question.findInvolving(quizzes);
         Form<Answer> filledForm = Form.form(Answer.class);
@@ -47,11 +48,13 @@ public class BrownPeterson extends Controller {
         if (questionNumber > 0){
             answerList.add(answer);
         }
-        if(questionNumber == 0){
-            TimeLog.create(new Date(),user, Trial.findById((int)trialId)).save();
+        /*if(questionNumber == 0){
+            TimeLog.create(new Date(),user, trial).save();
+        }*/
+        if (questionNumber+1 <= questions.size()){
+            int flashTime = quizzes.get(questionNumber).flashTime * 1000;
+            return ok(brown_peterson_exp.render(questions.get(questionNumber),quizzes.get(questionNumber++).initCountdown, flashTime,trialId));
         }
-        if (questionNumber+1 <= questions.size())
-            return ok(brown_peterson_exp.render(questions.get(questionNumber),quizzes.get(questionNumber++).initCountdown, trialId));
         else{
             List<Answer> answerListTemp = new ArrayList<Answer>(answerList);
             for(int i = 0; i < answerListTemp.size(); i++){

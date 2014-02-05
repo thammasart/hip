@@ -70,10 +70,16 @@ public class BrownPetersonTest extends WithApplication {
 		assertEquals(3, quizzes.size());
 	}
 
-	/*@Test
-	public void check_user_used_to_take_the_trial_by_timelog(){
-		User user = User.find.where().eq("id", 1).findUnique();
+	@Test
+	public void check_user_used_to_take_the_trial_by_timelog_success(){
+		User user = User.find.where().eq("username", "s550").findUnique();
 		Trial trial = Trial.find.where().eq("id", 1).findUnique();
-		assertTrue(TimeLog.isRepeatTrial(user.username, trial.id));
-	}*/
+		assertTrue(TimeLog.isRepeatTrial(user, trial));
+	}
+	@Test
+	public void check_user_used_to_take_the_trial_by_timelog_fail(){
+		User user = User.find.where().eq("username", "s551").findUnique();
+		Trial trial = Trial.find.where().eq("id", 1).findUnique();
+		assertFalse(TimeLog.isRepeatTrial(user, trial));
+	}
 }

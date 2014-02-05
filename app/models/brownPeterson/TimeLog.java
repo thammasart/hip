@@ -37,6 +37,12 @@ public class TimeLog extends Model{
 		timeLog.trial = trial;
 		return timeLog;
 	}
+
+	public static boolean isRepeatTrial(User user, Trial trial){
+		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trial", trial).findUnique();
+		return timeLog != null;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, TimeLog> find = new Finder(Long.class, TimeLog.class);
 

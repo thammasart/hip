@@ -1,6 +1,8 @@
-@(question : models.brownPeterson.Question,count : Integer, trialId : Long)
+@(question : models.brownPeterson.Question,count : Integer, flashTime : Integer,trialId : Long)
 @header("Human Information Processing Lab :: Home Page")
 <body>
+<!--FlashTime Container-->
+<input class="inputNumberBox" id = "flashTime" name = "flashTime" type="text" disabled hidden value = @flashTime />
 
 <!-- Page Header -->
     <div class="">
