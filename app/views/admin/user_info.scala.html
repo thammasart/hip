@@ -1,0 +1,39 @@
+@(user : List[User])
+@head_admin("Admin Panel")
+    <body>
+@nav_admin()
+        <div class="adminBody">
+
+            <h1 align="center"> User Information  </h1>
+            <div> <button id="slide01"  class="addUserButton"> Add User </button></div>
+            <table border="1" align="center" width="100%">
+                <tr class="tableContent">
+                    <th >Username </th>
+                    <th > Status </th>
+                    <th > name </th>
+                    <th > surname </th>
+                    <th > birth date</th>
+                    <th > gender</th>
+                    <th > semester</th>
+                    <th > year</th>
+                    <th > e-mail</th>
+                </tr>
+                @for(user<- user){
+                <tr class="tableContent">
+                <td width="12%"> @user.username</td>
+                <td width="6%"> @user.status</td>
+                <td width="13%"> name </td>
+                <td width="13%"> surname </td>
+                <td width="7%"> birth date </td>
+                <td width="5%"> gender </td>
+                <td width="5%"> semester </td>
+                <td width="4%"> year </td>
+                <td width="14%"> e-mail</td>
+                </tr>
+                }
+            </table>
+        </div>
+        <div id="slide01" class="adminBody">
+            @add_user(user)
+        </div>
+@footer()
