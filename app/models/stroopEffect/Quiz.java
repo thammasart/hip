@@ -27,6 +27,7 @@ public class Quiz extends Model{
         return quiz;
     }
 
+    @SuppressWarnings("unchecked")
     public static Finder<Long,Quiz> find = new Finder(Long.class,Quiz.class);
 
 }

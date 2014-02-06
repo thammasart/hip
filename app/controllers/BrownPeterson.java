@@ -24,21 +24,29 @@ public class BrownPeterson extends Controller {
     private static List<ExperimentSchedule> currentEx = ExperimentSchedule.getAllWorkingExperiment();
     public static int questionNumber = 0;
 
+    @Security.Authenticated(Secured.class)
     public static Result task(){
         User user = User.find.byId(request().username());
         return ok(brown_peterson_info.render(user));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result renderShortTermMemoryBrownPetersonTaskIframe(){
         return ok(brown_peterson_iframe.render());
     }
+    
+    @Security.Authenticated(Secured.class)
     public static Result renderShortTermMemoryBrownPetersonTaskProc(){
         User user = User.find.byId(request().username());
         return ok(brown_peterson_proc.render(user));
     }
+    
+    @Security.Authenticated(Secured.class)
     public static Result renderShortTermMemoryBrownPetersonTaskProcIframe(){
         return ok(brown_peterson_proc_iframe.render());
     }
+    
+    @Security.Authenticated(Secured.class)
     public static Result taskExperiment(long trialId){
             
         User user = User.find.where().eq("username", session().get("username")).findUnique();
@@ -50,9 +58,6 @@ public class BrownPeterson extends Controller {
         if (questionNumber > 0){
             answerList.add(answer);
         }
-        /*if(questionNumber == 0){
-            TimeLog.create(new Date(),user, trial).save();
-        }*/
         if (questionNumber+1 <= questions.size()){
             int flashTime = quizzes.get(questionNumber).flashTime * 1000;
             return ok(brown_peterson_exp.render(questions.get(questionNumber),quizzes.get(questionNumber++).initCountdown, flashTime,trialId));
@@ -69,6 +74,8 @@ public class BrownPeterson extends Controller {
             return redirect(routes.BrownPeterson.report(user.username, trialId));
         }
     }
+
+    @Security.Authenticated(Secured.class)
     public static Result report(String username, Long trialId){
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.BrownPeterson.task());

@@ -38,6 +38,7 @@ public class TimeLog extends Model{
         return timeLog;
     }
 
+    @SuppressWarnings("unchecked")
     public static Finder<Long, TimeLog> find = new Finder(Long.class, TimeLog.class);
 
 }

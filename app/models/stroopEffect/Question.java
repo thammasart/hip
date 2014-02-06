@@ -30,6 +30,7 @@ public class Question extends Model{
         ink_color = inkColor;
     }
 
+    @SuppressWarnings("unchecked")
     public static Finder<Long, Question> find = new Finder(Long.class,Question.class);
 
 }

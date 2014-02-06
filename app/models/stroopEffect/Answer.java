@@ -32,6 +32,7 @@ public class Answer extends Model{
         return newAnswer;
     }
 
+    @SuppressWarnings("unchecked")
     public static Finder<Long,Answer> find = new Finder(Long.class,Answer.class);
 
 }
