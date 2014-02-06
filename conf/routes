@@ -7,11 +7,7 @@ GET     /                           controllers.Application.index()
 POST    /                           controllers.Application.authenticate()
 GET     /home                       controllers.Application.home()
 GET     /about                      controllers.Application.about()
-<<<<<<< HEAD
-GET		/logout						controllers.Application.logout()
-=======
 GET		/logout					    controllers.Application.logout()
->>>>>>> 88244a202f93344596b9f1d67535a68b72249c9a
 GET     /PSD                        controllers.Application.perceptionSignalDetection()
 GET     /PCB                        controllers.Application.perceptionChangeBlindness()
 GET     /PCBIframe                  controllers.Application.perceptionChangeBlindnessIframe()
@@ -21,17 +17,9 @@ GET     /STMBtProc                  controllers.BrownPeterson.renderShortTermMem
 GET     /STMBtProcIframe            controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskProcIframe()
 GET     /STMBt                      controllers.BrownPeterson.task()
 GET     /STMBtIframe                controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskIframe()
-<<<<<<< HEAD
-GET     /STMBtExp                   controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskExp()
-POST    /STMBtExp                   controllers.BrownPeterson.renderShortTermMemoryBrownPetersonTaskExp()
-GET		/create-exp					controllers.AdminController.createExperiment()
-GET		/creat-exp-brownpeterson	controllers.AdminController.createExpBrownPeterson()
-=======
 GET     /STMBtExp                   controllers.BrownPeterson.taskExperiment(trialId : Long ?= 1)
 POST    /STMBtExp                   controllers.BrownPeterson.taskExperiment(trialId : Long ?= 1)
 GET     /report                     controllers.BrownPeterson.report(username:String ?= "", trial_id:Long ?= 0)
-
->>>>>>> 88244a202f93344596b9f1d67535a68b72249c9a
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
