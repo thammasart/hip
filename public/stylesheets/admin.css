@@ -1,0 +1,67 @@
+.homeButton{
+    width:150px;
+}
+
+#panel01,#img01
+{
+padding:5px;
+text-align:center;
+background-color:#ffffff;
+border:solid 1px #95A5A6;
+}
+.tableHeader{
+    margin:0px auto;
+}
+
+.addUserButton{
+    float:right;
+    margin-bottom:10px;
+}
+.textArea{
+    float: left;
+    margin-left: 40px;
+    padding-top: 25px;
+}
+.submitButton{
+    float: left;
+    margin: 25px auto 0px 25px;
+}
+th{
+    text-align:center;
+}
+.tableContent{
+    text-align:center;
+}
+.hc{
+    background-color:#E9E9E9;
+}
+
+.adminNavBar{
+    float: left;
+    height: 50px;
+    width: 800px;
+    font-size: 20px;
+    margin-left:20px;
+    color: white;
+}
+
+.adminNavBarText{
+    color:white; 
+    position: relative;
+    top: 18%;
+}
+.naviBarFix{
+    position:fixed;
+    width:100%;
+}
+
+.adminBody{
+    padding-top: 80px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-right: 10%;
+    height: 550px;
+    margin-bottom: 50px;
+}
+
