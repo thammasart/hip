@@ -5,6 +5,7 @@ import java.util.List;
 import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 public class TimeLog extends Model{
 	@Id
@@ -41,6 +42,10 @@ public class TimeLog extends Model{
 	public static boolean isRepeatTrial(User user, Trial trial){
 		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trial", trial).findUnique();
 		return timeLog != null;
+	}
+
+	public static boolean canTakeExperiment(User user, List<ExperimentSchedule> exps) {
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")

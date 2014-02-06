@@ -34,14 +34,6 @@ public class TrialTest extends WithApplication{
     }
 
     @Test
-    public void createTrialAndPointToExperimentSchedule(){
-        ExperimentSchedule exp = new ExperimentSchedule("Name",3,new Date(114,1,10),new Date(114,1,20), ExperimentType.STROOPEFFECT);
-        exp.save();
-        Trial.create(ExperimentSchedule.find.byId( new Long(2) )).save();
-        assertEquals(exp.id, Trial.findById(1).schedule.id);
-    }
-
-    @Test
     public void shouldBeFoundByExperimentSchedule(){
         ExperimentSchedule exs = new ExperimentSchedule("Name",3,new Date(114,1,10),new Date(114,1,20), ExperimentType.STROOPEFFECT);
         exs.save();

@@ -71,7 +71,7 @@ public class BrownPetersonTest extends WithApplication {
 	@Test
 	public void check_user_used_to_take_the_trial_by_timelog_success(){
 		User user = User.find.where().eq("username", "s550").findUnique();
-		Trial trial = Trial.find.where().eq("id", 1).findUnique();
+		Trial trial = Trial.find.where().eq("id", 2).findUnique();
 		assertTrue(TimeLog.isRepeatTrial(user, trial));
 	}
 	@Test
@@ -79,5 +79,12 @@ public class BrownPetersonTest extends WithApplication {
 		User user = User.find.where().eq("username", "s551").findUnique();
 		Trial trial = Trial.find.where().eq("id", 1).findUnique();
 		assertFalse(TimeLog.isRepeatTrial(user, trial));
+	}
+
+	@Test
+	public void check_user_can_take_the_exp_complete_3_trial() {
+		User user = User.find.where().eq("username", "s551").findUnique();
+		List<ExperimentSchedule> exps = ExperimentSchedule.getAllWorkingExperiment();
+		assertTrue(TimeLog.canTakeExperiment(user, exps));
 	}
 }
