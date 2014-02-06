@@ -11,6 +11,7 @@ public class AnswerTest extends WithApplication {
 		start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
 		
 	}
+	
 	@Test
 	public void shouldCreateAndNotNull(){new Trial().save();
 		new Trial().save();

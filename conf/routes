@@ -7,11 +7,7 @@ GET     /                           controllers.Application.index()
 POST    /                           controllers.Application.authenticate()
 GET     /home                       controllers.Application.home()
 GET     /about                      controllers.Application.about()
-<<<<<<< HEAD
-GET		/logout					    controllers.Application.logout()
-=======
-GET		/logout							controllers.Application.logout()
->>>>>>> ohmini-master
+GET		/logout						controllers.Application.logout()
 GET     /PSD                        controllers.Application.perceptionSignalDetection()
 GET     /PCB                        controllers.Application.perceptionChangeBlindness()
 GET     /PCBIframe                  controllers.Application.perceptionChangeBlindnessIframe()
@@ -24,10 +20,7 @@ GET     /STMBtIframe                controllers.BrownPeterson.renderShortTermMem
 GET     /STMBtExp                   controllers.BrownPeterson.taskExperiment(trialId : Long ?= 1)
 POST    /STMBtExp                   controllers.BrownPeterson.taskExperiment(trialId : Long ?= 1)
 GET     /report                     controllers.BrownPeterson.report(username:String ?= "", trial_id:Long ?= 0)
-<<<<<<< HEAD
-=======
 GET     /admin                      controllers.Admin.index()
->>>>>>> ohmini-master
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

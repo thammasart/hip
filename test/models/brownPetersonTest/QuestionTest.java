@@ -119,21 +119,6 @@ public class QuestionTest extends WithApplication{
 
     }
 
-    @Ignore @Test
-    public void randomTwoQuestionListShouldNotSame(){
-    	new Question("hello1","world1","!!!1").save();
-    	new Question("hello2","world2","!!!2").save();
-    	new Question("hello3","world3","!!!3").save();
-    	new Question("hello4","world4","!!!4").save();
-    	new Question("hello5","world5","!!!5").save();
-
-    	List<Question> questionList1 = Question.getQuestionListBy(2);
-    	List<Question> questionList2 = Question.getQuestionListBy(2);
-
-    	assertNotEquals(questionList1, questionList2);
-    	assertNotEquals(questionList1, questionList2);
-    }
-
     @Test
     public void amountOverflow() {
     	new Question("hello1","world1","!!!1").save();

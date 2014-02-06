@@ -1,5 +1,5 @@
 package models;
 
 public enum ExperimentType {
-	BROWNPETERSON
+	BROWNPETERSON, STROOPEFFECT
 }

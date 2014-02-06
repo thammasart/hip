@@ -9,8 +9,6 @@ import java.util.List;
 import com.avaje.ebean.*;
 import play.libs.Yaml;
 
-
-
 public class BrownPetersonTest extends WithApplication {
 	@Before
 	public void setUp() {

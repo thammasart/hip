@@ -1,15 +1,12 @@
 package models.stroopEffect;
 
-import models.ExperimentType;
 import play.test.WithApplication;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static play.test.Helpers.*;
-
 import java.util.Date;
-
 import models.stroopEffect.*;
-import models.ExperimentSchedule;
+import models.*;
 
 public class TrialTest extends WithApplication{
 
