@@ -3,7 +3,7 @@
     name:           Ex1
     noOfTrial:      3
     startDate:      2014-01-30
-    expireDate:        2015-02-07
+    expireDate:     2015-02-07
 
 #Question
 - &Question1 !!models.brownPeterson.Question
@@ -140,18 +140,17 @@
 
 #TimeLog
 - &timelog1 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-15
+    startTime: 2014-01-30
     endTime: 2014-01-30
     user: *ohm
     trial: *round1
 - &timelog2 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-30
-    endTime: 2014-01-30
+    startTime: 2014-01-31
+    endTime: 2014-01-31
     user: *ohm
     trial: *round2
 - &timelog3 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-19
-    endTime: 2014-01-30
+    startTime: 2014-10-19
     user: *ohm
     trial: *round3
 #Answer

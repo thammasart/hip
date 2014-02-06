@@ -5,39 +5,12 @@ import play.mvc.*;
 import play.data.*;
 import views.html.*;
 import views.html.iframe.*;
-import views.html.signalDetection.*;
-import views.html.changeBlindness.*;
 import models.*;
 
 public class Application extends Controller {
 
 	public static Result index() {
         return ok(index.render(Form.form(UserForm.class)));
-    }
-
-    @Security.Authenticated(Secured.class)
-	public static Result perceptionSignalDetection(){
-        return ok(signal_detection_info.render());
-    }
-    
-	@Security.Authenticated(Secured.class)
-	public static Result perceptionChangeBlindnessIframe(){
-        return ok(change_blindness_iframe.render());
-    }
-
-    @Security.Authenticated(Secured.class)
-	public static Result perceptionChangeBlindnessProcIframe(){
-        return ok(change_blindness_proc_iframe.render());
-    }
-    
-	@Security.Authenticated(Secured.class)
-	public static Result perceptionChangeBlindness(){
-        return ok(change_blindness_info.render());
-    }
-
-    @Security.Authenticated(Secured.class)
-	public static Result perceptionChangeBlindnessProc(){
-        return ok(change_blindness_proc.render());
     }
 
     @Security.Authenticated(Secured.class)

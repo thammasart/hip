@@ -1,10 +1,10 @@
 @(score : Integer,totalUsedTime: Double, totalScore : Integer,title : String, user : User)
-@header(title)
+@header("Human Information Processing Lab :: Report Page")
 @nav(user)
 <body>
 <div class="container report">
     <h3>คะแนน : @score/@totalScore </h3>
     <h3>เวลา : @totalUsedTime วินาที</h3>
-    <button type="button" class="btn btn-success btn-lg"><a href="@routes.BrownPeterson.task()">Home</a></button>
+    <button type="button" class="btn btn-success btn-lg"><a href="@routes.BrownPeterson.info()">Home</a></button>
 </div>
 @footer()

@@ -25,29 +25,29 @@ public class BrownPeterson extends Controller {
     public static int questionNumber = 0;
 
     @Security.Authenticated(Secured.class)
-    public static Result task(){
+    public static Result info(){
         User user = User.find.byId(request().username());
-        return ok(brown_peterson_info.render(user));
+        return ok(info.render(user));
     }
 
     @Security.Authenticated(Secured.class)
-    public static Result renderShortTermMemoryBrownPetersonTaskIframe(){
+    public static Result infoIframe(){
         return ok(brown_peterson_iframe.render());
     }
     
     @Security.Authenticated(Secured.class)
-    public static Result renderShortTermMemoryBrownPetersonTaskProc(){
+    public static Result proc(){
         User user = User.find.byId(request().username());
-        return ok(brown_peterson_proc.render(user));
+        return ok(proc.render(user));
     }
     
     @Security.Authenticated(Secured.class)
-    public static Result renderShortTermMemoryBrownPetersonTaskProcIframe(){
+    public static Result procIframe(){
         return ok(brown_peterson_proc_iframe.render());
     }
     
     @Security.Authenticated(Secured.class)
-    public static Result taskExperiment(long trialId){
+    public static Result experiment(long trialId){
             
         User user = User.find.where().eq("username", session().get("username")).findUnique();
         Trial trial = Trial.find.where().eq("id", trialId).findUnique();
@@ -60,7 +60,7 @@ public class BrownPeterson extends Controller {
         }
         if (questionNumber+1 <= questions.size()){
             int flashTime = quizzes.get(questionNumber).flashTime * 1000;
-            return ok(brown_peterson_exp.render(questions.get(questionNumber),quizzes.get(questionNumber++).initCountdown, flashTime,trialId));
+            return ok(exp.render(questions.get(questionNumber),quizzes.get(questionNumber++).initCountdown, flashTime,trialId));
         }
         else{
             List<Answer> answerListTemp = new ArrayList<Answer>(answerList);
@@ -78,7 +78,7 @@ public class BrownPeterson extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result report(String username, Long trialId){
         if(username.equals("") || trialId == 0){
-            return redirect(controllers.routes.BrownPeterson.task());
+            return redirect(controllers.routes.BrownPeterson.info());
         }
         User user = User.find.where().eq("username", username).findUnique();
         Trial trial = Trial.find.where().eq("id", trialId).findUnique();
