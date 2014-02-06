@@ -371,3 +371,11 @@ padding-top:8em;
     color: #999;
     margin-right: 10px;
 }
+
+.btn-save{
+    width:60%;
+}
+
+.btn-clear{
+    width: 30%;
+}

@@ -1,0 +1,48 @@
+@(expList : List[ExperimentSchedule])
+@import views.html.admin._
+
+@head_admin("Admin Panel")
+<body style="padding-top: 100px">
+@nav_admin()
+<div class="container">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-9 col-sm-8">
+                <h1>Experiment</h1>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <a href="@routes.Admin.addExperiment()">
+                    <button type="button" class="btn btn-success btn-save">+ADD</button>
+                </a>
+                <a href="#">
+                    <button type="button" class="btn btn-default btn-clear">Export</button>
+                </a>    
+            </div>
+        </div>
+    </div>
+       <table class="table">
+           <thead>
+               <tr>
+                   <th>ID</th>
+                   <th>Name</th>
+                   <th>Trial No.</th>
+                   <th>Start</th>
+                   <th>End</th>
+                   <th>type</th>
+               </tr>
+           </thead>
+           <tbody>
+               @for( exp <- expList){
+                <tr>
+                    <th>@exp.id</th>
+                    <th>@exp.name</th>
+                    <th>@exp.noOfTrial</th>
+                    <th>@exp.startDate</th>
+                    <th>@exp.expireDate</th>
+                    <th>@exp.experimentType</th>
+                </tr>
+               }
+           </tbody>
+       </table>
+</div>
+@footer()
