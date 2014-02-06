@@ -42,12 +42,14 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
 	public static Result home(){
-        return ok(home.render());
+        User user = User.find.byId(request().username());
+        return ok(home.render(user));
     }
 
     @Security.Authenticated(Secured.class)
     public static Result about() {
-        return ok(about.render());
+        User user = User.find.byId(request().username());
+        return ok(about.render(user));
     }
 
     public static Result logout() {

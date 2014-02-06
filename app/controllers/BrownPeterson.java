@@ -25,14 +25,16 @@ public class BrownPeterson extends Controller {
     public static int questionNumber = 0;
 
     public static Result task(){
-        return ok(brown_peterson_info.render());
+        User user = User.find.byId(request().username());
+        return ok(brown_peterson_info.render(user));
     }
 
     public static Result renderShortTermMemoryBrownPetersonTaskIframe(){
         return ok(brown_peterson_iframe.render());
     }
     public static Result renderShortTermMemoryBrownPetersonTaskProc(){
-        return ok(brown_peterson_proc.render());
+        User user = User.find.byId(request().username());
+        return ok(brown_peterson_proc.render(user));
     }
     public static Result renderShortTermMemoryBrownPetersonTaskProcIframe(){
         return ok(brown_peterson_proc_iframe.render());
@@ -79,6 +81,6 @@ public class BrownPeterson extends Controller {
 
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);  
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,quizzes.size(), "Report"));
+        return ok(report.render(score,totalUsedTime,quizzes.size(), "Report", user));
     }
 }

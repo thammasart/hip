@@ -69,6 +69,7 @@
 - &ohm !!models.User
     username:              s550
     password:              password
+    status:                ADMIN
 
 - &pae !!models.User
     username:               s551
