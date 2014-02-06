@@ -1,6 +1,13 @@
-@(question : models.brownPeterson.Question,count : Integer)
+@(question : models.brownPeterson.Question,count : Integer, flashTime : Integer,trialId : Long)
 @header("Human Information Processing Lab :: Home Page")
+
+<script src="@routes.Assets.at("javascripts/brownPetersonExperiment.js")"></script>
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+
 <body>
+
+<!--FlashTime Container-->
+<input class="inputNumberBox" id = "flashTime" name = "flashTime" type="text" disabled hidden value = @flashTime />
 
 <!-- Page Header -->
     <div class="">
@@ -24,7 +31,7 @@
     
   <span class="headerBox">คำตอบ</span>
   <span class="headerNumberBox">ใส่ตัวเลข</span>
-        <form action="@routes.BrownPeterson.renderShortTermMemoryBrownPetersonTaskExp()" method="post">
+        <form id = "answerForm" action="@routes.BrownPeterson.taskExperiment(trialId)" method="post">
           <input class="inputBox" id = "firstWord" name = "firstWord" type="text" placeholder="      คำตอบ" disabled />
           <input class="inputBox" id = "secondWord" name = "secondWord" type="text" placeholder="      คำตอบ" disabled />
           <input class="inputBox" id = "thirdWord" name = "thirdWord" type="text" placeholder="     คำตอบ"  disabled />
