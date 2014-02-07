@@ -1,0 +1,80 @@
+@(exp : ExperimentSchedule, trials : List[models.brownPeterson.Trial])
+@import views.html.admin._
+@import models.brownPeterson.Quiz
+@head_admin("Admin Panel : edit parameter")
+<body style="padding-top: 100px">
+@nav_admin()
+
+<div class="container-fluid">
+    <div class="row">
+        <form class="form-horizontal" role="form" action="@routes.Admin.updateExperiment(exp.id)" method="POST">
+            <div class="col-md-9 col-sm-8">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="name" placeholder="@exp.name" value="@exp.name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="startDate" placeholder="@exp.startDate.format("dd/MM/yyyy")" value="@exp.startDate.format("dd/MM/yyyy")">
+                    </div>
+                    <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="expireDate" placeholder="@exp.expireDate.format("dd/mm/yyyy")" value="@exp.expireDate.format("dd/MM/yyyy")" >
+                    </div>
+                </div> 
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <button type="submit" class="btn btn-success btn-save">+SAVE</button>
+                <a href="#">
+                    <button type="button" class="btn btn-danger btn-clear">Clear ALL</button>
+                </a>    
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="container">
+        @if(flash.containsKey("success")){
+            <p class="text-success">@flash.get("success")</p>
+        }
+        @if(flash.containsKey("error")){
+            <p class="text-danger">@flash.get("error")</p>
+        }
+    </div>
+</div>
+
+<div class="container">
+
+    @for(trial <- trials){
+        <h3>@trial.id</h3>
+        <div class="well">
+            <div class="row">
+            <form role="form">
+                <div class="col-md-9 col-sm-8">
+                    @for(quiz <- Quiz.findInvolving(trial)){
+                    <div class="form-group">
+                        <label for="initCountdown" class="control-label col-sm-4">ตัวเลขเริ่มนับถอยหลัง</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="initCountdown" value="@quiz.initCountdown">
+                        </div>
+                        <label for="flashTime" class="control-label col-sm-4">จำนวนวินาทีนับถอยหลัง</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="flashTime" value="@quiz.flashTime">
+                        </div>
+                    </div>
+                    }
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <ul>
+                        <li>Trigram</li>
+                        <li>Trigram</li>
+                    </ul>
+                </div>
+            </form>
+            </div>
+        </div>
+    }
+</div>
+@footer()

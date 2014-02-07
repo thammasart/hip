@@ -29,6 +29,7 @@
                    <th>Start</th>
                    <th>End</th>
                    <th>type</th>
+                   <th>#</th>
                </tr>
            </thead>
            <tbody>
@@ -37,9 +38,14 @@
                     <th>@exp.id</th>
                     <th>@exp.name</th>
                     <th>@exp.noOfTrial</th>
-                    <th>@exp.startDate</th>
-                    <th>@exp.expireDate</th>
+                    <th>@exp.startDate.format("dd/MM/yyyy")</th>
+                    <th>@exp.expireDate.format("dd/MM/yyyy")</th>
                     <th>@exp.experimentType</th>
+                    <th>
+                        <a href="@routes.Admin.parameter(exp.id)"><button class="btn btn-default btn-xs">
+                            edit parameter
+                        </button></a>
+                    </th>
                 </tr>
                }
            </tbody>
