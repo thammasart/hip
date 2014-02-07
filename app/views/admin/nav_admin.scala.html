@@ -7,16 +7,12 @@
     <div class="adminNavBar" align="center"> 
       <a href="@routes.Admin.renderUserInfo()" class="adminNavBarText" >User Info.&nbsp; | &nbsp;</a>
       <a href="" class="adminNavBarText" >Experimental Result &nbsp; | &nbsp;</a>
-      <a href="" class="adminNavBarText" > Experiment Set &nbsp; | &nbsp;</a>
+      <a href="@routes.Admin.experiment()" class="adminNavBarText" > Experiment Set &nbsp; | &nbsp;</a>
       <a href="#" class="adminNavBarText" >Create Experiment Set</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="@routes.Admin.experiment()">Experiment</a></li>
-        <li><a href="#">Link</a></li>
-      </ul>
       <div class="nav navbar-nav navbar-right">
         <span class="admin-name">@session().get("username") </span>
         <a href="@routes.Application.logout()"><button type="button" class="btn btn-default navbar-btn">logout</button></a>
