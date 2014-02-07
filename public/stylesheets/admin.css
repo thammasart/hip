@@ -63,3 +63,10 @@ th{
     margin-bottom: 50px;
 }
 
+.trial-box-left{
+    border-right: 1px solid #ccc;
+}
+.trial-box-right{
+    margin-top: auto;
+    margin-bottom: auto;
+}

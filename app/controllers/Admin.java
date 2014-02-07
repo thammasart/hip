@@ -74,9 +74,14 @@ public class Admin extends Controller {
         exp.save();
         flash("success","Successfully");
         for(int i = 0; i < exp.noOfTrial; i++){
-            Trial.create(exp).save();
+            Trial trial = Trial.create(exp);
+            trial.save();
+            List<Question> questions = Question.getQuestionListBy(3); // 3 is number of quiz in trial.
+            for(int j = 0; j < 3; j++){
+                Quiz.create(100, 5, trial, questions.get(0)).save();
+            }
         }
-        return redirect(routes.Admin.addExperiment());
+        return redirect(routes.Admin.experiment());
     }
 
     public static Result updateExperiment(long id) {

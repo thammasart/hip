@@ -19,10 +19,12 @@ public class ExperimentSchedule extends Model{
 	public String name = "Blank Experiment";
 	@Column(nullable=false, length=2)
 	public int noOfTrial = 3;
-	//@Column(nullable=false)
+	@Column(nullable=false)
+	@Required
 	@Formats.DateTime(pattern="dd/mm/yyyy")
 	public Date startDate;
-	//@Column(nullable=false)
+	@Required
+	@Column(nullable=false)
 	@Formats.DateTime(pattern="dd/mm/yyyy")
 	public Date expireDate;
 	public ExperimentType experimentType;
