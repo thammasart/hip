@@ -1,0 +1,60 @@
+@(expForm: Form[ExperimentSchedule])
+@import views.html.admin._
+@head_admin("Admin Panel")
+<body style="padding-top: 100px">
+@nav_admin()
+<div class="container-fluid">
+    <div class="row">
+        <form class="form-horizontal" role="form" action="@routes.Admin.saveExperiment()" method="POST">
+            <div class="col-md-9 col-sm-8">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="name" placeholder="ชื่อชุดคำถาม">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="startDate" placeholder="dd/mm/yyyy">
+                    </div>
+                    <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="expireDate" placeholder="dd/mm/yyyy">
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label for="noOfTrial" class="col-sm-2 control-label">จำนวนรอบ</label>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" name="noOfTrial" placeholder="3">
+                    </div>
+                </div>
+
+               <div class="form-group">
+                    <label for="experimentType" class="col-sm-2 control-label">การทดลอง</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" name="experimentType">
+                          <option value="@models.ExperimentType.BROWNPETERSON">Brown Peterson</option>
+                          <option value="@models.ExperimentType.STROOPEFFECT">Stroop Effect</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <button type="submit" class="btn btn-success btn-save">+SAVE</button>
+                <a href="#">
+                    <button type="button" class="btn btn-danger btn-clear">Clear ALL</button>
+                </a>    
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        @if(flash.containsKey("success")){
+            <p class="text-success">@flash.get("success")</p>
+        }
+        @if(flash.containsKey("error")){
+            <p class="text-danger">@flash.get("error")</p>
+        }
+    </div>
+</div>
+@footer()

@@ -16,6 +16,9 @@ GET     /brown-peterson/exp 		controllers.BrownPeterson.experiment(trialId : Lon
 POST    /brown-peterson/exp         controllers.BrownPeterson.experiment(trialId : Long ?= 1)
 GET     /brown-peterson/report      controllers.BrownPeterson.report(username:String ?= "", trial_id:Long ?= 0)
 GET     /admin                      controllers.Admin.index()
+GET     /admin/experiment           controllers.Admin.experiment()
+GET     /admin/experiment/add       controllers.Admin.addExperiment()
+POST    /admin/experiment           controllers.Admin.saveExperiment()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -7,23 +7,29 @@ import play.data.format.Formats;
 import java.util.List;
 import com.avaje.ebean.*;
 import java.util.ArrayList;
+import static play.data.validation.Constraints.*;
+
 
 @Entity
 public class ExperimentSchedule extends Model{
 	@Id
 	public long id;
+	@Required
 	@Column(nullable=false, length=30)
 	public String name = "Blank Experiment";
 	@Column(nullable=false, length=2)
 	public int noOfTrial = 3;
-	@Column(nullable=false)
+	//@Column(nullable=false)
+	@Formats.DateTime(pattern="dd/mm/yyyy")
 	public Date startDate;
-	@Column(nullable=false)
+	//@Column(nullable=false)
+	@Formats.DateTime(pattern="dd/mm/yyyy")
 	public Date expireDate;
 	public ExperimentType experimentType;
 	
 	@OneToMany
 	public List<Trial> trials = new ArrayList<Trial>();
+
 
 	public ExperimentSchedule(String name, int noOfTrial, Date startDate, Date expireDate, ExperimentType experimentType) {
 		this.name = name;
