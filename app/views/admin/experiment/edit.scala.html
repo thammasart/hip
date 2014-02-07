@@ -1,6 +1,8 @@
 @(exp : ExperimentSchedule, trials : List[models.brownPeterson.Trial])
 @import views.html.admin._
 @import models.brownPeterson.Quiz
+@import models.brownPeterson.TrigramType
+@import models.brownPeterson.TrigramLanguage
 @head_admin("Admin Panel : edit parameter")
 
 @nav_admin()
@@ -46,13 +48,12 @@
 </div>
 
 <div class="container">
-
     @for(trial <- trials){
-        <h3>@trial.id</h3>
+        <h3>Trial 0@{trials.indexOf(trial)+1}</h3>
         <div class="well">
             <div class="row">
-            <form role="form">
-                <div class="col-md-9 col-sm-8">
+            <form role="form" class="form-horizontal">
+                <div class="col-md-9 col-sm-8 trial-box-left">
                     @for(quiz <- Quiz.findInvolving(trial)){
                     <div class="form-group">
                         <label for="initCountdown" class="control-label col-sm-4">ตัวเลขเริ่มนับถอยหลัง</label>
@@ -61,16 +62,26 @@
                         </div>
                         <label for="flashTime" class="control-label col-sm-4">จำนวนวินาทีนับถอยหลัง</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="flashTime" value="@quiz.flashTime">
+                            <input type="number" min="1" max="20" class="form-control" name="flashTime" value="@quiz.flashTime">
                         </div>
                     </div>
                     }
                 </div>
-                <div class="col-md-3 col-sm-4">
-                    <ul>
-                        <li>Trigram</li>
-                        <li>Trigram</li>
-                    </ul>
+                <div class="col-md-3 col-sm-4 trial-box-right">
+                    <h4>Trigram Type</h4>
+                    <label class="radio-inline">
+                        <input type="radio" name="trigramType" value="@TrigramType.WORD" checked> Word 
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="trigramType" value="@TrigramType.NON_SENSE" disabled> <del>Non Sense</del>
+                    </label>
+                    <h4>Trigram Language</h4>
+                    <label class="radio-inline">
+                        <input type="radio" name="trigramLanguage" value="@TrigramLanguage.ENGLISH" checked> English
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="trigramLanguage" value="@TrigramLanguage.THAI" disabled> <del>ไทย</del> 
+                    </label>
                 </div>
             </form>
             </div>
