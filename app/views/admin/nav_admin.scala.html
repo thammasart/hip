@@ -1,8 +1,14 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse naviBarFix" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="@routes.Application.home()">Home</a>
+      <a class="navbar-brand homeButton"  href="@routes.Application.home()">Home</a>
+    </div>
+    <div class="adminNavBar" align="center"> 
+      <a href="@routes.Admin.renderUserInfo()" class="adminNavBarText" >User Info.&nbsp; | &nbsp;</a>
+      <a href="" class="adminNavBarText" >Experimental Result &nbsp; | &nbsp;</a>
+      <a href="" class="adminNavBarText" > Experiment Set &nbsp; | &nbsp;</a>
+      <a href="#" class="adminNavBarText" >Create Experiment Set</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,4 +23,5 @@
       </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+
 </nav>
