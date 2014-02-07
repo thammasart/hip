@@ -39,7 +39,7 @@ public class ExperimentSchedule extends Model{
 		this.experimentType = experimentType;
 	}
 
-	public static List<ExperimentSchedule> getAllWorkingExperiment() {
+	public static List<ExperimentSchedule> getAllWorkingExperiments() {
 		List<ExperimentSchedule> experiments = find.where().betweenProperties("startDate", "expireDate", new Date()).findList();
 		return experiments;
 	}

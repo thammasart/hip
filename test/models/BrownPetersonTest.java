@@ -83,8 +83,7 @@ public class BrownPetersonTest extends WithApplication {
 
 	@Test
 	public void check_user_can_take_the_exp_complete_3_trial() {
-		User user = User.find.where().eq("username", "s551").findUnique();
-		List<ExperimentSchedule> exps = ExperimentSchedule.getAllWorkingExperiment();
-		assertTrue(TimeLog.canTakeExperiment(user, exps));
+		User user = User.find.where().eq("username", "s550").findUnique();
+		assertFalse(TimeLog.canTakeExperiment(user));
 	}
 }

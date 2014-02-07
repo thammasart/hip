@@ -44,8 +44,13 @@ public class TimeLog extends Model{
 		return timeLog != null;
 	}
 
-	public static boolean canTakeExperiment(User user, List<ExperimentSchedule> exps) {
-		return true;
+	public static boolean canTakeExperiment(User user) {
+		/*int toDoCount = 0;
+		List<TimeLog> timeLogs = find.where().eq("user", user).findList();
+		for(TimeLog timeLog : timeLogs) {
+
+		}*/
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")

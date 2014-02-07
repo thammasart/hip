@@ -19,7 +19,7 @@ public class ExperimentScheduleTest extends WithApplication {
 		Date date = new Date();
 		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON).save();
 		
-		assertEquals(1, ExperimentSchedule.getAllWorkingExperiment().size());
+		assertEquals(1, ExperimentSchedule.getAllWorkingExperiments().size());
 	}
 
 	@Test
@@ -27,7 +27,7 @@ public class ExperimentScheduleTest extends WithApplication {
 		Date date = new Date();
 		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON).save();
 		
-		assertNotNull(ExperimentSchedule.getAllWorkingExperiment());
+		assertNotNull(ExperimentSchedule.getAllWorkingExperiments());
 	}
 
 	@Test

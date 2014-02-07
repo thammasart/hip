@@ -96,6 +96,19 @@
     trigramLanguage:       english
     trigramType:    word 
     schedule: *ex1
+- &round4 !!models.brownPeterson.Trial
+    trigramLanguage:       english
+    trigramType:    word
+    schedule: *ex2
+- &round5 !!models.brownPeterson.Trial
+    trigramLanguage:       english
+    trigramType:    word
+    schedule: *ex2
+- &round6 !!models.brownPeterson.Trial
+    trigramLanguage:       english
+    trigramType:    word 
+    schedule: *ex2
+
 - &quiz1 !!models.brownPeterson.Quiz
     initCountdown:                 100
     flashTime:                 5
@@ -111,7 +124,6 @@
     flashTime:                 7
     trial: *round1
     question: *Question3
-
 - &quiz4 !!models.brownPeterson.Quiz
     initCountdown:                 120
     flashTime:                 8
@@ -141,6 +153,51 @@
     initCountdown:                 534
     flashTime:                 3
     trial: *round3
+    question: *Question11
+- &quiz10 !!models.brownPeterson.Quiz
+    initCountdown:                 100
+    flashTime:                 5
+    trial: *round4
+    question: *Question1
+- &quiz11 !!models.brownPeterson.Quiz
+    initCountdown:                 90
+    flashTime:                 6
+    trial: *round4
+    question: *Question2
+- &quiz12 !!models.brownPeterson.Quiz
+    initCountdown:                 70
+    flashTime:                 7
+    trial: *round4
+    question: *Question3
+- &quiz13 !!models.brownPeterson.Quiz
+    initCountdown:                 120
+    flashTime:                 8
+    trial: *round5
+    question: *Question4
+- &quiz14 !!models.brownPeterson.Quiz
+    initCountdown:                 123
+    flashTime:                 5
+    trial: *round5
+    question: *Question5
+- &quiz15 !!models.brownPeterson.Quiz
+    initCountdown:                 77
+    flashTime:                 6
+    trial: *round5
+    question: *Question6
+- &quiz16 !!models.brownPeterson.Quiz
+    initCountdown:                 99
+    flashTime:                 8
+    trial: *round6
+    question: *Question7
+- &quiz17 !!models.brownPeterson.Quiz
+    initCountdown:                 111
+    flashTime:                 4
+    trial: *round6
+    question: *Question9
+- &quiz18 !!models.brownPeterson.Quiz
+    initCountdown:                 534
+    flashTime:                 3
+    trial: *round6
     question: *Question11
 
 #TimeLog

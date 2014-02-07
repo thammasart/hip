@@ -1,12 +1,7 @@
 package controllers;
 
-import models.brownPeterson.Question;
-import models.brownPeterson.Quiz;
-import models.brownPeterson.Answer;
-import models.brownPeterson.Trial;
-import models.brownPeterson.TimeLog;
-import models.User;
-import models.ExperimentSchedule;
+import models.brownPeterson.*;
+import models.*;
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -21,7 +16,7 @@ import java.util.Date;
 public class BrownPeterson extends Controller {
     public static List<Answer> answerList = new ArrayList<Answer>();
     public static List<Question> questions = null;
-    private static List<ExperimentSchedule> currentEx = ExperimentSchedule.getAllWorkingExperiment();
+    private static List<ExperimentSchedule> currentEx = ExperimentSchedule.getAllWorkingExperiments();
     public static int questionNumber = 0;
 
     @Security.Authenticated(Secured.class)
