@@ -22,6 +22,7 @@ import java.text.ParseException;
 public class Admin extends Controller {
     private static final Form<ExperimentSchedule> expForm = Form.form(ExperimentSchedule.class);
 
+    @Security.Authenticated(Secured.class)
     public static Result index() {
         User user = User.find.where().eq("username", session().get("username")).findUnique();
         List<User> userList = User.find.all();
@@ -36,12 +37,13 @@ public class Admin extends Controller {
         return ok(index_admin.render(User.getAllUser()));
         
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result renderUserInfo() {
         List<User> userList = User.find.all();
         return ok(user_info.render(User.getAllUser()));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result saveUser() {
         DynamicForm  stringForm = Form.form().bindFromRequest();
         String userString = stringForm.get("users");
@@ -57,15 +59,18 @@ public class Admin extends Controller {
         return ok(user_info.render(userList));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result displayExperimentList() {
         List<ExperimentSchedule> expList = ExperimentSchedule.find.all();
         return ok(views.html.admin.experiment.main.render(expList));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result addExperiment() {
         return ok(views.html.admin.experiment.add.render(expForm));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result saveExperiment() {
         Form<ExperimentSchedule> boundForm = expForm.bindFromRequest();
         if(boundForm.hasErrors()){
@@ -86,6 +91,7 @@ public class Admin extends Controller {
         return redirect(routes.Admin.displayExperimentList());
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result displayParameter(long id){
         final ExperimentSchedule exp = ExperimentSchedule.find.byId(id);
         if(exp == null){
@@ -93,7 +99,8 @@ public class Admin extends Controller {
         }
         return ok(views.html.admin.experiment.edit.render(exp));
     }
-
+    
+    @Security.Authenticated(Secured.class)
     public static Result saveBrownPetersonParameter(long expId){
         DynamicForm requestData = Form.form().bindFromRequest();
         ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
