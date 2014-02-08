@@ -46,6 +46,18 @@ public class ExperimentSchedule extends Model{
 		return experiments;
 	}
 
+	public String getExperimentTypeToString(){
+		String type = "Unknown";
+		if(this.experimentType != null){
+			switch(this.experimentType){
+				case BROWNPETERSON : type = "Brown Peterson"; break;
+				case STROOPEFFECT  : type = "Stroof Effect"; break;
+				default : type = "Unknown";
+			}
+		}
+		return type;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static Finder<Long,ExperimentSchedule> find = new Finder(Long.class,ExperimentSchedule.class);
 }

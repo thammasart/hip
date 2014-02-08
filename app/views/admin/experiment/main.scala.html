@@ -40,9 +40,9 @@
                     <th>@exp.noOfTrial</th>
                     <th>@exp.startDate.format("dd/MM/yyyy")</th>
                     <th>@exp.expireDate.format("dd/MM/yyyy")</th>
-                    <th>@exp.experimentType</th>
+                    <th>@exp.getExperimentTypeToString()</th>
                     <th>
-                        <a href="@routes.Admin.parameter(exp.id)"><button class="btn btn-default btn-xs">
+                        <a href="@routes.Admin.displayParameter(exp.id)"><button class="btn btn-default btn-xs">
                             edit parameter
                         </button></a>
                     </th>
