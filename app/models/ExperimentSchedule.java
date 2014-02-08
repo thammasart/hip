@@ -46,6 +46,16 @@ public class ExperimentSchedule extends Model{
 		return experiments;
 	}
 
+	public static List<ExperimentSchedule> getWorkingExperimentsByType(ExperimentType expType) {
+		List<ExperimentSchedule> experiments = getAllWorkingExperiments();
+		for(ExperimentSchedule exp : experiments) {
+			if(exp.experimentType != expType) {
+				experiments.remove(exp);
+			}
+		}
+		return experiments;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static Finder<Long,ExperimentSchedule> find = new Finder(Long.class,ExperimentSchedule.class);
 }
