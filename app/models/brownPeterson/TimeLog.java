@@ -2,6 +2,7 @@ package models.brownPeterson;
 
 import models.*;
 import java.util.List;
+import java.util.ArrayList;
 import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.Date;
@@ -43,15 +44,30 @@ public class TimeLog extends Model{
 		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trial", trial).findUnique();
 		return timeLog != null;
 	}
-
-	public static boolean canTakeExperiment(User user) {
-		/*int toDoCount = 0;
+/*
+	public static boolean canTakeExperiment(User user, List<ExperimentSchedule> exps) {
+		/*
 		List<TimeLog> timeLogs = find.where().eq("user", user).findList();
 		for(TimeLog timeLog : timeLogs) {
-
-		}*/
-		return false;
+			if(!Trial.inWorkingSchedule(timeLog.trial)) {
+				timeLogs.remove(timeLog);
+			}
+		}
+		return timeLogs.size() != 0;
+		
 	}
+
+/*
+	public static List<TimeLog> getUsersTakeTrialFromWorkingExperiments(User user) {
+		List<TimeLog> timeLogs = find.where().eq("user", user).findList();
+		for(TimeLog timeLog : timeLogs) {
+			if(!Trial.inWorkingSchedule(timeLog.trial)) {
+				timeLogs.remove(timeLog);
+			}
+		}
+		return timeLogs;
+	}
+	*/
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, TimeLog> find = new Finder(Long.class, TimeLog.class);

@@ -34,7 +34,7 @@ public class Trial extends Model{
 	public static List<Trial> findInvolving(ExperimentSchedule ex){
 		return find.where().eq("schedule", ex).findList();
 	}
-
+/*
 	public static boolean inWorkingSchedule(Trial trial) {
 		List<ExperimentSchedule> exps = ExperimentSchedule.getAllWorkingExperiments();
 		for(ExperimentSchedule exp : exps) {
@@ -43,7 +43,7 @@ public class Trial extends Model{
 		}
 		return false;
 	}
-
+*/
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 

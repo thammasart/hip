@@ -3,7 +3,14 @@
     name:           Ex1
     noOfTrial:      3
     startDate:      2014-01-30
-    expireDate:        2014-02-07
+    expireDate:     2015-02-07
+    experimentType: BROWNPETERSON
+- &ex2 !!models.ExperimentSchedule
+    name:           Ex2
+    noOfTrial:      3
+    startDate:      2012-01-30
+    expireDate:     2013-02-07
+    experimentType: BROWNPETERSON
 
 #Question
 - &Question1 !!models.brownPeterson.Question
@@ -68,7 +75,16 @@
 #User
 - &ohm !!models.User
     username:              s550
-    password:               password
+    password:              password
+    status:                ADMIN
+
+- &pae !!models.User
+    username:               s551
+    password:               1234
+
+- &nick !!models.User
+    username:               s552
+    password:               1111
 #Trial
 - &round1 !!models.brownPeterson.Trial
     trigramLanguage:       english
@@ -82,6 +98,19 @@
     trigramLanguage:       english
     trigramType:    word 
     schedule: *ex1
+- &round4 !!models.brownPeterson.Trial
+    trigramLanguage:       english
+    trigramType:    word
+    schedule: *ex2
+- &round5 !!models.brownPeterson.Trial
+    trigramLanguage:       english
+    trigramType:    word
+    schedule: *ex2
+- &round6 !!models.brownPeterson.Trial
+    trigramLanguage:       english
+    trigramType:    word 
+    schedule: *ex2
+
 - &quiz1 !!models.brownPeterson.Quiz
     initCountdown:                 100
     flashTime:                 5
@@ -97,7 +126,6 @@
     flashTime:                 7
     trial: *round1
     question: *Question3
-
 - &quiz4 !!models.brownPeterson.Quiz
     initCountdown:                 120
     flashTime:                 8
@@ -128,21 +156,66 @@
     flashTime:                 3
     trial: *round3
     question: *Question11
+- &quiz10 !!models.brownPeterson.Quiz
+    initCountdown:                 100
+    flashTime:                 5
+    trial: *round4
+    question: *Question1
+- &quiz11 !!models.brownPeterson.Quiz
+    initCountdown:                 90
+    flashTime:                 6
+    trial: *round4
+    question: *Question2
+- &quiz12 !!models.brownPeterson.Quiz
+    initCountdown:                 70
+    flashTime:                 7
+    trial: *round4
+    question: *Question3
+- &quiz13 !!models.brownPeterson.Quiz
+    initCountdown:                 120
+    flashTime:                 8
+    trial: *round5
+    question: *Question4
+- &quiz14 !!models.brownPeterson.Quiz
+    initCountdown:                 123
+    flashTime:                 5
+    trial: *round5
+    question: *Question5
+- &quiz15 !!models.brownPeterson.Quiz
+    initCountdown:                 77
+    flashTime:                 6
+    trial: *round5
+    question: *Question6
+- &quiz16 !!models.brownPeterson.Quiz
+    initCountdown:                 99
+    flashTime:                 8
+    trial: *round6
+    question: *Question7
+- &quiz17 !!models.brownPeterson.Quiz
+    initCountdown:                 111
+    flashTime:                 4
+    trial: *round6
+    question: *Question9
+- &quiz18 !!models.brownPeterson.Quiz
+    initCountdown:                 534
+    flashTime:                 3
+    trial: *round6
+    question: *Question11
 
 #TimeLog
 - &timelog1 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-15
+    startTime: 2014-01-30
     endTime: 2014-01-30
     user: *ohm
     trial: *round1
 - &timelog2 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-30
-    endTime: 2014-01-30
+    startTime: 2014-01-31
+    endTime: 2014-01-31
     user: *ohm
     trial: *round2
 - &timelog3 !!models.brownPeterson.TimeLog
-    startTime: 2011-11-19
-    endTime: 2014-01-30
+    startTime: 2014-10-19
+    endTime: 2014-10-19
     user: *ohm
     trial: *round3
 #Answer
@@ -155,17 +228,17 @@
     user: *ohm                 
     quiz: *quiz1           
 - &answer2 !!models.brownPeterson.Answer
-    firstWord:              wrong                
+    firstWord:              q2w3                
     secondWord:             q2w2
-    thirdWord:              q2w3
+    thirdWord:              q2w1
     usedTime:                   15
     countdownResult:        100
     user: *ohm                 
     quiz: *quiz2
 - &answer3 !!models.brownPeterson.Answer
-    firstWord:              q3w1                
-    secondWord:             wrong
-    thirdWord:              q3w3
+    firstWord:              q3w2                
+    secondWord:             q3w2
+    thirdWord:              q3w2
     usedTime:                   10
     countdownResult:        49
     user: *ohm                 
@@ -174,35 +247,35 @@
     usedTime:                   10
     countdownResult:        85
     user: *ohm                 
-    quiz: *quiz1           
+    quiz: *quiz4           
 - &answer5 !!models.brownPeterson.Answer
     firstWord:              wrong                
     thirdWord:              q5w3
     usedTime:                   15
     countdownResult:        100
     user: *ohm                 
-    quiz: *quiz2
+    quiz: *quiz5
 - &answer6 !!models.brownPeterson.Answer
     firstWord:              q6w1                
     usedTime:                   10
     countdownResult:        49
     user: *ohm                 
-    quiz: *quiz3
+    quiz: *quiz6
 - &answer7 !!models.brownPeterson.Answer
     firstWord:              q7w1                
     secondWord:             q7w2
     thirdWord:              q7w3
     usedTime:                   5
     user: *ohm                 
-    quiz: *quiz1           
+    quiz: *quiz7           
 - &answer8 !!models.brownPeterson.Answer
     firstWord:              wrong                
     secondWord:             q8w2
     thirdWord:              wrong
     usedTime:                   15
     user: *ohm                 
-    quiz: *quiz2
+    quiz: *quiz8
 - &answer9 !!models.brownPeterson.Answer
     usedTime:                   10
     user: *ohm                 
-    quiz: *quiz3
+    quiz: *quiz9

@@ -10,7 +10,10 @@
 </div> 
 <div class="procBody">
         <iframe src="@routes.BrownPeterson.procIframe()" class="procContent" frameborder="0" ></iframe>
-    <div class="procButtonContainer">
+    <div class="container">
+    @if(flash.containsKey("repeat")) {
+        <div class="alert alert-danger">@flash.get("repeat")</div>
+    }
          <div class="procButtonRed">
              <a href="@routes.BrownPeterson.info()" class="btn btn-block btn-lg btn-danger" ><span class="fui-arrow-left"></span> ย้อนกลับ</a>  &nbsp; 
          </div>
