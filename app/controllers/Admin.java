@@ -14,6 +14,9 @@ import models.brownPeterson.*;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 
 public class Admin extends Controller {
@@ -105,6 +108,34 @@ public class Admin extends Controller {
             return notFound("This Experiment does not exist.");
         }
         List<Trial> trials = Trial.findInvolving(exp);
+        return ok(views.html.admin.experiment.edit.render(exp, trials));
+    }
+
+    public static Result saveBrownPetersonParameter(long expId){
+        DynamicForm requestData = Form.form().bindFromRequest();
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
+        List<Trial> trials = Trial.findInvolving(exp);
+        exp.name = requestData.get("name");
+        try{
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            exp.startDate = dateFormat.parse(requestData.get("startDate"));
+            exp.expireDate = dateFormat.parse(requestData.get("expireDate"));
+        } catch (ParseException e){
+            flash("date_error", "กรุณากรอกข้อมูลช่วงเวลาการทำทดลองให้ถูกต้อง");
+            return badRequest(views.html.admin.experiment.edit.render(exp, trials));
+        }
+        exp.update();
+        for(Trial trial : trials){
+            for(Quiz quiz : Quiz.findInvolving(trial)){
+                quiz.initCountdown = Integer.parseInt(requestData.get("initCountdown-" + quiz.id));
+                quiz.flashTime = Integer.parseInt(requestData.get("flashTime-" + quiz.id));
+                quiz.update();
+            }
+            trial.trigramType = requestData.get("trigramType-" + trial.id);
+            trial.trigramLanguage = requestData.get("trigramLanguage-" + trial.id);
+            trial.update();
+        }
+        flash("success", "update success.");
         return ok(views.html.admin.experiment.edit.render(exp, trials));
     }
 }

@@ -6,10 +6,10 @@
 @head_admin("Admin Panel : edit parameter")
 
 @nav_admin()
-
+<form role="form" class="form-horizontal" action="@routes.Admin.saveBrownPetersonParameter(exp.id)" method="POST">
 <div class="container-fluid">
     <div class="row">
-        <form class="form-horizontal" role="form" action="@routes.Admin.updateExperiment(exp.id)" method="POST">
+        <!-- <form class="form-horizontal" role="form" action="@routes.Admin.updateExperiment(exp.id)" method="POST"> -->
             <div class="col-md-9 col-sm-8">
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
@@ -34,35 +34,38 @@
                     <button type="button" class="btn btn-danger btn-clear">Clear ALL</button>
                 </a>    
             </div>
-        </form>
+        <!-- </form> -->
     </div>
     <hr>
     <div class="container">
         @if(flash.containsKey("success")){
-            <p class="text-success">@flash.get("success")</p>
+            <p class="bg-success">@flash.get("success")</p>
         }
         @if(flash.containsKey("error")){
-            <p class="text-danger">@flash.get("error")</p>
+            <p class="bg-danger">@flash.get("error")</p>
+        }
+        @if(flash.containsKey("date_error")){
+            <p class="bg-danger">@flash.get("date_error")</p>
         }
     </div>
 </div>
 
 <div class="container">
+<!-- <form role="form" class="form-horizontal" action="@routes.Admin.saveBrownPetersonParameter(exp.id)" method="POST"> -->
     @for(trial <- trials){
         <h3>Trial 0@{trials.indexOf(trial)+1}</h3>
         <div class="well">
             <div class="row">
-            <form role="form" class="form-horizontal">
                 <div class="col-md-9 col-sm-8 trial-box-left">
                     @for(quiz <- Quiz.findInvolving(trial)){
                     <div class="form-group">
                         <label for="initCountdown" class="control-label col-sm-4">ตัวเลขเริ่มนับถอยหลัง</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="initCountdown" value="@quiz.initCountdown">
+                            <input type="number" min="1" max="999" class="form-control" name="initCountdown-@quiz.id" value="@quiz.initCountdown">
                         </div>
                         <label for="flashTime" class="control-label col-sm-4">จำนวนวินาทีนับถอยหลัง</label>
                         <div class="col-sm-2">
-                            <input type="number" min="1" max="20" class="form-control" name="flashTime" value="@quiz.flashTime">
+                            <input type="number" min="1" max="20" class="form-control" name="flashTime-@quiz.id" value="@quiz.flashTime">
                         </div>
                     </div>
                     }
@@ -70,22 +73,24 @@
                 <div class="col-md-3 col-sm-4 trial-box-right">
                     <h4>Trigram Type</h4>
                     <label class="radio-inline">
-                        <input type="radio" name="trigramType" value="@TrigramType.WORD" checked> Word 
+                        <input type="radio" name="trigramType-@trial.id" value="@TrigramType.WORD" checked> Word 
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="trigramType" value="@TrigramType.NON_SENSE" disabled> <del>Non Sense</del>
+                        <input type="radio" name="trigramType-@trial.id" value="@TrigramType.NON_SENSE" disabled> <del>Non Sense</del>
                     </label>
                     <h4>Trigram Language</h4>
                     <label class="radio-inline">
-                        <input type="radio" name="trigramLanguage" value="@TrigramLanguage.ENGLISH" checked> English
+                        <input type="radio" name="trigramLanguage-@trial.id" value="@TrigramLanguage.ENGLISH" checked> English
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="trigramLanguage" value="@TrigramLanguage.THAI" disabled> <del>ไทย</del> 
+                        <input type="radio" name="trigramLanguage-@trial.id" value="@TrigramLanguage.THAI" disabled> <del>ไทย</del> 
                     </label>
                 </div>
-            </form>
             </div>
         </div>
     }
+<button type="submit" class="btn btn-primary btn-lg">Save</button>
+<!-- </form> -->
 </div>
+</form>
 @footer()
