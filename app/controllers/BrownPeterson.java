@@ -45,13 +45,6 @@ public class BrownPeterson extends Controller {
     public static Result experiment(long trialId){
         User user = User.find.where().eq("username", session().get("username")).findUnique();
         Trial trial = Trial.find.where().eq("id", trialId).findUnique();
-        if(user == null) {
-            return redirect(routes.Application.index());
-        }
-        if(TimeLog.isRepeatTrial(user, trial)) {
-            flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
-            return ok(proc.render(user));
-        }
         List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trialId).findList();
         questions = Question.findInvolving(quizzes);
         Form<Answer> filledForm = Form.form(Answer.class);
@@ -90,5 +83,19 @@ public class BrownPeterson extends Controller {
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);  
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,quizzes.size(), "Report", user));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result checkUserTakeRepeatExperiment() {
+        User user = User.find.where().eq("username", session().get("username")).findUnique();
+        if(user == null) {
+            return redirect(routes.Application.index());
+        }
+        if(TimeLog.isRepeatTrial(user, Trial.find.byId(new Long(1)))) {
+            flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
+            return ok(proc.render(user));
+        }
+        TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
+        return redirect(routes.BrownPeterson.experiment(new Long(1)));
     }
 }
