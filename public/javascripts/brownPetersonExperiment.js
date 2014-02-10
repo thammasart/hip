@@ -16,12 +16,12 @@ var counter;
 function timer()
 {
   count=count-1;
-  if (count <= -1)
+  if (count <= 0)
   {
      clearInterval(counter);
           return;
   }
-        document.getElementById("timeLeft").innerHTML= " เวลาที่เหลือ " + count +" วินาท่ี " ;
+        document.getElementById("timeLeft").innerHTML= " เวลาที่เหลือ " + (count-1) +" วินาท่ี " ;
 }
 function startTimerFunction(){
         clearInterval(startTimer);
@@ -61,8 +61,8 @@ function answerTimerFunction(){
     	document.getElementById("SubmitButton").disabled = false;
     	document.getElementById("SubmitButton").style.visibility = "visible";
     	document.getElementById("timeLeft").style.visibility = "visible";
-//    	document.getElementById("ansTag").style.visibility = "visible";
-//    	document.getElementById("numberTag").style.visibility = "visible";
+    	document.getElementById("ansTag").style.visibility = "visible";
+    	document.getElementById("numberTag").style.visibility = "visible";
         counter = setInterval(timer, 1000); //1000 will  run it every 1 second
     	finTimer = setInterval(function() {finishTimerFunction()},answerTime);
     	d = new Date();
@@ -72,6 +72,7 @@ function answerTimerFunction(){
 
 function finishTimerFunction(){
         clearInterval(finTimer);
+        clearInterval(counter);
         document.getElementById("firstWord").disabled = true;
         document.getElementById("secondWord").disabled = true;
         document.getElementById("thirdWord").disabled = true;
