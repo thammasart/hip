@@ -3,7 +3,12 @@
 
 <script src="@routes.Assets.at("javascripts/brownPetersonExperiment.js")"></script>
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
 
+</script>
 <body>
 
 <!--FlashTime Container-->
@@ -28,9 +33,10 @@
   <div id="counter" class="counterText" align="center">@count</div>
 </div>
 <div class="answerBox">
-    
-  <span class="headerBox">คำตอบ</span>
-  <span class="headerNumberBox">ใส่ตัวเลข</span>
+   
+  <h3 align="center" id="timeLeft" >  </h3>  
+  <span class="headerBox" id="ansTag">คำตอบ</span>
+  <span class="headerNumberBox" id="numberTag">ใส่ตัวเลข</span>
         <form id = "answerForm" action="@routes.BrownPeterson.experiment(trialId)" method="post">
           <input class="inputBox" id = "firstWord" name = "firstWord" type="text" placeholder="      คำตอบ" disabled />
           <input class="inputBox" id = "secondWord" name = "secondWord" type="text" placeholder="      คำตอบ" disabled />

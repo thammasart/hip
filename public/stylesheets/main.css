@@ -136,7 +136,7 @@ width:631px;
 .infoContainer{
      width:950px;
      height:350px;
-     margin: 50px auto 50px auto;
+     margin: 0px auto 50px auto;
      
 }
 .procContent{
@@ -207,51 +207,81 @@ width:631px;
     margin-left: 25px;
     width:250px;
 }
-/*-------------------------------------Experiment Page------------------------------------------------------------------------------------------------------*/
+/*--------------------------Brown----------Experiment Page------------------------------------------------------------------------------------------------------*/
+
 .answerBox{
+    visibility:hidden;
     margin: 0px auto;
-    height:180px;
-    width:1350px;
+    height:200px;
+    width:1000px;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-115%);
+    -ms-transform: translateY(-115%);
+    transform: translateY(-115%);
 
 }
 
 .rabbitContainer{
-    width:300px;
-    height:200px;
-    padding-top:1em;
-    padding-right:1em;
-    margin:auto;
-    margin-top:1em;
-    margin-bottom:2em;
+    width:200px;
+    height:150px;
+    margin:0px auto;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(40%);
+    -ms-transform: translateY(40%);
+    transform: translateY(40%);
 }
 .questionBox{
-    width:60em;
-    height:50px;
-    font-size:20px;
-    margin:auto;
-    margin-top:2em;
-    margin-bottom:2em;
+    height:100px;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(180%);
+    -ms-transform: translateY(180%);
+    transform: translateY(180%);
+    width:1100px;
+    margin: 0px auto;
+}
+.timeLeft{
+    visibility: hidden;
+    width:330px;
+    height:70px;
+    font-size:30px;
+    margin:0px auto;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-130%);
+    -ms-transform: translateY(-130%);
+    transform: translateY(-130%);
 }
 .counterText{
     visibility: hidden;
     width:100px;
-    height:50px;
-    font-size:50px;
+    height:70px;
+    font-size:70px;
+    margin:0px auto;
+    position: relative;
+    top: -60%;
+    -webkit-transform: translateY(-192);
+    -ms-transform: translateY(-192%);
+    transform: translateY(-192%);
 }
 .questionWord{
     float:left;
-    width:7em;
-    height:50px;
-    font-size:40px;
-    margin-left:2em;
+    width:300px;
+    height:100px;
+    font-size:70px;
+    margin: 0px auto;
+    margin-left:60px;
 }
 .inputBox{
-    width:7em;
+    width:5em;
     padding:0px;
     font-size:2em;
     border: 2px solid #185daa;
     margin:20px auto;
-    margin-right:1em;
+    margin-right:3%;
+    margin-left:3%;
 }
 .inputNumberBox{
     width:3em;
@@ -266,12 +296,14 @@ width:631px;
 
 .headerBox{
     font-size: 40px;
-    margin-left:5%;
+    margin-left:3%;
+    visibility:hidden;
 }
 
 .headerNumberBox{
     font-size: 40px;
-    margin-left:695px;
+    margin-left:59%;
+    visibility:hidden;
 }
 
 /*-----------------------------------------------------------------------------------------------------------------*/
@@ -323,7 +355,8 @@ width:631px;
  padding: 10px;
  border-color:#BDC3C7;
  border-top-style:dashed;
- bottom: 5em;
+ position:relative;
+ bottom:11%;
  width:100%;
 }
 
@@ -331,7 +364,8 @@ width:631px;
 color:#34495E; 
 background-color:#BDC3C7; 
 padding:5px;
-bottom : 20px;
+position:relative;
+bottom : 2%;
 width:100%;
 height:4em;
 }
@@ -349,6 +383,9 @@ padding-top:8em;
     -webkit-transform: translateY(-8%);
     -ms-transform: translateY(-8%);
     transform: translateY(-8%); 
+  float:right;
+  margin-right:12%;
+  margin-top:2%;
   text-align: center;
   border-radius:4px;
   text-decoration: none;

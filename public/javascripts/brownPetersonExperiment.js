@@ -1,16 +1,28 @@
 var questionTime = 5000;
 var countDownTime = 5000;
-var flashTime;
+var flashTime = 5000;
 var answerTime = 30000;
 var startTimer = setInterval(function() {startTimerFunction()},3000);
-var countdownTimer;
-var flashTimer;
-var answerTimer;
-var finTimer;
+var countdownTimer = 0;
+var flashTimer = 0;
+var answerTimer = 0;
+var finTimer = 0;
 var expDuration = 0;
 var d;
 var isStore = 0;
+var count=30;
+var counter;
 
+function timer()
+{
+  count=count-1;
+  if (count <= 0)
+  {
+     clearInterval(counter);
+          return;
+  }
+        document.getElementById("timeLeft").innerHTML= " เวลาที่เหลือ " + (count-1) +" วินาท่ี " ;
+}
 function startTimerFunction(){
         clearInterval(startTimer);
         document.getElementById("word1").style.visibility="visible";
@@ -32,7 +44,6 @@ function flashTimerFunction(){
         clearInterval(flashTimer);
         document.getElementById("counter").style.visibility = "hidden";
         document.getElementById("hopRabbit").style.visibility = "visible";
-        flashTime = document.getElementById("flashTime").value;
     	answerTimer = setInterval(function() {answerTimerFunction()},flashTime);
 }
 
@@ -40,10 +51,19 @@ function answerTimerFunction(){
         clearInterval(answerTimer);
         document.getElementById("hopRabbit").style.visibility = "hidden";
         document.getElementById("firstWord").disabled = false;
+        document.getElementById("firstWord").style.visibility = "visible";
     	document.getElementById("secondWord").disabled = false;
+    	document.getElementById("secondWord").style.visibility = "visible";
     	document.getElementById("thirdWord").disabled = false;
+    	document.getElementById("thirdWord").style.visibility = "visible";
     	document.getElementById("countdownResult").disabled = false;
+    	document.getElementById("countdownResult").style.visibility = "visible";
     	document.getElementById("SubmitButton").disabled = false;
+    	document.getElementById("SubmitButton").style.visibility = "visible";
+    	document.getElementById("timeLeft").style.visibility = "visible";
+    	document.getElementById("ansTag").style.visibility = "visible";
+    	document.getElementById("numberTag").style.visibility = "visible";
+        counter = setInterval(timer, 1000); //1000 will  run it every 1 second
     	finTimer = setInterval(function() {finishTimerFunction()},answerTime);
     	d = new Date();
     	expDuration = d.getTime();
@@ -51,14 +71,18 @@ function answerTimerFunction(){
 }
 
 function finishTimerFunction(){
-
         clearInterval(finTimer);
-        submitButtonClick();
-        document.forms["answerForm"].submit();
+        clearInterval(counter);
+        document.getElementById("firstWord").disabled = true;
+        document.getElementById("secondWord").disabled = true;
+        document.getElementById("thirdWord").disabled = true;
+        document.getElementById("countdownResult").disabled = true;
+        d = new Date();
+        expDuration = d.getTime()-expDuration;
+        isStore = 1;
 }
 
 function submitButtonClick(){
-
      document.getElementById("firstWord").disabled = false;
      document.getElementById("secondWord").disabled = false;
      document.getElementById("thirdWord").disabled = false;
