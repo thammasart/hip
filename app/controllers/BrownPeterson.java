@@ -17,7 +17,7 @@ public class BrownPeterson extends Controller {
     public static List<Answer> answerList = new ArrayList<Answer>();
     public static List<Question> questions = null;
     private static List<ExperimentSchedule> currentEx = ExperimentSchedule.getAllWorkingExperiments();
-    public static int questionNumber = 0;
+    public static int questionNumber;
 
     @Security.Authenticated(Secured.class)
     public static Result info(){
