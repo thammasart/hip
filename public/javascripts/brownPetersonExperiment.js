@@ -75,11 +75,11 @@ function finishTimerFunction(){
 }
 
 function submitButtonClick(){
-//     document.getElementById("usedTime").disabled = false;
+     document.getElementById("usedTime").disabled = false;
 
-     if (document.getElementById("countdownResult").value == ""){
-        document.getElementById("countdownResult").value = "-99";
-     }
+//     if (document.getElementById("countdownResult").value == ""){
+//        document.getElementById("countdownResult").value = "-99";
+//     }
 
         d = new Date();
         expDuration = d.getTime()-expDuration;
