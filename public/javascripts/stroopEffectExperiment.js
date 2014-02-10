@@ -1,0 +1,50 @@
+var questionTime = 5000;
+var countDownTime = 5000;
+var flashTime;
+var answerTime = 5000;
+var startTimer = setInterval(function() {startTimerFunction()},3000);
+var questionTimer;
+var flashTimer;
+var answerTimer;
+var finTimer;
+var expDuration = 0;
+var d;
+var isStore = 0;
+
+function startTimerFunction(){
+        clearInterval(startTimer);
+        document.getElementById("word").style.visibility="visible";
+        questionTimer = setInterval(function() {answerTimerFunction()},questionTime);
+}
+
+function answerTimerFunction(){
+        clearInterval(questionTimer);
+        document.getElementById("word").style.visibility = "hidden";
+        document.getElementById("title").style.visibility="visible";
+        document.getElementById("black").style.visibility="visible";
+    	document.getElementById("red").style.visibility="visible";
+    	document.getElementById("blue").style.visibility="visible";
+    	document.getElementById("yellow").style.visibility="visible";
+    	document.getElementById("green").style.visibility="visible";
+    	document.getElementById("purple").style.visibility="visible";
+    	finTimer = setInterval(function() {finishTimerFunction()},answerTime);
+    	d = new Date();
+    	expDuration = d.getTime();
+
+}
+
+function finishTimerFunction(){
+
+        clearInterval(finTimer);
+        submitButtonClick();
+        document.forms["answerForm"].submit();
+}
+
+function submitButtonClick(){
+
+     d = new Date();
+     expDuration = d.getTime()-expDuration;
+     document.getElementById("usedTime").value = expDuration/1000;
+
+}
+

@@ -1,0 +1,42 @@
+.blackButton{
+    visibility:hidden;
+    border:none;
+    border-radius:7px;
+    background-color:black;
+    color:black;
+}
+.redButton{
+    visibility:hidden;
+    border:none;
+    border-radius:7px;
+    background-color:red;
+    color:red;
+}
+.blueButton{
+    visibility:hidden;
+    border:none;
+    border-radius:7px;
+    background-color:blue;
+    color:blue;
+}
+.yellowButton{
+    visibility:hidden;
+    border:none;
+    border-radius:7px;
+    background-color:yellow;
+    color:yellow;
+}
+.greenButton{
+    visibility:hidden;
+    border:none;
+    border-radius:7px;
+    background-color:green;
+    color:green;
+}
+.purpleButton{
+    visibility:hidden;
+    border:none;
+    border-radius:7px;
+    background-color:purple;
+    color:purple;
+}
