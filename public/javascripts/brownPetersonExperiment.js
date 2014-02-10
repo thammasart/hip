@@ -23,6 +23,16 @@ function calculateTimeLeft()
 //  }
         document.getElementById("timeLeft").innerHTML= " เวลาที่เหลือ " + (count-1) +" วินาท่ี " ;
 }
+function validate(evt) {
+  var theEvent = evt || window.event;
+  var key = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode( key );
+  var regex = /[0-9]|\./;
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
 function startTimerFunction(){
         clearInterval(startTimer);
         document.getElementById("word1").style.visibility="visible";
@@ -60,6 +70,8 @@ function answerTimerFunction(){
     	document.getElementById("ansTag").style.visibility = "visible";
     	document.getElementById("numberTag").style.visibility = "visible";
         document.answerForm.firstWord.focus();
+        
+
         counter = setInterval(calculateTimeLeft, 1000); //1000 will  run it every 1 second
     	finTimer = setInterval(function() {finishTimerFunction()},answerTime);
     	d = new Date();
@@ -81,7 +93,6 @@ function submitButtonClick(){
 //     if (document.getElementById("countdownResult").value == ""){
 //        document.getElementById("countdownResult").value = "-99";
 //     }
-
         d = new Date();
         expDuration = d.getTime()-expDuration;
         isStore = 1;
