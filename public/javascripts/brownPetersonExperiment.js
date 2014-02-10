@@ -59,6 +59,7 @@ function answerTimerFunction(){
     	document.getElementById("timeLeft").style.visibility = "visible";
     	document.getElementById("ansTag").style.visibility = "visible";
     	document.getElementById("numberTag").style.visibility = "visible";
+        document.answerForm.firstWord.focus();
         counter = setInterval(calculateTimeLeft, 1000); //1000 will  run it every 1 second
     	finTimer = setInterval(function() {finishTimerFunction()},answerTime);
     	d = new Date();
