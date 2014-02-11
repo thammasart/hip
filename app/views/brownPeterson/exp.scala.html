@@ -1,4 +1,4 @@
-@(question : models.brownPeterson.Question,count : Integer, flashTime : Integer,trialId : Long)
+@(trial : models.brownPeterson.Trial, questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
 
 <script src="@routes.Assets.at("javascripts/brownPetersonExperiment.js")"></script>
@@ -13,7 +13,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <body>
 
 <!--FlashTime Container-->
-<input class="inputNumberBox" id = "flashTime" name = "flashTime" type="text" disabled hidden value = @flashTime />
+<input class="inputNumberBox" id = "flashTime" name = "flashTime" type="text" disabled hidden value = @{trial.quizzes.get(questionNo).flashTime * 1000} />
 
 <!-- Page Header -->
     <div class="">
@@ -24,20 +24,20 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <div class="brownPeterson"></div>
 <!-- Content -->
 <div class="questionBox">
-      <div align="center" class="questionWord" id="word1" style="visibility:hidden">@question.firstWord</div>
-      <div align="center" class="questionWord" id="word2" style="visibility:hidden">@question.secondWord</div>
-      <div align="center" class="questionWord" id="word3" style="visibility:hidden">@question.thirdWord</div>
+      <div align="center" class="questionWord" id="word1" style="visibility:hidden">@trial.quizzes.get(questionNo).question.firstWord</div>
+      <div align="center" class="questionWord" id="word2" style="visibility:hidden">@trial.quizzes.get(questionNo).question.secondWord</div>
+      <div align="center" class="questionWord" id="word3" style="visibility:hidden">@trial.quizzes.get(questionNo).question.thirdWord</div>
 </div>
 <div class="rabbitContainer">
   <div id="hopRabbit"class="rabbit"></div>
-  <div id="counter" class="counterText" align="center">@count</div>
+  <div id="counter" class="counterText" align="center">@trial.quizzes.get(questionNo).initCountdown</div>
 </div>
 <div class="answerBox">
    
   <h3 align="center" id="timeLeft"> &nbsp </h3>  
   <span class="headerBox" id="ansTag">คำตอบ</span>
   <span class="headerNumberBox" id="numberTag">ใส่ตัวเลข</span>
-        <form id = "answerForm" action="@routes.BrownPeterson.experiment(trialId)" method="post" name="answerForm" >
+        <form id = "answerForm" action="@routes.BrownPeterson.saveAnswer(trial.id, questionNo)" method="post" name="answerForm" >
           <input class="inputBox" maxlength="20" id = "firstWord" name = "firstWord" type="text" placeholder="   คำตอบ" autofocus />
           <input class="inputBox"  maxlength="20"id = "secondWord" name = "secondWord" type="text" placeholder="   คำตอบ" />
           <input class="inputBox" maxlength="20" id = "thirdWord" name = "thirdWord" type="text" placeholder="  คำตอบ"  />

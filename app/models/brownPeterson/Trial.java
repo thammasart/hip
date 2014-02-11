@@ -16,11 +16,15 @@ public class Trial extends Model{
 	@Column(nullable=false, length=20)
 	public String trigramLanguage = "english";
 
+	public static final int TOTAL_QUESTION = 3;
+
 	@ManyToOne
 	public ExperimentSchedule schedule;
 	@OneToMany
 	public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
-
+        @OneToMany(mappedBy = "trial")
+        public List<Quiz> quizzes = new ArrayList<Quiz>();
+        
 	public static Trial create(ExperimentSchedule experimentSchedule){
 		Trial trial = new Trial();
 		trial.schedule = experimentSchedule;
