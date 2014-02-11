@@ -19,6 +19,7 @@ public class BrownPeterson extends Controller {
     private static List<ExperimentSchedule> currentEx = ExperimentSchedule.getAllWorkingExperiments();
     public static int questionNumber;
 
+    private static final Form<Answer> answerForm = Form.form(Answer.class);
     @Security.Authenticated(Secured.class)
     public static Result info(){
         User user = User.find.byId(request().username());
@@ -40,34 +41,35 @@ public class BrownPeterson extends Controller {
     public static Result procIframe(){
         return ok(brown_peterson_proc_iframe.render());
     }
-    
+
     @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId){
-        User user = User.find.where().eq("username", session().get("username")).findUnique();
-        Trial trial = Trial.find.where().eq("id", trialId).findUnique();
-        List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trialId).findList();
-        questions = Question.findInvolving(quizzes);
-        Form<Answer> filledForm = Form.form(Answer.class);
-        Answer answer = filledForm.bindFromRequest().get();
-        if (questionNumber > 0){
-            answerList.add(answer);
-        }
-        if (questionNumber+1 <= questions.size()){
-            int flashTime = quizzes.get(questionNumber).flashTime * 1000;
-            return ok(exp.render(questions.get(questionNumber),quizzes.get(questionNumber++).initCountdown, flashTime,trialId));
-        }
-        else{
-            List<Answer> answerListTemp = new ArrayList<Answer>(answerList);
-            for(int i = 0; i < answerListTemp.size(); i++){
-                answerListTemp.get(i).user = user;
-                answerListTemp.get(i).quiz = quizzes.get(i);
-                answerListTemp.get(i).save();
-            }
-            questionNumber = 0;
-            answerList.clear();
-            return redirect(routes.BrownPeterson.report(user.username, trialId));
-        }
+    public static Result experiment(long trialId, int questionNo){
+
+        return ok(exp.render(Trial.find.byId(trialId), questionNo));
     }
+
+    @Security.Authenticated(Secured.class)
+    public static Result saveAnswer(long trialId, int questionNo){
+       Form<Answer> boundForm = answerForm.bindFromRequest(); 
+       User user = User.find.byId(session().get("username"));
+       Trial trial = Trial.find.byId(trialId);
+     
+        if(boundForm.hasErrors()){
+            flash("error", "please correct the form above.");
+            return badRequest(views.html.home.render(user));
+        }
+        Answer answer = boundForm.get();
+        answer.user = user;
+        answer.quiz = trial.quizzes.get(questionNo);
+        answer.save();
+        
+        questionNo++;
+        if(questionNo < Trial.TOTAL_QUESTION){
+            return redirect(routes.BrownPeterson.experiment(trialId, questionNo));
+        }
+        return redirect(routes.BrownPeterson.report(user.username, trialId));
+    }
+    
     @Security.Authenticated(Secured.class)
     public static Result report(String username, Long trialId){
         if(username.equals("") || trialId == 0){
@@ -96,6 +98,6 @@ public class BrownPeterson extends Controller {
         }
         TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
         questionNumber = 0;
-        return redirect(routes.BrownPeterson.experiment(new Long(1)));
+        return redirect(routes.BrownPeterson.experiment(new Long(1), 0));
     }
 }

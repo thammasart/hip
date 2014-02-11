@@ -97,4 +97,17 @@ public class BrownPetersonTest extends WithApplication {
 		assertFalse(TimeLog.canTakeExperiment(user, exps));
 		*/
 	}
+
+        @Test
+        public void trial_should_have_3_quiz(){
+            Trial trial = Trial.find.byId(1L); 
+            assertNotNull(trial);
+            assertEquals(3,trial.quizzes.size());
+        }
+        
+        @Test
+        public void trial_can_reference_to_question() {
+            Trial trial = Trial.find.byId(1L);
+            assertEquals("q1w1", trial.quizzes.get(0).question.firstWord);
+        }
 }

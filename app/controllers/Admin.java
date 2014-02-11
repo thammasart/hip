@@ -74,10 +74,12 @@ public class Admin extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result saveExperiment() {
         Form<ExperimentSchedule> boundForm = expForm.bindFromRequest();
+
         if(boundForm.hasErrors()){
             flash("error", "please correct the form above.");
             return badRequest(views.html.admin.experiment.add.render(expForm));
         }
+
         ExperimentSchedule exp = boundForm.get();
         exp.save();
         flash("success","Successfully");
