@@ -1,0 +1,31 @@
+@(question : models.stroopEffect.Question,trialId : Long)
+@header("Human Information Processing Lab :: Home Page")
+
+<script src="@routes.Assets.at("javascripts/stroopEffectExperiment.js")"></script>
+
+<body>
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div class="brownPeterson"></div>
+<!-- Content -->
+<div class="questionBox">
+    <div align="center" class="questionWord" id="word" style="visibility:hidden;color:@question.ink_color">@question.color_word</div>
+</div>
+<div class="answerBox">
+    <h3 style="visibility:hidden" id="title">เลือกสีของหมึก</h3>
+    <form id = "answerForm" action="@routes.StroopEffect.report(question.color_word,trialId)" method="post">
+        <input type="submit" class="blackButton" id = "black" name = "Black" class="Button" onclick="return submitButtonClick()"/>
+        <input type="submit" class="redButton" id = "red" name = "Red" class="Button" onclick="return submitButtonClick()"/>
+        <input type="submit" class="blueButton" color:blue" id = "blue" name = "Blue" class="Button" onclick="return submitButtonClick()"/>
+        <input type="submit" class="yellowButton" id = "yellow" name = "Yellow" class="Button" onclick="return submitButtonClick()"/>
+        <input type="submit" class="greenButton" id = "green" name = "Green" class="Button" onclick="return submitButtonClick()"/>
+        <input type="submit" class="purpleButton" id = "purple" name = "Purple" class="Button"  onclick="return submitButtonClick()"/>
+        <input class="inputNumberBox" id = "usedTime" name = "usedTime" type="text" hidden/>
+    </form>
+</div>
+@footer()
