@@ -12,7 +12,7 @@ public class TimeLogTest extends WithApplication{
 
     @Before
     public void setUp(){
-        start(fakeApplication(inMemoryDatabase()));
+        start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
     }
 
     @Test

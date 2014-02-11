@@ -43,7 +43,7 @@ public class TimeLog extends Model{
 
 	public static boolean isRepeatTrial(User user, Trial trial){
 		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trial", trial).findUnique();
-		return (timeLog != null && timeLog.endTime == null);
+		return timeLog != null;
 	}
 /*
 	public static boolean canTakeExperiment(User user, List<ExperimentSchedule> exps) {

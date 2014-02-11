@@ -58,7 +58,7 @@ public class TrialTest extends WithApplication {
 	public void shoudBeFindByTrialInvolvingAndReferCorrectly(){
 		Date date = new Date();
 		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON).save();
-		ExperimentSchedule ex = ExperimentSchedule.find.byId(new Long(1));
+		ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
 		Trial.create(ex).save();
 		Trial.create(ex).save();
 		Trial.create(ex).save();
@@ -69,22 +69,5 @@ public class TrialTest extends WithApplication {
 		assertEquals(3, trials.get(2).id);
 	}
 
-	@Test
-	public void in_experiment_shcedule_working() {
-		/*
-		Date date = new Date();
-		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()-1, 0, 31), ExperimentType.BROWNPETERSON).save();
-		new ExperimentSchedule("Experiment 2", 3, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON).save();
-		ExperimentSchedule ex = ExperimentSchedule.find.byId(new Long(1));
-		ExperimentSchedule ex2 = ExperimentSchedule.find.byId(new Long(2));
-		Trial.create(ex).save();
-		Trial.create(ex).save();
-		Trial.create(ex).save();
-		Trial.create(ex2).save();
-		Trial.create(ex2).save();
-		Trial.create(ex2).save();
-		assertFalse(Trial.inWorkingSchedule(Trial.find.byId(new Long(1))));
-		assertTrue(Trial.inWorkingSchedule(Trial.find.byId(new Long(4))));
-		*/
-	}
+	
 }

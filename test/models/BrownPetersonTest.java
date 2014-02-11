@@ -72,6 +72,8 @@ public class BrownPetersonTest extends WithApplication {
 	public void check_user_used_to_take_the_trial_by_timelog_success(){
 		User user = User.find.where().eq("username", "s550").findUnique();
 		Trial trial = Trial.find.where().eq("id", 2).findUnique();
+		assertNotNull(user);
+		assertNotNull(trial);
 		assertTrue(TimeLog.isRepeatTrial(user, trial));
 	}
 	@Test
