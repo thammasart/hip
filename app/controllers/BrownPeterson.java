@@ -51,7 +51,10 @@ public class BrownPeterson extends Controller {
         if(TimeLog.isRepeatTrial(user, trial)) {
             flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
             return ok(proc.render(user));
+        }else{
+            TimeLog.create(new Date(), user, trial).save();
         }
+        
         List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trialId).findList();
         questions = Question.findInvolving(quizzes);
         Form<Answer> filledForm = Form.form(Answer.class);
@@ -72,6 +75,9 @@ public class BrownPeterson extends Controller {
             }
             questionNumber = 0;
             answerList.clear();
+            TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trial", trial).findUnique();
+            timeLog.endTime = new Date();
+            timeLog.update();
             return redirect(routes.BrownPeterson.report(user.username, trialId));
         }
     }

@@ -86,7 +86,7 @@ public class Admin extends Controller {
             trial.save();
             List<Question> questions = Question.getQuestionListBy(3); // 3 is number of quiz in trial.
             for(int j = 0; j < 3; j++){
-                Quiz.create(100, 5, trial, questions.get(0)).save();
+                Quiz.create(100, 5, trial, questions.get(j)).save();
             }
         }
         return redirect(routes.Admin.displayExperimentList());
@@ -149,8 +149,8 @@ public class Admin extends Controller {
             String questionRow = stz.nextToken();
             String[] questionArray = questionRow.split(",");
             models.brownPeterson.Question question 
-                = new models.brownPeterson.Question(questionArray[0], questionArray[1], questionArray[2]);
-                question.save();
+                 = new models.brownPeterson.Question(questionArray[0], questionArray[1], questionArray[2]);
+            question.save();
         }
         flash("success", "update success.");
         return ok(views.html.admin.experiment.addQuestion.render());
