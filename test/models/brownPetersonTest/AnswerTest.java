@@ -1,3 +1,5 @@
+package models.brownPetersonTest;
+
 import models.brownPeterson.*;
 import models.*;
 import play.test.WithApplication;
