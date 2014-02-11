@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import static play.test.Helpers.*;
 
 import java.util.Date;
+import java.util.Calendar;
 
 public class TimeLogTest extends WithApplication{
 
@@ -17,16 +18,19 @@ public class TimeLogTest extends WithApplication{
 
     @Test
     public void createTimeLogSuccess(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date startDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, +2);
+        Date finishDate = calendar.getTime();
         TimeLog timeLog = new TimeLog();
-        Date start = new Date(new Date().getYear()-1,1,1);
-        Date finish = new Date(new Date().getYear()+1,1,2);
-        TimeLog timeLog1 = new TimeLog(start,finish);
+        TimeLog timeLog1 = new TimeLog(startDate,finishDate);
         timeLog1.save();
 
         assertNotNull(timeLog);
-        assertNotNull(TimeLog.find.byId(new Long(1)));
-        assertEquals(start, timeLog1.start_time);
-        assertEquals(finish,timeLog1.end_time);
+        assertNotNull(TimeLog.find.byId(1L));
+        assertEquals(startDate, timeLog1.start_time);
+        assertEquals(finishDate,timeLog1.end_time);
     }
 
     @Test
@@ -34,9 +38,12 @@ public class TimeLogTest extends WithApplication{
         User u = new User("adisak", "abc123");
         u.save();
         Trial t = new Trial();
-        Date start = new Date(new Date().getYear()-1,1,1);
-        Date finish = new Date(new Date().getYear()+1,1,2);
-        TimeLog timeLog = TimeLog.create(start,finish, u, t);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date startDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, +2);
+        Date finishDate = calendar.getTime();
+        TimeLog timeLog = TimeLog.create(startDate,finishDate, u, t);
 
         assertEquals(u.username, timeLog.user.username);
         assertEquals(t.trial_id, timeLog.trial.trial_id);

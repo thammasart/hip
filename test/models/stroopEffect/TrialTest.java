@@ -5,6 +5,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static play.test.Helpers.*;
 import java.util.Date;
+import java.util.Calendar;
 import models.stroopEffect.*;
 import models.*;
 
@@ -35,7 +36,12 @@ public class TrialTest extends WithApplication{
 
     @Test
     public void shouldBeFoundByExperimentSchedule(){
-        ExperimentSchedule exs = new ExperimentSchedule("Name",3,new Date(114,1,10),new Date(114,1,20), ExperimentType.STROOPEFFECT);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date lastYearDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, +2);
+        Date nextYearDate = calendar.getTime();
+        ExperimentSchedule exs = new ExperimentSchedule("Name",3,lastYearDate,nextYearDate, ExperimentType.STROOPEFFECT);
         exs.save();
         Trial.create(exs).save();
         Trial.create(exs).save();
