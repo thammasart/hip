@@ -14,11 +14,6 @@ import views.html.iframe.*;
 import java.util.Date;
 
 public class BrownPeterson extends Controller {
-    public static List<Answer> answerList = new ArrayList<Answer>();
-    public static List<Question> questions = null;
-    private static List<ExperimentSchedule> currentEx = ExperimentSchedule.getAllWorkingExperiments();
-    public static int questionNumber;
-
     private static final Form<Answer> answerForm = Form.form(Answer.class);
     @Security.Authenticated(Secured.class)
     public static Result info(){
@@ -75,9 +70,17 @@ public class BrownPeterson extends Controller {
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.BrownPeterson.info());
         }
+<<<<<<< HEAD
         User user = User.find.byId(username);
         Trial trial = Trial.find.byId(trialId);
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
+=======
+        User user = User.find.where().eq("username", username).findUnique();
+        Trial trial = Trial.find.where().eq("id", trialId).findUnique();
+        List<Quiz> quizzes = Quiz.findInvolving(trial);
+        List<Answer> answers = Answer.findInvolving(user, quizzes);
+
+>>>>>>> 246c92ce2c6bf43694eea37d75b35813500310c7
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);  
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
@@ -94,7 +97,6 @@ public class BrownPeterson extends Controller {
             return ok(proc.render(user));
         }
         TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
-        questionNumber = 0;
         return redirect(routes.BrownPeterson.experiment(new Long(1), 0));
     }
 }

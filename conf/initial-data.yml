@@ -11,6 +11,18 @@
     startDate:      2012-01-30
     expireDate:     2013-02-07
     experimentType: BROWNPETERSON
+- &ex3 !!models.ExperimentSchedule
+    name:           Ex3
+    noOfTrial:      3
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: STROOPEFFECT
+- &ex4 !!models.ExperimentSchedule
+    name:           Ex4
+    noOfTrial:      3
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: STROOPEFFECT
 
 #Question
 - &Question1 !!models.brownPeterson.Question
@@ -279,3 +291,95 @@
     usedTime:                   10
     user: *ohm                 
     quiz: *quiz9
+
+#StroopEffect
+
+#Trial
+- &round7 !!models.stroopEffect.Trial
+    appear_time:       5
+    questionType:    ENGLISH
+    color_match: true
+    schedule: *ex3
+- &round8 !!models.stroopEffect.Trial
+    appear_time:       5
+    questionType:    ENGLISH
+    color_match: false
+    schedule: *ex3
+- &round9 !!models.stroopEffect.Trial
+    appear_time:       5
+    questionType:    ENGLISH
+    color_match: false
+    schedule: *ex3
+- &round10 !!models.stroopEffect.Trial
+    appear_time:       5
+    questionType:    THAI
+    color_match: true
+    schedule: *ex4
+- &round11 !!models.stroopEffect.Trial
+    appear_time:       5
+    questionType:    THAI
+    color_match: false
+    schedule: *ex4
+- &round12 !!models.stroopEffect.Trial
+    appear_time:       5
+    questionType:    THAI
+    color_match: false
+    schedule: *ex4
+
+#Question
+- &Question13 !!models.stroopEffect.Question
+    color_word:                Black
+    ink_color:               Black
+- &Question14 !!models.stroopEffect.Question
+    color_word:                Blue
+    ink_color:               Blue
+- &Question15 !!models.stroopEffect.Question
+    color_word:                Red
+    ink_color:               Red
+- &Question16 !!models.stroopEffect.Question
+    color_word:                Black
+    ink_color:               Yellow
+- &Question17 !!models.stroopEffect.Question
+    color_word:                Blue
+    ink_color:               Red
+- &Question18 !!models.stroopEffect.Question
+    color_word:                Green
+    ink_color:               Black
+- &Question19 !!models.stroopEffect.Question
+    color_word:                Purple
+    ink_color:               Green
+- &Question20 !!models.stroopEffect.Question
+    color_word:                Yellow
+    ink_color:               Blue
+- &Question21 !!models.stroopEffect.Question
+    color_word:                Red
+    ink_color:               Black
+
+#Quiz
+- &quiz19 !!models.stroopEffect.Quiz
+    trial: *round7
+    question: *Question13
+- &quiz20 !!models.stroopEffect.Quiz
+    trial: *round7
+    question: *Question14
+- &quiz21 !!models.stroopEffect.Quiz
+    trial: *round7
+    question: *Question15
+- &quiz22 !!models.stroopEffect.Quiz
+    trial: *round8
+    question: *Question16
+- &quiz23 !!models.stroopEffect.Quiz
+    trial: *round8
+    question: *Question17
+- &quiz24 !!models.stroopEffect.Quiz
+    trial: *round8
+    question: *Question18
+- &quiz25 !!models.stroopEffect.Quiz
+    trial: *round9
+    question: *Question19
+- &quiz26 !!models.stroopEffect.Quiz
+    trial: *round9
+    question: *Question20
+- &quiz27 !!models.stroopEffect.Quiz
+    trial: *round9
+    question: *Question21

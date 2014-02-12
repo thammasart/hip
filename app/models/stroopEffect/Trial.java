@@ -21,11 +21,16 @@ public class Trial extends Model{
     @Column(nullable=false)
     public boolean color_match;
 
+    public static final int TOTAL_QUESTION = 3;
+
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany
+<<<<<<< HEAD
     public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
     @OneToMany(mappedBy = "trial")
+=======
+>>>>>>> 246c92ce2c6bf43694eea37d75b35813500310c7
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public static Trial create(ExperimentSchedule experimentSchedule){

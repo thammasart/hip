@@ -15,7 +15,7 @@ import java.util.Date;
 import models.stroopEffect.*;
 
 public class StroopEffect extends Controller {
-
+    private static final Form<Answer> answerForm = Form.form(Answer.class);
     //แสดงหน้าข้อมูลการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result info(){
@@ -40,9 +40,30 @@ public class StroopEffect extends Controller {
     }
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId){
-        Question q = new Question("Black","Blue");
-        return ok(exp.render(q, trialId));
+    public static Result experiment(long trialId, int questionNo){
+        return ok(exp.render(Trial.find.byId(trialId), questionNo));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result saveAnswer(long trialId, int questionNo){
+        Form<Answer> boundForm = answerForm.bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        Trial trial = Trial.find.byId(trialId);
+
+        if(boundForm.hasErrors()){
+            flash("error", "please correct the form above.");
+            return badRequest(views.html.home.render(user));
+        }
+        Answer answer = boundForm.get();
+        answer.user = user;
+        answer.quiz = trial.quizzes.get(questionNo);
+        answer.save();
+
+        questionNo++;
+        if(questionNo < Trial.TOTAL_QUESTION){
+            return redirect(routes.StroopEffect.experiment(trialId, questionNo));
+        }
+        return redirect(routes.StroopEffect.report(user.username, trialId));
     }
 
     //แสดงหน้าผลลัพธ์การทดลอง
@@ -71,7 +92,7 @@ public class StroopEffect extends Controller {
         }
         TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
 */
-        return redirect(routes.StroopEffect.experiment(new Long(1)));
+        return redirect(routes.StroopEffect.experiment(new Long(1),0));
     }
 
 
