@@ -83,14 +83,7 @@ public class Admin extends Controller {
         ExperimentSchedule exp = boundForm.get();
         exp.save();
         flash("success","Successfully");
-        for(int i = 0; i < exp.noOfTrial; i++){
-            Trial trial = Trial.create(exp);
-            trial.save();
-            List<Question> questions = Question.getQuestionListBy(3); // 3 is number of quiz in trial.
-            for(int j = 0; j < 3; j++){
-                Quiz.create(100, 5, trial, questions.get(j)).save();
-            }
-        }
+        exp.generateTrials();
         return redirect(routes.Admin.displayExperimentList());
     }
 
@@ -107,7 +100,7 @@ public class Admin extends Controller {
     public static Result saveBrownPetersonParameter(long expId){
         DynamicForm requestData = Form.form().bindFromRequest();
         ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
-        List<Trial> trials = Trial.findInvolving(exp);
+        
         exp.name = requestData.get("name");
         try{
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -118,6 +111,9 @@ public class Admin extends Controller {
             return badRequest(views.html.admin.experiment.edit.render(exp));
         }
         exp.update();
+        /* Create Trials for Experiment */
+
+        List<Trial> trials = Trial.findInvolving(exp);
         for(Trial trial : trials){
             for(Quiz quiz : Quiz.findInvolving(trial)){
                 quiz.initCountdown = Integer.parseInt(requestData.get("initCountdown-" + quiz.id));
@@ -128,6 +124,7 @@ public class Admin extends Controller {
             trial.trigramLanguage = requestData.get("trigramLanguage-" + trial.id);
             trial.update();
         }
+        // end create Trial
         flash("success", "update success.");
         return ok(views.html.admin.experiment.edit.render(exp));
     }
