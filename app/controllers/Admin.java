@@ -130,9 +130,7 @@ public class Admin extends Controller {
     }
 
     public static Result displayBrownPetersonQuestionList(){
-        return ok(views.html.admin.experiment.displayQuestions.render(
-                models.brownPeterson.Question.find.all()
-            ));
+        return ok(views.html.admin.experiment.displayQuestions.render());
     }
 
     public static Result addBrownPetersonQuestion(){
@@ -142,17 +140,21 @@ public class Admin extends Controller {
     public static Result saveBrownPetersonQuestion(){
         DynamicForm  questionForm = Form.form().bindFromRequest();
         String questions = questionForm.get("questions");
+
         StringTokenizer stz = new StringTokenizer(questions,"\n");
 
         while(stz.hasMoreTokens()) { 
             String questionRow = stz.nextToken();
+            
             String[] questionArray = questionRow.split(",");
-            models.brownPeterson.Question question 
-                 = new models.brownPeterson.Question(questionArray[0], questionArray[1], questionArray[2]);
-            question.save();
+
+
+            new models.brownPeterson.Question(questionArray[0], questionArray[1], questionArray[2]).save();
+            
         }
         flash("success", "update success.");
-        return ok(views.html.admin.experiment.addQuestion.render());
+        
+        return ok(views.html.admin.experiment.displayQuestions.render());
     }
 
 }
