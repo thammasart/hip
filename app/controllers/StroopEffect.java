@@ -48,7 +48,15 @@ public class StroopEffect extends Controller {
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
     public static Result report(String username, Long trialId){
-        return TODO;
+        if(username.equals("") || trialId == 0){
+            return redirect(controllers.routes.StroopEffect.info());
+        }
+        User user = User.find.byId(username);
+        Trial trial = Trial.find.byId(trialId);
+        List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
+        double totalUsedTime = Answer.calculateTotalUsedTime(answers);
+        int score = Answer.calculateTotalScore(answers);
+        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
     @Security.Authenticated(Secured.class)

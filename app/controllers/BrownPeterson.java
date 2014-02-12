@@ -75,20 +75,17 @@ public class BrownPeterson extends Controller {
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.BrownPeterson.info());
         }
-        User user = User.find.where().eq("username", username).findUnique();
-        Trial trial = Trial.find.where().eq("id", trialId).findUnique();
-        List<Quiz> quizzes = Quiz.findInvolving(trial);
-        List<Question> questions = Question.findInvolving(quizzes);
-        List<Answer> answers = Answer.findInvolving(user, quizzes);
-
+        User user = User.find.byId(username);
+        Trial trial = Trial.find.byId(trialId);
+        List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);  
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,quizzes.size(), "Report", user));
+        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
 
     @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment() {
-        User user = User.find.where().eq("username", session().get("username")).findUnique();
+        User user = User.find.byId(session().get("username"));
         if(user == null) {
             return redirect(routes.Application.index());
         }
