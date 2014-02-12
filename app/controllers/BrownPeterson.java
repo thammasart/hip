@@ -15,6 +15,7 @@ import java.util.Date;
 
 public class BrownPeterson extends Controller {
     private static final Form<Answer> answerForm = Form.form(Answer.class);
+
     @Security.Authenticated(Secured.class)
     public static Result info(){
         User user = User.find.byId(request().username());
@@ -45,11 +46,10 @@ public class BrownPeterson extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result saveAnswer(long trialId, int questionNo){
-       Form<Answer> boundForm = answerForm.bindFromRequest(); 
-       User user = User.find.byId(session().get("username"));
-       Trial trial = Trial.find.byId(trialId);
-     
-        if(boundForm.hasErrors()){
+        Form<Answer> boundForm = answerForm.bindFromRequest(); 
+        User user = User.find.byId(session().get("username"));
+        Trial trial = Trial.find.byId(trialId);
+        if(boundForm.hasErrors()) {
             flash("error", "please correct the form above.");
             return badRequest(views.html.home.render(user));
         }
@@ -57,7 +57,6 @@ public class BrownPeterson extends Controller {
         answer.user = user;
         answer.quiz = trial.quizzes.get(questionNo);
         answer.save();
-        
         questionNo++;
         if(questionNo < Trial.TOTAL_QUESTION){
             return redirect(routes.BrownPeterson.experiment(trialId, questionNo));
@@ -70,17 +69,10 @@ public class BrownPeterson extends Controller {
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.BrownPeterson.info());
         }
-<<<<<<< HEAD
-        User user = User.find.byId(username);
-        Trial trial = Trial.find.byId(trialId);
-        List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
-=======
         User user = User.find.where().eq("username", username).findUnique();
         Trial trial = Trial.find.where().eq("id", trialId).findUnique();
         List<Quiz> quizzes = Quiz.findInvolving(trial);
         List<Answer> answers = Answer.findInvolving(user, quizzes);
-
->>>>>>> 246c92ce2c6bf43694eea37d75b35813500310c7
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);  
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));

@@ -1,7 +1,7 @@
 var questionTime = 5000;
 var countDownTime = 5000;
 var flashTime;
-var answerTime = 50000000;
+var answerTime = 5000;
 var startTimer = setInterval(function() {startTimerFunction()},3000);
 var questionTimer;
 var flashTimer;
@@ -13,6 +13,7 @@ var isStore = 0;
 
 function startTimerFunction(){
         clearInterval(startTimer);
+        questionTime = document.getElementById("appear_time").value;
         document.getElementById("word").style.visibility="visible";
         questionTimer = setInterval(function() {answerTimerFunction()},questionTime);
 }

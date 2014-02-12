@@ -18,16 +18,6 @@ GET     /brown-peterson/experiment      controllers.BrownPeterson.experiment(tri
 POST    /brown-peterson/experiment/save  controllers.BrownPeterson.saveAnswer(trialId:Long, questionNo:Int)
 GET     /brown-peterson/report      controllers.BrownPeterson.report(username:String ?= "", trial_id:Long ?= 0)
 
-<<<<<<< HEAD
-GET     /stroop-effect	            controllers.StroopEffect.info()
-GET     /stroop-effect/info         controllers.StroopEffect.infoIframe()
-GET     /stroop-effect/proc		    controllers.StroopEffect.proc()
-GET     /stroop-effect/proci	    controllers.StroopEffect.procIframe()
-GET     /stroop-effect/repeatexp	controllers.StroopEffect.checkUserTakeRepeatExperiment()
-GET     /stroop-effect/experiment   controllers.StroopEffect.experiment(trialId:Long)
-POST    /stroop-effect/experiment   controllers.StroopEffect.report(user:String,trialId:Long)
-GET     /stroop-effect/report      	controllers.StroopEffect.report(username:String ?= "", trial_id:Long ?= 0)
-=======
 GET     /stroop_effect	            controllers.StroopEffect.info()
 GET     /stroop_effect/info         controllers.StroopEffect.infoIframe()
 GET     /stroop_effect/proc		    controllers.StroopEffect.proc()
@@ -35,8 +25,7 @@ GET     /stroop_effect/proci	    controllers.StroopEffect.procIframe()
 GET     /stroop_effect/repeatexp	controllers.StroopEffect.checkUserTakeRepeatExperiment()
 GET     /stroop_effect/experiment   controllers.StroopEffect.experiment(trialId:Long, questionNo:Int)
 POST    /stroop_effect/experiment/save  controllers.StroopEffect.saveAnswer(trialId:Long, questionNo:Int)
-GET     /stroop_effect/report  controllers.StroopEffect.report(user:String,trialId:Long)
->>>>>>> 246c92ce2c6bf43694eea37d75b35813500310c7
+GET     /stroop-effect/report      	controllers.StroopEffect.report(username:String ?= "", trial_id:Long ?= 0)
 
 GET     /admin                      controllers.Admin.index()
 GET     /admin/experiment           controllers.Admin.displayExperimentList()
