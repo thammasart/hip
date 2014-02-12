@@ -1,14 +1,19 @@
 package models;
 
+import java.util.List;
+import java.util.ArrayList;
+import play.data.validation.ValidationError;
+
 public class UserForm {
 
     public String username;
     public String password;
     
-    public String validate() {
+    public List<ValidationError> validate() {
+        List<ValidationError> errors = new ArrayList<ValidationError>();
         if (User.authenticate(username, password) == null) {
-          return "Invalid user or password";
+          errors.add(new ValidationError("unauthenticate", "incorrect password"));
         }
-        return null;
+        return errors.isEmpty() ? null : errors;
     }
 }

@@ -52,5 +52,11 @@
             </button> 
             </form>
       </div>
+      
 </div>
+@if(flash().containsKey("password")){
+    <div class="alert alert-danger">
+        <p>@flash().get("password")</p>
+    </div>
+}
 @footer()
