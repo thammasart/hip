@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-public class Trial extends Model{
+public class Trial extends Model {
 	@Id
 	public long id;
 	@Column(nullable=false, length=20)
@@ -38,7 +38,7 @@ public class Trial extends Model{
 	public static List<Trial> findInvolving(ExperimentSchedule ex){
 		return find.where().eq("schedule", ex).findList();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 
