@@ -22,6 +22,7 @@ import java.text.ParseException;
 public class Admin extends Controller {
     private static final Form<ExperimentSchedule> expForm = Form.form(ExperimentSchedule.class);
 
+
     @Security.Authenticated(Secured.class)
     public static Result index() {
         User user = User.find.where().eq("username", session().get("username")).findUnique();
@@ -87,7 +88,7 @@ public class Admin extends Controller {
             trial.save();
             List<Question> questions = Question.getQuestionListBy(3); // 3 is number of quiz in trial.
             for(int j = 0; j < 3; j++){
-                Quiz.create(100, 5, trial, questions.get(0)).save();
+                Quiz.create(100, 5, trial, questions.get(j)).save();
             }
         }
         return redirect(routes.Admin.displayExperimentList());
@@ -101,7 +102,7 @@ public class Admin extends Controller {
         }
         return ok(views.html.admin.experiment.edit.render(exp));
     }
-    
+
     @Security.Authenticated(Secured.class)
     public static Result saveBrownPetersonParameter(long expId){
         DynamicForm requestData = Form.form().bindFromRequest();
@@ -130,4 +131,31 @@ public class Admin extends Controller {
         flash("success", "update success.");
         return ok(views.html.admin.experiment.edit.render(exp));
     }
+
+    public static Result displayBrownPetersonQuestionList(){
+        return ok(views.html.admin.experiment.displayQuestions.render(
+                models.brownPeterson.Question.find.all()
+            ));
+    }
+
+    public static Result addBrownPetersonQuestion(){
+        return ok(views.html.admin.experiment.addQuestion.render());
+    }
+
+    public static Result saveBrownPetersonQuestion(){
+        DynamicForm  questionForm = Form.form().bindFromRequest();
+        String questions = questionForm.get("questions");
+        StringTokenizer stz = new StringTokenizer(questions,"\n");
+
+        while(stz.hasMoreTokens()) { 
+            String questionRow = stz.nextToken();
+            String[] questionArray = questionRow.split(",");
+            models.brownPeterson.Question question 
+                 = new models.brownPeterson.Question(questionArray[0], questionArray[1], questionArray[2]);
+            question.save();
+        }
+        flash("success", "update success.");
+        return ok(views.html.admin.experiment.addQuestion.render());
+    }
+
 }

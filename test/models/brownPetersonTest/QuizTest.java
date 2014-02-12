@@ -1,3 +1,6 @@
+package models.brownPetersonTest;
+
+
 import models.*;
 import models.brownPeterson.*;
 import org.junit.*;

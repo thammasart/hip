@@ -1,5 +1,6 @@
 import org.junit.*;
 import java.util.Date;
+import java.util.Calendar;
 import static org.junit.Assert.*;
 import play.test.WithApplication;
 import static play.test.Helpers.*;
@@ -16,29 +17,43 @@ public class ExperimentScheduleTest extends WithApplication {
 
 	@Test
 	public void retrieveAllWorkingExperiment() {
-		Date date = new Date();
-		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON).save();
+		Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date lastYearDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, +2);
+        Date nextYearDate = calendar.getTime();
+		new ExperimentSchedule("Experiment 1", 5, lastYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
 		
 		assertEquals(1, ExperimentSchedule.getAllWorkingExperiments().size());
 	}
 
 	@Test
 	public void retrieveAllWorkingExperimentShouldNotNull() {
-		Date date = new Date();
-		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON).save();
+		Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date lastYearDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, +2);
+        Date nextYearDate = calendar.getTime();
+		new ExperimentSchedule("Experiment 1", 5, lastYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
 		
 		assertNotNull(ExperimentSchedule.getAllWorkingExperiments());
 	}
 
 	@Test
 	public void shouldBeCreateCorrectlyHasNoOfTrial() {
-		Date date = new Date();
-		ExperimentSchedule experimentSchedule = new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()+1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON);
+		Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date lastYearDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, +2);
+        Date nextYearDate = calendar.getTime();
+		new ExperimentSchedule("Experiment 1", 5, lastYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
 		
+		ExperimentSchedule experimentSchedule = ExperimentSchedule.find.byId(1L);
+
 		assertEquals("Experiment 1", experimentSchedule.name);
 		assertEquals(5, experimentSchedule.noOfTrial);
-		assertEquals(new Date(date.getYear()+1, 0, 1), experimentSchedule.startDate);
-		assertEquals(new Date(date.getYear()+1, 0, 31), experimentSchedule.expireDate);
+		assertEquals(lastYearDate, experimentSchedule.startDate);
+		assertEquals(nextYearDate, experimentSchedule.expireDate);
 		assertEquals(ExperimentType.BROWNPETERSON, experimentSchedule.experimentType);
 	}
 
@@ -49,10 +64,14 @@ public class ExperimentScheduleTest extends WithApplication {
 
 	@Test
 	public void getAllWorkingExperimentsByExperimentType() {
-		Date date = new Date();
-		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON).save();
-		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()-1, 0, 1), new Date(date.getYear()-1, 0, 31), ExperimentType.BROWNPETERSON).save();
-		new ExperimentSchedule("Experiment 1", 5, new Date(date.getYear()+1, 0, 1), new Date(date.getYear()+1, 0, 31), ExperimentType.BROWNPETERSON).save();
+		Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date lastYearDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, +2);
+        Date nextYearDate = calendar.getTime();
+		new ExperimentSchedule("Experiment 1", 5, lastYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
+		new ExperimentSchedule("Experiment 1", 5, lastYearDate, lastYearDate, ExperimentType.BROWNPETERSON).save();
+		new ExperimentSchedule("Experiment 1", 5, nextYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
 		assertEquals(1, ExperimentSchedule.getWorkingExperimentsByType(ExperimentType.BROWNPETERSON).size());
 	}
 }

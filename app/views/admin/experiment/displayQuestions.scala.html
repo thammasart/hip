@@ -1,0 +1,33 @@
+@(questions : List[models.brownPeterson.Question])
+@import views.html.admin._
+
+@head_admin("add question")
+
+@nav_admin()
+<div class="container">
+    @if(flash.containsKey("success")){
+            <div class="alert alert-success">@flash.get("success")</div>
+        }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Word</th>
+                <th>Second Word</th>
+                <th>Third Word</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(question <- questions){
+                <tr>
+                    <td>@question.id</td>
+                    <td>@question.firstWord</td>
+                    <td>@question.secondWord</td>
+                    <td>@question.thirdWord</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@footer()

@@ -1,0 +1,19 @@
+@import views.html.admin._
+
+@head_admin("add question")
+
+@nav_admin()
+<div class="container">
+    @if(flash.containsKey("success")){
+            <div class="alert alert-success">@flash.get("success")</div>
+        }
+    <form role="form" action="@routes.Admin.saveBrownPetersonQuestion()" method="POST">
+        <div class="form-group">
+            <label class="control-label">Add Question</label>
+            <textarea class="form-control" rows="3" name="questions"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+</div>
+
+@footer()

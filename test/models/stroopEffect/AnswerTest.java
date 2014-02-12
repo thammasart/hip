@@ -12,7 +12,7 @@ public class AnswerTest extends WithApplication{
 
     @Before
     public void setUp(){
-        start(fakeApplication(inMemoryDatabase()));
+        start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
     }
 
     @Test
@@ -37,6 +37,7 @@ public class AnswerTest extends WithApplication{
     public void createAndConnectWithQuizAndUser(){
         Quiz q = new Quiz();
         q.save();
+        new User("s550","1234").save();
         User u = User.find.where().eq("username","s550").findUnique();
         Answer ans = Answer.create("BLACK",10,u,q);
         ans.save();

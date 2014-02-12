@@ -30,6 +30,7 @@ public class TimeLog extends Model{
 		TimeLog timeLog = new TimeLog(startTime);
 		timeLog.user = user;
 		timeLog.trial = trial;
+		timeLog.endTime = null;
 		return timeLog;
 	}
 

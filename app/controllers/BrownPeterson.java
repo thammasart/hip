@@ -69,10 +69,7 @@ public class BrownPeterson extends Controller {
         }
         return redirect(routes.BrownPeterson.report(user.username, trialId));
     }
-
-
-
-
+    
     @Security.Authenticated(Secured.class)
     public static Result report(String username, Long trialId){
         if(username.equals("") || trialId == 0){

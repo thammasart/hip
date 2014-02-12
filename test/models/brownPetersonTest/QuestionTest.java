@@ -1,3 +1,6 @@
+package models.brownPetersonTest;
+
+
 import play.test.WithApplication;
 import org.junit.*;
 import static org.junit.Assert.*;

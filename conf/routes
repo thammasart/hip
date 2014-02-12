@@ -33,6 +33,9 @@ POST    /userInfo                   controllers.Admin.saveUser()
 GET     /userInfo                   controllers.Admin.renderUserInfo()
 GET     /admin/experiment/parameter/:id controllers.Admin.displayParameter(id:Long)
 POST    /admin/experiment/parameter/save                controllers.Admin.saveBrownPetersonParameter(id:Long)
+GET     /admin/experiment/brown-peterson/question       controllers.Admin.displayBrownPetersonQuestionList()
+GET     /admin/experiment/brown-peterson/question/add   controllers.Admin.addBrownPetersonQuestion()
+POST    /admin/experiment/brown-peterson/question/save  controllers.Admin.saveBrownPetersonQuestion()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
