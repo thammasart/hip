@@ -95,7 +95,7 @@ width:631px;
 .divPngInfo{
      margin-left: 14px ;
      padding:15px 50px 15px 50px;
-     width:70%;
+     width:50%;
      height:60%;
      border-width:0px;
 
@@ -142,11 +142,10 @@ width:631px;
 .procContent{
      width:900px;
      height:350px;
-     margin-top: 50px;
 }
 .procBody{
      width:900px;
-     min-height:500px;
+     min-height:450px;
      margin:auto;
      margin-bottom: 20px;
 }
@@ -178,12 +177,12 @@ width:631px;
 }
     
 .iframeContent{
-     min-height:350px;
-     padding-left:3em;
-     padding-top:15px;
-     padding-bottom:2em;
-     padding-right:2em;
-     background-color:#ECF0F1;
+     min-height:300px;
+     background-color:#EDEDED;
+     padding-left:5%;
+     padding-top:5%;
+     padding-bottom:5%;
+     padding-right:5%;
      font-family:Tahoma, 'Microsoft Sans Serif', AngsanaUPC, CordiaUPC;
      border-radius:25px;
 }
