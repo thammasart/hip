@@ -82,7 +82,7 @@ public class StroopEffect extends Controller {
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
     @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment() {
-        /*User user = User.find.where().eq("username", session().get("username")).findUnique();
+        User user = User.find.where().eq("username", session().get("username")).findUnique();
         if(user == null) {
             return redirect(routes.Application.index());
         }
@@ -91,7 +91,6 @@ public class StroopEffect extends Controller {
             return ok(proc.render(user));
         }
         TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
-*/
         return redirect(routes.StroopEffect.experiment(new Long(1),0));
     }
 

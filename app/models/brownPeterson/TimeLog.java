@@ -22,10 +22,12 @@ public class TimeLog extends Model{
 	public TimeLog(Date startTime){
 		this.startTime = startTime;
 	}
+
 	public TimeLog(Date startTime, Date endTime){
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
+	
 	public static TimeLog create(Date startTime, User user, Trial trial){
 		TimeLog timeLog = new TimeLog(startTime);
 		timeLog.user = user;
@@ -45,30 +47,6 @@ public class TimeLog extends Model{
 		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trial", trial).findUnique();
 		return timeLog != null;
 	}
-/*
-	public static boolean canTakeExperiment(User user, List<ExperimentSchedule> exps) {
-		/*
-		List<TimeLog> timeLogs = find.where().eq("user", user).findList();
-		for(TimeLog timeLog : timeLogs) {
-			if(!Trial.inWorkingSchedule(timeLog.trial)) {
-				timeLogs.remove(timeLog);
-			}
-		}
-		return timeLogs.size() != 0;
-		
-	}
-
-/*
-	public static List<TimeLog> getUsersTakeTrialFromWorkingExperiments(User user) {
-		List<TimeLog> timeLogs = find.where().eq("user", user).findList();
-		for(TimeLog timeLog : timeLogs) {
-			if(!Trial.inWorkingSchedule(timeLog.trial)) {
-				timeLogs.remove(timeLog);
-			}
-		}
-		return timeLogs;
-	}
-	*/
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, TimeLog> find = new Finder(Long.class, TimeLog.class);

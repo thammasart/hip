@@ -1,7 +1,6 @@
 package models.stroopEffect;
 
 import play.db.ebean.Model;
-
 import javax.persistence.*;
 
 import java.util.Date;
@@ -14,7 +13,7 @@ public class TimeLog extends Model{
 
     @Id
     public long time_log_id;
-    public Date start_time;
+    public Date start_time  = new Date();
     public Date end_time;
 
     @ManyToOne
@@ -22,13 +21,21 @@ public class TimeLog extends Model{
     @ManyToOne
     public User user;
 
-    public TimeLog(){
-
+    public TimeLog(Date startTime){
+        this.start_time = startTime;
     }
 
     public TimeLog(Date starTime,Date endTime){
         this.start_time = starTime;
         this.end_time = endTime;
+    }
+
+    public static TimeLog create(Date startTime, User user, Trial trial){
+        TimeLog timeLog = new TimeLog(startTime);
+        timeLog.user = user;
+        timeLog.trial = trial;
+        timeLog.end_time = null;
+        return timeLog;
     }
 
     public static TimeLog create(Date starTime,Date endTime, User user, Trial trial) {

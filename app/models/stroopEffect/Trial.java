@@ -1,6 +1,6 @@
 package models.stroopEffect;
 
-import models.brownPeterson.TimeLog;
+import models.stroopEffect.TimeLog;
 import play.db.ebean.Model;
 import javax.persistence.*;
 
@@ -25,6 +25,8 @@ public class Trial extends Model{
 
     @ManyToOne
     public ExperimentSchedule schedule;
+    @OneToMany
+    public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
     @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
