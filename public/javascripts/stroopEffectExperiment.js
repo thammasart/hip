@@ -1,7 +1,7 @@
 var questionTime = 5000;
 var countDownTime = 5000;
 var flashTime;
-var answerTime = 5000;
+var answerTime = 50000000;
 var startTimer = setInterval(function() {startTimerFunction()},3000);
 var questionTimer;
 var flashTimer;
@@ -34,17 +34,17 @@ function answerTimerFunction(){
 }
 
 function finishTimerFunction(){
-
         clearInterval(finTimer);
-        submitButtonClick();
+        d = new Date();
+        expDuration = d.getTime()-expDuration;
+        document.getElementById("usedTime").value = expDuration/1000;
         document.forms["answerForm"].submit();
 }
 
-function submitButtonClick(){
-
+function submitButtonClick(clicked_name){
      d = new Date();
      expDuration = d.getTime()-expDuration;
      document.getElementById("usedTime").value = expDuration/1000;
-
+     document.getElementById("answer").value = clicked_name;
 }
 

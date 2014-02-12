@@ -21,11 +21,13 @@ public class Trial extends Model{
     @Column(nullable=false)
     public boolean color_match;
 
+    public static final int TOTAL_QUESTION = 3;
+
     @ManyToOne
     public ExperimentSchedule schedule;
 
     @OneToMany
-    public List<Quiz> quizzes;
+    public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public static Trial create(ExperimentSchedule experimentSchedule){
         Trial trial = new Trial();
