@@ -14,12 +14,8 @@ import views.html.iframe.*;
 import java.util.Date;
 
 public class BrownPeterson extends Controller {
-    public static List<Answer> answerList = new ArrayList<Answer>();
-    public static List<Question> questions = null;
-    private static List<ExperimentSchedule> currentEx = ExperimentSchedule.getAllWorkingExperiments();
-    public static int questionNumber;
-
     private static final Form<Answer> answerForm = Form.form(Answer.class);
+
     @Security.Authenticated(Secured.class)
     public static Result info(){
         User user = User.find.byId(request().username());
@@ -50,11 +46,10 @@ public class BrownPeterson extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result saveAnswer(long trialId, int questionNo){
-       Form<Answer> boundForm = answerForm.bindFromRequest(); 
-       User user = User.find.byId(session().get("username"));
-       Trial trial = Trial.find.byId(trialId);
-     
-        if(boundForm.hasErrors()){
+        Form<Answer> boundForm = answerForm.bindFromRequest(); 
+        User user = User.find.byId(session().get("username"));
+        Trial trial = Trial.find.byId(trialId);
+        if(boundForm.hasErrors()) {
             flash("error", "please correct the form above.");
             return badRequest(views.html.home.render(user));
         }
@@ -62,7 +57,6 @@ public class BrownPeterson extends Controller {
         answer.user = user;
         answer.quiz = trial.quizzes.get(questionNo);
         answer.save();
-        
         questionNo++;
         if(questionNo < Trial.TOTAL_QUESTION){
             return redirect(routes.BrownPeterson.experiment(trialId, questionNo));
@@ -78,17 +72,15 @@ public class BrownPeterson extends Controller {
         User user = User.find.where().eq("username", username).findUnique();
         Trial trial = Trial.find.where().eq("id", trialId).findUnique();
         List<Quiz> quizzes = Quiz.findInvolving(trial);
-        List<Question> questions = Question.findInvolving(quizzes);
         List<Answer> answers = Answer.findInvolving(user, quizzes);
-
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);  
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,quizzes.size(), "Report", user));
+        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
 
     @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment() {
-        User user = User.find.where().eq("username", session().get("username")).findUnique();
+        User user = User.find.byId(session().get("username"));
         if(user == null) {
             return redirect(routes.Application.index());
         }
@@ -97,7 +89,6 @@ public class BrownPeterson extends Controller {
             return ok(proc.render(user));
         }
         TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
-        questionNumber = 0;
         return redirect(routes.BrownPeterson.experiment(new Long(1), 0));
     }
 }

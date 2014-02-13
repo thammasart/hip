@@ -40,3 +40,12 @@
     background-color:purple;
     color:purple;
 }
+.stroop-effect-quiz{
+    text-align:center;
+}
+.stroop-effect-answer{
+    margin-bottom:50px;
+}
+.stroop-effect-answer h3{
+    margin-bottom:30px;
+}

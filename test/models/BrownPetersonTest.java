@@ -83,33 +83,16 @@ public class BrownPetersonTest extends WithApplication {
 		assertFalse(TimeLog.isRepeatTrial(user, trial));
 	}
 
-	@Test
-	public void check_user_can_take_the_exp_complete_3_trial() {
-		/*
-		User user = User.find.where().eq("username", "s551").findUnique();
-		List<ExperimentSchedule> exps = ExperimentSchedule.getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
-		assertTrue(TimeLog.canTakeExperiment(user, exps));*/
-	}
-
-	@Test
-	public void check_user_cant_take_the_exp_complete_3_trial() {
-		/*
-		User user = User.find.where().eq("username", "s550").findUnique();
-		List<ExperimentSchedule> exps = ExperimentSchedule.getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
-		assertFalse(TimeLog.canTakeExperiment(user, exps));
-		*/
-	}
-
-        @Test
-        public void trial_should_have_3_quiz(){
-            Trial trial = Trial.find.byId(1L); 
-            assertNotNull(trial);
-            assertEquals(3,trial.quizzes.size());
-        }
+    @Test
+    public void trial_should_have_3_quiz(){
+        Trial trial = Trial.find.byId(1L); 
+        assertNotNull(trial);
+        assertEquals(3,trial.quizzes.size());
+    }
         
-        @Test
-        public void trial_can_reference_to_question() {
-            Trial trial = Trial.find.byId(1L);
-            assertEquals("q1w1", trial.quizzes.get(0).question.firstWord);
-        }
+    @Test
+    public void trial_can_reference_to_question() {
+        Trial trial = Trial.find.byId(1L);
+        assertEquals("q1w1", trial.quizzes.get(0).question.firstWord);
+    }
 }

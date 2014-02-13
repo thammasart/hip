@@ -13,6 +13,7 @@ var isStore = 0;
 
 function startTimerFunction(){
         clearInterval(startTimer);
+        questionTime = document.getElementById("appear_time").value;
         document.getElementById("word").style.visibility="visible";
         questionTimer = setInterval(function() {answerTimerFunction()},questionTime);
 }
@@ -34,17 +35,17 @@ function answerTimerFunction(){
 }
 
 function finishTimerFunction(){
-
         clearInterval(finTimer);
-        submitButtonClick();
+        d = new Date();
+        expDuration = d.getTime()-expDuration;
+        document.getElementById("usedTime").value = expDuration/1000;
         document.forms["answerForm"].submit();
 }
 
-function submitButtonClick(){
-
+function submitButtonClick(clicked_name){
      d = new Date();
      expDuration = d.getTime()-expDuration;
      document.getElementById("usedTime").value = expDuration/1000;
-
+     document.getElementById("answer").value = clicked_name;
 }
 

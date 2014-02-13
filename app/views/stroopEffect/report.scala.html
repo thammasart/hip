@@ -2,7 +2,7 @@
 @header("Human Information Processing Lab :: Report Page")
 @nav(user)
 <body>
-<div class="procBody">
+<div class="container report">
     <h3>คะแนน : @score/@totalScore </h3>
     <h3>เวลา : @{ BigDecimal(totalUsedTime).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble } วินาที</h3>
 </div>

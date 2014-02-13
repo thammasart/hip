@@ -32,9 +32,9 @@
             
 <!-- Login Right Panel : Username form --> 
 
-            <form action="@routes.Application.authenticate()"name="loginForm" method="post"> 
+            <form action="@routes.Application.authenticate()"name="loginForm" method="post" autocomplete="off"> 
             <div class="form-group">
-              <input name="username" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
+              <input name="username" autocomplete="off" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
               <label class="login-field-icon fui-user" for="login-name"></label>
             </div>
             

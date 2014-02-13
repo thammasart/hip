@@ -50,16 +50,23 @@ public class Admin extends Controller {
     public static Result saveUser() {
         DynamicForm  stringForm = Form.form().bindFromRequest();
         String userString = stringForm.get("users");
-        StringTokenizer stz = new StringTokenizer(userString,"\n");
-        List<User> userList = new ArrayList<User>();
 
-        while(stz.hasMoreTokens()) { 
-            String username = stz.nextToken();
-            User usr = new User(username,username);
-            usr.save();
-            userList.add(usr);
+        if(userString.contains(" "))return TODO;
+        String[] result = userString.split("\r\n");
+//        StringTokenizer stz = new StringTokenizer(userString,"\n");
+//        List<User> userList = new ArrayList<User>();
+
+        for(int i=0 ; i <result.length;i++){
+            User temp = new User(result[i],result[i]);
+            temp.save();
         }
-        return ok(user_info.render(userList));
+//        while(stz.hasMoreTokens()) { 
+//            String username = stz.nextToken();
+//            User usr = new User(username,username);
+//            usr.save();
+//            userList.add(usr);
+//        }
+        return ok(user_info.render(User.getAllUser()));
     }
 
     @Security.Authenticated(Secured.class)
