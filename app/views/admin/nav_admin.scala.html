@@ -3,18 +3,18 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand homeButton"  href="@routes.Application.home()">Home</a>
+      <a class="navbar-brand homeButton" style="color:white;" href="@routes.Application.home()">Home</a>
     </div>
     <div class="adminNavBar" align="center"> 
-      <span class="adminNavBarText" ><a href="@routes.Admin.renderUserInfo()">User Info.</a>&nbsp; | &nbsp;</span>
-      <span class="adminNavBarText" ><a href="" >Experimental Result</a> &nbsp; | &nbsp;</span>
-      <span  class="adminNavBarText"><a href="@routes.Admin.displayExperimentList()" >Experiment Set</a>&nbsp; | &nbsp;</span>
+      <span class="adminNavBarText" ><a style="color:white;"  href="@routes.Admin.renderUserInfo()">User Info.</a>&nbsp; | &nbsp;</span>
+      <span class="adminNavBarText" ><a style="color:white;"  href="" >Experimental Result</a> &nbsp; | &nbsp;</span>
+      <span  class="adminNavBarText"><a style="color:white;" href="@routes.Admin.displayExperimentList()" >Experiment Set</a>&nbsp; | &nbsp;</span>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <div class="nav navbar-nav navbar-right">
-        <span class="admin-name">@session().get("username") </span>
+        <span style="color:white;" class="admin-name">@session().get("username") </span>
         <a href="@routes.Application.logout()"><button type="button" class="btn btn-default navbar-btn">logout</button></a>
       </div>
     </div><!-- /.navbar-collapse -->

@@ -409,6 +409,9 @@ padding-top:8em;
     color: #999;
     margin-right: 10px;
 }
+.adminNavBarText{
+    color:white;
+}
 
 .btn-save{
     width:60%;

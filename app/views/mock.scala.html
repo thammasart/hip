@@ -1,0 +1,14 @@
+@(answers : List[models.brownPeterson.Answer])
+
+@for(answer <- answers){
+	<ul>
+		<li>@answer.id</li>
+		<li>@answer.firstWord</li>
+		<li>@answer.secondWord</li>
+		<li>@answer.thirdWord</li>
+		<li>@answer.usedTime</li>
+		<li>@answer.countdownResult</li>
+		<li>@answer.user.username</li>
+		<li>@answer.quiz.id</li>
+	</ul>
+}

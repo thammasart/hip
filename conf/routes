@@ -27,6 +27,9 @@ GET     /stroop_effect/experiment   controllers.StroopEffect.experiment(trialId:
 POST    /stroop_effect/experiment/save  controllers.StroopEffect.saveAnswer(trialId:Long, questionNo:Int)
 GET     /stroop-effect/report      	controllers.StroopEffect.report(username:String ?= "", trial_id:Long ?= 0)
 
+GET     /user                       controllers.UserController.editProfile()
+POST	/user 		         	controllers.UserController.saveUserProfile()
+
 GET     /admin                      controllers.Admin.index()
 GET     /admin/experiment           controllers.Admin.displayExperimentList()
 GET     /admin/experiment/add       controllers.Admin.addExperiment()

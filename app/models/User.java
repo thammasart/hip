@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import play.db.ebean.*;
 import javax.persistence.*;
+import java.util.Date;
 @Entity
 public class User extends Model{
 
@@ -15,6 +16,15 @@ public class User extends Model{
 	@Column(nullable=false, length=20)
 	public String password;
 	public UserRole status = UserRole.STUDENT;
+        public String firstName;
+        public String lastName;
+        public String gender;
+        public Date   birthDate;
+        public String section;
+        public String semester;
+        public int year;
+        public String eMail;
+
 
 	@OneToMany
 	List<Answer> answers = new ArrayList<Answer>();
