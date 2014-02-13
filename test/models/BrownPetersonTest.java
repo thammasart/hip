@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 import play.test.WithApplication;
 import static play.test.Helpers.*;
 import models.brownPeterson.*;
-import models.*;
+import models.ExperimentSchedule;
+import models.ExperimentType;
+import models.User;
+import models.UserForm;
+import models.UserRole;
 import java.util.List;
 import com.avaje.ebean.*;
 import play.libs.Yaml;
@@ -64,7 +68,7 @@ public class BrownPetersonTest extends WithApplication {
 	@Test
 	public void retrieve_Quizzes_involving_by_trial_success(){
 		Trial trial = Trial.find.where().eq("id", 1).findUnique();
-		List<Quiz> quizzes = Quiz.find.where().eq("id", trial.id).findList();
+		List<Quiz> quizzes = Quiz.findInvolving(trial);
 		assertEquals(3, quizzes.size());
 	}
 

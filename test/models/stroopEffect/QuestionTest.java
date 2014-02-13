@@ -16,15 +16,9 @@ public class QuestionTest extends WithApplication{
     }
 
     @Test
-    public void createQuesiton(){
-        Question q = new Question();
-        assertNotNull(q);
-    }
-
-    @Test
     public void createQuestionWithProperty(){
         Question q = new Question("WHITE","white");
-        assertEquals("WHITE",q.color_word);
+        assertEquals("WHITE",q.colorWord);
         assertEquals("white",q.inkColor);
     }
 
@@ -44,6 +38,6 @@ public class QuestionTest extends WithApplication{
         List<Quiz> quizList = new ArrayList<Quiz>();
         quizList.add(quiz);
         List<Question> questionList = Question.findInvoving(quizList);
-        assertEquals(q.id,questionList.get(0).question_id);
+        assertEquals(q.id,questionList.get(0).id);
     }
 }

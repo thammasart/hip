@@ -26,7 +26,7 @@ public class Question extends Model{
     }
 
     public Question(String colorWord, String inkColor){
-        colorWord = colorWord;
+        this.colorWord = colorWord;
         this.inkColor = inkColor;
     }
 
