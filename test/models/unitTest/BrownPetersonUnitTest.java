@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Calendar;
 
 
-public class brownPetersonUnitTest extends WithApplication {
+public class BrownPetersonUnitTest extends WithApplication {
 	@Before
 	public void setUp(){
 		start(fakeApplication(inMemoryDatabase(), fakeGlobal()));

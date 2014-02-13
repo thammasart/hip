@@ -81,6 +81,7 @@ public class FunctionalTest {
         assertThat(session(result).get("username")).isNull();
     }
 
+
     @Test
     public void viewAboutSuccess() {
         Result result = callAction(

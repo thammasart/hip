@@ -1,5 +1,5 @@
 package models.stroopEffect;
 
-enum QuestionType {
+public enum QuestionType {
     THAI,ENGLISH,SHAPE
 }
