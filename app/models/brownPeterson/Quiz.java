@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
+@Table (name="brown_peterson_quiz")
 public class Quiz extends Model{
 	@Id
 	public long id;

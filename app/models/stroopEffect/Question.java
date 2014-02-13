@@ -11,23 +11,31 @@ import java.util.ArrayList;
 @Table (name="stroop_engword_question")
 public class Question extends Model{
     @Id
-    public long question_id;
+    public long id;
     @Column(nullable=false, length=20)
-    public String color_word;
+    public String colorWord;
     @Column(nullable=false, length=20)
-    public String ink_color;
+    public String inkColor;
 
     @OneToMany
     public List<Quiz> quizzes;
 
     public Question(){
-        color_word = "";
-        ink_color = "black";
+        colorWord = "Black";
+        inkColor = "black";
     }
 
     public Question(String colorWord, String inkColor){
-        color_word = colorWord;
-        ink_color = inkColor;
+        this.colorWord = colorWord;
+        this.inkColor = inkColor;
+    }
+
+    public static List<Question> findInvoving(List<Quiz> quizzes){
+        List<Question> questions = new ArrayList<Question>();
+        for(Quiz quiz : quizzes){
+            questions.add(quiz.question);
+        }
+        return questions;
     }
 
     @SuppressWarnings("unchecked")

@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 
 @Entity
+@Table (name="brown_peterson_question")
 public class Question extends Model {
 	@Id
 	public Long id;
