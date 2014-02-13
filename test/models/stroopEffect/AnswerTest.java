@@ -1,8 +1,6 @@
 package models.stroopEffect;
 
-import models.ExperimentType;
 import models.User;
-import models.stroopEffect.Answer;
 import play.test.WithApplication;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -41,7 +39,7 @@ public class AnswerTest extends WithApplication{
         User u = User.find.where().eq("username","s550").findUnique();
         Answer ans = Answer.create("BLACK",10,u,q);
         ans.save();
-        assertEquals(q.quiz_id,ans.quiz.quiz_id);
+        assertEquals(q.id,ans.quiz.id);
         assertEquals(u.username,ans.user.username);
     }
 

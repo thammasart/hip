@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Table (name="stroop_quiz")
 public class Quiz extends Model{
     @Id
-    public long quiz_id;
+    public long id;
 
     @ManyToOne
     public Trial trial;

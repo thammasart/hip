@@ -64,7 +64,7 @@ public class BrownPetersonTest extends WithApplication {
 	@Test
 	public void retrieve_Quizzes_involving_by_trial_success(){
 		Trial trial = Trial.find.where().eq("id", 1).findUnique();
-		List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trial.id).findList();
+		List<Quiz> quizzes = Quiz.find.where().eq("id", trial.id).findList();
 		assertEquals(3, quizzes.size());
 	}
 

@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.sql.SQLException;
-import java.lang.ArrayIndexOutOfBoundsException;
 
 
 public class Admin extends Controller {
@@ -157,13 +155,9 @@ public class Admin extends Controller {
             
             String[] questionArray = questionRow.split(",");
 
-            try{
-                new models.brownPeterson.Question(questionArray[0].trim()
-                    , questionArray[1].trim(), questionArray[2].trim()).save();
-            }catch(ArrayIndexOutOfBoundsException e){
-                flash("error", "error index out of bound.");
-                return ok(views.html.admin.experiment.addQuestion.render());
-            }
+
+            new models.brownPeterson.Question(questionArray[0], questionArray[1], questionArray[2]).save();
+            
         }
         flash("success", "update success.");
         

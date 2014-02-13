@@ -6,7 +6,7 @@
 <body>
 
 <!--FlashTime Container-->
-<input class="inputNumberBox" id = "appear_time" name = "appear_time" type="text" disabled hidden value = @{trial.appear_time * 1000} />
+<input class="inputNumberBox" id = "appear_time" name = "appearTime" type="text" disabled hidden value = @{trial.appearTime * 1000} />
 
 <!-- Page Header -->
 <div class="">
@@ -17,11 +17,11 @@
 <div class="container stroop-effect-quiz">
 <!-- Content -->
     <div class="row">
-        <div id="word" style="visibility:hidden;color:@trial.quizzes.get(questionNo).question.ink_color"><h2>@trial.quizzes.get(questionNo).question.color_word</h2></div>
+        <div id="word" style="visibility:hidden;color:@trial.quizzes.get(questionNo).question.inkColor"><h2>@trial.quizzes.get(questionNo).question.colorWord</h2></div>
     </div>
     <div class="row stroop-effect-answer">
         <h3 style="visibility:hidden" id="title">เลือกสีของหมึก</h3>
-        <form id = "answerForm" action="@routes.StroopEffect.saveAnswer(trial.trial_id,questionNo)" method="post">
+        <form id = "answerForm" action="@routes.StroopEffect.saveAnswer(trial.id,questionNo)" method="post">
             <input type="submit" class="blackButton" id = "black" name = "Black" class="Button" onclick="return submitButtonClick(this.name)"/>
             <input type="submit" class="redButton" id = "red" name = "Red" class="Button" onclick="return submitButtonClick(this.name)"/>
             <input type="submit" class="blueButton" color:blue" id = "blue" name = "Blue" class="Button" onclick="return submitButtonClick(this.name)"/>
@@ -29,7 +29,7 @@
             <input type="submit" class="greenButton" id = "green" name = "Green" class="Button" onclick="return submitButtonClick(this.name)"/>
             <input type="submit" class="purpleButton" id = "purple" name = "Purple" class="Button"  onclick="return submitButtonClick(this.name)"/>
             <input class="inputNumberBox" id = "answer" name = "answer" type="text" hidden/>
-            <input class="inputNumberBox" id = "usedTime" name = "used_time" type="text" hidden/>
+            <input class="inputNumberBox" id = "usedTime" name = "usedTime" type="text" hidden/>
         </form>
     </div>
 </div>

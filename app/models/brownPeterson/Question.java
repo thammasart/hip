@@ -1,12 +1,14 @@
 package models.brownPeterson;
 
 import play.db.ebean.*;
+import play.db.ebean.Model.Finder;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 
 @Entity
+@Table (name="brown_peterson_question")
 public class Question extends Model {
 	@Id
 	public Long id;

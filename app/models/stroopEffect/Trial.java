@@ -1,6 +1,5 @@
 package models.stroopEffect;
 
-import models.stroopEffect.TimeLog;
 import play.db.ebean.Model;
 import javax.persistence.*;
 
@@ -13,13 +12,13 @@ import java.util.ArrayList;
 @Table (name="stroop_trial")
 public class Trial extends Model{
     @Id
-    public long trial_id;
+    public long id;
     @Column(nullable=false, length=2)
-    public long appear_time;
+    public long appearTime;
     @Column(nullable=false, length=20)
     public QuestionType questionType;
     @Column(nullable=false)
-    public boolean color_match;
+    public boolean colorMatch;
 
     public static final int TOTAL_QUESTION = 3;
 
@@ -37,15 +36,15 @@ public class Trial extends Model{
     }
 
     public Trial(){
-        appear_time = 0;
+        appearTime = 0;
         questionType = QuestionType.THAI;
-        color_match = true;
+        colorMatch = true;
     }
 
     public Trial(long appearTime,QuestionType type, boolean colorMatch){
-        this.appear_time = appearTime;
+        this.appearTime = appearTime;
         this.questionType = type;
-        this.color_match = colorMatch;
+        this.colorMatch = colorMatch;
     }
 
     public static Trial findById(long id){
