@@ -85,7 +85,18 @@ public class FunctionalTest {
     public void viewAboutSuccess() {
         Result result = callAction(
                 controllers.routes.ref.Application.about(),
-                fakeRequest().withSession("username", "s550"));
+                fakeRequest().withSession("username", "s550")
+            );
         assertThat(status(result)).isEqualTo(200);
+    }
+
+    @Test
+    public void viewAboutFailure() {
+        Result result = callAction(
+                controllers.routes.ref.Application.about(),
+                fakeRequest()
+            );
+        assertThat(status(result)).isEqualTo(SEE_OTHER);
+        assertThat(redirectLocation(result)).isEqualTo("/");
     }
 }
