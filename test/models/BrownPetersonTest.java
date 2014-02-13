@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 import play.test.WithApplication;
 import static play.test.Helpers.*;
 import models.brownPeterson.*;
-import models.*;
+import models.ExperimentSchedule;
+import models.ExperimentType;
+import models.User;
+import models.UserForm;
+import models.UserRole;
 import java.util.List;
 import com.avaje.ebean.*;
 import play.libs.Yaml;
@@ -26,8 +30,8 @@ public class BrownPetersonTest extends WithApplication {
 		assertEquals(12, Question.find.findRowCount());
 	}
 	@Test
-	public void users_should_have_3_Rows(){
-		assertEquals(3, User.find.findRowCount());
+	public void users_should_have_4_Rows(){
+		assertEquals(4, User.find.findRowCount());
 	}
 
 	@Test
@@ -39,12 +43,12 @@ public class BrownPetersonTest extends WithApplication {
 		assertEquals(18, Quiz.find.findRowCount());
 	}
 	@Test
-	public void timelog_should_have_3_row(){
-		assertEquals(3, TimeLog.find.findRowCount());
+	public void timelog_should_have_4_row(){
+		assertEquals(4, TimeLog.find.findRowCount());
 	}
 	@Test
-	public void answers_should_have_9_rows(){
-		assertEquals(9, Answer.find.findRowCount());
+	public void answers_should_have_12_rows(){
+		assertEquals(12, Answer.find.findRowCount());
 	}
 
 	@Test
@@ -64,7 +68,7 @@ public class BrownPetersonTest extends WithApplication {
 	@Test
 	public void retrieve_Quizzes_involving_by_trial_success(){
 		Trial trial = Trial.find.where().eq("id", 1).findUnique();
-		List<Quiz> quizzes = Quiz.find.where().eq("trial_id", trial.id).findList();
+		List<Quiz> quizzes = Quiz.findInvolving(trial);
 		assertEquals(3, quizzes.size());
 	}
 
@@ -94,5 +98,12 @@ public class BrownPetersonTest extends WithApplication {
     public void trial_can_reference_to_question() {
         Trial trial = Trial.find.byId(1L);
         assertEquals("q1w1", trial.quizzes.get(0).question.firstWord);
+    }
+    @Test
+    public void should_get_total_user_who_used_to_make_the_trial(){
+    	ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+    	assertEquals(3, exp.trials.size());
+    	assertEquals(1, exp.trials.get(0).calculateTotalUser());
+    	assertEquals(2, exp.trials.get(1).calculateTotalUser());
     }
 }

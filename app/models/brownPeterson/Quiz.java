@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
+@Table (name="brown_peterson_quiz")
 public class Quiz extends Model{
 	@Id
 	public long id;
@@ -20,7 +21,7 @@ public class Quiz extends Model{
 	@ManyToOne
 	public Question question;
 
-	@OneToMany
+	@OneToMany(mappedBy="quiz")
 	public List<Answer> answers = new ArrayList<Answer>();
 
 	public Quiz(int initCountdown, int flashTime){

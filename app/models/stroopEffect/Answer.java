@@ -12,10 +12,10 @@ import java.util.ArrayList;
 public class Answer extends Model{
 
     @Id
-    public long answer_id;
+    public long id;
     @Column(length=20)
     public String answer;
-    public double used_time;
+    public double usedTime;
 
     @ManyToOne
     public User user;
@@ -24,7 +24,7 @@ public class Answer extends Model{
 
     public Answer(String answer,double usedTime){
         this.answer = answer;
-        this.used_time = usedTime;
+        this.usedTime = usedTime;
     }
 
     public static Answer create(String answer, double usedTime,User user, Quiz quiz){
@@ -45,7 +45,7 @@ public class Answer extends Model{
     public static double calculateTotalUsedTime(List<Answer> answers) {
         double totalUsedTime = 0.0;
         for(Answer ans : answers) {
-            totalUsedTime += ans.used_time;
+            totalUsedTime += ans.usedTime;
         }
         return totalUsedTime;
     }
@@ -54,7 +54,7 @@ public class Answer extends Model{
         int totalScore = 0;
 
         for(Answer ans : answers) {
-            if(ans.answer.equals(ans.quiz.question.ink_color)) {
+            if(ans.answer.equals(ans.quiz.question.inkColor)) {
                 totalScore++;
             }
         }

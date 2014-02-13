@@ -12,9 +12,9 @@ import models.User;
 public class TimeLog extends Model{
 
     @Id
-    public long time_log_id;
-    public Date start_time  = new Date();
-    public Date end_time;
+    public long id;
+    public Date startTime = new Date();
+    public Date endTime;
 
     @ManyToOne
     public Trial trial;
@@ -22,19 +22,19 @@ public class TimeLog extends Model{
     public User user;
 
     public TimeLog(Date startTime){
-        this.start_time = startTime;
+        this.startTime = startTime;
     }
 
     public TimeLog(Date starTime,Date endTime){
-        this.start_time = starTime;
-        this.end_time = endTime;
+        this.startTime = starTime;
+        this.endTime = endTime;
     }
 
     public static TimeLog create(Date startTime, User user, Trial trial){
         TimeLog timeLog = new TimeLog(startTime);
         timeLog.user = user;
         timeLog.trial = trial;
-        timeLog.end_time = null;
+        timeLog.endTime = null;
         return timeLog;
     }
 

@@ -164,4 +164,7 @@ public class Admin extends Controller {
         return ok(views.html.admin.experiment.displayQuestions.render());
     }
 
+    public static Result displayExperimentResult(long expId){
+        return ok(views.html.admin.experiment.result.render(ExperimentSchedule.find.byId(expId)));
+    }
 }

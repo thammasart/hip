@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import static play.test.Helpers.*;
 import java.util.Date;
 import java.util.Calendar;
-import models.stroopEffect.*;
+
 import models.*;
 
 public class TrialTest extends WithApplication{
@@ -25,7 +25,7 @@ public class TrialTest extends WithApplication{
     @Test
     public void createTrailWithProperty(){
         Trial trial = new Trial(10,QuestionType.THAI,true);
-        assertEquals(10,trial.appear_time);
+        assertEquals(10,trial.appearTime);
     }
 
     @Test

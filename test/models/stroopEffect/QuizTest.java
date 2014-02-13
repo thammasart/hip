@@ -1,6 +1,5 @@
 package models.stroopEffect;
 
-import models.ExperimentType;
 import play.test.WithApplication;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -33,7 +32,7 @@ public class QuizTest extends WithApplication{
         q.save();
         Quiz quiz = Quiz.create(t,q);
         quiz.save();
-        assertEquals(t.trial_id,quiz.trial.trial_id);
-        assertEquals(q.question_id,quiz.question.question_id);
+        assertEquals(t.id,quiz.trial.id);
+        assertEquals(q.id,quiz.question.id);
     }
 }

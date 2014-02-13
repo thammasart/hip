@@ -53,4 +53,9 @@
             </form>
       </div>
 </div>
+@if(flash().containsKey("unauthenticate")){
+  <div class="alert alert.danger">
+      <p>@flash().get("unauthenticate")</p>
+  </div>
+}
 @footer()

@@ -37,6 +37,7 @@
                    <th>Start</th>
                    <th>End</th>
                    <th>type</th>
+                   <th>result</th>
                    <th>#</th>
                </tr>
            </thead>
@@ -49,6 +50,11 @@
                     <th>@exp.startDate.format("dd/MM/yyyy")</th>
                     <th>@exp.expireDate.format("dd/MM/yyyy")</th>
                     <th>@exp.getExperimentTypeToString()</th>
+                    <th>
+                        <a href="@routes.Admin.displayExperimentResult(exp.id)"><button class="btn btn-default btn-xs">
+                            result
+                        </button></a>
+                    </th>
                     <th>
                         <a href="@routes.Admin.displayParameter(exp.id)"><button class="btn btn-default btn-xs">
                             edit parameter

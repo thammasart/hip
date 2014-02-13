@@ -34,6 +34,7 @@ public class Application extends Controller {
 	public static Result authenticate() {
         Form<UserForm> userForm = Form.form(UserForm.class).bindFromRequest();
         if(userForm.hasErrors()) {
+            flash("unauthenticate", "Incorrect Username/Password.");
             return badRequest(index.render(userForm));
         }
         else {

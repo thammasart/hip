@@ -29,8 +29,8 @@ public class TimeLogTest extends WithApplication{
 
         assertNotNull(timeLog);
         assertNotNull(TimeLog.find.byId(1L));
-        assertEquals(startDate, timeLog1.start_time);
-        assertEquals(finishDate,timeLog1.end_time);
+        assertEquals(startDate, timeLog1.startTime);
+        assertEquals(finishDate,timeLog1.endTime);
     }
 
     @Test
@@ -46,6 +46,6 @@ public class TimeLogTest extends WithApplication{
         TimeLog timeLog = TimeLog.create(startDate,finishDate, u, t);
 
         assertEquals(u.username, timeLog.user.username);
-        assertEquals(t.trial_id, timeLog.trial.trial_id);
+        assertEquals(t.id, timeLog.trial.id);
     }
 }
