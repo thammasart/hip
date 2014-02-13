@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
+@Table (name="brown_peterson_trial")
 public class Trial extends Model {
 	@Id
 	public long id;
@@ -22,7 +23,7 @@ public class Trial extends Model {
 	public ExperimentSchedule schedule;
 	@OneToMany
 	public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
-    @OneToMany(mappedBy = "trial")
+    @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
         
 	public static Trial create(ExperimentSchedule experimentSchedule){

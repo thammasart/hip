@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table (name="brown_peterson_timelog")
 public class TimeLog extends Model{
 	@Id
 	public long id;

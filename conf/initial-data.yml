@@ -296,64 +296,64 @@
 
 #Trial
 - &round7 !!models.stroopEffect.Trial
-    appear_time:       5
+    appearTime:       5
     questionType:    ENGLISH
-    color_match: true
+    colorMatch: true
     schedule: *ex3
 - &round8 !!models.stroopEffect.Trial
-    appear_time:       5
+    appearTime:       5
     questionType:    ENGLISH
-    color_match: false
+    colorMatch: false
     schedule: *ex3
 - &round9 !!models.stroopEffect.Trial
-    appear_time:       5
+    appearTime:       5
     questionType:    ENGLISH
-    color_match: false
+    colorMatch: false
     schedule: *ex3
 - &round10 !!models.stroopEffect.Trial
-    appear_time:       5
+    appearTime:       5
     questionType:    THAI
-    color_match: true
+    colorMatch: true
     schedule: *ex4
 - &round11 !!models.stroopEffect.Trial
-    appear_time:       5
+    appearTime:       5
     questionType:    THAI
-    color_match: false
+    colorMatch: false
     schedule: *ex4
 - &round12 !!models.stroopEffect.Trial
-    appear_time:       5
+    appearTime:       5
     questionType:    THAI
-    color_match: false
+    colorMatch: false
     schedule: *ex4
 
 #Question
 - &Question13 !!models.stroopEffect.Question
-    color_word:                Black
-    ink_color:               Black
+    colorWord:                Black
+    inkColor:               Black
 - &Question14 !!models.stroopEffect.Question
-    color_word:                Blue
-    ink_color:               Blue
+    colorWord:                Blue
+    inkColor:               Blue
 - &Question15 !!models.stroopEffect.Question
-    color_word:                Red
-    ink_color:               Red
+    colorWord:                Red
+    inkColor:               Red
 - &Question16 !!models.stroopEffect.Question
-    color_word:                Black
-    ink_color:               Yellow
+    colorWord:                Black
+    inkColor:               Yellow
 - &Question17 !!models.stroopEffect.Question
-    color_word:                Blue
-    ink_color:               Red
+    colorWord:                Blue
+    inkColor:               Red
 - &Question18 !!models.stroopEffect.Question
-    color_word:                Green
-    ink_color:               Black
+    colorWord:                Green
+    inkColor:               Black
 - &Question19 !!models.stroopEffect.Question
-    color_word:                Purple
-    ink_color:               Green
+    colorWord:                Purple
+    inkColor:               Green
 - &Question20 !!models.stroopEffect.Question
-    color_word:                Yellow
-    ink_color:               Blue
+    colorWord:                Yellow
+    inkColor:               Blue
 - &Question21 !!models.stroopEffect.Question
-    color_word:                Red
-    ink_color:               Black
+    colorWord:                Red
+    inkColor:               Black
 
 #Quiz
 - &quiz19 !!models.stroopEffect.Quiz

@@ -1,10 +1,12 @@
 package models.stroopEffect;
 
-import models.ExperimentType;
 import play.test.WithApplication;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static play.test.Helpers.*;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class QuestionTest extends WithApplication{
 
@@ -23,7 +25,7 @@ public class QuestionTest extends WithApplication{
     public void createQuestionWithProperty(){
         Question q = new Question("WHITE","white");
         assertEquals("WHITE",q.color_word);
-        assertEquals("white",q.ink_color);
+        assertEquals("white",q.inkColor);
     }
 
     @Test
@@ -33,8 +35,15 @@ public class QuestionTest extends WithApplication{
     }
 
     @Test
-    public void shouldBeFoundBy(){
+    public void shouldBeFoundByQuiz(){
         Quiz quiz = new Quiz();
+        Question q = new Question("Black","Yellow");
+        quiz.question = q;
+        q.save();
         quiz.save();
+        List<Quiz> quizList = new ArrayList<Quiz>();
+        quizList.add(quiz);
+        List<Question> questionList = Question.findInvoving(quizList);
+        assertEquals(q.id,questionList.get(0).question_id);
     }
 }
