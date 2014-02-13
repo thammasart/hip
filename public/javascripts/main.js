@@ -23,10 +23,11 @@ $(document).ready(function(){
   });
 });
 
-$(function() {
-  $( "#startDate" ).datepicker();
+/*$(function() {
+  $( "#startDate" ).Datepicker();
 });
 
 $(function() {
-  $( "#expireDate" ).datepicker();
+  $( "#expireDate" ).Datepicker();
 });
+*/

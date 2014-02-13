@@ -87,7 +87,7 @@ public class FunctionalTest {
                 controllers.routes.ref.Application.about(),
                 fakeRequest().withSession("username", "s550")
             );
-        assertThat(status(result)).isEqualTo(200);
+        assertThat(status(result)).isEqualTo(OK);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class FunctionalTest {
                 controllers.routes.ref.BrownPeterson.info(),
                 fakeRequest().withSession("username", "s550")
             );
-        assertThat(status(result)).isEqualTo(200);
+        assertThat(status(result)).isEqualTo(OK);
     }
 
     @Test
@@ -125,7 +125,7 @@ public class FunctionalTest {
                 controllers.routes.ref.StroopEffect.info(),
                 fakeRequest().withSession("username", "s550")
             );
-        assertThat(status(result)).isEqualTo(200);
+        assertThat(status(result)).isEqualTo(OK);
     }
 
     @Test

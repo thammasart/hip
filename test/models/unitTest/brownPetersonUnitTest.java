@@ -131,7 +131,7 @@ public class brownPetersonUnitTest extends WithApplication {
     }
 
     @Test
-    public void recieveQuestionByAmountByfiveNotNull(){
+    public void recieve_Question_By_Amount_By_five_Not_Null(){
      	new Question("hello1","world1","!!!1").save();
     	new Question("hello2","world2","!!!2").save();
     	new Question("hello3","world3","!!!3").save();
@@ -147,7 +147,7 @@ public class brownPetersonUnitTest extends WithApplication {
     }
 
     @Test
-    public void questionMemberInListShouldNotSame() {
+    public void question_Member_In_List_Should_Not_Same() {
     	new Question("hello1","world1","!!!1").save();
     	new Question("hello2","world2","!!!2").save();
     	new Question("hello3","world3","!!!3").save();
@@ -162,7 +162,7 @@ public class brownPetersonUnitTest extends WithApplication {
     }
 
     @Test
-    public void amountOverflow() {
+    public void question_list_should_not_amount_Overflow() {
     	new Question("hello1","world1","!!!1").save();
     	new Question("hello2","world2","!!!2").save();
     	new Question("hello3","world3","!!!3").save();
@@ -175,7 +175,7 @@ public class brownPetersonUnitTest extends WithApplication {
     }
 
     @Test
-	public void shouldCreateAndNotNull(){
+	public void quiz_should_Create_And_Not_Null(){
 		new Trial().save();
 		new Question("hello","world","!!!").save();
 		Trial trial = Trial.findById(1);
@@ -184,7 +184,7 @@ public class brownPetersonUnitTest extends WithApplication {
 	}
 
 	@Test
-	public void shouldCreateAndReferCorectly(){
+	public void quiz_should_Create_And_Refer_Corectly(){
 		new Trial().save();
 		new Question("hello","world","!!!").save();
 		Trial trial = Trial.findById(1);
@@ -198,7 +198,7 @@ public class brownPetersonUnitTest extends WithApplication {
 	}
 
 	@Test
-	public void shouldFindInvolvingByTrialAndNotNull(){
+	public void quiz_should_Find_Involving_By_Trial_And_Not_Null(){
 		new Trial().save();
 		new Question("hello","world","!!!").save();
 		Trial trial = Trial.findById(1);
@@ -211,7 +211,7 @@ public class brownPetersonUnitTest extends WithApplication {
 	}
 
 	@Test
-	public void shouldFindInvolvingByTrialAndAttributeCorrectly(){
+	public void quiz_should_Find_Involving_By_Trial_And_Attribute_Correctly(){
 		new Trial().save();
 		new Question("hello","world","!!!").save();
 		Trial trial = Trial.findById(1);
@@ -269,7 +269,7 @@ public class brownPetersonUnitTest extends WithApplication {
 	}
 
 	@Test
-	public void shoudBeFindByTrialsInvolving(){
+	public void trial_shoud_Be_Find_By_Trials_Involving(){
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.YEAR, -1);
 		Date lastYearDate = calendar.getTime();
@@ -286,7 +286,7 @@ public class brownPetersonUnitTest extends WithApplication {
 	}
 
 	@Test
-	public void shoudBeFindByTrialInvolvingAndReferCorrectly(){
+	public void trial_shoud_Be_Find_By_Trial_Involving_And_Refer_Correctly(){
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.YEAR, -1);
 		Date lastYearDate = calendar.getTime();
