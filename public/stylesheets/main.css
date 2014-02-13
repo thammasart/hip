@@ -372,7 +372,37 @@ text-align:center;
 .center{
 padding-top:8em;
 }
+/*--------------------- profile ----------------------------*/
+.profileBody{
+    margin: 0% 10% 5% 10%;
+    width:80%;
+    
+    
+}
+.profileBody input{
+    margin-left:3%;
+}
+.profileBody h4{
+    position :relative;
+    top : 46%;
+    text-align:center;
+    -webkit-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
 
+.textLabel{
+    width: 40%;
+    margin-bottom: 1.5%;
+    margin-left: 5%;
+    display:inline-block;
+    text-align:right;
+
+}
+.profileSubmitButton{
+    width:3%;
+    margin: 3% auto;
+}
 
 /*-----------------------------------------------*/
 

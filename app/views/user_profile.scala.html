@@ -6,48 +6,48 @@
 <script src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")"></script>
 <body>
     @nav(user)
-        <h4 align="center" >  User Profile  </h4>
+    <div class="profileBody">
+        <h4  >  User Profile  </h4>
 	<div>
             <form action="@routes.UserController.saveUserProfile()" method="post" name="userForm">
-              <div> 
-                    <span>ชื่อ/Firstname</span>
-                    <input type="text" autocomplete="off" name="firstName" value="@user.firstName"> 
-              </div>
-              <div> 
-                    <span>นามสกุล/Lastname</span>
-                    <input type="text" autocomplete="off" name="lastName" value="@user.lastName"> 
-              </div>
-              <div> 
-                    <span>เพศ / Gender</span>
-                    <input type="text" autocomplete="off" name="gender" value="@user.gender"> 
-              </div>
-              <div> 
-                    <span>วัน-เดือน-ปี เกิด / Birth Date</span>
-                    <input type="text" autocomplete="off" name="birthDate" value="@user.birthDate"> 
-              </div>
-              <div> 
-                        <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                          <input class="span2" size="16" type="text" value="12-02-2012">
-                          <span class="add-on"><i class="icon-th"></i></span>
-                        </div>
-                    <span>เซค / Section</span>
-                    <input type="text" autocomplete="off" name="section" value="@user.section"> 
-              </div>
-              <div> 
-                    <span>ปีการศึกษา / Semester</span>
-                    <input type="text" autocomplete="off" name="semester" value="@user.semester"> 
-              </div>
-              <div> 
-                    <span>ชั้นปี / Year</span>
-                    <input type="text" autocomplete="off" name="year" value="@user.year"> 
-              </div>
-              <div> 
-                    <span>e-mail</span>
-                    <input type="text" autocomplete="off" name="eMail" value="@user.eMail"> 
-              </div>
+                      <div class="textLabel"> 
+                            <span>ชื่อ/Firstname &nbsp :</span>
+                      </div>
+                            <input type="text" autocomplete="off" name="firstName" value="@user.firstName"> 
+                      <div class="textLabel"> 
+                            <span>นามสกุล/Lastname &nbsp :</span>
+                      </div>
+                            <input type="text" autocomplete="off" name="lastName" value="@user.lastName"> 
+                      <div class="textLabel"> 
+                            <span>เพศ / Gender &nbsp :</span>
+                      </div>
+                            <input type="text" autocomplete="off" name="gender" value="@user.gender"> 
+                      <div class="textLabel"> 
+                            <span>วัน-เดือน-ปี เกิด / Birth Date &nbsp :</span>
+                      </div>
+                            <input type="text" autocomplete="off" name="birthDate" value="@user.birthDate"> 
+                      <div class="textLabel"> 
+                            <span>เซค / Section &nbsp :</span>
+                      </div>
+                            <input type="text" autocomplete="off" name="section" value="@user.section"> 
+                      <div class="textLabel"> 
+                            <span>ปีการศึกษา / Semester &nbsp :</span>
+                      </div>
+                            <input type="text" autocomplete="off" name="semester" value="@user.semester"> 
+                      <div class="textLabel"> 
+                            <span>ชั้นปี / Year &nbsp :</span>
+                      </div>
+                            <input type="text" autocomplete="off" name="year" value="@user.year"> 
+                      <div class="textLabel"> 
+                            <span>e-mail &nbsp :</span>
+                      </div>
+                            <input type="text" autocomplete="off" name="eMail" value="@user.eMail"> 
             </form>
-                <div class="submitButtonContainer">
-                    <button type="submit" class="submitButton" > Submit</button>
+                 <div class="profileSubmitButton">   
+                    <div class="submitButtonContainer">
+                        <button type="submit" class="submitButton" > Submit</button>
+                   </div>
                 </div>
 	</div>
+    </div>
 @footer()
