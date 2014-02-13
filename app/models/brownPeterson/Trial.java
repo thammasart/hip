@@ -21,7 +21,7 @@ public class Trial extends Model {
 
 	@ManyToOne
 	public ExperimentSchedule schedule;
-	@OneToMany
+	@OneToMany(mappedBy="trial")
 	public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
     @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
@@ -45,15 +45,11 @@ public class Trial extends Model {
 		for(Quiz quiz : this.quizzes){
 			totalScore += Answer.calculateTotalScore(quiz.answers);
 		}
-		return totalScore;
+		return totalScore/this.calculateTotalUser();
 	}
 
 	public int calculateTotalUser(){
-		List<Answer> answers = new ArrayList<Answer>();
-		for(Quiz quiz : this.quizzes){
-			answers.addAll(quiz.answers);
-		}
-		return 1;
+		return this.timeLogs.size();
 	}
 
 	@SuppressWarnings("unchecked")

@@ -43,8 +43,8 @@ public class BrownPetersonTest extends WithApplication {
 		assertEquals(18, Quiz.find.findRowCount());
 	}
 	@Test
-	public void timelog_should_have_3_row(){
-		assertEquals(3, TimeLog.find.findRowCount());
+	public void timelog_should_have_4_row(){
+		assertEquals(4, TimeLog.find.findRowCount());
 	}
 	@Test
 	public void answers_should_have_12_rows(){

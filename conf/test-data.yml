@@ -221,6 +221,11 @@
     endTime: 2014-10-19
     user: *ohm
     trial: *round3
+- &timelog4 !!models.brownPeterson.TimeLog
+    startTime: 2014-01-31
+    endTime: 2014-01-31
+    user: *demo
+    trial: *round2
 #Answer
 - &answer1 !!models.brownPeterson.Answer
     firstWord:              q1w1                
