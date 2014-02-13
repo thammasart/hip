@@ -99,4 +99,42 @@ public class FunctionalTest {
         assertThat(status(result)).isEqualTo(SEE_OTHER);
         assertThat(redirectLocation(result)).isEqualTo("/");
     }
+
+    @Test
+    public void viewBrownPetersonInfoSuccess() {
+        Result result = callAction(
+                controllers.routes.ref.BrownPeterson.info(),
+                fakeRequest().withSession("username", "s550")
+            );
+        assertThat(status(result)).isEqualTo(200);
+    }
+
+    @Test
+    public void viewBrownPetersonInfoFailure() {
+        Result result = callAction(
+                controllers.routes.ref.BrownPeterson.info(),
+                fakeRequest()
+            );
+        assertThat(status(result)).isEqualTo(SEE_OTHER);
+        assertThat(redirectLocation(result)).isEqualTo("/");
+    }
+
+    @Test
+    public void viewStroopEffectInfoSuccess() {
+        Result result = callAction(
+                controllers.routes.ref.StroopEffect.info(),
+                fakeRequest().withSession("username", "s550")
+            );
+        assertThat(status(result)).isEqualTo(200);
+    }
+
+    @Test
+    public void viewStroopEffectInfoFailure() {
+        Result result = callAction(
+                controllers.routes.ref.StroopEffect.info(),
+                fakeRequest()
+            );
+        assertThat(status(result)).isEqualTo(SEE_OTHER);
+        assertThat(redirectLocation(result)).isEqualTo("/");
+    }
 }
