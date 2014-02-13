@@ -12,7 +12,7 @@ public class UserForm {
     public List<ValidationError> validate() {
         List<ValidationError> errors = new ArrayList<ValidationError>();
         if (User.authenticate(username, password) == null) {
-          errors.add(new ValidationError("unauthenticate", "incorrect password"));
+          errors.add(new ValidationError("unauthenticate", "Incorrect Username/Password"));
         }
         return errors.isEmpty() ? null : errors;
     }

@@ -20,7 +20,7 @@ public class Quiz extends Model{
 	@ManyToOne
 	public Question question;
 
-	@OneToMany
+	@OneToMany(mappedBy="quiz")
 	public List<Answer> answers = new ArrayList<Answer>();
 
 	public Quiz(int initCountdown, int flashTime){

@@ -42,6 +42,16 @@ public class Answer extends Model{
 		return answers;
 	}
 
+	public static List<Answer> findInvolving(ExperimentSchedule exp){
+		List<Answer> answers = new ArrayList<Answer>();
+		for(Trial trial : exp.trials){
+			for(Quiz quiz : trial.quizzes){
+				answers.addAll(quiz.answers);
+			}
+		}
+		return answers;
+	}
+
 	public static double calculateTotalUsedTime(List<Answer> answers) {
 		double totalUsedTime = 0.0;
 		for(Answer ans : answers) {
@@ -68,9 +78,11 @@ public class Answer extends Model{
 			for(String go : a_words){
 				String temp = null;
 				for(String word : q_words){
-					if(go.equals(word)){
-						temp = word;
-					}		
+					if(go != null){
+						if(go.equals(word)){
+							temp = word;
+						}		
+					}
 				}
 				if(temp != null){
 					q_words.remove(temp);

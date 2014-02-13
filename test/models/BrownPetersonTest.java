@@ -26,8 +26,8 @@ public class BrownPetersonTest extends WithApplication {
 		assertEquals(12, Question.find.findRowCount());
 	}
 	@Test
-	public void users_should_have_3_Rows(){
-		assertEquals(3, User.find.findRowCount());
+	public void users_should_have_4_Rows(){
+		assertEquals(4, User.find.findRowCount());
 	}
 
 	@Test
@@ -43,8 +43,8 @@ public class BrownPetersonTest extends WithApplication {
 		assertEquals(3, TimeLog.find.findRowCount());
 	}
 	@Test
-	public void answers_should_have_9_rows(){
-		assertEquals(9, Answer.find.findRowCount());
+	public void answers_should_have_12_rows(){
+		assertEquals(12, Answer.find.findRowCount());
 	}
 
 	@Test
@@ -94,5 +94,12 @@ public class BrownPetersonTest extends WithApplication {
     public void trial_can_reference_to_question() {
         Trial trial = Trial.find.byId(1L);
         assertEquals("q1w1", trial.quizzes.get(0).question.firstWord);
+    }
+    @Test
+    public void should_get_total_user_who_used_to_make_the_trial(){
+    	ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+    	assertEquals(3, exp.trials.size());
+    	assertEquals(1, exp.trials.get(0).calculateTotalUser());
+    	assertEquals(2, exp.trials.get(1).calculateTotalUser());
     }
 }

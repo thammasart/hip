@@ -39,6 +39,18 @@ public class Trial extends Model {
 		return find.where().eq("schedule", ex).findList();
 	}
 
+	public int calculateAverageScore(){
+		int totalScore = 0;
+		for(Quiz quiz : this.quizzes){
+			totalScore += Answer.calculateTotalScore(quiz.answers);
+		}
+		return totalScore;
+	}
+
+	public int calculateTotalUser(){
+		return 1;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 

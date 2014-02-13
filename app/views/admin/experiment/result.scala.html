@@ -1,0 +1,32 @@
+@(exp : ExperimentSchedule)
+@import views.html.admin._
+
+@head_admin("Result")
+
+@nav_admin()
+<div class="container">
+    <div class="page-header">
+        <h1>@exp.name <small>@exp.getExperimentTypeToString()</small></h1>
+    </div>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Trial</th>
+                <th>Score</th>
+                <th>Used time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(trial <- exp.trials){
+                    <td>@trial.id</td>
+                    <td>@trial.calculateAverageScore()</td>
+                    <td>10.3</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@footer()

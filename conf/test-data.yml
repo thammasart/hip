@@ -85,6 +85,9 @@
 - &nick !!models.User
     username:               s552
     password:               1111
+- &demo !!models.User
+    username:               demo
+    password:               demo
 #Trial
 - &round1 !!models.brownPeterson.Trial
     trigramLanguage:       english
@@ -279,3 +282,24 @@
     usedTime:                   10
     user: *ohm                 
     quiz: *quiz9
+
+- &answer10 !!models.brownPeterson.Answer
+    firstWord:              q4w1                
+    usedTime:                   10
+    countdownResult:        49
+    user: *demo                 
+    quiz: *quiz4
+- &answer11 !!models.brownPeterson.Answer
+    firstWord:              q5w1                
+    secondWord:             q5w2
+    thirdWord:              q5w3
+    usedTime:                   5
+    user: *demo                 
+    quiz: *quiz5           
+- &answer12 !!models.brownPeterson.Answer
+    firstWord:              wrong                
+    secondWord:             q6w2
+    thirdWord:              wrong
+    usedTime:                   15
+    user: *demo                 
+    quiz: *quiz6
