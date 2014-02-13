@@ -80,4 +80,12 @@ public class FunctionalTest {
         assertThat(redirectLocation(result)).isEqualTo("/");
         assertThat(session(result).get("username")).isNull();
     }
+
+    @Test
+    public void viewAboutSuccess() {
+        Result result = callAction(
+                controllers.routes.ref.Application.about(),
+                fakeRequest().withSession("username", "s550"));
+        assertThat(status(result)).isEqualTo(200);
+    }
 }
