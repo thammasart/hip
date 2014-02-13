@@ -48,6 +48,10 @@ public class Trial extends Model {
 	}
 
 	public int calculateTotalUser(){
+		List<Answer> answers = new ArrayList<Answer>();
+		for(Quiz quiz : this.quizzes){
+			answers.addAll(quiz.answers);
+		}
 		return 1;
 	}
 

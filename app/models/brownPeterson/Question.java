@@ -1,6 +1,7 @@
 package models.brownPeterson;
 
 import play.db.ebean.*;
+import play.db.ebean.Model.Finder;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Collections;
