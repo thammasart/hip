@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.Date;
+import play.data.format.Formats;
 @Entity
 public class User extends Model{
 
@@ -16,14 +17,15 @@ public class User extends Model{
 	@Column(nullable=false, length=20)
 	public String password;
 	public UserRole status = UserRole.STUDENT;
-        public String firstName;
-        public String lastName;
-        public String gender;
-        public Date   birthDate;
-        public String section;
-        public String semester;
-        public int year;
-        public String eMail;
+    public String firstName;
+    public String lastName;
+    public String gender;
+    @Formats.DateTime(pattern="dd/mm/yyyy")
+    public Date   birthDate;
+    public String section;
+    public String semester;
+    public int year = 1;
+    public String eMail;
 
 
 	@OneToMany

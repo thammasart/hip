@@ -1,52 +1,110 @@
 @(user : User)
-@header("Human Information Processing Lab :: Home Page")
-
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/datepicker.css ")">
-<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+@import views.html.admin._
+@head_admin("Human Information Processing Lab :: Home Page")
 <body>
     @nav(user)
-    <div class="profileBody">
-        <h4  >  User Profile  </h4>
-	<div>
-            <form action="@routes.UserController.saveUserProfile()" method="post" name="userForm">
-                      <div class="textLabel"> 
-                            <span>ชื่อ/Firstname &nbsp :</span>
-                      </div>
-                            <input type="text" autocomplete="off" name="firstName" value="@user.firstName"> 
-                      <div class="textLabel"> 
-                            <span>นามสกุล/Lastname &nbsp :</span>
-                      </div>
-                            <input type="text" autocomplete="off" name="lastName" value="@user.lastName"> 
-                      <div class="textLabel"> 
-                            <span>เพศ / Gender &nbsp :</span>
-                      </div>
-                            <input type="text" autocomplete="off" name="gender" value="@user.gender"> 
-                      <div class="textLabel"> 
-                            <span>วัน-เดือน-ปี เกิด / Birth Date &nbsp :</span>
-                      </div>
-                            <input type="text" autocomplete="off" name="birthDate" value="@user.birthDate"> 
-                      <div class="textLabel"> 
-                            <span>เซค / Section &nbsp :</span>
-                      </div>
-                            <input type="text" autocomplete="off" name="section" value="@user.section"> 
-                      <div class="textLabel"> 
-                            <span>ปีการศึกษา / Semester &nbsp :</span>
-                      </div>
-                            <input type="text" autocomplete="off" name="semester" value="@user.semester"> 
-                      <div class="textLabel"> 
-                            <span>ชั้นปี / Year &nbsp :</span>
-                      </div>
-                            <input type="text" autocomplete="off" name="year" value="@user.year"> 
-                      <div class="textLabel"> 
-                            <span>e-mail &nbsp :</span>
-                      </div>
-                            <input type="text" autocomplete="off" name="eMail" value="@user.eMail"> 
-            </form>
-                 <div class="profileSubmitButton">   
-                    <div class="submitButtonContainer">
-                        <button type="submit" class="submitButton" > Submit</button>
-                   </div>
-                </div>
+    <div class="container">
+        <h4 >  User Profile </h4>
+            <form role="form" class="form-horizontal" action="@routes.UserController.saveUserProfile()" method="post">
+              <div class="well">
+                  <div class="form-group">
+                        <label for="username" class="col-sm-4 control-label"> 
+                              Username
+                        </label>
+                        <div class="col-sm-3">
+                              <input type="text" class="form-control" autocomplete="off" value="@user.username" disabled>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                        <label for="firstName" class="col-sm-4 control-label"> 
+                              ชื่อ/Firstname
+                        </label>
+                        <div class="col-sm-3">
+                              <input type="text" class="form-control" autocomplete="off" name="firstName" value="@user.firstName">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="lastName" class="col-sm-4 control-label"> 
+                              นามสกุล/Lastname
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" autocomplete="off" name="lastName" value="@user.lastName">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                       <label for="gender" class="col-sm-4 control-label"> 
+                              เพศ/Gender
+                        </label>
+                        <div class="col-sm-3">
+                              <label class="radio-inline">
+                                <input type="radio" value="male" name="gender"> ชาย
+                              </label>
+                              <label class="radio-inline">
+                                <input type="radio" value="female" name="gender"> หญิง
+                              </label>
+                              <label class="radio-inline">
+                                <input type="radio" value="other" name="gender"> อื่นๆ
+                              </label>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                       <label for="birthDate" class="col-sm-4 control-label"> 
+                              วัน-เดือน-ปี เกิด / Birth Date
+                        </label>
+                        <div class="col-sm-3">
+                          <div class="input-group date" id="birthdate-picker">
+                              <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="birthDate" 
+                              @if(user.birthDate != null){
+                                value="@user.birthDate.format("dd/MM/yyyy")"
+                              }>
+                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                          </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#birthdate-picker').datetimepicker();
+                            });
+                        </script>
+                  </div>
+                  <div class="form-group">
+                       <label for="section" class="col-sm-4 control-label"> 
+                              เซค / Section
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" autocomplete="off" name="section" value="@user.section">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                       <label for="semester" class="col-sm-4 control-label"> 
+                              ปีการศึกษา / Semester
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" autocomplete="off" name="semester" value="@user.semester">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                       <label for="year" class="col-sm-4 control-label"> 
+                              ชั้นปี / Year 
+                        </label>
+                        <div class="col-sm-1">
+                            <input type="number" min="1" max="7" class="form-control" autocomplete="off" name="year" value="@user.year">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                       <label for="eMail" class="col-sm-4 control-label"> 
+                              e-mail 
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="email" class="form-control" autocomplete="off" name="eMail" value="@user.eMail">
+                        </div>
+                  </div>
+                  <div class="form-group">
+                  <div class="col-sm-offset-4 col-sm-3">
+                  <button id="submit-button" type="submit" class="btn btn-success btn-lg" >Submit</button>
+                  </div>
+                  </div>
+          </div>
+          </form>
 	</div>
-    </div>
+  
 @footer()

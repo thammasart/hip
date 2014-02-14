@@ -18,13 +18,25 @@
                 </div>
                 <div class="form-group">
                     <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name="startDate" placeholder="@exp.startDate.format("dd/MM/yyyy")" value="@exp.startDate.format("dd/MM/yyyy")">
+                    <div class="input-group date col-sm-3" id="startdate-picker">
+                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="startDate" placeholder="@exp.startDate.format("dd/MM/yyyy")" value="@exp.startDate.format("dd/MM/yyyy")">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#startdate-picker').datetimepicker();
+                        });
+                    </script>
                     <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name="expireDate" placeholder="@exp.expireDate.format("dd/mm/yyyy")" value="@exp.expireDate.format("dd/MM/yyyy")" >
+                    <div class="col-sm-3 input-group date" id="expiredate-picker">
+                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="expireDate" placeholder="@exp.expireDate.format("dd/mm/yyyy")" value="@exp.expireDate.format("dd/MM/yyyy")" >
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#expiredate-picker').datetimepicker();
+                        });
+                    </script>
                 </div> 
                 <div class="form-group">
                     <label for="experimentType" class="col-sm-2 control-label">การทดลอง</label>
@@ -105,3 +117,21 @@
 </div>
 </form>
 <br>
+<div class="container">
+    <div class="col-md-10">
+        <div class='well'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+</div>

@@ -22,12 +22,3 @@ $(document).ready(function(){
     $("#panel03").slideToggle("fast");
   });
 });
-
-/*$(function() {
-  $( "#startDate" ).Datepicker();
-});
-
-$(function() {
-  $( "#expireDate" ).Datepicker();
-});
-*/
