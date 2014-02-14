@@ -10,6 +10,9 @@ import static org.fest.assertions.Assertions.*;
 import com.google.common.collect.ImmutableMap;
 import com.avaje.ebean.Ebean;
 
+import static org.junit.Assert.*;
+
+import models.User;
 public class FunctionalTest {
 
     @Before
@@ -107,9 +110,11 @@ public class FunctionalTest {
         Result result = callAction(
                 controllers.routes.ref.BrownPeterson.info(),
                 fakeRequest().withSession("username", "s550")
-            );
+        );
+
         assertThat(status(result)).isEqualTo(OK);
         assertThat(redirectLocation(result)).isNull();
+
     }
 
     @Test
@@ -144,85 +149,154 @@ public class FunctionalTest {
 
     @Test
     public void viewStroopEffectInfoSuccess() {
-        Result result = callAction(
-                controllers.routes.ref.StroopEffect.info(),
-                fakeRequest().withSession("username", "s550")
-            );
-        assertThat(status(result)).isEqualTo(OK);
-        assertThat(redirectLocation(result)).isNull();
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.info(),
+                        fakeRequest().withSession("username", "s550")
+                    );
+                assertThat(status(result)).isEqualTo(OK);
+                assertThat(redirectLocation(result)).isNull();
+            }
+        });
     }
 
     @Test
     public void viewStroopEffectInfoFailure() {
-        Result result = callAction(
-                controllers.routes.ref.StroopEffect.info(),
-                fakeRequest()
-            );
-        assertThat(status(result)).isEqualTo(SEE_OTHER);
-        assertThat(redirectLocation(result)).isEqualTo("/");
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.info(),
+                        fakeRequest()
+                    );
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+                assertThat(redirectLocation(result)).isEqualTo("/");
+            }
+        });
     }
+
     @Test
     public void viewStroopEffectProcSuccess(){
-        Result result = callAction(
-                controllers.routes.ref.StroopEffect.proc(),
-                fakeRequest().withSession("username", "s550")
-        );
-        assertThat(status(result)).isEqualTo(OK);
-        assertThat(redirectLocation(result)).isNull();
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.proc(),
+                        fakeRequest().withSession("username", "s550")
+                );
+                assertThat(status(result)).isEqualTo(OK);
+                assertThat(redirectLocation(result)).isNull();
+            }
+        });
     }
     @Test
     public void viewStroopEffectProcFailure(){
-        Result result = callAction(
-                controllers.routes.ref.StroopEffect.proc(),
-                fakeRequest()
-        );
-        assertThat(status(result)).isEqualTo(SEE_OTHER);
-        assertThat(redirectLocation(result)).isEqualTo("/");
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.proc(),
+                        fakeRequest()
+                );
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+                assertThat(redirectLocation(result)).isEqualTo("/");
+            }
+        });
     }
 
     @Test
     public void viewStroopEffectExperimentCheckUserTakeRepeatExperimentSuccess(){
-        Result result = callAction(
-                controllers.routes.ref.StroopEffect.checkUserTakeRepeatExperiment(),
-                fakeRequest().withSession("username", "s550")
-        );
-        assertThat(status(result)).isEqualTo(SEE_OTHER);
-        assertThat(redirectLocation(result)).isEqualTo("/stroop_effect/experiment?trialId=2&questionNo=0");
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.checkUserTakeRepeatExperiment(),
+                        fakeRequest().withSession("username", "s550")
+                );
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+                assertThat(redirectLocation(result)).isEqualTo("/stroop_effect/experiment?trialId=2&questionNo=0");
+            }
+        });
     }
 
     @Test
     public void viewBrownPetersonExperimentCheckUserTakeRepeatExperimentFailure(){
-        Result result = callAction(
-                controllers.routes.ref.BrownPeterson.checkUserTakeRepeatExperiment(),
-                fakeRequest().withSession("username", "s550")
-        );
-        assertThat(status(result)).isEqualTo(OK);
-        assertThat(redirectLocation(result)).isNull();
-        assertThat(flash(result).containsKey("repeat")).isTrue();
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.BrownPeterson.checkUserTakeRepeatExperiment(),
+                        fakeRequest().withSession("username", "s550")
+                );
+                assertThat(status(result)).isEqualTo(OK);
+                assertThat(redirectLocation(result)).isNull();
+                assertThat(flash(result).containsKey("repeat")).isTrue();
+            }
+        });
 
     }
 
     @Test
     public void viewStroopEffectExperimentSuccess(){
-
-        long id = 2;
-        int i = 0;
-        Result result = callAction(
-                controllers.routes.ref.StroopEffect.saveAnswer(id,i),
-                fakeRequest().withSession("username", "s550")
-        );
-        assertThat(status(result)).isEqualTo(OK);
-
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.experiment(new Long(2),0),
+                        fakeRequest().withSession("username", "s550")
+                );
+                assertThat(status(result)).isEqualTo(OK);
+                assertThat(redirectLocation(result)).isNull();
+            }
+        });
     }
     @Test
     public void viewStroopEffectExperimentFailure(){
-        Result result = callAction(
-                controllers.routes.ref.StroopEffect.experiment(new Long(2), 0),
-                fakeRequest()
-        );
-        assertThat(status(result)).isEqualTo(SEE_OTHER);
-        assertThat(redirectLocation(result)).isEqualTo("/");
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.experiment(new Long(2), 0),
+                        fakeRequest()
+                );
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+                assertThat(redirectLocation(result)).isEqualTo("/");
+             }
+        });
+    }
+    @Test
+    public void viewStroopEffectSaveAnswerRepeatSuccess(){
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.saveAnswer(new Long(2), 0),
+                        fakeRequest().withSession("username", "s550")
+                );
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+                assertThat(redirectLocation(result)).isEqualTo("/stroop_effect/experiment?trialId=2&questionNo=1");
+            }
+        });
     }
 
+    @Test
+    public void viewStroopEffectSaveAnswerToReportSuccess(){
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.StroopEffect.saveAnswer(new Long(2),2),
+                        fakeRequest().withSession("username", "s550")
+                );
+                assertThat(status(result)).isEqualTo(SEE_OTHER);
+                assertThat(redirectLocation(result)).isEqualTo("/stroop-effect/report?username=s550&trial_id=2");
+            }
+        });
+    }
 
+    @Test
+    public void viewBrownPetersonReportSuccess(){
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Result result = callAction(
+                        controllers.routes.ref.BrownPeterson.report("s550", new Long(1)),
+                        fakeRequest().withSession("username", "s550")
+                );
+                assertThat(status(result)).isEqualTo(OK);
+                assertThat(redirectLocation(result)).isNull();
+            }
+        });
+    }
 }

@@ -41,6 +41,7 @@ public class StroopEffect extends Controller {
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo){
+
         return ok(exp.render(Trial.find.byId(trialId), questionNo));
     }
 
