@@ -36,6 +36,13 @@ public class User extends Model{
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
+        this.firstName = "";
+        this.lastName = "";
+        this.gender = "";
+        this.section = "";
+        this.semester = "";
+        this.year = 1;
+        this.eMail = "";
 	}
 
 	public static List<User> getAllUser() {
