@@ -37,13 +37,13 @@
                         </label>
                         <div class="col-sm-3">
                               <label class="radio-inline">
-                                <input type="radio" value="male" name="gender"> ชาย
+                                <input type="radio" value="male" name="gender" @if(user.gender.equals("male")){ checked }> ชาย
                               </label>
                               <label class="radio-inline">
-                                <input type="radio" value="female" name="gender"> หญิง
+                                <input type="radio" value="female" name="gender" @if(user.gender.equals("female")){ checked } > หญิง
                               </label>
                               <label class="radio-inline">
-                                <input type="radio" value="other" name="gender"> อื่นๆ
+                                <input type="radio" value="other" name="gender" @if(user.gender.equals("") || user.gender.equals("other")){ checked } > อื่นๆ
                               </label>
                         </div>
                   </div>
