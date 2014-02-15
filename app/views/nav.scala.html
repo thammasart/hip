@@ -4,9 +4,9 @@
         <div class="login-bar" >
           @if(user.status == UserRole.ADMIN){
             <a href="@routes.Admin.index()">&#91;admin&#93;</a>
-          }else{
-            <a href="@routes.UserController.editProfile()">&#91;User profile &#93;</a>
           }
+          <a href="@routes.UserController.editProfile()">&#91;User profile &#93;</a>
+
           <span>@request().username()  </span>
             <a href="@routes.Application.logout()"><button type="button" class="btn btn-default btn-xs">logout</button></a>
         </div>
