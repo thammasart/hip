@@ -40,6 +40,7 @@ public class User extends Model{
         this.firstName = "";
         this.lastName = "";
         this.gender = "";
+        this.birthDate = new Date();
         this.section = "";
         this.semester = "";
         this.year = 1;
