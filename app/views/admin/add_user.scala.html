@@ -2,6 +2,12 @@
         <div class="container">
 
             <h3 align="center">Add User </h3>
+        @if(flash.containsKey("userExisted")) {
+            <div class="alert alert-danger">@flash.get("userExisted")</div>
+        }
+        @if(flash.containsKey("savedSuccess")){
+            <div class="alert alert-success">@flash.get("savedSuccess")</div>
+        }
 
         <form id="answerForm" method="post" >
           <div class="textArea">
