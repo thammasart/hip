@@ -19,6 +19,14 @@ function calculateTimeLeft()
         document.getElementById("timeLeft").innerHTML= " เวลาที่เหลือ " + (count-1) +" วินาท่ี " ;
 }
 function validate(evt) {
+
+  if (event.keyCode == 13) {
+        // Do something
+        submitButtonClick();
+        document.forms["answerForm"].submit();
+        //alert ("You pressed the enter key, naughty boy");
+    }
+
   var theEvent = evt || window.event;
   var key = theEvent.keyCode || theEvent.which;
   key = String.fromCharCode( key );

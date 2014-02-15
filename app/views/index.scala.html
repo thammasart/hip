@@ -45,7 +45,12 @@
             </div>
 
 <!-- Login Right Panel : Login Button -->           
-          <br> 
+
+          @if(flash().containsKey("unauthenticate")){
+            <div class="alert alert.danger">
+                <p>@flash().get("unauthenticate")</p>
+            </div>
+          }
                      
            <button class="btn btn-block btn-lg btn-success" type="submit"> 
             Login
@@ -53,9 +58,5 @@
             </form>
       </div>
 </div>
-@if(flash().containsKey("unauthenticate")){
-  <div class="alert alert.danger">
-      <p>@flash().get("unauthenticate")</p>
-  </div>
-}
+
 @footer()
