@@ -51,19 +51,29 @@ public class Admin extends Controller {
 
         if(userString.contains(" "))return TODO;
         String[] result = userString.split("\r\n");
-//        StringTokenizer stz = new StringTokenizer(userString,"\n");
-//        List<User> userList = new ArrayList<User>();
 
+        boolean userExist = false;
+        List<String> userExistName = new ArrayList<String>();
         for(int i=0 ; i <result.length;i++){
-            User temp = new User(result[i],result[i]);
-            temp.save();
+            List<User> users = User.find.where().eq("username",result[i]).findList();
+            if (users.size() == 0){
+                User temp = new User(result[i],result[i]);
+                temp.save();
+            }
+            else{
+                userExist = true;
+                userExistName.add(result[i]);
+            }
         }
-//        while(stz.hasMoreTokens()) { 
-//            String username = stz.nextToken();
-//            User usr = new User(username,username);
-//            usr.save();
-//            userList.add(usr);
-//        }
+        if (userExist){
+            String errorText = "Already has user: ";
+            for (String i : userExistName)
+                errorText = errorText + i + " ";
+            flash("userExisted", errorText);
+        }
+        else
+            flash("savedSuccess","Add Success");
+
         return ok(user_info.render(User.getAllUser()));
     }
 
