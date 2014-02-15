@@ -28,9 +28,6 @@ public class UserController extends Controller {
             return redirect(routes.Application.index());
         }
 
-        if(user.status == UserRole.ADMIN) {
-            return redirect(routes.Application.home());
-        }
         return ok(user_profile.render(user));
     }
 
@@ -51,4 +48,30 @@ public class UserController extends Controller {
         oldUser.update();
         return ok(user_profile.render(oldUser));
     }
+
+    @Security.Authenticated(Secured.class)
+    public static Result changeUserPassword(){
+        User user = User.find.byId(session().get("username"));
+        return ok(password.render(user));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result saveUserPassword(){
+        DynamicForm requestData = Form.form().bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        if (User.authenticate(user.username,requestData.get("oldPassword")) != null){
+            if (requestData.get("newPassword").equals(requestData.get("confirmPassword"))){
+                user.password = requestData.get("newPassword");
+                user.update();
+                flash("success","Change password complete!!!");
+            }
+            else
+                flash("error","Confirm password is not match.");
+        }
+        else
+            flash("error","Old password is incorrect.");
+
+        return ok(password.render(user));
+    }
+
 }

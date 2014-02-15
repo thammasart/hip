@@ -88,15 +88,22 @@
 - &ohm !!models.User
     username:              s550
     password:              password
+    gender:                male
+    year:                  2
     status:                ADMIN
 
 - &pae !!models.User
     username:               s551
     password:               1234
+    gender:                male
+    year:                  6
 
 - &nick !!models.User
     username:               s552
     password:               1111
+    gender:                male
+    year:                  5
+
 #Trial
 - &round1 !!models.brownPeterson.Trial
     trigramLanguage:       english

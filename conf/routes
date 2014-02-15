@@ -29,6 +29,8 @@ GET     /stroop-effect/report      	controllers.StroopEffect.report(username:Str
 
 GET     /user                       controllers.UserController.editProfile()
 POST	/user 		         	controllers.UserController.saveUserProfile()
+GET     /user/changepassword    controllers.UserController.changeUserPassword()
+POST    /user/changepassword    controllers.UserController.saveUserPassword()
 
 GET     /admin                      controllers.Admin.index()
 GET     /admin/experiment           controllers.Admin.displayExperimentList()
