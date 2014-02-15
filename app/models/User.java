@@ -8,6 +8,7 @@ import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.Date;
 import play.data.format.Formats;
+
 @Entity
 public class User extends Model{
 
