@@ -7,6 +7,13 @@
     @if(flash.containsKey("success")){
             <div class="alert alert-success">@flash.get("success")</div>
         }
+    <div class="row">
+        <div class="col-md-3 col-sm-6 sub-button">
+            <a href="@routes.Admin.addBrownPetersonQuestion()">
+                <button type="button" class="btn btn-default btn-xs">add questions</button>
+            </a>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>

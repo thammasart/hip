@@ -10,13 +10,31 @@
     @if(flash.containsKey("error")){
             <div class="alert alert-danger">@flash.get("error")</div>
         }
+    <div class="row">
+        <div class="col-md-3 col-sm-6 sub-button">
+            <a href="@routes.Admin.displayBrownPetersonQuestionList()">
+                <button type="button" class="btn btn-default btn-xs">show questions</button>
+            </a>
+        </div>
+    </div>
+    <br>
     <form role="form" action="@routes.Admin.saveBrownPetersonQuestion()" method="POST">
         <div class="form-group">
             <label class="control-label">Add Question</label>
-            <textarea class="form-control" rows="3" name="questions"></textarea>
+            <textarea class="form-control" rows="10" name="questions"></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </form>
+    <br>
+</div>
+<div class="container">
+    <div class="alert alert-warning">
+        <p><b>รูปแบบการเพิ่มคำถามของ Brown Peterson</b></p>
+        <p> - เพิ่มโดยใช้ , (comma) ขั้นระหว่างคำ และว้นบรรทัดในแต่ละข้อ</p>
+        <p>เช่น</p>
+        <p>circle,school,white</p>
+        <p>paper,teacher,wheel</p>
+    </div>
 </div>
 
 @footer()
