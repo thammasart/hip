@@ -15,13 +15,25 @@
                 </div>
                 <div class="form-group">
                     <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name="startDate" placeholder="dd/mm/yyyy">
+                    <div class="input-group date col-sm-3" id="startdate-picker">
+                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="startDate" placeholder="dd/mm/yyyy">
+                        <span class="input-group-addon"> + </span>
                     </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#startdate-picker').datetimepicker();
+                        });
+                    </script>
                     <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name="expireDate" placeholder="dd/mm/yyyy">
+                    <div class="col-sm-3 input-group date" id="expiredate-picker">
+                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="expireDate" placeholder="dd/mm/yyyy" >
+                        <span class="input-group-addon"> + </span>
                     </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#expiredate-picker').datetimepicker();
+                        });
+                    </script>
                 </div> 
                 <div class="form-group">
                     <label for="noOfTrial" class="col-sm-2 control-label">จำนวนรอบ</label>
