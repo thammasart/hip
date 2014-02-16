@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.lang.Exception;
 
 
 public class Admin extends Controller {
@@ -156,19 +157,26 @@ public class Admin extends Controller {
 
     public static Result saveBrownPetersonQuestion(){
         DynamicForm  questionForm = Form.form().bindFromRequest();
-        String questions = questionForm.get("questions");
+        String tempQuestion = questionForm.get("questions");
 
-        StringTokenizer stz = new StringTokenizer(questions,"\n");
+        String[] questions = tempQuestion.split("\\r?\\n");
+        int counter = 0;
 
-        while(stz.hasMoreTokens()) { 
-            String questionRow = stz.nextToken();
-            
-            String[] questionArray = questionRow.split(",");
-
-
-            new models.brownPeterson.Question(questionArray[0], questionArray[1], questionArray[2]).save();
-            
+        for(String question : questions){
+            try{
+                String[] words = question.split(",");
+                new models.brownPeterson.Question(words[0],words[1],words[2]).save();
+            }catch(Exception e){
+                String warning = "เพิ่มคำถามสำเร็จ " + counter + " คำถาม" +
+                                " พบปัญหาที่บรรทัดที่ " + (counter + 1) +
+                                " [" + questions[counter] + "]" +
+                                " โปรดลองใหม่อีกครั้ง";
+                flash("error", warning);
+                return badRequest(views.html.admin.experiment.addQuestion.render());
+            }
+            counter++;
         }
+
         flash("success", "update success.");
         
         return ok(views.html.admin.experiment.displayQuestions.render());

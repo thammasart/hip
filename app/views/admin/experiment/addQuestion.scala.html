@@ -7,6 +7,9 @@
     @if(flash.containsKey("success")){
             <div class="alert alert-success">@flash.get("success")</div>
         }
+    @if(flash.containsKey("error")){
+            <div class="alert alert-danger">@flash.get("error")</div>
+        }
     <form role="form" action="@routes.Admin.saveBrownPetersonQuestion()" method="POST">
         <div class="form-group">
             <label class="control-label">Add Question</label>

@@ -9,7 +9,7 @@ $('.submitButton').click(function() {
 });
 
 $(document).ready(function() {
-$('#submitButton').click(function() {
+$('#submit-button').click(function() {
   $(this).parent().toggleClass('animation'); 
   timer = setInterval(function(){submitFunc()},500);
 });
