@@ -23,7 +23,7 @@ import java.lang.Exception;
 public class Admin extends Controller {
     private static final Form<ExperimentSchedule> expForm = Form.form(ExperimentSchedule.class);
 
-
+    //แสดงผลหน้า home ของ admin
     @Security.Authenticated(Secured.class)
     public static Result index() {
         User user = User.find.where().eq("username", session().get("username")).findUnique();
@@ -39,12 +39,14 @@ public class Admin extends Controller {
         return ok(index_admin.render(User.getAllUser()));
         
     }
+    //แสดงผลหน้าข้อมูลของ user ทั้งหมด
     @Security.Authenticated(Secured.class)
     public static Result renderUserInfo() {
         List<User> userList = User.find.all();
         return ok(user_info.render(User.getAllUser()));
     }
 
+    //ทำการเพิ่ม user account ใหม่เข้าไปในระบบ
     @Security.Authenticated(Secured.class)
     public static Result saveUser() {
         DynamicForm  stringForm = Form.form().bindFromRequest();
@@ -77,18 +79,21 @@ public class Admin extends Controller {
 
         return ok(user_info.render(User.getAllUser()));
     }
-
+    
+    //แสดงผลหน้า experiment set ทั้งหมดในระบบ
     @Security.Authenticated(Secured.class)
     public static Result displayExperimentList() {
         List<ExperimentSchedule> expList = ExperimentSchedule.find.all();
         return ok(views.html.admin.experiment.main.render(expList));
     }
 
+    //แสดงหน้าเพิ่มชุดการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result addExperiment() {
         return ok(views.html.admin.experiment.add.render(expForm));
     }
 
+    //
     @Security.Authenticated(Secured.class)
     public static Result saveExperiment() {
         Form<ExperimentSchedule> boundForm = expForm.bindFromRequest();

@@ -309,7 +309,7 @@ width:631px;
 .hipTitle{
     color:#34495E;
     background:#BDC3C7;
-    padding:20px 100px;
+    padding:20px;
     margin-top: 0px;
 }
 .login-bar{
@@ -332,9 +332,14 @@ width:631px;
 
 }
 .middle{
-    height:350px;
-    width:800px;
+    min-height:250px;
+    width:700px;
     margin:auto ;
+    position :relative;
+    top : 50%;
+    -webkit-transform: translateY(-15%);
+    -ms-transform: translateY(-15%);
+    transform: translateY(-15%);
 }
 
 
