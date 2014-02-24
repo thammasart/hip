@@ -335,32 +335,32 @@
 
 #Question
 - &Question13 !!models.stroopEffect.Question
-    colorWord:                Black
-    inkColor:               Black
+    colorWord:                black
+    inkColor:               black
 - &Question14 !!models.stroopEffect.Question
-    colorWord:                Blue
-    inkColor:               Blue
+    colorWord:                blue
+    inkColor:               blue
 - &Question15 !!models.stroopEffect.Question
-    colorWord:                Red
-    inkColor:               Red
+    colorWord:                red
+    inkColor:               red
 - &Question16 !!models.stroopEffect.Question
-    colorWord:                Black
-    inkColor:               Yellow
+    colorWord:                black
+    inkColor:               yellow
 - &Question17 !!models.stroopEffect.Question
-    colorWord:                Blue
-    inkColor:               Red
+    colorWord:                blue
+    inkColor:               red
 - &Question18 !!models.stroopEffect.Question
-    colorWord:                Green
-    inkColor:               Black
+    colorWord:                green
+    inkColor:               black
 - &Question19 !!models.stroopEffect.Question
-    colorWord:                Purple
-    inkColor:               Green
+    colorWord:                purple
+    inkColor:               green
 - &Question20 !!models.stroopEffect.Question
-    colorWord:                Yellow
-    inkColor:               Blue
+    colorWord:                yellow
+    inkColor:               blue
 - &Question21 !!models.stroopEffect.Question
-    colorWord:                Red
-    inkColor:               Black
+    colorWord:                red
+    inkColor:               black
 
 #Quiz
 - &quiz19 !!models.stroopEffect.Quiz
