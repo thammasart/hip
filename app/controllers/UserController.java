@@ -11,6 +11,8 @@ import views.html.admin.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 import java.text.DateFormat;
@@ -42,10 +44,14 @@ public class UserController extends Controller {
         oldUser.birthDate = newUser.birthDate;
         oldUser.section = newUser.section;
         oldUser.semester = newUser.semester;
+        oldUser.academicYear= newUser.academicYear;
         oldUser.year = newUser.year;
+        oldUser.department = newUser.department;
+        oldUser.faculty = newUser.faculty;
         oldUser.eMail = newUser.eMail;
         
         oldUser.update();
+        flash("success","Submit User Profile Complete!!!");
         return ok(user_profile.render(oldUser));
     }
 

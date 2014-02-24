@@ -1,11 +1,15 @@
 @(user : User)
 @import views.html.admin._
 @head_admin("Human Information Processing Lab :: Home Page")
+<script src="@routes.Assets.at("javascripts/userProfile.js")"></script>
 <body>
     @nav(user)
+    @if(flash.containsKey("success")){
+            <div class="alert alert-success submitSuccess" align="center">@flash.get("success")</div>
+            }
     <div class="container">
         <h4 >  User Profile </h4>
-            <form role="form" class="form-horizontal" action="@routes.UserController.saveUserProfile()" method="post">
+            <form role="form" class="form-horizontal" onsubmit="return submitButtonClick()"  action="@routes.UserController.saveUserProfile()" method="post">
               <div class="well">
                   <div class="form-group">
                         <label for="username" class="col-sm-4 control-label"> 
@@ -22,23 +26,29 @@
                   </div>
                   <div class="form-group">
                         <label for="firstName" class="col-sm-4 control-label"> 
-                              ชื่อ/Firstname
+                              ชื่อ
                         </label>
                         <div class="col-sm-3">
-                              <input type="text" class="form-control" autocomplete="off" name="firstName" value="@user.firstName">
+                              <input type="text" class="form-control" id="firstnameInput" autocomplete="off" name="firstName" value="@user.firstName">
+                        </div>
+                        <div>
+                            <label class="alertText" id="firstnameAlert"  > <i> *  Please enter Firstname</i></label>
                         </div>
                   </div>
                   <div class="form-group">
                       <label for="lastName" class="col-sm-4 control-label"> 
-                              นามสกุล/Lastname
+                              นามสกุล
                         </label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" autocomplete="off" name="lastName" value="@user.lastName">
+                            <input type="text" class="form-control" id="lastnameInput" autocomplete="off" name="lastName" value="@user.lastName">
+                        </div>
+                        <div>
+                            <label class="alertText" id="lastnameAlert"  > <i> *  Please enter Lastname</i></label>
                         </div>
                   </div>
                   <div class="form-group">
                        <label for="gender" class="col-sm-4 control-label"> 
-                              เพศ/Gender
+                              เพศ
                         </label>
                         <div class="col-sm-3">
                               <label class="radio-inline">
@@ -47,60 +57,110 @@
                               <label class="radio-inline">
                                 <input type="radio" value="female" name="gender" @if(user.gender.equals("female")){ checked } > หญิง
                               </label>
-                              <label class="radio-inline">
-                                <input type="radio" value="other" name="gender" @if(user.gender.equals("") || user.gender.equals("other")){ checked } > อื่นๆ
-                              </label>
+                              <div hidden >
+                                <label class="radio-inline">
+                                  <input id ="other" type="radio" value="other" name="gender" @if(user.gender.equals("") || user.gender.equals("other")){ checked }> อื่นๆ
+                                </label>
+                              </div>
+                        </div>
+                        <div>
+                          <label class="alertText" id="genderAlert"  > <i> *  Please select your Gender</i></label>
                         </div>
                   </div>
                   <div class="form-group">
                        <label for="birthDate" class="col-sm-4 control-label"> 
-                              วัน-เดือน-ปี เกิด / Birth Date
+                              วัน-เดือน-ปี เกิด 
                         </label>
                         <div class="col-sm-3">
                           <div class="input-group date" id="birthdate-picker">
-                              <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="birthDate" 
+                              <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="birthDate" id="birthInputBox" 
                               @if(user.birthDate != null){
                                 value="@user.birthDate.format("dd/MM/yyyy")"
-                              } placeholder="dd/mm/yyyy">
+                              } placeholder="dd/mm/yyyy" disabled>
+
                               <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                           </div>
                         </div>
                         <script type="text/javascript">
                             $(function () {
-                                $('#birthdate-picker').datetimepicker();
+                                $('#birthdate-picker').datetimepicker()
                             });
                         </script>
                   </div>
                   <div class="form-group">
                        <label for="section" class="col-sm-4 control-label"> 
-                              เซค / Section
+                              เซคชั่น 
                         </label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" autocomplete="off" name="section" value="@user.section">
+                            <input type="text" class="form-control" onkeypress='validateSemester(event)' autocomplete="off" name="section" id="sectionInput"value="@user.section">
+                        </div>
+                        <div>
+                            <label class="alertText" id="sectionAlert"  > <i> *  Please enter Section</i></label>
                         </div>
                   </div>
                   <div class="form-group">
                        <label for="semester" class="col-sm-4 control-label"> 
-                              ปีการศึกษา / Semester
+                              ภาคเรียน / ปีการศึกษา
                         </label>
+                        <div class="col-sm-1">
+                            <input type="number" min="1" max="3" class="form-control" onkeypress='validateSemester(event)'id="semesterInput"  autocomplete="off" name="semester" value="@user.semester">
+                        </div>
+                        <div class="slash" > / </div>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" autocomplete="off" name="semester" value="@user.semester">
+                            <input type="text" class="form-control" id="academicYear" onkeypress='validateSemester(event)' autocomplete="off" name="academicYear" value="@user.academicYear">
+                        </div>
+                        <div>
+                            <label class="alertText" id="semesterAlert"  > <i> *  Please enter semester </i></label>
                         </div>
                   </div>
                   <div class="form-group">
                        <label for="year" class="col-sm-4 control-label"> 
-                              ชั้นปี / Year 
+                              ชั้นปี
                         </label>
                         <div class="col-sm-1">
-                            <input type="number" min="1" max="7" class="form-control" autocomplete="off" name="year" value="@user.year">
+                            <input type="number" min="1" max="7" class="form-control" id="yearInput" onkeypress='validateSemester(event)' autocomplete="off" name="year" value="@user.year">
+                        </div>
+                        <div>
+                            <label class="alertText" id="yearAlert"  > <i> *  Please enter Year</i></label>
                         </div>
                   </div>
+
+
+                  <div class="form-group">
+                       <label for="department" class="col-sm-4 control-label"> 
+                              ภาควิชา 
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="departmentInput" autocomplete="off" name="department" value="@user.department">
+                        </div>
+                        <div>
+                            <label class="alertText" id="departmentAlert"  > <i> *  Please enter department</i></label>
+                        </div>
+                  </div>
+
+
+                  <div class="form-group">
+                       <label for="faculty" class="col-sm-4 control-label"> 
+                              คณะ 
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="facultyInput" autocomplete="off" name="faculty" value="@user.faculty">
+                        </div>
+                        <div>
+                            <label class="alertText" id="facultyAlert"  > <i> *  Please enter faculty</i></label>
+                        </div>
+                  </div>
+
+
                   <div class="form-group">
                        <label for="eMail" class="col-sm-4 control-label"> 
                               e-mail 
                         </label>
                         <div class="col-sm-3">
-                            <input type="email" class="form-control" autocomplete="off" name="eMail" value="@user.eMail">
+                            <input type="text" class="form-control" id="emailInput" autocomplete="off" name="eMail" value="@user.eMail">
+                        </div>
+                        <div>
+                            <label class="alertText" id="emailAlert"  > <i> *  Please enter e-mail</i></label>
                         </div>
                   </div>
                   <div class="form-group">
@@ -108,6 +168,7 @@
                   <button id="submit-button" type="submit" class="btn btn-success btn-lg" >Submit</button>
                   </div>
                   </div>
+            
           </div>
           </form>
 	</div>

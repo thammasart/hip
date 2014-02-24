@@ -332,7 +332,7 @@ width:631px;
 
 }
 .middle{
-    min-height:250px;
+    min-height:300px;
     width:700px;
     margin:auto ;
     position :relative;
@@ -458,4 +458,24 @@ padding-top:8em;
 
 .pickup-date{
     margin-left: 15px;
+}
+
+/*---------------------------------------- user profile ---------------------------------*/
+
+.alertText{
+    color : rgb(150,3,3);
+    padding-top:0.5%;
+    visibility:hidden;
+}
+
+.slash{
+    float:left;
+    font-size:24px;
+}
+
+.submitSuccess{
+    width:50%;
+    margin:0px auto;
+    border-style:outset;
+    font-size:20px;
 }

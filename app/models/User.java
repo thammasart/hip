@@ -21,12 +21,15 @@ public class User extends Model{
     public String firstName;
     public String lastName;
     public String gender;
-    @Formats.DateTime(pattern="dd/mm/yyyy")
+    @Formats.DateTime(pattern="dd/MM/yyyy")
     public Date   birthDate;
     public String section;
     public String semester;
+    public String academicYear;
     public int year = 1;
     public String eMail;
+    public String faculty;
+    public String department;
 
 
 	@OneToMany
@@ -43,8 +46,11 @@ public class User extends Model{
         this.birthDate = new Date();
         this.section = "";
         this.semester = "";
+        this.academicYear ="";
         this.year = 1;
         this.eMail = "";
+        this.faculty="";
+        this.department="";
 	}
 
 	public static List<User> getAllUser() {
