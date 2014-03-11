@@ -315,6 +315,7 @@ width:631px;
 .login-bar{
     margin-bottom: 0px;
     text-align: right;
+    height:30px;
 }
 .login-bar span{
     font-size: 14px;
