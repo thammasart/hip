@@ -22,6 +22,11 @@ border:solid 1px #95A5A6;
     margin-left: 40px;
     padding-top: 25px;
 }
+.addUserInput{
+    width:50%;
+    float:left;
+    margin: 2% 0% 0% 4%;
+}
 .submitButton{
     float: left;
     margin: 25px auto 0px 25px;

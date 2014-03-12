@@ -60,7 +60,7 @@ public class Admin extends Controller {
         for(int i=0 ; i <result.length;i++){
             List<User> users = User.find.where().eq("username",result[i]).findList();
             if (users.size() == 0){
-                User temp = new User(result[i],result[i]);
+                User temp = new User(result[i],result[i],stringForm.get("section"),stringForm.get("semester"),stringForm.get("academicYear"),stringForm.get("department"),stringForm.get("faculty"));
                 temp.save();
             }
             else{

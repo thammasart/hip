@@ -37,20 +37,20 @@ public class User extends Model{
 	@OneToMany
 	List<TimeLog> timeLogs = new ArrayList<TimeLog>();
 
-	public User(String username, String password) {
+	public User(String username, String password ,String section, String semester, String academicYear, String department, String faculty) {
 		this.username = username;
 		this.password = password;
         this.firstName = "";
         this.lastName = "";
         this.gender = "";
         this.birthDate = new Date();
-        this.section = "";
-        this.semester = "";
-        this.academicYear ="";
+        this.section = section;
+        this.semester = semester;
+        this.academicYear = academicYear;
         this.year = 1;
         this.eMail = "";
-        this.faculty="";
-        this.department="";
+        this.faculty= faculty;
+        this.department= department;
 	}
 
 	public static List<User> getAllUser() {

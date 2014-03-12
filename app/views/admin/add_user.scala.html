@@ -13,6 +13,59 @@
           <div class="textArea">
             <textarea name="users" rows="10" cols="50" ></textarea>
           </div>
+                <div class="addUserInput">
+                  <div class="form-group">
+                       <label for="section" class="col-sm-4 control-label"> 
+                              เซคชั่น 
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" onkeypress='validateSemester(event)' autocomplete="off" name="section" id="sectionInput">
+                        </div>
+                        <div>
+                            <label class="alertText" id="sectionAlert"  > <i> *  Please enter Section</i></label>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                       <label for="semester" class="col-sm-4 control-label"> 
+                              ภาคเรียน / ปีการศึกษา
+                        </label>
+                        <div class="col-sm-1">
+                            <input style="width:50px;"type="number" min="1" max="3" class="form-control" onkeypress='validateSemester(event)'id="semesterInput"  autocomplete="off" name="semester">
+                        </div>
+                        <div class="slash" style="margin-left:30px;"> / </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="academicYear" onkeypress='validateSemester(event)' autocomplete="off" name="academicYear" >
+                        </div>
+                        <div>
+                            <label class="alertText" id="semesterAlert"  > <i> *  Please enter semester </i></label>
+                        </div>
+                  </div>
+
+                  <div class="form-group">
+                       <label for="department" class="col-sm-4 control-label"> 
+                              ภาควิชา 
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="departmentInput" autocomplete="off" name="department" >
+                        </div>
+                        <div>
+                            <label class="alertText" id="departmentAlert"  > <i> *  Please enter department</i></label>
+                        </div>
+                  </div>
+
+
+                  <div class="form-group">
+                       <label for="faculty" class="col-sm-4 control-label"> 
+                              คณะ 
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="facultyInput" autocomplete="off" name="faculty" >
+                        </div>
+                        <div>
+                            <label class="alertText" id="facultyAlert"  > <i> *  Please enter faculty</i></label>
+                        </div>
+                  </div>
+                </div>
           <div>
             <input type="submit"class="submitButton" > </input>
           </div>

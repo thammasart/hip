@@ -11,25 +11,31 @@
                     <th > Status </th>
                     <th > Name </th>
                     <th > Surname </th>
+                    <th > E-mail</th>
                     <th > Birth Date</th>
                     <th > Gender</th>
+                    <th > Year</th>
                     <th > Section</th>
                     <th > Semester</th>
-                    <th > Year</th>
-                    <th > E-mail</th>
+                    <th > AcademicYear</th>
+                    <th > Faculty</th>
+                    <th > Department</th>
                 </tr>
                 @for(user<- user){
                 <tr class="tableContent">
-                <td width="12%"> @user.username</td>
+                <td width="8%"> @user.username</td>
                 <td width="6%"> @user.status</td>
-                <td width="13%"> @user.firstName</td>
-                <td width="13%"> @user.lastName</td>
-                <td width="12%"> @user.birthDate </td>
+                <td width="11%"> @user.firstName</td>
+                <td width="11%"> @user.lastName</td>
+                <td width="11%">@user.eMail</td>
+                <td width="8%"> @user.birthDate </td>
                 <td width="6%"> @user.gender </td>
-                <td width="8%"> @user.section</td>
-                <td width="8%"> @user.semester</td>
-                <td width="6%"> @user.year</td>
-                <td width="16%">@user.eMail</td>
+                <td width="4%"> @user.year</td>
+                <td width="6%"> @user.section</td>
+                <td width="4%"> @user.semester</td>
+                <td width="6%"> @user.academicYear</td>
+                <td width="9%"> @user.faculty</td>
+                <td width="9%"> @user.department</td>
                 </tr>
                 }
             </table>
