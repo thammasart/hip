@@ -6,8 +6,9 @@
 GET     /                           controllers.Application.index()
 POST    /                           controllers.Application.authenticate()
 GET     /home                       controllers.Application.home()
+GET     /select-experiment          controllers.Application.selectExperiment()
 GET     /about                      controllers.Application.about()
-GET		/logout						controllers.Application.logout()
+GET	/logout			    controllers.Application.logout()
 
 GET     /brown-peterson		        controllers.BrownPeterson.info()
 GET     /brown-peterson/info        controllers.BrownPeterson.infoIframe()
