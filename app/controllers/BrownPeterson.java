@@ -84,11 +84,11 @@ public class BrownPeterson extends Controller {
         if(user == null) {
             return redirect(routes.Application.index());
         }
-        if(TimeLog.isRepeatTrial(user, Trial.find.byId(new Long(1)))) {
-            flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
+        if(models.brownPeterson.TimeLog.isRepeatTrial(user, Trial.find.byId(new Long(1)))) {
+            flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำอีกครั้งโปรดติดต่อผู้ดูแลระบบ");
             return ok(proc.render(user));
         }
-        TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
+        models.brownPeterson.TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
         return redirect(routes.BrownPeterson.experiment(new Long(1), 0));
     }
 }

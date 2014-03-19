@@ -42,14 +42,9 @@ public class UserController extends Controller {
         oldUser.lastName = newUser.lastName;
         oldUser.gender = newUser.gender;
         oldUser.birthDate = newUser.birthDate;
-        oldUser.section = newUser.section;
-        oldUser.semester = newUser.semester;
-        oldUser.academicYear= newUser.academicYear;
         oldUser.year = newUser.year;
-        oldUser.department = newUser.department;
-        oldUser.faculty = newUser.faculty;
         oldUser.eMail = newUser.eMail;
-        
+        //่้try catch
         oldUser.update();
         flash("success","Submit User Profile Complete!!!");
         return ok(user_profile.render(oldUser));

@@ -87,11 +87,11 @@ public class StroopEffect extends Controller {
         if(user == null) {
             return redirect(routes.Application.index());
         }
-        if(TimeLog.isRepeatTrial(user, Trial.find.byId(new Long(2)))) {
+        if(models.stroopEffect.TimeLog.isRepeatTrial(user, Trial.find.byId(new Long(2)))) {
             flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
             return ok(proc.render(user));
         }
-        TimeLog.create(new Date(), user, Trial.find.byId(new Long(2))).save();
+        models.stroopEffect.TimeLog.create(new Date(), user, Trial.find.byId(new Long(2))).save();
         return redirect(routes.StroopEffect.experiment(new Long(2),0));
     }
 

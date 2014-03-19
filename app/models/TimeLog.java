@@ -1,12 +1,10 @@
-package models.brownPeterson;
+package models;
 
-import models.User;
 import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name="brown_peterson_timelog")
 public class TimeLog extends Model{
 	@Id
 	public long id;
@@ -15,8 +13,10 @@ public class TimeLog extends Model{
 
 	@ManyToOne
 	public User user;
+	public long trialId;
+
 	@ManyToOne
-	public Trial trial;
+	public ExperimentSchedule exp;
 
 	public TimeLog(Date startTime){
 		this.startTime = startTime;
@@ -27,27 +27,21 @@ public class TimeLog extends Model{
 		this.endTime = endTime;
 	}
 	
-	public static TimeLog create(Date startTime, User user, Trial trial){
+	public static TimeLog create(Date startTime, User user
+		,long trialId,ExperimentSchedule exp){
 		TimeLog timeLog = new TimeLog(startTime);
 		timeLog.user = user;
-		timeLog.trial = trial;
+		timeLog.trialId = trialId;
 		timeLog.endTime = null;
+		timeLog.exp = exp;
 		return timeLog;
 	}
 
-	public static TimeLog create(Date startTime, Date endTime, User user, Trial trial){
-		TimeLog timeLog = new TimeLog(startTime, endTime);
-		timeLog.user = user;
-		timeLog.trial = trial;
-		return timeLog;
-	}
-
-	public static boolean isRepeatTrial(User user, Trial trial){
-		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trial", trial).findUnique();
+	public static boolean isRepeatlong(User user, long trialId){
+		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trialId", trialId).findUnique();
 		return timeLog != null;
 	}
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, TimeLog> find = new Finder(Long.class, TimeLog.class);
-
 }

@@ -1,25 +1,22 @@
 package models.stroopEffect;
 
+import models.User;
 import play.db.ebean.Model;
 import javax.persistence.*;
-
 import java.util.Date;
-
-import models.User;
 
 @Entity
 @Table (name="stroop_time_log")
 public class TimeLog extends Model{
-
     @Id
     public long id;
     public Date startTime = new Date();
     public Date endTime;
 
     @ManyToOne
-    public Trial trial;
-    @ManyToOne
     public User user;
+    @ManyToOne
+    public Trial trial;
 
     public TimeLog(Date startTime){
         this.startTime = startTime;
