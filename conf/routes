@@ -10,6 +10,8 @@ GET     /select-experiment          controllers.Application.selectExperiment()
 GET     /about                      controllers.Application.about()
 GET	/logout			    controllers.Application.logout()
 
+GET		/check-repeat-user			controllers.Application.checkUserTakeRepeatExperiment(trial_id:Long, exp_id:Long)
+
 GET     /brown-peterson		        controllers.BrownPeterson.info()
 GET     /brown-peterson/info        controllers.BrownPeterson.infoIframe()
 GET     /brown-peterson/proc		controllers.BrownPeterson.proc()

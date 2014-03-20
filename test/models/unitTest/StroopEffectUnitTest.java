@@ -129,6 +129,7 @@ public class StroopEffectUnitTest extends WithApplication{
         assertEquals(3, Trial.findInvolving(exs).size());
     }
 
+    /*
     @Test
     public void createTimeLogSuccess(){
         Calendar calendar = Calendar.getInstance();
@@ -160,5 +161,5 @@ public class StroopEffectUnitTest extends WithApplication{
 
         assertEquals(u.username, timeLog.user.username);
         assertEquals(t.id, timeLog.trial.id);
-    }
+    }*/
 }

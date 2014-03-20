@@ -6,6 +6,7 @@ import play.data.*;
 import views.html.*;
 import views.html.iframe.*;
 import models.*;
+import java.util.Date;
 
 public class Application extends Controller {
 
@@ -47,6 +48,20 @@ public class Application extends Controller {
             session("username", userForm.get().username);
             return redirect(routes.Application.home());
         }
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result checkUserTakeRepeatExperiment(long trialId, long expId) {
+        User user = User.find.byId(session().get("username"));
+        if(user == null) {
+            return redirect(routes.Application.index());
+        }
+        if(TimeLog.isRepeatTrial(user, trialId, ExperimentSchedule.find.byId(expId))) {
+            flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำอีกครั้งโปรดติดต่อผู้ดูแลระบบ");
+            return ok(views.html.brownPeterson.proc.render(user));
+        }
+        TimeLog.create(new Date(), user, trialId, ExperimentSchedule.find.byId(expId)).save();
+        return TODO;
     }
 
 }

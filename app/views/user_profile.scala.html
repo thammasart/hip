@@ -4,11 +4,11 @@
 <script src="@routes.Assets.at("javascripts/userProfile.js")"></script>
 <script>
 
-    function init(){
+    function initFocusPoniter(){
         document.userProfileForm.firstName.focus();
     }
 </script>
-<body onload="init()" >
+<body onload="initFocusPoniter()" >
     @nav(user)
     @if(flash.containsKey("success")){
             <div class="alert alert-success submitSuccess" align="center">@flash.get("success")</div>

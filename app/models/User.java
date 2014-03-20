@@ -18,16 +18,16 @@ public class User extends Model{
 	@Column(nullable=false, length=20)
 	public String password;
 	public UserRole status = UserRole.STUDENT;
-    public String firstName;
-    public String lastName;
-    public String gender;
+    public String firstName ="";
+    public String lastName ="";
+    public String gender ="";
     @Formats.DateTime(pattern="dd/MM/yyyy")
     public Date   birthDate;
     public String section;
     public String semester;
     public String academicYear;
     public int year = 1;
-    public String eMail;
+    public String eMail ="";
     public String faculty;
     public String department;
 
@@ -41,6 +41,7 @@ public class User extends Model{
         this.username = username;
         this.password = password;
     }
+
 
 	public static List<User> getAllUser() {
 		return find.all();

@@ -42,10 +42,11 @@ public class BrownPetersonTest extends WithApplication {
 	public void quizzes_should_have_3_row(){
 		assertEquals(18, Quiz.find.findRowCount());
 	}
+	/*
 	@Test
 	public void timelog_should_have_4_row(){
 		assertEquals(4, TimeLog.find.findRowCount());
-	}
+	}*/
 	@Test
 	public void answers_should_have_12_rows(){
 		assertEquals(12, Answer.find.findRowCount());
@@ -71,7 +72,7 @@ public class BrownPetersonTest extends WithApplication {
 		List<Quiz> quizzes = Quiz.findInvolving(trial);
 		assertEquals(3, quizzes.size());
 	}
-
+	/*
 	@Test
 	public void check_user_used_to_take_the_trial_by_timelog_success(){
 		User user = User.find.where().eq("username", "s550").findUnique();
@@ -86,7 +87,7 @@ public class BrownPetersonTest extends WithApplication {
 		Trial trial = Trial.find.where().eq("id", 1).findUnique();
 		assertFalse(TimeLog.isRepeatTrial(user, trial));
 	}
-
+	*/
     @Test
     public void trial_should_have_3_quiz(){
         Trial trial = Trial.find.byId(1L); 

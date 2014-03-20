@@ -225,15 +225,7 @@ public class BrownPetersonUnitTest extends WithApplication {
 		assertEquals(100, quizzes.get(1).initCountdown);
 		assertEquals(80, quizzes.get(2).initCountdown);
 	}
-	@Test
-	public void timelog_should_create_And_Not_Null(){
-		new Trial().save();
-		Trial trial = Trial.findById(1);
-		new User("123","Secret").save();
-		User user = User.find.byId("123");
-
-		assertNotNull(TimeLog.create(new Date(), new Date(), user, trial));
-	}
+	
 
 	@Test
 	public void trialShouldCreateAndNotNull(){

@@ -37,8 +37,8 @@ public class TimeLog extends Model{
 		return timeLog;
 	}
 
-	public static boolean isRepeatlong(User user, long trialId){
-		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trialId", trialId).findUnique();
+	public static boolean isRepeatTrial(User user, long trialId, ExperimentSchedule exp){
+		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trialId", trialId).eq("exp", exp).findUnique();
 		return timeLog != null;
 	}
 
