@@ -38,6 +38,10 @@ public class AttentionBlink extends Controller {
     public static Result procIframe(){
         return ok(attention_blink_proc_iframe.render());
     }
+    @Security.Authenticated(Secured.class)
+    public static Result demoPage(){
+        return ok(demo.render());
+    }
 //    //แสดงหน้าการทดลอง
 //    @Security.Authenticated(Secured.class)
 //    public static Result experiment(long trialId, int questionNo){

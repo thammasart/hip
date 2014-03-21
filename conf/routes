@@ -25,6 +25,7 @@ GET     /attention-blink/info            controllers.AttentionBlink.info()
 GET     /attention-blink/infoi           controllers.AttentionBlink.infoIframe()
 GET     /attention-blink/proc            controllers.AttentionBlink.proc()
 GET     /attention-blink/proci           controllers.AttentionBlink.procIframe()
+GET     /attention-blink/demo            controllers.AttentionBlink.demoPage()
 GET     /attention-blink/repeatexp     	 controllers.AttentionBlink.checkUserTakeRepeatExperiment()
 
 GET     /stroop_effect	            controllers.StroopEffect.info()

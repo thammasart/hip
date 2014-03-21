@@ -157,12 +157,16 @@ width:631px;
 .procButtonGreen{
      width:300px;
      float:left;
-     margin-left:70px;
+     margin-left:35px;
+}
+.procButtonBlue{
+     width:150px;
+     float:left;
+     margin-left:240px;
 }
 .procButtonRed{
      width:150px;
      float:left;
-     margin-left:300px;
 }
 .infoContent{
      float:left;
