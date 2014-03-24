@@ -43,4 +43,57 @@ public class SignalDetectionUnitTest extends WithApplication {
         assertEquals('y',q.noise);
     }
 
+    @Test
+    public void createQuizNotNull(){
+        assertNotNull(new Quiz());
+    }
+
+    @Test
+    public void createQuizWithParameter(){
+        Quiz q = new Quiz(5,2);
+        assertEquals(5,q.displayTime);
+        assertEquals(2,q.noOfTarget);
+    }
+
+    @Test
+    public void createQuizAndSaveComplete(){
+        new Quiz(2,2).save();
+        assertEquals(1,Quiz.find.findRowCount());
+    }
+
+    @Test
+    public void saveAndRetrieveQuizComplete(){
+        new Quiz(5,2).save();
+        Quiz q = Quiz.find.byId(1L);
+        assertEquals(5,q.displayTime);
+        assertEquals(2,q.noOfTarget);
+    }
+
+
+    @Test
+    public void quizCanAccessToQuestion(){
+        Quiz quiz = new Quiz(5,2);
+        Question q = new Question('x','y');
+        quiz.question = q;
+        q.save();
+        quiz.save();
+        Quiz quiz2 = Quiz.find.byId(1L);
+        Question question = quiz2.question;
+        assertEquals(q,question);
+        assertEquals('x',question.target);
+        assertEquals('y',question.noise);
+    }
+
+    @Test
+    public void createQuizByMethonCcreate(){
+        Question q = new Question('x','y');
+        q.save();
+        Quiz.create(5,2,q).save();
+        Quiz quiz = Quiz.find.byId(1L);
+
+        assertEquals(5,quiz.displayTime);
+        assertEquals(2,quiz.noOfTarget);
+        assertEquals(q,quiz.question);
+    }
+
 }
