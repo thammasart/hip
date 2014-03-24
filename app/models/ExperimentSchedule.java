@@ -49,13 +49,26 @@ public class ExperimentSchedule extends Model{
 	}
 
 	public static List<ExperimentSchedule> getWorkingExperimentsByType(ExperimentType expType) {
-		List<ExperimentSchedule> experiments = getAllWorkingExperiments();
-		for(ExperimentSchedule exp : experiments) {
-			if(exp.experimentType != expType) {
-				experiments.remove(exp);
+		List<ExperimentSchedule> allWorkingExp = getAllWorkingExperiments();
+		List<ExperimentSchedule> exps = new ArrayList<ExperimentSchedule>();
+		for(ExperimentSchedule exp : allWorkingExp) {
+			if(exp.experimentType == expType) {
+				exps.add(exp);
 			}
 		}
-		return experiments;
+		return exps;
+	}
+
+
+	public static List<ExperimentSchedule> getWorkingExperimentsByType(String expType){
+		List<ExperimentSchedule> expList = null;
+		final String BROWNPETERSON = "BROWNPETERSON";
+		final String STROOPEFFECT = "STROOPEFFECT";
+        switch(expType){
+            case BROWNPETERSON : expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);break;
+            case STROOPEFFECT : expList = getWorkingExperimentsByType(ExperimentType.STROOPEFFECT);break;
+        }
+        return expList;
 	}
 	
 	public String getExperimentTypeToString(){
