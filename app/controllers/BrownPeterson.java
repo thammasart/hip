@@ -77,18 +77,4 @@ public class BrownPeterson extends Controller {
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
-
-    @Security.Authenticated(Secured.class)
-    public static Result checkUserTakeRepeatExperiment() {
-        User user = User.find.byId(session().get("username"));
-        if(user == null) {
-            return redirect(routes.Application.index());
-        }
-        if(models.brownPeterson.TimeLog.isRepeatTrial(user, Trial.find.byId(new Long(1)))) {
-            flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำอีกครั้งโปรดติดต่อผู้ดูแลระบบ");
-            return ok(proc.render(user));
-        }
-        models.brownPeterson.TimeLog.create(new Date(), user, Trial.find.byId(new Long(1))).save();
-        return redirect(routes.BrownPeterson.experiment(new Long(1), 0));
-    }
 }

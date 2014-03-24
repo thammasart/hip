@@ -21,8 +21,7 @@ public class Trial extends Model {
 
 	@ManyToOne
 	public ExperimentSchedule schedule;
-	@OneToMany(mappedBy="trial")
-	public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
+
     @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
         
@@ -45,12 +44,13 @@ public class Trial extends Model {
 		for(Quiz quiz : this.quizzes){
 			totalScore += Answer.calculateTotalScore(quiz.answers);
 		}
-		return totalScore/this.calculateTotalUser();
+		//return totalScore/this.calculateTotalUser();
+        return 1;
 	}
-
+/*
 	public int calculateTotalUser(){
 		return this.timeLogs.size();
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
