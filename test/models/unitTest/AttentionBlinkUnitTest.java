@@ -11,16 +11,34 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 
-public class StroopEffectUnitTest extends WithApplication{
+public class AttentionBlinkUnitTest extends WithApplication{
 
     @Before
     public void setUp(){
         start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
     }
 
-    /*@Test
+    @Test
     public void createAnswer() {
     	Answer answer = new Answer();
     	assertNotNull(answer);
-    }*/
+    }
+
+    @Test
+    public void createQuestion() {
+    	Question question = new Question();
+    	assertNotNull(question);
+    }
+
+    @Test
+    public void createQuiz() {
+    	Quiz quiz = new Quiz();
+    	assertNotNull(quiz);
+    }
+
+    @Test
+    public void createTrial() {
+    	Trial trial = new Trial();
+    	assertNotNull(trial);
+    }
 }
