@@ -130,6 +130,7 @@
     trigramType:    word 
     schedule: *ex2
 
+
 - &quiz1 !!models.brownPeterson.Quiz
     initCountdown:                 100
     flashTime:                 5
