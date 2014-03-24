@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class Application extends Controller {
 
+
 	public static Result index() {
         return ok(index.render(Form.form(UserForm.class)));
     }
@@ -53,15 +54,29 @@ public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment(long trialId, long expId) {
         User user = User.find.byId(session().get("username"));
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
         if(user == null) {
             return redirect(routes.Application.index());
         }
-        if(TimeLog.isRepeatTrial(user, trialId, ExperimentSchedule.find.byId(expId))) {
+        if(TimeLog.isRepeatTrial(user, trialId, exp)) {
             flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำอีกครั้งโปรดติดต่อผู้ดูแลระบบ");
-            return ok(views.html.brownPeterson.proc.render(user));
+            return ok(views.html.trial.render(exp.experimentType.toString() ,user));
         }
-        TimeLog.create(new Date(), user, trialId, ExperimentSchedule.find.byId(expId)).save();
-        return TODO;
+        TimeLog.create(new Date(), user, trialId, exp).save();
+        
+        Result nextPage = badRequest(views.html.trial.render(exp.experimentType.toString() , user));
+
+        switch(exp.experimentType){
+            case BROWNPETERSON : nextPage = redirect(routes.BrownPeterson.experiment(trialId,0));break;
+            case STROOPEFFECT : nextPage = redirect(routes.StroopEffect.experiment(trialId,0)); break;
+        }
+        return nextPage;
+    }
+
+    public static Result chooseTrial(String experimentType){
+        User user = User.find.byId(session().get("username"));
+        
+        return ok(views.html.trial.render(experimentType, user));
     }
 
 }

@@ -8,6 +8,7 @@ POST    /                           controllers.Application.authenticate()
 GET     /home                       controllers.Application.home()
 GET     /select-experiment          controllers.Application.selectExperiment()
 GET     /about                      controllers.Application.about()
+GET     /trial                      controllers.Application.chooseTrial(exp_type : String)
 GET	/logout			    controllers.Application.logout()
 
 GET		/check-repeat-user			controllers.Application.checkUserTakeRepeatExperiment(trial_id:Long, exp_id:Long)
