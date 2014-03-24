@@ -77,4 +77,7 @@ public class BrownPeterson extends Controller {
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
+
+
+
 }

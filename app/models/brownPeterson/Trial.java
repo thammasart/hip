@@ -50,8 +50,8 @@ public class Trial extends Model {
 /*
 	public int calculateTotalUser(){
 		return this.timeLogs.size();
-	}*/
-
+	}
+*/
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 

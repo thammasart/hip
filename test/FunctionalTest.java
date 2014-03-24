@@ -221,7 +221,7 @@ public class FunctionalTest {
         running(fakeApplication(), new Runnable() {
             public void run() {
                 Result result = callAction(
-                        controllers.routes.ref.BrownPeterson.checkUserTakeRepeatExperiment(),
+                        controllers.routes.ref.Application.checkUserTakeRepeatExperiment(new Long(1),new Long(1)),
                         fakeRequest().withSession("username", "s550")
                 );
                 assertThat(status(result)).isEqualTo(OK);

@@ -206,26 +206,30 @@
     question: *Question11
 
 #TimeLog
-- &timelog1 !!models.brownPeterson.TimeLog
+- &timelog1 !!models.TimeLog
     startTime: 2014-01-30
     endTime: 2014-01-30
     user: *ohm
-    trial: *round1
-- &timelog2 !!models.brownPeterson.TimeLog
+    trialId: 1
+    exp: *ex1
+- &timelog2 !!models.TimeLog
     startTime: 2014-01-31
     endTime: 2014-01-31
     user: *ohm
-    trial: *round2
-- &timelog3 !!models.brownPeterson.TimeLog
+    trialId: 2
+    exp: *ex1
+- &timelog3 !!models.TimeLog
     startTime: 2014-10-19
     endTime: 2014-10-19
     user: *ohm
-    trial: *round3
-- &timelog4 !!models.brownPeterson.TimeLog
+    trialId: 3
+    exp: *ex1
+- &timelog4 !!models.TimeLog
     startTime: 2014-01-31
     endTime: 2014-01-31
     user: *demo
-    trial: *round2
+    trialId: 2
+    exp: *ex1
 #Answer
 - &answer1 !!models.brownPeterson.Answer
     firstWord:              q1w1                

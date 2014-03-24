@@ -100,6 +100,7 @@ public class BrownPetersonTest extends WithApplication {
         Trial trial = Trial.find.byId(1L);
         assertEquals("q1w1", trial.quizzes.get(0).question.firstWord);
     }
+    /*
     @Test
     public void should_get_total_user_who_used_to_make_the_trial(){
     	ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
@@ -107,4 +108,5 @@ public class BrownPetersonTest extends WithApplication {
     	assertEquals(1, exp.trials.get(0).calculateTotalUser());
     	assertEquals(2, exp.trials.get(1).calculateTotalUser());
     }
+    */
 }
