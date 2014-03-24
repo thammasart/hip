@@ -154,18 +154,21 @@
     question: *Question11
 
 #TimeLog
-- &timelog1 !!models.brownPeterson.TimeLog
+- &timelog1 !!models.TimeLog
     startTime: 2011-11-15
     endTime: 2014-01-30
     user: *ohm
-    trial: *round1
-- &timelog2 !!models.brownPeterson.TimeLog
+    trialId: 1
+    exp: *ex1
+- &timelog2 !!models.TimeLog
     startTime: 2011-11-30
     endTime: 2014-01-30
     user: *ohm
-    trial: *round2
-- &timelog3 !!models.brownPeterson.TimeLog
+    trialId: 2
+    exp: *ex1
+- &timelog3 !!models.TimeLog
     startTime: 2011-11-19
     endTime: 2014-01-30
     user: *ohm
-    trial: *round3
+    trialId: 3
+    exp: *ex1
