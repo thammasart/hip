@@ -42,6 +42,7 @@ GET     /signal_detection/info         controllers.SignalDetection.infoIframe()
 GET     /signal_detection/proc		    controllers.SignalDetection.proc()
 GET     /signal_detection/proci	    controllers.SignalDetection.procIframe()
 GET     /signal_detection/demo            controllers.SignalDetection.demoPage()
+GET     /signal_detection/experiment   controllers.SignalDetection.experiment(trialId:Long, questionNo:Int)
 GET     /signal_detection/repeatexp     	 controllers.SignalDetection.checkUserTakeRepeatExperiment()
 
 GET     /user                       controllers.UserController.editProfile()

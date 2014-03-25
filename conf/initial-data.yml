@@ -23,6 +23,18 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: STROOPEFFECT
+- &ex5 !!models.ExperimentSchedule
+    name:           Ex5
+    noOfTrial:      3
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: SIGNALDETECTION
+- &ex6 !!models.ExperimentSchedule
+    name:           Ex6
+    noOfTrial:      3
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: SIGNALDETECTION
 
 #Question
 - &Question1 !!models.brownPeterson.Question
@@ -394,3 +406,35 @@
 - &quiz27 !!models.stroopEffect.Quiz
     trial: *round9
     question: *Question21
+
+#Trial
+- &round13 !!models.signalDetection.Trial
+    schedule: *ex5
+
+#Question
+- &Question22 !!models.signalDetection.Question
+    target:                Y
+    noise:               X
+- &Question23 !!models.signalDetection.Question
+    target:                8
+    noise:               B
+- &Question24 !!models.signalDetection.Question
+    target:                I
+    noise:               l
+
+#Quiz
+- &quiz28 !!models.signalDetection.Quiz
+    trial: *round13
+    noOfTarget: 1
+    length: 6
+    question: *Question22
+- &quiz29 !!models.signalDetection.Quiz
+    trial: *round13
+    noOfTarget: 3
+    length: 10
+    question: *Question23
+- &quiz30 !!models.signalDetection.Quiz
+    trial: *round13
+    noOfTarget: 1
+    length: 15
+    question: *Question24
