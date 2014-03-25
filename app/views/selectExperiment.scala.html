@@ -28,17 +28,24 @@
 
 
 <!-- Perception Panel -->
+
 <div class="divSlideContainer"  id="panel01">
         <div class="divSlideTitle" >
             <span class="fui-list"></span>&nbsp;&nbsp;Perception
         </div>
-        <div class="divContainer1" >
+
+        <div class="divContainer" >
+
              <div class="divExperimentIcon" >
-                      <a  href="#"><img class="divPng"  src="@routes.Assets.at("images/change_blindness.png")"></a>
-                   <div>
-                      <a href="#">Change Blindness</a>
-                   </div> 
-             </div> 
+                <a  href="#"><img class="divPng"  src="@routes.Assets.at("images/change_blindness.png")"></a>
+                    <div>
+                        <a href="#">Change Blindness</a>
+                    </div>
+             </div>
+             <div class="divExperimentIcon" >
+                <a  href="@routes.SignalDetection.info()"><img class="divPng"  src="@routes.Assets.at("images/signal_detection.png")"></a>
+                    <div><a href="@routes.SignalDetection.info()">Signal Detection</a></div>
+            </div>
         </div>
 </div>
 
@@ -46,13 +53,15 @@
 <!-- Short-Term Memory Panel -->
 
 <div class="divSlideContainer"  id="panel02">
-    <div class="divSlideTitle"><span class="fui-list"></span>&nbsp;&nbsp;Attention</div>
+    <div class="divSlideTitle">
+        <span class="fui-list"></span>&nbsp;&nbsp;Short-Term Memory
+    </div>
     
     <div class="divContainer">
 
       <div class="divExperimentIcon" >
         <a  href="#"><img class="divPng"  src="@routes.Assets.at("images/sternberg_search.png")"></a>
-          <div><a href="#">Sternberg Search</a></div> 
+          <div><a href="#">Sternberg Search</a></div>
       </div>
       <div class="divExperimentIcon" >
         <a  href="@routes.BrownPeterson.info()"><img class="divPng"  src="@routes.Assets.at("images/brown_peterson.png")"></a>
