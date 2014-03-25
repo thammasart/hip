@@ -14,6 +14,8 @@ public class Quiz extends Model{
 
     @ManyToOne
 	public Question question;
+    @ManyToOne
+    public Trial trial;
 
     public Quiz(){
     	this.displayTime = 0;

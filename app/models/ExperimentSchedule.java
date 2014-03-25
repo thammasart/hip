@@ -64,10 +64,18 @@ public class ExperimentSchedule extends Model{
 		List<ExperimentSchedule> expList = null;
 		final String BROWNPETERSON = "BROWNPETERSON";
 		final String STROOPEFFECT = "STROOPEFFECT";
-        switch(expType){
-            case BROWNPETERSON : expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);break;
-            case STROOPEFFECT : expList = getWorkingExperimentsByType(ExperimentType.STROOPEFFECT);break;
+        final String SIGNALDETECTION = "SIGNALDETECTION";
+
+        if (expType.equals(BROWNPETERSON)){
+            expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
         }
+        else if (expType.equals(STROOPEFFECT)){
+            expList = getWorkingExperimentsByType(ExperimentType.STROOPEFFECT);
+        }
+        else if (expType.equals(SIGNALDETECTION)){
+            expList = getWorkingExperimentsByType(ExperimentType.SIGNALDETECTION);
+        }
+
         return expList;
 	}
 	

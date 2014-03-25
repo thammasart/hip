@@ -13,9 +13,10 @@ public class Question extends Model{
     public char target;
     public char noise;
 
-    public Question(){
+    @OneToMany
+    public List<Quiz> quizzes;
 
-    }
+    public Question(){}
 
     public Question(char target,char noise){
         this.target = target;
