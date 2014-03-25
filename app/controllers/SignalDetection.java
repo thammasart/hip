@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class SignalDetection extends Controller{
 
-    //private static final Form<Answer> answerForm = Form.form(Answer.class);
+    private static final Form<Answer> answerForm = Form.form(Answer.class);
     //แสดงหน้าข้อมูลการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result info(){
@@ -43,16 +43,15 @@ public class SignalDetection extends Controller{
         return ok(signal_detection_proc_iframe.render());
     }
 
-    //แสดงหน้าการทดลอง
-    @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId, int questionNo){
-        //return ok(exp.render(Trial.find.byId(trialId), questionNo));
-        return TODO;
-    }
-
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
         return ok(demo.render());
+    }
+
+    //แสดงหน้าการทดลอง
+    @Security.Authenticated(Secured.class)
+    public static Result experiment(long trialId, int questionNo){
+        return ok(exp.render(Trial.find.byId(trialId),questionNo));
     }
 
 /*
@@ -96,7 +95,7 @@ public class SignalDetection extends Controller{
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
     @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment() {
-        return TODO;
+        return redirect(routes.SignalDetection.experiment(13L,0));
     }
 
 }
