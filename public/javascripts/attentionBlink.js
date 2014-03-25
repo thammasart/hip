@@ -12,6 +12,9 @@ var question = new Array();
     question[1] = "A";
     question[2] = "R";
     question[3] = "K";
+    question[4] = "X";
+    question[5] = "1";
+    question[6] = "3";
 
 function showInstruction (){
     clearInterval(startTimer);
@@ -27,7 +30,7 @@ function showAttentionWord(){
     clearInterval(attentionWordTime);
     clearInterval(showTimerTime);
     questionTime = setInterval(showQuestionList,500);
-    questionTime2 = setInterval(function(){showQuestionWord()},2500);
+    questionTime2 = setInterval(function(){showQuestionWord()},question.length*550);
 }
 function showQuestionList(){
     document.getElementById("word").innerHTML= question[i];
@@ -36,6 +39,9 @@ function showQuestionList(){
 function showQuestionWord(){
     clearInterval(questionTime2);
     clearInterval(questionTime);
+    document.getElementById("me").style.visibility = "visible";
+    document.getElementById("maiMe").style.visibility = "visible";
+    document.getElementById("ret").style.visibility = "visible";
     document.getElementById("word").innerHTML = " มี A และ B ติดกันหรือไม่ " ;
 }
 function calculateTimeLeft()

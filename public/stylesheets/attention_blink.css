@@ -12,3 +12,26 @@
 .attentionWord p{
     font-size:60px;
 }
+.choice{
+    position:relative;
+    top:45%;
+    width:50%;
+    margin-left:25%;
+}
+.ansButton{
+    width:25%;
+    height:5%;
+    font-size:22px;
+    float:left;
+    margin-left:17%;
+    visibility:hidden;
+}
+.ret{
+    width:40%;
+    font-size:40px;
+    visibility:hidden;
+}
+.retDiv{
+    position:relative;
+    top:47%;
+}

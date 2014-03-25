@@ -23,5 +23,12 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <div class="attentionWord"  >
          <p id="word" >  </p>
     </div>
+    <div class="choice" align="center" id="choice" >
+         <button type="button" class="btn btn-danger ansButton" id="maiMe"> ไม่มี </button>
+         <button type="button" class="btn btn-success ansButton" id="me"> มี  </button>
+    </div>
+    <div align="center" class="retDiv">
+        <a  class="btn btn-info ret" id="ret" href="@routes.AttentionBlink.proc()"> Done </a >
+    </div>
 </div>
 @footer()
