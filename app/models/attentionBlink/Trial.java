@@ -15,18 +15,29 @@ public class Trial extends Model{
         public int length;
         public double blinkTime;
         public QuestionType questionType;        
+        public int numberOfQuiz;
 
         @ManyToOne
         public ExperimentSchedule schedule;
 
         @OneToMany
         public List<Quiz> quizzes = new ArrayList<Quiz>();
-
+        
+        //Constructor
 	public Trial(int length , double blinkTime ,QuestionType questionType) {
             this.length = length;
             this.blinkTime = blinkTime;
             this.questionType = questionType;
 	}
+
+        public static Trial create(ExperimentSchedule ex, int length, double blinkTime, QuestionType questionType,int numberOfQuiz) {
+            Trial trial = new Trial(length,blinkTime,questionType);
+            trial.schedule = ex; 
+            trial.numberOfQuiz = numberOfQuiz;
+
+            return trial;
+        }
+
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);

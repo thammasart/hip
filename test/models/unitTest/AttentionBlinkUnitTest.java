@@ -78,10 +78,37 @@ public class AttentionBlinkUnitTest extends WithApplication{
         assertEquals(QuestionType.NUMBER,trial.questionType);
         
     }
+    @Test
+    public void setNumberOfQuizInTrial(){
+        
+        Trial t =  new Trial(10,0.5,QuestionType.NUMBER);        
+        t.numberOfQuiz = 3;
+        t.save();
+        assertEquals(3,Trial.find.byId(1L).numberOfQuiz);
+    }
 
     @Test
     public void trialQueryShouldCorrect(){
         new Trial(10,0.5,QuestionType.NUMBER).save();        
         assertNotNull(Trial.find.byId(1L));
+    }
+
+    @Test
+    public void linkTrialWithExperimentSchedule(){
+	Calendar calendar = Calendar.getInstance();
+	calendar.add(Calendar.YEAR, -1);
+
+	Date lastYearDate = calendar.getTime();
+	calendar.add(Calendar.YEAR, +2);
+	Date nextYearDate = calendar.getTime();
+
+	new ExperimentSchedule("Experiment 1", 5, lastYearDate,nextYearDate, ExperimentType.BROWNPETERSON).save();
+        ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
+        
+        Trial trial = Trial.create(ex,13,0.5,QuestionType.NUMBER,3);
+        trial.save();
+
+	assertNotNull(trial);
+        assertEquals(ex.id, Trial.find.byId(1L).schedule.id);
     }
 }
