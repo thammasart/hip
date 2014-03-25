@@ -3,6 +3,7 @@ package models.unitTest;
 import models.ExperimentSchedule;
 import models.ExperimentType;
 import models.TimeLog;
+import models.User;
 import models.signalDetection.*;
 import play.test.WithApplication;
 import org.junit.*;
@@ -11,6 +12,10 @@ import static play.test.Helpers.*;
 import java.util.List;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.List;
+import java.util.ArrayList;
+
+
 
 public class SignalDetectionUnitTest extends WithApplication {
 
@@ -48,19 +53,21 @@ public class SignalDetectionUnitTest extends WithApplication {
 
     @Test
     public void questionShouldFindQuizzesCorrectly(){
-
-        Question q = new Question('8','B');
+        new Question('8','B').save();
+        Question q = Question.find.byId(1L);
+        new Trial().save();
+        Trial trial = Trial.find.byId(1L);
         q.save();
-        Quiz.create(10,2,q).save();
-        Quiz.create(7,2,q).save();
-        Quiz.create(5,1,q).save();
+        Quiz.create(1.0,2,trial,q).save();
+        Quiz.create(0.7,2,trial,q).save();
+        Quiz.create(0.5,1,trial,q).save();
 
         List<Quiz> quizzes = Question.find.byId(1L).quizzes;
 
         assertEquals(3,quizzes.size());
-        assertEquals(10,quizzes.get(0).displayTime);
-        assertEquals(7,quizzes.get(1).displayTime);
-        assertEquals(5,quizzes.get(2).displayTime);
+        assertEquals(1.0,quizzes.get(0).displayTime,0.001);
+        assertEquals(0.7,quizzes.get(1).displayTime,0.001);
+        assertEquals(0.5,quizzes.get(2).displayTime,0.001);
 
     }
 
@@ -71,8 +78,8 @@ public class SignalDetectionUnitTest extends WithApplication {
 
     @Test
     public void createQuizWithParameter(){
-        Quiz q = new Quiz(5,2);
-        assertEquals(5,q.displayTime);
+        Quiz q = new Quiz(0.5,2);
+        assertEquals(0.5,q.displayTime,0.001);
         assertEquals(2,q.noOfTarget);
     }
 
@@ -84,9 +91,9 @@ public class SignalDetectionUnitTest extends WithApplication {
 
     @Test
     public void saveAndRetrieveQuizComplete(){
-        new Quiz(5,2).save();
+        new Quiz(0.5,2).save();
         Quiz q = Quiz.find.byId(1L);
-        assertEquals(5,q.displayTime);
+        assertEquals(0.5,q.displayTime,0.001);
         assertEquals(2,q.noOfTarget);
     }
 
@@ -109,10 +116,12 @@ public class SignalDetectionUnitTest extends WithApplication {
     public void createQuizByMethodCreate(){
         Question q = new Question('x','y');
         q.save();
-        Quiz.create(5,2,q).save();
+        new Trial().save();
+        Quiz.create(0.5,2,Trial.find.byId(1L),q).save();
         Quiz quiz = Quiz.find.byId(1L);
 
-        assertEquals(5,quiz.displayTime);
+        assertNotNull(quiz);
+        assertEquals(0.5,quiz.displayTime,0.001);
         assertEquals(2,quiz.noOfTarget);
         assertEquals(q,quiz.question);
     }
@@ -208,4 +217,110 @@ public class SignalDetectionUnitTest extends WithApplication {
         assertEquals(t.id,timeLog.trialId);
     }
 
+    @Test 
+    public void answerShouldCreateAndNotNull(){
+        new Trial().save();
+        new Question('x','y').save();
+        Trial trial = Trial.find.byId(1L);
+        Question question = Question.find.byId(1L);
+        Quiz.create(200, 7, trial, question).save();
+        Quiz quiz = Quiz.find.byId(new Long(1));
+        new User("123","Secret").save();
+        User user = User.find.byId("123");
+
+        assertNotNull(Answer.create(true, 13.9, user, quiz));
+    }
+
+    @Test 
+    public void answerShouldCreateResultIsCorrect(){
+        new Trial().save();
+        new Question('x','y').save();
+        Trial trial = Trial.find.byId(1L);
+        Question question = Question.find.byId(1L);
+        Quiz.create(0.7, 7, trial, question).save();
+        Quiz.create(1.0, 0, trial, question).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        Quiz quiz2 = Quiz.find.byId(2L);
+        new User("123","Secret").save();
+        User user = User.find.byId("123");
+        Answer answer =  Answer.create(true, 13.9, user, quiz);
+        Answer answer2 =  Answer.create(true, 13.9, user, quiz2);
+        assertEquals(true,answer.isCorrect);
+        assertEquals(false,answer2.isCorrect);
+    }
+
+    @Test
+    public void calculateTotalScoreShouldCorrect(){
+        new Trial().save();
+        new Question('x','y').save();
+        Trial trial = Trial.find.byId(1L);
+        Question question = Question.find.byId(1L);
+        Quiz.create(0.7, 7, trial, question).save();
+        Quiz.create(0.85, 0, trial, question).save();
+        Quiz.create(1.0, 0, trial, question).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        Quiz quiz2 = Quiz.find.byId(2L);
+        Quiz quiz3 = Quiz.find.byId(3L);
+        new User("123","Secret").save();
+        User user = User.find.byId("123");
+        Answer answer =  Answer.create(true, 13.9, user, quiz);
+        Answer answer2 =  Answer.create(true, 2.9, user, quiz2);
+        Answer answer3 =  Answer.create(false, 0.9, user, quiz3);
+        List<Answer> answers = new ArrayList<Answer>();
+        answers.add(answer);
+        answers.add(answer2);
+
+        assertEquals(1,Answer.calculateTotalScore(answers));
+
+        answers.add(answer3);
+        assertEquals(2,Answer.calculateTotalScore(answers));
+    }
+
+    @Test
+    public void calculateTotalUsedTimeShouldCorrect(){
+        new Trial().save();
+        new Question('x','y').save();
+        Trial trial = Trial.find.byId(1L);
+        Question question = Question.find.byId(1L);
+        Quiz.create(0.7, 7, trial, question).save();
+        Quiz.create(0.85, 0, trial, question).save();
+        Quiz.create(1.0, 0, trial, question).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        Quiz quiz2 = Quiz.find.byId(2L);
+        Quiz quiz3 = Quiz.find.byId(3L);
+        new User("123","Secret").save();
+        User user = User.find.byId("123");
+        Answer answer =  Answer.create(true, 13.9, user, quiz);
+        Answer answer2 =  Answer.create(true, 2.9, user, quiz2);
+        Answer answer3 =  Answer.create(false, 0.9, user, quiz3);
+        List<Answer> answers = new ArrayList<Answer>();
+        answers.add(answer);
+        answers.add(answer2);
+
+        assertEquals(16.8,Answer.calculateTotalUsedTime(answers),0.001);
+
+        answers.add(answer3);
+        assertEquals(17.7,Answer.calculateTotalUsedTime(answers),0.001);
+    }
+
+    @Test
+    public void createAnswerAndSaveComplete(){
+        new Trial().save();
+        new Question('x','y').save();
+        Trial trial = Trial.find.byId(1L);
+        Question question = Question.find.byId(1L);
+        Quiz.create(0.7, 7, trial, question).save();
+        Quiz quiz = Quiz.find.byId(1L);
+
+        new User("123","Secret").save();
+        User user = User.find.byId("123");
+        Answer.create(true, 13.9, user, quiz).save();
+        Answer answer =  Answer.find.byId(1L);
+
+        assertNotNull(answer);
+        assertEquals(user,answer.user);
+        assertEquals(quiz,answer.quiz);
+        assertEquals(13.9,answer.usedTime,0.001);
+        assertEquals(true,answer.answer);
+    }
 }

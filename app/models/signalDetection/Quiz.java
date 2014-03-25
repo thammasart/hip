@@ -9,7 +9,7 @@ public class Quiz extends Model{
 	@Id
     public long id;
 
-    public int displayTime;
+    public double displayTime;
     public int noOfTarget;
 
     @ManyToOne
@@ -22,14 +22,15 @@ public class Quiz extends Model{
     	this.noOfTarget = 0;
     }
 
-    public Quiz(int displayTime,int noOfTarget){
+    public Quiz(double displayTime,int noOfTarget){
     	this.displayTime = displayTime;
     	this.noOfTarget = noOfTarget;
     }
 
-    public static Quiz create(int displayTime,int noOfTarget,Question question){
+    public static Quiz create(double displayTime,int noOfTarget,Trial trial,Question question){
     	Quiz quiz = new Quiz(displayTime,noOfTarget);
     	quiz.question = question;
+    	quiz.trial = trial;
     	return quiz;
     }
 
