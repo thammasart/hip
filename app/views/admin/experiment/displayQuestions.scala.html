@@ -7,6 +7,9 @@
     @if(flash.containsKey("success")){
             <div class="alert alert-success">@flash.get("success")</div>
         }
+    @if(flash.containsKey("error")){
+            <div class="alert alert-danger">@flash.get("error")</div>
+        }
     <div class="row">
         <div class="col-md-3 col-sm-6 sub-button">
             <a href="@routes.Admin.addBrownPetersonQuestion()">
@@ -14,13 +17,16 @@
             </a>
         </div>
     </div>
-    <table class="table">
+    <table class="table text-center">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>First Word</th>
                 <th>Second Word</th>
                 <th>Third Word</th>
+                <th>Trigram Type</th>
+                <th>Trigram Language</th>
+                <th>#</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +36,9 @@
                     <td>@question.firstWord</td>
                     <td>@question.secondWord</td>
                     <td>@question.thirdWord</td>
+                    <td>@question.trigramType</td>
+                    <td>@question.trigramLanguage</td>
+                    <td><a href="@routes.Admin.deleteBrownPetersonQuestion(question.id)" class="btn btn-xs btn-danger">delete</a></td>
                 </tr>
             }
         </tbody>

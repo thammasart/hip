@@ -142,9 +142,9 @@ public class Admin extends Controller {
         exp.update();
         /* Create Trials for Experiment */
 
-        List<Trial> trials = Trial.findInvolving(exp);
-        for(Trial trial : trials){
-            for(Quiz quiz : Quiz.findInvolving(trial)){
+        List<models.brownPeterson.Trial> trials = models.brownPeterson.Trial.findInvolving(exp);
+        for(models.brownPeterson.Trial trial : trials){
+            for(models.brownPeterson.Quiz quiz : models.brownPeterson.Quiz.findInvolving(trial)){
                 quiz.initCountdown = Integer.parseInt(requestData.get("initCountdown-" + quiz.id));
                 quiz.flashTime = Integer.parseInt(requestData.get("flashTime-" + quiz.id));
                 quiz.update();
@@ -200,10 +200,21 @@ public class Admin extends Controller {
     }
 
     public static Result randomBrownPetersonQuestion(long expId, long quizId){
-        Quiz quiz = Quiz.find.byId(quizId);
+        models.brownPeterson.Quiz quiz = models.brownPeterson.Quiz.find.byId(quizId);
         quiz.randomToNewQuestion();
         flash("success", "เปลี่ยนแปลงคำถามเรียบร้อยแล้ว");
         return redirect(routes.Admin.displayParameter(expId));
+    }
+    public static Result deleteBrownPetersonQuestion(long questionId){
+        models.brownPeterson.Question question = models.brownPeterson.Question.find.byId(questionId);
+        if(question.quizzes.size() > 0){
+            flash("error", "ไม่สามารถลบได้ เนื่องจากถูกใช้งานอยู่");
+            System.out.println(question.quizzes.size());
+        }else{
+            question.delete();
+            flash("success", "ลบคำถามเรียบร้อยแล้ว");
+        }
+        return redirect(routes.Admin.displayBrownPetersonQuestionList());
     }
 
     public static Result displayExperimentResult(long expId){

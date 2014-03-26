@@ -19,7 +19,10 @@ public class Question extends Model {
 	@Column(nullable=false, length=20)
 	public String thirdWord;
 	public String trigramType = Trial.WORD;
-	public String trigramLanguage = Trial.ENGLISH;	
+	public String trigramLanguage = Trial.ENGLISH;
+
+	@OneToMany
+	public List<Quiz> quizzes = new ArrayList<Quiz>();
 
 	public Question (String firstWord, String secondWord,String thirdWord){
 		this.firstWord = firstWord;
