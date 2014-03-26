@@ -11,6 +11,12 @@
     case ExperimentType.STROOPEFFECT => {
         @stroofEffect(exp)
     }
+    case ExperimentType.SIGNALDETECTION => {
+        @signal_detection(exp)
+    }
+    case ExperimentType.ATTENTIONBLINK => {
+        @attention_blink(exp)
+    }
     case _ => {
         <h1>Experiment type is not found!!</h1>
     }

@@ -65,6 +65,7 @@ public class ExperimentSchedule extends Model{
 		final String BROWNPETERSON = "BROWNPETERSON";
 		final String STROOPEFFECT = "STROOPEFFECT";
         final String SIGNALDETECTION = "SIGNALDETECTION";
+        final String ATTENTIONBLINK = "ATTENTIONBLINK";
 
         if (expType.equals(BROWNPETERSON)){
             expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
@@ -74,6 +75,9 @@ public class ExperimentSchedule extends Model{
         }
         else if (expType.equals(SIGNALDETECTION)){
             expList = getWorkingExperimentsByType(ExperimentType.SIGNALDETECTION);
+        }
+        else if (expType.equals(ATTENTIONBLINK)){
+            expList = getWorkingExperimentsByType(ExperimentType.ATTENTIONBLINK);
         }
 
         return expList;
@@ -85,6 +89,8 @@ public class ExperimentSchedule extends Model{
 			switch(this.experimentType){
 				case BROWNPETERSON : type = "Brown Peterson"; break;
 				case STROOPEFFECT  : type = "Stroof Effect"; break;
+				case SIGNALDETECTION : type = "Signal Detection"; break;
+				case ATTENTIONBLINK : type = "Attention Blink";break;
 				default : type = "Unknown";
 			}
 		}
@@ -93,19 +99,23 @@ public class ExperimentSchedule extends Model{
 
 	public void generateTrials(){
 		switch(this.experimentType){
-			case BROWNPETERSON : generateTrialsByNoOfTrial() ;break;
+			case BROWNPETERSON : generateBrownPetersonTrial() ;break;
 			case STROOPEFFECT : break;
+			case SIGNALDETECTION : break;
+			case ATTENTIONBLINK : break;
 		}
 	}
 
-	private void generateTrialsByNoOfTrial(){
+	private void generateBrownPetersonTrial(){
+        final int DEFAULT_COUNTDOWN = 100;
+        final int DEFAULT_FLASHTIME = 5;
 		for(int i = 0; i < this.noOfTrial; i++){
 			models.brownPeterson.Trial trial = models.brownPeterson.Trial.create(this);
             trial.save();
             List<models.brownPeterson.Question> questions 
             	= models.brownPeterson.Question.getQuestionListBy(models.brownPeterson.Trial.TOTAL_QUESTION); // 3 is number of quiz in trial.
             for(int j = 0; j < models.brownPeterson.Trial.TOTAL_QUESTION; j++){
-                models.brownPeterson.Quiz.create(100, 5, trial, questions.get(j)).save();
+                models.brownPeterson.Quiz.create(DEFAULT_COUNTDOWN, DEFAULT_FLASHTIME, trial, questions.get(j)).save();
             }
 		}
 	}

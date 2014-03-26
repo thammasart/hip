@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.lang.Exception;
 
 
+
 public class Admin extends Controller {
     private static final Form<ExperimentSchedule> expForm = Form.form(ExperimentSchedule.class);
 
@@ -148,8 +149,14 @@ public class Admin extends Controller {
                 quiz.flashTime = Integer.parseInt(requestData.get("flashTime-" + quiz.id));
                 quiz.update();
             }
-            trial.trigramType = requestData.get("trigramType-" + trial.id);
-            trial.trigramLanguage = requestData.get("trigramLanguage-" + trial.id);
+            String trigramType = requestData.get("trigramType-" + trial.id);
+            String trigramLanguage = requestData.get("trigramLanguage-" + trial.id);
+            if(!(trigramType.equals(trial.trigramType) && trigramLanguage.equals(trial.trigramLanguage))) {
+                trial.trigramType = trigramType;
+                trial.trigramLanguage = trigramLanguage;
+                trial.randomNewQuestions();
+            }
+            
             trial.update();
         }
         // end create Trial
@@ -190,6 +197,13 @@ public class Admin extends Controller {
         flash("success", "update success.");
         
         return ok(views.html.admin.experiment.displayQuestions.render());
+    }
+
+    public static Result randomBrownPetersonQuestion(long expId, long quizId){
+        Quiz quiz = Quiz.find.byId(quizId);
+        quiz.randomToNewQuestion();
+        flash("success", "เปลี่ยนแปลงคำถามเรียบร้อยแล้ว");
+        return redirect(routes.Admin.displayParameter(expId));
     }
 
     public static Result displayExperimentResult(long expId){

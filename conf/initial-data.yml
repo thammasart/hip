@@ -40,61 +40,207 @@
 - &Question1 !!models.brownPeterson.Question
     firstWord:                q1w1
     secondWord:               q1w2
-    thirdWord:                q1w3  
+    thirdWord:                q1w3
+    trigramType:              word
+    trigramLanguage:          english  
 
 - &Question2 !!models.brownPeterson.Question
     firstWord:                q2w1
     secondWord:               q2w2
     thirdWord:                q2w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question3 !!models.brownPeterson.Question
     firstWord:                q3w1
     secondWord:               q3w2
     thirdWord:                q3w3
+    trigramType:              word
+    trigramLanguage:          english
 - &Question4 !!models.brownPeterson.Question
     firstWord:                q4w1
     secondWord:               q4w2
-    thirdWord:                q4w3  
+    thirdWord:                q4w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question5 !!models.brownPeterson.Question
     firstWord:                q5w1
     secondWord:               q5w2
     thirdWord:                q5w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question6 !!models.brownPeterson.Question
     firstWord:                q6w1
     secondWord:               q6w2
     thirdWord:                q6w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question7 !!models.brownPeterson.Question
     firstWord:                q7w1
     secondWord:               q7w2
-    thirdWord:                q7w3  
+    thirdWord:                q7w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question8 !!models.brownPeterson.Question
     firstWord:                q8w1
     secondWord:               q8w2
     thirdWord:                q8w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question9 !!models.brownPeterson.Question
     firstWord:                q9w1
     secondWord:               q9w2
     thirdWord:                q9w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question10 !!models.brownPeterson.Question
     firstWord:                q10w1
     secondWord:               q10w2
     thirdWord:                q10w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question11 !!models.brownPeterson.Question
     firstWord:                q11w1
     secondWord:               q11w2
     thirdWord:                q11w3
+    trigramType:              word
+    trigramLanguage:          english
 
 - &Question12 !!models.brownPeterson.Question
     firstWord:                q12w1
     secondWord:               q12w2
     thirdWord:                q12w3
+    trigramType:              word
+    trigramLanguage:          english
+
+- &QuestionTH13 !!models.brownPeterson.Question
+    firstWord:                ถนน
+    secondWord:               รถไฟ
+    thirdWord:                บ้าน
+    trigramType:              word
+    trigramLanguage:          thai  
+
+- &QuestionTH14 !!models.brownPeterson.Question
+    firstWord:                เมือง
+    secondWord:               ชาวนา
+    thirdWord:                พยาบาล
+    trigramType:              word
+    trigramLanguage:          thai
+
+- &QuestionTH15 !!models.brownPeterson.Question
+    firstWord:                มะละกอ
+    secondWord:               ดินสอ
+    thirdWord:                ปืน
+    trigramType:              word
+    trigramLanguage:          thai
+- &QuestionTH16 !!models.brownPeterson.Question
+    firstWord:                เรือ
+    secondWord:               บ้าน
+    thirdWord:                มะเขือเทศ
+    trigramType:              word
+    trigramLanguage:          thai
+
+- &QuestionTH17 !!models.brownPeterson.Question
+    firstWord:                ทหาร
+    secondWord:               น้ำชา
+    thirdWord:                จักรยาน
+    trigramType:              word
+    trigramLanguage:          thai
+
+- &QuestionTH18 !!models.brownPeterson.Question
+    firstWord:                ไม้ประดู่
+    secondWord:               ปลวก
+    thirdWord:                เครื่องบิน
+    trigramType:              word
+    trigramLanguage:          thai
+
+- &QuestionNS1 !!models.brownPeterson.Question
+    firstWord:                dhfk
+    secondWord:               sflp
+    thirdWord:                qwqt
+    trigramType:              nonsense
+    trigramLanguage:          english  
+
+- &QuestionNS2 !!models.brownPeterson.Question
+    firstWord:                gfds
+    secondWord:               kltr
+    thirdWord:                cvmk
+    trigramType:              nonsense
+    trigramLanguage:          english
+
+- &QuestionNS3 !!models.brownPeterson.Question
+    firstWord:                vcdr
+    secondWord:               pqsz
+    thirdWord:                fgkl
+    trigramType:              nonsense
+    trigramLanguage:          english
+- &QuestionNS4 !!models.brownPeterson.Question
+    firstWord:                fskj
+    secondWord:               pwsx
+    thirdWord:                vcmk
+    trigramType:              nonsense
+    trigramLanguage:          english
+
+- &QuestionNS5 !!models.brownPeterson.Question
+    firstWord:                trfd
+    secondWord:               lmxd
+    thirdWord:                pkgf
+    trigramType:              nonsense
+    trigramLanguage:          english
+
+- &QuestionNS6 !!models.brownPeterson.Question
+    firstWord:                rpmz
+    secondWord:               wqrt
+    thirdWord:                pklr
+    trigramType:              nonsense
+    trigramLanguage:          english
+- &QuestionNS_TH1 !!models.brownPeterson.Question
+    firstWord:                ดพกห
+    secondWord:               สรนย
+    thirdWord:                หกสว
+    trigramType:              nonsense
+    trigramLanguage:          thai  
+
+- &QuestionNS_TH2 !!models.brownPeterson.Question
+    firstWord:                ธฑญส
+    secondWord:               ญฑฒฮ
+    thirdWord:                ฆฤซธ
+    trigramType:              nonsense
+    trigramLanguage:          thai
+
+- &QuestionNS_TH3 !!models.brownPeterson.Question
+    firstWord:                ญฐณศ
+    secondWord:               ซศษณ
+    thirdWord:                ธฌฑฎ
+    trigramType:              nonsense
+    trigramLanguage:          thai
+- &QuestionNS_TH4 !!models.brownPeterson.Question
+    firstWord:                รนยบ
+    secondWord:               ลกดพ
+    thirdWord:                สดทห
+    trigramType:              nonsense
+    trigramLanguage:          thai
+
+- &QuestionNS_TH5 !!models.brownPeterson.Question
+    firstWord:                ดพธณ
+    secondWord:               นณฏฆ
+    thirdWord:                ฤฉฮฒ
+    trigramType:              nonsense
+    trigramLanguage:          thai
+
+- &QuestionNS_TH6 !!models.brownPeterson.Question
+    firstWord:                ฬศซญ
+    secondWord:               ฐชตค
+    thirdWord:                ถภฎฑ
+    trigramType:              nonsense
+    trigramLanguage:          thai
 
 #User
 - &ohm !!models.User

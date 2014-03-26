@@ -18,6 +18,8 @@ public class Question extends Model {
 	public String secondWord;
 	@Column(nullable=false, length=20)
 	public String thirdWord;
+	public String trigramType = Trial.WORD;
+	public String trigramLanguage = Trial.ENGLISH;	
 
 	public Question (String firstWord, String secondWord,String thirdWord){
 		this.firstWord = firstWord;
@@ -49,6 +51,10 @@ public class Question extends Model {
 			questions.add(quiz.question);
 		}
 		return questions;
+	}
+
+	public String toString(){
+		return firstWord + ", " + secondWord + ", " + thirdWord;
 	}
     
     @SuppressWarnings("unchecked")
