@@ -1,5 +1,6 @@
 package controllers;
 
+import models.ExperimentSchedule;
 import models.signalDetection.*;
 import play.*;
 import play.mvc.*;
@@ -54,7 +55,7 @@ public class SignalDetection extends Controller{
         return ok(exp.render(Trial.find.byId(trialId),questionNo));
     }
 
-/*
+
     @Security.Authenticated(Secured.class)
     public static Result saveAnswer(long trialId, int questionNo){
         Form<Answer> boundForm = answerForm.bindFromRequest();
@@ -65,6 +66,7 @@ public class SignalDetection extends Controller{
             flash("error", "please correct the form above.");
             return badRequest(views.html.home.render(user));
         }
+
         Answer answer = boundForm.get();
         answer.user = user;
         answer.quiz = trial.quizzes.get(questionNo);
@@ -72,16 +74,16 @@ public class SignalDetection extends Controller{
 
         questionNo++;
         if(questionNo < Trial.TOTAL_QUESTION){
-            return redirect(routes.StroopEffect.experiment(trialId, questionNo));
+            return redirect(routes.SignalDetection.experiment(trialId, questionNo));
         }
-        return redirect(routes.StroopEffect.report(user.username, trialId));
+        return redirect(routes.SignalDetection.report(user.username, trialId));
     }
 
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result report(String username, Long trialId){
+    public static Result report(String username, long trialId){
         if(username.equals("") || trialId == 0){
-            return redirect(controllers.routes.StroopEffect.info());
+            return redirect(controllers.routes.SignalDetection.info());
         }
         User user = User.find.byId(username);
         Trial trial = Trial.find.byId(trialId);
@@ -91,11 +93,19 @@ public class SignalDetection extends Controller{
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
 
-*/
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
     @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment() {
-        return redirect(routes.SignalDetection.experiment(13L,0));
+        User user = User.find.where().eq("username", session().get("username")).findUnique();
+        if(user == null) {
+            return redirect(routes.Application.index());
+        }
+        if(models.TimeLog.isRepeatTrial(user, 1, ExperimentSchedule.find.byId(5L))) {
+            flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
+            return ok(proc.render(user));
+        }
+        models.TimeLog.create(new Date(), user, 1,ExperimentSchedule.find.byId(5L)).save();
+        return redirect(routes.SignalDetection.experiment(1,0));
     }
 
 }

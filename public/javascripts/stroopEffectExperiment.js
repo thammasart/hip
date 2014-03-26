@@ -48,4 +48,3 @@ function submitButtonClick(clicked_name){
      document.getElementById("usedTime").value = expDuration/1000;
      document.getElementById("answer").value = clicked_name;
 }
-
