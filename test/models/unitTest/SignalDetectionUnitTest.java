@@ -58,9 +58,9 @@ public class SignalDetectionUnitTest extends WithApplication {
         new Trial().save();
         Trial trial = Trial.find.byId(1L);
         q.save();
-        Quiz.create(1.0,2,trial,q).save();
-        Quiz.create(0.7,2,trial,q).save();
-        Quiz.create(0.5,1,trial,q).save();
+        Quiz.create(1.0,2,15,trial,q).save();
+        Quiz.create(0.7,2,15,trial,q).save();
+        Quiz.create(0.5,1,15,trial,q).save();
 
         List<Quiz> quizzes = Question.find.byId(1L).quizzes;
 
@@ -78,20 +78,20 @@ public class SignalDetectionUnitTest extends WithApplication {
 
     @Test
     public void createQuizWithParameter(){
-        Quiz q = new Quiz(0.5,2);
+        Quiz q = new Quiz(0.5,2,15);
         assertEquals(0.5,q.displayTime,0.001);
         assertEquals(2,q.noOfTarget);
     }
 
     @Test
     public void createQuizAndSaveComplete(){
-        new Quiz(2,2).save();
+        new Quiz(2,2,15).save();
         assertEquals(1,Quiz.find.findRowCount());
     }
 
     @Test
     public void saveAndRetrieveQuizComplete(){
-        new Quiz(0.5,2).save();
+        new Quiz(0.5,2,15).save();
         Quiz q = Quiz.find.byId(1L);
         assertEquals(0.5,q.displayTime,0.001);
         assertEquals(2,q.noOfTarget);
@@ -100,7 +100,7 @@ public class SignalDetectionUnitTest extends WithApplication {
 
     @Test
     public void quizCanAccessToQuestion(){
-        Quiz quiz = new Quiz(5,2);
+        Quiz quiz = new Quiz(5,2,15);
         Question q = new Question('x','y');
         quiz.question = q;
         q.save();
@@ -117,7 +117,7 @@ public class SignalDetectionUnitTest extends WithApplication {
         Question q = new Question('x','y');
         q.save();
         new Trial().save();
-        Quiz.create(0.5,2,Trial.find.byId(1L),q).save();
+        Quiz.create(0.5,2,15,Trial.find.byId(1L),q).save();
         Quiz quiz = Quiz.find.byId(1L);
 
         assertNotNull(quiz);
@@ -223,7 +223,7 @@ public class SignalDetectionUnitTest extends WithApplication {
         new Question('x','y').save();
         Trial trial = Trial.find.byId(1L);
         Question question = Question.find.byId(1L);
-        Quiz.create(200, 7, trial, question).save();
+        Quiz.create(200, 7, 15, trial, question).save();
         Quiz quiz = Quiz.find.byId(new Long(1));
         new User("123","Secret").save();
         User user = User.find.byId("123");
@@ -237,8 +237,8 @@ public class SignalDetectionUnitTest extends WithApplication {
         new Question('x','y').save();
         Trial trial = Trial.find.byId(1L);
         Question question = Question.find.byId(1L);
-        Quiz.create(0.7, 7, trial, question).save();
-        Quiz.create(1.0, 0, trial, question).save();
+        Quiz.create(0.7, 7, 15, trial, question).save();
+        Quiz.create(1.0, 0, 15, trial, question).save();
         Quiz quiz = Quiz.find.byId(1L);
         Quiz quiz2 = Quiz.find.byId(2L);
         new User("123","Secret").save();
@@ -255,9 +255,9 @@ public class SignalDetectionUnitTest extends WithApplication {
         new Question('x','y').save();
         Trial trial = Trial.find.byId(1L);
         Question question = Question.find.byId(1L);
-        Quiz.create(0.7, 7, trial, question).save();
-        Quiz.create(0.85, 0, trial, question).save();
-        Quiz.create(1.0, 0, trial, question).save();
+        Quiz.create(0.7, 7, 15, trial, question).save();
+        Quiz.create(0.85, 0, 15, trial, question).save();
+        Quiz.create(1.0, 0, 15, trial, question).save();
         Quiz quiz = Quiz.find.byId(1L);
         Quiz quiz2 = Quiz.find.byId(2L);
         Quiz quiz3 = Quiz.find.byId(3L);
@@ -282,9 +282,9 @@ public class SignalDetectionUnitTest extends WithApplication {
         new Question('x','y').save();
         Trial trial = Trial.find.byId(1L);
         Question question = Question.find.byId(1L);
-        Quiz.create(0.7, 7, trial, question).save();
-        Quiz.create(0.85, 0, trial, question).save();
-        Quiz.create(1.0, 0, trial, question).save();
+        Quiz.create(0.7, 7, 15, trial, question).save();
+        Quiz.create(0.85, 0, 15, trial, question).save();
+        Quiz.create(1.0, 0, 15, trial, question).save();
         Quiz quiz = Quiz.find.byId(1L);
         Quiz quiz2 = Quiz.find.byId(2L);
         Quiz quiz3 = Quiz.find.byId(3L);
@@ -309,7 +309,7 @@ public class SignalDetectionUnitTest extends WithApplication {
         new Question('x','y').save();
         Trial trial = Trial.find.byId(1L);
         Question question = Question.find.byId(1L);
-        Quiz.create(0.7, 7, trial, question).save();
+        Quiz.create(0.7, 7, 15, trial, question).save();
         Quiz quiz = Quiz.find.byId(1L);
 
         new User("123","Secret").save();

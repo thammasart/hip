@@ -29,6 +29,12 @@ public class Quiz extends Model{
     }
 
     public static Quiz create(double displayTime,int noOfTarget,int length,Trial trial,Question question){
+    	if(displayTime > 1.0){
+    		displayTime = 1.0;
+    	}
+    	else if(displayTime < 0.5){
+    		displayTime = 0.5;
+    	}
     	Quiz quiz = new Quiz(displayTime,noOfTarget,length);
     	quiz.question = question;
     	quiz.trial = trial;
