@@ -12,3 +12,17 @@
 .signalDetectionWord p{
     font-size:60px;
 }
+.yesButton{
+    visibility:hidden;
+    border:none;
+    border-radius:7px;
+    background-color:green;
+    color:white;
+}
+.noButton{
+    visibility:hidden;
+    border:none;
+    border-radius:7px;
+    background-color:red;
+    color:white;
+}

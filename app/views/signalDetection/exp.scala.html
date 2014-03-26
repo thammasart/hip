@@ -24,6 +24,19 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <div class="signalDetectionExp">
     <div class="signalDetectionWord"  >
         <p id="word" >  </p>
+        <div>
+            <form id = "answerForm" action="@routes.SignalDetection.saveAnswer(trial.id,questionNo)" method="post">
+                <input type="submit" class="noButton" id = "false" name = "false" value="ไม่มี" class="Button" onclick="return submitButtonClick(this.name)"/>
+                <input type="submit" class="yesButton" id = "true" name = "true"  value="มี" class="Button" onclick="return submitButtonClick(this.name)"/>
+                <input id = "answer" name = "answer" type="checkbox" hidden/>
+                <input id = "usedTime" name = "usedTime" type="text" hidden/>
+                <input id = "isCorrect" name = "isCorrect" type="checkbox" hidden/>
+            </form>
+        </div>
+        <div id="target" hidden>@trial.quizzes.get(questionNo).question.target</div>
+        <div id="noise" hidden>@trial.quizzes.get(questionNo).question.noise</div>
+        <div id="length" hidden>@trial.quizzes.get(questionNo).length</div>
+        <div id="noOfTarget" hidden>@trial.quizzes.get(questionNo).noOfTarget</div>
     </div>
 </div>
 @footer()

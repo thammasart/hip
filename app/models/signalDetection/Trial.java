@@ -14,13 +14,12 @@ import java.util.ArrayList;
 public class Trial extends Model{
     @Id
     public long id;
-
     @ManyToOne
     public ExperimentSchedule schedule;
-
     @OneToMany
     public List<Quiz> quizzes;
 
+    public static final int TOTAL_QUESTION = 3;
     public Trial(){}
 
     public static Trial create(ExperimentSchedule experimentSchedule){

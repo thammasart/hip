@@ -43,6 +43,14 @@ public class Answer extends Model{
 		return newAnswer;
 	}
 
+    public static List<Answer> findInvolving(User user, List<Quiz> quizzes){
+        List<Answer> answers = new ArrayList<Answer>();
+        for(Quiz quiz:quizzes){
+            answers.add(find.where().eq("user" ,user).eq("quiz",quiz).findUnique());
+        }
+        return answers;
+    }
+
 	public static int calculateTotalScore(List<Answer> answers){
 		int totalScore = 0;
 		for(Answer ans : answers){
