@@ -30,6 +30,14 @@ public class Question extends Model {
 		this.thirdWord = thirdWord;
 	}
 
+	public static Question create(String firstWord, String secondWord, String thirdWord, 
+		String trigramType, String trigramLanguage){
+		Question question = new Question(firstWord, secondWord, thirdWord);
+		question.trigramType = trigramType;
+		question.trigramLanguage = trigramLanguage;
+		return question;
+	}
+
 	public static Question findQuestionById(int id) {
 		return find.byId(new Long(id));
 	}

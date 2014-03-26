@@ -175,6 +175,8 @@ public class Admin extends Controller {
     public static Result saveBrownPetersonQuestion(){
         DynamicForm  questionForm = Form.form().bindFromRequest();
         String tempQuestion = questionForm.get("questions");
+        String trigramType = questionForm.get("trigramType");
+        String trigramLanguage = questionForm.get("trigramLanguage");
 
         String[] questions = tempQuestion.split("\\r?\\n");
         int counter = 0;
@@ -182,7 +184,7 @@ public class Admin extends Controller {
         for(String question : questions){
             try{
                 String[] words = question.split(",");
-                new models.brownPeterson.Question(words[0],words[1],words[2]).save();
+                models.brownPeterson.Question.create(words[0],words[1],words[2], trigramType, trigramLanguage).save();
             }catch(Exception e){
                 String warning = "เพิ่มคำถามสำเร็จ " + counter + " คำถาม" +
                                 " พบปัญหาที่บรรทัดที่ " + (counter + 1) +

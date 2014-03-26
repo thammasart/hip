@@ -1,6 +1,8 @@
 @import views.html.admin._
+@import models.brownPeterson.Trial
 
 @head_admin("add question")
+
 
 @nav_admin()
 <div class="container">
@@ -19,9 +21,38 @@
     </div>
     <br>
     <form role="form" action="@routes.Admin.saveBrownPetersonQuestion()" method="POST">
-        <div class="form-group">
-            <label class="control-label">Add Question</label>
-            <textarea class="form-control" rows="10" name="questions"></textarea>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Add Question</label>
+                    <textarea class="form-control" rows="10" name="questions"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Trigram Type</h4>
+                    <label class="radio-inline">
+                        <input type="radio" name="trigramType" value="@Trial.WORD" checked 
+                        > Word 
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="trigramType" value="@Trial.NON_SENSE" 
+
+                        > Nonsense
+                    </label>
+                </div>
+                <div class="form-group">
+                    <h4>Trigram Language</h4>
+                    <label class="radio-inline">
+                        <input type="radio" name="trigramLanguage" value="@Trial.ENGLISH" checked
+                        > English
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="trigramLanguage" value="@Trial.THAI" 
+                        > ไทย 
+                    </label>
+                </div>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </form>
