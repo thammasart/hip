@@ -13,16 +13,20 @@
     font-size:60px;
 }
 .yesButton{
+    margin:0px 0px 0px 80px;
     visibility:hidden;
     border:none;
     border-radius:7px;
     background-color:green;
+    width:150px;
     color:white;
 }
 .noButton{
+    margin:0px 80px 0px 0px;
     visibility:hidden;
     border:none;
     border-radius:7px;
     background-color:red;
+    width:150px;
     color:white;
 }

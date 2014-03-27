@@ -573,14 +573,17 @@
     trial: *round13
     noOfTarget: 1
     length: 6
+    displayTime: 0.2
     question: *Question22
 - &quiz29 !!models.signalDetection.Quiz
     trial: *round13
     noOfTarget: 3
     length: 10
+    displayTime: 0.3
     question: *Question23
 - &quiz30 !!models.signalDetection.Quiz
     trial: *round13
     noOfTarget: 1
     length: 15
+    displayTime: 1
     question: *Question24
