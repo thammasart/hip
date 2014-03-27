@@ -35,6 +35,18 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: SIGNALDETECTION
+- &ex7 !!models.ExperimentSchedule
+    name:           Ex7
+    noOfTrial:      2
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: ATTENTIONBLINK
+- &ex8 !!models.ExperimentSchedule
+    name:           Ex8
+    noOfTrial:      2
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: ATTENTIONBLINK
 
 #Question
 - &Question1 !!models.brownPeterson.Question
@@ -584,3 +596,128 @@
     noOfTarget: 1
     length: 15
     question: *Question24
+
+#Attention Blink
+#Trial
+- &round14 !!models.attentionBlink.Trial
+    length: 16
+    blinkTime: 0.5
+    questionType: ENGLISH
+    numberOfQuiz: 3
+    schedule: *ex7
+- &round15 !!models.attentionBlink.Trial
+    length: 13
+    blinkTime: 0.5
+    questionType: NUMBER
+    numberOfQuiz: 3
+    schedule: *ex7
+- &round16 !!models.attentionBlink.Trial
+    length: 20
+    blinkTime: 0.5
+    questionType: ENGLISH
+    numberOfQuiz: 3
+    schedule: *ex8
+- &round17 !!models.attentionBlink.Trial
+    length: 13
+    blinkTime: 0.5
+    questionType: THAI
+    numberOfQuiz: 3
+    schedule: *ex8
+#Question
+- &Question25 !!models.attentionBlink.Question
+    letter: ab
+    set: abcdefghijklmnop
+    correctAnswer: true
+    questionType: ENGLISH
+- &Question26 !!models.attentionBlink.Question
+    letter: ep
+    set: iksadjutlprpnrub
+    correctAnswer: false
+    questionType: ENGLISH
+- &Question27 !!models.attentionBlink.Question
+    letter: jg
+    set: klotyuiqpnhksnvq
+    correctAnswer: false
+    questionType: ENGLISH
+- &Question28 !!models.attentionBlink.Question
+    letter: 12
+    set: 5236987412025
+    correctAnswer: true
+    questionType: NUMBER
+- &Question29 !!models.attentionBlink.Question
+    letter: 96
+    set: 1452369870645
+    correctAnswer: false
+    questionType: NUMBER
+- &Question30 !!models.attentionBlink.Question
+    letter: 87
+    set: 6987532154065
+    correctAnswer: true
+    questionType: NUMBER
+- &Question31 !!models.attentionBlink.Question
+    letter: fg
+    set: abcdefghijklmnopqrst
+    correctAnswer: true
+    questionType: ENGLISH
+- &Question32 !!models.attentionBlink.Question
+    letter: hm
+    set: iksadjutlprpnmnbgtyu
+    correctAnswer: false
+    questionType: ENGLISH
+- &Question33 !!models.attentionBlink.Question
+    letter: pz
+    set: klotyuiqpnhkszxcvbnm
+    correctAnswer: false
+    questionType: ENGLISH
+- &Question34 !!models.attentionBlink.Question
+    letter: ชซ
+    set: กขคงจฉชซญฐฑฎฏ
+    correctAnswer: true
+    questionType: THAI
+- &Question35 !!models.attentionBlink.Question
+    letter: กด
+    set: ฟหกดฌษศซสวงฒม
+    correctAnswer: true
+    questionType: THAI
+- &Question36 !!models.attentionBlink.Question
+    letter: ฟห
+    set: ผปฉอฮทมฒฬฝฦภถ
+    correctAnswer: false
+    questionType: THAI
+#Quiz
+- &Quiz31 !!models.attentionBlink.Quiz
+    trial: *round14
+    question: *Question25
+- &Quiz32 !!models.attentionBlink.Quiz
+    trial: *round14
+    question: *Question26
+- &Quiz33 !!models.attentionBlink.Quiz
+    trial: *round14
+    question: *Question27
+- &Quiz34 !!models.attentionBlink.Quiz
+    trial: *round15
+    question: *Question28
+- &Quiz35 !!models.attentionBlink.Quiz
+    trial: *round15
+    question: *Question29
+- &Quiz36 !!models.attentionBlink.Quiz
+    trial: *round15
+    question: *Question30
+- &Quiz37 !!models.attentionBlink.Quiz
+    trial: *round16
+    question: *Question31
+- &Quiz38 !!models.attentionBlink.Quiz
+    trial: *round16
+    question: *Question32
+- &Quiz39 !!models.attentionBlink.Quiz
+    trial: *round16
+    question: *Question33
+- &Quiz40 !!models.attentionBlink.Quiz
+    trial: *round17
+    question: *Question34
+- &Quiz41 !!models.attentionBlink.Quiz
+    trial: *round17
+    question: *Question35
+- &Quiz42 !!models.attentionBlink.Quiz
+    trial: *round17
+    question: *Question36

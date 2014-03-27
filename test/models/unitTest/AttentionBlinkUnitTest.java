@@ -41,11 +41,11 @@ public class AttentionBlinkUnitTest extends WithApplication{
     public void createQuestion() {
         String set = "1234567891234";
         String letter = "56";
-    	Question question = new Question(letter, set, "91", QuestionType.NUMBER);
+    	Question question = new Question(letter, set, true, QuestionType.NUMBER);
     	assertNotNull(question);
         assertEquals(letter, question.letter);
         assertEquals(set, question.set);
-        assertEquals("91", question.correctAnswer);
+        assertTrue(question.correctAnswer);
         assertEquals(QuestionType.NUMBER, question.questionType);
     }
 
@@ -53,7 +53,7 @@ public class AttentionBlinkUnitTest extends WithApplication{
     public void questionQueryShouldCorrect() {
         String set = "1234567891234";
         String letter = "56";
-    	new Question(letter, set, "91", QuestionType.NUMBER).save();
+    	new Question(letter, set, true, QuestionType.NUMBER).save();
         assertNotNull(Question.find.byId(1L));
     }
 

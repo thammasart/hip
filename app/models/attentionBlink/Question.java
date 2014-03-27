@@ -12,11 +12,10 @@ public class Question extends Model{
 	public String letter;
         @Column(nullable=false, length=20)
         public String set;
-        @Column(nullable=false, length=2)
-        public String correctAnswer;
+        public boolean correctAnswer;
         public QuestionType questionType;
 
-	public Question(String letter, String set, String correctAnswer, QuestionType questionType) {
+	public Question(String letter, String set, boolean correctAnswer, QuestionType questionType) {
             this.letter = letter;
             this.set = set;
             this.correctAnswer = correctAnswer;
