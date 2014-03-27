@@ -104,7 +104,7 @@ public class StroopEffectUnitTest extends WithApplication{
 
     @Test
     public void createTrailWithProperty(){
-        Trial trial = new Trial(10,QuestionType.THAI,true);
+        Trial trial = new Trial(10,QuestionType.THAI);
         assertEquals(10,trial.appearTime);
     }
 

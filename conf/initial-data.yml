@@ -467,32 +467,26 @@
 - &round7 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    ENGLISH
-    colorMatch: true
     schedule: *ex3
 - &round8 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    ENGLISH
-    colorMatch: false
     schedule: *ex3
 - &round9 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    ENGLISH
-    colorMatch: false
     schedule: *ex3
 - &round10 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    THAI
-    colorMatch: true
     schedule: *ex4
 - &round11 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    THAI
-    colorMatch: false
     schedule: *ex4
 - &round12 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    THAI
-    colorMatch: false
     schedule: *ex4
 
 #Question

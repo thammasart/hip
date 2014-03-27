@@ -25,6 +25,9 @@ public class Quiz extends Model{
 	@OneToMany(mappedBy="quiz")
 	public List<Answer> answers = new ArrayList<Answer>();
 
+	public static final int DEFAULT_FLASHTIME = 5;
+	public static final int DEFAULT_INITCOUNTDOWN = 100;
+
 	public Quiz(int initCountdown, int flashTime){
 		this.initCountdown = initCountdown;
 		this.flashTime = flashTime;

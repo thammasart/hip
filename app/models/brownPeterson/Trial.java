@@ -62,6 +62,15 @@ public class Trial extends Model {
 		}	
 	}
 
+	public void generateQuiz(){
+		List<Question> questions 
+			= Question.find.where().eq("trigramType", trigramType).eq("trigramLanguage", trigramLanguage).findList();
+		for(int i = 0; i < TOTAL_QUESTION; i++){
+			Quiz.create(Quiz.DEFAULT_INITCOUNTDOWN, 
+				Quiz.DEFAULT_FLASHTIME, this, Question.randomNewQuestion(questions)).save();
+		}
+	}
+
 /*
 	public int calculateTotalUser(){
 		return this.timeLogs.size();

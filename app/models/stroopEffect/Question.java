@@ -38,6 +38,10 @@ public class Question extends Model{
         return questions;
     }
 
+    public boolean isMatch(){
+        return colorWord.equals(inkColor);
+    }
+
     @SuppressWarnings("unchecked")
     public static Finder<Long, Question> find = new Finder(Long.class,Question.class);
 

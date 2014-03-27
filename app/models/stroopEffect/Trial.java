@@ -17,8 +17,6 @@ public class Trial extends Model{
     public long appearTime;
     @Column(nullable=false, length=20)
     public QuestionType questionType;
-    @Column(nullable=false)
-    public boolean colorMatch;
 
     public static final int TOTAL_QUESTION = 3;
 
@@ -38,13 +36,11 @@ public class Trial extends Model{
     public Trial(){
         appearTime = 0;
         questionType = QuestionType.THAI;
-        colorMatch = true;
     }
 
-    public Trial(long appearTime,QuestionType type, boolean colorMatch){
+    public Trial(long appearTime,QuestionType type){
         this.appearTime = appearTime;
         this.questionType = type;
-        this.colorMatch = colorMatch;
     }
 
     public static Trial findById(long id){

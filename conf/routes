@@ -66,6 +66,7 @@ GET     /admin/experiment/brown-peterson/question/add   controllers.Admin.addBro
 POST    /admin/experiment/brown-peterson/question/save  controllers.Admin.saveBrownPetersonQuestion()
 GET     /admin/experiment/brown-peterson/question/random    controllers.Admin.randomBrownPetersonQuestion(exp_id : Long, quiz_id : Long)
 GET     /admin/experiment/brown-peterson/question/delete controllers.Admin.deleteBrownPetersonQuestion(id : Long)
+GET     /admin/experiment/stroof-effect/question/change controllers.Admin.switchStroopEffectQuestion(quiz_id : Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

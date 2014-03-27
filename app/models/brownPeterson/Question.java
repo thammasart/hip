@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Random;
 
 @Entity
 @Table (name="brown_peterson_question")
@@ -62,6 +63,13 @@ public class Question extends Model {
 			questions.add(quiz.question);
 		}
 		return questions;
+	}
+
+	public static Question randomNewQuestion(List<Question> questions){
+		Random random = new Random();
+		int index = random.nextInt(questions.size());
+		Question question = questions.get(index);
+		return question;
 	}
 
 	public String toString(){

@@ -222,4 +222,10 @@ public class Admin extends Controller {
     public static Result displayExperimentResult(long expId){
         return ok(views.html.admin.experiment.result.render(ExperimentSchedule.find.byId(expId)));
     }
+
+    public static Result switchStroopEffectQuestion(long quizId){
+        models.stroopEffect.Quiz quiz = models.stroopEffect.Quiz.find.byId(quizId);
+        quiz.switchRandomQuestion();
+        return TODO;
+    }
 }

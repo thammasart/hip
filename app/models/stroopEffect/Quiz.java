@@ -1,6 +1,7 @@
 package models.stroopEffect;
 
 import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
 
 import javax.persistence.*;
 
@@ -25,6 +26,10 @@ public class Quiz extends Model{
         quiz.trial = trial;
         quiz.question = question;
         return quiz;
+    }
+
+    public void switchRandomQuestion(){
+        ;
     }
 
     @SuppressWarnings("unchecked")
