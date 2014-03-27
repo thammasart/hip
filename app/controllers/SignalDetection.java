@@ -49,6 +49,17 @@ public class SignalDetection extends Controller{
         return ok(demo.render());
     }
 
+    @Security.Authenticated(Secured.class)
+    public static Result reportDemo(){
+        Form<Answer> boundForm = answerForm.bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        Answer answer = boundForm.get();
+        int score = 0;
+        if (answer.isCorrect)
+            score++;
+        return ok(report.render(score,answer.usedTime,1, "Report", user));
+    }
+
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo){

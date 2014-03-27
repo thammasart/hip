@@ -10,8 +10,13 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
 </script>
 --!>
-
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
 <script src="@routes.Assets.at("javascripts/signalDetection.js")"></script>
+<script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+</script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/signalDetection.css")">
 <body>
 
@@ -37,6 +42,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         <div id="noise" hidden>@trial.quizzes.get(questionNo).question.noise</div>
         <div id="length" hidden>@trial.quizzes.get(questionNo).length</div>
         <div id="noOfTarget" hidden>@trial.quizzes.get(questionNo).noOfTarget</div>
+        <div id="displayTime" hidden>@trial.quizzes.get(questionNo).displayTime</div>
     </div>
 </div>
 @footer()
