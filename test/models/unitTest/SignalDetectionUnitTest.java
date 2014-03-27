@@ -323,4 +323,28 @@ public class SignalDetectionUnitTest extends WithApplication {
         assertEquals(13.9,answer.usedTime,0.001);
         assertEquals(true,answer.answer);
     }
+
+    @Test
+    public void getAnswerFromUserAndTrialComplete(){
+        new Trial().save();
+        new Question('x','y').save();
+        Trial trial = Trial.find.byId(1L);
+        Question question = Question.find.byId(1L);
+        Quiz.create(0.7, 7, 15, trial, question).save();
+        Quiz quiz = Quiz.find.byId(1L);
+
+        new User("123","Secret").save();
+        User user = User.find.byId("123");
+        Answer.create(true, 13.9, user, quiz).save();
+
+
+        List<Answer> answers = Answer.findInvolving(user,trial.quizzes);
+        Answer answer =  answers.get(0);
+        assertEquals(1,answers.size());
+        assertEquals(user,answer.user);
+        assertEquals(quiz,answer.quiz);
+        assertEquals(13.9,answer.usedTime,0.001);
+        assertEquals(true,answer.answer);
+
+    }
 }
