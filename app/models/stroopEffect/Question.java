@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 @Entity
 @Table (name="stroop_engword_question")
@@ -64,6 +65,12 @@ public class Question extends Model{
             }
         }
         return notMatchQuestions;
+    }
+
+    public static Question randomNewQuestion(List<Question> questions){
+        Random random = new Random();
+        int index = random.nextInt(questions.size());
+        return questions.get(index);
     }
 
     @SuppressWarnings("unchecked")

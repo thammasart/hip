@@ -35,7 +35,7 @@ public class Trial extends Model{
 
     public Trial(){
         appearTime = 0;
-        questionType = QuestionType.THAI;
+        questionType = QuestionType.ENGLISH;
     }
 
     public Trial(long appearTime,QuestionType type){
@@ -66,6 +66,13 @@ public class Trial extends Model{
         List<Question> questions = Question.find.where().eq("questionType", questionType).findList();
         for(Quiz quiz : quizzes){
             quiz.randomToNewQuestion(questions);
+        }
+    }
+
+    public void generateQuiz(){
+        List<Question> questions = Question.find.where().eq("questionType", questionType).findList();
+        for(int i = 0; i < TOTAL_QUESTION; i++){
+            Quiz.create(this, Question.randomNewQuestion(questions)).save();
         }
     }
 
