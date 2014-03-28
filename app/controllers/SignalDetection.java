@@ -46,7 +46,10 @@ public class SignalDetection extends Controller{
 
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
-        return ok(demo.render());
+        Question question = new Question('Y','X');
+        Quiz quiz = new Quiz(0.5,2,10);
+        quiz.question = question;
+        return ok(demo.render(quiz));
     }
 
     @Security.Authenticated(Secured.class)
