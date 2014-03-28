@@ -2,6 +2,9 @@ package controllers;
 
 import models.brownPeterson.*;
 import models.*;
+import models.brownPeterson.Answer;
+import models.brownPeterson.Quiz;
+import models.brownPeterson.Trial;
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -36,6 +39,29 @@ public class BrownPeterson extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result procIframe(){
         return ok(brown_peterson_proc_iframe.render());
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result demoPage(){
+        Question question = new Question("BTP","PYM","KLI");
+        Quiz quiz = new Quiz(123,5);
+        quiz.question = question;
+        return ok(demo.render(quiz));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result reportDemo(String first,String second,String third){
+        Form<Answer> boundForm = answerForm.bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        Answer answer = boundForm.get();
+        Question question = new Question(first,second,third);
+        Quiz quiz = new Quiz(123,5);
+        quiz.question = question;
+        answer.quiz = quiz;
+        List<Answer> answers = new ArrayList<Answer>();
+        answers.add(answer);
+        int score = Answer.calculateTotalScore(answers);
+        return ok(report.render(score,answer.usedTime,1, "Report", user));
     }
 
     @Security.Authenticated(Secured.class)
@@ -77,6 +103,7 @@ public class BrownPeterson extends Controller {
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
+
 
 
 

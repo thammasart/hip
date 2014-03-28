@@ -1,3 +1,4 @@
+@(quiz : models.signalDetection.Quiz)
 @header("Human Information Processing Lab :: Home Page")
 <!--
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
@@ -10,7 +11,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 </script>
 --!>
 
-<script src="@routes.Assets.at("javascripts/signalDetectionDemo.js")"></script>
+<script src="@routes.Assets.at("javascripts/signalDetection.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/signalDetection.css")">
 <body>
 
@@ -32,6 +33,11 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                 <input id = "isCorrect" name = "isCorrect" type="checkbox" hidden/>
             </form>
         </div>
+        <div id="target" hidden>@quiz.question.target</div>
+        <div id="noise" hidden>@quiz.question.noise</div>
+        <div id="length" hidden>@quiz.length</div>
+        <div id="noOfTarget" hidden>@quiz.noOfTarget</div>
+        <div id="displayTime" hidden>@quiz.displayTime</div>
     </div>
 </div>
 @footer()
