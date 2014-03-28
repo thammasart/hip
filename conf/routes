@@ -60,14 +60,15 @@ POST    /admin/experiment           controllers.Admin.saveExperiment()
 GET     /admin/experiment/result/:id controllers.Admin.displayExperimentResult(id : Long)
 POST    /userInfo                   controllers.Admin.saveUser()
 GET     /userInfo                   controllers.Admin.renderUserInfo()
-GET     /admin/experiment/parameter/ controllers.Admin.displayParameter(id:Long)
-POST    /admin/experiment/parameter/                controllers.Admin.saveBrownPetersonParameter(id:Long)
+GET     /admin/experiment/parameter controllers.Admin.displayParameter(id:Long)
+POST    /admin/experiment/parameter/brownPeterson                controllers.Admin.saveBrownPetersonParameter(id:Long)
 GET     /admin/experiment/brown-peterson/question       controllers.Admin.displayBrownPetersonQuestionList()
 GET     /admin/experiment/brown-peterson/question/add   controllers.Admin.addBrownPetersonQuestion()
 POST    /admin/experiment/brown-peterson/question/save  controllers.Admin.saveBrownPetersonQuestion()
 GET     /admin/experiment/brown-peterson/question/random    controllers.Admin.randomBrownPetersonQuestion(exp_id : Long, quiz_id : Long)
 GET     /admin/experiment/brown-peterson/question/delete controllers.Admin.deleteBrownPetersonQuestion(id : Long)
-GET     /admin/experiment/stroof-effect/question/change controllers.Admin.switchStroopEffectQuestion(quiz_id : Long)
+GET     /admin/experiment/stroof-effect/question/change controllers.Admin.switchStroopEffectQuestion(exp_id : Long, quiz_id : Long)
+POST     /admin/experiment/parameter/stroopEffect controllers.Admin.saveStroopEffectParameter(exp_id : Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

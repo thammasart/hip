@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 @Entity
 @Table (name="stroop_quiz")
@@ -29,7 +30,24 @@ public class Quiz extends Model{
     }
 
     public void switchRandomQuestion(){
-        ;
+        Random random = new Random();
+        if(!question.isMatch()){
+            List<Question> questions = Question.findAllMatchQuestion();
+            int index = random.nextInt(questions.size());
+            question = questions.get(index);
+        }else{
+            List<Question> questions = Question.findAllNotMatchQuestion();
+            int index = random.nextInt(questions.size());
+            question = questions.get(index);
+        }
+        update();
+    }
+
+    public void randomToNewQuestion(List<Question> questions){
+        Random random = new Random();
+        int index = random.nextInt(questions.size());
+        question = questions.get(index);
+        update();
     }
 
     @SuppressWarnings("unchecked")

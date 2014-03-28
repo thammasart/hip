@@ -2,8 +2,9 @@
 @import views.html.admin._
 @import models.stroopEffect.Quiz
 @import models.stroopEffect.Trial
+@import models.stroopEffect.QuestionType
 
-<form role="form" class="form-horizontal">
+<form role="form" class="form-horizontal" action="@routes.Admin.saveStroopEffectParameter(exp.id)" method="POST">
 <div class="container">
     <div class="row">
             <div class="col-md-8 col-sm-8">
@@ -86,13 +87,33 @@
                                         <td>@{index + 1}</td>
                                         <td>@quiz.question.colorWord</td>
                                         <td>@quiz.question.inkColor</td>
-                                        <td><a href="@routes.Admin.switchStroopEffectQuestion(quiz.id)" class="btn btn-xs btn-danger">switch
+                                        <td><a href="@routes.Admin.switchStroopEffectQuestion(exp.id, quiz.id)" class="btn btn-xs btn-danger">switch
                                         </a></td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="col-md-3 col-sm-4 trial-box-right">
+                    <h4>Question Type</h4
+                    <label class="radio">
+                        <input type="radio" name="questionType-@trial.id" value="@QuestionType.ENGLISH" 
+                        @if(trial.questionType.equals(QuestionType.ENGLISH)){
+                            checked
+                        }
+                        > English
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="questionType-@trial.id" value="@QuestionType.THAI" 
+                        @if(trial.questionType.equals(QuestionType.THAI)){
+                            checked
+                        }
+                        > ไทย
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="questionType-@trial.id" value="@QuestionType.SHAPE" disabled > <del>Shape</del> 
+                    </label>
                 </div>
             </div>
         </div>

@@ -10,12 +10,15 @@ import java.util.ArrayList;
 @Entity
 @Table (name="stroop_engword_question")
 public class Question extends Model{
+
     @Id
     public long id;
     @Column(nullable=false, length=20)
     public String colorWord;
     @Column(nullable=false, length=20)
     public String inkColor;
+
+    public QuestionType questionType = QuestionType.ENGLISH;
 
     @OneToMany
     public List<Quiz> quizzes;
@@ -39,7 +42,28 @@ public class Question extends Model{
     }
 
     public boolean isMatch(){
-        return colorWord.equals(inkColor);
+        return colorWord.equalsIgnoreCase(inkColor);
+    }
+
+    public static List<Question> findAllMatchQuestion(){
+        List<Question> questions = Question.find.all();
+        List<Question> matchQuestions = new ArrayList<Question>();
+        for(Question question : questions){
+            if(question.colorWord.equalsIgnoreCase(question.inkColor)){
+                matchQuestions.add(question);
+            }
+        }
+        return matchQuestions;
+    }
+    public static List<Question> findAllNotMatchQuestion(){
+        List<Question> questions = Question.find.all();
+        List<Question> notMatchQuestions = new ArrayList<Question>();
+        for(Question question : questions){
+            if(!question.colorWord.equalsIgnoreCase(question.inkColor)){
+                notMatchQuestions.add(question);
+            }
+        }
+        return notMatchQuestions;
     }
 
     @SuppressWarnings("unchecked")

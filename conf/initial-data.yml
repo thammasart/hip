@@ -505,30 +505,75 @@
 - &Question13 !!models.stroopEffect.Question
     colorWord:                black
     inkColor:               black
+    questionType:           ENGLISH
 - &Question14 !!models.stroopEffect.Question
     colorWord:                blue
     inkColor:               blue
+    questionType:           ENGLISH
 - &Question15 !!models.stroopEffect.Question
     colorWord:                red
     inkColor:               red
+    questionType:           ENGLISH
 - &Question16 !!models.stroopEffect.Question
     colorWord:                black
     inkColor:               yellow
+    questionType:           ENGLISH
 - &Question17 !!models.stroopEffect.Question
     colorWord:                blue
     inkColor:               red
+    questionType:           ENGLISH
 - &Question18 !!models.stroopEffect.Question
     colorWord:                green
     inkColor:               black
+    questionType:           ENGLISH
 - &Question19 !!models.stroopEffect.Question
     colorWord:                purple
     inkColor:               green
+    questionType:           ENGLISH
 - &Question20 !!models.stroopEffect.Question
     colorWord:                yellow
     inkColor:               blue
+    questionType:           ENGLISH
 - &Question21 !!models.stroopEffect.Question
     colorWord:                red
     inkColor:               black
+    questionType:           ENGLISH
+- &Question_se_TH13 !!models.stroopEffect.Question
+    colorWord:                ดำ
+    inkColor:               ดำ
+    questionType:           THAI
+- &Question_se_TH14 !!models.stroopEffect.Question
+    colorWord:                น้ำเงิน
+    inkColor:               น้ำเงิน
+    questionType:           THAI
+- &Question_se_TH15 !!models.stroopEffect.Question
+    colorWord:                แดง
+    inkColor:               แดง
+    questionType:           THAI
+- &Question_se_TH16 !!models.stroopEffect.Question
+    colorWord:                ดำ
+    inkColor:               เหลือง
+    questionType:           THAI
+- &Question_se_TH17 !!models.stroopEffect.Question
+    colorWord:                น้ำเงิน
+    inkColor:               แดง
+    questionType:           THAI
+- &Question_se_TH18 !!models.stroopEffect.Question
+    colorWord:                เขียว
+    inkColor:               ดำ
+    questionType:           THAI
+- &Question_se_TH19 !!models.stroopEffect.Question
+    colorWord:                ม่วง
+    inkColor:               สีเขียว
+    questionType:           THAI
+- &Question_se_TH20 !!models.stroopEffect.Question
+    colorWord:                เหลือง
+    inkColor:               น้ำเงิน
+    questionType:           THAI
+- &Question_se_TH21 !!models.stroopEffect.Question
+    colorWord:                แดง
+    inkColor:               ดำ
+    questionType:           THAI
 
 #Quiz
 - &quiz19 !!models.stroopEffect.Quiz

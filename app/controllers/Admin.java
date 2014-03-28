@@ -223,9 +223,27 @@ public class Admin extends Controller {
         return ok(views.html.admin.experiment.result.render(ExperimentSchedule.find.byId(expId)));
     }
 
-    public static Result switchStroopEffectQuestion(long quizId){
+    public static Result switchStroopEffectQuestion(long expId, long quizId){
         models.stroopEffect.Quiz quiz = models.stroopEffect.Quiz.find.byId(quizId);
         quiz.switchRandomQuestion();
-        return TODO;
+        flash("success", "เปลี่ยนแปลงคำถามเรียบร้อยแล้ว");
+        return redirect(routes.Admin.displayParameter(expId));
+    }
+
+    public static Result saveStroopEffectParameter(long expId){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
+        DynamicForm  requestData = Form.form().bindFromRequest();
+        
+        List<models.stroopEffect.Trial> trials = models.stroopEffect.Trial.findInvolving(exp);
+        for(models.stroopEffect.Trial trial : trials ){
+            String questionType = requestData.get("questionType-" + trial.id);
+            if(!trial.questionType.toString().equals(questionType)){
+                trial.setQuestionType(questionType);
+                trial.randomNewQuestions();
+            }
+        }
+
+        flash("success", "update success.");
+        return ok(views.html.admin.experiment.edit.render(exp));
     }
 }

@@ -16,7 +16,7 @@ public class Trial extends Model{
     @Column(nullable=false, length=2)
     public long appearTime;
     @Column(nullable=false, length=20)
-    public QuestionType questionType;
+    public QuestionType questionType = QuestionType.ENGLISH;
 
     public static final int TOTAL_QUESTION = 3;
 
@@ -49,6 +49,24 @@ public class Trial extends Model{
 
     public static List<Trial> findInvolving(ExperimentSchedule ex){
         return find.where().eq("schedule", ex).findList();
+    }
+
+    public void setQuestionType(String type){
+        if(type.equals(QuestionType.ENGLISH.toString())){
+            this.questionType = QuestionType.ENGLISH;
+        }else if(type.equals(QuestionType.THAI.toString())){
+            this.questionType = QuestionType.THAI;
+        }else if(type.equals(QuestionType.SHAPE.toString())){
+            this.questionType = QuestionType.SHAPE;
+        }
+        update();
+    }
+
+    public void randomNewQuestions(){
+        List<Question> questions = Question.find.where().eq("questionType", questionType).findList();
+        for(Quiz quiz : quizzes){
+            quiz.randomToNewQuestion(questions);
+        }
     }
 
     @SuppressWarnings("unchecked")
