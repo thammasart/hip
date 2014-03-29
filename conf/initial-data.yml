@@ -661,7 +661,7 @@
     schedule: *ex8
 - &round17 !!models.attentionBlink.Trial
     length: 13
-    blinkTime: 0.5
+    blinkTime: 0.1
     questionType: THAI
     numberOfQuiz: 3
     schedule: *ex8

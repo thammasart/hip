@@ -5,20 +5,28 @@ var showInstructionTime = 0;
 var showTimerTime = 0;
 var attentionWordTime = 0;
 var questionTime = 0;
-var questionTime2 = 0;
 var i =0;
+var question_set;
+var question_letter;
+var question_correctAnswer;
+var trial_blinkTime;
+var expDuration;
 var question = new Array();
-    question[0] = "D";        
-    question[1] = "A";
-    question[2] = "R";
-    question[3] = "K";
-    question[4] = "X";
-    question[5] = "1";
-    question[6] = "3";
+
+function genQuestion(){
+    for (var j=0;j<question_set.length;j++){
+        question[j] = question_set.charAt(j);
+    }
+}
 
 function showInstruction (){
     clearInterval(startTimer);
-    document.getElementById("word").innerHTML=" ค้นหา A และ B ที่อยู่ติดกัน ";
+    question_set = document.getElementById("questionSet").innerHTML;
+    question_letter = document.getElementById("questionLetter").innerHTML;
+    question_correctAnswer = document.getElementById("correctAnswer").innerHTML;
+    trial_blinkTime = document.getElementById("blinkTime").innerHTML;
+    genQuestion();
+    document.getElementById("word").innerHTML=" ค้นหา "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1) + " ที่อยู่ติดกัน";
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
 function showTimer(){
@@ -29,23 +37,43 @@ function showTimer(){
 function showAttentionWord(){
     clearInterval(attentionWordTime);
     clearInterval(showTimerTime);
-    questionTime = setInterval(showQuestionList,500);
-    questionTime2 = setInterval(function(){showQuestionWord()},question.length*550);
+    questionTime = setInterval(showQuestionList,trial_blinkTime*1000);
 }
 function showQuestionList(){
-    document.getElementById("word").innerHTML= question[i];
-    i++;
+    if (i < question.length){
+        document.getElementById("word").innerHTML= question[i];
+        i++;
+    }
+    else{
+        showQuestionWord();
+    }
 }
 function showQuestionWord(){
-    clearInterval(questionTime2);
     clearInterval(questionTime);
     document.getElementById("me").style.visibility = "visible";
     document.getElementById("maiMe").style.visibility = "visible";
-    document.getElementById("ret").style.visibility = "visible";
-    document.getElementById("word").innerHTML = " มี A และ B ติดกันหรือไม่ " ;
+    document.getElementById("word").innerHTML=" มี "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1) + " ติดกันหรือไม่";
+    d = new Date();
+    expDuration = d.getTime();
 }
+
+function submitButtonClick(clicked_name){
+     d = new Date();
+     expDuration = d.getTime()-expDuration;
+     document.getElementById("usedTime").value = expDuration/1000;
+     if (clicked_name == "me")
+        document.getElementById("answer").checked= true;
+     else
+        document.getElementById("answer").checked = false;
+     if ( (question_correctAnswer=="true" && clicked_name == "me") || (question_correctAnswer=="false" && clicked_name == "maiMe") )
+        document.getElementById("isCorrect").checked = true;
+     else
+        document.getElementById("isCorrect").checked = false;
+
+}
+
 function calculateTimeLeft()
 {
   count=count-1;
-        document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาท่ี " ;
+        document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาที" ;
 }
