@@ -540,39 +540,39 @@
     questionType:           ENGLISH
 - &Question_se_TH13 !!models.stroopEffect.Question
     colorWord:                ดำ
-    inkColor:               ดำ
+    inkColor:               black
     questionType:           THAI
 - &Question_se_TH14 !!models.stroopEffect.Question
     colorWord:                น้ำเงิน
-    inkColor:               น้ำเงิน
+    inkColor:               blue
     questionType:           THAI
 - &Question_se_TH15 !!models.stroopEffect.Question
     colorWord:                แดง
-    inkColor:               แดง
+    inkColor:               red
     questionType:           THAI
 - &Question_se_TH16 !!models.stroopEffect.Question
     colorWord:                ดำ
-    inkColor:               เหลือง
+    inkColor:               yellow
     questionType:           THAI
 - &Question_se_TH17 !!models.stroopEffect.Question
     colorWord:                น้ำเงิน
-    inkColor:               แดง
+    inkColor:               red
     questionType:           THAI
 - &Question_se_TH18 !!models.stroopEffect.Question
     colorWord:                เขียว
-    inkColor:               ดำ
+    inkColor:               black
     questionType:           THAI
 - &Question_se_TH19 !!models.stroopEffect.Question
     colorWord:                ม่วง
-    inkColor:               สีเขียว
+    inkColor:               green
     questionType:           THAI
 - &Question_se_TH20 !!models.stroopEffect.Question
     colorWord:                เหลือง
-    inkColor:               น้ำเงิน
+    inkColor:               blue
     questionType:           THAI
 - &Question_se_TH21 !!models.stroopEffect.Question
     colorWord:                แดง
-    inkColor:               ดำ
+    inkColor:               black
     questionType:           THAI
 
 #Quiz
