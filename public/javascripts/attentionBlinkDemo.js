@@ -7,14 +7,23 @@ var attentionWordTime = 0;
 var questionTime = 0;
 var questionTime2 = 0;
 var i =0;
+var expDuration;
+var score = 0;
 var question = new Array();
-    question[0] = "D";
-    question[1] = "A";
-    question[2] = "R";
-    question[3] = "K";
-    question[4] = "X";
-    question[5] = "1";
-    question[6] = "3";
+    question[0] = "Q";
+    question[1] = "W";
+    question[2] = "E";
+    question[3] = "R";
+    question[4] = "T";
+    question[5] = "Y";
+    question[6] = "U";
+    question[7] = "I";
+    question[8] = "O";
+    question[9] = "P";
+    question[10] = "A";
+    question[11] = "S";
+    question[12] = "D";
+    question[13] = "F";
 
 function showInstruction (){
     clearInterval(startTimer);
@@ -30,7 +39,7 @@ function showAttentionWord(){
     clearInterval(attentionWordTime);
     clearInterval(showTimerTime);
     questionTime = setInterval(showQuestionList,500);
-    questionTime2 = setInterval(function(){showQuestionWord()},question.length*550);
+    questionTime2 = setInterval(function(){showQuestionWord()},(question.length*500)+500);
 }
 function showQuestionList(){
     document.getElementById("word").innerHTML= question[i];
@@ -39,10 +48,20 @@ function showQuestionList(){
 function showQuestionWord(){
     clearInterval(questionTime2);
     clearInterval(questionTime);
+    d = new Date();
+    expDuration = d.getTime();
     document.getElementById("me").style.visibility = "visible";
     document.getElementById("maiMe").style.visibility = "visible";
-    document.getElementById("ret").style.visibility = "visible";
     document.getElementById("word").innerHTML = " มี A และ B ติดกันหรือไม่ " ;
+}
+function done(name){
+    d = new Date();
+    expDuration =  (d.getTime()-expDuration)/1000;
+    if(name == "maiMe"){
+        score = score+1;
+    }
+    document.getElementById("time").value = expDuration;
+    document.getElementById("score").value = score ;
 }
 function calculateTimeLeft()
 {

@@ -2,7 +2,6 @@
     width:100%;
     height:500px;
     margin:20px 0px 20px 0px;
-    border:solid;
 }
 .attentionWord{
     text-align:center;
@@ -26,12 +25,15 @@
     margin-left:17%;
     visibility:hidden;
 }
-.ret{
-    width:40%;
-    font-size:40px;
-    visibility:hidden;
+.navButtonContainer{
+    width:50%;
+    margin-left:25%;
+    margin-top:5%;
 }
-.retDiv{
-    position:relative;
-    top:47%;
+.navButton{
+    width:25%;
+    height:5%;
+    font-size:22px;
+    float:left;
+    margin-left:17%;
 }

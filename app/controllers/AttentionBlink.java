@@ -83,6 +83,14 @@ public class AttentionBlink extends Controller {
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
+    @Security.Authenticated(Secured.class)
+    public static Result demoReport(){
+        DynamicForm reportData = Form.form().bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        double time = Double.parseDouble(reportData.get("time"));
+        int score = Integer.parseInt(reportData.get("score"));
+        return ok(demoReport.render(score,time,1,"Demo Report",user));
+    }
 
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
     @Security.Authenticated(Secured.class)
