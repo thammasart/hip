@@ -10,26 +10,26 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 </script>
 --!>
 <script src="@routes.Assets.at("javascripts/attentionBlinkDemo.js")"></script>
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/attention_blink.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <body>
 
 <!-- Page Header -->
     <div class="">
-          <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+          <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
           <!-- Dashed line-->
           <div class="titleLine"></div>
     </div>
-<div class="attentionBlinkExp">
-    <div class="attentionWord"  >
-         <p id="word" >  </p>
+<div class="expMainWindow">
+    <div class="expCenterWord">
+         <p id="word">  </p>
     </div>
     <form action="@routes.AttentionBlink.demoReport()" method="post" >
         <div class="choice" align="center" id="choice" >
-            <input id="score" name="score" hidden/> 
-            <input id="time" name="time" hidden/> 
              <button type="submit" class="btn btn-danger ansButton" id="maiMe" name="maiMe" onclick="return done(this.name)"> ไม่มี </button >
              <button type="submit" class="btn btn-success ansButton" id="me"  name="me"onclick="return done(this.name)"  > มี  </button >
         </div>
+            <input id="score" name="score" hidden/> 
+            <input id="time" name="time" hidden/> 
     </form>
 </div>
 @footer()

@@ -30,7 +30,6 @@ public class Trial extends Model{
         Trial trial = new Trial(questionType);
         trial.schedule = ex; 
         trial.numberOfQuiz = numberOfQuiz;
-
         return trial;
     }
 
