@@ -66,7 +66,6 @@ public class BrownPeterson extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo){
-
         return ok(exp.render(Trial.find.byId(trialId), questionNo));
     }
 

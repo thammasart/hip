@@ -30,14 +30,17 @@ public class Trial extends Model{
             this.questionType = questionType;
 	}
 
-        public static Trial create(ExperimentSchedule ex, int length, double blinkTime, QuestionType questionType,int numberOfQuiz) {
-            Trial trial = new Trial(length,blinkTime,questionType);
-            trial.schedule = ex; 
-            trial.numberOfQuiz = numberOfQuiz;
+    public static Trial create(ExperimentSchedule ex, int length, double blinkTime, QuestionType questionType,int numberOfQuiz) {
+        Trial trial = new Trial(length,blinkTime,questionType);
+        trial.schedule = ex; 
+        trial.numberOfQuiz = numberOfQuiz;
 
-            return trial;
-        }
+        return trial;
+    }
 
+    public static List<Trial> findInvolving(ExperimentSchedule ex){
+        return find.where().eq("schedule", ex).findList();
+    }
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
