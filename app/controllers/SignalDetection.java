@@ -47,7 +47,7 @@ public class SignalDetection extends Controller{
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
         Question question = new Question('Y','X');
-        Quiz quiz = new Quiz(0.5,2,10);
+        Quiz quiz = new Quiz(0.5,2,20);
         quiz.question = question;
         return ok(demo.render(quiz));
     }
@@ -60,7 +60,7 @@ public class SignalDetection extends Controller{
         int score = 0;
         if (answer.isCorrect)
             score++;
-        return ok(report.render(score,answer.usedTime,1, "Report", user));
+        return ok(demoReport.render(score,answer.usedTime,1, "Report", user));
     }
 
     //แสดงหน้าการทดลอง

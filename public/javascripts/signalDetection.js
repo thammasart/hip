@@ -33,13 +33,11 @@ function showTimer(){
 function showSignalWord(){
     clearInterval(signalWordTime);
     clearInterval(showTimerTime);
-    document.getElementById("word").style.fontSize = "30px";
     document.getElementById("word").innerHTML= question;
     questionTime = setInterval(function(){showQuestionWord()},displayTime);
 }
 function showQuestionWord(){
     clearInterval(questionTime);
-    document.getElementById("word").style.fontSize = "60px";
     document.getElementById("word").innerHTML = " มี "+ target +" อยู่หรือไม่ " ;
     document.getElementById("true").style.visibility = "visible";
     document.getElementById("false").style.visibility = "visible";

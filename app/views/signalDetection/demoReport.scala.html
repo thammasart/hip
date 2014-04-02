@@ -17,9 +17,9 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             </div>
         </div>
         <div class="navContainer">
-            <a class="btn btn-danger navButton" href="@routes.AttentionBlink.proc()"> กลับไปขั้นตอนการทดลอง </a>
-            <a class="btn btn-primary navButton navButtonDemo" href="@routes.AttentionBlink.demoPage()"> ทดลองเล่นอีกครั้ง </a>
-            <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.ATTENTIONBLINK.toString())"> เริ่มการทดลอง </a>
+            <a class="btn btn-danger navButton" href="@routes.SignalDetection.proc()"> ทำอีกครั้ง </a>
+            <a class="btn btn-primary navButton navButtonDemo" href="@routes.SignalDetection.demoPage()"> ทำอีกครั้ง </a>
+            <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.SIGNALDETECTION.toString())"> เสร็จสิ้น </a>
         </div>
     </div>
 @footer()
