@@ -642,26 +642,18 @@
 #Attention Blink
 #Trial
 - &round14 !!models.attentionBlink.Trial
-    length: 16
-    blinkTime: 0.5
     questionType: ENGLISH
     numberOfQuiz: 3
     schedule: *ex7
 - &round15 !!models.attentionBlink.Trial
-    length: 13
-    blinkTime: 0.5
     questionType: NUMBER
     numberOfQuiz: 3
     schedule: *ex7
 - &round16 !!models.attentionBlink.Trial
-    length: 20
-    blinkTime: 0.5
     questionType: ENGLISH
     numberOfQuiz: 3
     schedule: *ex8
 - &round17 !!models.attentionBlink.Trial
-    length: 13
-    blinkTime: 0.1
     questionType: THAI
     numberOfQuiz: 3
     schedule: *ex8
@@ -728,38 +720,86 @@
     questionType: THAI
 #Quiz
 - &Quiz31 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 16
+    numberOfTarget: 2
+    isCorrect: true
     trial: *round14
     question: *Question25
 - &Quiz32 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 16
+    numberOfTarget: 2
+    isCorrect: false
     trial: *round14
     question: *Question26
 - &Quiz33 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 16
+    numberOfTarget: 2
+    isCorrect: false
     trial: *round14
     question: *Question27
 - &Quiz34 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 13
+    numberOfTarget: 2
+    isCorrect: true
     trial: *round15
     question: *Question28
 - &Quiz35 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 13
+    numberOfTarget: 2
+    isCorrect: false
     trial: *round15
     question: *Question29
 - &Quiz36 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 13
+    numberOfTarget: 2
+    isCorrect: true
     trial: *round15
     question: *Question30
 - &Quiz37 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 20
+    numberOfTarget: 2
+    isCorrect: true
     trial: *round16
     question: *Question31
 - &Quiz38 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 20
+    numberOfTarget: 2
+    isCorrect: false
     trial: *round16
     question: *Question32
 - &Quiz39 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 20
+    numberOfTarget: 2
+    isCorrect: false
     trial: *round16
     question: *Question33
 - &Quiz40 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 13
+    numberOfTarget: 2
+    isCorrect: true
     trial: *round17
     question: *Question34
 - &Quiz41 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 13
+    numberOfTarget: 2
+    isCorrect: true
     trial: *round17
     question: *Question35
 - &Quiz42 !!models.attentionBlink.Quiz
+    blinkTime: 0.1
+    length: 13
+    numberOfTarget: 2
+    isCorrect: false
     trial: *round17
     question: *Question36

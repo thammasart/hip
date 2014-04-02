@@ -233,6 +233,17 @@ public class Admin extends Controller {
     public static Result saveStroopEffectParameter(long expId){
         ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
         DynamicForm  requestData = Form.form().bindFromRequest();
+
+        exp.name = requestData.get("name");
+        try{
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            exp.startDate = dateFormat.parse(requestData.get("startDate"));
+            exp.expireDate = dateFormat.parse(requestData.get("expireDate"));
+        } catch (ParseException e){
+            flash("date_error", "กรุณากรอกข้อมูลช่วงเวลาการทำทดลองให้ถูกต้อง");
+            return badRequest(views.html.admin.experiment.edit.render(exp));
+        }
+        exp.update();
         
         List<models.stroopEffect.Trial> trials = models.stroopEffect.Trial.findInvolving(exp);
         for(models.stroopEffect.Trial trial : trials ){
@@ -240,6 +251,85 @@ public class Admin extends Controller {
             if(!trial.questionType.toString().equals(questionType)){
                 trial.setQuestionType(questionType);
                 trial.randomNewQuestions();
+            }
+        }
+
+        flash("success", "update success.");
+        return ok(views.html.admin.experiment.edit.render(exp));
+    }
+
+    public static Result saveAttentionBlinkParameter(long expId){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
+        DynamicForm  requestData = Form.form().bindFromRequest();
+
+        exp.name = requestData.get("name");
+        try{
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            exp.startDate = dateFormat.parse(requestData.get("startDate"));
+            exp.expireDate = dateFormat.parse(requestData.get("expireDate"));
+        } catch (ParseException e){
+            flash("date_error", "กรุณากรอกข้อมูลช่วงเวลาการทำทดลองให้ถูกต้อง");
+            return badRequest(views.html.admin.experiment.edit.render(exp));
+        }
+        exp.update();
+
+        List<models.attentionBlink.Trial> trials = models.attentionBlink.Trial.findInvolving(exp);
+        
+        for(models.attentionBlink.Trial trial : trials){
+            boolean isQuestionChange = false;
+            String questionType = requestData.get("questionType-" + trial.id);
+            if(!trial.questionType.toString().equals(questionType)){
+                trial.changeQuestionType(questionType);
+                isQuestionChange = true;
+                trial.update();
+            }
+
+            for(models.attentionBlink.Quiz quiz : trial.quizzes){
+                boolean isCorrectChange = false;
+                String lengthStr = requestData.get("length-" + quiz.id);
+                String numberOfTargetStr = requestData.get("numberOfTarget-" + quiz.id);
+                String isCorrectStr = requestData.get("isCorrect-" + quiz.id);
+                String blinkTimeStr = requestData.get("blinkTime-" + quiz.id);
+                boolean isCorrect = true;
+                if(isCorrectStr == null){
+                    isCorrect = false;
+                }else{
+                    isCorrect = true;
+                }
+
+                if(isCorrect != quiz.isCorrect){
+                    quiz.isCorrect = isCorrect;
+                    quiz.question.correctAnswer = isCorrect;
+                    isCorrectChange = true;
+                }
+
+
+                    
+                try{
+                    int length = Integer.parseInt(lengthStr);
+                    int numberOfTarget = Integer.parseInt(numberOfTargetStr);
+                    double blinkTime = Double.parseDouble(blinkTimeStr);
+                    if(length != quiz.length){
+                        quiz.length = length;
+                        isQuestionChange = true;
+                    }
+                    if(numberOfTarget != quiz.numberOfTarget){
+                        quiz.numberOfTarget = numberOfTarget;
+                        isQuestionChange = true;
+                    }
+                    quiz.blinkTime = blinkTime;
+                } catch(Exception e){
+                    flash("error", "ข้อมูลไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง");
+                    return badRequest(views.html.admin.experiment.edit.render(exp));
+                }
+                if(isCorrectChange && !isQuestionChange){
+                    quiz.question.changeQuestionSetByCorrectAnswer();
+                }
+                quiz.update();
+            }
+
+            if(isQuestionChange){
+                trial.generateNewQuestions();
             }
         }
 

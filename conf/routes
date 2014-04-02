@@ -75,7 +75,7 @@ GET     /admin/experiment/brown-peterson/question/random    controllers.Admin.ra
 GET     /admin/experiment/brown-peterson/question/delete controllers.Admin.deleteBrownPetersonQuestion(id : Long)
 GET     /admin/experiment/stroof-effect/question/change controllers.Admin.switchStroopEffectQuestion(exp_id : Long, quiz_id : Long)
 POST     /admin/experiment/parameter/stroopEffect controllers.Admin.saveStroopEffectParameter(exp_id : Long)
-
+POST    /admin/experiment/parameter/attention-blink controllers.Admin.saveAttentionBlinkParameter(exp_id : Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

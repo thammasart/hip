@@ -34,7 +34,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         </form>
 
     </div>
-    <p id="blinkTime" hidden>@trial.blinkTime</p>
+    <p id="blinkTime" hidden>@trial.quizzes(questionNo).blinkTime</p>
     <p id="questionSet" hidden>@trial.quizzes(questionNo).question.set</p>
     <p id="questionLetter" hidden>@trial.quizzes(questionNo).question.letter</p>
     <p id="correctAnswer" hidden>@trial.quizzes(questionNo).question.correctAnswer</p>
