@@ -7,16 +7,19 @@ window.location.hash="Again-No-back-button";//again because google chrome don't 
 window.onhashchange=function(){window.location.hash="no-back-button";}
 
 </script>
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/attention_blink.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <body>
-    <div class="attentionBlinkExp">
-        <div class="container report" align="center">
+<div class="expMainWindow" style="height:465px;">
+    <div class="expMainWindowFrame">
+        <div class="expCenterWord" align="center">
             <h3>คะแนน : @score/@totalScore </h3>
             <h3>เวลา : @{ BigDecimal(totalUsedTime).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble } วินาที</h3>
         </div>
-        <div class="navButtonContainer">
-            <a class="btn btn-primary navButton" href="@routes.PositionError.demoPage()"> ทำอีกครั้ง </a>
-            <a class="btn btn-success navButton" href="@routes.PositionError.proc()"> เสร็จสิ้น </a>
-        </div>
     </div>
+    <div class="navContainer">
+        <a class="btn btn-danger navButton" href="@routes.PositionError.proc()"> กลับไปขั้นตอนการทดลอง </a>
+        <a class="btn btn-primary navButton navButtonDemo" href="@routes.PositionError.demoPage()"> ทดลองเล่นอีกครั้ง </a>
+        <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.ATTENTIONBLINK.toString())"> เริ่มการทดลอง </a>
+    </div>
+</div>
 @footer()
