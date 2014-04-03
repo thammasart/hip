@@ -3,9 +3,7 @@ package models.signalDetection;
 import play.db.ebean.Model;
 import javax.persistence.*;
 import models.TimeLog;
-
 import models.ExperimentSchedule;
-
 import java.util.List;
 import java.util.ArrayList;
 

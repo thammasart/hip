@@ -9,7 +9,6 @@ import play.test.WithApplication;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static play.test.Helpers.*;
-import java.util.List;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
