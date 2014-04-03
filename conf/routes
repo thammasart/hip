@@ -52,6 +52,14 @@ GET     /signal_detection/experiment   controllers.SignalDetection.experiment(tr
 POST    /signal_detection/experiment/save  controllers.SignalDetection.saveAnswer(trialId:Long, questionNo:Int)
 GET     /signal_detection/report      	controllers.SignalDetection.report(username:String ?= "", trial_id:Long ?= 0)
 
+GET     /positionError	            controllers.PositionError.info()
+GET     /positionError/info         controllers.PositionError.infoIframe()
+GET     /positionError/proc		    controllers.PositionError.proc()
+GET     /positionError/proci	    controllers.PositionError.procIframe()
+GET     /positionError/demo            controllers.PositionError.demoPage()
+POST    /positionError/reportDemo      	controllers.PositionError.demoReport()
+GET     /positionError/repeatexp     	 controllers.PositionError.checkUserTakeRepeatExperiment()
+
 GET     /user                       controllers.UserController.editProfile()
 POST	/user 		         	controllers.UserController.saveUserProfile()
 GET     /user/changepassword    controllers.UserController.changeUserPassword()

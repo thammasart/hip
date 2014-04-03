@@ -1,0 +1,81 @@
+@header("Human Information Processing Lab :: Home Page")
+<!--
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+--!>
+<script src="@routes.Assets.at("javascripts/positionErrorDemo.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/positionError.css")">
+<body onload="onLoad()">
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div class="positionErrorExp">
+    <div class="positionWord"  >
+        <p id="word" >  </p>
+        <div>
+            <div id="dragElements" class="dragZone">
+                <div draggable="true" class="pull-left" style="font-size:60px;">A</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">B</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">C</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">D</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">E</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">F</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">G</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">H</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">I</div>
+                <div draggable="true" class="pull-left" style="font-size:60px;">J</div>
+
+            </div>
+            <div id="dropZone" class="dropDiv">
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+                <div class="dropZone pull-left">
+                    <div class="dropChar" draggable="true" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="@routes.PositionError.demoReport()" method="post" >
+        <div class="choice" align="center" id="choice" >
+            <button type="submit" class="btn btn-success ansButton" id="confirm"  name="confirm"onclick="return done()"  > ยืนยัน </button>
+            <input id="answer" name="answer" hidden/>
+            <input id="usedTime" name="usedTime" hidden/>
+        </div>
+    </form>
+</div>
+@footer()

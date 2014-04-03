@@ -1,0 +1,44 @@
+@(trial : models.attentionBlink.Trial, questionNo : Integer)
+@header("Human Information Processing Lab :: Home Page")
+
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+
+<script src="@routes.Assets.at("javascripts/attentionBlink.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/attention_blink.css")">
+<body>
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div class="attentionBlinkExp">
+    <div class="attentionWord"  >
+        <p id="word" >  </p>
+    </div>
+    <div class="choice" align="center" id="choice" >
+
+        <form id = "answerForm" action="@routes.AttentionBlink.saveAnswer(trial.id,questionNo)" method="post">
+            <input type="submit" class="btn btn-danger ansButton" id = "maiMe" name = "maiMe" value="ไม่มี" class="Button" onclick="return submitButtonClick(this.name)"/>
+            <input type="submit" class="btn btn-success ansButton" id = "me" name = "me"  value="มี" class="Button" onclick="return submitButtonClick(this.name)"/>
+            <input id = "answer" name = "answer" type="checkbox" hidden/>
+            <input id = "usedTime" name = "usedTime" type="text" hidden/>
+            <input id = "isCorrect" name = "isCorrect" type="checkbox" hidden/>
+        </form>
+
+    </div>
+    <p id="blinkTime" hidden>@trial.blinkTime</p>
+    <p id="questionSet" hidden>@trial.quizzes(questionNo).question.set</p>
+    <p id="questionLetter" hidden>@trial.quizzes(questionNo).question.letter</p>
+    <p id="correctAnswer" hidden>@trial.quizzes(questionNo).question.correctAnswer</p>
+
+
+</div>
+@footer()
