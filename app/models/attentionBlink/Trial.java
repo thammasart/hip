@@ -22,9 +22,20 @@ public class Trial extends Model{
     public List<Quiz> quizzes = new ArrayList<Quiz>();
         
     //Constructor
+    public Trial(){
+        this.questionType = QuestionType.ENGLISH;
+        this.numberOfQuiz = 3;
+    }
+
 	public Trial(QuestionType questionType) {
             this.questionType = questionType;
 	}
+
+    public static Trial create(ExperimentSchedule ex){
+        Trial trial = new Trial();
+        trial.schedule = ex;
+        return trial;
+    }
 
     public static Trial create(ExperimentSchedule ex, QuestionType questionType,int numberOfQuiz) {
         Trial trial = new Trial(questionType);
@@ -53,6 +64,11 @@ public class Trial extends Model{
         }
         else if(questionType.equals("NUMBER")){
             this.questionType = QuestionType.NUMBER;
+        }
+    }
+    public void generateQuiz(){
+        for(int i = 0; i < this.numberOfQuiz; i++){
+            Quiz.create(this).save();
         }
     }
 

@@ -102,7 +102,7 @@ public class ExperimentSchedule extends Model{
 			case BROWNPETERSON : generateBrownPetersonTrial() ;break;
 			case STROOPEFFECT : generateStroopEffectTrial(); break;
 			case SIGNALDETECTION : break;
-			case ATTENTIONBLINK : break;
+			case ATTENTIONBLINK : generateAttentionBlinkTrial(); break;
 		}
 	}
 
@@ -118,6 +118,14 @@ public class ExperimentSchedule extends Model{
 			models.stroopEffect.Trial trial = models.stroopEffect.Trial.create(this);
             trial.save();
             trial.generateQuiz();
+		}
+	}
+
+	private void generateAttentionBlinkTrial(){
+		for(int i = 0; i < this.noOfTrial; i++){
+			models.attentionBlink.Trial trial = models.attentionBlink.Trial.create(this);
+			trial.save();
+			trial.generateQuiz();
 		}
 	}
 

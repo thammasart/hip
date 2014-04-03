@@ -330,6 +330,7 @@ public class Admin extends Controller {
 
             if(isQuestionChange){
                 trial.generateNewQuestions();
+                models.attentionBlink.Question.deleteAllUnusedQuestion();
             }
         }
 

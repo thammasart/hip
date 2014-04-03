@@ -3,6 +3,9 @@ package models.attentionBlink;
 import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.Random;
+import java.util.List;
+import play.db.ebean.Model.Finder;
+import java.util.ArrayList;
 
 @Entity
 @Table (name = "attention_blink_question")
@@ -21,6 +24,9 @@ public class Question extends Model{
     public boolean correctAnswer;
     public QuestionType questionType;
 
+    @OneToOne(mappedBy="question")
+    public Quiz quiz;
+
 	public Question(String letter, String set, boolean correctAnswer, QuestionType questionType) {
         this.letter = letter;
         this.set = set;
@@ -33,10 +39,7 @@ public class Question extends Model{
         String typeString = getQuestionTypeCase(questionType);
 
         Random random = new Random();
-        StringBuffer letterBuffer = new StringBuffer();
-        for(int i = 0; i < numberOfTarget; i++){
-            letterBuffer.append(typeString.charAt(random.nextInt(typeString.length())));
-        }
+        StringBuffer letterBuffer = generateLetterBuffer(numberOfTarget, typeString);
 
         for(int i =0; i < length; i++){
             setbuffer.append(typeString.charAt(random.nextInt(typeString.length())));
@@ -57,11 +60,43 @@ public class Question extends Model{
                 temp = temp.replace(letterBuffer, newLetter);
                 setbuffer = new StringBuffer(temp);
             }
+
+            if(numberOfTarget == 2){
+                int index = random.nextInt(setbuffer.length() - 2);
+                setbuffer.setCharAt(index, letterBuffer.charAt(0));
+            }else if(numberOfTarget == 3){
+                int index = random.nextInt(setbuffer.length() - 3);
+                setbuffer.setCharAt(index, letterBuffer.charAt(0));
+                setbuffer.setCharAt(index + 2, letterBuffer.charAt(2));
+            }
+
         }
 
         Question question = new Question(letterBuffer.toString(), setbuffer.toString(), isCorrect, questionType);
         question.save();
         return question;
+    }
+
+    private static StringBuffer generateLetterBuffer(int numberOfTarget, String typeString){
+        StringBuffer letterBuffer = new StringBuffer();
+        Random random = new Random();
+
+        for(int i = 0; i < numberOfTarget; i++){
+            letterBuffer.append(typeString.charAt(random.nextInt(typeString.length())));
+        }
+        if(numberOfTarget == 2){
+            if(letterBuffer.charAt(0) == letterBuffer.charAt(1)){
+                letterBuffer = generateLetterBuffer(numberOfTarget, typeString);
+            }
+        }else if(numberOfTarget == 3){
+            if(letterBuffer.charAt(0) == letterBuffer.charAt(1) ||
+                letterBuffer.charAt(0) == letterBuffer.charAt(2) ||
+                letterBuffer.charAt(1) == letterBuffer.charAt(2)
+                ){
+                letterBuffer = generateLetterBuffer(numberOfTarget, typeString);
+            }
+        }
+        return letterBuffer;
     }
 
     public void changeQuestionSetByCorrectAnswer(){
@@ -96,9 +131,18 @@ public class Question extends Model{
         }
         return typeString;
     }
-        
+
+    public static void deleteAllUnusedQuestion(){
+        List<Question> questions = find.all();
+        for(Question question : questions){
+            if(question.quiz == null)
+                question.delete();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public static Finder<Long, Question> find = new Finder(Long.class, Question.class);
+    
     
     
     

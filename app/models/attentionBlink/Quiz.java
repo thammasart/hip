@@ -20,11 +20,21 @@ public class Quiz extends Model{
         @ManyToOne
         public Trial trial;
 
-        @ManyToOne
+        @OneToOne
         public Question question;
 
         @OneToMany
         public List<Answer> answers = new ArrayList<Answer>();
+
+        public static Quiz create(Trial trial){
+                Quiz quiz = new Quiz();
+                Question question = Question.generateQuestion(trial.questionType, quiz.length, 
+                        quiz.numberOfTarget, quiz.isCorrect);
+                question.save();
+                quiz.question = question;
+                quiz.trial = trial;
+                return quiz;
+        }
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Quiz> find = new Finder(Long.class, Quiz.class);
