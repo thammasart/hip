@@ -66,5 +66,5 @@ function done(name){
 function calculateTimeLeft()
 {
   count=count-1;
-        document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาท่ี " ;
+        document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาที " ;
 }

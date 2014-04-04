@@ -47,6 +47,18 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: ATTENTIONBLINK
+- &ex9 !!models.ExperimentSchedule
+    name:           Ex9
+    noOfTrial:      1
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: POSITIONERROR
+- &ex10 !!models.ExperimentSchedule
+    name:           Ex10
+    noOfTrial:      1
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: POSITIONERROR
 
 #Question
 - &Question1 !!models.brownPeterson.Question
@@ -803,3 +815,37 @@
     isCorrect: false
     trial: *round17
     question: *Question36
+
+#Position Error
+
+#Trial
+- &round18 !!models.positionError.Trial
+    flashSpeed: 1
+    delayTime: 1
+    questionType: ENGLISH
+    schedule: *ex9
+
+#Question
+- &Question37 !!models.positionError.Question
+    memorySet: ABCDEFGHIJ
+    questionType: ENGLISH
+- &Question38 !!models.positionError.Question
+    memorySet: AABBCC
+    questionType: ENGLISH
+- &Question39 !!models.positionError.Question
+    memorySet: ONEPIECE
+    questionType: ENGLISH
+
+#Quiz
+- &Quiz43 !!models.positionError.Quiz
+    length: 10
+    trial: *round18
+    question: *Question37
+- &Quiz44 !!models.positionError.Quiz
+    length: 6
+    trial: *round18
+    question: *Question38
+- &Quiz45 !!models.positionError.Quiz
+    length: 8
+    trial: *round18
+    question: *Question39

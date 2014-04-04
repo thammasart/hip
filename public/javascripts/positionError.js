@@ -3,68 +3,213 @@ var instructionTime = 5000;
 var count = 5;
 var showInstructionTime = 0;
 var showTimerTime = 0;
-var attentionWordTime = 0;
+var positionWordTime = 0;
 var questionTime = 0;
-var questionTime2 = 0;
+
+var charTime = 0;
+var gapTime = 0;
+
 var i =0;
+var trial_flashSpeed;
+var trial_delayTime;
 var expDuration;
-var score = 0;
+var dragElements;
+var dropZone;
+var dropZoneOrigin;
 var question = new Array();
-    question[0] = "Q";
-    question[1] = "W";
-    question[2] = "E";
-    question[3] = "R";
-    question[4] = "T";
-    question[5] = "Y";
-    question[6] = "U";
-    question[7] = "I";
-    question[8] = "O";
-    question[9] = "P";
-    question[10] = "A";
-    question[11] = "S";
-    question[12] = "D";
-    question[13] = "F";
+
+function onLoad(){
+
+    dragElements = document.querySelectorAll('#dragElements div');
+    dropZone = document.querySelectorAll('#dropZone .dropChar');
+    dropZoneOrigin = document.querySelector('#dragElements');
+    for (var j = 0; j < dragElements.length; j++) {
+        // Event Listener for when the drag interaction starts.
+        dragElements[j].addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData('text', this.innerHTML);
+            currentDragElement = this;
+        });
+
+        // Event Listener for when the drag interaction finishes.
+        dragElements[j].addEventListener('dragend', function(e) {
+            currentDragElement = null;
+        });
+    }
+
+    for (var j = 0; j < dropZone.length; j++) {
+
+        dropZone[j].addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData('text', this.innerHTML);
+            currentDragElement = this;
+        });
+
+        // Event Listener for when the drag interaction finishes.
+        dropZone[j].addEventListener('dragend', function(e) {
+            currentDragElement = null;
+        });
+
+        dropZone[j].addEventListener('dragover', function(e) {
+          if (e.preventDefault) {
+            e.preventDefault();
+          }
+          return false;
+        });
+
+        // Event Listener for when the dragged element enters the drop zone.
+        dropZone[j].addEventListener('dragenter', function(e) {
+            //TODO
+        });
+
+        // Event Listener for when the dragged element leaves the drop zone.
+        dropZone[j].addEventListener('dragleave', function(e) {
+            //TODO
+        });
+
+        // Event Listener for when the dragged element dropped in the drop zone.
+        dropZone[j].addEventListener('drop', function(e) {
+            if (e.preventDefault) e.preventDefault();
+            if (e.stopPropagation) e.stopPropagation();
+            if (this.innerHTML == ""){
+                this.innerHTML = e.dataTransfer.getData('text');
+                currentDragElement.innerHTML = "";
+            }
+
+            return false;
+        });
+    }
+    dropZoneOrigin.addEventListener('dragover', function(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        return false;
+    });
+
+    // Event Listener for when the dragged element enters the drop zone.
+    dropZoneOrigin.addEventListener('dragenter', function(e) {
+        //TODO
+    });
+
+    // Event Listener for when the dragged element leaves the drop zone.
+    dropZoneOrigin.addEventListener('dragleave', function(e) {
+        //TODO
+    });
+
+    dropZoneOrigin.addEventListener('drop', function(e) {
+        if (e.preventDefault) e.preventDefault();
+        if (e.stopPropagation) e.stopPropagation();
+        if (currentDragElement.innerHTML != ""){
+            for (var j = 0; j < dragElements.length; j++){
+                if (dragElements[j].innerHTML == ""){
+                    currentDragElement.innerHTML = "";
+                    dragElements[j].innerHTML = e.dataTransfer.getData('text');
+                    break;
+                }
+            }
+        }
+        return false;
+    });
+}
+
+function genQuestion(){
+
+    for (var j = 0; j < dragElements.length; j++) {
+        question[j] = dragElements[j].innerHTML;
+    }
+    randomDragElementOrder();
+}
+
+function randomDragElementOrder(){
+    var textLength = dragElements.length;
+    var isSame = true;
+    do{
+        for (var j = 0; j < textLength; j++) {
+            var randIndex = Math.floor(Math.random()*textLength);
+
+            var temp = dragElements[j].innerHTML;
+            dragElements[j].innerHTML = dragElements[randIndex].innerHTML;
+            dragElements[randIndex].innerHTML = temp;
+
+        }
+
+        for (var j = 0; j < textLength; j++) {
+            if (question[j] != dragElements[j].innerHTML){
+                isSame = false;
+                break;
+            }
+            isSame = true;
+        }
+
+    }while(isSame);
+}
 
 function showInstruction (){
     clearInterval(startTimer);
-    document.getElementById("word").innerHTML=" ค้นหา A และ B ที่อยู่ติดกัน ";
+    trial_flashSpeed = document.getElementById("flashSpeed").innerHTML;
+    trial_delayTime = document.getElementById("delayTime").innerHTML;
+
+    question_correctAnswer = true;
+    genQuestion();
+    document.getElementById("word").innerHTML=" จำตัวอักษรที่ปรากฎ";
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
+
 function showTimer(){
     clearInterval(showInstructionTime);
     showTimerTime =   setInterval(calculateTimeLeft,1000);
-    attentionWordTime = setInterval(function(){showAttentionWord()},5000);
+    positionWordTime = setInterval(function(){showWordSeries()},5000);
 }
-function showAttentionWord(){
-    clearInterval(attentionWordTime);
+function showWordSeries(){
+    clearInterval(positionWordTime);
     clearInterval(showTimerTime);
-    questionTime = setInterval(showQuestionList,500);
-    questionTime2 = setInterval(function(){showQuestionWord()},(question.length*500)+500);
+    showCharacter();
 }
-function showQuestionList(){
-    document.getElementById("word").innerHTML= question[i];
-    i++;
+
+function showCharacter(){
+    clearInterval(gapTime);
+    if (i < question.length){
+        document.getElementById("word").innerHTML= question[i];
+        i++;
+        charTime = setInterval(showBlank,trial_flashSpeed*1000);
+    }
+    else
+        showQuestionWord();
 }
+
+function showBlank(){
+    clearInterval(charTime);
+
+    document.getElementById("word").innerHTML = "";
+    gapTime = setInterval(showCharacter,trial_delayTime*1000);
+}
+
 function showQuestionWord(){
-    clearInterval(questionTime2);
-    clearInterval(questionTime);
+    clearInterval(charTime);
+    document.querySelector('.positionWord').style.top = "10%";
+    document.getElementById("dragElements").style.visibility = "visible";
+    document.getElementById("dropZone").style.visibility = "visible";
+    document.getElementById("confirm").style.visibility = "visible";
+    document.getElementById("word").innerHTML= "Drag & Drop ตามลำดับที่ปรากฎก่อนหน้านี้";
+
     d = new Date();
     expDuration = d.getTime();
-    document.getElementById("me").style.visibility = "visible";
-    document.getElementById("maiMe").style.visibility = "visible";
-    document.getElementById("word").innerHTML = " มี A และ B ติดกันหรือไม่ " ;
 }
-function done(name){
+
+function done(){
     d = new Date();
-    expDuration =  (d.getTime()-expDuration)/1000;
-    if(name == "maiMe"){
-        score = score+1;
-    }
-    document.getElementById("time").value = expDuration;
-    document.getElementById("score").value = score ;
+    expDuration = d.getTime()-expDuration;
+    document.getElementById("usedTime").value = expDuration/1000;
+    document.getElementById("isCorrect").checked = true;
+    var word = "";
+    for (var j=0;j<dropZone.length;j++){
+        word += dropZone[j].innerHTML;
+        if (dropZone[j].innerHTML != question[j]){
+            document.getElementById("isCorrect").checked = false;
+        }
+     }
+     document.getElementById("answer").value = word;
 }
-function calculateTimeLeft()
-{
-  count=count-1;
-        document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาท่ี " ;
+
+function calculateTimeLeft(){
+    count=count-1;
+    document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาที" ;
 }
