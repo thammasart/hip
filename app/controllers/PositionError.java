@@ -2,6 +2,7 @@ package controllers;
 
 import models.ExperimentSchedule;
 import models.User;
+import models.positionError.*;
 
 import play.*;
 import play.mvc.*;
@@ -15,7 +16,7 @@ import views.html.iframe.*;
 import java.util.Date;
 
 public class PositionError extends Controller{
-
+    private static final Form<Answer> answerForm = Form.form(Answer.class);
     @Security.Authenticated(Secured.class)
     public static Result info(){
         User user = User.find.byId(request().username());
@@ -39,26 +40,64 @@ public class PositionError extends Controller{
     }
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
-        return ok(demo.render());
+        Question question = new Question("ABCDEFGHIJ",QuestionType.ENGLISH);
+        Quiz quiz = new Quiz(10,question,null);
+        return ok(demo.render(quiz,0.5,1.0));
     }
     @Security.Authenticated(Secured.class)
     public static Result demoReport(){
-
-        DynamicForm reportData = Form.form().bindFromRequest();
+        Form<Answer> boundForm = answerForm.bindFromRequest();
         User user = User.find.byId(session().get("username"));
-        double time = Double.parseDouble(reportData.get("usedTime"));
-        String answer = reportData.get("answer");
-        String solve = "ABCDEFGHIJ";
-        int score = 1;
-        for (int i=0;i<solve.length();i++){
-            if (solve.charAt(i) != answer.charAt(i)){
-                score = 0;
-                break;
-            }
-        }
-        return ok(demoReport.render(score,time,1,"Demo Report",user));
+        Answer answer = boundForm.get();
+        int score = 0;
+        if (answer.isCorrect)
+            score++;
+        return ok(demoReport.render(score,answer.usedTime,1,"Demo Report",user));
+    }
 
-        //return TODO;
+    //แสดงหน้าการทดลอง
+    @Security.Authenticated(Secured.class)
+    public static Result experiment(long trialId,int questionNo){
+        return ok(exp.render(Trial.find.byId(trialId), questionNo));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result saveAnswer(long trialId, int questionNo){
+
+        Form<Answer> boundForm = answerForm.bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        Trial trial = Trial.find.byId(trialId);
+
+        if(boundForm.hasErrors()){
+            flash("error", "please correct the form above.");
+            return badRequest(views.html.home.render(user));
+        }
+
+        Answer answer = boundForm.get();
+        answer.user = user;
+        answer.quiz = trial.quizzes.get(questionNo);
+        answer.save();
+
+        questionNo++;
+        if(questionNo < 3){
+            return redirect(routes.PositionError.experiment(trialId, questionNo));
+        }
+        return redirect(routes.PositionError.report(user.username, trialId));
+    }
+
+    //แสดงหน้าผลลัพธ์การทดลอง
+    @Security.Authenticated(Secured.class)
+    public static Result report(String username, long trialId){
+        if(username.equals("") || trialId == 0){
+            return redirect(controllers.routes.AttentionBlink.info());
+        }
+
+        User user = User.find.byId(username);
+        Trial trial = Trial.find.byId(trialId);
+        List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
+        double totalUsedTime = Answer.calculateTotalUsedTime(answers);
+        int score = Answer.calculateTotalScore(answers);
+        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
 
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
@@ -76,7 +115,7 @@ public class PositionError extends Controller{
         models.TimeLog.create(new Date(), user, 1,ExperimentSchedule.find.byId(7L)).save();
         return redirect(routes.AttentionBlink.experiment(4,0));
         */
-        return TODO;
+        return redirect(routes.PositionError.experiment(1,0));
     }
 
 }
