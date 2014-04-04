@@ -127,4 +127,74 @@ public class SternbergSearchUnitTest extends WithApplication{
     	assertEquals(question, quiz.question);
     	assertTrue(quiz.isTrue);
     }
+
+    @Test
+    public void queryQuizShouldCorrect(){
+    	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
+    	new Question("5", QuestionType.NUMBER).save();
+    	Question question = Question.find.byId(1L);
+    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial trial = Trial.find.byId(1L);
+    	Quiz.create(trial, question, true).save();
+    	Quiz quiz = Quiz.find.byId(1L);
+    	assertNotNull(quiz);
+    	assertEquals(trial, quiz.trial);
+    	assertEquals(question, quiz.question);
+    	assertTrue(quiz.isTrue);
+    }
+
+    @Test
+    public void createAnswerShouldNotNull(){
+    	User user = User.find.byId("123");
+    	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
+    	new Question("5", QuestionType.NUMBER).save();
+    	Question question = Question.find.byId(1L);
+    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial trial = Trial.find.byId(1L);
+    	Quiz.create(trial, question, true).save();
+    	Quiz quiz = Quiz.find.byId(1L);
+    	Answer answer = new Answer(user, quiz);
+    	assertNotNull(answer);
+    	assertEquals(user, answer.user);
+    	assertEquals(quiz, answer.quiz);
+    }
+
+    @Test
+    public void createAnswerWithParameter(){
+    	User user = User.find.byId("123");
+    	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
+    	new Question("5", QuestionType.NUMBER).save();
+    	Question question = Question.find.byId(1L);
+    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial trial = Trial.find.byId(1L);
+    	Quiz.create(trial, question, true).save();
+    	Quiz quiz = Quiz.find.byId(1L);
+    	Answer answer = Answer.create(user, quiz, true, 4.85, true);
+    	assertNotNull(answer);
+    	assertEquals(user, answer.user);
+    	assertEquals(quiz, answer.quiz);
+    	assertTrue(answer.answer);
+    	assertEquals(4.85, answer.usedTime, 0.001);
+    	assertTrue(answer.isCorrect);
+    }
+
+    @Test
+    public void queryAnswerShouldCorrect(){
+    	User user = User.find.byId("123");
+    	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
+    	new Question("5", QuestionType.NUMBER).save();
+    	Question question = Question.find.byId(1L);
+    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial trial = Trial.find.byId(1L);
+    	Quiz.create(trial, question, true).save();
+    	Quiz quiz = Quiz.find.byId(1L);
+    	Answer.create(user, quiz, true, 4.85, true).save();
+    	Answer answer = Answer.find.byId(1L);
+    	assertNotNull(answer);
+    	assertEquals(user, answer.user);
+    	assertEquals(quiz, answer.quiz);
+    	assertTrue(answer.answer);
+    	assertEquals(4.85, answer.usedTime, 0.001);
+    	assertTrue(answer.isCorrect);
+    }
 }
