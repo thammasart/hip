@@ -71,17 +71,15 @@ public class AttentionBlinkUnitTest extends WithApplication{
 
     @Test
     public void createTrial() {
-    	Trial trial = new Trial(10,0.5,QuestionType.NUMBER);
+    	Trial trial = new Trial(QuestionType.NUMBER);
     	assertNotNull(trial);
-        assertEquals(10,trial.length);
-        assertEquals(0.5,trial.blinkTime,0.2);
         assertEquals(QuestionType.NUMBER,trial.questionType);
         
     }
     @Test
     public void setNumberOfQuizInTrial(){
         
-        Trial t =  new Trial(10,0.5,QuestionType.NUMBER);        
+        Trial t =  new Trial(QuestionType.NUMBER);        
         t.numberOfQuiz = 3;
         t.save();
         assertEquals(3,Trial.find.byId(1L).numberOfQuiz);
@@ -89,7 +87,7 @@ public class AttentionBlinkUnitTest extends WithApplication{
 
     @Test
     public void trialQueryShouldCorrect(){
-        new Trial(10,0.5,QuestionType.NUMBER).save();        
+        new Trial(QuestionType.NUMBER).save();        
         assertNotNull(Trial.find.byId(1L));
     }
 
@@ -102,10 +100,10 @@ public class AttentionBlinkUnitTest extends WithApplication{
 	calendar.add(Calendar.YEAR, +2);
 	Date nextYearDate = calendar.getTime();
 
-	new ExperimentSchedule("Experiment 1", 5, lastYearDate,nextYearDate, ExperimentType.BROWNPETERSON).save();
+	new ExperimentSchedule("Experiment 1", 5, lastYearDate,nextYearDate, ExperimentType.ATTENTIONBLINK).save();
         ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
         
-        Trial trial = Trial.create(ex,13,0.5,QuestionType.NUMBER,3);
+        Trial trial = Trial.create(ex, QuestionType.NUMBER, 3);
         trial.save();
 
 	assertNotNull(trial);

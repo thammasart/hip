@@ -14,7 +14,7 @@ import com.avaje.ebean.*;
 import play.libs.Yaml;
 
 public class BrownPetersonTest extends WithApplication {
-	@Before
+	/*@Before
 	public void setUp() {
 		start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
 		Ebean.save((List) Yaml.load("test-data.yml"));
@@ -46,7 +46,7 @@ public class BrownPetersonTest extends WithApplication {
 	@Test
 	public void timelog_should_have_4_row(){
 		assertEquals(4, TimeLog.find.findRowCount());
-	}*/
+	}
 	@Test
 	public void answers_should_have_12_rows(){
 		assertEquals(12, Answer.find.findRowCount());
@@ -87,7 +87,7 @@ public class BrownPetersonTest extends WithApplication {
 		Trial trial = Trial.find.where().eq("id", 1).findUnique();
 		assertFalse(TimeLog.isRepeatTrial(user, trial));
 	}
-	*/
+	
     @Test
     public void trial_should_have_3_quiz(){
         Trial trial = Trial.find.byId(1L); 
