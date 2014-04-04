@@ -9,6 +9,7 @@ public class Global extends GlobalSettings {
 	public void onStart(Application app) {
 		if(User.find.findRowCount() == 0) {
 			Ebean.save((List) Yaml.load("initial-data.yml"));
+			Ebean.save((List) Yaml.load("user.yml"));
 		}
 	}
 }

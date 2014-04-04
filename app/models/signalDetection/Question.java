@@ -14,7 +14,7 @@ public class Question extends Model{
     public char noise;
 
     @OneToMany
-    public List<Quiz> quizzes;
+    public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(){}
 

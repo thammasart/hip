@@ -15,7 +15,7 @@ public class Question extends Model{
 	public QuestionType questionType;
 
 	@OneToMany
-    public List<Quiz> quizzes;
+	public List<Quiz> quizzes = new ArrayList<Quiz>();
 
 	public Question(String memorySet, QuestionType questionType){
 		this.memorySet = memorySet;
