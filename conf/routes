@@ -86,5 +86,8 @@ GET     /admin/experiment/stroof-effect/question/change controllers.Admin.switch
 POST     /admin/experiment/parameter/stroopEffect controllers.Admin.saveStroopEffectParameter(exp_id : Long)
 POST    /admin/experiment/parameter/attention-blink controllers.Admin.saveAttentionBlinkParameter(exp_id : Long)
 
+GET     /initial                    controllers.InitialController.index()
+GET     /initial/AttentionBlink     controllers.StroopEffect.installQuestion()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

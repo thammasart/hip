@@ -16,6 +16,8 @@ import models.stroopEffect.*;
 
 public class StroopEffect extends Controller {
     private static final Form<Answer> answerForm = Form.form(Answer.class);
+
+
     //แสดงหน้าข้อมูลการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result info(){
@@ -95,5 +97,27 @@ public class StroopEffect extends Controller {
         return redirect(routes.StroopEffect.experiment(new Long(2),0));
     }
 
+    @Security.Authenticated(Secured.class)
+    public static Result installQuestion(){
+        final String[] colors = { "black", "blue", "red", "green", "purple", "yellow"};
+        final String[] colorsTH = { "ดำ", "น้ำเงิน", "แดง", "เขียว", "ม่วง", "เหลือง"};
+        for(int i=0; i < colors.length; i++){
+            for(int j=0;j < colors.length; j++){
+                Question question = new Question(colors[i], colors[j]);
+                question.questionType = QuestionType.ENGLISH;
+                question.save();
+            }
+        }
+
+        for(int i = 0; i < colorsTH.length; i++){
+            for(int j=0;j < colors.length; j++){
+                Question question = new Question(colorsTH[i], colors[j]);
+                question.questionType = QuestionType.THAI;
+                question.save();
+            }
+        }
+
+        return redirect(routes.Admin.index());
+    }
 
 }

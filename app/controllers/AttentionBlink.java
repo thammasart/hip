@@ -93,4 +93,6 @@ public class AttentionBlink extends Controller {
         int score = Integer.parseInt(reportData.get("score"));
         return ok(demoReport.render(score,time,1,"Demo Report",user));
     }
+
+
 }

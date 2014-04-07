@@ -32,11 +32,11 @@ public class Quiz extends Model{
     public void switchRandomQuestion(){
         Random random = new Random();
         if(!question.isMatch()){
-            List<Question> questions = Question.findAllMatchQuestion();
+            List<Question> questions = Question.findAllMatchQuestion(this.trial.questionType);
             int index = random.nextInt(questions.size());
             question = questions.get(index);
         }else{
-            List<Question> questions = Question.findAllNotMatchQuestion();
+            List<Question> questions = Question.findAllNotMatchQuestion(this.trial.questionType);
             int index = random.nextInt(questions.size());
             question = questions.get(index);
         }

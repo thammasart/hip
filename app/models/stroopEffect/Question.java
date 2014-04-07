@@ -7,10 +7,14 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import play.db.ebean.Model.Finder;
 
 @Entity
 @Table (name="stroop_engword_question")
 public class Question extends Model{
+
+    public static final String[] colors = { "black", "blue", "red", "green", "purple", "yellow"};
+    public static final String[] colorsTH = { "ดำ", "น้ำเงิน", "แดง", "เขียว", "ม่วง", "เหลือง"};
 
     @Id
     public long id;
@@ -46,8 +50,8 @@ public class Question extends Model{
         return colorWord.equalsIgnoreCase(inkColor);
     }
 
-    public static List<Question> findAllMatchQuestion(){
-        List<Question> questions = Question.find.all();
+    public static List<Question> findAllMatchQuestion(QuestionType questionType){
+        List<Question> questions = find.where().eq("questionType", questionType).findList();
         List<Question> matchQuestions = new ArrayList<Question>();
         for(Question question : questions){
             if(question.colorWord.equalsIgnoreCase(question.inkColor)){
@@ -56,11 +60,11 @@ public class Question extends Model{
         }
         return matchQuestions;
     }
-    public static List<Question> findAllNotMatchQuestion(){
-        List<Question> questions = Question.find.all();
+    public static List<Question> findAllNotMatchQuestion(QuestionType questionType){
+        List<Question> questions = find.where().eq("questionType", questionType).findList();
         List<Question> notMatchQuestions = new ArrayList<Question>();
         for(Question question : questions){
-            if(!question.colorWord.equalsIgnoreCase(question.inkColor)){
+            if((!question.colorWord.equalsIgnoreCase(question.inkColor))){
                 notMatchQuestions.add(question);
             }
         }
