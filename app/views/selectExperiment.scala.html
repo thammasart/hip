@@ -1,98 +1,87 @@
 @(user : User)
 @header("Human Information Processing Lab :: Home Page")
 
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/select_experiment.css")">
 <body>
-
 
 <!-- Page Header -->
 @nav(user)
-<!-- Image Slide Menu -->
 
-    <!--Perception -->
-            <div class="homeMain">
-                <div class="tile homeMenu1" id="slide01" ><img src="@routes.Assets.at("images/perception.png")" width="150" height="150"><br><br><br>
-                <a  id="slide01" class="btn btn-block btn-lg btn-primary">
-                <span class="fui-list"></span>&nbsp;&nbsp;Perception</a></div>
-
-    <!-- Attention -->
-                <div class="tile homeMenu1" id="slide02" ><img src="@routes.Assets.at("images/attention.png")" width="150" height="150"><br><br><br>
-                <a  id="slide02" class="btn btn-block btn-lg btn-primary">
-                <span class="fui-list"></span>&nbsp;&nbsp;  Short-Term Memory</a></div>
-
-    <!--Short-Term Memory -->
-                <div class="tile homeMenu1" id="slide03" ><img src="@routes.Assets.at("images/shortmem.png")" width="150" height="150"><br><br><br>
-                <a  id="slide01" class="btn btn-block btn-lg btn-primary">
-                <span class="fui-list"></span>&nbsp;&nbsp;Attention</a></div>
-            </div>
-<br>
-
-
-<!-- Perception Panel -->
-
-<div class="divSlideContainer"  id="panel01">
-        <div class="divSlideTitle" >
-            <span class="fui-list"></span>&nbsp;&nbsp;Perception
-        </div>
-
-        <div class="divContainer" >
-
-             <div class="divExperimentIcon" >
-                <a  href="#"><img class="divPng"  src="@routes.Assets.at("images/change_blindness.png")"></a>
-                    <div>
-                        <a href="#">Change Blindness</a>
-                    </div>
-             </div>
-             <div class="divExperimentIcon" >
-                <a  href="@routes.SignalDetection.info()"><img class="divPng"  src="@routes.Assets.at("images/signal_detection.png")"></a>
-                    <div><a href="@routes.SignalDetection.info()">Signal Detection</a></div>
-            </div>
-        </div>
-</div>
-
-
-<!-- Short-Term Memory Panel -->
-
-<div class="divSlideContainer"  id="panel02">
-    <div class="divSlideTitle">
-        <span class="fui-list"></span>&nbsp;&nbsp;Short-Term Memory
-    </div>
+    <div class="seMainWindow">
     
-    <div class="divContainer">
+        <div class="category">
 
-      <div class="divExperimentIcon" >
-        <a  href="@routes.SternbergSearch.info()"><img class="divPng"  src="@routes.Assets.at("images/sternberg_search.png")"></a>
-          <div><a href="@routes.SternbergSearch.info()">Sternberg Search</a></div>
-      </div>
-      <div class="divExperimentIcon" >
-        <a  href="@routes.PositionError.info()"><img class="divPng"  src="@routes.Assets.at("images/brown_peterson.png")"></a>
-            <div><a href="@routes.PositionError.info()">Position Error</a></div>
-      </div>
-      <div class="divExperimentIcon" >
-        <a  href="@routes.BrownPeterson.info()"><img class="divPng"  src="@routes.Assets.at("images/brown_peterson.png")"></a>
-          <div><a href="@routes.BrownPeterson.info()">Brown-Peterson Task</a></div> 
-      </div>
-
-    </div>
-</div>
-
-
-<!-- Attention Panel -->
-
-<div class="divSlideContainer"  id="panel03">
-    <div class="divSlideTitle"><span class="fui-list"></span>&nbsp;&nbsp;Attention</div>
+            <div class="categoryTitle" align="center">
+                <span> Attention </span>
+            </div>
     
-    <div class="divContainer">
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/attn01_attentional_blink.png")">
+                <a class="btn btn-default exButton"> Attention Blink </a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/attn02_simon_effect.png")">
+                <a class="btn btn-default exButton"> Simon Effect</a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/attn03_stroop_effect.png")">
+                <a class="btn btn-default exButton"> Stroop Effect </a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/attn04_visual_search.png")">
+                <a class="btn btn-default exButton"> Attention Blink </a>
+            </div>
 
-      <div class="divExperimentIcon" >
-        <a  href="@routes.StroopEffect.info()"><img class="divPng"  src="@routes.Assets.at("images/stroop_effect.png")"></a>
-          <div><a href="@routes.StroopEffect.info()">Stroop Effect</a></div>
-      </div>
-      <div class="divExperimentIcon" >
-        <a  href="@routes.AttentionBlink.info()"><img class="divPng"  src="@routes.Assets.at("images/attention_blink.png")"></a>
-          <div><a href="@routes.AttentionBlink.info()">Attention Blink</a></div> 
-      </div>
+        </div>
+        <div class="category">
+
+            <div class="categoryTitle" align="center">
+                <span> Short-Term Memory</span>
+            </div>
+
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/stm01_brown_peterson.png")">
+                <a class="btn btn-default exButton"> Attention Blink </a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/stm02_magic_number7.png")">
+                <a class="btn btn-default exButton"> Magic Number 7</a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/stm03_position_error.png")">
+                <a class="btn btn-default exButton"> Position Error</a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/stm04_sternberg_search.png")">
+                <a class="btn btn-default exButton"> Sternberg Search</a>
+            </div>
+
+        </div>
+        <div class="category">
+
+            <div class="categoryTitle" align="center">
+                <span> Perception</span>
+            </div>
+
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/perc01_change_blindness.png")">
+                <a class="btn btn-default exButton"> Change Blindness</a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/perc02_garner_interference.png")">
+                <a class="btn btn-default exButton"> Garner Interference</a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/perc03_muller.png")">
+                <a class="btn btn-default exButton"> Muller-Layer Illusion</a>
+            </div>
+            <div class="exIcon" align="center">
+                <img class="exImage" src="@routes.Assets.at("images/perc04_signal_detection.png")">
+                <a class="btn btn-default exButton"> Signal Detection</a>
+            </div>
+
+        </div>
     </div>
-</div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 @footer()
