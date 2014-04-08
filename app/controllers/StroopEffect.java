@@ -82,6 +82,7 @@ public class StroopEffect extends Controller {
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
+
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
     @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment() {

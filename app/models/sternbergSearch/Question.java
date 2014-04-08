@@ -11,13 +11,13 @@ import play.db.ebean.Model.Finder;
 public class Question extends Model{
     @Id
     public long id;
-    public String question;
+    public String memorySet;
     public QuestionType questionType;
-    @OneToOne
-    public Quiz quiz;
+    @OneToMany
+    public List<Quiz> quizzes;
 
-    public Question(String question, QuestionType questionType) {
-    	this.question = question;
+    public Question(String memorySet, QuestionType questionType) {
+    	this.memorySet = memorySet;
     	this.questionType = questionType;
     }
 

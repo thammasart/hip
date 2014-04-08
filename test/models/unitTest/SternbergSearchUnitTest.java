@@ -37,18 +37,16 @@ public class SternbergSearchUnitTest extends WithApplication{
     @Test
     public void createTrialWithParameter(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	String memorySet = "123456";
-    	int length = 6;
+    	int length = 5;
     	double blinkTime = 0.05;
     	int oneCharIsCorrect = 2;
     	int oneCharIsInCorrect = 2;
     	int twoCharIsCorrect = 2;
     	int twoCharIsInCorrect = 2;
     	QuestionType questionType = QuestionType.NUMBER;
-    	Trial trial = Trial.create(ex, memorySet, length, blinkTime, oneCharIsCorrect, oneCharIsInCorrect, twoCharIsCorrect, twoCharIsInCorrect, questionType);
+    	Trial trial = Trial.create(ex, length, blinkTime, oneCharIsCorrect, oneCharIsInCorrect, twoCharIsCorrect, twoCharIsInCorrect, questionType);
     	assertNotNull(trial);
     	assertEquals(ex, trial.schedule);
-    	assertEquals(memorySet, trial.memorySet);
     	assertEquals(length, trial.length);
     	assertEquals(blinkTime, trial.blinkTime, 0.001);
     	assertEquals(oneCharIsCorrect, trial.oneCharIsCorrect);
@@ -56,6 +54,7 @@ public class SternbergSearchUnitTest extends WithApplication{
     	assertEquals(twoCharIsCorrect, trial.twoCharIsCorrect);
     	assertEquals(twoCharIsInCorrect, trial.twoCharIsInCorrect);
     	assertEquals(questionType, trial.questionType);
+
     }
 
     @Test
@@ -69,11 +68,10 @@ public class SternbergSearchUnitTest extends WithApplication{
     	int twoCharIsCorrect = 2;
     	int twoCharIsInCorrect = 2;
     	QuestionType questionType = QuestionType.NUMBER;
-    	Trial.create(ex, memorySet, length, blinkTime, oneCharIsCorrect, oneCharIsInCorrect, twoCharIsCorrect, twoCharIsInCorrect, questionType).save();
+    	Trial.create(ex, length, blinkTime, oneCharIsCorrect, oneCharIsInCorrect, twoCharIsCorrect, twoCharIsInCorrect, questionType).save();
     	Trial trial = Trial.find.byId(1L);
     	assertNotNull(trial);
     	assertEquals(ex, trial.schedule);
-    	assertEquals(memorySet, trial.memorySet);
     	assertEquals(length, trial.length);
     	assertEquals(blinkTime, trial.blinkTime, 0.001);
     	assertEquals(oneCharIsCorrect, trial.oneCharIsCorrect);
@@ -85,28 +83,28 @@ public class SternbergSearchUnitTest extends WithApplication{
 
     @Test
     public void createQuestionWithParameterAndNotNull(){
-    	new Question("5", QuestionType.NUMBER).save();
+    	new Question("12345", QuestionType.NUMBER).save();
     	Question question = Question.find.byId(1L);
     	assertNotNull(question);
-    	assertEquals("5", question.question);
+    	assertEquals("12345", question.memorySet);
     	assertEquals(QuestionType.NUMBER, question.questionType);
     }
 
     @Test
     public void queryQuestionShouldCorrect(){
-    	new Question("5", QuestionType.NUMBER).save();
+    	new Question("12345", QuestionType.NUMBER).save();
     	Question question = Question.find.byId(1L);
     	assertNotNull(question);
-    	assertEquals("5", question.question);
+    	assertEquals("12345", question.memorySet);
     	assertEquals(QuestionType.NUMBER, question.questionType);
     }
 
     @Test
     public void createQuizAndNotNull(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	new Question("5", QuestionType.NUMBER).save();
+    	new Question("12345", QuestionType.NUMBER).save();
     	Question question = Question.find.byId(1L);
-    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial.create(ex, 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
     	Trial trial = Trial.find.byId(1L);
     	Quiz quiz = new Quiz(trial, question);
     	assertNotNull(quiz);
@@ -117,29 +115,31 @@ public class SternbergSearchUnitTest extends WithApplication{
     @Test
     public void createQuizWithParameter(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	new Question("5", QuestionType.NUMBER).save();
+    	new Question("12345", QuestionType.NUMBER).save();
     	Question question = Question.find.byId(1L);
-    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial.create(ex, 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
     	Trial trial = Trial.find.byId(1L);
-    	Quiz quiz = Quiz.create(trial, question, true);
+    	Quiz quiz = Quiz.create(trial, question, "5", true);
     	assertNotNull(quiz);
     	assertEquals(trial, quiz.trial);
     	assertEquals(question, quiz.question);
+        assertEquals("5", quiz.questionChar);
     	assertTrue(quiz.isTrue);
     }
 
     @Test
     public void queryQuizShouldCorrect(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	new Question("5", QuestionType.NUMBER).save();
+    	new Question("12345", QuestionType.NUMBER).save();
     	Question question = Question.find.byId(1L);
-    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial.create(ex, 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
     	Trial trial = Trial.find.byId(1L);
-    	Quiz.create(trial, question, true).save();
+    	Quiz.create(trial, question, "5", true).save();
     	Quiz quiz = Quiz.find.byId(1L);
     	assertNotNull(quiz);
     	assertEquals(trial, quiz.trial);
     	assertEquals(question, quiz.question);
+        assertEquals("5", quiz.questionChar);
     	assertTrue(quiz.isTrue);
     }
 
@@ -147,11 +147,11 @@ public class SternbergSearchUnitTest extends WithApplication{
     public void createAnswerShouldNotNull(){
     	User user = User.find.byId("123");
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	new Question("5", QuestionType.NUMBER).save();
+    	new Question("12345", QuestionType.NUMBER).save();
     	Question question = Question.find.byId(1L);
-    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial.create(ex, 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
     	Trial trial = Trial.find.byId(1L);
-    	Quiz.create(trial, question, true).save();
+    	Quiz.create(trial, question, "5", true).save();
     	Quiz quiz = Quiz.find.byId(1L);
     	Answer answer = new Answer(user, quiz);
     	assertNotNull(answer);
@@ -163,11 +163,11 @@ public class SternbergSearchUnitTest extends WithApplication{
     public void createAnswerWithParameter(){
     	User user = User.find.byId("123");
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	new Question("5", QuestionType.NUMBER).save();
+    	new Question("12345", QuestionType.NUMBER).save();
     	Question question = Question.find.byId(1L);
-    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial.create(ex, 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
     	Trial trial = Trial.find.byId(1L);
-    	Quiz.create(trial, question, true).save();
+    	Quiz.create(trial, question, "5", true).save();
     	Quiz quiz = Quiz.find.byId(1L);
     	Answer answer = Answer.create(user, quiz, true, 4.85, true);
     	assertNotNull(answer);
@@ -182,11 +182,11 @@ public class SternbergSearchUnitTest extends WithApplication{
     public void queryAnswerShouldCorrect(){
     	User user = User.find.byId("123");
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	new Question("5", QuestionType.NUMBER).save();
+    	new Question("12345", QuestionType.NUMBER).save();
     	Question question = Question.find.byId(1L);
-    	Trial.create(ex, "123456", 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
+    	Trial.create(ex, 6, 0.05, 2, 2, 2, 2, QuestionType.NUMBER).save();
     	Trial trial = Trial.find.byId(1L);
-    	Quiz.create(trial, question, true).save();
+    	Quiz.create(trial, question, "5", true).save();
     	Quiz quiz = Quiz.find.byId(1L);
     	Answer.create(user, quiz, true, 4.85, true).save();
     	Answer answer = Answer.find.byId(1L);

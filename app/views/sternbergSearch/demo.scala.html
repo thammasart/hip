@@ -1,0 +1,35 @@
+@header("Human Information Processing Lab :: Home Page")
+<!--
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+--!>
+<script src="@routes.Assets.at("javascripts/sternbergSearchDemo.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<body>
+
+<!-- Page Header -->
+    <div class="">
+          <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
+          <!-- Dashed line-->
+          <div class="titleLine"></div>
+    </div>
+<div class="expMainWindow">
+    <div class="expCenterWord">
+         <p id="word">  </p>
+    </div>
+    <div class="choice" align="center" id="choice" >
+        <button class="btn btn-danger ansButton" id="maiMe" name="maiMe" onclick="return done(this.name)"> ไม่มี </button >
+        <button class="btn btn-success ansButton" id="me"  name="me"onclick="return done(this.name)"  > มี  </button >
+    </div>
+    <form id="answerForm" action="@routes.SternbergSearch.demoReport()" method="post" >
+            <input id="score" name="score" hidden/> 
+            <input id="time" name="time" hidden/> 
+    </form>
+</div>
+@footer()

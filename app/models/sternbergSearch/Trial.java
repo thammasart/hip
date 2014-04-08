@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Trial extends Model{
 	@Id
 	public long id;
-	public String memorySet;
 	public int length;
 	public double blinkTime;
 	public int oneCharIsCorrect;
@@ -29,9 +28,8 @@ public class Trial extends Model{
     	this.schedule = schedule;
     }
 
-    public static Trial create(ExperimentSchedule schedule, String memorySet, int length, double blinkTime, int oneCharIsCorrect, int oneCharIsInCorrect, int twoCharIsCorrect, int twoCharIsInCorrect, QuestionType questionType){
+    public static Trial create(ExperimentSchedule schedule, int length, double blinkTime, int oneCharIsCorrect, int oneCharIsInCorrect, int twoCharIsCorrect, int twoCharIsInCorrect, QuestionType questionType){
     	Trial newTrial = new Trial(schedule);
-    	newTrial.memorySet = memorySet;
     	newTrial.length = length;
     	newTrial.blinkTime = blinkTime;
     	newTrial.oneCharIsCorrect = oneCharIsCorrect;
