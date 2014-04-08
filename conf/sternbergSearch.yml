@@ -13,7 +13,6 @@
     experimentType: STERNBERGSEARCH
 #Trial
 - &round19 !!models.sternbergSearch.Trial
-    memorySet: J
     length: 1
     blinkTime: 0.03
     oneCharIsCorrect: 1
@@ -23,7 +22,6 @@
     questionType: ENGLISH
     schedule: *ex11
 - &round20 !!models.sternbergSearch.Trial
-    memorySet: 953
     length: 3
     blinkTime: 0.01
     oneCharIsCorrect: 3
@@ -33,7 +31,6 @@
     questionType: NUMBER
     schedule: *ex11
 - &round21 !!models.sternbergSearch.Trial
-    memorySet: BO
     length: 2
     blinkTime: 0.02
     oneCharIsCorrect: 1
@@ -43,7 +40,6 @@
     questionType: ENGLISH
     schedule: *ex12
 - &round22 !!models.sternbergSearch.Trial
-	memorySet: ซชฎฏ
     length: 4
     blinkTime: 0.1
     oneCharIsCorrect: 1
@@ -54,136 +50,110 @@
     schedule: *ex12
 #Question
 - &Question40 !!models.sternbergSearch.Question
-	question: M
+    memorySet: J
 	questionType: ENGLISH
 - &Question41 !!models.sternbergSearch.Question
-	question: J
-	questionType: ENGLISH
+	memorySet: 953
+	questionType: NUMBER
 - &Question42 !!models.sternbergSearch.Question
-	question: K
+	memorySet: BO
 	questionType: ENGLISH
 - &Question43 !!models.sternbergSearch.Question
-	question: 5
-	questionType: NUMBER
-- &Question44 !!models.sternbergSearch.Question
-	question: 1
-	questionType: NUMBER
-- &Question45 !!models.sternbergSearch.Question
-	question: 0
-	questionType: NUMBER
-- &Question46 !!models.sternbergSearch.Question
-	question: 3
-	questionType: NUMBER
-- &Question47 !!models.sternbergSearch.Question
-	question: 9
-	questionType: NUMBER
-- &Question48 !!models.sternbergSearch.Question
-	question: 7
-	questionType: NUMBER
-- &Question49 !!models.sternbergSearch.Question
-	question: K
-	questionType: ENGLISH
-- &Question50 !!models.sternbergSearch.Question
-	question: OK
-	questionType: ENGLISH
-- &Question51 !!models.sternbergSearch.Question
-	question: O
-	questionType: ENGLISH
-- &Question52 !!models.sternbergSearch.Question
-	question: BO
-	questionType: ENGLISH
-- &Question53 !!models.sternbergSearch.Question
-	question: ษ
-	questionType: THAI
-- &Question54 !!models.sternbergSearch.Question
-	question: ฐล
-	questionType: THAI
-- &Question55 !!models.sternbergSearch.Question
-	question: ฎฏ
-	questionType: THAI
-- &Question56 !!models.sternbergSearch.Question
-	question: ซช
-	questionType: THAI
-- &Question57 !!models.sternbergSearch.Question
-	question: ฏ
-	questionType: THAI
-- &Question58 !!models.sternbergSearch.Question
-	question: ณษ
+	memorySet: ซชฎฏ
 	questionType: THAI
 #Quiz
 - &Quiz46 !!models.sternbergSearch.Quiz
+    questionChar: M
     isTrue: false
     trial: *round19
     question: *Question40
 - &Quiz47 !!models.sternbergSearch.Quiz
+    questionChar: J
     isTrue: true
     trial: *round19
-    question: *Question41
+    question: *Question40
 - &Quiz48 !!models.sternbergSearch.Quiz
+    questionChar: K
     isTrue: false
     trial: *round19
-    question: *Question42
+    question: *Question40
 - &Quiz49 !!models.sternbergSearch.Quiz
+    questionChar: 5
     isTrue: true
     trial: *round20
-    question: *Question43
+    question: *Question41
 - &Quiz50 !!models.sternbergSearch.Quiz
+    questionChar: 1
     isTrue: false
     trial: *round20
-    question: *Question44
+    question: *Question41
 - &Quiz51 !!models.sternbergSearch.Quiz
+    questionChar: 0
     isTrue: false
     trial: *round20
-    question: *Question45
+    question: *Question41
 - &Quiz52 !!models.sternbergSearch.Quiz
+    questionChar: 3
     isTrue: true
     trial: *round20
-    question: *Question46
+    question: *Question41
 - &Quiz53 !!models.sternbergSearch.Quiz
+    questionChar: 9
     isTrue: true
     trial: *round20
-    question: *Question47
+    question: *Question41
 - &Quiz54 !!models.sternbergSearch.Quiz
+    questionChar: 7
     isTrue: false
     trial: *round20
-    question: *Question48
+    question: *Question41
 - &Quiz55 !!models.sternbergSearch.Quiz
+    questionChar: K
     isTrue: false
     trial: *round21
-    question: *Question49
+    question: *Question42
 - &Quiz56 !!models.sternbergSearch.Quiz
+    questionChar: OK
     isTrue: false
     trial: *round21
-    question: *Question50
+    question: *Question42
 - &Quiz57 !!models.sternbergSearch.Quiz
+    questionChar: O
     isTrue: true
     trial: *round21
-    question: *Question51
+    question: *Question42
 - &Quiz58 !!models.sternbergSearch.Quiz
+    questionChar: BO
     isTrue: true
     trial: *round21
-    question: *Question52
+    question: *Question42
 - &Quiz59 !!models.sternbergSearch.Quiz
+    questionChar: ษ
     isTrue: false
     trial: *round22
-    question: *Question53
+    question: *Question43
 - &Quiz60 !!models.sternbergSearch.Quiz
+    questionChar: ฐล
     isTrue: false
     trial: *round22
-    question: *Question54
+    question: *Question43
 - &Quiz61 !!models.sternbergSearch.Quiz
+    questionChar: ฎฏ
     isTrue: true
     trial: *round22
-    question: *Question55
+    question: *Question43
 - &Quiz62 !!models.sternbergSearch.Quiz
+    questionChar: ซช
     isTrue: true
     trial: *round22
-    question: *Question56
+    question: *Question43
 - &Quiz63 !!models.sternbergSearch.Quiz
+    questionChar: ฏ
     isTrue: true
     trial: *round22
-    question: *Question57
+    question: *Question43
 - &Quiz64 !!models.sternbergSearch.Quiz
+    questionChar: ณษ
     isTrue: false
     trial: *round22
-    question: *Question58
+    question: *Question43
