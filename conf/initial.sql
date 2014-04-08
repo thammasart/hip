@@ -343,3 +343,4 @@ alter table position_error_trial add constraint fk_position_error_trial_sched_35
 create index ix_position_error_trial_sched_35 on position_error_trial (schedule_id);
 
 insert into user (username,password,status) values ('admin', 'admin', 0);
+update user set first_name='admin',last_name='admin',gender='',section='',semester='',academic_year='',year=2555,e_mail='',faculty='', department='';

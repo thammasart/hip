@@ -183,7 +183,12 @@ public class Admin extends Controller {
 
         for(String question : questions){
             try{
-                String[] words = question.split(",");
+                String[] words = null;
+                if(question.contains(",")){
+                    words = question.split(",");
+                }else{
+                    words = question.split("\\s+");
+                }   
                 models.brownPeterson.Question.create(words[0],words[1],words[2], trigramType, trigramLanguage).save();
             }catch(Exception e){
                 String warning = "เพิ่มคำถามสำเร็จ " + counter + " คำถาม" +
