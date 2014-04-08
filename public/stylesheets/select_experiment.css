@@ -1,0 +1,41 @@
+.seMainWindow{
+    width:70%;
+    height:500px;
+    margin-left:15%;
+    margin-bottom:1%;
+    margin-top:-1.5%;
+}
+.category{
+    width:100%;
+    height:32%;
+    margin-bottom:0.5%;
+}
+.categoryTitle{
+    width:100%;
+    height:20%;
+    background-color:#DCE3E3;
+}
+.categoryTitle span{
+    font-size:22px;
+    Position:relative;
+    top:-3px;
+}
+.exIcon{
+    width:20%;
+    height:80%;
+    margin-left:2.5%;
+    margin-right:2.5%;
+    float:left;
+}
+.exImage{
+    width:75px;
+    float:left;
+    margin:3% 0% 3% 30%;
+}
+.exButton{
+    color:dimgray;
+    height:23%;
+    padding-top:3px;
+    background-color:#C4D9DF;   
+    border-width:1px;
+}
