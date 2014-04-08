@@ -11,10 +11,11 @@ import play.db.ebean.Model.Finder;
 public class Quiz extends Model{
         @Id
         public long id;
+        public String questionChar;
         public boolean isTrue;
         @ManyToOne
         public Trial trial;
-        @OneToOne
+        @ManyToOne
         public Question question;
         @OneToMany
         public List<Answer> answers = new ArrayList<Answer>();
@@ -24,8 +25,9 @@ public class Quiz extends Model{
                 this.question = question;
         }
 
-        public static Quiz create(Trial trial, Question question, boolean isTrue){
+        public static Quiz create(Trial trial, Question question, String questionWord, boolean isTrue){
                 Quiz newQuiz = new Quiz(trial, question);
+                newQuiz.questionChar = questionWord;
                 newQuiz.isTrue = isTrue;
                 return newQuiz;
         }
