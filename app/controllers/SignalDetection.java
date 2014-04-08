@@ -44,6 +44,7 @@ public class SignalDetection extends Controller{
         return ok(signal_detection_proc_iframe.render());
     }
 
+    //แสดงหน้าตัวอย่างการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
         Question question = new Question('Y','X');
@@ -51,7 +52,7 @@ public class SignalDetection extends Controller{
         quiz.question = question;
         return ok(demo.render(quiz));
     }
-
+    //แสดงหน้าผลลัพธ์ตัวอย่างการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result reportDemo(){
         Form<Answer> boundForm = answerForm.bindFromRequest();
