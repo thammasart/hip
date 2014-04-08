@@ -42,6 +42,11 @@ GET     /stroop_effect/experiment   controllers.StroopEffect.experiment(trialId:
 POST    /stroop_effect/experiment/save  controllers.StroopEffect.saveAnswer(trialId:Long, questionNo:Int)
 GET     /stroop-effect/report      	controllers.StroopEffect.report(username:String ?= "", trial_id:Long ?= 0)
 
+GET     /sternberg_search	            controllers.SternbergSearch.info()
+GET     /sternberg_search/info         controllers.SternbergSearch.infoIframe()
+GET     /sternberg_search/proc		    controllers.SternbergSearch.proc()
+GET     /sternberg_search/proci	    controllers.SternbergSearch.procIframe()
+
 GET     /signal_detection	            controllers.SignalDetection.info()
 GET     /signal_detection/info         controllers.SignalDetection.infoIframe()
 GET     /signal_detection/proc		    controllers.SignalDetection.proc()
