@@ -118,7 +118,7 @@ public class StroopEffect extends Controller {
             }
         }
 
-        return redirect(routes.Admin.index());
+        return redirect(routes.InitialController.index());
     }
 
 }

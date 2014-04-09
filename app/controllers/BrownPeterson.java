@@ -15,6 +15,9 @@ import java.util.Collections;
 import views.html.brownPeterson.*;
 import views.html.iframe.*;
 import java.util.Date;
+import java.io.File;
+import com.google.common.io.Files;
+import com.google.common.base.Charsets;
 
 public class BrownPeterson extends Controller {
     private static final Form<Answer> answerForm = Form.form(Answer.class);
@@ -103,7 +106,33 @@ public class BrownPeterson extends Controller {
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
 
+    @Security.Authenticated(Secured.class)
+    public static Result installQuestion(){
+        try{
+            String THAI_WORD_PATH = "/public/archive/brown_peterson_thai_word_question.txt";
+            String ENG_WORD_PATH = "/public/archive/brown_peterson_eng_word_question.txt";
+            String ENG_NONSENSE_PATH = "/public/archive/brown_peterson_eng_nonsense_question.txt";
+            String THAI_NONSENSE_PATH = "/public/archive/brown_peterson_thai_nonsense_question.txt";
+            File thaiWordsFile = Play.application().getFile(THAI_WORD_PATH);
+            File engNonsenseFile = Play.application().getFile(ENG_WORD_PATH);
+            File engWordsFile = Play.application().getFile(ENG_NONSENSE_PATH);
+            File thaiNonsenseFile = Play.application().getFile(THAI_NONSENSE_PATH);
+            String thaiWords = Files.toString(thaiWordsFile, Charsets.UTF_8);
+            String engWords = Files.toString(engWordsFile, Charsets.UTF_8);
+            String thaiNonsense = Files.toString(thaiNonsenseFile, Charsets.UTF_8);
+            String engNonesense = Files.toString(engNonsenseFile, Charsets.UTF_8);
 
+            Question.generateQuestion(thaiWords, Trial.WORD, Trial.THAI);
+            Question.generateQuestion(engWords, Trial.WORD, Trial.ENGLISH);
+            Question.generateQuestion(thaiNonsense, Trial.NON_SENSE, Trial.THAI);
+            Question.generateQuestion(engNonesense, Trial.NON_SENSE, Trial.ENGLISH);
+
+        }catch(Exception e){
+            System.out.println("exception error");
+        }
+
+        return redirect(routes.InitialController.index());
+    }
 
 
 }

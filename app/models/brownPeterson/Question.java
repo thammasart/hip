@@ -75,6 +75,26 @@ public class Question extends Model {
 	public String toString(){
 		return firstWord + ", " + secondWord + ", " + thirdWord;
 	}
+
+	public static void generateQuestion(String questionText, String trigramType, String trigramLanguage){
+		String[] questions = questionText.split("\\r?\\n");
+        int counter = 0;
+
+        for(String question : questions){
+            try{
+                String[] words = null;
+                if(question.contains(",")){
+                    words = question.split(",");
+                }else{
+                    words = question.split("\\s+");
+                }   
+                create(words[0],words[1],words[2], trigramType, trigramLanguage).save();
+            }catch(Exception e){
+                System.out.println("generateQuestion error");
+            }
+            counter++;
+        }
+	}
     
     @SuppressWarnings("unchecked")
 	public static Finder<Long,Question> find = new Finder(Long.class,Question.class);
