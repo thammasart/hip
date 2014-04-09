@@ -257,6 +257,20 @@ public class Admin extends Controller {
                 trial.setQuestionType(questionType);
                 trial.randomNewQuestions();
             }
+
+            for(models.stroopEffect.Quiz quiz : trial.quizzes){
+                String isMatchString = requestData.get("isMatch-" + quiz.id);
+                boolean isMatch = true;
+                if(isMatchString == null){
+                    isMatch = false;
+                }else{
+                    isMatch = true;
+                }
+
+                if(isMatch != quiz.question.isMatch()){
+                    quiz.switchRandomQuestion();
+                }
+            }
         }
 
         flash("success", "update success.");
