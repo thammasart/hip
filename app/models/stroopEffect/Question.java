@@ -16,6 +16,7 @@ public class Question extends Model{
     public static final String[] colors = { "black", "blue", "red", "green", "purple", "yellow"};
     public static final String[] colorsTH = { "ดำ", "น้ำเงิน", "แดง", "เขียว", "ม่วง", "เหลือง"};
 
+
     @Id
     public long id;
     @Column(nullable=false, length=20)
@@ -47,14 +48,47 @@ public class Question extends Model{
     }
 
     public boolean isMatch(){
+
+        String colorWord = "";
+
+        if(this.questionType == QuestionType.ENGLISH){
+            colorWord = this.colorWord;
+        }else if(this.questionType == QuestionType.THAI){
+            colorWord = getEnglishColorWord(this.colorWord);
+        }
         return colorWord.equalsIgnoreCase(inkColor);
+    }
+
+    public String getEnglishColorWord(String colorWordTH){
+        final String BLACK_TH = "ดำ";
+        final String BLUE_TH = "น้ำเงิน";
+        final String RED_TH = "แดง";
+        final String GREEN_TH = "เขียว";
+        final String PURPLE_TH = "ม่วง";
+        final String YELLOW_TH = "เหลือง";
+        final String BLACK = "black";
+        final String BLUE = "blue";
+        final String RED = "red";
+        final String GREEN = "green";
+        final String PURPLE = "purple";
+        final String YELLOW = "yellow";
+        String colorWord = "";
+        switch(colorWordTH){
+            case BLACK_TH : colorWord = BLACK;break;
+            case BLUE_TH : colorWord = BLUE;break;
+            case RED_TH : colorWord = RED;break;
+            case GREEN_TH : colorWord = GREEN;break;
+            case PURPLE_TH : colorWord = PURPLE;break;
+            case YELLOW_TH : colorWord = YELLOW;break;
+        }
+        return colorWord;
     }
 
     public static List<Question> findAllMatchQuestion(QuestionType questionType){
         List<Question> questions = find.where().eq("questionType", questionType).findList();
         List<Question> matchQuestions = new ArrayList<Question>();
         for(Question question : questions){
-            if(question.colorWord.equalsIgnoreCase(question.inkColor)){
+            if(question.isMatch()){
                 matchQuestions.add(question);
             }
         }
@@ -64,7 +98,7 @@ public class Question extends Model{
         List<Question> questions = find.where().eq("questionType", questionType).findList();
         List<Question> notMatchQuestions = new ArrayList<Question>();
         for(Question question : questions){
-            if((!question.colorWord.equalsIgnoreCase(question.inkColor))){
+            if(!question.isMatch()){
                 notMatchQuestions.add(question);
             }
         }
