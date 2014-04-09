@@ -5,6 +5,7 @@ import play.mvc.*;
 import play.data.*;
 
 import models.User;
+import models.ExperimentSchedule;
 import models.sternbergSearch.*;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import views.html.iframe.*;
 import java.util.Date;
 
 public class SternbergSearch extends Controller{
+
+    private static final Form<Answer> answerForm = Form.form(Answer.class);
 
     //แสดงหน้าข้อมูลการทดลอง
     @Security.Authenticated(Secured.class)
@@ -62,14 +65,13 @@ public class SternbergSearch extends Controller{
 
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId,int questionNo){
-        //return ok(exp.render(Trial.find.byId(trialId), questionNo));
-        return TODO;
+    public static Result experiment(long trialId,int questionNo,boolean isShowQuestion){
+        return ok(exp.render(Trial.find.byId(trialId),questionNo,isShowQuestion));
     }
 
     @Security.Authenticated(Secured.class)
     public static Result saveAnswer(long trialId, int questionNo){
-        /*
+
         Form<Answer> boundForm = answerForm.bindFromRequest();
         User user = User.find.byId(session().get("username"));
         Trial trial = Trial.find.byId(trialId);
@@ -85,18 +87,16 @@ public class SternbergSearch extends Controller{
         answer.save();
 
         questionNo++;
-        if(questionNo < trial.numberOfQuiz){
-            return redirect(routes.AttentionBlink.experiment(trialId, questionNo));
+        if(questionNo < trial.oneCharIsCorrect + trial.oneCharIsInCorrect + trial.twoCharIsCorrect + trial.twoCharIsInCorrect){
+            return redirect(routes.SternbergSearch.experiment(trialId, questionNo, true));
         }
-        return redirect(routes.AttentionBlink.report(user.username, trialId));
-        */
-        return TODO;
+        return redirect(routes.SternbergSearch.report(user.username, trialId));
     }
 
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
     public static Result report(String username, long trialId){
-        /*
+
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.AttentionBlink.info());
         }
@@ -107,8 +107,6 @@ public class SternbergSearch extends Controller{
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
-        */
-        return TODO;
     }
 
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
@@ -119,16 +117,15 @@ public class SternbergSearch extends Controller{
         if(user == null) {
             return redirect(routes.Application.index());
         }
-/*
+
         if(models.TimeLog.isRepeatTrial(user, 1, ExperimentSchedule.find.byId(11L))) {
             flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
             return ok(proc.render(user));
         }
         models.TimeLog.create(new Date(), user, 1,ExperimentSchedule.find.byId(11L)).save();
-        return redirect(routes.AttentionBlink.experiment(19,0));
 
- */
-        return TODO;
+        return redirect(routes.SternbergSearch.experiment(4L, 0,false));
+
     }
 
 }

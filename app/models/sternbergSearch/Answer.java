@@ -1,6 +1,7 @@
 package models.sternbergSearch;
 
 import models.User;
+import models.sternbergSearch.*;
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -32,6 +33,30 @@ public class Answer extends Model{
         newAnswer.usedTime = usedTime;
         newAnswer.isCorrect = isCorrect;
         return newAnswer;
+    }
+
+    public static List<Answer> findInvolving(User user, List<Quiz> quizzes){
+        List<Answer> answers = new ArrayList<Answer>();
+        for(Quiz quiz:quizzes){
+            answers.add(find.where().eq("user" ,user).eq("quiz",quiz).findUnique());
+        }
+        return answers;
+    }
+
+    public static int calculateTotalScore(List<Answer> answers){
+        int totalScore = 0;
+        for(Answer ans : answers){
+            if(ans.isCorrect) totalScore++;
+        }
+        return totalScore;
+    }
+
+    public static double calculateTotalUsedTime(List<Answer> answers){
+        double totalUsedTime = 0;
+        for(Answer ans : answers){
+            totalUsedTime += ans.usedTime;
+        }
+        return totalUsedTime;
     }
 
 	@SuppressWarnings("unchecked")

@@ -37,6 +37,7 @@ function showTimer(){
     attentionWordTime = setInterval(function(){showAttentionWord()},5000);
 }
 function showAttentionWord(){
+    document.getElementById("word").innerHTML = "";
     clearInterval(attentionWordTime);
     clearInterval(showTimerTime);
     questionTime = setInterval(showQuestionList,500);
