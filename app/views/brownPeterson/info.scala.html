@@ -6,26 +6,28 @@
 @nav(user)
 <!-- Content -->
 <!-- Explanation -->
-<div class="infoContainer">
-    <!-- Right Panel -->  
-    <div class="infoButton" >
-        <div align="center">
-            <img src="@routes.Assets.at("images/brown_peterson.png")" class="divPngInfo">
-            <h6 class="marginWord">Brown Peterson</h6>
-        </div>
-        <!-- Buttons -->  
-            <div class="infoButtonContainer">
-              <div class="infoRedButton">
-                <a href="@routes.Application.selectExperiment()" class=" btn btn-block btn-lg btn-danger"  ><span class="fui-arrow-left" ></span> ย้อนกลับ</a>  &nbsp; 
-              </div>
-
-              <div class="infoGreenButton">
-                <a href="@routes.BrownPeterson.proc()" class=" btn btn-block btn-lg btn-primary"><span class="fui-arrow-right"></span> อ่านขั้นตอนการทดลอง</a>
-              </div>
+<div class="homeMainWindow">
+    <div class="infoContainer">
+        <!-- Right Panel -->  
+        <div class="infoButton" >
+            <div align="center">
+                <img src="@routes.Assets.at("images/stm01_brown_peterson.png")" class="divPngInfo">
+                <h6 class="marginWord">Brown Peterson</h6>
             </div>
-    </div>
-    <div class="infoContent">
-        <iframe src="@routes.BrownPeterson.infoIframe()" frameborder="0" width="450" height="350"></iframe>
+            <!-- Buttons -->  
+                <div class="infoButtonContainer">
+                  <div class="infoRedButton">
+                    <a href="@routes.Application.selectExperiment()" class=" btn btn-block btn-lg btn-danger"  ><span class="fui-arrow-left" ></span> ย้อนกลับ</a>  &nbsp; 
+                  </div>
+
+                  <div class="infoGreenButton">
+                    <a href="@routes.BrownPeterson.proc()" class=" btn btn-block btn-lg btn-primary"><span class="fui-arrow-right"></span> อ่านขั้นตอนการทดลอง</a>
+                  </div>
+                </div>
+        </div>
+        <div class="infoContent">
+            <iframe src="@routes.BrownPeterson.infoIframe()" frameborder="0" width="450" height="350"></iframe>
+        </div>
     </div>
 </div>
 @footer()

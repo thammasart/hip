@@ -1,3 +1,11 @@
+.homeMainWindow{
+    width:100%;
+    height:469px;
+    margin-bottom:1%;
+    margin-top:-1.5%;
+    border:solid;
+    border-color:white;
+}
 #panel01,#img01
 {
 padding:5px;
@@ -61,7 +69,7 @@ width:631px;
 .homeMain{
     height:305px;
     width:730px;
-    margin:0px auto;
+    margin:5% auto;
 }
 .divSlideContainer{
     margin:auto;
@@ -136,7 +144,7 @@ width:631px;
 .infoContainer{
      width:950px;
      height:350px;
-     margin: 0px auto 50px auto;
+     margin: 3.5% auto 50px auto;
      
 }
 .procContent{
