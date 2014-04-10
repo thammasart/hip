@@ -66,6 +66,7 @@ public class ExperimentSchedule extends Model{
 		final String STROOPEFFECT = "STROOPEFFECT";
         final String SIGNALDETECTION = "SIGNALDETECTION";
         final String ATTENTIONBLINK = "ATTENTIONBLINK";
+        final String POSITIONERROR = "POSITIONERROR";
 
         if (expType.equals(BROWNPETERSON)){
             expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
@@ -79,6 +80,9 @@ public class ExperimentSchedule extends Model{
         else if (expType.equals(ATTENTIONBLINK)){
             expList = getWorkingExperimentsByType(ExperimentType.ATTENTIONBLINK);
         }
+        else if (expType.equals(POSITIONERROR)){
+            expList = getWorkingExperimentsByType(ExperimentType.POSITIONERROR);
+        }
 
         return expList;
 	}
@@ -91,6 +95,7 @@ public class ExperimentSchedule extends Model{
 				case STROOPEFFECT  : type = "Stroof Effect"; break;
 				case SIGNALDETECTION : type = "Signal Detection"; break;
 				case ATTENTIONBLINK : type = "Attention Blink";break;
+				case POSITIONERROR : type = "Position Error";break;
 				default : type = "Unknown";
 			}
 		}
@@ -103,6 +108,7 @@ public class ExperimentSchedule extends Model{
 			case STROOPEFFECT : generateStroopEffectTrial(); break;
 			case SIGNALDETECTION : break;
 			case ATTENTIONBLINK : generateAttentionBlinkTrial(); break;
+			case POSITIONERROR : break;
 		}
 	}
 
