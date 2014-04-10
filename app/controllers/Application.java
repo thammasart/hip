@@ -70,6 +70,7 @@ public class Application extends Controller {
             case BROWNPETERSON : nextPage = redirect(routes.BrownPeterson.experiment(trialId,0));break;
             case STROOPEFFECT : nextPage = redirect(routes.StroopEffect.experiment(trialId,0)); break;
             case ATTENTIONBLINK : nextPage = redirect(routes.AttentionBlink.experiment(trialId,0)); break;
+            case SIGNALDETECTION : nextPage = redirect(routes.SignalDetection.experiment(trialId,0)); break;
         }
         return nextPage;
     }
