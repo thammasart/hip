@@ -127,8 +127,9 @@ public class Admin extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result saveBrownPetersonParameter(long expId){
-        DynamicForm requestData = Form.form().bindFromRequest();
+        
         ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
+        DynamicForm requestData = Form.form().bindFromRequest();
         
         exp.name = requestData.get("name");
         try{
@@ -350,6 +351,52 @@ public class Admin extends Controller {
             if(isQuestionChange){
                 trial.generateNewQuestions();
                 models.attentionBlink.Question.deleteAllUnusedQuestion();
+            }
+        }
+
+        flash("success", "update success.");
+        return ok(views.html.admin.experiment.edit.render(exp));
+    }
+
+    public static Result saveSignalDetectionParameter(long expId){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
+        DynamicForm  requestData = Form.form().bindFromRequest();
+
+        exp.name = requestData.get("name");
+        try{
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            exp.startDate = dateFormat.parse(requestData.get("startDate"));
+            exp.expireDate = dateFormat.parse(requestData.get("expireDate"));
+        } catch (ParseException e){
+            flash("date_error", "กรุณากรอกข้อมูลช่วงเวลาการทำทดลองให้ถูกต้อง");
+            return badRequest(views.html.admin.experiment.edit.render(exp));
+        }
+        exp.update();
+
+        List<models.signalDetection.Trial> trials = models.signalDetection.Trial.findInvolving(exp);
+
+        for(models.signalDetection.Trial trial : trials){
+            for(models.signalDetection.Quiz quiz : trial.quizzes){
+                
+                String targetString = requestData.get("target-" + quiz.id);
+                String noiseString = requestData.get("noise-" + quiz.id);
+                String lengthString = requestData.get("length-" + quiz.id);
+                String noOfTargetString = requestData.get("noOfTarget-" + quiz.id);
+                String displayTimeString = requestData.get("displayTime-" + quiz.id);
+
+                char target = targetString.charAt(0);
+                char noise = noiseString.charAt(0);
+                int length = Integer.parseInt(lengthString);
+                int noOfTarget = Integer.parseInt(noOfTargetString);
+                double displayTime = Double.parseDouble(displayTimeString);
+                quiz.question.target = target;
+                quiz.question.noise = noise;
+                quiz.length = length;
+                quiz.noOfTarget = noOfTarget;
+                quiz.displayTime = displayTime;
+                quiz.question.update();
+                quiz.update();
+                
             }
         }
 
