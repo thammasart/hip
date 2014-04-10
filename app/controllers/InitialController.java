@@ -13,8 +13,6 @@ public class InitialController extends Controller {
         User user = User.find.where().eq("username", session().get("username")).findUnique();
         if(!(user.status == UserRole.ADMIN))
             return redirect(routes.Application.index());
-
-        System.out.println(Play.application().configuration().getBoolean("question.brownPeterson.install"));
         return ok(initial.render());
     }
 
