@@ -71,6 +71,8 @@ public class Application extends Controller {
             case STROOPEFFECT : nextPage = redirect(routes.StroopEffect.experiment(trialId,0)); break;
             case ATTENTIONBLINK : nextPage = redirect(routes.AttentionBlink.experiment(trialId,0)); break;
             case SIGNALDETECTION : nextPage = redirect(routes.SignalDetection.experiment(trialId,0)); break;
+            case POSITIONERROR : nextPage = redirect(routes.PositionError.experiment(trialId,0)); break;
+            case STERNBERGSEARCH : nextPage = redirect(routes.SternbergSearch.experiment(trialId,0,false)); break;
         }
         return nextPage;
     }
