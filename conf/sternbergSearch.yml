@@ -14,7 +14,7 @@
 #Trial
 - &round19 !!models.sternbergSearch.Trial
     length: 1
-    blinkTime: 0.03
+    blinkTime: 0.5
     oneCharIsCorrect: 1
     oneCharIsInCorrect: 2
     twoCharIsCorrect: 0
@@ -23,7 +23,7 @@
     schedule: *ex11
 - &round20 !!models.sternbergSearch.Trial
     length: 3
-    blinkTime: 0.01
+    blinkTime: 0.3
     oneCharIsCorrect: 3
     oneCharIsInCorrect: 3
     twoCharIsCorrect: 0
@@ -32,7 +32,7 @@
     schedule: *ex11
 - &round21 !!models.sternbergSearch.Trial
     length: 2
-    blinkTime: 0.02
+    blinkTime: 0.4
     oneCharIsCorrect: 1
     oneCharIsInCorrect: 1
     twoCharIsCorrect: 1
@@ -41,7 +41,7 @@
     schedule: *ex12
 - &round22 !!models.sternbergSearch.Trial
     length: 4
-    blinkTime: 0.1
+    blinkTime: 0.2
     oneCharIsCorrect: 1
     oneCharIsInCorrect: 1
     twoCharIsCorrect: 2
@@ -51,16 +51,16 @@
 #Question
 - &Question40 !!models.sternbergSearch.Question
     memorySet: J
-	questionType: ENGLISH
+    questionType: ENGLISH
 - &Question41 !!models.sternbergSearch.Question
-	memorySet: 953
-	questionType: NUMBER
+    memorySet: 953
+    questionType: NUMBER
 - &Question42 !!models.sternbergSearch.Question
-	memorySet: BO
-	questionType: ENGLISH
+    memorySet: BO
+    questionType: ENGLISH
 - &Question43 !!models.sternbergSearch.Question
-	memorySet: ซชฎฏ
-	questionType: THAI
+    memorySet: ซชฎฏ
+    questionType: THAI
 #Quiz
 - &Quiz46 !!models.sternbergSearch.Quiz
     questionChar: M

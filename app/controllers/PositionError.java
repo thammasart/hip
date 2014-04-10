@@ -107,14 +107,12 @@ public class PositionError extends Controller{
         if(user == null) {
             return redirect(routes.Application.index());
         }
-        /*
-        if(models.TimeLog.isRepeatTrial(user, 1, ExperimentSchedule.find.byId(7L))) {
+
+        if(models.TimeLog.isRepeatTrial(user, 1, ExperimentSchedule.find.byId(8L))) {
             flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
             return ok(proc.render(user));
         }
-        models.TimeLog.create(new Date(), user, 1,ExperimentSchedule.find.byId(7L)).save();
-        return redirect(routes.AttentionBlink.experiment(4,0));
-        */
+        models.TimeLog.create(new Date(), user, 1,ExperimentSchedule.find.byId(8L)).save();
         return redirect(routes.PositionError.experiment(1,0));
     }
 
