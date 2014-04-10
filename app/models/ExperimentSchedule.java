@@ -67,6 +67,7 @@ public class ExperimentSchedule extends Model{
         final String SIGNALDETECTION = "SIGNALDETECTION";
         final String ATTENTIONBLINK = "ATTENTIONBLINK";
         final String POSITIONERROR = "POSITIONERROR";
+        final String STERNBERGSEARCH = "STERNBERGSEARCH";
 
         if (expType.equals(BROWNPETERSON)){
             expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
@@ -83,6 +84,9 @@ public class ExperimentSchedule extends Model{
         else if (expType.equals(POSITIONERROR)){
             expList = getWorkingExperimentsByType(ExperimentType.POSITIONERROR);
         }
+        else if (expType.equals(STERNBERGSEARCH)){
+            expList = getWorkingExperimentsByType(ExperimentType.STERNBERGSEARCH);
+        }
 
         return expList;
 	}
@@ -96,6 +100,7 @@ public class ExperimentSchedule extends Model{
 				case SIGNALDETECTION : type = "Signal Detection"; break;
 				case ATTENTIONBLINK : type = "Attention Blink";break;
 				case POSITIONERROR : type = "Position Error";break;
+				case STERNBERGSEARCH : type = "Sternberg Search";break;
 				default : type = "Unknown";
 			}
 		}
@@ -109,6 +114,7 @@ public class ExperimentSchedule extends Model{
 			case SIGNALDETECTION : break;
 			case ATTENTIONBLINK : generateAttentionBlinkTrial(); break;
 			case POSITIONERROR : break;
+			case STERNBERGSEARCH : break;
 		}
 	}
 

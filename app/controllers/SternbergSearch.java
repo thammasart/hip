@@ -108,24 +108,4 @@ public class SternbergSearch extends Controller{
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
-
-    //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
-    @Security.Authenticated(Secured.class)
-    public static Result checkUserTakeRepeatExperiment() {
-
-        User user = User.find.where().eq("username", session().get("username")).findUnique();
-        if(user == null) {
-            return redirect(routes.Application.index());
-        }
-
-        if(models.TimeLog.isRepeatTrial(user, 1, ExperimentSchedule.find.byId(11L))) {
-            flash("repeat", "คุณเคยทำการทดลองนี้แล้ว หากต้องการทำต่อโปรดติดต่อผู้ดูแลระบบ");
-            return ok(proc.render(user));
-        }
-        models.TimeLog.create(new Date(), user, 1,ExperimentSchedule.find.byId(11L)).save();
-
-        return redirect(routes.SternbergSearch.experiment(4L, 0,false));
-
-    }
-
 }
