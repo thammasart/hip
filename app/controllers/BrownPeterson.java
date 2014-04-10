@@ -129,6 +129,7 @@ public class BrownPeterson extends Controller {
 
         }catch(Exception e){
             System.out.println("exception error");
+            return redirect(routes.InitialController.index());
         }
 
         return redirect(routes.InitialController.index());
