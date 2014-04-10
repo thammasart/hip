@@ -30,6 +30,14 @@ public class Trial extends Model{
         return find.where().eq("schedule", ex).findList();
     }
 
+    public void generateQuiz(){
+        for(int i = 0; i < TOTAL_QUESTION; i++){
+            Question question = new Question('Y', 'X');
+            question.save();
+            Quiz.create(0.1, 1,15, this, question).save();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public static Model.Finder<Long,Trial> find = new Finder(Long.class, Trial.class);
 }

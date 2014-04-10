@@ -2,6 +2,7 @@ package models.signalDetection;
 
 import play.db.ebean.Model;
 import javax.persistence.*;
+import play.db.ebean.Model.Finder;
 
 @Entity
 @Table (name="signal_detection_quiz")

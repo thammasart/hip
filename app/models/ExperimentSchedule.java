@@ -66,6 +66,8 @@ public class ExperimentSchedule extends Model{
 		final String STROOPEFFECT = "STROOPEFFECT";
         final String SIGNALDETECTION = "SIGNALDETECTION";
         final String ATTENTIONBLINK = "ATTENTIONBLINK";
+        final String POSITIONERROR = "POSITIONERROR";
+        final String STERNBERGSEARCH = "STERNBERGSEARCH";
 
         if (expType.equals(BROWNPETERSON)){
             expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
@@ -79,6 +81,12 @@ public class ExperimentSchedule extends Model{
         else if (expType.equals(ATTENTIONBLINK)){
             expList = getWorkingExperimentsByType(ExperimentType.ATTENTIONBLINK);
         }
+        else if (expType.equals(POSITIONERROR)){
+            expList = getWorkingExperimentsByType(ExperimentType.POSITIONERROR);
+        }
+        else if (expType.equals(STERNBERGSEARCH)){
+            expList = getWorkingExperimentsByType(ExperimentType.STERNBERGSEARCH);
+        }
 
         return expList;
 	}
@@ -91,6 +99,8 @@ public class ExperimentSchedule extends Model{
 				case STROOPEFFECT  : type = "Stroof Effect"; break;
 				case SIGNALDETECTION : type = "Signal Detection"; break;
 				case ATTENTIONBLINK : type = "Attention Blink";break;
+				case POSITIONERROR : type = "Position Error";break;
+				case STERNBERGSEARCH : type = "Sternberg Search";break;
 				default : type = "Unknown";
 			}
 		}
@@ -101,8 +111,10 @@ public class ExperimentSchedule extends Model{
 		switch(this.experimentType){
 			case BROWNPETERSON : generateBrownPetersonTrial() ;break;
 			case STROOPEFFECT : generateStroopEffectTrial(); break;
-			case SIGNALDETECTION : break;
+			case SIGNALDETECTION : generateSignalDetectionTrial(); break;
 			case ATTENTIONBLINK : generateAttentionBlinkTrial(); break;
+			case POSITIONERROR : break;
+			case STERNBERGSEARCH : break;
 		}
 	}
 
@@ -122,8 +134,15 @@ public class ExperimentSchedule extends Model{
 	}
 
 	private void generateAttentionBlinkTrial(){
+        for(int i = 0; i < this.noOfTrial; i++){
+            models.attentionBlink.Trial trial = models.attentionBlink.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
+    private void generateSignalDetectionTrial(){
 		for(int i = 0; i < this.noOfTrial; i++){
-			models.attentionBlink.Trial trial = models.attentionBlink.Trial.create(this);
+			models.signalDetection.Trial trial = models.signalDetection.Trial.create(this);
 			trial.save();
 			trial.generateQuiz();
 		}

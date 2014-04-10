@@ -73,6 +73,11 @@ function onLoad(){
                 this.innerHTML = e.dataTransfer.getData('text');
                 currentDragElement.innerHTML = "";
             }
+            else{
+                var temp = this.innerHTML;
+                this.innerHTML = e.dataTransfer.getData('text');
+                currentDragElement.innerHTML = temp;
+            }
 
             return false;
         });

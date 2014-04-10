@@ -79,6 +79,7 @@
                                     <th>No.</th>
                                     <th>Color Word</th>
                                     <th>Ink Color</th>
+                                    <th>isMatch</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
@@ -88,8 +89,15 @@
                                         <td>@{index + 1}</td>
                                         <td>@quiz.question.colorWord</td>
                                         <td>@quiz.question.inkColor</td>
+                                        <td><input name="isMatch-@quiz.id" type="checkbox" 
+                                            @if(quiz.question.isMatch()){
+                                                checked 
+                                            }
+                                            >
+                                        </td>
                                         <td><a href="@routes.Admin.switchStroopEffectQuestion(exp.id, quiz.id)" class="btn btn-xs btn-danger">switch
                                         </a></td>
+
                                     </tr>
                                 }
                             </tbody>
