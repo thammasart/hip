@@ -68,7 +68,7 @@ width:631px;
 
 .homeMain{
     height:305px;
-    width:730px;
+    width:731px;
     margin:5% auto;
 }
 .divSlideContainer{
@@ -149,7 +149,7 @@ width:631px;
 }
 .procContent{
      width:900px;
-     height:480px;
+     min-height:410px;
 }
 .procBody{
      width:900px;

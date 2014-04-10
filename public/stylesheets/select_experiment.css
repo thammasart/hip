@@ -30,12 +30,12 @@
 .exImage{
     width:75px;
     float:left;
-    margin:3% 0% 3% 36%;
+    margin:3% 0% 3% 32%;
 }
-.exButton{
-    color:dimgray;
-    height:23%;
-    padding-top:3px;
-    background-color:#C4D9DF;   
-    border-width:1px;
+.exWord{
+    float:left;
+    margin-left:19%;
+    width:62%;
+    color:black;
+
 }
