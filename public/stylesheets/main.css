@@ -68,7 +68,7 @@ width:631px;
 
 .homeMain{
     height:305px;
-    width:731px;
+    width:737px;
     margin:5% auto;
 }
 .divSlideContainer{
@@ -347,12 +347,7 @@ width:631px;
 .middle{
     min-height:300px;
     width:700px;
-    margin:auto ;
-    position :relative;
-    top : 50%;
-    -webkit-transform: translateY(-15%);
-    -ms-transform: translateY(-15%);
-    transform: translateY(-15%);
+    margin:7% auto ;
 }
 
 
