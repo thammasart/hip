@@ -13,6 +13,8 @@ public class Question extends Model{
     public long id;
     public String memorySet;
     public QuestionType questionType;
+    @OneToMany
+    public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(String memorySet, QuestionType questionType) {
     	this.memorySet = memorySet;
