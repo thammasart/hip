@@ -24,4 +24,9 @@ public class MagicNumber7UnitTest extends WithApplication{
 		new ExperimentSchedule("Experiment 1", 1, lastYearDate,nextYearDate, ExperimentType.MAGICNUMBER7).save();
 		new User("123", "123").save();
     }
+
+    @Test
+    public void createQuestionAndNotNull(){
+    	assertNotNull(new Question("ABCDE", QuestionType.ENGLISH));
+    }
 }
