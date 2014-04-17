@@ -2,24 +2,23 @@
 @header("Human Information Processing Lab :: Home Page")
 
 <body>
+<div class="fixSize">
+    <!-- Page Header -->
+    @nav(user)
+            <div class="homeMainWindow">
+                <div class="homeMain">
+                    <div class="tile homeMenu1" id="slide01" ><img src="@routes.Assets.at("images/profile.png")" width="150" height="150"><br><br><br>
+                    <a href="@routes.UserController.editProfile()"  class="btn btn-block btn-lg btn-primary">
+                    <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;User Profile</a></div>
 
-<!-- Page Header -->
-@nav(user)
-        <div class="homeMainWindow">
-            <div class="homeMain">
-                <div class="tile homeMenu1" id="slide01" ><img src="@routes.Assets.at("images/profile.png")" width="150" height="150"><br><br><br>
-                <a href="@routes.UserController.editProfile()"  class="btn btn-block btn-lg btn-primary">
-                <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;User Profile</a></div>
+                    <div class="tile homeMenu1" id="slide02" ><img src="@routes.Assets.at("images/experiment.png")" width="150" height="150"><br><br><br>
+                    <a href="@routes.Application.selectExperiment()"  class="btn btn-block btn-lg btn-primary">
+                    <span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp; Select Experiment </a></div>
 
-                <div class="tile homeMenu1" id="slide02" ><img src="@routes.Assets.at("images/experiment.png")" width="150" height="150"><br><br><br>
-                <a href="@routes.Application.selectExperiment()"  class="btn btn-block btn-lg btn-primary">
-                <span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp; Select Experiment </a></div>
-
-                <div class="tile homeMenu1"  ><img src="@routes.Assets.at("images/result.png")" width="150" height="150"><br><br><br>
-                <a  id="slide01" class="btn btn-block btn-lg btn-primary">
-                <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Experiment Result</a></div>
+                    <div class="tile homeMenu1"  ><img src="@routes.Assets.at("images/result.png")" width="150" height="150"><br><br><br>
+                    <a  id="slide01" class="btn btn-block btn-lg btn-primary">
+                    <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Experiment Result</a></div>
+                </div>
             </div>
-        </div>
-<br>
-@footer()
-
+    @footer()
+</div>

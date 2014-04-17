@@ -1,10 +1,16 @@
+.fixSize{
+    border:solid;
+    border-color:red;
+    height:780px;
+    border-width:1px;
+}
 .homeMainWindow{
     width:100%;
-    height:469px;
-    margin-bottom:1%;
+    min-height:518px;
     margin-top:-1.5%;
     border:solid;
     border-color:white;
+    border-width:1px;
 }
 #panel01,#img01
 {
@@ -68,7 +74,7 @@ width:631px;
 
 .homeMain{
     height:305px;
-    width:731px;
+    width:737px;
     margin:5% auto;
 }
 .divSlideContainer{
@@ -347,12 +353,7 @@ width:631px;
 .middle{
     min-height:300px;
     width:700px;
-    margin:auto ;
-    position :relative;
-    top : 50%;
-    -webkit-transform: translateY(-15%);
-    -ms-transform: translateY(-15%);
-    transform: translateY(-15%);
+    margin:7% auto ;
 }
 
 
@@ -497,4 +498,16 @@ padding-top:8em;
     width:50%;
     margin:0px auto;
     font-size:20px;
+}
+/*----------------------------------- Trial ---------------------------------------------*/
+.trialButton{
+    color:dimgray !important;   
+}
+.backToProc{
+    margin-left:35%;
+    margin-top:1%;
+}
+.trialContainer{
+    width:30%;
+    margin:0px auto;
 }
