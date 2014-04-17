@@ -2,75 +2,77 @@
 @header("Human Information Processing Lab :: Trial")
 
 <body>
+<div class="fixSize">
 
-
-<!-- Page Header -->
-@nav(user)
-<div class="container">
-    @for(exp <- ExperimentSchedule.getWorkingExperimentsByType(expType)) {
-        <h3>@exp.name</h3>
-        @exp.experimentType match {
-            case ExperimentType.BROWNPETERSON => {
-                @for((trial, index) <- models.brownPeterson.Trial.findInvolving(exp).zipWithIndex ){
-                    @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                        <p><button disabled class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></p>
-                    }else{
-                        <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></a></p>
+    <!-- Page Header -->
+    @nav(user)
+    <div class="homeMainWindow">
+        <div class="trialContainer">
+            @for(exp <- ExperimentSchedule.getWorkingExperimentsByType(expType)) {
+                <h3>@exp.name</h3>
+                @exp.experimentType match {
+                    case ExperimentType.BROWNPETERSON => {
+                        @for((trial, index) <- models.brownPeterson.Trial.findInvolving(exp).zipWithIndex ){
+                            @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
+                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                            }else{
+                                <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp  Trial @{ index + 1 } </button></a></p>
+                            }
+                        }
+                    }
+                    case ExperimentType.STROOPEFFECT => {
+                        @for((trial, index) <- models.stroopEffect.Trial.findInvolving(exp).zipWithIndex ){
+                            @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
+                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                            }else{
+                                <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
+                            }
+                        }
+                    }
+                    case ExperimentType.ATTENTIONBLINK => {
+                        @for((trial, index) <- models.attentionBlink.Trial.findInvolving(exp).zipWithIndex ){
+                            @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
+                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                            }else{
+                                <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
+                            }
+                        }
+                    }
+                    case ExperimentType.SIGNALDETECTION => {
+                        @for((trial, index) <- models.signalDetection.Trial.findInvolving(exp).zipWithIndex ){
+                            @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
+                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                            }else{
+                                <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
+                            }
+                        }
+                    }
+                    case ExperimentType.POSITIONERROR => {
+                        @for((trial, index) <- models.positionError.Trial.findInvolving(exp).zipWithIndex ){
+                            @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
+                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                            }else{
+                                <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
+                            }
+                        }
+                    }
+                    case ExperimentType.STERNBERGSEARCH => {
+                        @for((trial, index) <- models.sternbergSearch.Trial.findInvolving(exp).zipWithIndex ){
+                            @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
+                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                            }else{
+                                <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
+                            }
+                        }
+                    }
+                    case _ => {
+                        <div class="alert alert-danger">Experiment is not found!!</div>
                     }
                 }
+                
             }
-            case ExperimentType.STROOPEFFECT => {
-                @for((trial, index) <- models.stroopEffect.Trial.findInvolving(exp).zipWithIndex ){
-                    @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                        <p><button disabled class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></p>
-                    }else{
-                        <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></a></p>
-                    }
-                }
-            }
-            case ExperimentType.ATTENTIONBLINK => {
-                @for((trial, index) <- models.attentionBlink.Trial.findInvolving(exp).zipWithIndex ){
-                    @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                        <p><button disabled class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></p>
-                    }else{
-                        <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></a></p>
-                    }
-                }
-            }
-            case ExperimentType.SIGNALDETECTION => {
-                @for((trial, index) <- models.signalDetection.Trial.findInvolving(exp).zipWithIndex ){
-                    @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                        <p><button disabled class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></p>
-                    }else{
-                        <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></a></p>
-                    }
-                }
-            }
-            case ExperimentType.POSITIONERROR => {
-                @for((trial, index) <- models.positionError.Trial.findInvolving(exp).zipWithIndex ){
-                    @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                        <p><button disabled class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></p>
-                    }else{
-                        <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></a></p>
-                    }
-                }
-            }
-            case ExperimentType.STERNBERGSEARCH => {
-                @for((trial, index) <- models.sternbergSearch.Trial.findInvolving(exp).zipWithIndex ){
-                    @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                        <p><button disabled class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></p>
-                    }else{
-                        <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success">Trial @{ index + 1 }</button></a></p>
-                    }
-                }
-            }
-            case _ => {
-                <div class="alert alert-danger">Experiment is not found!!</div>
-            }
-        }
-        
-    }
-    <br>
+        </div>
+        <p ><a class="backToProc btn btn-danger" href="@routes.Application.checkBackFormTrial(expType)"><span class="glyphicon glyphicon-chevron-left"> กลับไปขั้นตอนการทดลอง</span></a>
+    </div>
+    @footer()
 </div>
-
-@footer()

@@ -52,6 +52,24 @@ public class Application extends Controller {
     }
 
     @Security.Authenticated(Secured.class)
+    public static Result checkBackFormTrial(String expType) {
+        User user = User.find.byId(session().get("username"));
+        if(user == null) {
+            return redirect(routes.Application.index());
+        }
+        Result nextPage = TODO;
+        switch(expType){
+            case "BROWNPETERSON" : nextPage = redirect(routes.BrownPeterson.proc());break;
+            case "STROOPEFFECT" : nextPage = redirect(routes.StroopEffect.proc()); break;
+            case "ATTENTIONBLINK" : nextPage = redirect(routes.AttentionBlink.proc()); break;
+            case "SIGNALDETECTION" : nextPage = redirect(routes.SignalDetection.proc()); break;
+            case "POSITIONERROR" : nextPage = redirect(routes.PositionError.proc()); break;
+            case "STERNBERGSEARCH" : nextPage = redirect(routes.SternbergSearch.proc()); break;
+        }
+        return nextPage;
+    }
+
+    @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment(long trialId, long expId) {
         User user = User.find.byId(session().get("username"));
         ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
