@@ -1,13 +1,13 @@
 #Experiment Schedule
 - &ex11 !!models.ExperimentSchedule
     name:           Ex11
-    noOfTrial:      1
+    noOfTrial:      2
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: STERNBERGSEARCH
 - &ex12 !!models.ExperimentSchedule
     name:           Ex12
-    noOfTrial:      1
+    noOfTrial:      2
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: STERNBERGSEARCH
