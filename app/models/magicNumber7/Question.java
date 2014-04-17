@@ -11,8 +11,14 @@ import play.db.ebean.Model.Finder;
 public class Question extends Model{
     @Id
     public long id;
+    public String memorySet;
+    public QuestionType questionType;
+    @OneToMany
+    public List<Quiz> quizzes = new ArrayList<Quiz>();
 
-    public Question() {
+    public Question(String memorySet, QuestionType questionType) {
+    	this.memorySet = memorySet;
+    	this.questionType = questionType;
     }
 
 	@SuppressWarnings("unchecked")
