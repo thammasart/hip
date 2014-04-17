@@ -14,7 +14,7 @@
                     case ExperimentType.BROWNPETERSON => {
                         @for((trial, index) <- models.brownPeterson.Trial.findInvolving(exp).zipWithIndex ){
                             @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                                <p><button disabled class="trialButton btn btn-lg btn-block ">Trial @{ index + 1 }</button></p>
                             }else{
                                 <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp  Trial @{ index + 1 } </button></a></p>
                             }
@@ -23,7 +23,7 @@
                     case ExperimentType.STROOPEFFECT => {
                         @for((trial, index) <- models.stroopEffect.Trial.findInvolving(exp).zipWithIndex ){
                             @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                                <p><button disabled class="trialButton btn btn-lg btn-block">Trial @{ index + 1 }</button></p>
                             }else{
                                 <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
                             }
@@ -32,7 +32,7 @@
                     case ExperimentType.ATTENTIONBLINK => {
                         @for((trial, index) <- models.attentionBlink.Trial.findInvolving(exp).zipWithIndex ){
                             @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                                <p><button disabled class="trialButton btn btn-lg btn-block">Trial @{ index + 1 }</button></p>
                             }else{
                                 <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
                             }
@@ -41,7 +41,7 @@
                     case ExperimentType.SIGNALDETECTION => {
                         @for((trial, index) <- models.signalDetection.Trial.findInvolving(exp).zipWithIndex ){
                             @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                                <p><button disabled class="trialButton btn btn-lg btn-block">Trial @{ index + 1 }</button></p>
                             }else{
                                 <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
                             }
@@ -50,7 +50,7 @@
                     case ExperimentType.POSITIONERROR => {
                         @for((trial, index) <- models.positionError.Trial.findInvolving(exp).zipWithIndex ){
                             @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                                <p><button disabled class="trialButton btn btn-lg btn-block">Trial @{ index + 1 }</button></p>
                             }else{
                                 <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
                             }
@@ -59,7 +59,7 @@
                     case ExperimentType.STERNBERGSEARCH => {
                         @for((trial, index) <- models.sternbergSearch.Trial.findInvolving(exp).zipWithIndex ){
                             @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
-                                <p><button disabled class="btn btn-lg btn-block btn-info">Trial @{ index + 1 }</button></p>
+                                <p><button disabled class="trialButton btn btn-lg btn-block">Trial @{ index + 1 }</button></p>
                             }else{
                                 <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
                             }

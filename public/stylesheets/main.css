@@ -501,7 +501,7 @@ padding-top:8em;
 }
 /*----------------------------------- Trial ---------------------------------------------*/
 .trialButton{
-    
+    color:dimgray !important;   
 }
 .backToProc{
     margin-left:35%;
