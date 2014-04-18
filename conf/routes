@@ -71,7 +71,7 @@ GET     /magic_number7/info           controllers.MagicNumber7.infoIframe()
 GET     /magic_number7/proc            controllers.MagicNumber7.proc()
 GET     /magic_number7/proci           controllers.MagicNumber7.procIframe()
 GET     /magic_number7/demo            controllers.MagicNumber7.demoPage()
-POST    /magic_number7/reportDemo      controllers.MagicNumber7.demoReport()
+POST    /magic_number7/reportDemo      controllers.MagicNumber7.demoReport(length:Int)
 GET     /magic_number7/experiment      controllers.MagicNumber7.experiment(trialId:Long, questionNo:Int)
 POST    /magic_number7/experiment/save controllers.MagicNumber7.saveAnswer(trialId:Long, questionNo:Int)
 GET     /magic_number7/report      	 controllers.MagicNumber7.report(username:String ?= "", trial_id:Long ?= 0)
@@ -113,6 +113,12 @@ POST    /admin/experiment/parameter/signal-detection controllers.Admin.saveSigna
 GET     /initial                    controllers.InitialController.index()
 GET     /initial/AttentionBlink     controllers.StroopEffect.installQuestion()
 GET     /initial/BrownPeterson      controllers.BrownPeterson.installQuestion()
+
+# Map Bootstrap images
+GET     /assets/fonts/glyphicons-halflings-regular.woff        controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.woff")
+GET     /assets/fonts/glyphicons-halflings-regular.eot        controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.eot")
+GET     /assets/fonts/glyphicons-halflings-regular.ttf        controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.ttf")
+GET     /assets/fonts/glyphicons-halflings-regular.svg        controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.svg")
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -12,20 +12,20 @@ import java.util.ArrayList;
 public class Trial extends Model{
 	@Id
 	public long id;
-	public int length;
     public QuestionType questionType;
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
+    public static int numberOfQuiz = 3;
+
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
     }
 
-    public static Trial create(ExperimentSchedule schedule, int length, QuestionType questionType){
+    public static Trial create(ExperimentSchedule schedule, QuestionType questionType){
     	Trial newTrial = new Trial(schedule);
-    	newTrial.length = length;
     	newTrial.questionType = questionType;
     	return newTrial;
     }

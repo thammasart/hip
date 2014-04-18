@@ -6,6 +6,7 @@ var showTimerTime = 0;
 var signalWordTime = 0;
 var questionTime = 0;
 var expDuration = 0;
+var delayTime = 0;
 var question = "";
 var target;
 var noise;
@@ -28,8 +29,16 @@ function showInstruction (){
 function showTimer(){
     clearInterval(showInstructionTime);
     showTimerTime =   setInterval(calculateTimeLeft,1000);
-    signalWordTime = setInterval(function(){showSignalWord()},5000);
+    delayTime = setInterval(function(){showBlank()},5000);
 }
+
+function showBlank(){
+    clearInterval(delayTime);
+    clearInterval(showTimerTime);
+    document.getElementById("word").innerHTML= "";
+    signalWordTime = setInterval(function(){showSignalWord()},500);
+}
+
 function showSignalWord(){
     clearInterval(signalWordTime);
     clearInterval(showTimerTime);

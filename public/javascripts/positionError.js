@@ -5,6 +5,7 @@ var showInstructionTime = 0;
 var showTimerTime = 0;
 var positionWordTime = 0;
 var questionTime = 0;
+var delayTime = 0;
 
 var charTime = 0;
 var gapTime = 0;
@@ -161,11 +162,18 @@ function showInstruction (){
 function showTimer(){
     clearInterval(showInstructionTime);
     showTimerTime =   setInterval(calculateTimeLeft,1000);
-    positionWordTime = setInterval(function(){showWordSeries()},5000);
+    delayTime =setInterval(function(){showBlankBefore()},5000);
 }
+
+function showBlankBefore(){
+    clearInterval(delayTime);
+    clearInterval(showTimerTime);
+    document.getElementById("word").innerHTML= "";
+    positionWordTime = setInterval(function(){showWordSeries()},500);
+}
+
 function showWordSeries(){
     clearInterval(positionWordTime);
-    clearInterval(showTimerTime);
     showCharacter();
 }
 
