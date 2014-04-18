@@ -13,116 +13,123 @@
     experimentType: MAGICNUMBER7
     #Trial
 - &round23 !!models.magicNumber7.Trial
-    length: 5
     questionType: ENGLISH
     schedule: *ex13
 - &round24 !!models.magicNumber7.Trial
-    length: 7
     questionType: NUMBER
     schedule: *ex13
 - &round25 !!models.magicNumber7.Trial
-    length: 7
     questionType: THAI
     schedule: *ex14
 - &round26 !!models.magicNumber7.Trial
-    length: 9
     questionType: ENGLISH
     schedule: *ex14
 #Question
-- &Question44 !!models.sternbergSearch.Question
+- &Question44 !!models.magicNumber7.Question
     memorySet: ABCDE
     questionType: ENGLISH
-- &Question45 !!models.sternbergSearch.Question
+- &Question45 !!models.magicNumber7.Question
     memorySet: QWERT
     questionType: ENGLISH
-- &Question46 !!models.sternbergSearch.Question
+- &Question46 !!models.magicNumber7.Question
     memorySet: ASDFG
     questionType: ENGLISH
-- &Question47 !!models.sternbergSearch.Question
+- &Question47 !!models.magicNumber7.Question
     memorySet: 1234567
     questionType: NUMBER
-- &Question48 !!models.sternbergSearch.Question
+- &Question48 !!models.magicNumber7.Question
     memorySet: 9876543
     questionType: NUMBER
-- &Question49 !!models.sternbergSearch.Question
+- &Question49 !!models.magicNumber7.Question
     memorySet: 7530413
     questionType: NUMBER
-- &Question50 !!models.sternbergSearch.Question
+- &Question50 !!models.magicNumber7.Question
     memorySet: ผปฉอฮทม
     questionType: THAI
-- &Question51 !!models.sternbergSearch.Question
+- &Question51 !!models.magicNumber7.Question
     memorySet: ตจขชฃลบ
     questionType: THAI
-- &Question52 !!models.sternbergSearch.Question
+- &Question52 !!models.magicNumber7.Question
     memorySet: ฟหฆกฏดฌ
     questionType: THAI
-- &Question53 !!models.sternbergSearch.Question
+- &Question53 !!models.magicNumber7.Question
     memorySet: ABCDEFGHI
     questionType: ENGLISH
-- &Question54 !!models.sternbergSearch.Question
+- &Question54 !!models.magicNumber7.Question
     memorySet: QWERTYUIO
     questionType: ENGLISH
-- &Question55 !!models.sternbergSearch.Question
+- &Question55 !!models.magicNumber7.Question
     memorySet: ASDFGHJKL
     questionType: ENGLISH
 #Quiz
-- &Quiz65 !!models.sternbergSearch.Quiz
+- &Quiz65 !!models.magicNumber7.Quiz
     displayTime: 0.5
     chunkSize: 0
+    length: 5
     trial: *round23
     question: *Question44
-- &Quiz66 !!models.sternbergSearch.Quiz
+- &Quiz66 !!models.magicNumber7.Quiz
     displayTime: 0.3
     chunkSize: 0
+    length: 5
     trial: *round23
     question: *Question45
-- &Quiz67 !!models.sternbergSearch.Quiz
+- &Quiz67 !!models.magicNumber7.Quiz
     displayTime: 0.1
     chunkSize: 2
+    length: 5
     trial: *round23
     question: *Question46
-- &Quiz68 !!models.sternbergSearch.Quiz
+- &Quiz68 !!models.magicNumber7.Quiz
     displayTime: 0.7
     chunkSize: 0
+    length: 7
     trial: *round24
     question: *Question47
-- &Quiz69 !!models.sternbergSearch.Quiz
+- &Quiz69 !!models.magicNumber7.Quiz
     displayTime: 0.5
     chunkSize: 2
+    length: 7
     trial: *round24
     question: *Question48
-- &Quiz70 !!models.sternbergSearch.Quiz
+- &Quiz70 !!models.magicNumber7.Quiz
     displayTime: 0.3
     chunkSize: 2
+    length: 7
     trial: *round24
     question: *Question49
-- &Quiz71 !!models.sternbergSearch.Quiz
+- &Quiz71 !!models.magicNumber7.Quiz
     displayTime: 0.5
     chunkSize: 0
     trial: *round25
     question: *Question50
-- &Quiz72 !!models.sternbergSearch.Quiz
+- &Quiz72 !!models.magicNumber7.Quiz
     displayTime: 0.3
     chunkSize: 3
+    length: 7
     trial: *round25
     question: *Question51
-- &Quiz73 !!models.sternbergSearch.Quiz
+- &Quiz73 !!models.magicNumber7.Quiz
     displayTime: 0.1
     chunkSize: 3
+    length: 7
     trial: *round25
     question: *Question52
-- &Quiz74 !!models.sternbergSearch.Quiz
+- &Quiz74 !!models.magicNumber7.Quiz
     displayTime: 0.7
     chunkSize: 0
+    length: 9
     trial: *round26
     question: *Question53
-- &Quiz75 !!models.sternbergSearch.Quiz
+- &Quiz75 !!models.magicNumber7.Quiz
     displayTime: 0.5
     chunkSize: 3
+    length: 9
     trial: *round26
     question: *Question54
-- &Quiz76 !!models.sternbergSearch.Quiz
+- &Quiz76 !!models.magicNumber7.Quiz
     displayTime: 0.3
     chunkSize: 3
+    length: 9
     trial: *round26
     question: *Question55

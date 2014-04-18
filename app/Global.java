@@ -10,6 +10,7 @@ public class Global extends GlobalSettings {
 		if(User.find.findRowCount() == 0) {
 			Ebean.save((List) Yaml.load("initial-data.yml"));
             Ebean.save((List) Yaml.load("sternbergSearch.yml"));
+            Ebean.save((List) Yaml.load("magicNumber7.yml"));
 			Ebean.save((List) Yaml.load("user.yml"));
 		}
 	}
