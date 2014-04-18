@@ -22,10 +22,9 @@
     font-size:60px;
 }
 .navContainer{
-    position:relative;
-    top:80px;
     width:70%;
     margin-left:23%;
+    margin-top:4.2%;
 }
 .choice{
     position:relative;
@@ -44,7 +43,6 @@
 .navButton{
     width:20%;
     height:5%;
-    font-size:85%;
     float:left;
     margin-left:3%;
 }

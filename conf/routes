@@ -14,6 +14,9 @@ GET	/logout			    controllers.Application.logout()
 GET		/check-repeat-user			controllers.Application.checkUserTakeRepeatExperiment(trial_id:Long, exp_id:Long)
 GET		/back-form-trial			controllers.Application.checkBackFormTrial(exp_type:String)
 
+
+GET	/result                     controllers.Application.showResult()
+
 GET     /brown-peterson		        controllers.BrownPeterson.info()
 GET     /brown-peterson/info        controllers.BrownPeterson.infoIframe()
 GET     /brown-peterson/proc		controllers.BrownPeterson.proc()

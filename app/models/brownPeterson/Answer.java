@@ -52,6 +52,12 @@ public class Answer extends Model{
 		}
 		return answers;
 	}
+        
+        public static double calculateAverageScore(){
+                List<Answer> answers = Answer.find.all();
+                double sum = Answer.calculateTotalScore(answers);
+                return sum/(answers.size());
+        }
 
 	public static double calculateTotalUsedTime(List<Answer> answers) {
 		double totalUsedTime = 0.0;

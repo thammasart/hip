@@ -1,0 +1,13 @@
+@(user : User,scoreList: List[Double])
+@header("Human Information Processing Lab :: Home Page")
+
+<body>
+<div class="fixSize">
+    <!-- Page Header -->
+    @nav(user)
+
+        @for(sc<-scoreList){
+            <p> @sc  = </p>
+        }
+    @footer()
+</div>

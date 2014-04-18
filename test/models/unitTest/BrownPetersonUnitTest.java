@@ -58,6 +58,32 @@ public class BrownPetersonUnitTest extends WithApplication {
         Question q = new Question("hello","world","!!!");
         assertNotNull(q);
     }
+    
+    @Test
+    public void should_get_average_score(){
+        
+		new Trial().save();
+		new Question("hello","world","!!!").save();
+		Trial trial = Trial.findById(1);
+		Question question = Question.findQuestionById(1);
+		Quiz.create(200, 7, trial, question).save();
+		Quiz quiz = Quiz.find.byId(new Long(1));
+		new User("123","Secret").save();
+		new User("001","Secret").save();
+		new User("002","Secret").save();
+		new User("003","Secret").save();
+		User user1 = User.find.byId("123");
+		User user2 = User.find.byId("001");
+		User user3 = User.find.byId("002");
+		User user4 = User.find.byId("003");
+		
+		 new Answer("hello", "world", "!!!", 16.9,"TDM", user1, quiz).save();
+		 new Answer("hello", "world", "!!!", 16.9,"TDM", user4, quiz).save();
+		 new Answer("first word", "second word", "third word", 13.9,"TDM", user2, quiz).save();
+		 new Answer("first word", "second word", "third word", 13.9,"TDM", user3, quiz).save();
+                
+                assertEquals(0.5,Answer.calculateAverageScore(),0.01);
+    }
 
     @Test
     public void should_save_and_query_question(){

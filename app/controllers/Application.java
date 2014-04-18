@@ -7,6 +7,8 @@ import views.html.*;
 import views.html.iframe.*;
 import models.*;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Application extends Controller {
 
@@ -30,6 +32,14 @@ public class Application extends Controller {
     public static Result about() {
         User user = User.find.byId(request().username());
         return ok(about.render(user));
+    }
+    
+    @Security.Authenticated(Secured.class)
+    public static Result showResult(){
+        User user = User.find.byId(request().username());
+        List<Double> scores = new ArrayList<Double>();
+        scores.add(models.brownPeterson.Answer.calculateAverageScore());
+        return ok(allResult.render(user,scores));
     }
 
     public static Result logout() {
