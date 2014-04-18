@@ -3,45 +3,50 @@
 @import models.brownPeterson.Quiz
 @import models.brownPeterson.Trial
 
-
-<form role="form" class="form-horizontal" action="@routes.Admin.saveBrownPetersonParameter(exp.id)" method="POST">
-<div class="container">
-    <div class="row">
+<div class="container" ng-app="ExperimentCreator">
+<form role="form" name="parameter" class="form-horizontal" action="@routes.Admin.saveBrownPetersonParameter(exp.id)" method="POST">
+    <div class="row" ng-controller="ExController"  >
             <div class="col-md-8 col-sm-8">
-                <div class="form-group">
+                <div class="form-group has-feedback" ng-class="{true: 'has-success', false:'has-error' }[parameter.name.$valid]">
                     <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="name" placeholder="@exp.name" value="@exp.name">
+                        <input type="text" ng-init="exName='@exp.name'" class="form-control" name="name" ng-model="exName" ng-pattern="word">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="parameter.name.$valid"></span>
+                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="parameter.name.$invalid"></span>
+                    </div>
+
+                </div>
+                <div class="form-group" ng-class="{true: 'has-success', false:'has-error' }[parameter.startDate.$valid]">
+                    <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
+                    <div class="input-group date col-sm-3 has-feedback">
+                        <input type="text" name="startDate" class="form-control" datepicker-popup="{{format}}" ng-init='startDate=stringToDate("@exp.startDate.format("MM/dd/yyyy")")'  ng-model="startDate" is-open="startDateOpened" min="minDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                           <button class="btn btn-default" ng-click="open($event, 0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        <div class="col-sm-1 form-control-feedback date-feedback">
+                            <span class="glyphicon glyphicon-ok " ng-show="parameter.startDate.$valid"></span>
+                            <span class="glyphicon glyphicon-remove " ng-show="parameter.startDate.$invalid"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group" ng-class="{true: 'has-success', false:'has-error' }[parameter.expireDate.$valid]">
+                    <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
+                    <div class="input-group date col-sm-3 has-feedback">
+                        <input type="text" name="expireDate" class="form-control" datepicker-popup="{{format}}" ng-init='expireDate=stringToDate("@exp.expireDate.format("MM/dd/yyyy")")' ng-model="expireDate" is-open="expireDateOpened" min="startDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                           <button class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        <div class="col-sm-1 form-control-feedback date-feedback">
+                            <span class="glyphicon glyphicon-ok " ng-show="parameter.expireDate.$valid"></span>
+                            <span class="glyphicon glyphicon-remove " ng-show="parameter.expireDate.$invalid"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
-                    <div class="input-group date col-sm-3" id="startdate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="startDate" placeholder="@exp.startDate.format("dd/MM/yyyy")" value="@exp.startDate.format("dd/MM/yyyy")">
-                        <span class="input-group-addon"> + </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#startdate-picker').datetimepicker();
-                        });
-                    </script>
-                    <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
-                    <div class="col-sm-3 input-group date" id="expiredate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="expireDate" placeholder="@exp.expireDate.format("dd/mm/yyyy")" value="@exp.expireDate.format("dd/MM/yyyy")" >
-                        <span class="input-group-addon"> + </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#expiredate-picker').datetimepicker();
-                        });
-                    </script>
-                </div> 
-                <div class="form-group">
                     <label for="experimentType" class="col-sm-2 control-label">การทดลอง</label>
-                    <div class="col-sm-3">
-                        <select class="form-control" name="experimentType" disabled>
-                          <option value="@exp.experimentType">@exp.getExperimentTypeToString()</option>
-                        </select>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" disabled value="@exp.experimentType">
                     </div>
                 </div>
             </div>
@@ -69,7 +74,6 @@
             <div class="alert alert-danger">@flash.get("date_error")</div>
         }
     </div>
-</div>
 
 <div class="container">
     @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
@@ -157,6 +161,6 @@
         </div>
     </div>
     
-</div>
 </form>
+</div>
 <br>

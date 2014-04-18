@@ -21,11 +21,11 @@ public class ExperimentSchedule extends Model{
 	public int noOfTrial = 3;
 	@Column(nullable=false)
 	@Required
-	@Formats.DateTime(pattern="dd/mm/yyyy")
+	@Formats.DateTime(pattern="dd-MM-yyyy")
 	public Date startDate;
 	@Required
 	@Column(nullable=false)
-	@Formats.DateTime(pattern="dd/mm/yyyy")
+	@Formats.DateTime(pattern="dd-MM-yyyy")
 	public Date expireDate;
 	public ExperimentType experimentType;
 	

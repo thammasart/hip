@@ -1,4 +1,53 @@
-angular.module('ExperimentCreator', [])
+angular.module('ExperimentCreator', ['ui.bootstrap'])
     .controller('ExController', function($scope){
         $scope.word = /^[a-zA-Z0-9ก-๙_ \-]*$/;
+        $scope.value = 3;
+
+        $scope.today = function() {
+            $scope.dt = new Date();
+            $scope.startDate = new Date();
+            $scope.expireDate = new Date();
+        };
+        $scope.today();
+
+        $scope.stringToDate = function(value){
+            return new Date(value);
+        };
+
+        $scope.showWeeks = true;
+        $scope.toggleWeeks = function () {
+            $scope.showWeeks = ! $scope.showWeeks;
+        };
+
+        $scope.clear = function () {
+            $scope.dt = null;
+        };
+
+        // Disable weekend selection
+        $scope.disabled = function(date, mode) {
+            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        };
+
+        $scope.toggleMin = function() {
+            $scope.minDate = ( $scope.minDate ) ? null : new Date();
+        };
+        $scope.toggleMin();
+
+        $scope.open = function($event, target) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            if(target === 0)
+                $scope.startDateOpened = true;
+            else if(target === 1)
+                $scope.expireDateOpened = true;
+        };
+
+        $scope.dateOptions = {
+            'year-format': "'yy'",
+            'starting-day': 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'dd-MM-yyyy'];
+        $scope.format = $scope.formats[3];
     });
