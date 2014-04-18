@@ -67,7 +67,7 @@ public class Application extends Controller {
             case "STERNBERGSEARCH" : nextPage = redirect(routes.SternbergSearch.proc()); break;
             case "MAGICNUMBER7" : nextPage = redirect(routes.MagicNumber7.proc()); break;
         }
-
+        
         return nextPage;
     }
 

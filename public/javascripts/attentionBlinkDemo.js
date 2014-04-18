@@ -4,6 +4,7 @@ var count = 5;
 var showInstructionTime = 0;
 var showTimerTime = 0;
 var attentionWordTime = 0;
+var delayTime = 0;
 var questionTime = 0;
 var questionTime2 = 0;
 var i =0;
@@ -33,7 +34,13 @@ function showInstruction (){
 function showTimer(){
     clearInterval(showInstructionTime);
     showTimerTime =   setInterval(calculateTimeLeft,1000);
-    attentionWordTime = setInterval(function(){showAttentionWord()},5000);
+    delayTime = setInterval(function(){showBlank()},5000);
+}
+function showBlank(){
+    clearInterval(delayTime);
+    clearInterval(showTimerTime);
+    document.getElementById("word").innerHTML= "";
+    attentionWordTime = setInterval(function(){showAttentionWord()},500);
 }
 function showAttentionWord(){
     clearInterval(attentionWordTime);
