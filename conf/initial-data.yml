@@ -21,7 +21,7 @@
     name:           Ex4
     noOfTrial:      3
     startDate:      2014-01-30
-    expireDate:     2015-02-07
+    expireDate:     2014-02-07
     experimentType: STROOPEFFECT
 - &ex5 !!models.ExperimentSchedule
     name:           Ex5
