@@ -1,17 +1,13 @@
 @(trial : models.signalDetection.Trial,questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
-<!--
-<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+<script src="@routes.Assets.at("javascripts/signalDetection.js")"></script>
  <script>
 window.location.hash="no-back-button";
 window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
 window.onhashchange=function(){window.location.hash="no-back-button";}
-
 </script>
---!>
-<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
-<script src="@routes.Assets.at("javascripts/signalDetection.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <body>
 
@@ -25,7 +21,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <div class="expCenterWord"  >
         <p id="word" >  </p>
     </div>
-            <form id = "answerForm" action="@routes.SignalDetection.saveAnswer(trial.id,questionNo)" method="post">
+            <form id = "answerForm" action="@routes.SignalDetection.saveAnswer(trial.id,questionNo)" method="post" >
         <div class="choice" align="center">
                 <input type="submit" class="btn btn-danger ansButton" id = "false" name = "false" value="ไม่มี"  onclick="return submitButtonClick(this.name)"/>
                 <input type="submit" class="btn btn-success ansButton" id = "true" name = "true"  value="มี"  onclick="return submitButtonClick(this.name)"/>
