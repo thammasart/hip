@@ -1,67 +1,12 @@
 @(exp : ExperimentSchedule)
 @import views.html.admin._
+@import views.html.admin.experiment._
 @import models.brownPeterson.Quiz
 @import models.brownPeterson.Trial
 
 <div class="container" ng-app="ExperimentCreator">
 <form role="form" name="parameter" class="form-horizontal" action="@routes.Admin.saveBrownPetersonParameter(exp.id)" method="POST">
-    <div class="row" ng-controller="ExController"  >
-            <div class="col-md-8 col-sm-8">
-                <div class="form-group has-feedback" ng-class="{true: 'has-success', false:'has-error' }[parameter.name.$valid]">
-                    <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
-                    <div class="col-sm-4">
-                        <input type="text" ng-init="exName='@exp.name'" class="form-control" name="name" ng-model="exName" ng-pattern="word">
-                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="parameter.name.$valid"></span>
-                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="parameter.name.$invalid"></span>
-                    </div>
-
-                </div>
-                <div class="form-group" ng-class="{true: 'has-success', false:'has-error' }[parameter.startDate.$valid]">
-                    <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
-                    <div class="input-group date col-sm-3 has-feedback">
-                        <input type="text" name="startDate" class="form-control" datepicker-popup="{{format}}" ng-init='startDate=stringToDate("@exp.startDate.format("MM/dd/yyyy")")'  ng-model="startDate" is-open="startDateOpened" min="minDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
-                        <span class="input-group-btn">
-                           <button class="btn btn-default" ng-click="open($event, 0)"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                        <div class="col-sm-1 form-control-feedback date-feedback">
-                            <span class="glyphicon glyphicon-ok " ng-show="parameter.startDate.$valid"></span>
-                            <span class="glyphicon glyphicon-remove " ng-show="parameter.startDate.$invalid"></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-group" ng-class="{true: 'has-success', false:'has-error' }[parameter.expireDate.$valid]">
-                    <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
-                    <div class="input-group date col-sm-3 has-feedback">
-                        <input type="text" name="expireDate" class="form-control" datepicker-popup="{{format}}" ng-init='expireDate=stringToDate("@exp.expireDate.format("MM/dd/yyyy")")' ng-model="expireDate" is-open="expireDateOpened" min="startDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                        <span class="input-group-btn">
-                           <button class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                        <div class="col-sm-1 form-control-feedback date-feedback">
-                            <span class="glyphicon glyphicon-ok " ng-show="parameter.expireDate.$valid"></span>
-                            <span class="glyphicon glyphicon-remove " ng-show="parameter.expireDate.$invalid"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="experimentType" class="col-sm-2 control-label">การทดลอง</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" disabled value="@exp.experimentType">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <button type="submit" class="btn btn-success btn-save">+SAVE ALL</button>  
-            </div>
-            <div class="col-md-3 col-sm-6 sub-button">
-                <a href="@routes.Admin.addBrownPetersonQuestion()">
-                    <button type="button" class="btn btn-default btn-xs">+questions</button>
-                </a>
-                <a href="@routes.Admin.displayBrownPetersonQuestionList()">
-                    <button type="button" class="btn btn-default btn-xs">show questions</button>
-                </a>
-            </div>
-    </div>
+@exp_edit(exp)
     <hr>
     <div class="container">
         @if(flash.containsKey("success")){
@@ -157,7 +102,7 @@
     }
     <div class="row">
         <div class="col-md-4 col-sm-4 col-md-offset-8 col-sm-offset-8">
-            <button type="submit" class="btn btn-success btn-save">+SAVE ALL</button>  
+            <button type="submit" class="btn btn-success btn-save" ng-disabled="parameter.$invalid">+SAVE ALL</button>
         </div>
     </div>
     

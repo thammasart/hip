@@ -3,6 +3,15 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.word = /^[a-zA-Z0-9ก-๙_ \-]*$/;
         $scope.value = 3;
 
+        $scope.getInputStatus = function(input){
+            if(input.$pristine)
+                return 2;
+            if(input.$valid)
+                return 0;
+            return 1;
+        };
+
+
         $scope.today = function() {
             $scope.dt = new Date();
             $scope.startDate = new Date();
@@ -50,4 +59,16 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'dd-MM-yyyy'];
         $scope.format = $scope.formats[3];
+
+        $scope.checkDateValid = function(input){
+            if($scope.startDate <= $scope.expireDate){
+                input.startDate.$setValidity('startDate', true);
+                input.expireDate.$setValidity('expireDate', true);
+                return true;
+            }
+
+            input.startDate.$setValidity('startDate', false);
+            input.expireDate.$setValidity('expireDate', false);
+            return false;
+        }
     });
