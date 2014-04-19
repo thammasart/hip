@@ -59,6 +59,7 @@ function showQuestionWord(){
     }
     document.getElementById("confirm").style.visibility = "visible";
     document.getElementById("word").innerHTML = " เติมตัวอักษรให้ถูกต้องตามลำดับ" ;
+    document.getElementById("cen").style.top = "15%" ;
 }
 function done(){
     d = new Date();

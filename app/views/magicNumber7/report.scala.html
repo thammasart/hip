@@ -11,7 +11,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <div class="fixSize">
     @nav(user)
     <div class="expMainWindow" style="height:470px;">
-        <div class="expMainWindowFrame" style="height:initial; padding-top:0.5%; padding-bottom:1%;">
+        <div class="expMainWindowFrame" style="padding-top:0.5%;" >
             <div class="expCenterWord">
                 @for(ans <- answers){
                     <h3>ข้อที่ @(ans.id - answers.get(0).id + 1 ) : @ans.score/@ans.quiz.length</h3>
