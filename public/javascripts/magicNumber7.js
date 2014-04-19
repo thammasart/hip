@@ -59,6 +59,7 @@ function showQuestionWord(){
     }
     document.getElementById("confirm").style.visibility = "visible";
     document.getElementById("word").innerHTML = " เติมตัวอักษรให้ถูกต้องตามลำดับ" ;
+    document.getElementById("cen").style.top = "15%" ;
 }
 function done(){
     d = new Date();
@@ -83,4 +84,13 @@ function calculateTimeLeft()
 {
         count=count-1;
         document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาที " ;
+}
+
+function textHandler(){
+    for (var j=0;j<ansZone.length;j++){
+        if (ansZone[j] == event.srcElement && j+1 < ansZone.length){
+            ansZone[j+1].focus();
+            break;
+        }
+    }
 }
