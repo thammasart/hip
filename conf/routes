@@ -14,6 +14,9 @@ GET	/logout			    controllers.Application.logout()
 GET		/check-repeat-user			controllers.Application.checkUserTakeRepeatExperiment(trial_id:Long, exp_id:Long)
 GET		/back-form-trial			controllers.Application.checkBackFormTrial(exp_type:String)
 
+
+GET	/result                     controllers.Application.showResult()
+
 GET     /brown-peterson		        controllers.BrownPeterson.info()
 GET     /brown-peterson/info        controllers.BrownPeterson.infoIframe()
 GET     /brown-peterson/proc		controllers.BrownPeterson.proc()
@@ -68,7 +71,7 @@ GET     /magic_number7/info           controllers.MagicNumber7.infoIframe()
 GET     /magic_number7/proc            controllers.MagicNumber7.proc()
 GET     /magic_number7/proci           controllers.MagicNumber7.procIframe()
 GET     /magic_number7/demo            controllers.MagicNumber7.demoPage()
-POST    /magic_number7/reportDemo      controllers.MagicNumber7.demoReport()
+POST    /magic_number7/reportDemo      controllers.MagicNumber7.demoReport(length:Int)
 GET     /magic_number7/experiment      controllers.MagicNumber7.experiment(trialId:Long, questionNo:Int)
 POST    /magic_number7/experiment/save controllers.MagicNumber7.saveAnswer(trialId:Long, questionNo:Int)
 GET     /magic_number7/report      	 controllers.MagicNumber7.report(username:String ?= "", trial_id:Long ?= 0)

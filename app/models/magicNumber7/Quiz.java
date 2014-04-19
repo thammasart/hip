@@ -13,6 +13,7 @@ public class Quiz extends Model{
 	public long id;
 	public double displayTime;
 	public int chunkSize;
+    public int length;
 	@ManyToOne
 	public Trial trial;
 	@ManyToOne
@@ -23,10 +24,11 @@ public class Quiz extends Model{
 		this.question = question;
 	}
 
-	public static Quiz create(Trial trial, Question question, double displayTime, int chunkSize){
+	public static Quiz create(Trial trial, Question question, double displayTime, int chunkSize, int length){
 		Quiz newQuiz = new Quiz(trial, question);
 		newQuiz.displayTime = displayTime;
 		newQuiz.chunkSize = chunkSize;
+        newQuiz.length = length;
 		return newQuiz;
 	}
 

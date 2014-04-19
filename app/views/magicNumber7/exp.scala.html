@@ -1,44 +1,41 @@
-@(trial : models.attentionBlink.Trial, questionNo : Integer)
+@(trial : models.magicNumber7.Trial, questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
 
+<script src="@routes.Assets.at("javascripts/magicNumber7.js")"></script>
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
 window.location.hash="no-back-button";
 window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
 window.onhashchange=function(){window.location.hash="no-back-button";}
-
 </script>
 
-<script src="@routes.Assets.at("javascripts/attentionBlink.js")"></script>
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/attention_blink.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/MagicNO7.css")">
 <body>
 
 <!-- Page Header -->
 <div class="">
-    <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+    <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
     <!-- Dashed line-->
     <div class="titleLine"></div>
 </div>
 <div class="expMainWindow">
     <div class="expCenterWord">
-         <p id="word">  </p>
+        <p id="word">  </p>
     </div>
-    <div class="choice" align="center" id="choice" >
-
-        <form id = "answerForm" action="@routes.AttentionBlink.saveAnswer(trial.id,questionNo)" method="post">
-            <button type="submit" class="btn btn-danger ansButton" id = "maiMe" name = "maiMe" class="Button" onclick="return submitButtonClick(this.name)"/>ไม่มี</button >
-            <button type="submit" class="btn btn-success ansButton" id = "me" name = "me" class="Button" onclick="return submitButtonClick(this.name)"/>มี</button >
-            <input id = "answer" name = "answer" type="checkbox" hidden/>
-            <input id = "usedTime" name = "usedTime" type="text" hidden/>
-            <input id = "isCorrect" name = "isCorrect" type="checkbox" hidden/>
-        </form>
-
-    </div>
-    <p id="blinkTime" hidden>@trial.quizzes(questionNo).blinkTime</p>
-    <p id="questionSet" hidden>@trial.quizzes(questionNo).question.set</p>
-    <p id="questionLetter" hidden>@trial.quizzes(questionNo).question.letter</p>
-    <p id="correctAnswer" hidden>@trial.quizzes(questionNo).question.correctAnswer</p>
-
-
+    <form action="@routes.MagicNumber7.saveAnswer(trial.id, questionNo)" method="post" >
+        <div class="choiceMagic" align="center" id="choice" >
+            @for(s <- trial.quizzes(questionNo).question.memorySet){
+                <input class="inputBox inputMagic" autocomplete="off" maxlength="1" type="text" />
+            }
+            <button type="submit" class="btn btn-success ansButton" id="confirm"  name="confirm"onclick="return done()"  > ยืนยัน </button>
+        </div>
+        <input id="answer" name="answer" hidden/>
+        <input id="usedTime" name="usedTime" hidden/>
+        <input id="score" name="score" hidden/>
+    </form>
+    <p id="memorySet"  hidden>@trial.quizzes(questionNo).question.memorySet</p>
+    <p id="displayTime" hidden>@trial.quizzes(questionNo).displayTime</p>
+    <p id="chunkSize" hidden>@trial.quizzes(questionNo).chunkSize</p>
 </div>
 @footer()

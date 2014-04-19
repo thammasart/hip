@@ -43,7 +43,7 @@ public class Admin extends Controller {
     //แสดงผลหน้าข้อมูลของ user ทั้งหมด
     @Security.Authenticated(Secured.class)
     public static Result renderUserInfo() {
-        List<User> userList = User.find.all();
+       // List<User> userList = User.find.all(); // I think it useless : who wrote it plz take care .
         return ok(user_info.render(User.getAllUser()));
     }
 

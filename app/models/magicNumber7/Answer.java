@@ -15,7 +15,7 @@ public class Answer extends Model{
     public long id;
     public String answer;
     public double usedTime;
-    public boolean isCorrect;
+    public int score;
     @ManyToOne
     public User user;
     @ManyToOne 
@@ -26,11 +26,11 @@ public class Answer extends Model{
         this.quiz = quiz;
     }
 
-    public static Answer create(User user, Quiz quiz, String answer, double usedTime, boolean isCorrect){
+    public static Answer create(User user, Quiz quiz, String answer, double usedTime, int score){
         Answer newAnswer = new Answer(user, quiz);
         newAnswer.answer = answer;
         newAnswer.usedTime = usedTime;
-        newAnswer.isCorrect = isCorrect;
+        newAnswer.score = score;
         return newAnswer;
     }
 
@@ -45,7 +45,7 @@ public class Answer extends Model{
     public static int calculateTotalScore(List<Answer> answers){
         int totalScore = 0;
         for(Answer ans : answers){
-            if(ans.isCorrect) totalScore++;
+            totalScore+=ans.score;
         }
         return totalScore;
     }

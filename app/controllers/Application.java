@@ -7,6 +7,8 @@ import views.html.*;
 import views.html.iframe.*;
 import models.*;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Application extends Controller {
 
@@ -30,6 +32,14 @@ public class Application extends Controller {
     public static Result about() {
         User user = User.find.byId(request().username());
         return ok(about.render(user));
+    }
+    
+    @Security.Authenticated(Secured.class)
+    public static Result showResult(){
+        User user = User.find.byId(request().username());
+        List<Double> scores = new ArrayList<Double>();
+        scores.add(models.brownPeterson.Answer.calculateAverageScore());
+        return ok(allResult.render(user,scores));
     }
 
     public static Result logout() {
@@ -65,7 +75,9 @@ public class Application extends Controller {
             case "SIGNALDETECTION" : nextPage = redirect(routes.SignalDetection.proc()); break;
             case "POSITIONERROR" : nextPage = redirect(routes.PositionError.proc()); break;
             case "STERNBERGSEARCH" : nextPage = redirect(routes.SternbergSearch.proc()); break;
+            case "MAGICNUMBER7" : nextPage = redirect(routes.MagicNumber7.proc()); break;
         }
+        
         return nextPage;
     }
 
@@ -91,13 +103,14 @@ public class Application extends Controller {
             case SIGNALDETECTION : nextPage = redirect(routes.SignalDetection.experiment(trialId,0)); break;
             case POSITIONERROR : nextPage = redirect(routes.PositionError.experiment(trialId,0)); break;
             case STERNBERGSEARCH : nextPage = redirect(routes.SternbergSearch.experiment(trialId,0,false)); break;
+            case MAGICNUMBER7 : nextPage = redirect(routes.MagicNumber7.experiment(trialId,0)); break;
         }
         return nextPage;
     }
 
     public static Result chooseTrial(String experimentType){
         User user = User.find.byId(session().get("username"));
-        
+
         return ok(views.html.trial.render(experimentType, user));
     }
 

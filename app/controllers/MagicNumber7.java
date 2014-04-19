@@ -1,5 +1,10 @@
 package controllers;
 
+import models.magicNumber7.Answer;
+import models.magicNumber7.Question;
+import models.magicNumber7.Quiz;
+import models.magicNumber7.Trial;
+import models.signalDetection.*;
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -43,61 +48,64 @@ public class MagicNumber7 extends Controller{
 
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
-        return ok(demo.render());
+        Trial trial = new Trial(null);
+        Question question = new Question("ABOPQAF",null);
+        Quiz quiz = Quiz.create(trial,question,2,0,7);
+        trial.quizzes = new ArrayList<Quiz>();
+        trial.quizzes.add(quiz);
+        return ok(demo.render(trial, 0));
     }
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo){
-        //return ok(exp.render(Trial.find.byId(trialId), questionNo));
-        return TODO;
+        return ok(exp.render(Trial.find.byId(trialId), questionNo));
     }
 
     @Security.Authenticated(Secured.class)
     public static Result saveAnswer(long trialId, int questionNo){
-        /*Form<Answer> boundForm = answerForm.bindFromRequest();
+        DynamicForm reportData = Form.form().bindFromRequest();
+        double time = Double.parseDouble(reportData.get("usedTime"));
+        int score = Integer.parseInt(reportData.get("score"));
+        String answer = reportData.get("answer");
+
         User user = User.find.byId(session().get("username"));
         Trial trial = Trial.find.byId(trialId);
 
-        if(boundForm.hasErrors()){
+        if(reportData.hasErrors()){
             flash("error", "please correct the form above.");
             return badRequest(views.html.home.render(user));
         }
 
-        Answer answer = boundForm.get();
-        answer.user = user;
-        answer.quiz = trial.quizzes.get(questionNo);
-        answer.save();
+        Answer ans = Answer.create(user,trial.quizzes.get(questionNo),answer,time,score);
+        ans.save();
 
         questionNo++;
         if(questionNo < trial.numberOfQuiz){
-            return redirect(routes.AttentionBlink.experiment(trialId, questionNo));
+            return redirect(routes.MagicNumber7.experiment(trialId, questionNo));
         }
-        return redirect(routes.AttentionBlink.report(user.username, trialId));*/
-        return TODO;
+        return redirect(routes.MagicNumber7.report(user.username, trialId));
     }
 
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
     public static Result report(String username, long trialId){
-        /*if(username.equals("") || trialId == 0){
-            return redirect(controllers.routes.AttentionBlink.info());
+        if(username.equals("") || trialId == 0){
+            return redirect(controllers.routes.MagicNumber7.info());
         }
         User user = User.find.byId(username);
         Trial trial = Trial.find.byId(trialId);
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
-        int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));*/
-        return TODO;
+        return ok(report.render(answers,totalUsedTime, "Report", user));
     }
 
     @Security.Authenticated(Secured.class)
-    public static Result demoReport(){
+    public static Result demoReport(int length){
         DynamicForm reportData = Form.form().bindFromRequest();
         User user = User.find.byId(session().get("username"));
-        double time = Double.parseDouble(reportData.get("time"));
+        double time = Double.parseDouble(reportData.get("usedTime"));
         int score = Integer.parseInt(reportData.get("score"));
-        return ok(demoReport.render(score,time,7,"Demo Report",user));
+        return ok(demoReport.render(score,time,length,"Demo Report",user));
     }
 
 }
