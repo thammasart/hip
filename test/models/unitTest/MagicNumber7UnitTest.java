@@ -50,28 +50,26 @@ public class MagicNumber7UnitTest extends WithApplication{
     @Test
     public void createTrialWithParameterShouldCorrect(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial trial = Trial.create(ex, 5, QuestionType.ENGLISH);
+    	Trial trial = Trial.create(ex, QuestionType.ENGLISH);
     	assertNotNull(trial);
     	assertEquals(ex, trial.schedule);
-    	assertEquals(5, trial.length);
     	assertEquals(QuestionType.ENGLISH, trial.questionType);
     }
 
     @Test
     public void queryTrialShouldCorrect(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	Trial trial = Trial.find.byId(1L);
     	assertNotNull(trial);
     	assertEquals(ex, trial.schedule);
-    	assertEquals(5, trial.length);
     	assertEquals(QuestionType.ENGLISH, trial.questionType);
     }
 
     @Test
     public void createQuizShouldNotNull(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	Trial trial = Trial.find.byId(1L);
     	new Question("ABCDE", QuestionType.ENGLISH).save();
     	Question question = Question.find.byId(1L);
@@ -84,40 +82,42 @@ public class MagicNumber7UnitTest extends WithApplication{
     @Test
     public void createQuizWithParameterShouldCorrect(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	Trial trial = Trial.find.byId(1L);
     	new Question("ABCDE", QuestionType.ENGLISH).save();
     	Question question = Question.find.byId(1L);
-    	Quiz quiz = Quiz.create(trial, question, 0.5, 2);
+    	Quiz quiz = Quiz.create(trial, question, 0.5, 2, 5);
     	assertNotNull(quiz);
     	assertEquals(trial, quiz.trial);
     	assertEquals(question, quiz.question);
     	assertEquals(0.5, quiz.displayTime, 0.001);
+        assertEquals(5, quiz.length);
     	assertEquals(2, quiz.chunkSize);
     }
 
     @Test
     public void queryQuizShouldCorrect(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	Trial trial = Trial.find.byId(1L);
     	new Question("ABCDE", QuestionType.ENGLISH).save();
     	Question question = Question.find.byId(1L);
-    	Quiz.create(trial, question, 0.5, 2).save();
+    	Quiz.create(trial, question, 0.5, 2, 5).save();
     	Quiz quiz = Quiz.find.byId(1L);
     	assertNotNull(quiz);
     	assertEquals(trial, quiz.trial);
     	assertEquals(question, quiz.question);
     	assertEquals(0.5, quiz.displayTime, 0.001);
+        assertEquals(5, quiz.length);
     	assertEquals(2, quiz.chunkSize);
     }
 
     @Test
     public void createAnswerShouldNotNull(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	new Question("ABCDE", QuestionType.ENGLISH).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0).save();
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0, 5).save();
     	Answer answer = new Answer(User.find.byId("123"), Quiz.find.byId(1L));
     	assertNotNull(answer);
     	assertEquals(User.find.byId("123"), answer.user);
@@ -127,47 +127,47 @@ public class MagicNumber7UnitTest extends WithApplication{
     @Test
     public void createAnswerWithParameterShouldNotNull(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	new Question("ABCDE", QuestionType.ENGLISH).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0).save();
-    	Answer answer = Answer.create(User.find.byId("123"), Quiz.find.byId(1L), "ABCDE", 5.55, true);
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0, 5).save();
+    	Answer answer = Answer.create(User.find.byId("123"), Quiz.find.byId(1L), "ABCDE", 5.55, 5);
     	assertNotNull(answer);
     	assertEquals(User.find.byId("123"), answer.user);
     	assertEquals(Quiz.find.byId(1L), answer.quiz);
     	assertEquals("ABCDE", answer.answer);
     	assertEquals(5.55, answer.usedTime, 0.001);
-    	assertTrue(answer.isCorrect);
+    	assertEquals(5, answer.score);
     }
 
     @Test
     public void QueryAnswerShouldNotNull(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	new Question("ABCDE", QuestionType.ENGLISH).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0).save();
-    	Answer.create(User.find.byId("123"), Quiz.find.byId(1L), "ABCDE", 5.55, true).save();
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0, 5).save();
+    	Answer.create(User.find.byId("123"), Quiz.find.byId(1L), "ABCDE", 5.55, 5).save();
     	Answer answer = Answer.find.byId(1L);
     	assertNotNull(answer);
     	assertEquals(User.find.byId("123"), answer.user);
     	assertEquals(Quiz.find.byId(1L), answer.quiz);
     	assertEquals("ABCDE", answer.answer);
     	assertEquals(5.55, answer.usedTime, 0.001);
-    	assertTrue(answer.isCorrect);
+    	assertEquals(5, answer.score);
     }
 
     @Test
     public void getListAnswerFromUserAndTrialShouldCorrect(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	new Question("ABCDE", QuestionType.ENGLISH).save();
     	new Question("ZXCVB", QuestionType.ENGLISH).save();
     	new Question("QWERT", QuestionType.ENGLISH).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(2L), 0.3, 2).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(3L), 0.1, 3).save();
-    	Answer.create(User.find.byId("123"), Quiz.find.byId(1L), "ABCDE", 5.55, true).save();
-    	Answer.create(User.find.byId("123"), Quiz.find.byId(2L), "MNBVC", 6.66, false).save();
-    	Answer.create(User.find.byId("123"), Quiz.find.byId(3L), "QWERT", 7.77, true).save();
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0, 5).save();
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(2L), 0.3, 2, 5).save();
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(3L), 0.1, 3, 5).save();
+    	Answer.create(User.find.byId("123"), Quiz.find.byId(1L), "ABCDE", 5.55, 5).save();
+    	Answer.create(User.find.byId("123"), Quiz.find.byId(2L), "MNBVC", 6.66, 5).save();
+    	Answer.create(User.find.byId("123"), Quiz.find.byId(3L), "QWERT", 7.77, 5).save();
     	List<Answer> answers = new ArrayList<Answer>();
     	answers = Answer.findInvolving(User.find.byId("123"), Trial.find.byId(1L).quizzes);
     	assertNotNull(answers);
@@ -177,21 +177,20 @@ public class MagicNumber7UnitTest extends WithApplication{
     }
 
     @Test
-    public void calculateScoreAndUsedTimeShouldCorrect(){
+    public void calculateUsedTimeShouldCorrect(){
     	ExperimentSchedule ex = ExperimentSchedule.find.byId(1L);
-    	Trial.create(ex, 5, QuestionType.ENGLISH).save();
+    	Trial.create(ex, QuestionType.ENGLISH).save();
     	new Question("ABCDE", QuestionType.ENGLISH).save();
     	new Question("ZXCVB", QuestionType.ENGLISH).save();
     	new Question("QWERT", QuestionType.ENGLISH).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(2L), 0.3, 2).save();
-    	Quiz.create(Trial.find.byId(1L), Question.find.byId(3L), 0.1, 3).save();
-    	Answer.create(User.find.byId("123"), Quiz.find.byId(1L), "ABCDE", 5.55, true).save();
-    	Answer.create(User.find.byId("123"), Quiz.find.byId(2L), "MNBVC", 6.66, false).save();
-    	Answer.create(User.find.byId("123"), Quiz.find.byId(3L), "QWERT", 7.77, true).save();
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(1L), 0.5, 0, 5).save();
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(2L), 0.3, 2, 5).save();
+    	Quiz.create(Trial.find.byId(1L), Question.find.byId(3L), 0.1, 3, 5).save();
+    	Answer.create(User.find.byId("123"), Quiz.find.byId(1L), "ABCDE", 5.55, 5).save();
+    	Answer.create(User.find.byId("123"), Quiz.find.byId(2L), "MNBVC", 6.66, 5).save();
+    	Answer.create(User.find.byId("123"), Quiz.find.byId(3L), "QWERT", 7.77, 5).save();
     	List<Answer> answers = new ArrayList<Answer>();
     	answers = Answer.findInvolving(User.find.byId("123"), Trial.find.byId(1L).quizzes);
-    	assertEquals(2, Answer.calculateTotalScore(answers));
     	assertEquals(19.98, Answer.calculateTotalUsedTime(answers), 0.001);
     }
 }
