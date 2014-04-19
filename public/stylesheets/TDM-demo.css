@@ -25,6 +25,7 @@
 }
 .navContainer{
     width:70%;
+    height:40px;
     margin-left:23%;
     margin-top:4.2%;
 }
@@ -44,7 +45,7 @@
 }
 .navButton{
     width:20%;
-    height:5%;
+    height:40px;
     float:left;
     margin-left:3%;
 }
