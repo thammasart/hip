@@ -63,19 +63,19 @@
     questionType: ENGLISH
 #Quiz
 - &Quiz65 !!models.magicNumber7.Quiz
-    displayTime: 0.5
+    displayTime: 0.7
     chunkSize: 0
     length: 5
     trial: *round23
     question: *Question44
 - &Quiz66 !!models.magicNumber7.Quiz
-    displayTime: 0.3
+    displayTime: 0.7
     chunkSize: 0
     length: 5
     trial: *round23
     question: *Question45
 - &Quiz67 !!models.magicNumber7.Quiz
-    displayTime: 0.1
+    displayTime: 0.7
     chunkSize: 2
     length: 5
     trial: *round23
@@ -87,30 +87,30 @@
     trial: *round24
     question: *Question47
 - &Quiz69 !!models.magicNumber7.Quiz
-    displayTime: 0.5
+    displayTime: 0.7
     chunkSize: 2
     length: 7
     trial: *round24
     question: *Question48
 - &Quiz70 !!models.magicNumber7.Quiz
-    displayTime: 0.3
+    displayTime: 0.7
     chunkSize: 2
     length: 7
     trial: *round24
     question: *Question49
 - &Quiz71 !!models.magicNumber7.Quiz
-    displayTime: 0.5
+    displayTime: 0.7
     chunkSize: 0
     trial: *round25
     question: *Question50
 - &Quiz72 !!models.magicNumber7.Quiz
-    displayTime: 0.3
+    displayTime: 0.7
     chunkSize: 3
     length: 7
     trial: *round25
     question: *Question51
 - &Quiz73 !!models.magicNumber7.Quiz
-    displayTime: 0.1
+    displayTime: 0.7
     chunkSize: 3
     length: 7
     trial: *round25
@@ -122,13 +122,13 @@
     trial: *round26
     question: *Question53
 - &Quiz75 !!models.magicNumber7.Quiz
-    displayTime: 0.5
+    displayTime: 0.7
     chunkSize: 3
     length: 9
     trial: *round26
     question: *Question54
 - &Quiz76 !!models.magicNumber7.Quiz
-    displayTime: 0.3
+    displayTime: 0.7
     chunkSize: 3
     length: 9
     trial: *round26
