@@ -1,6 +1,7 @@
 @(trial : models.magicNumber7.Trial, questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
 
+<script src="@routes.Assets.at("javascripts/formHandle.js")"></script>
 <script src="@routes.Assets.at("javascripts/magicNumber7.js")"></script>
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
@@ -23,7 +24,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <div class="expCenterWord">
         <p id="word">  </p>
     </div>
-    <form action="@routes.MagicNumber7.saveAnswer(trial.id, questionNo)" method="post" >
+    <form action="@routes.MagicNumber7.saveAnswer(trial.id, questionNo)" method="post">
         <div class="choiceMagic" align="center" id="choice" >
             @for(s <- trial.quizzes(questionNo).question.memorySet){
                 <input class="inputBox inputMagic" autocomplete="off" maxlength="1" type="text" />

@@ -78,6 +78,7 @@ function done(){
     document.getElementById("usedTime").value = expDuration;
     document.getElementById("score").value = score ;
 }
+
 function calculateTimeLeft()
 {
         count=count-1;
