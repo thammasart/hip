@@ -9,55 +9,57 @@
 </script>
 
 <body onload="init()" >
-<!-- Page Header -->
+<div class="fixSize">
+    <!-- Page Header -->
 
-  <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
-   <h4 class="titleLine"></h4>
+      <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+       <h4 class="titleLine"></h4>
 
-<!-- Login -->
-<div class="homeMainWindow" style="height:561px">
-    <div class="middle">
-    <!-- Login Left Panel -->
-        <div class="cstuIcon"  align="center">
-              <img src="@routes.Assets.at("images/cstu.png")"  wusernameth="80" height="80">
-             <br><br>
-             <h4 class="tile-title">Hello and welcome!</h4>
-             <small style="font-size:14px;">Type-in your username and password to login</small>
+    <!-- Login -->
+    <div class="homeMainWindow" style="height:590px">
+        <div class="middle">
+        <!-- Login Left Panel -->
+            <div class="cstuIcon"  align="center">
+                  <img src="@routes.Assets.at("images/cstu.png")"  wusernameth="80" height="80">
+                 <br><br>
+                 <h4 class="tile-title">Hello and welcome!</h4>
+                 <small style="font-size:14px;">Type-in your username and password to login</small>
 
-        </div >
+            </div >
 
-    <!-- Login Right Panel -->
-    <!-- Login Right Panel : Gray BG -->
-            <div   class="loginI login-form ">
-                
-    <!-- Login Right Panel : Username form --> 
+        <!-- Login Right Panel -->
+        <!-- Login Right Panel : Gray BG -->
+                <div   class="loginI login-form ">
+                    
+        <!-- Login Right Panel : Username form --> 
 
-                <form action="@routes.Application.authenticate()"name="loginForm" method="post" autocomplete="off"> 
-                <div class="form-group">
-                  <input name="username" autocomplete="off" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
-                  <label class="login-field-icon fui-user" for="login-name"></label>
-                </div>
-                
-    <!-- Login Right Panel : Password form --> 
-                <div class="form-group">
-                  <input name="password" style="padding:10px 38px;" type="password" class="form-control login-field login-pass" value="" placeholder="Password" >
-                  <label class="login-field-icon fui-lock" for="login-pass"></label>
-                </div>
+                    <form action="@routes.Application.authenticate()"name="loginForm" method="post" autocomplete="off"> 
+                    <div class="form-group">
+                      <input name="username" autocomplete="off" style="padding:10px 38px;" type="text" class="form-control login-field login-name" value="" placeholder="Username">
+                      <label class="login-field-icon fui-user" for="login-name"></label>
+                    </div>
+                    
+        <!-- Login Right Panel : Password form --> 
+                    <div class="form-group">
+                      <input name="password" style="padding:10px 38px;" type="password" class="form-control login-field login-pass" value="" placeholder="Password" >
+                      <label class="login-field-icon fui-lock" for="login-pass"></label>
+                    </div>
 
-    <!-- Login Right Panel : Login Button -->           
+        <!-- Login Right Panel : Login Button -->           
 
-              @if(flash().containsKey("unauthenticate")){
-                <div class="alert alert.danger">
-                    <p>@flash().get("unauthenticate")</p>
-                </div>
-              }
-                         
-               <button class="btn btn-block btn-lg btn-success" type="submit"> 
-                <b>Login</b>
-                </button> 
-                </form>
-          </div>
+                  @if(flash().containsKey("unauthenticate")){
+                    <div class="alert alert.danger">
+                        <p>@flash().get("unauthenticate")</p>
+                    </div>
+                  }
+                             
+                   <button class="btn btn-block btn-lg btn-success" type="submit"> 
+                    <b>Login</b>
+                    </button> 
+                    </form>
+              </div>
+        </div>
     </div>
-</div>
 
-@footer()
+    @footer()
+</div>

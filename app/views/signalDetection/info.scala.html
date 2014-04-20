@@ -1,31 +1,34 @@
 @(user : User)
 @header("Human Information Processing Lab :: Home Page")
 <body>
+<div class="fixSize">
+    <!-- Page Header -->
+    @nav(user)
+    <!-- Content -->
+    <!-- Explanation -->
+    <div class="homeMainWindow">
+        <div class="infoContainer">
+            <!-- Right Panel -->
+            <div class="infoButton" >
+                <div align="center">
+                    <img src="@routes.Assets.at("images/perc04_signal_detection.png")" class="divPngInfo">
+                    <h6 class="marginWord"> Signal Detection</h6>
+                </div>
+                <!-- Buttons -->
+                <div class="infoButtonContainer">
+                    <div class="infoRedButton">
+                        <a href="@routes.Application.selectExperiment()" class=" btn btn-block btn-lg btn-danger"  ><span class="glyphicon glyphicon-chevron-left" ></span> ย้อนกลับ</a>  &nbsp;
+                    </div>
 
-<!-- Page Header -->
-@nav(user)
-<!-- Content -->
-<!-- Explanation -->
-<div class="infoContainer">
-    <!-- Right Panel -->
-    <div class="infoButton" >
-        <div align="center">
-            <img src="@routes.Assets.at("images/perc04_signal_detection.png")" class="divPngInfo">
-            <h6 class="marginWord"> Signal Detection</h6>
-        </div>
-        <!-- Buttons -->
-        <div class="infoButtonContainer">
-            <div class="infoRedButton">
-                <a href="@routes.Application.selectExperiment()" class=" btn btn-block btn-lg btn-danger"  ><span class="glyphicon glyphicon-chevron-left" ></span> ย้อนกลับ</a>  &nbsp;
+                    <div class="infoGreenButton">
+                        <a href="@routes.SignalDetection.proc()" class=" btn btn-block btn-lg btn-primary"> อ่านขั้นตอนการทดลอง<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                </div>
             </div>
-
-            <div class="infoGreenButton">
-                <a href="@routes.SignalDetection.proc()" class=" btn btn-block btn-lg btn-primary"> อ่านขั้นตอนการทดลอง<span class="glyphicon glyphicon-chevron-right"></span></a>
+            <div class="infoContent">
+                <iframe src="@routes.SignalDetection.infoIframe()" frameborder="0" width="450" height="350"></iframe>
             </div>
         </div>
     </div>
-    <div class="infoContent">
-        <iframe src="@routes.SignalDetection.infoIframe()" frameborder="0" width="450" height="350"></iframe>
-    </div>
+    @footer()
 </div>
-@footer()
