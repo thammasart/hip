@@ -3,10 +3,12 @@
 @import views.html.admin.experiment._
 @import models.brownPeterson.Quiz
 @import models.brownPeterson.Trial
+@import models.brownPeterson.Question
 
 <div class="container" ng-app="ExperimentCreator">
 <form role="form" name="parameter" class="form-horizontal" action="@routes.Admin.saveBrownPetersonParameter(exp.id)" method="POST">
-@exp_edit(exp)
+
+    @exp_edit(exp)
     <hr>
     <div class="container">
         @if(flash.containsKey("success")){
@@ -20,56 +22,60 @@
         }
     </div>
 
-<div class="container">
+<div class="container" ng-controller="BrownPetersonCtrl" >
+    @for(question <- Question.find.all()){
+
+    }
     @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
         <h3>Trial @{index + 1}</h3>
         <div class="well">
             <div class="row">
                 <div class="col-md-9 col-sm-8 trial-box-left">
                     @for((quiz, i) <- Quiz.findInvolving(trial).zipWithIndex){
-                    <div class="form-group">
+                    <div class="form-group has-feedback">
                         <label for="initCountdown" class="control-label col-sm-4">คำถามที่ @{i+1} :  ตัวเลขเริ่มนับถอยหลัง</label>
-                        <div class="col-sm-2">
-                            <input type="number" min="1" max="999" class="form-control" name="initCountdown-@quiz.id" value="@quiz.initCountdown">
+                        <div class="col-sm-2" ng-class="{true : 'has-error', false : '' }[parameter.initCountdown_@{quiz.id}.$invalid]">
+                            <input type="number" min="1" max="999" class="form-control" name="initCountdown_@quiz.id"
+                                   ng-init="initCountdown@quiz.id = @quiz.initCountdown;initCountdowns.push(initCountdown@quiz.id)"
+                                   ng-model="initCountdown@quiz.id" required>
+                            <span class="glyphicon glyphicon-remove form-control-feedback number-input" ng-show="parameter.initCountdown_@{quiz.id}.$invalid"></span>
                         </div>
                         <label for="flashTime" class="control-label col-sm-4">จำนวนวินาทีนับถอยหลัง</label>
-                        <div class="col-sm-2">
-                            <input type="number" min="1" max="20" class="form-control" name="flashTime-@quiz.id" value="@quiz.flashTime">
+                        <div class="col-sm-2" ng-class="{true : 'has-error', false : '' }[parameter.flashTime_@{quiz.id}.$invalid]">
+                            <input type="number" min="1" max="20" class="form-control" name="flashTime_@quiz.id"
+                                   ng-init="flashTime@quiz.id=@quiz.flashTime;flashTimes.push(flashTime@quiz.id)" ng-model="flashTime@quiz.id" required>
+                            <span class="glyphicon glyphicon-remove form-control-feedback number-input" ng-show="parameter.flashTime_@{quiz.id}.$invalid"></span>
                         </div>
                     </div>
                     }
                 </div>
-                <div class="col-md-3 col-sm-4 trial-box-right">
+                <div class="col-md-3 col-sm-4 trial-box-right"
+                     ng-init="trigramType@trial.id='@trial.trigramType';trigramLanguage@trial.id='@trial.trigramLanguage';
+                                trigramTypes.push(trigramType@trial.id); trigramLanguages.push(trigramLanguage@trial.id) ">
                     <h4>Trigram Type</h4>
                     <label class="radio-inline">
-                        <input type="radio" name="trigramType-@trial.id" value="@Trial.WORD"
-                        @if(trial.trigramType.equals(Trial.WORD)){
-                            checked 
-                        }
+                        <input type="radio" name="trigramType-@trial.id" ng-model="trigramType@trial.id" value="@Trial.WORD"
+
                         > Word 
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="trigramType-@trial.id" value="@Trial.NON_SENSE" 
-                        @if(trial.trigramType.equals(Trial.NON_SENSE)){
-                            checked
-                        }
+                        <input type="radio" name="trigramType-@trial.id"  ng-model="trigramType@trial.id" value="@Trial.NON_SENSE"
+
                         > Nonsense
                     </label>
                     <h4>Trigram Language</h4>
                     <label class="radio-inline">
-                        <input type="radio" name="trigramLanguage-@trial.id" value="@Trial.ENGLISH" 
-                        @if(trial.trigramLanguage.equals(Trial.ENGLISH)){
-                            checked
-                        }
+                        <input type="radio" name="trigramLanguage-@trial.id" ng-model="trigramLanguage@trial.id" value="@Trial.ENGLISH"
+
                         > English
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="trigramLanguage-@trial.id" value="@Trial.THAI" 
-                        @if(trial.trigramLanguage.equals(Trial.THAI)){
-                            checked
-                        }
+                        <input type="radio" name="trigramLanguage-@trial.id" ng-model="trigramLanguage@trial.id" value="@Trial.THAI"
+
                         > ไทย 
                     </label>
+                    <br>
+                    <button class="btn btn-primary block-top" >generate question</button>
                 </div>
             </div>
             <div class="row">
@@ -87,10 +93,10 @@
                             </thead>
                             <tbody>
                                 @for((quiz, index) <- Quiz.findInvolving(trial).zipWithIndex){
-                                    <tr>
+                                    <tr ng-init="question@quiz.id='@quiz.question.toString()'">
                                         <td>@{index + 1}</td>
-                                        <td>@quiz.question.toString()</td>
-                                        <td><a href="@routes.Admin.randomBrownPetersonQuestion(exp.id, quiz.id)" class="btn btn-xs btn-danger">random</a></td>
+                                        <td>{{question@quiz.id}}</td>
+                                        <td><a href ng-click="question@quiz.id = '@quiz.generateNewQuestion().toString()'" class="btn btn-xs btn-danger">random</a></td>
                                     </tr>
                                 }
                             </tbody>

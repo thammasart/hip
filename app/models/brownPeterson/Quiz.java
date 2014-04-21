@@ -53,6 +53,14 @@ public class Quiz extends Model{
 		update();
 	}
 
+    public Question generateNewQuestion(){
+        List<Question> questions
+                = Question.find.where().eq("trigramType", trial.trigramType).eq("trigramLanguage", trial.trigramLanguage).findList();
+        Random random = new Random();
+        int index = random.nextInt(questions.size());
+        return questions.get(index);
+    }
+
 	public void randomToNewQuestion(List<Question> questions){
 		Random random = new Random();
 		int index = random.nextInt(questions.size());

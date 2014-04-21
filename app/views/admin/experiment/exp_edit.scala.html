@@ -14,7 +14,7 @@
         <div class="form-group" ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(parameter.startDate)]">
             <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
             <div class="input-group date col-sm-3 has-feedback">
-                <input type="text" name="startDate" class="form-control" datepicker-popup="{{format}}" ng-init='startDate=stringToDate("@exp.startDate.format("MM/dd/yyyy")")'  ng-model="startDate" is-open="startDateOpened" min="minDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+                <input type="text" name="startDate" class="form-control" datepicker-popup="{{format}}" ng-init='startDate=stringToDate("@exp.startDate.format("MM/dd/yyyy")")'  ng-model="startDate" is-open="startDateOpened"  datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                            <button class="btn btn-default" ng-click="open($event, 0)"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>

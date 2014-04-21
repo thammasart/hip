@@ -133,7 +133,7 @@ public class Admin extends Controller {
         
         exp.name = requestData.get("name");
         try{
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             exp.startDate = dateFormat.parse(requestData.get("startDate"));
             exp.expireDate = dateFormat.parse(requestData.get("expireDate"));
         } catch (ParseException e){
@@ -146,8 +146,8 @@ public class Admin extends Controller {
         List<models.brownPeterson.Trial> trials = models.brownPeterson.Trial.findInvolving(exp);
         for(models.brownPeterson.Trial trial : trials){
             for(models.brownPeterson.Quiz quiz : models.brownPeterson.Quiz.findInvolving(trial)){
-                quiz.initCountdown = Integer.parseInt(requestData.get("initCountdown-" + quiz.id));
-                quiz.flashTime = Integer.parseInt(requestData.get("flashTime-" + quiz.id));
+                quiz.initCountdown = Integer.parseInt(requestData.get("initCountdown_" + quiz.id));
+                quiz.flashTime = Integer.parseInt(requestData.get("flashTime_" + quiz.id));
                 quiz.update();
             }
             String trigramType = requestData.get("trigramType-" + trial.id);
