@@ -22,18 +22,19 @@ public class Application extends Controller {
         User user = User.find.byId(request().username());
         return ok(home.render(user));
     }
-        
+
     @Security.Authenticated(Secured.class)
 	public static Result selectExperiment(){
         User user = User.find.byId(request().username());
         return ok(selectExperiment.render(user));
     }
+
     @Security.Authenticated(Secured.class)
     public static Result about() {
         User user = User.find.byId(request().username());
         return ok(about.render(user));
     }
-    
+
     @Security.Authenticated(Secured.class)
     public static Result showResult(){
         User user = User.find.byId(request().username());
@@ -77,7 +78,7 @@ public class Application extends Controller {
             case "STERNBERGSEARCH" : nextPage = redirect(routes.SternbergSearch.proc()); break;
             case "MAGICNUMBER7" : nextPage = redirect(routes.MagicNumber7.proc()); break;
         }
-        
+
         return nextPage;
     }
 

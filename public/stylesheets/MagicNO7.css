@@ -1,12 +1,22 @@
 .choiceMagic{
     position:relative;
-    top:230px;
-    width:70%;
-    margin-left:15%;
+    top:100px;
+    width:100%;
 }
 
 .inputMagic{
-    width:2em;
+    width:2.5em;
+    Height:2.5em;
     text-align:center;
     visibility: hidden;
+    font-size:2.5em;
+}
+.submitSeven{
+    margin-top:4%;
+    margin-right:27.5%;
+    
+}
+.magicInputBox{
+    margin-right:1%;
+    margin-left:1%;
 }

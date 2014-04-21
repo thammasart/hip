@@ -14,35 +14,39 @@
     #Trial
 - &round23 !!models.magicNumber7.Trial
     questionType: ENGLISH
+    numberOfQuiz: 1
     schedule: *ex13
 - &round24 !!models.magicNumber7.Trial
     questionType: NUMBER
+    numberOfQuiz: 3
     schedule: *ex13
 - &round25 !!models.magicNumber7.Trial
     questionType: THAI
+    numberOfQuiz: 5
     schedule: *ex14
 - &round26 !!models.magicNumber7.Trial
     questionType: ENGLISH
+    numberOfQuiz: 7
     schedule: *ex14
 #Question
 - &Question44 !!models.magicNumber7.Question
     memorySet: ABCDE
     questionType: ENGLISH
 - &Question45 !!models.magicNumber7.Question
-    memorySet: QWERT
-    questionType: ENGLISH
-- &Question46 !!models.magicNumber7.Question
-    memorySet: ASDFG
-    questionType: ENGLISH
-- &Question47 !!models.magicNumber7.Question
     memorySet: 1234567
     questionType: NUMBER
-- &Question48 !!models.magicNumber7.Question
+- &Question46 !!models.magicNumber7.Question
     memorySet: 9876543
     questionType: NUMBER
-- &Question49 !!models.magicNumber7.Question
+- &Question47 !!models.magicNumber7.Question
     memorySet: 7530413
     questionType: NUMBER
+- &Question48 !!models.magicNumber7.Question
+    memorySet: ณรนญยฐบ
+    questionType: THAI
+- &Question49 !!models.magicNumber7.Question
+    memorySet: ษศสซวงฅ
+    questionType: THAI
 - &Question50 !!models.magicNumber7.Question
     memorySet: ผปฉอฮทม
     questionType: THAI
@@ -61,24 +65,36 @@
 - &Question55 !!models.magicNumber7.Question
     memorySet: ASDFGHJKL
     questionType: ENGLISH
+- &Question56 !!models.magicNumber7.Question
+    memorySet: QAZXSWEDC
+    questionType: ENGLISH
+- &Question57 !!models.magicNumber7.Question
+    memorySet: YHNUJMIKL
+    questionType: ENGLISH
+- &Question58 !!models.magicNumber7.Question
+    memorySet: POIUYTREW
+    questionType: ENGLISH
+- &Question59 !!models.magicNumber7.Question
+    memorySet: MNBVCXZLK
+    questionType: ENGLISH
 #Quiz
 - &Quiz65 !!models.magicNumber7.Quiz
-    displayTime: 0.5
+    displayTime: 0.7
     chunkSize: 0
     length: 5
     trial: *round23
     question: *Question44
 - &Quiz66 !!models.magicNumber7.Quiz
-    displayTime: 0.3
+    displayTime: 0.7
     chunkSize: 0
     length: 5
-    trial: *round23
+    trial: *round24
     question: *Question45
 - &Quiz67 !!models.magicNumber7.Quiz
-    displayTime: 0.1
+    displayTime: 0.7
     chunkSize: 2
     length: 5
-    trial: *round23
+    trial: *round24
     question: *Question46
 - &Quiz68 !!models.magicNumber7.Quiz
     displayTime: 0.7
@@ -87,30 +103,30 @@
     trial: *round24
     question: *Question47
 - &Quiz69 !!models.magicNumber7.Quiz
-    displayTime: 0.5
+    displayTime: 0.7
     chunkSize: 2
     length: 7
-    trial: *round24
+    trial: *round25
     question: *Question48
 - &Quiz70 !!models.magicNumber7.Quiz
-    displayTime: 0.3
+    displayTime: 0.7
     chunkSize: 2
     length: 7
-    trial: *round24
+    trial: *round25
     question: *Question49
 - &Quiz71 !!models.magicNumber7.Quiz
-    displayTime: 0.5
+    displayTime: 0.7
     chunkSize: 0
     trial: *round25
     question: *Question50
 - &Quiz72 !!models.magicNumber7.Quiz
-    displayTime: 0.3
+    displayTime: 0.7
     chunkSize: 3
     length: 7
     trial: *round25
     question: *Question51
 - &Quiz73 !!models.magicNumber7.Quiz
-    displayTime: 0.1
+    displayTime: 0.7
     chunkSize: 3
     length: 7
     trial: *round25
@@ -122,14 +138,38 @@
     trial: *round26
     question: *Question53
 - &Quiz75 !!models.magicNumber7.Quiz
-    displayTime: 0.5
+    displayTime: 0.7
     chunkSize: 3
     length: 9
     trial: *round26
     question: *Question54
 - &Quiz76 !!models.magicNumber7.Quiz
-    displayTime: 0.3
+    displayTime: 0.7
     chunkSize: 3
     length: 9
     trial: *round26
     question: *Question55
+- &Quiz77 !!models.magicNumber7.Quiz
+    displayTime: 0.7
+    chunkSize: 3
+    length: 9
+    trial: *round26
+    question: *Question56
+- &Quiz78 !!models.magicNumber7.Quiz
+    displayTime: 0.7
+    chunkSize: 3
+    length: 9
+    trial: *round26
+    question: *Question57
+- &Quiz79 !!models.magicNumber7.Quiz
+    displayTime: 0.7
+    chunkSize: 3
+    length: 9
+    trial: *round26
+    question: *Question58
+- &Quiz80 !!models.magicNumber7.Quiz
+    displayTime: 0.7
+    chunkSize: 3
+    length: 9
+    trial: *round26
+    question: *Question59

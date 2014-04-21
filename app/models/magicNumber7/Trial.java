@@ -18,7 +18,7 @@ public class Trial extends Model{
     @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
-    public static int numberOfQuiz = 3;
+    public int numberOfQuiz = 3;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;

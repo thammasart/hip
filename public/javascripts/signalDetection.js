@@ -70,6 +70,8 @@ function calculateTimeLeft(){
     count=count-1;
     document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาที " ;
 }
+
+
 function generateQuestion(){
     var targetChar = new Array();
 
