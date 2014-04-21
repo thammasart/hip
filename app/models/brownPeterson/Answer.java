@@ -19,6 +19,7 @@ public class Answer extends Model{
 	public double usedTime;
 	@Column(length=20)
 	public String countdownResult;
+	public boolean isCorrect;
 
 	@ManyToOne
 	public User user;
@@ -33,6 +34,20 @@ public class Answer extends Model{
 		this.countdownResult = countdownResult;
 		this.user = user;
 		this.quiz = quiz;
+
+		Question q = quiz.question;
+		if(!q.firstWord.equals(firstWord) && !q.firstWord.equals(secondWord) && !q.firstWord.equals(thirdWord)){
+			this.isCorrect = false;
+		}
+		else if(!q.secondWord.equals(firstWord) && !q.secondWord.equals(secondWord) && !q.secondWord.equals(thirdWord)){
+			this.isCorrect = false;
+		}
+		else if(!q.thirdWord.equals(firstWord) && !q.thirdWord.equals(secondWord) && !q.thirdWord.equals(thirdWord)){
+			this.isCorrect = false;
+		}
+		else{
+			this.isCorrect = true;
+		}
 	}
 
 	public static List<Answer> findInvolving(User user,List<Quiz> quizzes){
@@ -69,42 +84,12 @@ public class Answer extends Model{
 
 	public static int calculateTotalScore(List<Answer> answers) {
 		int totalScore = 0;
-
 		for(Answer answer : answers){
-			Question q = answer.quiz.question;
-			List<String> q_words = new ArrayList<String>();
-			q_words.add(q.firstWord);
-			q_words.add(q.secondWord);
-			q_words.add(q.thirdWord);
-
-			List<String> a_words = new ArrayList<String>();
-			a_words.add(answer.firstWord);
-			a_words.add(answer.secondWord);
-			a_words.add(answer.thirdWord);
-
-			for(String go : a_words){
-				String temp = null;
-				for(String word : q_words){
-					if(go != null){
-						if(go.equals(word)){
-							temp = word;
-						}		
-					}
-				}
-				if(temp != null){
-					q_words.remove(temp);
-				}else{
-					break;
-				}
-			}
-
-			if(q_words.size() == 0){
+			if(answer.isCorrect)
 				totalScore++;
-			}
 		}
 		return totalScore;
 	}
-
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Answer> find = new Finder(Long.class, Answer.class);
 

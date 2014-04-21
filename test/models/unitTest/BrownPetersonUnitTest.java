@@ -48,6 +48,7 @@ public class BrownPetersonUnitTest extends WithApplication {
 		assertEquals("first word", answer.firstWord);
 		assertEquals("second word", answer.secondWord);
 		assertEquals("third word", answer.thirdWord);
+		assertFalse(answer.isCorrect);
 
 		assertEquals("123", answer.user.username);
 		assertEquals(200, answer.quiz.initCountdown);
@@ -82,7 +83,7 @@ public class BrownPetersonUnitTest extends WithApplication {
 		 new Answer("first word", "second word", "third word", 13.9,"TDM", user2, quiz).save();
 		 new Answer("first word", "second word", "third word", 13.9,"TDM", user3, quiz).save();
                 
-                assertEquals(0.5,Answer.calculateAverageScore(),0.01);
+        assertEquals(0.5,Answer.calculateAverageScore(),0.01);
     }
 
     @Test

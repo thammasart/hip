@@ -54,6 +54,7 @@ create table brown_peterson_answer (
   third_word                varchar(20),
   used_time                 double,
   countdown_result          varchar(20),
+  is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
   constraint pk_brown_peterson_answer primary key (id))
