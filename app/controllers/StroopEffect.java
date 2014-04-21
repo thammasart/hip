@@ -60,6 +60,7 @@ public class StroopEffect extends Controller {
         Answer answer = boundForm.get();
         answer.user = user;
         answer.quiz = trial.quizzes.get(questionNo);
+        answer.isCorrect = answer.quiz.question.inkColor.equalsIgnoreCase(answer.answer);
         answer.save();
 
         questionNo++;

@@ -38,7 +38,10 @@ public class StroopEffectUnitTest extends WithApplication{
 
     @Test
     public void createAndConnectWithQuizAndUser(){
+        new Question("Black","Yellow").save();
+        Question question = Question.find.byId(1L);
         Quiz q = new Quiz();
+        q.question = question;
         q.save();
         new User("s550","1234").save();
         User u = User.find.where().eq("username","s550").findUnique();

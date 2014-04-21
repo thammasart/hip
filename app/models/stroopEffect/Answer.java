@@ -16,6 +16,7 @@ public class Answer extends Model{
     @Column(length=20)
     public String answer;
     public double usedTime;
+    public boolean isCorrect;
 
     @ManyToOne
     public User user;
@@ -31,6 +32,7 @@ public class Answer extends Model{
         Answer newAnswer = new Answer(answer,usedTime);
         newAnswer.user = user;
         newAnswer.quiz = quiz;
+        newAnswer.isCorrect = quiz.question.inkColor.equalsIgnoreCase(answer);
         return newAnswer;
     }
 
@@ -52,9 +54,8 @@ public class Answer extends Model{
 
     public static int calculateTotalScore(List<Answer> answers) {
         int totalScore = 0;
-
         for(Answer ans : answers) {
-            if(ans.answer.equals(ans.quiz.question.inkColor)) {
+            if(ans.isCorrect) {
                 totalScore++;
             }
         }
