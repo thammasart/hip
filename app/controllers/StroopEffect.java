@@ -1,6 +1,9 @@
 package controllers;
 
-import models.*;
+import models.User;
+import models.TimeLog;
+import models.ExperimentSchedule;
+import models.stroopEffect.*;
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -40,6 +43,17 @@ public class StroopEffect extends Controller {
     public static Result procIframe(){
         return ok(stroop_effect_proc_iframe.render());
     }
+
+    @Security.Authenticated(Secured.class)
+    public static Result demoPage(){
+        Trial trial = new Trial(2,QuestionType.ENGLISH);
+        Question question = new Question("Blue","Red");
+        Quiz quiz = Quiz.create(trial,question);
+        trial.quizzes = new ArrayList<Quiz>();
+        trial.quizzes.add(quiz);
+        return ok(demo.render(trial,0));
+    }
+
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo){
@@ -82,6 +96,18 @@ public class StroopEffect extends Controller {
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result demoReport(){
+        Form<Answer> boundForm = answerForm.bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        Answer answer = boundForm.get();
+        double time = answer.usedTime;
+        int score = 0;
+        if (answer.answer.equalsIgnoreCase("Red"))
+            score++;
+        return ok(demoReport.render(score,time,1,"Demo Report",user));
     }
 
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง

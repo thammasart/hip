@@ -1,0 +1,42 @@
+@(trial : models.stroopEffect.Trial,questionNo : Integer)
+@header("Human Information Processing Lab :: Home Page")
+
+<script src="@routes.Assets.at("javascripts/stroopEffectExperiment.js")"></script>
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+<script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+<body>
+
+<!--FlashTime Container-->
+<input class="inputNumberBox" id = "appear_time" name = "appearTime" type="text" disabled hidden value = @{trial.appearTime * 1000} />
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div class="container stroop-effect-quiz">
+    <!-- Content -->
+    <div class="row">
+        <div id="word" style="visibility:hidden;color:@trial.quizzes.get(questionNo).question.inkColor"><h2>@trial.quizzes.get(questionNo).question.colorWord</h2></div>
+    </div>
+    <div class="row stroop-effect-answer">
+        <h3 style="visibility:hidden" id="title">เลือกสีของหมึก</h3>
+        <form id = "answerForm" action="@routes.StroopEffect.demoReport()" method="post">
+            <input type="submit" class="blackButton" id = "black" name = "black" class="Button" onclick="return submitButtonClick(this.name)"/>
+            <input type="submit" class="redButton" id = "red" name = "red" class="Button" onclick="return submitButtonClick(this.name)"/>
+            <input type="submit" class="blueButton" color="blue" id = "blue" name = "blue" class="Button" onclick="return submitButtonClick(this.name)"/>
+            <input type="submit" class="yellowButton" id = "yellow" name = "yellow" class="Button" onclick="return submitButtonClick(this.name)"/>
+            <input type="submit" class="greenButton" id = "green" name = "green" class="Button" onclick="return submitButtonClick(this.name)"/>
+            <input type="submit" class="purpleButton" id = "purple" name = "purple" class="Button"  onclick="return submitButtonClick(this.name)"/>
+            <input class="inputNumberBox" id = "answer" name = "answer" type="text" hidden/>
+            <input class="inputNumberBox" id = "usedTime" name = "usedTime" type="text" hidden/>
+        </form>
+    </div>
+</div>
+@footer()
