@@ -32,7 +32,7 @@ public class Answer extends Model{
         Answer newAnswer = new Answer(answer,usedTime);
         newAnswer.user = user;
         newAnswer.quiz = quiz;
-        newAnswer.isCorrect = answer.equals(quiz.question.inkColor);
+        newAnswer.isCorrect = quiz.question.inkColor.equalsIgnoreCase(answer);
         return newAnswer;
     }
 
