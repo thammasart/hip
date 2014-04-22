@@ -78,4 +78,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.trigramTypes = [];
         $scope.trigramLanguages = [];
 
+    })
+    .controller('AttentionBlinkCtrl', function($scope){
+        $scope.word = /^[0-1]{1}\.[0-9]+$/;
     });

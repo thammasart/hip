@@ -284,7 +284,7 @@ public class Admin extends Controller {
 
         exp.name = requestData.get("name");
         try{
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             exp.startDate = dateFormat.parse(requestData.get("startDate"));
             exp.expireDate = dateFormat.parse(requestData.get("expireDate"));
         } catch (ParseException e){
@@ -297,7 +297,7 @@ public class Admin extends Controller {
         
         for(models.attentionBlink.Trial trial : trials){
             boolean isQuestionChange = false;
-            String questionType = requestData.get("questionType-" + trial.id);
+            String questionType = requestData.get("questionType_" + trial.id);
             if(!trial.questionType.toString().equals(questionType)){
                 trial.changeQuestionType(questionType);
                 isQuestionChange = true;
@@ -306,10 +306,10 @@ public class Admin extends Controller {
 
             for(models.attentionBlink.Quiz quiz : trial.quizzes){
                 boolean isCorrectChange = false;
-                String lengthStr = requestData.get("length-" + quiz.id);
-                String numberOfTargetStr = requestData.get("numberOfTarget-" + quiz.id);
-                String isCorrectStr = requestData.get("isCorrect-" + quiz.id);
-                String blinkTimeStr = requestData.get("blinkTime-" + quiz.id);
+                String lengthStr = requestData.get("length_" + quiz.id);
+                String numberOfTargetStr = requestData.get("numberOfTarget_" + quiz.id);
+                String isCorrectStr = requestData.get("isCorrect_" + quiz.id);
+                String blinkTimeStr = requestData.get("blinkTime_" + quiz.id);
                 boolean isCorrect = true;
                 if(isCorrectStr == null){
                     isCorrect = false;
