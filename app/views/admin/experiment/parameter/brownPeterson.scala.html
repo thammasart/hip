@@ -23,9 +23,7 @@
     </div>
 
 <div class="container" ng-controller="BrownPetersonCtrl" >
-    @for(question <- Question.find.all()){
 
-    }
     @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
         <h3>Trial @{index + 1}</h3>
         <div class="well">
@@ -74,8 +72,6 @@
 
                         > ไทย 
                     </label>
-                    <br>
-                    <button class="btn btn-primary block-top" >generate question</button>
                 </div>
             </div>
             <div class="row">

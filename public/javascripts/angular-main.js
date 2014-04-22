@@ -78,11 +78,4 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.trigramTypes = [];
         $scope.trigramLanguages = [];
 
-        function Question(id, questions, type, language){
-            this.id = id;
-            this.questions = questions;
-            this.type = type;
-            this.language = language;
-        };
-
     });
