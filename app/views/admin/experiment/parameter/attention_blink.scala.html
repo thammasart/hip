@@ -1,55 +1,14 @@
 @(exp : ExperimentSchedule)
 @import views.html.admin._
+@import views.html.admin.experiment._
 @import models.attentionBlink.Trial
 @import models.attentionBlink.Quiz
 @import models.attentionBlink.QuestionType
 @import models.attentionBlink.Question
 
-<form role="form" class="form-horizontal" action="@routes.Admin.saveAttentionBlinkParameter(exp.id)" method="POST">
-<div class="container">
-    <div class="row">
-            <div class="col-md-8 col-sm-8">
-                <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="name" placeholder="@exp.name" value="@exp.name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
-                    <div class="input-group date col-sm-3" id="startdate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="startDate" placeholder="@exp.startDate.format("dd/MM/yyyy")" value="@exp.startDate.format("dd/MM/yyyy")">
-                        <span class="input-group-addon"> + </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#startdate-picker').datetimepicker();
-                        });
-                    </script>
-                    <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
-                    <div class="col-sm-3 input-group date" id="expiredate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="expireDate" placeholder="@exp.expireDate.format("dd/mm/yyyy")" value="@exp.expireDate.format("dd/MM/yyyy")" >
-                        <span class="input-group-addon"> + </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#expiredate-picker').datetimepicker();
-                        });
-                    </script>
-                </div> 
-                <div class="form-group">
-                    <label for="experimentType" class="col-sm-2 control-label">การทดลอง</label>
-                    <div class="col-sm-3">
-                        <select class="form-control" name="experimentType" disabled>
-                          <option value="@exp.experimentType">@exp.getExperimentTypeToString()</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <button type="submit" class="btn btn-success btn-save">+SAVE ALL</button>  
-            </div>
-    </div>
+<div class="container" ng-app="ExperimentCreator">
+<form role="form" class="form-horizontal" name="parameter" action="@routes.Admin.saveAttentionBlinkParameter(exp.id)" method="POST">
+    @exp_edit(exp)
     <hr>
     <div class="container">
         @if(flash.containsKey("success")){
@@ -62,9 +21,8 @@
             <div class="alert alert-danger">@flash.get("date_error")</div>
         }
     </div>
-</div>
 
-<div class="container">
+<div class="container" ng-controller="AttentionBlinkCtrl">
     @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
         <h3>Trial @{index + 1}</h3>
         <div class="well">
@@ -86,16 +44,23 @@
                                 @for((quiz, index) <- Quiz.find.where().eq("trial", trial).findList().zipWithIndex){
                                     <tr>
                                         <td>@{index + 1}</td>
-                                        <td><input type="number" min="13" max="20" value="@quiz.length" name="length-@quiz.id" class="form-control center-block input-two-word"></td>
-                                        <td><input type="number" min="1" max="3" value="@quiz.numberOfTarget" name="numberOfTarget-@quiz.id" class="form-control center-block input-two-word"></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.length_@{quiz.id}.$invalid]">
+                                            <input type="number" min="13" max="20"  name="length_@quiz.id" class="form-control center-block input-two-word "
+                                                ng-init="length@quiz.id = @quiz.length" ng-model="length@quiz.id" required></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.numberOfTarget_@{quiz.id}.$invalid]">
+                                            <input type="number" min="1" max="3" name="numberOfTarget_@quiz.id" class="form-control center-block input-two-word"
+                                                    ng-init="numberOfTarget@quiz.id = @quiz.numberOfTarget" ng-model="numberOfTarget@quiz.id" required></div></td>
 
-                                        <td><input name="isCorrect-@quiz.id" type="checkbox" 
+                                        <td><input name="isCorrect_@quiz.id" type="checkbox"
                                             @if(quiz.isCorrect){
                                                 checked 
                                             }
                                             >
                                         </td>
-                                        <td><input type="text" class="form-control center-block input-two-word" value="@quiz.blinkTime" name="blinkTime-@quiz.id"></td>
+                                        <td><div ng-class="{true: 'has-error', false : ''}[parameter.blinkTime_@{quiz.id}.$invalid]">
+                                            <input type="text" class="form-control center-block input-two-word" name="blinkTime_@quiz.id"
+                                                   ng-pattern="word" ng-init="blinkTime@quiz.id = @quiz.blinkTime" ng-model="blinkTime@quiz.id"
+                                                   required ></div></td>
                                     </tr>
                                 }
                             </tbody>
@@ -131,21 +96,21 @@
                 <div class="col-md-3 col-sm-4 trial-box-right">
                     <h4>Question Type</h4
                     <label class="radio">
-                        <input type="radio" name="questionType-@trial.id" value="@QuestionType.ENGLISH" 
+                        <input type="radio" name="questionType_@trial.id" value="@QuestionType.ENGLISH"
                         @if(trial.questionType.equals(QuestionType.ENGLISH)){
                             checked
                         }
                         > English
                     </label>
                     <label class="radio">
-                        <input type="radio" name="questionType-@trial.id" value="@QuestionType.THAI" 
+                        <input type="radio" name="questionType_@trial.id" value="@QuestionType.THAI"
                         @if(trial.questionType.equals(QuestionType.THAI)){
                             checked
                         }
                         > ไทย
                     </label>
                     <label class="radio">
-                        <input type="radio" name="questionType-@trial.id" value="@QuestionType.NUMBER"@if(trial.questionType.equals(QuestionType.NUMBER)){
+                        <input type="radio" name="questionType_@trial.id" value="@QuestionType.NUMBER"@if(trial.questionType.equals(QuestionType.NUMBER)){
                             checked
                         }  
                         > ตัวเลข 
@@ -156,10 +121,11 @@
     }
     <div class="row">
         <div class="col-md-4 col-sm-4 col-md-offset-8 col-sm-offset-8">
-            <button type="submit" class="btn btn-success btn-save">+SAVE ALL</button>  
+            <button type="submit" class="btn btn-success btn-save" ng-disabled="parameter.$invalid">+SAVE ALL</button>
         </div>
     </div>
     
 </div>
 </form>
+</div>
 <br>

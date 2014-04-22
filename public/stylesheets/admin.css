@@ -82,3 +82,15 @@ th{
 .no-margin-bottom{
     margin-bottom: 0;
 }
+
+.number-input {
+    margin-right:10px;
+}
+
+.date-feedback {
+    right:-30px !important;
+}
+
+.block-top{
+    margin-top:20px;
+}
