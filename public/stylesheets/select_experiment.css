@@ -1,41 +1,55 @@
 .seMainWindow{
-    width:70%;
-    height:499px;
-    margin-left:15%;
+    width:62%;
+    height:471px;
+    margin-left:19%;
     margin-bottom:1%;
-    margin-top:-1.5%;
 }
 .category{
     width:100%;
-    height:32%;
-    margin-bottom:0.5%;
+    height:27%;
+    margin-bottom:3%;
+    border:solid;
+    border-radius:15px;
 }
 .categoryTitle{
-    width:100%;
-    height:20%;
-    background-color:#DCE3E3;
+    width:20%;
+    height:100%;
+    float:left;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+}
+.attention{
+    background-color:#F7B7A5;
+}
+.shortTerm{
+    background-color:#9DE8F7;
+}
+.perception{
+    background-color:#73FDCE;
 }
 .categoryTitle span{
-    font-size:22px;
+    font-size:30px;
     Position:relative;
-    top:-3px;
+    top:38px;
 }
 .exIcon{
     width:20%;
-    height:80%;
-    margin-left:2.5%;
-    margin-right:2.5%;
+    height:100%;
     float:left;
+    padding-top:1%;
 }
 .exImage{
-    width:75px;
+    width:60px;
     float:left;
     margin:3% 0% 3% 32%;
+    box-shadow:3px 3px 5px gray;
+    border-radius:30px;
 }
 .exWord{
     float:left;
     margin-left:15%;
     width:62%;
     color:black;
+    font-size:15px;
 
 }

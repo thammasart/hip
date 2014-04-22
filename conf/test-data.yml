@@ -237,6 +237,7 @@
     thirdWord:              q1w3
     usedTime:                  5
     countdownResult:        85
+    isCorrect:              true
     user: *ohm                 
     quiz: *quiz1           
 - &answer2 !!models.brownPeterson.Answer
@@ -245,6 +246,7 @@
     thirdWord:              q2w1
     usedTime:                   15
     countdownResult:        100
+    isCorrect:              true
     user: *ohm                 
     quiz: *quiz2
 - &answer3 !!models.brownPeterson.Answer
@@ -253,11 +255,13 @@
     thirdWord:              q3w2
     usedTime:                   10
     countdownResult:        49
+    isCorrect:              false
     user: *ohm                 
     quiz: *quiz3
 - &answer4 !!models.brownPeterson.Answer
     usedTime:                   10
     countdownResult:        85
+    isCorrect:              false
     user: *ohm                 
     quiz: *quiz4           
 - &answer5 !!models.brownPeterson.Answer
@@ -265,12 +269,14 @@
     thirdWord:              q5w3
     usedTime:                   15
     countdownResult:        100
+    isCorrect:              false
     user: *ohm                 
     quiz: *quiz5
 - &answer6 !!models.brownPeterson.Answer
     firstWord:              q6w1                
     usedTime:                   10
     countdownResult:        49
+    isCorrect:              false
     user: *ohm                 
     quiz: *quiz6
 - &answer7 !!models.brownPeterson.Answer
@@ -278,6 +284,7 @@
     secondWord:             q7w2
     thirdWord:              q7w3
     usedTime:                   5
+    isCorrect:              true
     user: *ohm                 
     quiz: *quiz7           
 - &answer8 !!models.brownPeterson.Answer
@@ -285,10 +292,12 @@
     secondWord:             q8w2
     thirdWord:              wrong
     usedTime:                   15
+    isCorrect:              false
     user: *ohm                 
     quiz: *quiz8
 - &answer9 !!models.brownPeterson.Answer
     usedTime:                   10
+    isCorrect:              false
     user: *ohm                 
     quiz: *quiz9
 
@@ -296,6 +305,7 @@
     firstWord:              q4w1                
     usedTime:                   10
     countdownResult:        49
+    isCorrect:              false
     user: *demo                 
     quiz: *quiz4
 - &answer11 !!models.brownPeterson.Answer
@@ -303,6 +313,7 @@
     secondWord:             q5w2
     thirdWord:              q5w3
     usedTime:                   5
+    isCorrect:              true
     user: *demo                 
     quiz: *quiz5           
 - &answer12 !!models.brownPeterson.Answer
@@ -310,5 +321,6 @@
     secondWord:             q6w2
     thirdWord:              wrong
     usedTime:                   15
+    isCorrect:              false
     user: *demo                 
     quiz: *quiz6

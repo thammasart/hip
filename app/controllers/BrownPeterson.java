@@ -84,6 +84,7 @@ public class BrownPeterson extends Controller {
         Answer answer = boundForm.get();
         answer.user = user;
         answer.quiz = trial.quizzes.get(questionNo);
+        answer = new Answer(answer.firstWord,answer.secondWord,answer.thirdWord,answer.usedTime,answer.countdownResult,answer.user,answer.quiz);
         answer.save();
         questionNo++;
         if(questionNo < Trial.TOTAL_QUESTION){
