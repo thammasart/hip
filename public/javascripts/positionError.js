@@ -197,8 +197,12 @@ function showBlank(){
 
 function showQuestionWord(){
     clearInterval(charTime);
-    document.querySelector('.positionWord').style.top = "10%";
+    document.querySelector('.positionWord').style.top = "5%";
     document.getElementById("dragElements").style.visibility = "visible";
+    var dropWidth = (6*dragElements.length);
+    var dropMargin = (100.0-dropWidth)/2.0 ;
+    document.getElementById("dropZone").style.width = dropWidth+"%" ;
+    document.getElementById("dropZone").style.marginLeft= dropMargin+"%" ;
     document.getElementById("dropZone").style.visibility = "visible";
     document.getElementById("confirm").style.visibility = "visible";
     document.getElementById("word").innerHTML= "Drag & Drop ตามลำดับที่ปรากฎก่อนหน้านี้";
