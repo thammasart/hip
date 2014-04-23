@@ -24,6 +24,9 @@ function genQuestion(){
             function(e){
                     if( !e ) e = window.event;
                     var elem = e.target || e.srcElement;
+
+                    if(elem.value == "")
+                        return false;
                     for (var j=0;j<ansZone.length;j++){
                         if (ansZone[j] == elem && j+1 < ansZone.length){
                             ansZone[j+1].focus();
