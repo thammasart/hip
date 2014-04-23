@@ -81,4 +81,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     })
     .controller('AttentionBlinkCtrl', function($scope){
         $scope.word = /^[0-1]{1}\.[0-9]+$/;
+    })
+    .controller('SignalDetectionCtrl', function($scope){
+        $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
+        $scope.floatPattern = /^[0-1]{1}\.[0-9]+$/;
     });
