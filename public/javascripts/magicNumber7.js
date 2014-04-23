@@ -19,6 +19,19 @@ function genQuestion(){
     ansZone = document.querySelectorAll('#choice .inputMagic');
     quiz_displayTime = document.getElementById("displayTime").innerHTML;
     quiz_chunkSize = document.getElementById("chunkSize").innerHTML;
+    for (var j=0;j<ansZone.length;j++){
+        ansZone[j].addEventListener('input',
+            function(e){
+                    if( !e ) e = window.event;
+                    var elem = e.target || e.srcElement;
+                    for (var j=0;j<ansZone.length;j++){
+                        if (ansZone[j] == elem && j+1 < ansZone.length){
+                            ansZone[j+1].focus();
+                            break;
+                        }
+                    }
+            }, true);
+    }
 }
 function showInstruction (){
     clearInterval(startTimer);
@@ -87,11 +100,3 @@ function calculateTimeLeft()
         document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาที " ;
 }
 
-function textHandler(){
-    for (var j=0;j<ansZone.length;j++){
-        if (ansZone[j] == event.srcElement && j+1 < ansZone.length){
-            ansZone[j+1].focus();
-            break;
-        }
-    }
-}
