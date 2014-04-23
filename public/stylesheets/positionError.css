@@ -1,6 +1,6 @@
 .positionErrorExp{
     width:100%;
-    height:500px;
+    height:537px;
     margin:20px 0px 20px 0px;
 }
 .positionWord{
@@ -13,9 +13,9 @@
 }
 .choice{
     position:relative;
-    top:180px;
+    top:80px;
     width:50;
-    margin-left:55%;
+    margin-left:65%;
 }
 .ansButton{
     width:25%;
@@ -40,8 +40,18 @@
 
 .dragZone{
     visibility:hidden;
-    border:thick solid;
+    border:dashed;
+    width:80%;
+    margin-left:10%;
     height:100px;
+    border-color:#C0CFE2;
+    border-width:3px;
+    background-color:#E1F5EC;
+    color:#556C82;
+}
+.dragItem{
+    width:3%;
+    margin-left:5.3%;
 }
 
 #dragElements div {
@@ -49,18 +59,35 @@
 }
 
 .dropDiv{
-    margin-top: 5%;
+    margin-top: 3%;
     visibility:hidden;
+    /*width:80%;
+    margin-left:10%;*/
+    height:106px;
+    border:dashed;
+    border-color:#BBC6D1;
+    background-color:#E1F5EC;
+    color:#556C82;
 }
 
 .dropZone{
     width:100px;
     height:100px;
     border:thick solid;
+    margin-left:1%;
+    border-radius:15px;
+    border-color:#BBC6D1;
+    color:#556C82;
 }
 
 .dropChar{
     width:100px;
     height:100px;
     font-size:60px;
+    margin-left:-5%;
+}
+.dropZoneBox{
+    border:dashed;
+    border-color:#C0CFE2;
+    background-color:#E1F5EC;
 }
