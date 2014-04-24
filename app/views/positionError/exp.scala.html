@@ -33,7 +33,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                 </div>
                 <div id="dropZone" class="dropDiv" align="center">
                     @for(s <- trial.quizzes(questionNo).question.memorySet){
-                        <div class="dropZone pull-left">
+                        <div class="dropZone pull-left" name="box">
                             <div class="dropChar" draggable="true" ></div>
                         </div>
                     }
