@@ -1,0 +1,35 @@
+.arrow{
+    width:250px;
+    height:50px;
+    border:solid;
+}
+.lineArrow{
+    width:200px;
+    height:3px;
+    background:black;
+    float:left;
+    position:relative;
+    top:20.5px;
+    margin-left:15px;
+}
+.mullerArrow{
+    padding:15px;
+            box-shadow:2px -2px 0 1px black inset;
+    -webkit-box-shadow:2px -2px 0 1px black inset;
+    position:absolute;
+    border:solid transparent;
+    border-width:0 0 1em 1em;
+    transition:0.3s;
+    float:left;
+   
+}
+.arrow-left {
+    -webkit-transform:rotate(45deg);
+}
+.arrow-right{
+    -webkit-transform:rotate(225deg);
+}
+.arrowHover:hover {
+            box-shadow:2px -2px 0 1px gray inset;
+    -webkit-box-shadow:4px -4px gray inset;
+}
