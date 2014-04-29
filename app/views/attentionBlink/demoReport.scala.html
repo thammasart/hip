@@ -10,7 +10,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <body>
 <div class="fixSize">
 @nav(user)
-    <div class="expMainWindow" style="height:460px;">
+    <div class="expMainWindow" style="height:470px;">
         <div class="expMainWindowFrame">
             <div class="expCenterWord" align="center">
                 <h3>คะแนน : @score/@totalScore </h3>
@@ -18,9 +18,9 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             </div>
         </div>
         <div class="navContainer">
-            <a class="btn btn-danger navButton" href="@routes.AttentionBlink.proc()"> กลับไปขั้นตอนการทดลอง </a>
-            <a class="btn btn-primary navButton navButtonDemo" href="@routes.AttentionBlink.demoPage()"> ทดลองเล่นอีกครั้ง </a>
-            <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.ATTENTIONBLINK.toString())"> เริ่มการทดลอง </a>
+            <a class="btn btn-danger navButton" href="@routes.AttentionBlink.proc()"><span class="glyphicon glyphicon-th"></span> กลับไปขั้นตอนการทดลอง </a>
+            <a class="btn btn-primary navButton navButtonDemo" href="@routes.AttentionBlink.demoPage()"><span class="glyphicon glyphicon-th-list"></span> ทดลองเล่นอีกครั้ง </a>
+            <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.ATTENTIONBLINK.toString())"><span class="glyphicon glyphicon-stats"></span> เริ่มการทดลอง </a>
         </div>
     </div>
 @footer()

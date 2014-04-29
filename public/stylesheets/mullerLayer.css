@@ -4,6 +4,7 @@
     margin-left:20%;
     border:solid;
     border-color:white;
+    visibility:hidden;
 }
 .arrowContainer{
     width:270px;
@@ -32,10 +33,12 @@
 }
 .arrow-left {
     -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
     margin-left:19px;
 }
 .arrow-right{
     -webkit-transform:rotate(225deg);
+    transform:rotate(225deg);
 }
 .arrowHover:hover {
             box-shadow:2px -2px 0 1px gray inset;
