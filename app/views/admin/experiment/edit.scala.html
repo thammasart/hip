@@ -20,6 +20,12 @@
     case ExperimentType.POSITIONERROR => {
         @positionError(exp)
     }
+    case ExperimentType.STERNBERGSEARCH => {
+        @sternbergSearch(exp)
+    }
+    case ExperimentType.MAGICNUMBER7 => {
+        @magicNumber7(exp)
+    }
     case _ => {
         <h1>Experiment type is not found!!</h1>
     }
