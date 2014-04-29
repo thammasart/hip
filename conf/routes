@@ -17,6 +17,12 @@ GET		/back-form-trial			controllers.Application.checkBackFormTrial(exp_type:Stri
 
 GET	/result                     controllers.Application.showResult()
 
+GET     /muller-layer               controllers.MullerLayer.info()
+GET     /muller-layer/info          controllers.MullerLayer.infoIframe()
+GET     /muller-layer/proc          controllers.MullerLayer.proc()
+GET     /muller-layer/proci         controllers.MullerLayer.procIframe()
+GET     /muller-layer/demo          controllers.MullerLayer.demoPage()
+
 GET     /brown-peterson		        controllers.BrownPeterson.info()
 GET     /brown-peterson/info        controllers.BrownPeterson.infoIframe()
 GET     /brown-peterson/proc		controllers.BrownPeterson.proc()

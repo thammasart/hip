@@ -1,0 +1,43 @@
+.mainContainer{
+    width:60%;
+    min-height:300px;
+    margin-left:20%;
+    border:solid;
+    border-color:white;
+}
+.arrowContainer{
+    width:270px;
+    height:50px;
+    margin-bottom:3%;
+}
+.lineArrow{
+    width:0px;
+    height:3px;
+    background:black;
+    float:left;
+    position:relative;
+    top:20.5px;
+    margin-left:31px;
+}
+.mullerArrow{
+    padding:15px;
+            box-shadow:2px -2px 0 1px black inset;
+    -webkit-box-shadow:2px -2px 0 1px black inset;
+    position:absolute;
+    border:solid transparent;
+    border-width:0 0 1em 1em;
+    transition:0.3s;
+    float:left;
+   
+}
+.arrow-left {
+    -webkit-transform:rotate(45deg);
+    margin-left:19px;
+}
+.arrow-right{
+    -webkit-transform:rotate(225deg);
+}
+.arrowHover:hover {
+            box-shadow:2px -2px 0 1px gray inset;
+    -webkit-box-shadow:4px -4px gray inset;
+}

@@ -26,13 +26,13 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         <div>
             <div id="dragElements" class="dragZone">
                 @for(s <- quiz.question.memorySet){
-                <div draggable="true" class="pull-left" style="font-size:60px;">@s</div>
+                <div draggable="true" class="pull-left dragItem" style="font-size:60px;">@s</div>
                 }
 
             </div>
             <div id="dropZone" class="dropDiv">
                 @for(s <- quiz.question.memorySet){
-                <div class="dropZone pull-left">
+                <div class="dropZone pull-left" name="box">
                     <div class="dropChar" draggable="true" ></div>
                 </div>
                 }

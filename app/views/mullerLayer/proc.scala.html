@@ -1,0 +1,26 @@
+@(user: User)
+@header("Human Information Processing Lab :: Home Page")
+<body>
+<div class="fixSize">
+    <!-- Page Header -->
+    @nav(user)
+    <!-- Content -->
+    <div class="procBody">
+            <iframe src="" class="procContent" frameborder="0" ></iframe>
+        <div class="container">
+        @if(flash.containsKey("repeat")) {
+            <div class="alert alert-danger">@flash.get("repeat")</div>
+        }
+             <div class="procButtonRed">
+                 <a href="@routes.MullerLayer.info()" class="btn btn-block btn-lg btn-danger" ><span class="glyphicon glyphicon-chevron-left"></span> ย้อนกลับ</a>  &nbsp; 
+             </div>
+             <div class="procButtonBlue">
+                 <a href="@routes.MullerLayer.demoPage()" class="btn btn-block btn-lg btn-primary" ><span class="glyphicon glyphicon-play"></span> ทดลองเล่น</a>  &nbsp; 
+             </div>
+             <div class="procButtonGreen">
+                 <a href="@routes.Application.chooseTrial(ExperimentType.MULLERLAYER.toString())" class="btn btn-block btn-lg btn-success" ><span class="glyphicon glyphicon-th-list"></span>&nbsp; เลือก Trial การทดลอง</a>
+             </div>
+        </div>
+    </div>
+    @footer()
+</div>
