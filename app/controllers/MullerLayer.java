@@ -41,6 +41,14 @@ public class MullerLayer extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
+      //  List<Integer> arrow = new ArrayList<Integer>();
+      //  Random rand = new Random();
+      //  int amount = rand.nextInt(3) + 3 ;
+      //  
+      //  for(int i = 0; i < amount;i++){
+      //      arrow.add(rand.nextInt(5));
+      //  }
+      //  
         return ok(demo.render());
     }
     //แสดงหน้าการทดลอง
