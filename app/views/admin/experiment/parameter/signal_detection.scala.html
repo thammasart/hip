@@ -3,67 +3,17 @@
 @import models.signalDetection.Trial
 @import models.signalDetection.Quiz
 @import models.signalDetection.Question
+@import views.html.admin.experiment._
+@import views.html.form._
 
-<form role="form" class="form-horizontal" action="@routes.Admin.saveSignalDetectionParameter(exp.id)" method="POST">
-<div class="container">
-    <div class="row">
-            <div class="col-md-8 col-sm-8">
-                <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="name" placeholder="@exp.name" value="@exp.name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
-                    <div class="input-group date col-sm-3" id="startdate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="startDate" placeholder="@exp.startDate.format("dd/MM/yyyy")" value="@exp.startDate.format("dd/MM/yyyy")">
-                        <span class="input-group-addon"> + </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#startdate-picker').datetimepicker();
-                        });
-                    </script>
-                    <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
-                    <div class="col-sm-3 input-group date" id="expiredate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="expireDate" placeholder="@exp.expireDate.format("dd/mm/yyyy")" value="@exp.expireDate.format("dd/MM/yyyy")" >
-                        <span class="input-group-addon"> + </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#expiredate-picker').datetimepicker();
-                        });
-                    </script>
-                </div> 
-                <div class="form-group">
-                    <label for="experimentType" class="col-sm-2 control-label">การทดลอง</label>
-                    <div class="col-sm-3">
-                        <select class="form-control" name="experimentType" disabled>
-                          <option value="@exp.experimentType">@exp.getExperimentTypeToString()</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <button type="submit" class="btn btn-success btn-save">+SAVE ALL</button>  
-            </div>
-    </div>
+<div class="container" ng-app="ExperimentCreator">
+<form role="form" name="parameter" class="form-horizontal" action="@routes.Admin.saveSignalDetectionParameter(exp.id)" method="POST">
+
+@exp_edit(exp)
     <hr>
-    <div class="container">
-        @if(flash.containsKey("success")){
-            <div class="alert alert-success">@flash.get("success")</div>
-        }
-        @if(flash.containsKey("error")){
-            <div class="alert alert-danger">@flash.get("error")</div>
-        }
-        @if(flash.containsKey("date_error")){
-            <div class="alert alert-danger">@flash.get("date_error")</div>
-        }
-    </div>
-</div>
+    @error()
 
-<div class="container">
+<div class="container" ng-controller="SignalDetectionCtrl">
     @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
         <h3>Trial @{index + 1}</h3>
             <div class="row">
@@ -85,11 +35,21 @@
                                 @for((quiz, index) <- Quiz.find.where().eq("trial", trial).findList().zipWithIndex){
                                     <tr>
                                         <td>@{index + 1}</td>
-                                        <td><input type="text" name="target-@quiz.id" value="@quiz.question.target" class="form-control center-block input-one-word"></td>
-                                        <td><input type="text" name="noise-@quiz.id" value="@quiz.question.noise" class="form-control center-block input-one-word"></td>
-                                        <td><input type="text" name="length-@quiz.id" value="@quiz.length" class="form-control center-block input-two-word"></td>
-                                        <td><input type="text" name="noOfTarget-@quiz.id" value="@quiz.noOfTarget" class="form-control center-block input-two-word"></td>
-                                        <td><input type="text" name="displayTime-@quiz.id" value="@quiz.displayTime" class="form-control center-block input-two-word"></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.target_@{quiz.id}.$invalid]">
+                                            <input type="text" ng-pattern="single" name="target_@quiz.id" ng-init="target@quiz.id = '@quiz.question.target'"
+                                                   ng-model="target@quiz.id" class="form-control center-block input-one-word"></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.noise_@{quiz.id}.$invalid]">
+                                            <input type="text" ng-pattern="single" name="noise_@quiz.id" ng-init="noise@quiz.id = '@quiz.question.noise' "
+                                                   ng-model="noise@quiz.id" class="form-control center-block input-one-word"></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.length_@{quiz.id}.$invalid]">
+                                            <input type="number" min="1" max="60" name="length_@quiz.id" ng-init="length@quiz.id = @quiz.length"
+                                                   ng-model="length@quiz.id" class="form-control center-block input-two-word"></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.noOfTarget_@{quiz.id}.$invalid]">
+                                            <input type="number" min="0" max="3" name="noOfTarget_@quiz.id" ng-init="noOfTarget@quiz.id =@quiz.noOfTarget"
+                                                   ng-model="noOfTarget@quiz.id" class="form-control center-block input-two-word"></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.displayTime_@{quiz.id}.$invalid]">
+                                            <input type="text" ng-pattern="floatPattern" name="displayTime_@quiz.id" ng-init="displayTime@quiz.id = @quiz.displayTime"
+                                                   ng-model="displayTime@quiz.id" class="form-control center-block input-two-word"></div></td>
                                     </tr>
                                 }
                             </tbody>
@@ -105,4 +65,5 @@
     </div>
 </div>
 </form>
+    </div>
 <br>

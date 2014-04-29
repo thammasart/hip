@@ -4,67 +4,17 @@
 @import models.stroopEffect.Trial
 @import models.stroopEffect.QuestionType
 @import models.stroopEffect.Question
+@import views.html.admin.experiment._
+@import views.html.form._
 
+<div class="container" ng-app="ExperimentCreator">
 <form role="form" class="form-horizontal" action="@routes.Admin.saveStroopEffectParameter(exp.id)" method="POST">
-<div class="container">
-    <div class="row">
-            <div class="col-md-8 col-sm-8">
-                <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="name" placeholder="@exp.name" value="@exp.name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
-                    <div class="input-group date col-sm-3" id="startdate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="startDate" placeholder="@exp.startDate.format("dd/MM/yyyy")" value="@exp.startDate.format("dd/MM/yyyy")">
-                        <span class="input-group-addon"> + </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#startdate-picker').datetimepicker();
-                        });
-                    </script>
-                    <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
-                    <div class="col-sm-3 input-group date" id="expiredate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" name="expireDate" placeholder="@exp.expireDate.format("dd/mm/yyyy")" value="@exp.expireDate.format("dd/MM/yyyy")" >
-                        <span class="input-group-addon"> + </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#expiredate-picker').datetimepicker();
-                        });
-                    </script>
-                </div> 
-                <div class="form-group">
-                    <label for="experimentType" class="col-sm-2 control-label">การทดลอง</label>
-                    <div class="col-sm-3">
-                        <select class="form-control" name="experimentType" disabled>
-                          <option value="@exp.experimentType">@exp.getExperimentTypeToString()</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <button type="submit" class="btn btn-success btn-save">+SAVE ALL</button>  
-            </div>
-    </div>
-    <hr>
-    <div class="container">
-        @if(flash.containsKey("success")){
-            <div class="alert alert-success">@flash.get("success")</div>
-        }
-        @if(flash.containsKey("error")){
-            <div class="alert alert-danger">@flash.get("error")</div>
-        }
-        @if(flash.containsKey("date_error")){
-            <div class="alert alert-danger">@flash.get("date_error")</div>
-        }
-    </div>
-</div>
 
-<div class="container">
+    @exp_edit(exp)
+    <hr>
+    @error()
+
+<div class="container" ng-controller="StroofEffectCtrl">
     @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
         <h3>Trial @{index + 1}</h3>
         <div class="well">
@@ -135,4 +85,5 @@
     
 </div>
 </form>
+    </div>
 <br>
