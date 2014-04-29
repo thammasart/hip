@@ -199,10 +199,16 @@ function showQuestionWord(){
     clearInterval(charTime);
     document.querySelector('.positionWord').style.top = "5%";
     document.getElementById("dragElements").style.visibility = "visible";
-    var dropWidth = (6*dragElements.length);
+    var dropWidth = 1+(6*dragElements.length);
     var dropMargin = (100.0-dropWidth)/2.0 ;
+    var boxWidth = (100.0 - dragElements.length)/dragElements.length;
     document.getElementById("dropZone").style.width = dropWidth+"%" ;
     document.getElementById("dropZone").style.marginLeft= dropMargin+"%" ;
+    var boxSet = document.getElementsByName("box");
+
+    for(var k = 0; k < boxSet.length;k++){
+        boxSet[k].style.width = boxWidth+"%";
+    }
     document.getElementById("dropZone").style.visibility = "visible";
     document.getElementById("confirm").style.visibility = "visible";
     document.getElementById("word").innerHTML= "Drag & Drop ตามลำดับที่ปรากฎก่อนหน้านี้";

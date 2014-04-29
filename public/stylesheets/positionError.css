@@ -50,12 +50,13 @@
     color:#556C82;
 }
 .dragItem{
-    width:3%;
-    margin-left:5.3%;
-}
+    margin-left:2.3%;
+    width:6%;
+    border:solid;
+    border-radius:15px;
+    border-color:#BBC6D1;
+    background:white;
 
-#dragElements div {
-    margin-right: 10px;
 }
 
 .dropDiv{
@@ -68,16 +69,18 @@
     border-color:#BBC6D1;
     background-color:#E1F5EC;
     color:#556C82;
+    padding-right:0.5%;
 }
 
 .dropZone{
-    width:100px;
-    height:100px;
+    /*width:11.4%;*/
+    height:100%;
     border:thick solid;
     margin-left:1%;
     border-radius:15px;
     border-color:#BBC6D1;
     color:#556C82;
+    background-color:white;
 }
 
 .dropChar{

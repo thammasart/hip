@@ -28,7 +28,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <form action="@routes.MagicNumber7.demoReport(trial.quizzes(questionNo).length)" method="post" >
         <div class="choiceMagic" align="center" id="choice" >
             @for(s <- trial.quizzes(questionNo).question.memorySet){
-                <input class="inputBox inputMagic" autocomplete="off" maxlength="1" type="text" oninput="textHandler()"/>
+                <input class="inputBox inputMagic" autocomplete="off" maxlength="1" type="text"/>
             }
             <button type="submit" class="btn btn-success ansButton" id="confirm"  name="confirm"onclick="return done()"  > ยืนยัน </button>
         </div>
