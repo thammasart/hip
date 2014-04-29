@@ -5,22 +5,13 @@
 @import models.attentionBlink.Quiz
 @import models.attentionBlink.QuestionType
 @import models.attentionBlink.Question
+@import views.html.form._
 
 <div class="container" ng-app="ExperimentCreator">
 <form role="form" class="form-horizontal" name="parameter" action="@routes.Admin.saveAttentionBlinkParameter(exp.id)" method="POST">
     @exp_edit(exp)
     <hr>
-    <div class="container">
-        @if(flash.containsKey("success")){
-            <div class="alert alert-success">@flash.get("success")</div>
-        }
-        @if(flash.containsKey("error")){
-            <div class="alert alert-danger">@flash.get("error")</div>
-        }
-        @if(flash.containsKey("date_error")){
-            <div class="alert alert-danger">@flash.get("date_error")</div>
-        }
-    </div>
+    @error()
 
 <div class="container" ng-controller="AttentionBlinkCtrl">
     @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
