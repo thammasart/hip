@@ -90,7 +90,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     })
     .controller('PositionErrorCtrl', function($scope){
     })
-    .controller('SternbergSearch', function($scope){
+    .controller('SternbergSearchCtrl', function($scope){
     })
-    .controller('MagicNumber7', function($scope){
+    .controller('MagicNumber7Ctrl', function($scope){
     });

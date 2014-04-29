@@ -13,6 +13,53 @@
         <hr>
         @error()
         <div class="container" ng-controller="SternbergSearchCtrl">
+            @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
+            <h3>Trial @{index + 1}</h3>
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-9 col-sm-8 trial-box-left">
+                        @for((quiz, i) <- trial.quizzes.zipWithIndex){
+                        <p>quiz.id</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-4 trial-box-right">
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Question</div>
+                            <table class="table text-center">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Question</th>
+                                    <th>#</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for((quiz, index) <- trial.quizzes.zipWithIndex){
+                                <tr ng-init="question@quiz.id='@quiz.question.memorySet'">
+                                    <td>@{index + 1}</td>
+                                    <td>{{question@quiz.id}}</td>
+                                    <td>#</td>
+                                </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-md-offset-8 col-sm-offset-8">
+                    <button type="submit" class="btn btn-success btn-save" ng-disabled="parameter.$invalid">+SAVE ALL</button>
+                </div>
+            </div>
         </div>
     </form>
 </div>
