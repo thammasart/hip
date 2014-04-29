@@ -657,7 +657,7 @@
     trial: *round13
     noOfTarget: 1
     length: 15
-    displayTime: 1
+    displayTime: 1.0
     question: *Question24
 
 #Attention Blink

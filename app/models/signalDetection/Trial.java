@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table (name="signal_trial")
+@Table (name="signal_detection_trial")
 public class Trial extends Model{
     @Id
     public long id;

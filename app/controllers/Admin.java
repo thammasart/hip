@@ -364,7 +364,7 @@ public class Admin extends Controller {
 
         exp.name = requestData.get("name");
         try{
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             exp.startDate = dateFormat.parse(requestData.get("startDate"));
             exp.expireDate = dateFormat.parse(requestData.get("expireDate"));
         } catch (ParseException e){
@@ -378,11 +378,11 @@ public class Admin extends Controller {
         for(models.signalDetection.Trial trial : trials){
             for(models.signalDetection.Quiz quiz : trial.quizzes){
                 
-                String targetString = requestData.get("target-" + quiz.id);
-                String noiseString = requestData.get("noise-" + quiz.id);
-                String lengthString = requestData.get("length-" + quiz.id);
-                String noOfTargetString = requestData.get("noOfTarget-" + quiz.id);
-                String displayTimeString = requestData.get("displayTime-" + quiz.id);
+                String targetString = requestData.get("target_" + quiz.id);
+                String noiseString = requestData.get("noise_" + quiz.id);
+                String lengthString = requestData.get("length_" + quiz.id);
+                String noOfTargetString = requestData.get("noOfTarget_" + quiz.id);
+                String displayTimeString = requestData.get("displayTime_" + quiz.id);
 
                 char target = targetString.charAt(0);
                 char noise = noiseString.charAt(0);

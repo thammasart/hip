@@ -1,0 +1,11 @@
+<div class="container">
+    @if(flash.containsKey("success")){
+    <div class="alert alert-success">@flash.get("success")</div>
+    }
+    @if(flash.containsKey("error")){
+    <div class="alert alert-danger">@flash.get("error")</div>
+    }
+    @if(flash.containsKey("date_error")){
+    <div class="alert alert-danger">@flash.get("date_error")</div>
+    }
+</div>

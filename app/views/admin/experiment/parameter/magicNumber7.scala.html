@@ -1,0 +1,18 @@
+@(exp : ExperimentSchedule)
+@import views.html.admin._
+@import models.magicNumber7.Trial
+@import models.magicNumber7.Quiz
+@import models.magicNumber7.Question
+@import views.html.admin.experiment._
+@import views.html.form._
+
+<div class="container" ng-app="ExperimentCreator">
+    <form role="form" name="parameter" class="form-horizontal">
+
+        @exp_edit(exp)
+        <hr>
+        @error()
+        <div class="container" ng-controller="MagicNumber7Ctrl">
+        </div>
+    </form>
+</div>
