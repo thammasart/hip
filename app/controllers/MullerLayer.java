@@ -37,7 +37,7 @@ public class MullerLayer extends Controller {
     //แสดงกรอบในหน้าขั้นตอนการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result procIframe(){
-        return ok(attention_blink_proc_iframe.render()); // not done yet
+        return ok(muller_layer_proc_iframe.render()); // not done yet
     }
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){

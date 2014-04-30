@@ -6,7 +6,7 @@
     @nav(user)
     <!-- Content -->
     <div class="procBody">
-            <iframe src="" class="procContent" frameborder="0" ></iframe>
+            <iframe src="@routes.MullerLayer.procIframe()" class="procContent" frameborder="0" ></iframe>
         <div class="container">
         @if(flash.containsKey("repeat")) {
             <div class="alert alert-danger">@flash.get("repeat")</div>
