@@ -85,6 +85,12 @@ GET     /magic_number7/experiment      controllers.MagicNumber7.experiment(trial
 POST    /magic_number7/experiment/save controllers.MagicNumber7.saveAnswer(trialId:Long, questionNo:Int)
 GET     /magic_number7/report      	 controllers.MagicNumber7.report(username:String ?= "", trial_id:Long ?= 0)
 
+GET     /garner_interference                controllers.GarnerInterference.info()
+GET     /garner_interference/info           controllers.GarnerInterference.infoIframe()
+GET     /garner_interference/proc           controllers.GarnerInterference.proc()
+GET     /garner_interference/procIframe     controllers.GarnerInterference.procIframe()
+GET     /garner_interference/demo           controllers.GarnerInterference.demoPage()
+
 GET     /positionError	            controllers.PositionError.info()
 GET     /positionError/info         controllers.PositionError.infoIframe()
 GET     /positionError/proc		    controllers.PositionError.proc()

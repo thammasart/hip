@@ -1,59 +1,26 @@
-<html>
-<head>
-<meta http-equiv="Content-Language" content="th" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-<meta http-equiv="content-Type" content="text/html; charset=window-874"> 
-<meta http-equiv="content-Type" content="text/html; charset=tis-620"> 
-<!-- CSS link -->
-    <link rel="stylesheet" type="text/css" href="..\Flat-UI-master\css\demo.css">
- 	<link rel="stylesheet" type="text/css" href="..\Flat-UI-master\css\docs.css">
- 	<link rel="stylesheet" type="text/css" href="..\Flat-UI-master\css\flat-ui.css">
- 	<link rel="stylesheet" type="text/css" href="..\Flat-UI-master\css\scrollbar.css">
-<!-- Title -->    
-<title>Human Information Processing Lab :: Garner Interference</title>
-
-</head>
-
+@(user: User)
+@header("Human Information Processing Lab :: Home Page")
 <body>
-
-<!-- Page Header -->
-<center>
-
-  <h3 style="color:#34495E; background:#BDC3C7; padding:20px 100px">Human Information Processing Lab</h3>
-  <h6 style="font-size:large; font-family:Tahoma, 'Microsoft Sans Serif', AngsanaUPC, CordiaUPC">
-       <a href="home.html">หน้าแรก</a>&nbsp; | &nbsp;
-       <a href="about_hip.html">เกี่่ยวกับ HIP Lab</a>&nbsp; | &nbsp;
-       <a href="#">ผลการทดลอง</a>
-  </h6>
-  <!-- Dashed line-->
-  <h4 style="color:34495E;; padding:0px 100px 0px 0px; border-color:#BDC3C7; border-bottom-style:dashed;"></h4>
-
-
-<!-- Content -->
-
-<table>
-<tr>
-<td><iframe src="iframe/garner_interference_proc_iframe.html" frameborder="0" width="750" height="350"></iframe></td></tr>
-
-<tr>
-<td align="right">
-<br><a href="garner_interference_info.html" class="btn btn-block btn-lg btn-danger" style="padding:10px 5px"><span class="fui-arrow-left"></span> ย้อนกลับ</a>  &nbsp; 
-          <a href="#" class="btn btn-block btn-lg btn-success" style="padding:10px 80px"><span class="fui-play"></span>&nbsp; เริ่มการทดลอง</a>
-<br>
-</td>
-</tr>
-</table>
-
-
-
-
-<!-- Footer -->
-<br>
-<h4 style="color:#34495E; padding:10px 100px; border-color:#BDC3C7; border-top-style:dashed;"></h4>
-<div style="color:#34495E; background:#BDC3C7; padding:20px 100px">
-<normal >Department of Computer Science</normal> <br>
-<small >Faculty of Science and Technology, Thammasat University</small> <br>
-
-
-</body>
-</html>
+<div class="fixSize">
+    <!-- Page Header -->
+    @nav(user)
+    <!-- Content -->
+    <div class="procBody">
+            <iframe src="@routes.GarnerInterference.procIframe()" class="procContent" frameborder="0" ></iframe>
+        <div class="container">
+        @if(flash.containsKey("repeat")) {
+            <div class="alert alert-danger">@flash.get("repeat")</div>
+        }
+             <div class="procButtonRed">
+                 <a href="@routes.GarnerInterference.info()" class="btn btn-block btn-lg btn-danger" ><span class="glyphicon glyphicon-chevron-left"></span> ย้อนกลับ</a>  &nbsp; 
+             </div>
+             <div class="procButtonBlue">
+                 <a href="@routes.GarnerInterference.demoPage()" class="btn btn-block btn-lg btn-primary" ><span class="glyphicon glyphicon-play"></span> ทดลองเล่น</a>  &nbsp; 
+             </div>
+             <div class="procButtonGreen">
+                 <a href="@routes.Application.chooseTrial(ExperimentType.GARNERINTERFERENCE.toString())" class="btn btn-block btn-lg btn-success" ><span class="glyphicon glyphicon-th-list"></span>&nbsp; เลือก Trial การทดลอง</a>
+             </div>
+        </div>
+    </div>
+    @footer()
+</div>
