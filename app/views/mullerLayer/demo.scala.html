@@ -26,44 +26,48 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         <p id="word"> </p>
     </div>
 
-        <div align="center"id="ic"  style="padding-top:12px; margin-bottom:2%; visibility:hidden;" > <h3> คลิกเส้นที่มีความยาวต่างจากเส้นอื่น </h3> </div>
+        <div align="center"id="ic"  style="padding-top:12px; visibility:hidden;" > <h3> คลิกเส้นที่มีความยาวต่างจากเส้นอื่น </h3> </div>
 
         <div class="mainContainer" align="center" id="mc">
-            <a class="arrowHover" href="">
-                <div class="arrowContainer">
-                    <div class="lineArrow" style="width:200px"></div>
-                </div>
-            </a >
+            <form action="@routes.MullerLayer.demoReport()" method="post">
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                    <div class="arrowContainer">
+                        <div class="lineArrow" style="width:200px"></div>
+                    </div>
+                </button >
 
-            <a class="arrowHover" href="">
-                <div class="arrowContainer">
-                    <div class="mullerArrow arrow-left" href=""></div>
-                    <div class="lineArrow" style="width:200px"></div>
-                    <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
-                </div>
-            </a >
-            <a class="arrowHover" href="">
-                <div class="arrowContainer">
-                    <div class="mullerArrow arrow-right" href=""></div>
-                    <div class="lineArrow" style="width:190px"></div>
-                    <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
-                </div>
-            </a >
-            <a class="arrowHover" href="">
-                <div class="arrowContainer">
-                    <div class="mullerArrow arrow-right" href=""></div>
-                    <div class="lineArrow" style="width:200px"></div>
-                    <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
-                </div>
-            </a >
-            <a class="arrowHover" href="">
-                <div class="arrowContainer">
-                    <div class="mullerArrow arrow-left" href=""></div>
-                    <div class="lineArrow" style="width:200px"></div>
-                    <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
-                </div>
-            </a >
-        </div>
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                    <div class="arrowContainer">
+                        <div class="mullerArrow arrow-left" href=""></div>
+                        <div class="lineArrow" style="width:200px"></div>
+                        <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                    </div>
+                </button >
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="t">
+                    <div class="arrowContainer">
+                        <div class="mullerArrow arrow-right" href=""></div>
+                        <div class="lineArrow" style="width:190px"></div>
+                        <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
+                    </div>
+                </button >
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                    <div class="arrowContainer">
+                        <div class="mullerArrow arrow-right" href=""></div>
+                        <div class="lineArrow" style="width:200px"></div>
+                        <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                    </div>
+                </button >
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                    <div class="arrowContainer">
+                        <div class="mullerArrow arrow-left" href=""></div>
+                        <div class="lineArrow" style="width:200px"></div>
+                        <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
+                    </div>
+                </button >
+                <input id="score" name="score" hidden/>
+                <input id="time" name="time" hidden/>
+            </div>
+        </form>
     </div>
     @footer()
 </div>
