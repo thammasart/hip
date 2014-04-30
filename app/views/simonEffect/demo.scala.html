@@ -1,0 +1,41 @@
+@header("Human Information Processing Lab :: Home Page")
+<!--
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+--!>
+
+<script src="@routes.Assets.at("javascripts/simonEffect.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/simonEffect.css")">
+<body>
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center" style="margin-top:30px" >Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div class="expMainWindow">
+    <div class="simonCenterWord"  >
+        <div id = "top" style="font-size:100px;margin-bottom:1%;visibility:hidden;">  </div>
+        <div id = "question" class="simonQuestion">
+            <div id = "left" style="font-size:100px;margin-right:29%;float:left;visibility:hidden;">  </div>
+            <div id = "word" style="font-size:60px;float:left;"></div>
+            <div id = "right" style="font-size:100px;margin-left:29%;float:left;visibility:hidden;">  </div>
+        </div>
+        <div id = "bottom" style="font-size:100px;margin-top:1%;visibility:hidden;">  </div>
+    </div>
+    <form id = "answerForm" action="@routes.SimonEffect.reportDemo()" method="post">
+        <input id = "answer" name = "answer" type="text" hidden/>
+        <input id = "usedTime" name = "usedTime" type="text" hidden/>
+        <input id = "isCorrect" name = "isCorrect" type="text" hidden/>
+    </form>
+
+</div>
+@footer()
