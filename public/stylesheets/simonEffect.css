@@ -1,0 +1,15 @@
+.simonCenterWord{
+    text-align:center;
+    position:relative;
+}
+.simonInstructionWord{
+    font-size:60px;
+}
+.simonQuestion{
+    display: inline-block;
+    width:40%;
+}
+.simonSignal{
+    font-size:100px;
+    float:left;
+}
