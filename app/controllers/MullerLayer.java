@@ -41,14 +41,6 @@ public class MullerLayer extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
-      //  List<Integer> arrow = new ArrayList<Integer>();
-      //  Random rand = new Random();
-      //  int amount = rand.nextInt(3) + 3 ;
-      //  
-      //  for(int i = 0; i < amount;i++){
-      //      arrow.add(rand.nextInt(5));
-      //  }
-      //  
         return ok(demo.render());
     }
     //แสดงหน้าการทดลอง
@@ -57,6 +49,15 @@ public class MullerLayer extends Controller {
         return TODO;
     }
 
+
+    @Security.Authenticated(Secured.class)
+    public static Result demoReport(){
+        DynamicForm reportData = Form.form().bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        double time = Double.parseDouble(reportData.get("time"));
+        int score = Integer.parseInt(reportData.get("score"));
+        return ok(demoReport.render(score,time,1,"Demo Report",user));
+    }
 //    @Security.Authenticated(Secured.class)
 //    public static Result saveAnswer(long trialId, int questionNo){
 //        Form<Answer> boundForm = answerForm.bindFromRequest();
@@ -92,15 +93,6 @@ public class MullerLayer extends Controller {
 //        double totalUsedTime = Answer.calculateTotalUsedTime(answers);
 //        int score = Answer.calculateTotalScore(answers);
 //        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
-//    }
-//
-//    @Security.Authenticated(Secured.class)
-//    public static Result demoReport(){
-//        DynamicForm reportData = Form.form().bindFromRequest();
-//        User user = User.find.byId(session().get("username"));
-//        double time = Double.parseDouble(reportData.get("time"));
-//        int score = Integer.parseInt(reportData.get("score"));
-//        return ok(demoReport.render(score,time,1,"Demo Report",user));
 //    }
 
 

@@ -9,7 +9,12 @@
 .arrowContainer{
     width:270px;
     height:50px;
-    margin-bottom:3%;
+    margin-bottom:10%;
+}
+.arrowButton{
+    border:none;
+    background-color:transparent;
+    display:block;
 }
 .lineArrow{
     width:0px;
