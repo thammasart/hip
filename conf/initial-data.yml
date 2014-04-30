@@ -839,10 +839,10 @@
     memorySet: ABCDEFGHIJ
     questionType: ENGLISH
 - &Question38 !!models.positionError.Question
-    memorySet: AABBCC
+    memorySet: AABBC
     questionType: ENGLISH
 - &Question39 !!models.positionError.Question
-    memorySet: ONEPIECE
+    memorySet: ONEPIEC
     questionType: ENGLISH
 
 #Quiz
@@ -851,10 +851,10 @@
     trial: *round18
     question: *Question37
 - &Quiz44 !!models.positionError.Quiz
-    length: 6
+    length: 5
     trial: *round18
     question: *Question38
 - &Quiz45 !!models.positionError.Quiz
-    length: 8
+    length: 7
     trial: *round18
     question: *Question39

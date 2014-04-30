@@ -89,6 +89,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     .controller('StroofEffectCtrl', function($scope){
     })
     .controller('PositionErrorCtrl', function($scope){
+        $scope.word = /^[0-1]{1}\.[0-9]+$/;
     })
     .controller('SternbergSearchCtrl', function($scope){
     })
