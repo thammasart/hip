@@ -3,6 +3,7 @@
 @import models.sternbergSearch.Trial
 @import models.sternbergSearch.Quiz
 @import models.sternbergSearch.Question
+@import models.sternbergSearch.QuestionType
 @import views.html.admin.experiment._
 @import views.html.form._
 
@@ -18,14 +19,73 @@
             <div class="well">
                 <div class="row">
                     <div class="col-md-9 col-sm-8 trial-box-left">
-                        @for((quiz, i) <- trial.quizzes.zipWithIndex){
-                        <p>quiz.id</p>
-                        }
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2">Length</th>
+                                        <th colspan="2">1 Char</th>
+                                        <th colspan="2">2 Chars</th>
+                                        <th rowspan="2">Blink Time</th>
+                                    </tr>
+                                    <tr>
+                                        <th>correct</th>
+                                        <th>incorrect</th>
+                                        <th>correct</th>
+                                        <th>incorrect</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.length_@{trial.id}.$invalid]">
+                                            <input type="number" min="1" max="6"  name="length_@trial.id" class="form-control center-block input-two-word "
+                                                   ng-init="length@trial.id = @trial.length" ng-model="length@trial.id" required></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.oneCharIsCorrect_@{trial.id}.$invalid]">
+                                            <input type="number" min="0" max="10"  name="oneCharIsCorrect_@trial.id" class="form-control center-block input-two-word "
+                                                   ng-init="oneCharIsCorrect@trial.id = @trial.oneCharIsCorrect" ng-model="oneCharIsCorrect@trial.id" required></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.oneCharIsInCorrect_@{trial.id}.$invalid]">
+                                            <input type="number" min="0" max="10"  name="oneCharIsInCorrect_@trial.id" class="form-control center-block input-two-word "
+                                                   ng-init="oneCharIsInCorrect@trial.id = @trial.oneCharIsInCorrect" ng-model="oneCharIsInCorrect@trial.id" required></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.twoCharIsCorrect_@{trial.id}.$invalid]">
+                                            <input type="number" min="0" max="10"  name="twoCharIsCorrect_@trial.id" class="form-control center-block input-two-word "
+                                                   ng-init="twoCharIsCorrect@trial.id = @trial.twoCharIsCorrect" ng-model="twoCharIsCorrect@trial.id" required></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.twoCharIsInCorrect_@{trial.id}.$invalid]">
+                                            <input type="number" min="0" max="10"  name="twoCharIsInCorrect_@trial.id" class="form-control center-block input-two-word "
+                                                   ng-init="twoCharIsInCorrect@trial.id = @trial.twoCharIsInCorrect" ng-model="twoCharIsInCorrect@trial.id" required></div></td>
+                                        <td><div
+                                                 ng-class="{true: 'has-error', false : ''}[parameter.blinkTime_@{trial.id}.$invalid]">
+                                            <input type="text" class="form-control center-block input-two-word" name="blinkTime_@trial.id"
+                                                   ng-pattern="word" ng-init="blinkTime@trial.id = '@trial.blinkTime'"
+                                                   ng-model="blinkTime@trial.id"
+                                                   required>
+                                        </div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                     </div>
-                </div>
-
-                <div class="col-md-3 col-sm-4 trial-box-right">
-
+                    <div class="col-md-3 col-sm-4 trial-box-right">
+                        <h4>Memory Set Language</h4>
+                        <label class="radio-inline">
+                            <input type="radio" name="questionType_@trial.id" value="@QuestionType.ENGLISH"
+                            @if(trial.questionType.equals(QuestionType.ENGLISH)){
+                            checked
+                            }
+                            > English
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="questionType_@trial.id" value="@QuestionType.THAI"
+                            @if(trial.questionType.equals(QuestionType.THAI)){
+                            checked
+                            }
+                            > ไทย
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="questionType_@trial.id" value="@QuestionType.NUMBER"@if(trial.questionType.equals(QuestionType.NUMBER)){
+                            checked
+                            }
+                            > ตัวเลข
+                        </label>
+                        <br>
+                    </div>
                 </div>
                 <div class="row">
 
@@ -35,19 +95,15 @@
                             <table class="table text-center">
                                 <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Question</th>
+                                    <th>Memory Set</th>
                                     <th>#</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @for((quiz, index) <- trial.quizzes.zipWithIndex){
-                                <tr ng-init="question@quiz.id='@quiz.question.memorySet'">
-                                    <td>@{index + 1}</td>
-                                    <td>{{question@quiz.id}}</td>
+                                <tr ng-init="question@trial.id='@trial.quizzes.get(0).question.memorySet'">
+                                    <td>{{question@trial.id}}</td>
                                     <td>#</td>
                                 </tr>
-                                }
                                 </tbody>
                             </table>
                         </div>
