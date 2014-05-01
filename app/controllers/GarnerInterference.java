@@ -43,21 +43,21 @@ public class GarnerInterference extends Controller {
     public static Result demoPage(){
         return ok(demo.render());
     }
+
+    @Security.Authenticated(Secured.class)
+    public static Result demoReport(){
+        DynamicForm reportData = Form.form().bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        double time = Double.parseDouble(reportData.get("time"));
+        int score = Integer.parseInt(reportData.get("score"));
+        return ok(demoReport.render(score,time,1,"Demo Report",user));
+    }
 //    //แสดงหน้าการทดลอง
 //    @Security.Authenticated(Secured.class)
 //    public static Result experiment(long trialId,int questionNo){
 //        return TODO;
 //    }
 //
-//
-//    @Security.Authenticated(Secured.class)
-//    public static Result demoReport(){
-//        DynamicForm reportData = Form.form().bindFromRequest();
-//        User user = User.find.byId(session().get("username"));
-//        double time = Double.parseDouble(reportData.get("time"));
-//        int score = Integer.parseInt(reportData.get("score"));
-//        return ok(demoReport.render(score,time,1,"Demo Report",user));
-//    }
 //    @Security.Authenticated(Secured.class)
 //    public static Result saveAnswer(long trialId, int questionNo){
 //        Form<Answer> boundForm = answerForm.bindFromRequest();

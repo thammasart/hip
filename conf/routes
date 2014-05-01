@@ -100,7 +100,7 @@ GET     /garner_interference/info           controllers.GarnerInterference.infoI
 GET     /garner_interference/proc           controllers.GarnerInterference.proc()
 GET     /garner_interference/procIframe     controllers.GarnerInterference.procIframe()
 GET     /garner_interference/demo           controllers.GarnerInterference.demoPage()
-GET     /garner_interference/reportDemo     controllers.GarnerInterference.demoReport()
+POST     /garner_interference/reportDemo     controllers.GarnerInterference.demoReport()
 
 GET     /positionError	            controllers.PositionError.info()
 GET     /positionError/info         controllers.PositionError.infoIframe()
