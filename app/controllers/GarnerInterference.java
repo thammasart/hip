@@ -41,8 +41,7 @@ public class GarnerInterference extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
-  //      return ok(demo.render());
-        return TODO;
+        return ok(demo.render());
     }
 //    //แสดงหน้าการทดลอง
 //    @Security.Authenticated(Secured.class)
