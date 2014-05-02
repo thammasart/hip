@@ -1,0 +1,50 @@
+.mainContainer{
+    border:solid;
+    border-color:white;
+    width:60%;
+    margin-left:20%;
+    height:400px;
+    visibility:hidden;
+    -webkit-transition:0.5s;
+    transition:0.5s;
+}
+.bigSquare{
+    width:250px;
+    height:250px;
+    float:left;
+    margin-left:2%;
+    position:relative;
+    top:18%;
+}
+.smallSquare{
+    width:240px;
+    height:240px;
+    float:left;
+    margin-left:2%;
+    position:relative;
+    top:19.5%;
+}
+.dark{
+    background-color:dimgray;
+}
+.light{
+    background-color:gray;
+}
+.nameTag{
+    position:relative;
+    top:25%;
+    font-size:450%;
+}
+.choice{
+    position:relative;
+    top:-70px;
+    width:50%;
+    margin-left:25%;
+    display:inline-block;
+}
+.sq{
+    position:relative;
+    top:4%;
+    margin-left:44%;
+    float:none;
+}

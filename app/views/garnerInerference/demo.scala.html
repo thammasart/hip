@@ -1,0 +1,61 @@
+@header("Human Information Processing Lab :: Home Page")
+<!--
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+--!>
+<script src="@routes.Assets.at("javascripts/garnerInterference.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/garnerInterference.css")">
+<body>
+<div class="fixSize">
+    <!-- Page Header -->
+    <div class="">
+          <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
+          <!-- Dashed line-->
+          <div class="titleLine"></div>
+    </div>
+    <div class="expMainWindow" style="height:507px;">
+
+    <div class="expCenterWord">
+        <p id="word"> </p>
+    </div>
+
+        <div align="center"id="ic"  style="padding-top:12px; visibility:hidden; " > <h3 id="q"> จำรูปสี่เหลี่ยมทั้งสี่รูปนี้ </h3> </div>
+
+        <div class="mainContainer" align="center" id="mc">
+            
+            <div class="bigSquare dark" style="margin-left:2.5%;">
+                <p class="nameTag"> A </p>
+            </div>
+            <div class="bigSquare light">
+                <p class="nameTag"> B </p>
+            </div>
+            <div class="smallSquare dark" id="sq">
+                <p class="nameTag" id="sqw"> C </p>
+            </div>
+            <div class="smallSquare light">
+                <p class="nameTag"> D </p>
+            </div>
+
+        </div>
+        
+            <form action="@routes.GarnerInterference.demoReport()" method="post">
+           <!-- <div class="smallSquare dark sq" style="visibility:hidden;" id="sq">
+            </div>
+--!>
+        <div class="choice" align="center" id="choice" style="visibility:hidden;">
+             <button type="submit" class="btn btn-danger ansButton" id="no" name="no" onclick="return done(this.name)"> ไม่ใช่ </button >
+             <button type="submit" class="btn btn-success ansButton" id="yes"  name="yes"onclick="return done(this.name)"  > ใช่</button >
+        </div>
+                <input id="score" name="score" hidden/>
+                <input id="time" name="time" hidden/>
+            </form>
+    </div>
+    @footer()
+</div>
