@@ -18,9 +18,29 @@
             <div class="well">
                 <div class="row">
                     <div class="col-md-9 col-sm-8 trial-box-left">
+                        <table class="table text-center">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Length</th>
+                                <th>Chunk Size</th>
+                                <th>Display Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                         @for((quiz, i) <- trial.quizzes.zipWithIndex){
-                        <p>quiz.id</p>
+
+
+                                    <tr>
+                                        <td>@{i + 1}</td>
+                                        <td>@quiz.length</td>
+                                        <td>@quiz.chunkSize</td>
+                                        <td>@quiz.displayTime</td>
+                                    </tr>
+
                         }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
