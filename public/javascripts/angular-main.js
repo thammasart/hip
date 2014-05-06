@@ -95,4 +95,5 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.word = /^[0-1]{1}\.[0-9]+$/;
     })
     .controller('MagicNumber7Ctrl', function($scope){
+        $scope.word = /^[1-9]{1}\.[0-9]+$/;
     });

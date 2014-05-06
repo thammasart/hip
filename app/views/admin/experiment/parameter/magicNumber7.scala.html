@@ -3,6 +3,7 @@
 @import models.magicNumber7.Trial
 @import models.magicNumber7.Quiz
 @import models.magicNumber7.Question
+@import models.magicNumber7.QuestionType
 @import views.html.admin.experiment._
 @import views.html.form._
 
@@ -33,19 +34,50 @@
 
                                     <tr>
                                         <td>@{i + 1}</td>
-                                        <td>@quiz.length</td>
-                                        <td>@quiz.chunkSize</td>
-                                        <td>@quiz.displayTime</td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.length_@{quiz.id}.$invalid]">
+                                            <input type="number" min="3" max="12"  name="length_@quiz.id" class="form-control center-block input-two-word "
+                                                   ng-init="length@quiz.id = @quiz.length" ng-model="length@quiz.id" required></div></td>
+                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.chunkSize_@{quiz.id}.$invalid]">
+                                            <input type="number" min="0" max="12"  name="chunkSize_@quiz.id" class="form-control center-block input-two-word "
+                                                   ng-init="chunkSize@quiz.id = @quiz.chunkSize" ng-model="chunkSize@quiz.id" required></div></td>
+                                        <td><div
+                                                ng-class="{true: 'has-error', false : ''}[parameter.displayTime_@{quiz.id}.$invalid]">
+                                            <input type="text" class="form-control center-block input-two-word" name="displayTime_@quiz.id"
+                                                   ng-pattern="word" ng-init="displayTime@quiz.id = '@quiz.displayTime'"
+                                                   ng-model="displayTime@quiz.id"
+                                                   required>
+                                        </div></td>
                                     </tr>
 
                         }
                             </tbody>
                         </table>
                     </div>
+                    <div class="col-md-3 col-sm-4 trial-box-right">
+                    <h4>Memory Set Language</h4>
+                    <label class="radio-inline">
+                        <input type="radio" name="questionType_@trial.id" value="@QuestionType.ENGLISH"
+                        @if(trial.questionType.equals(QuestionType.ENGLISH)){
+                        checked
+                        }
+                        > English
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="questionType_@trial.id" value="@QuestionType.THAI"
+                        @if(trial.questionType.equals(QuestionType.THAI)){
+                        checked
+                        }
+                        > ไทย
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="questionType_@trial.id" value="@QuestionType.NUMBER"
+                        @if(trial.questionType.equals(QuestionType.NUMBER)){
+                        checked
+                        }
+                        > ตัวเลข
+                    </label>
+                    <br>
                 </div>
-
-                <div class="col-md-3 col-sm-4 trial-box-right">
-
                 </div>
                 <div class="row">
 
