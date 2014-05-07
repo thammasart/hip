@@ -12,13 +12,14 @@ function showSquare(){
     clearInterval(startTimer);
     document.getElementById("mc").style.visibility = "visible";  
     document.getElementById("ic").style.visibility = "visible";  
-    showTimerTime2 = setInterval(function() { showTimer()},5000);
+    document.getElementById("ic2").style.visibility = "visible";  
 }
 
 function showTimer(){
-    clearInterval(showTimerTime2);
     document.getElementById("mc").style.visibility = "hidden";
+    document.getElementById("mc").style.display= "none";
     document.getElementById("ic").style.visibility = "hidden";
+    document.getElementById("ic2").style.visibility = "hidden";
     showTimerTime =   setInterval(calculateTimeLeft,1000);
     delayTime = setInterval(function(){delay()},5000);
 }
@@ -32,6 +33,7 @@ function delay(){
     clearInterval(delayTime);
     clearInterval(showTimerTime);
     document.getElementById("word").innerHTML="";
+    document.getElementById("mc").style.display= "table";
     delayTime2 = setInterval(function(){showQuestion()},1000);
 }
 function showQuestion(){
@@ -43,7 +45,7 @@ function showQuestion(){
     document.getElementById("no").style.visibility = "visible";
     document.getElementById("sq").style.visibility = "visible";
     document.getElementById("sqw").innerHTML = "";
-    document.getElementById("sq").style.margin = "-4% 0% 0% -10.5%";
+    document.getElementById("sq").style.margin-left = "-5%";
     
     document.getElementById("q").innerHTML = " รูปนี้ใช่สี่เหลี่ยมสีเข้มขนาดเล็กหรือไม่ " ;
 }
