@@ -13,17 +13,17 @@ public class Trial extends Model{
 	@Id
 	public long id;
 	public QuestionType questionType;
-	public double binkTime;
+	public double blinkTime;
 
 	@ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
-    public Trial(ExperimentSchedule schedule, QuestionType questionType, double binkTime){
+    public Trial(ExperimentSchedule schedule, QuestionType questionType, double blinkTime){
     	this.schedule = schedule;
     	this.questionType = questionType;
-    	this.binkTime = binkTime;
+    	this.blinkTime = blinkTime;
     }
 
     @SuppressWarnings("unchecked")

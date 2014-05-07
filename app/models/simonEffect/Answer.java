@@ -29,6 +29,22 @@ public class Answer extends Model{
     	this.isCorrect = answer.equals(quiz.question.direction);
     }
 
+    public static int calculateTotalScore(List<Answer> answers){
+        int totalScore = 0;
+        for(Answer ans : answers){
+            if(ans.isCorrect) totalScore++;
+        }
+        return totalScore;
+    }
+
+    public static double calculateTotalUsedTime(List<Answer> answers){
+        double totalUsedTime = 0;
+        for(Answer ans : answers){
+            totalUsedTime += ans.usedTime;
+        }
+        return totalUsedTime;
+    }
+
     @SuppressWarnings("unchecked")
 	public static Finder<Long,Answer> find = new Finder(Long.class,Answer.class);
 

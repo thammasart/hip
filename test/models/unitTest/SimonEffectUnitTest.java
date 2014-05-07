@@ -65,7 +65,7 @@ public class SimonEffectUnitTest extends WithApplication {
     	Trial trial = new Trial(exp, QuestionType.TWOFEATURE, 0.5);
 
         assertEquals(exp,trial.schedule);
-        assertEquals(0.5,trial.binkTime, 0.001);
+        assertEquals(0.5,trial.blinkTime, 0.001);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class SimonEffectUnitTest extends WithApplication {
 
         Trial trial = Trial.find.byId(1L);
         assertEquals(exp,trial.schedule);
-        assertEquals(0.5,trial.binkTime, 0.001);
+        assertEquals(0.5,trial.blinkTime, 0.001);
     }
 
     @Test
@@ -187,6 +187,66 @@ public class SimonEffectUnitTest extends WithApplication {
 		assertEquals(0.9, ans.usedTime, 0.01);;
 		assertEquals(true, ans.isCorrect);
     }
+
+    @Test
+    public void calculateScoreShouldCorrect(){
+    	new Question("red",'O',"up").save();
+    	new Question("red",'X',"right").save();
+    	new Question("geen",'O',"left").save();
+    	new Question("geen",'X',"down").save();
+        Question q1 = Question.find.byId(1L);
+        Question q2 = Question.find.byId(2L);
+        Question q3 = Question.find.byId(3L);
+        Question q4 = Question.find.byId(4L);
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp, QuestionType.TWOFEATURE, 0.5).save();
+    	Trial trial = Trial.find.byId(1L);
+        new Quiz(trial, q1, "down").save();
+        new Quiz(trial, q2, "up").save();
+        new Quiz(trial, q3, "left").save();
+        new Quiz(trial, q4, "right").save();
+        new Quiz(trial, q4, "up").save();
+        User user = User.find.byId("123");
+		new Answer(user, Quiz.find.byId(1L), "down", 0.9).save();
+		new Answer(user, Quiz.find.byId(2L), "up", 0.5).save();
+		new Answer(user, Quiz.find.byId(3L), "left", 0.1).save();
+		new Answer(user, Quiz.find.byId(4L), "right", 0.2).save();
+		new Answer(user, Quiz.find.byId(5L), "down", 1.6).save();
+
+		List<Answer> ans = Answer.find.where().eq("user_username", "123").findList();
+		assertEquals(2,Answer.calculateTotalScore(ans));
+    }
+
+    @Test
+    public void calculateUsedTimeShouldCorrect(){
+    	new Question("red",'O',"up").save();
+    	new Question("red",'X',"right").save();
+    	new Question("geen",'O',"left").save();
+    	new Question("geen",'X',"down").save();
+        Question q1 = Question.find.byId(1L);
+        Question q2 = Question.find.byId(2L);
+        Question q3 = Question.find.byId(3L);
+        Question q4 = Question.find.byId(4L);
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp, QuestionType.TWOFEATURE, 0.5).save();
+    	Trial trial = Trial.find.byId(1L);
+        new Quiz(trial, q1, "down").save();
+        new Quiz(trial, q2, "up").save();
+        new Quiz(trial, q3, "left").save();
+        new Quiz(trial, q4, "right").save();
+        new Quiz(trial, q4, "up").save();
+        User user = User.find.byId("123");
+		new Answer(user, Quiz.find.byId(1L), "down", 0.9).save();
+		new Answer(user, Quiz.find.byId(2L), "up", 0.5).save();
+		new Answer(user, Quiz.find.byId(3L), "left", 0.1).save();
+		new Answer(user, Quiz.find.byId(4L), "right", 0.2).save();
+		new Answer(user, Quiz.find.byId(5L), "down", 1.6).save();
+
+		List<Answer> ans = Answer.find.where().eq("user_username", "123").findList();
+		assertEquals(3.3,Answer.calculateTotalUsedTime(ans),0.001);
+    }
+
+
 
 
 
