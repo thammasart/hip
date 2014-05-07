@@ -1,0 +1,45 @@
+@header("Human Information Processing Lab :: Home Page")
+<!--
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+--!>
+
+<script src="@routes.Assets.at("javascripts/visualSearchDemo.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/visualSearch.css")">
+<body>
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div class="expMainWindow">
+    <div class="expCenterWord">
+        <div class="inst" id="word"></div>
+        <div class = "circleEx" id="circleEx" ></div>
+    </div>
+    <form action="@routes.VisualSearch.demoReport()" method="post" >
+        <div class="visualArea" id="visualArea">
+            <button class="box" name = "noise" style="top:10%;left:10%;border-color:#57BAC9" onclick="shapeClick(this.name)"></button>
+            <button class="box" name = "noise" style="top:40%;left:53%;border-color:#57BAC9" onclick="shapeClick(this.name)"></button>
+            <button class="box" name = "noise" style="top:20%;left:42%;border-color:#2ED2AE" onclick="shapeClick(this.name)"></button>
+            <button class="box" name = "noise" style="top:7%;left:45%;border-color:#A51B00" onclick="shapeClick(this.name)"></button>
+            <button class="box" name = "noise" style="top:70%;left:20%;border-color:#2ED2AE" onclick="shapeClick(this.name)"></button>
+            <button class="circle" name = "noise" style="top:65%;left:30%;border-color:#A51B00" onclick="shapeClick(this.name)"></button>
+            <button class="circle" name = "noise" style="top:55%;left:50%;border-color:#2ED2AE" onclick="shapeClick(this.name)"></button>
+            <button class="circle" name = "noise" style="top:32%;left:42%;border-color:#A51B00" onclick="shapeClick(this.name)"></button>
+            <button class="circle" name = "noise" style="top:80%;left:90%;border-color:#2ED2AE" onclick="shapeClick(this.name)"></button>
+            <button class="circle" name = "target" style="top:8%;left:17%;border-color:#57BAC9" onclick="shapeClick(this.name)"></button>
+        </div>
+        <input id="score" name="score" hidden/>
+        <input id="usedTime" name="usedTime" hidden/>
+    </form>
+</div>
+@footer()
