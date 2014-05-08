@@ -69,6 +69,7 @@ public class ExperimentSchedule extends Model{
         final String POSITIONERROR = "POSITIONERROR";
         final String STERNBERGSEARCH = "STERNBERGSEARCH";
         final String MAGICNUMBER7 = "MAGICNUMBER7";
+        final String SIMONEFFECT = "SIMONEFFECT";
 
         if (expType.equals(BROWNPETERSON)){
             expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
@@ -91,6 +92,9 @@ public class ExperimentSchedule extends Model{
         else if (expType.equals(MAGICNUMBER7)){
             expList = getWorkingExperimentsByType(ExperimentType.MAGICNUMBER7);
         }
+        else if (expType.equals(SIMONEFFECT)){
+            expList = getWorkingExperimentsByType(ExperimentType.SIMONEFFECT);
+        }
         return expList;
 	}
 	
@@ -105,6 +109,7 @@ public class ExperimentSchedule extends Model{
 				case POSITIONERROR : type = "Position Error";break;
 				case STERNBERGSEARCH : type = "Sternberg Search";break;
                 case MAGICNUMBER7 : type = "Magic Number 7";break;
+                case SIMONEFFECT : type = "Simon Effect";break;
 				default : type = "Unknown";
 			}
 		}
@@ -120,6 +125,7 @@ public class ExperimentSchedule extends Model{
 			case POSITIONERROR : break;
 			case STERNBERGSEARCH : break;
             case MAGICNUMBER7: generateMagicNumber7Trial(); break;
+            case SIMONEFFECT : break;
 		}
 	}
 
