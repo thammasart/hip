@@ -8,6 +8,10 @@ import javax.persistence.*;
 public class Quiz extends Model{
     @Id
     public long id;
+    public int noOfChoise;
+    public int differChoise;
+    public LenghtType lenghtType;
+    public int differLenght;
     @ManyToOne
     public Trial trial;
     @ManyToOne
