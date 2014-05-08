@@ -36,7 +36,10 @@ public class MullerLayerUnitTest extends WithApplication {
 
     @Test
     public void createTrialShouldNotNull(){
-        Trial t = new Trial();
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        Trial t = new Trial(exp);
         assertNotNull(t);
+        assertEquals(exp, t.schedule);
     }
+
 }
