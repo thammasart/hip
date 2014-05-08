@@ -122,7 +122,7 @@ public class ExperimentSchedule extends Model{
 			case STROOPEFFECT : generateStroopEffectTrial(); break;
 			case SIGNALDETECTION : generateSignalDetectionTrial(); break;
 			case ATTENTIONBLINK : generateAttentionBlinkTrial(); break;
-			case POSITIONERROR : break;
+			case POSITIONERROR : generatePositionErrorTrial();break;
 			case STERNBERGSEARCH : break;
             case MAGICNUMBER7: generateMagicNumber7Trial(); break;
             case SIMONEFFECT : break;
@@ -158,6 +158,14 @@ public class ExperimentSchedule extends Model{
 			trial.generateQuiz();
 		}
 	}
+
+    private void generatePositionErrorTrial(){
+        for (int i = 0; i < this.noOfTrial; i++){
+            models.positionError.Trial trial = models.positionError.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
 
     private void generateMagicNumber7Trial(){
         for(int i = 0; i < this.noOfTrial; i++){

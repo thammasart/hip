@@ -17,6 +17,8 @@ public class Trial extends Model{
 	public double delayTime;
 	public QuestionType questionType;
 
+    public int numberOfQuiz = 3;
+
 	@ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany
@@ -34,6 +36,18 @@ public class Trial extends Model{
 		newTrial.schedule = schedule;
 		return newTrial;
 	}
+
+    public static Trial create(ExperimentSchedule schedule){
+        Trial newTrial = new Trial(0.05,0.1,QuestionType.ENGLISH);
+        newTrial.schedule = schedule;
+        return newTrial;
+    }
+
+    public void generateQuiz(){
+        for(int i = 0; i < this.numberOfQuiz; i++){
+            Quiz.create(this).save();
+        }
+    }
 
 	public static List<Trial> findInvolving(ExperimentSchedule ex){
         return find.where().eq("schedule", ex).findList();

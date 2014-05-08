@@ -9,12 +9,14 @@ public class Quiz extends Model{
 	@Id
 	public long id;
 
-	public int length;
+	public int length = 7;
 
 	@ManyToOne
 	public Question question;
     @ManyToOne
     public Trial trial;
+
+    public Quiz(){}
 
     public Quiz(int length,Question question, Trial trial){
     	this.length = length;
@@ -24,6 +26,14 @@ public class Quiz extends Model{
 
     public static Quiz create(int length, Question question, Trial trial){
     	Quiz newQuiz = new Quiz(length, question, trial);
+    	return newQuiz;
+    }
+    public static Quiz create(Trial trial){
+    	Quiz newQuiz = new Quiz();
+        Question question = Question.generateQuestion(trial.questionType, newQuiz.length);
+        question.save();
+        newQuiz.question = question;
+        newQuiz.trial = trial;
     	return newQuiz;
     }
 
