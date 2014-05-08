@@ -14,8 +14,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
 
-
-
 public class SimonEffectUnitTest extends WithApplication {
 
     @Before

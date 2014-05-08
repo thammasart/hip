@@ -43,10 +43,9 @@ function showQuestion(){
     document.getElementById("ic").style.visibility = "visible";
     document.getElementById("yes").style.visibility = "visible";
     document.getElementById("no").style.visibility = "visible";
+    document.getElementById("sq").style.marginLeft = "-5%";
     document.getElementById("sq").style.visibility = "visible";
     document.getElementById("sqw").innerHTML = "";
-    document.getElementById("sq").style.margin-left = "-5%";
-    
     document.getElementById("q").innerHTML = " รูปนี้ใช่สี่เหลี่ยมสีเข้มขนาดเล็กหรือไม่ " ;
 }
 
