@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class Question extends Model{
     @Id
     public long id;
+    public LineType line1;
+    public LineType line2;
+    public LineType line3;
+    public LineType line4;
+    public LineType line5;
 
     /*@OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();

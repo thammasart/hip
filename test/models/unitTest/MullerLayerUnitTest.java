@@ -33,4 +33,10 @@ public class MullerLayerUnitTest extends WithApplication {
     	Question q = new Question();
     	assertNotNull(q);
     }
+
+    @Test
+    public void createTrialShouldNotNull(){
+        Trial t = new Trial();
+        assertNotNull(t);
+    }
 }
