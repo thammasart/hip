@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class Answer extends Model{
     @Id
     public long id;
+    public int answer;
+    public double usedTime;
+    public boolean isCorrect;
     @ManyToOne
     public User user;
     @ManyToOne 
