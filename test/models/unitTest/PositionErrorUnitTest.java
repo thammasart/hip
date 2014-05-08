@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 
-//@Ignore
 public class PositionErrorUnitTest extends WithApplication {
 
     @Before
@@ -26,7 +25,6 @@ public class PositionErrorUnitTest extends WithApplication {
         Date nextYearDate = calendar.getTime();
         new ExperimentSchedule("Experiment 1", 3, lastYearDate,
          		nextYearDate, ExperimentType.POSITIONERROR).save();
-
         new User("123","Secret").save();
 
     }
