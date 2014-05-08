@@ -119,7 +119,7 @@ public class ExperimentSchedule extends Model{
 			case ATTENTIONBLINK : generateAttentionBlinkTrial(); break;
 			case POSITIONERROR : break;
 			case STERNBERGSEARCH : break;
-            case MAGICNUMBER7: break;
+            case MAGICNUMBER7: generateMagicNumber7Trial(); break;
 		}
 	}
 
@@ -152,6 +152,14 @@ public class ExperimentSchedule extends Model{
 			trial.generateQuiz();
 		}
 	}
+
+    private void generateMagicNumber7Trial(){
+        for(int i = 0; i < this.noOfTrial; i++){
+            models.magicNumber7.Trial trial = models.magicNumber7.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long,ExperimentSchedule> find = new Finder(Long.class,ExperimentSchedule.class);

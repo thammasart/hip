@@ -24,6 +24,8 @@ public class Quiz extends Model{
 		this.question = question;
 	}
 
+    public Quiz(){}
+
 	public static Quiz create(Trial trial, Question question, double displayTime, int chunkSize, int length){
 		Quiz newQuiz = new Quiz(trial, question);
 		newQuiz.displayTime = displayTime;
@@ -31,6 +33,18 @@ public class Quiz extends Model{
         newQuiz.length = length;
 		return newQuiz;
 	}
+
+    public static Quiz create(Trial trial){
+        Quiz quiz = new Quiz();
+        quiz.length = 9;
+        quiz.displayTime = 3.0;
+        quiz.chunkSize = 3;
+        Question question = Question.generateQuestion(trial.questionType, quiz.length);
+        question.save();
+        quiz.question = question;
+        quiz.trial = trial;
+        return quiz;
+    }
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Quiz> find = new Finder(Long.class, Quiz.class);
