@@ -123,13 +123,21 @@ public class ExperimentSchedule extends Model{
 			case SIGNALDETECTION : generateSignalDetectionTrial(); break;
 			case ATTENTIONBLINK : generateAttentionBlinkTrial(); break;
 			case POSITIONERROR : generatePositionErrorTrial();break;
-			case STERNBERGSEARCH : break;
+			case STERNBERGSEARCH : generateSternbergSearchTrial();break;
             case MAGICNUMBER7: generateMagicNumber7Trial(); break;
             case SIMONEFFECT : break;
 		}
 	}
 
-	private void generateBrownPetersonTrial(){
+    private void generateSternbergSearchTrial() {
+        for(int i = 0; i < this.noOfTrial; i++){
+            models.sternbergSearch.Trial trial = models.sternbergSearch.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
+
+    private void generateBrownPetersonTrial(){
 		for(int i = 0; i < this.noOfTrial; i++){
 			models.brownPeterson.Trial trial = models.brownPeterson.Trial.create(this);
             trial.save();

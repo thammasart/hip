@@ -28,6 +28,17 @@ public class Trial extends Model{
     	this.schedule = schedule;
     }
 
+    public static Trial create(ExperimentSchedule schedule){
+        Trial trial = new Trial(schedule);
+        trial.length = 3;
+        trial.blinkTime = 0.3;
+        trial.oneCharIsCorrect = 3;
+        trial.oneCharIsInCorrect = 3;
+        trial.questionType = QuestionType.ENGLISH;
+        return trial;
+
+    }
+
     public static Trial create(ExperimentSchedule schedule, int length, double blinkTime, int oneCharIsCorrect, int oneCharIsInCorrect, int twoCharIsCorrect, int twoCharIsInCorrect, QuestionType questionType){
     	Trial newTrial = new Trial(schedule);
     	newTrial.length = length;
@@ -46,4 +57,8 @@ public class Trial extends Model{
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
+
+    public void generateQuiz() {
+        Quiz.create(this).save();
+    }
 }
