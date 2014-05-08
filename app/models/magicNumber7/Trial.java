@@ -30,9 +30,23 @@ public class Trial extends Model{
     	return newTrial;
     }
 
+    public static Trial create(ExperimentSchedule schedule){
+        Trial newTrial = new Trial(schedule);
+        newTrial.questionType = QuestionType.ENGLISH;
+        return newTrial;
+    }
+
     public static List<Trial> findInvolving(ExperimentSchedule ex){
         return find.where().eq("schedule", ex).findList();
     }
+
+    public void generateQuiz(){
+        for(int i = 0; i < this.numberOfQuiz; i++){
+            Quiz.create(this).save();
+        }
+    }
+
+
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);

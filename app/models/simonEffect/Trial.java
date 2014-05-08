@@ -26,6 +26,10 @@ public class Trial extends Model{
     	this.blinkTime = blinkTime;
     }
 
+    public static List<Trial> findInvolving(ExperimentSchedule ex){
+        return find.where().eq("schedule", ex).findList();
+    }
+
     @SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 }

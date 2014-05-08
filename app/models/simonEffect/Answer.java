@@ -45,6 +45,14 @@ public class Answer extends Model{
         return totalUsedTime;
     }
 
+    public static List<Answer> findInvolving(User user, List<Quiz> quizzes){
+        List<Answer> answers = new ArrayList<Answer>();
+        for(Quiz quiz:quizzes){
+            answers.add(find.where().eq("user" ,user).eq("quiz",quiz).findUnique());
+        }
+        return answers;
+    }
+
     @SuppressWarnings("unchecked")
 	public static Finder<Long,Answer> find = new Finder(Long.class,Answer.class);
 

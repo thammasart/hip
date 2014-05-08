@@ -74,6 +74,15 @@
                             }
                         }
                     }
+                    case ExperimentType.SIMONEFFECT => {
+                        @for((trial, index) <- models.simonEffect.Trial.findInvolving(exp).zipWithIndex ){
+                            @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
+                                <p><button disabled class="trialButton btn btn-lg btn-block">Trial @{ index + 1 }</button></p>
+                            }else{
+                                <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp Trial @{ index + 1 } </button></a></p>
+                            }
+                        }
+                    }
                     case _ => {
                         <div class="alert alert-danger">Experiment is not found!!</div>
                     }
