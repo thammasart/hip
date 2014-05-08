@@ -15,10 +15,9 @@ public class Question extends Model{
     public LineType line3;
     public LineType line4;
     public LineType line5;
-
-    /*@OneToMany
+    @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
-*/
+
     public Question(){}
 
     @SuppressWarnings("unchecked")

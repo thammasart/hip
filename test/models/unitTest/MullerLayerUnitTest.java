@@ -42,4 +42,14 @@ public class MullerLayerUnitTest extends WithApplication {
         assertEquals(exp, t.schedule);
     }
 
+    @Test
+    public void createQuizShouldNotNull(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        Trial t = new Trial(exp);
+        Question q = new Question();
+        Quiz quiz = new Quiz(t, q);
+        assertNotNull(quiz);
+        assertEquals(t, quiz.trial);
+        assertEquals(q, quiz.question);
+    }
 }
