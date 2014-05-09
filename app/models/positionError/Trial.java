@@ -49,7 +49,7 @@ public class Trial extends Model{
         }
     }
 
-	public static List<Trial> findInvolving(ExperimentSchedule ex){
+    public static List<Trial> findInvolving(ExperimentSchedule ex){
         return find.where().eq("schedule", ex).findList();
     }
 

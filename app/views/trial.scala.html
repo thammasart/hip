@@ -11,6 +11,15 @@
             @for(exp <- ExperimentSchedule.getWorkingExperimentsByType(expType)) {
                 <h3>@exp.name</h3>
                 @exp.experimentType match {
+                    case ExperimentType.MULLERLAYER=> {
+                        @for((trial, index) <- models.mullerLayer.Trial.findInvolving(exp).zipWithIndex ){
+                            @if(TimeLog.isRepeatTrial(user, trial.id, exp)){
+                                <p><button disabled class="trialButton btn btn-lg btn-block ">Trial @{ index + 1 }</button></p>
+                            }else{
+                                <p><a href="@routes.Application.checkUserTakeRepeatExperiment(trial.id, exp.id)"><button class="btn btn-lg btn-block btn-success"><span class="glyphicon glyphicon-play"></span>&nbsp  Trial @{ index + 1 } </button></a></p>
+                            }
+                        }
+                    }
                     case ExperimentType.BROWNPETERSON => {
                         @for((trial, index) <- models.brownPeterson.Trial.findInvolving(exp).zipWithIndex ){
                             @if(TimeLog.isRepeatTrial(user, trial.id, exp)){

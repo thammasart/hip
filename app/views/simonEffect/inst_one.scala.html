@@ -1,6 +1,5 @@
 @(trial : models.simonEffect.Trial,questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
-
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
 window.location.hash="no-back-button";
@@ -8,7 +7,6 @@ window.location.hash="Again-No-back-button";//again because google chrome don't 
 window.onhashchange=function(){window.location.hash="no-back-button";}
 
 </script>
-
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/simonEffect.css")">
 <body>
@@ -28,8 +26,8 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             <p>เมื่อท่านพร้อมแล้วกดปุ่ม เริ่มการทดลอง</p>
         </div>
         <img  class = "simonIntroImg" src="@routes.Assets.at("images/simon_one_feature.png")">
-        <div class="procButtonGreen">
-            <a href="@routes.SimonEffect.doExperiment(trial.id,questionNo)" class="btn  btn-success simonExpButton" >เริ่มการทดลอง</a>
+        <div class="procButtonGreen simonExpButton">
+            <a href="@routes.SimonEffect.doExperiment(trial.id,questionNo)" class="btn  btn-success " >เริ่มการทดลอง</a>
         </div>
     </div>
 

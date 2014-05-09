@@ -30,8 +30,8 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             <p>เมื่อท่านพร้อมแล้วกดปุ่ม เริ่มการทดลอง</p>
         </div>
         <img  class = "simonIntroImg" src="@routes.Assets.at("images/simon_key.png")">
-        <div class="procButtonGreen">
-            <a href="@routes.SimonEffect.doExperiment(trial.id,questionNo)" class="btn  btn-success simonExpButton" >เริ่มการทดลอง</a>
+        <div class="procButtonGreen simonExpButton">
+            <a href="@routes.SimonEffect.doExperiment(trial.id,questionNo)" class="btn  btn-success" >เริ่มการทดลอง</a>
         </div>
     </div>
 
