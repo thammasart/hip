@@ -1,4 +1,4 @@
-package models.visualSearch;
+package models.garnerInterference;
 
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table (name="visual_search_trial")
+@Table (name="garner_interference_trial")
 public class Trial extends Model{
     @Id
     public long id;
