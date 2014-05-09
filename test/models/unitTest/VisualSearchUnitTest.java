@@ -43,4 +43,17 @@ public class VisualSearchUnitTest extends WithApplication {
         assertNotNull(trial);
         assertEquals(exp, trial.schedule);
     }
+
+    @Test
+    public void createQuestionShouldNotNull(){
+        Question question = new Question();
+        assertNotNull(question);
+    }
+
+    @Test
+    public void queryQuestionShouldCorrect(){
+        new Question().save();
+        Question question = Question.find.byId(1L);
+        assertNotNull(question);
+    }
 }
