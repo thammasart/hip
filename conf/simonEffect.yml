@@ -11,7 +11,7 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: SIMONEFFECT
-    #Trial
+#Trial
 - &round27 !!models.simonEffect.Trial
     questionType: ONEFEATURE
     blinkTime: 0.5
