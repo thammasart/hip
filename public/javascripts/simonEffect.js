@@ -27,9 +27,6 @@ function showInstruction (){
 }
 function showTimer(){
     clearInterval(showInstructionTime);
-    document.getElementById("question").style.width = "50%";
-    document.getElementById("left").innerHTML = "?";
-    document.getElementById("right").innerHTML = "?";
     showTimerTime = setInterval(calculateTimeLeft,1000);
     delayTime = setInterval(function(){showBlank()},5000);
 }
@@ -37,11 +34,8 @@ function showTimer(){
 function showBlank(){
     clearInterval(delayTime);
     clearInterval(showTimerTime);
-    document.getElementById("question").style.width = "40%";
-    document.getElementById("word").innerHTML = "+";
-    document.getElementById("word").style.fontSize = "100px";
-    document.getElementById("up").innerHTML = "?";
-    document.getElementById("down").innerHTML = "?";
+    document.getElementById("word").innerHTML = "&nbsp";
+    document.getElementById("center").style.visibility = "visible";
     signalWordTime = setInterval(function(){showSignalWord()},1000);
 }
 
