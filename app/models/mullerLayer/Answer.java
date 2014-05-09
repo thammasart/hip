@@ -25,6 +25,14 @@ public class Answer extends Model{
         this.quiz = quiz;
     }
 
+    public static Answer create(User user, Quiz quiz, int answer, double usedTime, boolean isCorrect){
+        Answer newAnswer = new Answer(user, quiz);
+        newAnswer.answer = answer;
+        newAnswer.usedTime = usedTime;
+        newAnswer.isCorrect = isCorrect;
+        return newAnswer;
+    }
+
     @SuppressWarnings("unchecked")
     public static Finder<Long, Answer> find = new Finder(Long.class,Answer.class);
 

@@ -112,4 +112,43 @@ public class MullerLayerUnitTest extends WithApplication {
         assertEquals(user, ans.user);
         assertEquals(quiz, ans.quiz);
     }
+
+    @Test
+    public void createAnswerShouldHaveParameter(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial t = Trial.find.byId(1L);
+        new Question().save();
+        Question q = Question.find.byId(1L);
+        new Quiz(t, q).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        User user = User.find.byId("admin");
+        Answer ans = Answer.create(user, quiz, 3, 0.75, true);
+        assertNotNull(ans);
+        assertEquals(user, ans.user);
+        assertEquals(quiz, ans.quiz);
+        assertEquals(3, ans.answer);
+        assertEquals(0.75, ans.usedTime, 0.001);
+        assertTrue(ans.isCorrect);
+    }
+
+    @Test
+    public void queryAnswerWithParameterShouldCorrect(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial t = Trial.find.byId(1L);
+        new Question().save();
+        Question q = Question.find.byId(1L);
+        new Quiz(t, q).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        User user = User.find.byId("admin");
+        Answer.create(user, quiz, 3, 0.75, true).save();
+        Answer ans = Answer.find.byId(1L);
+        assertNotNull(ans);
+        assertEquals(user, ans.user);
+        assertEquals(quiz, ans.quiz);
+        assertEquals(3, ans.answer);
+        assertEquals(0.75, ans.usedTime, 0.001);
+        assertTrue(ans.isCorrect);
+    }
 }
