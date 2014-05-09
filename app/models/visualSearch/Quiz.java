@@ -8,9 +8,14 @@ import javax.persistence.*;
 public class Quiz extends Model{
     @Id
     public long id;
+    @ManyToOne
+    public Trial trial;
+    @ManyToOne
+    public Question question;
 
-    public Quiz(){
-    	
+    public Quiz(Trial trial, Question question){
+    	this.trial = trial;
+    	this.question = question;
     }
 
     @SuppressWarnings("unchecked")

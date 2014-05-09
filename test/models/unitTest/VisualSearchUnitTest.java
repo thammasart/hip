@@ -59,14 +59,90 @@ public class VisualSearchUnitTest extends WithApplication {
 
     @Test
     public void createQuizShouldNotNull(){
-        Quiz quiz = new Quiz();
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial trial = Trial.find.byId(1L);
+        new Question().save();
+        Question question = Question.find.byId(1L);
+        Quiz quiz = new Quiz(trial, question);
         assertNotNull(quiz);
+        assertEquals(trial, quiz.trial);
+        assertEquals(question, quiz.question);
     }
 
     @Test
     public void queryQuizShouldCorrect(){
-        new Quiz().save();
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial trial = Trial.find.byId(1L);
+        new Question().save();
+        Question question = Question.find.byId(1L);
+        new Quiz(trial, question).save();
         Quiz quiz = Quiz.find.byId(1L);
         assertNotNull(quiz);
+        assertEquals(trial, quiz.trial);
+        assertEquals(question, quiz.question);
+    }
+
+    @Test
+    public void createAnswerShouldNotNull(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial trial = Trial.find.byId(1L);
+        new Question().save();
+        Question question = Question.find.byId(1L);
+        new Quiz(trial, question).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        User user = User.find.byId("test");
+        Answer answer = new Answer(user, quiz);
+        assertNotNull(answer);
+        assertEquals(user, answer.user);
+        assertEquals(quiz, answer.quiz);
+    }
+
+    @Test
+    public void queryAnswerShouldCorrect(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial trial = Trial.find.byId(1L);
+        new Question().save();
+        Question question = Question.find.byId(1L);
+        new Quiz(trial, question).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        User user = User.find.byId("test");
+        new Answer(user, quiz).save();
+        Answer answer = Answer.find.byId(1L);
+        assertNotNull(answer);
+        assertEquals(user, answer.user);
+        assertEquals(quiz, answer.quiz);
+    }
+
+    @Test
+    public void getListAnswerFromUserAndTrialShouldCorrect(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial trial = Trial.find.byId(1L);
+        new Question().save();
+        new Question().save();
+        new Question().save();
+        Question question1 = Question.find.byId(1L);
+        Question question2 = Question.find.byId(2L);
+        Question question3 = Question.find.byId(3L);
+        new Quiz(trial, question1).save();
+        new Quiz(trial, question2).save();
+        new Quiz(trial, question3).save();
+        Quiz quiz1 = Quiz.find.byId(1L);
+        Quiz quiz2 = Quiz.find.byId(2L);
+        Quiz quiz3 = Quiz.find.byId(3L);
+        User user = User.find.byId("test");
+        new Answer(user, quiz1).save();
+        new Answer(user, quiz2).save();
+        new Answer(user, quiz3).save();
+        List<Answer> answers = new ArrayList<Answer>();
+        answers = Answer.findInvolving(user, trial.quizzes);
+        assertNotNull(answers);
+        assertEquals(Answer.find.byId(1L), answers.get(0));
+        assertEquals(Answer.find.byId(2L), answers.get(1));
+        assertEquals(Answer.find.byId(3L), answers.get(2));
     }
 }

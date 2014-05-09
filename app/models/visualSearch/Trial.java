@@ -14,6 +14,8 @@ public class Trial extends Model{
     public long id;
     @ManyToOne
     public ExperimentSchedule schedule;
+    @OneToMany
+    public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;

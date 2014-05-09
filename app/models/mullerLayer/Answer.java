@@ -1,7 +1,6 @@
 package models.mullerLayer;
 
 import models.User;
-
 import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.List;
