@@ -56,4 +56,17 @@ public class VisualSearchUnitTest extends WithApplication {
         Question question = Question.find.byId(1L);
         assertNotNull(question);
     }
+
+    @Test
+    public void createQuizShouldNotNull(){
+        Quiz quiz = new Quiz();
+        assertNotNull(quiz);
+    }
+
+    @Test
+    public void queryQuizShouldCorrect(){
+        new Quiz().save();
+        Quiz quiz = Quiz.find.byId(1L);
+        assertNotNull(quiz);
+    }
 }

@@ -4,7 +4,7 @@ import play.db.ebean.Model;
 import javax.persistence.*;
 
 @Entity
-@Table (name="visual_search_trial")
+@Table (name="visual_search_question")
 public class Question extends Model{
     @Id
     public long id;
