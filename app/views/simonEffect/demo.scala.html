@@ -24,13 +24,14 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 </div>
 <div class="expMainWindow">
     <div class="simonCenterWord"  >
-        <div id = "up" style="font-size:100px;margin-bottom:1%;visibility:hidden;">  </div>
+        <p id = "word" >&nbsp</p>
+        <div class = "simonChar simonUp" id = "up"> O </div>
         <div id = "question" class="simonQuestion">
-            <div id = "left" style="font-size:100px;margin-right:29%;float:left;visibility:hidden;">  </div>
-            <div id = "word" style="font-size:60px;float:left;"></div>
-            <div id = "right" style="font-size:100px;margin-left:29%;float:left;visibility:hidden;">  </div>
+            <div class = "simonChar simonLeft" id = "left" > O </div>
+            <div class = "simonChar simonCenter" id = "center">+</div>
+            <div class = "simonChar simonRight" id = "right"> O </div>
         </div>
-        <div id = "down" style="font-size:100px;margin-top:1%;visibility:hidden;">  </div>
+        <div class = "simonChar simonDown" id = "down" > O </div>
     </div>
     <form id = "answerForm" action="@routes.SimonEffect.reportDemo()" method="post">
         <input id = "answer" name = "answer" type="text" hidden/>
