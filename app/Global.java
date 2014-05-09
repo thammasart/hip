@@ -12,6 +12,7 @@ public class Global extends GlobalSettings {
             Ebean.save((List) Yaml.load("sternbergSearch.yml"));
             Ebean.save((List) Yaml.load("magicNumber7.yml"));
 			Ebean.save((List) Yaml.load("simonEffect.yml"));
+			Ebean.save((List) Yaml.load("mullerLayer.yml"));
 			Ebean.save((List) Yaml.load("user.yml"));
 		}
 	}
