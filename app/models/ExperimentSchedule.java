@@ -70,6 +70,7 @@ public class ExperimentSchedule extends Model{
         final String STERNBERGSEARCH = "STERNBERGSEARCH";
         final String MAGICNUMBER7 = "MAGICNUMBER7";
         final String SIMONEFFECT = "SIMONEFFECT";
+        final String MULLERLAYER = "MULLERLAYER";
 
         if (expType.equals(BROWNPETERSON)){
             expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
@@ -95,6 +96,9 @@ public class ExperimentSchedule extends Model{
         else if (expType.equals(SIMONEFFECT)){
             expList = getWorkingExperimentsByType(ExperimentType.SIMONEFFECT);
         }
+        else if (expType.equals(MULLERLAYER)){
+            expList = getWorkingExperimentsByType(ExperimentType.MULLERLAYER);
+        }
         return expList;
 	}
 	
@@ -110,6 +114,7 @@ public class ExperimentSchedule extends Model{
 				case STERNBERGSEARCH : type = "Sternberg Search";break;
                 case MAGICNUMBER7 : type = "Magic Number 7";break;
                 case SIMONEFFECT : type = "Simon Effect";break;
+                case MULLERLAYER: type = "Muller Layer";break;
 				default : type = "Unknown";
 			}
 		}
@@ -126,6 +131,7 @@ public class ExperimentSchedule extends Model{
 			case STERNBERGSEARCH : generateSternbergSearchTrial();break;
             case MAGICNUMBER7: generateMagicNumber7Trial(); break;
             case SIMONEFFECT : break;
+            case MULLERLAYER: break;
 		}
 	}
 
