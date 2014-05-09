@@ -35,9 +35,25 @@ public class MullerLayerUnitTest extends WithApplication {
     }
 
     @Test
+    public void queryQuestionShouldNotNull(){
+        new Question().save();
+        Question q = Question.find.byId(1L);
+        assertNotNull(q);
+    }
+
+    @Test
     public void createTrialShouldNotNull(){
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         Trial t = new Trial(exp);
+        assertNotNull(t);
+        assertEquals(exp, t.schedule);
+    }
+
+    @Test
+    public void queryTrialShouldNotNull(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial t = Trial.find.byId(1L);
         assertNotNull(t);
         assertEquals(exp, t.schedule);
     }
@@ -54,6 +70,20 @@ public class MullerLayerUnitTest extends WithApplication {
     }
 
     @Test
+    public void queryQuizShouldNotNull(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial t = Trial.find.byId(1L);
+        new Question().save();
+        Question q = Question.find.byId(1L);
+        new Quiz(t, q).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        assertNotNull(quiz);
+        assertEquals(t, quiz.trial);
+        assertEquals(q, quiz.question);
+    }
+
+    @Test
     public void createAnswerShouldNotNull(){
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         Trial t = new Trial(exp);
@@ -61,6 +91,23 @@ public class MullerLayerUnitTest extends WithApplication {
         Quiz quiz = new Quiz(t, q);
         User user = User.find.byId("admin");
         Answer ans = new Answer(user, quiz);
+        assertNotNull(ans);
+        assertEquals(user, ans.user);
+        assertEquals(quiz, ans.quiz);
+    }
+
+    @Test
+    public void queryAnswerShouldNotNull(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial t = Trial.find.byId(1L);
+        new Question().save();
+        Question q = Question.find.byId(1L);
+        new Quiz(t, q).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        User user = User.find.byId("admin");
+        new Answer(user, quiz).save();
+        Answer ans = Answer.find.byId(1L);
         assertNotNull(ans);
         assertEquals(user, ans.user);
         assertEquals(quiz, ans.quiz);
