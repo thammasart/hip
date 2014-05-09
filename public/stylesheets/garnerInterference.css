@@ -62,7 +62,7 @@
 }
 .choice{
     position:relative;
-    top:-140px;
+    top:-250px;
     width:50%;
     margin-left:25%;
     display:inline-block;
@@ -74,7 +74,7 @@
     float:none;
 }
 .underWord{
-    margin-top:4%;
+    margin-top:3%;
     display:inline-block;
     visibility:hidden;
 }

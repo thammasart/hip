@@ -1,6 +1,7 @@
-@(trial : models.attentionBlink.Trial, questionNo : Integer)
+@(trial : models.mullerLayer.Trial, questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
-
+<!--
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
 window.location.hash="no-back-button";
@@ -8,37 +9,66 @@ window.location.hash="Again-No-back-button";//again because google chrome don't 
 window.onhashchange=function(){window.location.hash="no-back-button";}
 
 </script>
-
-<script src="@routes.Assets.at("javascripts/attentionBlink.js")"></script>
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/attention_blink.css")">
+--!>
+<script src="@routes.Assets.at("javascripts/mullerLayer.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/mullerLayer.css")">
 <body>
+<div class="fixSize">
+    <!-- Page Header -->
+    <div class="">
+          <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
+          <!-- Dashed line-->
+          <div class="titleLine"></div>
+    </div>
+    <div class="expMainWindow" style="height:507px;">
 
-<!-- Page Header -->
-<div class="">
-    <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
-    <!-- Dashed line-->
-    <div class="titleLine"></div>
-</div>
-<div class="expMainWindow">
     <div class="expCenterWord">
-         <p id="word">  </p>
+        <p id="word"> </p>
     </div>
-    <div class="choice" align="center" id="choice" >
 
-        <form id = "answerForm" action="@routes.AttentionBlink.saveAnswer(trial.id,questionNo)" method="post">
-            <button type="submit" class="btn btn-danger ansButton" id = "maiMe" name = "maiMe" class="Button" onclick="return submitButtonClick(this.name)"/>ไม่มี</button >
-            <button type="submit" class="btn btn-success ansButton" id = "me" name = "me" class="Button" onclick="return submitButtonClick(this.name)"/>มี</button >
-            <input id = "answer" name = "answer" type="checkbox" hidden/>
-            <input id = "usedTime" name = "usedTime" type="text" hidden/>
-            <input id = "isCorrect" name = "isCorrect" type="checkbox" hidden/>
+        <div align="center"id="ic"  style="padding-top:12px; visibility:hidden;" > <h3> คลิกเส้นที่มีความยาวต่างจากเส้นอื่น </h3> </div>
+
+        <div class="mainContainer" align="center" id="mc">
+            <form action="@routes.MullerLayer.demoReport()" method="post">
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                    <div class="arrowContainer">
+                        <div class="lineArrow" style="width:200px"></div>
+                    </div>
+                </button >
+
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                    <div class="arrowContainer">
+                        <div class="mullerArrow arrow-left" href=""></div>
+                        <div class="lineArrow" style="width:200px"></div>
+                        <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                    </div>
+                </button >
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="t">
+                    <div class="arrowContainer">
+                        <div class="mullerArrow arrow-right" href=""></div>
+                        <div class="lineArrow" style="width:190px"></div>
+                        <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
+                    </div>
+                </button >
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                    <div class="arrowContainer">
+                        <div class="mullerArrow arrow-right" href=""></div>
+                        <div class="lineArrow" style="width:200px"></div>
+                        <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                    </div>
+                </button >
+                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                    <div class="arrowContainer">
+                        <div class="mullerArrow arrow-left" href=""></div>
+                        <div class="lineArrow" style="width:200px"></div>
+                        <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
+                    </div>
+                </button >
+                <input id="score" name="score" hidden/>
+                <input id="time" name="time" hidden/>
+            </div>
         </form>
-
     </div>
-    <p id="blinkTime" hidden>@trial.quizzes(questionNo).blinkTime</p>
-    <p id="questionSet" hidden>@trial.quizzes(questionNo).question.set</p>
-    <p id="questionLetter" hidden>@trial.quizzes(questionNo).question.letter</p>
-    <p id="correctAnswer" hidden>@trial.quizzes(questionNo).question.correctAnswer</p>
-
-
+    @footer()
 </div>
-@footer()

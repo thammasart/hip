@@ -23,6 +23,7 @@ GET     /muller-layer/proc          controllers.MullerLayer.proc()
 GET     /muller-layer/proci         controllers.MullerLayer.procIframe()
 GET     /muller-layer/demo          controllers.MullerLayer.demoPage()
 POST    /muller-layer/reportDemo    controllers.MullerLayer.demoReport()
+GET     /muller-layer/experiment    controllers.MullerLayer.experiment(trialId:Long,questionNo:Int)
 
 GET     /brown-peterson		        controllers.BrownPeterson.info()
 GET     /brown-peterson/info        controllers.BrownPeterson.infoIframe()

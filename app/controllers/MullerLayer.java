@@ -1,6 +1,9 @@
 package controllers;
 
-import models.*;
+import models.ExperimentSchedule;
+import models.User;
+import models.mullerLayer.*;
+
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -46,7 +49,7 @@ public class MullerLayer extends Controller {
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo){
-        return TODO;
+        return ok(exp.render(Trial.find.byId(trialId), questionNo));
     }
 
 

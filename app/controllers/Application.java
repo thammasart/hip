@@ -78,6 +78,7 @@ public class Application extends Controller {
             case "STERNBERGSEARCH" : nextPage = redirect(routes.SternbergSearch.proc()); break;
             case "MAGICNUMBER7" : nextPage = redirect(routes.MagicNumber7.proc()); break;
             case "SIMONEFFECT" : nextPage = redirect(routes.SimonEffect.proc()); break;
+            case "MULLERLAYER" : nextPage = redirect(routes.MullerLayer.proc()); break;
         }
 
         return nextPage;
@@ -107,6 +108,7 @@ public class Application extends Controller {
             case STERNBERGSEARCH : nextPage = redirect(routes.SternbergSearch.experiment(trialId,0,false)); break;
             case MAGICNUMBER7 : nextPage = redirect(routes.MagicNumber7.experiment(trialId,0)); break;
             case SIMONEFFECT : nextPage = redirect(routes.SimonEffect.experiment(trialId,0)); break;
+            case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0)); break;
         }
         return nextPage;
     }

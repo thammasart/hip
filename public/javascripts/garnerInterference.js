@@ -34,19 +34,22 @@ function delay(){
     clearInterval(showTimerTime);
     document.getElementById("word").innerHTML="";
     document.getElementById("mc").style.display= "table";
-    delayTime2 = setInterval(function(){showQuestion()},1000);
+    document.getElementById("sq").style.marginLeft = "-5%";
+    document.getElementById("sq").style.visibility = "visible";
+    document.getElementById("sqw").innerHTML = "";
+
+    delayTime2 = setInterval(function(){showQuestion()},5000);
 }
 function showQuestion(){
     clearInterval(delayTime2);
     d = new Date();
     expDuration = d.getTime();
+    document.getElementById("sq").style.visibility = "hidden";
     document.getElementById("ic").style.visibility = "visible";
     document.getElementById("yes").style.visibility = "visible";
     document.getElementById("no").style.visibility = "visible";
-    document.getElementById("sq").style.marginLeft = "-5%";
-    document.getElementById("sq").style.visibility = "visible";
-    document.getElementById("sqw").innerHTML = "";
-    document.getElementById("q").innerHTML = " รูปนี้ใช่สี่เหลี่ยมสีเข้มขนาดเล็กหรือไม่ " ;
+    document.getElementById("q").style.marginTop = "10%";
+    document.getElementById("q").innerHTML = " ใช่สี่เหลี่ยมสีเข้มขนาดเล็กหรือไม่ " ;
 }
 
 function done(name){
