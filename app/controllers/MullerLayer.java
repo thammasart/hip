@@ -49,7 +49,19 @@ public class MullerLayer extends Controller {
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo){
-        return ok(exp.render(Trial.find.byId(trialId), questionNo));
+        Trial t = Trial.find.byId(trialId);
+        List<LineType> lt = new ArrayList<LineType>();
+        int noOfDeleteLines = 5-t.quizzes.get(questionNo).noOfChoise;
+        lt.add(t.quizzes.get(questionNo).question.line1);
+        lt.add(t.quizzes.get(questionNo).question.line2);
+        lt.add(t.quizzes.get(questionNo).question.line3);
+        lt.add(t.quizzes.get(questionNo).question.line4);
+        lt.add(t.quizzes.get(questionNo).question.line5);
+
+        for(int i = 0 ; i <noOfDeleteLines;i++){
+            lt.remove(i);
+        }
+        return ok(exp.render(Trial.find.byId(trialId), questionNo,lt));
     }
 
 

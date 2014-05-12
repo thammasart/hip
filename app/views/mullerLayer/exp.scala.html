@@ -1,5 +1,7 @@
-@(trial : models.mullerLayer.Trial, questionNo : Integer)
+@(trial : models.mullerLayer.Trial, questionNo : Integer , lineType:List[models.mullerLayer.LineType])
 @header("Human Information Processing Lab :: Home Page")
+@import models.mullerLayer.LineType
+@import models.mullerLayer.LenghtType
 <!--
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
@@ -13,7 +15,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <script src="@routes.Assets.at("javascripts/mullerLayer.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/mullerLayer.css")">
-<body>
+<body onload="setLength()">
 <div class="fixSize">
     <!-- Page Header -->
     <div class="">
@@ -31,40 +33,54 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
         <div class="mainContainer" align="center" id="mc">
             <form action="@routes.MullerLayer.demoReport()" method="post">
-                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
-                    <div class="arrowContainer">
-                        <div class="lineArrow" style="width:200px"></div>
-                    </div>
-                </button >
+                @for(line <- lineType){
+                    @line match{
+                        case LineType.NONE => {
+                        <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                            <div class="arrowContainer">
+                                <div class="lineArrow" style="width:200px"></div>
+                            </div>
+                        </button >
+                        }
+                        case LineType.OUT =>{
+                        <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                            <div class="arrowContainer">
+                                <div class="mullerArrow arrow-left" href=""></div>
+                                <div class="lineArrow" style="width:200px"></div>
+                                <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                            </div>
+                        </button >
+                        }
+                        case LineType.IN=>{
+                        <button class="arrowButton" type="submit" onclick="return done(this.name)" name="t">
+                            <div class="arrowContainer">
+                                <div class="mullerArrow arrow-right" href=""></div>
+                                <div class="lineArrow" style="width:190px"></div>
+                                <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
+                            </div>
+                        </button >
+                        }
+                        case LineType.RIGHT=>{
+                        <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                            <div class="arrowContainer">
+                                <div class="mullerArrow arrow-right" href=""></div>
+                                <div class="lineArrow" style="width:200px"></div>
+                                <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                            </div>
+                        </button >
+                        }
+                        case LineType.LEFT=>{
+                        <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
+                            <div class="arrowContainer">
+                                <div class="mullerArrow arrow-left" href=""></div>
+                                <div class="lineArrow" style="width:200px"></div>
+                                <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
+                            </div>
+                        </button >
+                        }
+                    }
+                }
 
-                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
-                    <div class="arrowContainer">
-                        <div class="mullerArrow arrow-left" href=""></div>
-                        <div class="lineArrow" style="width:200px"></div>
-                        <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
-                    </div>
-                </button >
-                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="t">
-                    <div class="arrowContainer">
-                        <div class="mullerArrow arrow-right" href=""></div>
-                        <div class="lineArrow" style="width:190px"></div>
-                        <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
-                    </div>
-                </button >
-                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
-                    <div class="arrowContainer">
-                        <div class="mullerArrow arrow-right" href=""></div>
-                        <div class="lineArrow" style="width:200px"></div>
-                        <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
-                    </div>
-                </button >
-                <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
-                    <div class="arrowContainer">
-                        <div class="mullerArrow arrow-left" href=""></div>
-                        <div class="lineArrow" style="width:200px"></div>
-                        <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
-                    </div>
-                </button >
                 <input id="score" name="score" hidden/>
                 <input id="time" name="time" hidden/>
             </div>

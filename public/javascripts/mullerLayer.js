@@ -43,3 +43,6 @@ function done(name){
     document.getElementById("score").value = score;
 
 }
+function setLength(){
+    alert();
+}
