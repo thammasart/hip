@@ -32,6 +32,30 @@ public class Answer extends Model{
         return answers;
     }
 
+    public static Answer create(User user, Quiz quiz, boolean answer, double usedTime, boolean isCorrect){
+        Answer newAnswer = new Answer(user, quiz);
+        newAnswer.answer = answer;
+        newAnswer.usedTime = usedTime;
+        newAnswer.isCorrect = isCorrect;
+        return newAnswer;
+    }
+
+    public static int calculateTotalScore(List<Answer> answers){
+        int totalScore = 0;
+        for(Answer ans : answers){
+            if(ans.isCorrect) totalScore++;
+        }
+        return totalScore;
+    }
+
+    public static double calculateTotalUsedTime(List<Answer> answers){
+        double totalUsedTime = 0;
+        for(Answer ans : answers){
+            totalUsedTime += ans.usedTime;
+        }
+        return totalUsedTime;
+    }
+
     @SuppressWarnings("unchecked")
     public static Finder<Long, Answer> find = new Finder(Long.class, Answer.class);
 

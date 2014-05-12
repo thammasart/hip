@@ -1,12 +1,12 @@
 #Experiment Schedule
 - &ex17 !!models.ExperimentSchedule
-    name:           Ex15
+    name:           Ex17
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: MULLERLAYER
 - &ex18 !!models.ExperimentSchedule
-    name:           Ex16
+    name:           Ex18
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07

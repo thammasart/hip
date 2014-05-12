@@ -145,4 +145,49 @@ public class GarnerInterferenceUnitTest extends WithApplication {
         assertEquals(Answer.find.byId(2L), answers.get(1));
         assertEquals(Answer.find.byId(3L), answers.get(2));
     }
+
+    public void createAnswerShouldHaveParameter(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial t = Trial.find.byId(1L);
+        new Question().save();
+        Question q = Question.find.byId(1L);
+        new Quiz(t, q).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        User user = User.find.byId("test");
+        Answer ans = Answer.create(user, quiz, true, 0.75, true);
+        assertNotNull(ans);
+        assertEquals(user, ans.user);
+        assertEquals(quiz, ans.quiz);
+        assertTrue(ans.answer);
+        assertEquals(0.75, ans.usedTime, 0.001);
+        assertTrue(ans.isCorrect);
+    }
+
+    @Test
+    public void calculateScoreAndUsedTimeShouldCorrect(){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial t = Trial.find.byId(1L);
+        new Question().save();
+        new Question().save();
+        new Question().save();
+        Question q1 = Question.find.byId(1L);
+        Question q2 = Question.find.byId(2L);
+        Question q3 = Question.find.byId(3L);
+        new Quiz(t, q1).save();
+        new Quiz(t, q2).save();
+        new Quiz(t, q3).save();
+        Quiz quiz1 = Quiz.find.byId(1L);
+        Quiz quiz2 = Quiz.find.byId(2L);
+        Quiz quiz3 = Quiz.find.byId(3L);
+        User user = User.find.byId("test");
+        Answer.create(user, quiz1, true, 0.75, true).save();
+        Answer.create(user, quiz2, true, 0.70, true).save();
+        Answer.create(user, quiz3, true, 0.55, false).save();
+        List<Answer> answers = new ArrayList<Answer>();
+        answers = Answer.findInvolving(user, t.quizzes);
+        assertEquals(2, Answer.calculateTotalScore(answers));
+        assertEquals(2.00, Answer.calculateTotalUsedTime(answers), 0.001);
+    }
 }
