@@ -15,7 +15,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <script src="@routes.Assets.at("javascripts/mullerLayer.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/mullerLayer.css")">
-<body onload="setLength()">
+<body onload="setUp()">
 <div class="fixSize">
     <!-- Page Header -->
     <div class="">
@@ -38,7 +38,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                         case LineType.NONE => {
                         <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
                             <div class="arrowContainer">
-                                <div class="lineArrow" style="width:200px"></div>
+                                <div class="lineArrow" ><div style="position:aboulute"></div></div>
                             </div>
                         </button >
                         }
@@ -46,7 +46,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                         <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-left" href=""></div>
-                                <div class="lineArrow" style="width:200px"></div>
+                                <div class="lineArrow" ></div>
                                 <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
                             </div>
                         </button >
@@ -55,7 +55,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                         <button class="arrowButton" type="submit" onclick="return done(this.name)" name="t">
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-right" href=""></div>
-                                <div class="lineArrow" style="width:190px"></div>
+                                <div class="lineArrow" ></div>
                                 <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
                             </div>
                         </button >
@@ -64,7 +64,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                         <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-right" href=""></div>
-                                <div class="lineArrow" style="width:200px"></div>
+                                <div class="lineArrow" ></div>
                                 <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
                             </div>
                         </button >
@@ -73,14 +73,16 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                         <button class="arrowButton" type="submit" onclick="return done(this.name)" name="f">
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-left" href=""></div>
-                                <div class="lineArrow" style="width:200px"></div>
+                                <div class="lineArrow" ></div>
                                 <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
                             </div>
                         </button >
                         }
                     }
                 }
-
+                <div id="differentChoice">  @trial.quizzes(questionNo).differChoise </div>
+                <div id="lenghtType">  @trial.quizzes(questionNo).lenghtType </div>
+                <div id="differentLenght">  @trial.quizzes(questionNo).differLenght </div>
                 <input id="score" name="score" hidden/>
                 <input id="time" name="time" hidden/>
             </div>

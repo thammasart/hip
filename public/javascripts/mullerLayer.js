@@ -6,10 +6,15 @@ var delayTime2 = 0;
 var expDuration = 0;
 var d = 0;
 var score = 0;
+var differentChoice ; 
+var lenghtType ; 
+var differentLenght ; 
+var lineLength = "5%";
 
 function showTimer(){
     clearInterval(startTimer);
     showTimerTime =   setInterval(calculateTimeLeft,1000);
+    alert(lenghtType);
     delayTime = setInterval(function(){delay()},5000);
 }
 
@@ -43,6 +48,22 @@ function done(name){
     document.getElementById("score").value = score;
 
 }
-function setLength(){
-    alert();
+function setUp(){
+    differentChoice = document.getElementById("differentChoice").innerHTML;
+    lenghtType = document.getElementById("lenghtType").innerHTML.toString();
+    differentLenght = document.getElementById("differentLenght").innerHTML;
+   
+    if(lenghtType == "SHORT"){
+        lineLength = "30%";
+    }
+    else if(lenghtType == "MIDDLE"){
+        lineLength = "50%";        
+    }
+    else if(lenghtType == "LONG"){
+        lineLength = "80%";
+    }
+    var line = document.getElementsByClassName('arrowButton');
+    for(var k =0;k<line.length;k++){
+        line[k].style['width'] = lineLength;
+    }
 }

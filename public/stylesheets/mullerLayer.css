@@ -7,9 +7,8 @@
     visibility:hidden;
 }
 .arrowContainer{
-    width:270px;
     height:50px;
-    margin-bottom:10%;
+    margin-bottom:30px;
 }
 .arrowButton{
     border:none;
@@ -17,7 +16,7 @@
     display:block;
 }
 .lineArrow{
-    width:0px;
+    width:90%;
     height:3px;
     background:black;
     float:left;
