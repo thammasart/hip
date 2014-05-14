@@ -1,5 +1,5 @@
 package models.garnerInterference;
 
-public enum ExperimentFeature{
+public enum Feature{
 	ONEFEATURE, TWOFEATURE
 }

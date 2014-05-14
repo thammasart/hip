@@ -190,4 +190,15 @@ public class GarnerInterferenceUnitTest extends WithApplication {
         assertEquals(2, Answer.calculateTotalScore(answers));
         assertEquals(2.00, Answer.calculateTotalUsedTime(answers), 0.001);
     }
+
+    public void createColorShouldNotNull(){
+        Color color = new Color();
+        assertNotNull(color);
+    }
+
+    public void queryColorShouldCorrect(){
+        new Color().save();
+        Color color = Color.find.byId(1L);
+        assertNotNull(color);
+    }
 }

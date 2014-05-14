@@ -8,9 +8,12 @@ import javax.persistence.*;
 public class Question extends Model{
     @Id
     public long id;
-    public String colorCode;
+    public String colorPic;
+    public String sizePic;
     public String color;
-    public int saturation;
+    public String size;
+    public boolean colorMatch;
+    public boolean sizeMatch;
     
     public Question(){
     	

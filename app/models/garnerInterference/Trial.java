@@ -13,9 +13,12 @@ public class Trial extends Model{
     public long id;
     public double lengthBigSquare;
     public double lengthSmallSquare;
-    public String colorCodeDark;
-    public String colorCodeLight;
-    public ExperimentFeature experimentFeature; // one feature or two feature
+    public String color;
+    public Feature feature; // one feature or two feature
+    @ManyToOne
+    public Color colorDark;
+    @ManyToOne
+    public Color colorLight;
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany
