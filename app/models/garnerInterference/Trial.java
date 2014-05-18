@@ -11,6 +11,14 @@ import java.util.ArrayList;
 public class Trial extends Model{
     @Id
     public long id;
+    public double lengthBigSquare;
+    public double lengthSmallSquare;
+    public String color;
+    public Feature feature; // one feature or two feature
+    @ManyToOne
+    public Color colorDark;
+    @ManyToOne
+    public Color colorLight;
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany

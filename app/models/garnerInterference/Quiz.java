@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Quiz extends Model{
     @Id
     public long id;
+    public QuestionType questionType; // color or size or both
     @ManyToOne
     public Trial trial;
     @ManyToOne
