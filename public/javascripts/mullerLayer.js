@@ -14,7 +14,6 @@ var lineLength = "5%";
 function showTimer(){
     clearInterval(startTimer);
     showTimerTime =   setInterval(calculateTimeLeft,1000);
-    alert(lenghtType);
     delayTime = setInterval(function(){delay()},5000);
 }
 
@@ -48,22 +47,24 @@ function done(name){
     document.getElementById("score").value = score;
 
 }
-function setUp(){
+function setUp(differLenght,differChoice){
     differentChoice = document.getElementById("differentChoice").innerHTML;
     lenghtType = document.getElementById("lenghtType").innerHTML.toString();
     differentLenght = document.getElementById("differentLenght").innerHTML;
    
-    if(lenghtType == "SHORT"){
-        lineLength = "30%";
+    if(lenghtType == 1){
+        lineLength = 30;
     }
-    else if(lenghtType == "MIDDLE"){
-        lineLength = "50%";        
+    else if(lenghtType == 2){
+        lineLength = 50;        
     }
-    else if(lenghtType == "LONG"){
-        lineLength = "80%";
+    else if(lenghtType == 3){
+        lineLength = 80;
     }
     var line = document.getElementsByClassName('arrowButton');
     for(var k =0;k<line.length;k++){
-        line[k].style['width'] = lineLength;
+        line[k].style['width'] = lineLength + "%";
     }
+    document.getElementById(differChoice-1).style.width = lineLength - differLenght+"%";
+
 }
