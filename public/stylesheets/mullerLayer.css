@@ -8,12 +8,12 @@
 }
 .arrowContainer{
     height:50px;
-    margin-bottom:30px;
 }
 .arrowButton{
     border:none;
     background-color:transparent;
     display:block;
+    margin-bottom:30px;
 }
 .lineArrow{
     width:90%;

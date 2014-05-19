@@ -32,7 +32,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         <div align="center"id="ic"  style="padding-top:12px; visibility:hidden;" > <h3> คลิกเส้นที่มีความยาวต่างจากเส้นอื่น </h3> </div>
 
         <div class="mainContainer" align="center" id="mc">
-            <form action="@routes.MullerLayer.demoReport()" method="post">
+            <form id="answerForm"  action="@routes.MullerLayer.saveAnswer(trial.id,questionNo)" method="post">
                 @for((line, index)  <- lineType.zipWithIndex){
 
                         
@@ -40,14 +40,14 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
                     @line match{
                         case LineType.NONE => {
-                        <button class="arrowButton" type="submit" onclick="return done(this.name)" id="@index">
+                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoise)" id="@index">
                             <div class="arrowContainer">
                                 <div class="lineArrow" ></div>
                             </div>
                         </button >
                         }
                         case LineType.OUT =>{
-                        <button class="arrowButton" type="submit" onclick="return done(this.name)" id="@index">
+                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoise)" id="@index">
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-left" href=""></div>
                                 <div class="lineArrow" ></div>
@@ -56,7 +56,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                         </button >
                         }
                         case LineType.IN=>{
-                        <button class="arrowButton" type="submit" onclick="return done(this.name)" id="@index" >
+                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoise)" id="@index" >
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-right" href=""></div>
                                 <div class="lineArrow" ></div>
@@ -65,7 +65,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                         </button >
                         }
                         case LineType.RIGHT=>{
-                        <button class="arrowButton" type="submit" onclick="return done(this.name)" id="@index">
+                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoise)" id="@index">
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-right" href=""></div>
                                 <div class="lineArrow" ></div>
@@ -74,7 +74,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                         </button >
                         }
                         case LineType.LEFT=>{
-                        <button class="arrowButton" type="submit" onclick="return done(this.name)" id="@index">
+                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoise)" id="@index">
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-left" href=""></div>
                                 <div class="lineArrow" ></div>
@@ -101,7 +101,8 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                 <div id="differentChoice" hidden>  @trial.quizzes(questionNo).differChoise </div>
                 <div id="differentLenght" hidden>  @trial.quizzes(questionNo).differLenght </div>
                 <input id="score" name="score" hidden/>
-                <input id="time" name="time" hidden/>
+                <input id="usedTime" name="usedTime" hidden/>
+                <input id="isCorrect" name="isCorrect" type="checkbox" hidden/>
             </div>
         </form>
     </div>

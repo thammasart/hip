@@ -5,11 +5,11 @@ var delayTime = 0;
 var delayTime2 = 0;
 var expDuration = 0;
 var d = 0;
-var score = 0;
 var differentChoice ; 
 var lenghtType ; 
 var differentLenght ; 
 var lineLength = "5%";
+var score = 0 ;
 
 function showTimer(){
     clearInterval(startTimer);
@@ -36,7 +36,18 @@ function showQuestion(){
     document.getElementById("ic").style.visibility = "visible";  
 }
 
-function done(name){
+function done(id,correctAnswer){
+    d = new Date();
+    expDuration = (d.getTime()-expDuration)/1000;
+    document.getElementById("usedTime").value = expDuration;
+
+    if(id == correctAnswer-1){
+        document.getElementById("isCorrect").checked = true;
+    }else{
+        document.getElementById("isCorrect").checked = false;
+    }
+}
+function doneDemo(name){
     d = new Date();
     expDuration = (d.getTime()-expDuration)/1000;
 
@@ -48,9 +59,7 @@ function done(name){
 
 }
 function setUp(differLenght,differChoice){
-    differentChoice = document.getElementById("differentChoice").innerHTML;
     lenghtType = document.getElementById("lenghtType").innerHTML.toString();
-    differentLenght = document.getElementById("differentLenght").innerHTML;
    
     if(lenghtType == 1){
         lineLength = 30;
