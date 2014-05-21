@@ -13,47 +13,47 @@
     experimentType: GARNERINTERFERENCE
 #Color
 - &color1 !!models.garnerInterference.Color
-    colorCode: #E88C8C
+    colorCode: E88C8C
     color: red
     saturation: 1
 - &color2 !!models.garnerInterference.Color
-    colorCode: #7D0F0F
+    colorCode: 7D0F0F
     color: red
     saturation: 10
 - &color3 !!models.garnerInterference.Color
-    colorCode: #D63030
+    colorCode: D63030
     color: red
     saturation: 5
 - &color4 !!models.garnerInterference.Color
-    colorCode: #1947A3
+    colorCode: 1947A3
     color: blue
     saturation: 5
 - &color5 !!models.garnerInterference.Color
-    colorCode: #8099CC
+    colorCode: 8099CC
     color: blue
     saturation: 1
 - &color6 !!models.garnerInterference.Color
-    colorCode: #52CC29
+    colorCode: 52CC29
     color: green
     saturation: 8
 - &color7 !!models.garnerInterference.Color
-    colorCode: #75FF47
+    colorCode: 75FF47
     color: green
     saturation: 5
 - &color8 !!models.garnerInterference.Color
-    colorCode: #FFDB4D
+    colorCode: FFDB4D
     color: yellow
     saturation: 3
 - &color9 !!models.garnerInterference.Color
-    colorCode: #FFE066
+    colorCode: FFE066
     color: yellow
     saturation: 2
 - &color10 !!models.garnerInterference.Color
-    colorCode: #BABABA
+    colorCode: BABABA
     color: grey
     saturation: 6
 - &color11 !!models.garnerInterference.Color
-    colorCode: #C8C8C8
+    colorCode: C8C8C8
     color: grey
     saturation: 4
 #Trial

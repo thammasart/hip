@@ -376,6 +376,7 @@ width:631px;
  position:relative;
  bottom:11%;
  width:100%;
+ display: inline-block;
 }
 
 .footDiv{
