@@ -1,6 +1,9 @@
 package controllers;
 
-import models.*;
+import models.ExperimentSchedule;
+import models.User;
+import models.garnerInterference.*;
+
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -52,12 +55,12 @@ public class GarnerInterference extends Controller {
         int score = Integer.parseInt(reportData.get("score"));
         return ok(demoReport.render(score,time,1,"Demo Report",user));
     }
-//    //แสดงหน้าการทดลอง
-//    @Security.Authenticated(Secured.class)
-//    public static Result experiment(long trialId,int questionNo){
-//        return TODO;
-//    }
-//
+    //แสดงหน้าการทดลอง
+    @Security.Authenticated(Secured.class)
+    public static Result experiment(long trialId,int questionNo){
+        return ok(exp.render(Trial.find.byId(trialId), questionNo));
+    }
+
 //    @Security.Authenticated(Secured.class)
 //    public static Result saveAnswer(long trialId, int questionNo){
 //        Form<Answer> boundForm = answerForm.bindFromRequest();

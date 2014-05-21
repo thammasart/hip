@@ -104,7 +104,8 @@ GET     /garner_interference/info           controllers.GarnerInterference.infoI
 GET     /garner_interference/proc           controllers.GarnerInterference.proc()
 GET     /garner_interference/procIframe     controllers.GarnerInterference.procIframe()
 GET     /garner_interference/demo           controllers.GarnerInterference.demoPage()
-POST     /garner_interference/reportDemo     controllers.GarnerInterference.demoReport()
+POST    /garner_interference/reportDemo     controllers.GarnerInterference.demoReport()
+GET     /garner_interference/experiment     controllers.GarnerInterference.experiment(trialId:Long , questionNo:Int)
 
 GET     /positionError	            controllers.PositionError.info()
 GET     /positionError/info         controllers.PositionError.infoIframe()

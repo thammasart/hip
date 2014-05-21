@@ -79,6 +79,7 @@ public class Application extends Controller {
             case "MAGICNUMBER7" : nextPage = redirect(routes.MagicNumber7.proc()); break;
             case "SIMONEFFECT" : nextPage = redirect(routes.SimonEffect.proc()); break;
             case "MULLERLAYER" : nextPage = redirect(routes.MullerLayer.proc()); break;
+            case "GARNERINTERFERENCE" : nextPage = redirect(routes.GarnerInterference.proc()); break;
         }
 
         return nextPage;
@@ -109,6 +110,7 @@ public class Application extends Controller {
             case MAGICNUMBER7 : nextPage = redirect(routes.MagicNumber7.experiment(trialId,0)); break;
             case SIMONEFFECT : nextPage = redirect(routes.SimonEffect.experiment(trialId,0)); break;
             case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0)); break;
+            case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0)); break;
         }
         return nextPage;
     }
