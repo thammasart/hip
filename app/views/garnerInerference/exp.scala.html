@@ -1,0 +1,77 @@
+@(trial : models.garnerInterference.Trial, questionNo : Integer )
+@header("Human Information Processing Lab :: Home Page")
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<!--
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+--!>
+<script src="@routes.Assets.at("javascripts/garnerInterference.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/garnerInterference.css")">
+<body>
+<div class="fixSize">
+    <!-- Page Header -->
+    <div class="">
+          <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
+          <!-- Dashed line-->
+          <div class="titleLine"></div>
+    </div>
+    <div class="expMainWindow" style="height:507px;">
+
+    <div class="expCenterWord">
+        <span id="word" style="font-size:60px;"> </span>
+    </div>
+
+
+        <div class="mainContainer" align="center" id="mc">
+            
+        <div align="center"id="ic"  style="visibility:hidden; " > <h3 id="q"> จำลักษณะของรูปทั้ง 4 แบบไว้ (ทั้งขนาดและสี)</h3> </div>
+
+            <div class="bigSquare dark" style="margin-left:3.5%;">
+                <div class="absoluteSquare" ><div><span class="nameTag"> A </span></div></div>
+            </div>
+            <div class="bigSquare light">
+                <div class="absoluteSquare" ><div><span class="nameTag"> B </span></div></div>
+            </div>
+            <div class="smallSquare dark" id="sq">
+                <div class="absoluteSquare" ><div><span class="nameTag" id="sqw"> C </span></div></div>
+            </div>
+            <div class="smallSquare light">
+                <div class="absoluteSquare" ><div><span class="nameTag"> D </span></div></div>
+            </div>
+            
+            <div > @trial.lengthSmallSquare </div>
+            <div > @trial.lengthBigSquare</div>
+            <div > @trial.color</div>
+            <div > @trial.feature</div>
+            <div > @trial.colorDark.colorCode</div>
+            <div > @trial.colorLight.colorCode</div>
+            <div > @trial.quizzes(questionNo).questionType</div>
+            <div > @trial.quizzes(questionNo).question.colorPic</div>
+
+
+        <div align="center"id="ic2" class="underWord" > <h3 id="q"> เมื่อพร้อมแล้วให้กดปุ่ม เริ่มการทดลอง </h3> </div>
+        <div ><button class="btn btn-success startButton" onclick="return showTimer()"> เริ่มการทดลอง </button></div>
+        </div>
+
+        
+            <form action="@routes.GarnerInterference.demoReport()" method="post">
+           <!-- <div class="smallSquare dark sq" style="visibility:hidden;" id="sq">
+            </div>
+--!>
+        <div class="choice" align="center" id="choice" style="visibility:hidden;">
+             <button type="submit" class="btn btn-danger ansButton" id="no" name="no" onclick="return done(this.name)"> ไม่ใช่ </button >
+             <button type="submit" class="btn btn-success ansButton" id="yes"  name="yes"onclick="return done(this.name)"  > ใช่</button >
+        </div>
+                
+                <input id="score" name="score" hidden/>
+                <input id="time" name="time" hidden/>
+            </form>
+    </div>
+    @footer()
+</div>
