@@ -38,19 +38,19 @@
     schedule: *ex16
 #Question
 - &Question60 !!models.simonEffect.Question
-    character: O
+    alphabet: O
     color: red
     direction: up
 - &Question61 !!models.simonEffect.Question
-    character: O
+    alphabet: O
     color: green
     direction: left
 - &Question62 !!models.simonEffect.Question
-    character: X
+    alphabet: X
     color: red
     direction: right
 - &Question63 !!models.simonEffect.Question
-    character: X
+    alphabet: X
     color: green
     direction: down
 #Quiz

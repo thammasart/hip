@@ -12,14 +12,14 @@ public class Question extends Model{
     @Id
     public long id;
     public String color;
-    public char character;
+    public char alphabet;
     public String direction;
     @OneToMany
     public List<Quiz> quizzes;
 
-    public Question(String color,char character , String direction) {
+    public Question(String color,char alphabet , String direction) {
     	this.color = color;
-    	this.character = character;
+    	this.alphabet = alphabet;
     	this.direction = direction;
     }
 

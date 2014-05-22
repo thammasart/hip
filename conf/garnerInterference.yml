@@ -109,85 +109,85 @@
 - &Question67 !!models.garnerInterference.Question
     colorPic: dark
     sizePic: big
-    color: dark
-    size: big
+    colorQuestion: dark
+    sizeQuestion: big
     colorMatch: true
     sizeMatch: true
 - &Question68 !!models.garnerInterference.Question
     colorPic: dark
     sizePic: small
-    color: dark
-    size: small
+    colorQuestion: dark
+    sizeQuestion: small
     colorMatch: true
     sizeMatch: true
 - &Question69 !!models.garnerInterference.Question
     colorPic: light
     sizePic: big
-    color: light
-    size: small
+    colorQuestion: light
+    sizeQuestion: small
     colorMatch: true
     sizeMatch: true
 - &Question70 !!models.garnerInterference.Question
     colorPic: light
     sizePic: small
-    color: light
-    size: small
+    colorQuestion: light
+    sizeQuestion: small
     colorMatch: true
     sizeMatch: true
 - &Question71 !!models.garnerInterference.Question
     colorPic: dark
     sizePic: big
-    color: dark
-    size: small
+    colorQuestion: dark
+    sizeQuestion: small
     colorMatch: true
     sizeMatch: false
 - &Question72 !!models.garnerInterference.Question
     colorPic: light
     sizePic: big
-    color: light
-    size: small
+    colorQuestion: light
+    sizeQuestion: small
     colorMatch: true
     sizeMatch: false
 - &Question73 !!models.garnerInterference.Question
     colorPic: dark
     sizePic: small
-    color: light
-    size: small
+    colorQuestion: light
+    sizeQuestion: small
     colorMatch: false
     sizeMatch: true
 - &Question74 !!models.garnerInterference.Question
     colorPic: light
     sizePic: big
-    color: dark
-    size: big
+    colorQuestion: dark
+    sizeQuestion: big
     colorMatch: false
     sizeMatch: true
 - &Question75 !!models.garnerInterference.Question
     colorPic: dark
     sizePic: small
-    color: light
-    size: big
+    colorQuestion: light
+    sizeQuestion: big
     colorMatch: false
     sizeMatch: false
 - &Question76 !!models.garnerInterference.Question
     colorPic: light
     sizePic: big
-    color: dark
-    size: small
+    colorQuestion: dark
+    sizeQuestion: small
     colorMatch: false
     sizeMatch: false
 - &Question77 !!models.garnerInterference.Question
     colorPic: dark
     sizePic: big
-    color: light
-    size: small
+    colorQuestion: light
+    sizeQuestion: small
     colorMatch: false
     sizeMatch: false
 - &Question78 !!models.garnerInterference.Question
     colorPic: light
     sizePic: small
-    color: dark
-    size: big
+    colorQuestion: dark
+    sizeQuestion: big
     colorMatch: false
     sizeMatch: false
 #Quiz
