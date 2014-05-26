@@ -43,13 +43,14 @@
 }
 
 .visualArea{
-    position:relative;
-    width:70%;
+    position:absolute;
+    width:800px;
     height:500px;
     border-style:solid;
     border-width:2px;
 	margin-left:16%;
-	top:-40px;
+	top:142px;
+	left:120px;
 	visibility:hidden;
 }
 

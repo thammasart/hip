@@ -19,11 +19,15 @@ var isTimeToAnswer = false;
 function showInstruction (){
     clearInterval(startTimer);
     question_color = document.getElementById("question_color").innerHTML;
-    question_character = document.getElementById("question_character").innerHTML;
+    question_character = document.getElementById("question_alphabet").innerHTML;
     question_direction = document.getElementById("question_direction").innerHTML;
     quiz_position = document.getElementById("quiz_position").innerHTML;
     trial_blinkTime = document.getElementById("trial_blinkTime").innerHTML;
-    showInstructionTime = setInterval(function(){showTimer()},1000);
+    if (document.getElementById("questionNo").innerHTML == 0)
+        showInstructionTime = setInterval(function(){showTimer()},1000);
+    else {
+        showBlank();
+    }
 }
 function showTimer(){
     clearInterval(showInstructionTime);
