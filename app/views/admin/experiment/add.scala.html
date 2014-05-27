@@ -6,23 +6,34 @@
 <div class="container-fluid" ng-app="ExperimentCreator">
     <div class="row" ng-controller="ExController">
         <form class="form-horizontal" name="create" role="form" action="@routes.Admin.saveExperiment()" method="POST">
-             <div class="col-md-9 col-sm-8">
-                <div class="form-group has-feedback" ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.name)]">
+            <div class="col-md-9 col-sm-8">
+                <div class="form-group has-feedback"
+                     ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.name)]">
                     <label for="name" class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
+
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="name" placeholder="ชื่อชุดคำถาม" ng-model="exName" ng-pattern="word">
-                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="create.name.$valid && !create.name.$pristine"></span>
-                        <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="create.name.$invalid"></span>
+                        <input type="text" class="form-control" name="name" placeholder="ชื่อชุดคำถาม" ng-model="exName"
+                               ng-pattern="word">
+                        <span class="glyphicon glyphicon-ok form-control-feedback"
+                              ng-show="create.name.$valid && !create.name.$pristine"></span>
+                        <span class="glyphicon glyphicon-remove form-control-feedback"
+                              ng-show="create.name.$invalid"></span>
                     </div>
 
                 </div>
-                <div class="form-group " ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.startDate)]">
+                <div class="form-group "
+                     ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.startDate)]">
                     <label for="startDate" class="col-sm-2 control-label">เริ่ม</label>
+
                     <div class="input-group date col-sm-3 has-feedback">
-                        <input type="text" name="startDate" class="form-control" datepicker-popup="{{format}}" ng-model="startDate" is-open="startDateOpened" min="minDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+                        <input type="text" name="startDate" class="form-control" datepicker-popup="{{format}}"
+                               ng-model="startDate" is-open="startDateOpened" min="minDate"
+                               datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
                         <span class="input-group-btn">
-                           <button class="btn btn-default" ng-click="open($event, 0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                           <button class="btn btn-default" ng-click="open($event, 0)"><i
+                                   class="glyphicon glyphicon-calendar"></i></button>
                         </span>
+
                         <div class="col-sm-1 form-control-feedback date-feedback">
                             <span class="glyphicon glyphicon-ok " ng-show="checkDateValid(create)"></span>
                             <span class="glyphicon glyphicon-remove " ng-show="!checkDateValid(create)"></span>
@@ -30,39 +41,55 @@
 
                     </div>
                 </div>
-                 <div class="form-group has-feedback" ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.expireDate) ]">
+                <div class="form-group has-feedback"
+                     ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.expireDate) ]">
                     <label for="expireDate" class="col-sm-2 control-label">สิ้นสุด</label>
+
                     <div class="input-group date col-sm-3 has-feedback">
-                        <input type="text" name="expireDate" class="form-control" datepicker-popup="{{format}}" ng-model="expireDate" is-open="expireDateOpened" min="startDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                        <input type="text" name="expireDate" class="form-control" datepicker-popup="{{format}}"
+                               ng-model="expireDate" is-open="expireDateOpened" min="startDate"
+                               datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
                         <span class="input-group-btn">
-                           <button class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                           <button class="btn btn-default" ng-click="open($event, 1)"><i
+                                   class="glyphicon glyphicon-calendar"></i></button>
                         </span>
+
                         <div class="col-sm-1 form-control-feedback date-feedback">
                             <span class="glyphicon glyphicon-ok " ng-show="checkDateValid(create)"></span>
                             <span class="glyphicon glyphicon-remove " ng-show="!checkDateValid(create)"></span>
                         </div>
                     </div>
                 </div>
-                <div class="form-group has-feedback" ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.noOfTrial)]">
+                <div class="form-group has-feedback"
+                     ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.noOfTrial)]">
                     <label for="noOfTrial" class="col-sm-2 control-label">จำนวนรอบ</label>
+
                     <div class="col-sm-2">
-                        <input type="number" min="1" max="10" class="form-control" name="noOfTrial" value="{{value}}" ng-model="value" required>
-                        <span class="glyphicon glyphicon-ok form-control-feedback number-input" ng-show="create.noOfTrial.$valid && !create.noOfTrial.$pristine"></span>
-                        <span class="glyphicon glyphicon-remove form-control-feedback number-input" ng-show="create.noOfTrial.$invalid"></span>
+                        <input type="number" min="1" max="10" class="form-control" name="noOfTrial" value="{{value}}"
+                               ng-model="value" required>
+                        <span class="glyphicon glyphicon-ok form-control-feedback number-input"
+                              ng-show="create.noOfTrial.$valid && !create.noOfTrial.$pristine"></span>
+                        <span class="glyphicon glyphicon-remove form-control-feedback number-input"
+                              ng-show="create.noOfTrial.$invalid"></span>
                     </div>
                 </div>
 
-               <div class="form-group">
+                <div class="form-group">
                     <label for="experimentType" class="col-sm-2 control-label">การทดลอง</label>
+
                     <div class="col-sm-3">
                         <select class="form-control" name="experimentType">
-                          <option value="@models.ExperimentType.BROWNPETERSON">Brown Peterson</option>
-                          <option value="@models.ExperimentType.STROOPEFFECT">Stroop Effect</option>
-                          <option value="@models.ExperimentType.SIGNALDETECTION">Signal Detection</option>
-                          <option value="@models.ExperimentType.ATTENTIONBLINK">Attention Blink</option>
-                          <option value="@models.ExperimentType.POSITIONERROR">Position Error</option>
-                          <option value="@models.ExperimentType.STERNBERGSEARCH">Sternberg Search</option>
-                          <option value="@models.ExperimentType.MAGICNUMBER7">Magic Number 7</option>
+                            <option value="@models.ExperimentType.BROWNPETERSON">Brown Peterson</option>
+                            <option value="@models.ExperimentType.STROOPEFFECT">Stroop Effect</option>
+                            <option value="@models.ExperimentType.SIGNALDETECTION">Signal Detection</option>
+                            <option value="@models.ExperimentType.ATTENTIONBLINK">Attention Blink</option>
+                            <option value="@models.ExperimentType.POSITIONERROR">Position Error</option>
+                            <option value="@models.ExperimentType.STERNBERGSEARCH">Sternberg Search</option>
+                            <option value="@models.ExperimentType.MAGICNUMBER7">Magic Number 7</option>
+                            <option value="@models.ExperimentType.MULLERLAYER">Muller Layer</option>
+                            <option value="@models.ExperimentType.GARNERINTERFERENCE">Garner Interference</option>
+                            <option value="@models.ExperimentType.SIMONEFFECT">Simon Effect</option>
+                            <option value="@models.ExperimentType.VISUALSEARCH">Visual Search</option>
                         </select>
                     </div>
                 </div>
@@ -75,10 +102,10 @@
     </div>
     <div class="container">
         @if(flash.containsKey("success")){
-            <p class="text-success">@flash.get("success")</p>
+        <p class="text-success">@flash.get("success")</p>
         }
         @if(flash.containsKey("error")){
-            <p class="text-danger">@flash.get("error")</p>
+        <p class="text-danger">@flash.get("error")</p>
         }
     </div>
 </div>

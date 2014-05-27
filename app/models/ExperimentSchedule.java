@@ -120,6 +120,7 @@ public class ExperimentSchedule extends Model{
                 case SIMONEFFECT : type = "Simon Effect";break;
                 case MULLERLAYER: type = "Muller Layer";break;
                 case GARNERINTERFERENCE : type = "Garner Interference";break;
+                case VISUALSEARCH : type = "Visaul Search";break;
 				default : type = "Unknown";
 			}
 		}
@@ -135,11 +136,20 @@ public class ExperimentSchedule extends Model{
 			case POSITIONERROR : generatePositionErrorTrial();break;
 			case STERNBERGSEARCH : generateSternbergSearchTrial();break;
             case MAGICNUMBER7: generateMagicNumber7Trial(); break;
-            case SIMONEFFECT : break;
+            case SIMONEFFECT : generateSimonEffectTrial(); break;
             case MULLERLAYER: break;
             case GARNERINTERFERENCE: break;
+            case VISUALSEARCH: break;
 		}
 	}
+
+    private void generateSimonEffectTrial() {
+        for(int i=0; i < this.noOfTrial; i++){
+            models.simonEffect.Trial trial = models.simonEffect.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
 
     private void generateSternbergSearchTrial() {
         for(int i = 0; i < this.noOfTrial; i++){

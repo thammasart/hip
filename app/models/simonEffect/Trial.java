@@ -14,6 +14,7 @@ public class Trial extends Model{
 	public long id;
 	public QuestionType questionType;
 	public double blinkTime;
+    public int noOfQuiz = 3;
 
 	@ManyToOne
     public ExperimentSchedule schedule;
@@ -32,4 +33,15 @@ public class Trial extends Model{
 
     @SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
+
+    public static Trial create(ExperimentSchedule experimentSchedule) {
+        return new Trial(experimentSchedule, QuestionType.ONEFEATURE, 0.8);
+    }
+
+    public void generateQuiz() {
+        for(int i = 0; i < noOfQuiz; i++){
+            Quiz quiz = Quiz.create(this);
+            quiz.save();
+        }
+    }
 }
