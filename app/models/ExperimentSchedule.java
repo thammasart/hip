@@ -137,11 +137,19 @@ public class ExperimentSchedule extends Model{
 			case STERNBERGSEARCH : generateSternbergSearchTrial();break;
             case MAGICNUMBER7: generateMagicNumber7Trial(); break;
             case SIMONEFFECT : generateSimonEffectTrial(); break;
-            case MULLERLAYER: break;
+            case MULLERLAYER: generateMullerLayerTrial();break;
             case GARNERINTERFERENCE: break;
             case VISUALSEARCH: break;
 		}
 	}
+
+    private void generateMullerLayerTrial() {
+        for(int i =0; i < this.noOfTrial; i++){
+            models.mullerLayer.Trial trial = models.mullerLayer.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
 
     private void generateSimonEffectTrial() {
         for(int i=0; i < this.noOfTrial; i++){

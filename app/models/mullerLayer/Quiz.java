@@ -25,4 +25,18 @@ public class Quiz extends Model{
     @SuppressWarnings("unchecked")
     public static Finder<Long, Quiz> find = new Finder(Long.class,Quiz.class);
 
+    public Quiz() {
+
+    }
+
+    public static Quiz create(Trial trial) {
+        Quiz quiz = new Quiz();
+        quiz.trial = trial;
+        quiz.noOfChoise = 3;
+        quiz.differChoise = 2;
+        quiz.differLenght = 2;
+        quiz.lenghtType = LenghtType.MIDDLE;
+        quiz.question = Question.generateQuestion();
+        return quiz;
+    }
 }
