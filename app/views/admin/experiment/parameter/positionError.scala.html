@@ -27,13 +27,8 @@
                         <div class="form-group ">
                             <label class="col-sm-4 col-md-3 control-label">คำถามที่ @{i + 1}</label>
 
-                            <div class="col-md-2 col-sm-2">
-                                <select class="form-control">
-                                    <option>3</option>
-                                    <option>5</option>
-                                    <option>7</option>
-                                    <option>10</option>
-                                    <option>12</option>
+                            <div class="col-md-2 col-sm-2" ng-init="selected_@quiz.id = @quiz.length">
+                                <select class="form-control" ng-model="selected_@quiz.id" ng-options="set.length as set.length for set in memorySet">
                                 </select>
                             </div>
                         </div>

@@ -90,6 +90,11 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     })
     .controller('PositionErrorCtrl', function($scope){
         $scope.word = /^[0-1]{1}\.[0-9]+$/;
+        $scope.memorySet = [    {length: 3},
+                                {length: 5},
+                                {length: 7},
+                                {length: 10},
+                                {length: 12}];
     })
     .controller('SternbergSearchCtrl', function($scope){
         $scope.word = /^[0-1]{1}\.[0-9]+$/;
