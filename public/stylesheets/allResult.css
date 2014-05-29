@@ -31,7 +31,7 @@
 .beam{
     position:absolute;
     bottom:0%;
-    width:10%;
+    width:12%;
 }
 .graphLine{
     box-shadow:0px 2px 0px black;
@@ -50,4 +50,28 @@
     margin-top:1%;
     font-size:20px;
     float:left;
+}
+.beam1{
+    background-color:#EF9E84;
+    height:13%;
+}
+.beam2{
+    background-color:#7ED3E7;
+    height:60%;
+}
+.beam3{
+    background-color:#7FE6AF;
+    height:80%;
+}
+.beam4{
+    background-color:#F7F09D;
+    height:20%;
+}
+.panelSize{
+    width:48%;
+    margin-right:2%;
+    height:40%;
+    margin-top:1%;
+    float:left;
+    
 }
