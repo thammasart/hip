@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Trial extends Model{
     @Id
     public long id;
-    public ShapeType target = CIRCLE_BLUE;
+    public ShapeType target = ShapeType.CIRCLE_BLUE;
     public int dense;
     public boolean sqaureBlue;
     public boolean sqaureGreen;

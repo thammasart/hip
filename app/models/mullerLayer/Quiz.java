@@ -8,8 +8,8 @@ import javax.persistence.*;
 public class Quiz extends Model{
     @Id
     public long id;
-    public int noOfChoise;
-    public int differChoise;
+    public int noOfChoice;
+    public int differChoice;
     public LenghtType lenghtType;
     public int differLenght;
     @ManyToOne
@@ -32,8 +32,8 @@ public class Quiz extends Model{
     public static Quiz create(Trial trial) {
         Quiz quiz = new Quiz();
         quiz.trial = trial;
-        quiz.noOfChoise = 3;
-        quiz.differChoise = 2;
+        quiz.noOfChoice = 3;
+        quiz.differChoice = 2;
         quiz.differLenght = 2;
         quiz.lenghtType = LenghtType.MIDDLE;
         quiz.question = Question.generateQuestion();

@@ -51,7 +51,7 @@ public class MullerLayer extends Controller {
     public static Result experiment(long trialId,int questionNo){
         Trial t = Trial.find.byId(trialId);
         List<LineType> lt = new ArrayList<LineType>();
-        int noOfDeleteLines = 5-t.quizzes.get(questionNo).noOfChoise;
+        int noOfDeleteLines = 5-t.quizzes.get(questionNo).noOfChoice;
         lt.add(t.quizzes.get(questionNo).question.line1);
         lt.add(t.quizzes.get(questionNo).question.line2);
         lt.add(t.quizzes.get(questionNo).question.line3);
