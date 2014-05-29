@@ -8,6 +8,8 @@ import javax.persistence.*;
 public class Quiz extends Model{
     @Id
     public long id;
+    public int positionXofTarget;
+    public int positionYofTarget;
     @ManyToOne
     public Trial trial;
     @ManyToOne
