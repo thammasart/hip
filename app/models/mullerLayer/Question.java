@@ -2,6 +2,8 @@ package models.mullerLayer;
 
 import play.db.ebean.Model;
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -23,4 +25,20 @@ public class Question extends Model{
     @SuppressWarnings("unchecked")
     public static Finder<Long, Question> find = new Finder(Long.class,Question.class);
 
+    public static Question generateQuestion() {
+        Question question = new Question();
+        List<LineType> lines = new ArrayList<LineType>();
+        for(LineType line : LineType.values()){
+            lines.add(line);
+        }
+        Collections.shuffle(lines);
+        question.line1 = lines.get(0);
+        question.line2 = lines.get(1);
+        question.line3 = lines.get(2);
+        question.line4 = lines.get(3);
+        question.line5 = lines.get(4);
+
+        question.save();
+        return question;
+    }
 }

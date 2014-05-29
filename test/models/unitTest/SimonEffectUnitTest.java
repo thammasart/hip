@@ -37,7 +37,7 @@ public class SimonEffectUnitTest extends WithApplication {
     public void createQuestionWithParameter(){
         Question q = new Question("red",'O',"up");
         assertEquals("red",q.color);
-        assertEquals('O',q.character);
+        assertEquals('O',q.alphabet);
         assertEquals("up",q.direction);
     }
 
@@ -48,7 +48,7 @@ public class SimonEffectUnitTest extends WithApplication {
 
         Question q = Question.find.byId(1L);
         assertEquals("red",q.color);
-        assertEquals('O',q.character);
+        assertEquals('O',q.alphabet);
         assertEquals("up",q.direction);
     }
 
@@ -243,9 +243,4 @@ public class SimonEffectUnitTest extends WithApplication {
 		List<Answer> ans = Answer.find.where().eq("user_username", "123").findList();
 		assertEquals(3.3,Answer.calculateTotalUsedTime(ans),0.001);
     }
-
-
-
-
-
 }

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class Trial extends Model{
     @Id
     public long id;
+    public int noOfQuiz = 3;
+
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany
@@ -27,4 +29,14 @@ public class Trial extends Model{
     @SuppressWarnings("unchecked")
     public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 
+    public static Trial create(ExperimentSchedule experimentSchedule) {
+        return new Trial(experimentSchedule);
+    }
+
+    public void generateQuiz() {
+        for(int i =0; i < noOfQuiz; i++){
+            Quiz quiz = Quiz.create(this);
+            quiz.save();
+        }
+    }
 }

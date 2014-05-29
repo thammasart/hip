@@ -11,6 +11,14 @@ import java.util.ArrayList;
 public class Trial extends Model{
     @Id
     public long id;
+    public ShapeType target = ShapeType.CIRCLE_BLUE;
+    public int dense;
+    public boolean sqaureBlue;
+    public boolean sqaureGreen;
+    public boolean sqaureRed;
+    public boolean circleGreen;
+    public boolean circleRed;
+    public FrameSize frameSize;
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany

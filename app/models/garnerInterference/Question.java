@@ -10,8 +10,8 @@ public class Question extends Model{
     public long id;
     public String colorPic;
     public String sizePic;
-    public String color;
-    public String size;
+    public String colorQuestion;
+    public String sizeQuestion;
     public boolean colorMatch;
     public boolean sizeMatch;
     

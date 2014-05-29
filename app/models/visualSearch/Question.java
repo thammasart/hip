@@ -8,9 +8,14 @@ import javax.persistence.*;
 public class Question extends Model{
     @Id
     public long id;
+    public ShapeType shapeType;
+    public int positionX;
+    public int positionY;
+    @ManyToOne
+    public Quiz quiz;
 
-    public Question(){
-    	
+    public Question(Quiz quiz){
+    	this.quiz = quiz;
     }
 
     @SuppressWarnings("unchecked")

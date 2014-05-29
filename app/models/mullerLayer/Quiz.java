@@ -8,8 +8,8 @@ import javax.persistence.*;
 public class Quiz extends Model{
     @Id
     public long id;
-    public int noOfChoise;
-    public int differChoise;
+    public int noOfChoice;
+    public int differChoice;
     public LenghtType lenghtType;
     public int differLenght;
     @ManyToOne
@@ -25,4 +25,18 @@ public class Quiz extends Model{
     @SuppressWarnings("unchecked")
     public static Finder<Long, Quiz> find = new Finder(Long.class,Quiz.class);
 
+    public Quiz() {
+
+    }
+
+    public static Quiz create(Trial trial) {
+        Quiz quiz = new Quiz();
+        quiz.trial = trial;
+        quiz.noOfChoice = 3;
+        quiz.differChoice = 2;
+        quiz.differLenght = 2;
+        quiz.lenghtType = LenghtType.MIDDLE;
+        quiz.question = Question.generateQuestion();
+        return quiz;
+    }
 }
