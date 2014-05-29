@@ -1,0 +1,53 @@
+.graphContainer{
+    height:460px;
+    width:43%;
+    margin-left:5%;
+    margin-bottom:25px;
+    float:left;
+}
+.panelContainer{
+    height:460px;
+    width:43%;
+    border:solid;
+    border-color:red;
+    border-width:1px;
+    margin-left:5%;
+    margin-bottom:25px;
+    float:left;
+}
+.experimentName{
+    width:100%;
+    display:inline-block; 
+    text-align:center;
+    font-size:40px;
+    margin-bottom:3%;
+}
+.graphBox{
+    width:48%;
+    height:70%;
+    float:left;
+    position:relative;
+}
+.beam{
+    position:absolute;
+    bottom:0%;
+    width:10%;
+}
+.graphLine{
+    box-shadow:0px 2px 0px black;
+    width:85%;
+    height:2px;
+    position:absolute;
+    left:15%;
+}
+.graphLineTag{
+    position:absolute;
+    left:2%;
+}
+.graphTag{
+    width:50%;
+    text-align:center;
+    margin-top:1%;
+    font-size:20px;
+    float:left;
+}

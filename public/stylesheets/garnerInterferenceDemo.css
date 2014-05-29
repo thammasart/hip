@@ -1,5 +1,4 @@
 .mainContainer{
-    display:none;
     border:solid;
     border-color:white;
     width:1300px;
@@ -63,7 +62,7 @@
 }
 .choice{
     position:relative;
-    top:-250px;
+    top:-350px;
     width:50%;
     margin-left:25%;
     display:inline-block;

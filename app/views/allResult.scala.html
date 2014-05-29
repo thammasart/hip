@@ -1,13 +1,69 @@
 @(user : User,scoreList: List[Double])
 @header("Human Information Processing Lab :: Home Page")
 
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css")">
 <body>
 <div class="fixSize">
     <!-- Page Header -->
     @nav(user)
 
-        @for(sc<-scoreList){
-            <p> @sc  = </p>
-        }
+   <div class = "graphContainer" id = "">
+
+        <div class = "experimentName" id = "">
+             Experiment name
+        </div>  
+        <div class = "graphBox" id = "">
+            <div class = "graphLineTag" style= "bottom:-3.5%;">0%</div>
+            <div class = "graphLineTag" style= "bottom:17%;">20%</div>
+            <div class = "graphLineTag" style= "bottom:37%;">40%</div>
+            <div class = "graphLineTag" style= "bottom:57%;">60%</div>
+            <div class = "graphLineTag" style= "bottom:77%;">80%</div>
+            <div class = "graphLineTag" style= "bottom:96%;">100%</div>
+
+            <div class = "graphLine" style= "bottom:0%;"></div>
+            <div class = "graphLine" style= "bottom:20%;"></div>
+            <div class = "graphLine" style= "bottom:40%;"></div>
+            <div class = "graphLine" style= "bottom:60%;"></div>
+            <div class = "graphLine" style= "bottom:80%;"></div>
+            <div class = "graphLine" style= "bottom:100%;"></div>
+
+             <div class = "beam" style= "margin-left:20%;"></div>
+             <div class = "beam" style= "margin-left:40%;"></div>
+             <div class = "beam" style= "margin-left:60%;"></div>
+             <div class = "beam" style= "margin-left:80%;"></div>
+
+        </div>        
+        <div class = "graphBox" style="margin-left:4%;" id = "">
+            <div class = "graphLineTag" style= "bottom:-3.5%;">0%</div>
+            <div class = "graphLineTag" style= "bottom:17%;">20%</div>
+            <div class = "graphLineTag" style= "bottom:37%;">40%</div>
+            <div class = "graphLineTag" style= "bottom:57%;">60%</div>
+            <div class = "graphLineTag" style= "bottom:77%;">80%</div>
+            <div class = "graphLineTag" style= "bottom:96%;">100%</div>
+
+            <div class = "graphLine" style= "bottom:0%;"></div>
+            <div class = "graphLine" style= "bottom:20%;"></div>
+            <div class = "graphLine" style= "bottom:40%;"></div>
+            <div class = "graphLine" style= "bottom:60%;"></div>
+            <div class = "graphLine" style= "bottom:80%;"></div>
+            <div class = "graphLine" style= "bottom:100%;"></div>
+
+             <div class = "beam" style= "margin-left:20%;"></div>
+             <div class = "beam" style= "margin-left:40%;"></div>
+             <div class = "beam" style= "margin-left:60%;"></div>
+             <div class = "beam" style= "margin-left:80%;"></div>
+
+        </div>        
+        
+        <div class = "graphTag" id = "">
+            Score
+        </div>  
+        <div class = "graphTag" id = "">
+            Time
+        </div>  
+   </div>  
+   <div class = "panelContainer" id = "">
+   </div>  
+
     @footer()
 </div>

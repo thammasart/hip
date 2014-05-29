@@ -8,30 +8,9 @@ var expDuration = 0;
 var d = 0;
 var score = 0;
 
-function setup(){
-
-    var bigSQ = document.getElementsByClassName('bigSquare');
-    var smallSQ = document.getElementsByClassName('smallSquare');
-    var darkSQ = document.getElementsByClassName('dark');
-    var lightSQ= document.getElementsByClassName('light');
-    for(var k =0;k<bigSQ.length;k++){
-        bigSQ[k].style['width'] = document.getElementById("lengthBigSquare").innerHTML+ "cm";
-    }
-    for(var j =0;j<smallSQ.length;j++){
-        smallSQ[j].style['width'] = document.getElementById("lengthSmallSquare").innerHTML+ "cm";
-    }
-    for(var l = 0; l < darkSQ.length;l++){ 
-        darkSQ[l].style['background-color'] = "#"+document.getElementById("colorDark").innerHTML;
-    }    
-    for(var m = 0; m < lightSQ.length;m++){ 
-        lightSQ[m].style['background-color'] = "#"+document.getElementById("colorLight").innerHTML;
-    } 
-}
-
 function showSquare(){
     clearInterval(startTimer);
     document.getElementById("mc").style.visibility = "visible";  
-    document.getElementById("mc").style.display = "inherit";  
     document.getElementById("ic").style.visibility = "visible";  
     document.getElementById("ic2").style.visibility = "visible";  
 }
@@ -55,6 +34,9 @@ function delay(){
     clearInterval(showTimerTime);
     document.getElementById("word").innerHTML="";
     document.getElementById("mc").style.display= "table";
+    document.getElementById("sq").style.marginLeft = "-5%";
+    document.getElementById("sq").style.visibility = "visible";
+    document.getElementById("sqw").innerHTML = "";
 
     delayTime2 = setInterval(function(){showQuestion()},5000);
 }
@@ -62,6 +44,7 @@ function showQuestion(){
     clearInterval(delayTime2);
     d = new Date();
     expDuration = d.getTime();
+    document.getElementById("sq").style.visibility = "hidden";
     document.getElementById("ic").style.visibility = "visible";
     document.getElementById("yes").style.visibility = "visible";
     document.getElementById("no").style.visibility = "visible";
