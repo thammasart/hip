@@ -46,15 +46,26 @@ public class VisualSearchUnitTest extends WithApplication {
 
     @Test
     public void createQuestionShouldNotNull(){
-        Question question = new Question();
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial trial = Trial.find.byId(1L);
+        Quiz quiz = new Quiz(trial);
+        Question question = new Question(quiz);
         assertNotNull(question);
+        assertEquals(quiz, question.quiz);
     }
 
     @Test
     public void queryQuestionShouldCorrect(){
-        new Question().save();
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
+        new Trial(exp).save();
+        Trial trial = Trial.find.byId(1L);
+        new Quiz(trial).save();
+        Quiz quiz = Quiz.find.byId(1L);
+        new Question(quiz).save();
         Question question = Question.find.byId(1L);
         assertNotNull(question);
+        assertEquals(quiz, question.quiz);
     }
 
     @Test
@@ -62,12 +73,9 @@ public class VisualSearchUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
-        Question question = Question.find.byId(1L);
-        Quiz quiz = new Quiz(trial, question);
+        Quiz quiz = new Quiz(trial);
         assertNotNull(quiz);
         assertEquals(trial, quiz.trial);
-        assertEquals(question, quiz.question);
     }
 
     @Test
@@ -75,13 +83,10 @@ public class VisualSearchUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
-        Question question = Question.find.byId(1L);
-        new Quiz(trial, question).save();
+        new Quiz(trial).save();
         Quiz quiz = Quiz.find.byId(1L);
         assertNotNull(quiz);
         assertEquals(trial, quiz.trial);
-        assertEquals(question, quiz.question);
     }
 
     @Test
@@ -89,10 +94,10 @@ public class VisualSearchUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
-        Question question = Question.find.byId(1L);
-        new Quiz(trial, question).save();
+        new Quiz(trial).save();
         Quiz quiz = Quiz.find.byId(1L);
+        new Question(quiz).save();
+        Question question = Question.find.byId(1L);
         User user = User.find.byId("test");
         Answer answer = new Answer(user, quiz);
         assertNotNull(answer);
@@ -105,10 +110,10 @@ public class VisualSearchUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
-        Question question = Question.find.byId(1L);
-        new Quiz(trial, question).save();
+        new Quiz(trial).save();
         Quiz quiz = Quiz.find.byId(1L);
+        new Question(quiz).save();
+        Question question = Question.find.byId(1L);
         User user = User.find.byId("test");
         new Answer(user, quiz).save();
         Answer answer = Answer.find.byId(1L);
@@ -122,18 +127,18 @@ public class VisualSearchUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
-        new Question().save();
-        new Question().save();
-        Question question1 = Question.find.byId(1L);
-        Question question2 = Question.find.byId(2L);
-        Question question3 = Question.find.byId(3L);
-        new Quiz(trial, question1).save();
-        new Quiz(trial, question2).save();
-        new Quiz(trial, question3).save();
+        new Quiz(trial).save();
+        new Quiz(trial).save();
+        new Quiz(trial).save();
         Quiz quiz1 = Quiz.find.byId(1L);
         Quiz quiz2 = Quiz.find.byId(2L);
         Quiz quiz3 = Quiz.find.byId(3L);
+        new Question(quiz1).save();
+        new Question(quiz2).save();
+        new Question(quiz3).save();
+        Question question1 = Question.find.byId(1L);
+        Question question2 = Question.find.byId(2L);
+        Question question3 = Question.find.byId(3L);
         User user = User.find.byId("test");
         new Answer(user, quiz1).save();
         new Answer(user, quiz2).save();

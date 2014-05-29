@@ -2,6 +2,8 @@ package models.visualSearch;
 
 import play.db.ebean.Model;
 import javax.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table (name="visual_search_quiz")
@@ -12,12 +14,11 @@ public class Quiz extends Model{
     public int positionYofTarget;
     @ManyToOne
     public Trial trial;
-    @ManyToOne
-    public Question question;
+    @OneToMany
+    public List<Question> questions = new ArrayList<Question>();
 
-    public Quiz(Trial trial, Question question){
+    public Quiz(Trial trial){
     	this.trial = trial;
-    	this.question = question;
     }
 
     @SuppressWarnings("unchecked")
