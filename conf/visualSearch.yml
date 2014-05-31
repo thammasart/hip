@@ -68,7 +68,7 @@
     schedule: *ex22
 #Quiz
 - &Quiz119 !!models.visualSearch.Quiz
-    positionXofTarget: 5
+    positionXofTarget: 60
     positionYofTarget: 5
     trial: *round45
 - &Quiz120 !!models.visualSearch.Quiz
