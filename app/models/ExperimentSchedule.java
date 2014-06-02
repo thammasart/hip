@@ -138,10 +138,18 @@ public class ExperimentSchedule extends Model{
             case MAGICNUMBER7: generateMagicNumber7Trial(); break;
             case SIMONEFFECT : generateSimonEffectTrial(); break;
             case MULLERLAYER: generateMullerLayerTrial();break;
-            case GARNERINTERFERENCE: break;
+            case GARNERINTERFERENCE: generateGarnerInterferenceTrial();break;
             case VISUALSEARCH: break;
 		}
 	}
+
+    private void generateGarnerInterferenceTrial() {
+        for(int i=0; i < this.noOfTrial; i++){
+            models.garnerInterference.Trial trial = models.garnerInterference.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
 
     private void generateMullerLayerTrial() {
         for(int i =0; i < this.noOfTrial; i++){

@@ -35,4 +35,11 @@ public class Trial extends Model{
     @SuppressWarnings("unchecked")
     public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 
+    public static Trial create(ExperimentSchedule experimentSchedule) {
+        return null;
+    }
+
+    public void generateQuiz() {
+
+    }
 }
