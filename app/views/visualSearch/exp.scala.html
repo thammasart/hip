@@ -1,0 +1,71 @@
+@(trial : models.visualSearch.Trial,questionNo : Integer,width : String, height : String, top : String, left : String )
+@header("Human Information Processing Lab :: Home Page")
+<!--
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+--!>
+
+<script src="@routes.Assets.at("javascripts/visualSearch.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/visualSearch.css")">
+<body>
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div class="expMainWindow">
+    <div class="expCenterWord">
+        <div class="inst" id="word"></div>
+        <div class = "circleEx" id="circleEx" ></div>
+    </div>
+    <form action="@routes.VisualSearch.saveAnswer(trial.id,questionNo)" method="post" >
+
+        <div class="visualArea" style="left:@left;top:@top;width:@width;height:@height;"id="visualArea">
+
+            @for(question <- trial.quizzes(questionNo).questions){
+                @question.shapeType match{
+
+                    case models.visualSearch.ShapeType.SQAURE_GREEN => {
+                        <button class="box" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#2ED2AE" onclick="shapeClick(this)"></button>
+                    }
+
+                    case models.visualSearch.ShapeType.SQAURE_BLUE => {
+                        <button class="box" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
+                    }
+
+                    case models.visualSearch.ShapeType.SQAURE_RED => {
+                        <button class="box" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#A51B00" onclick="shapeClick(this)"></button>
+                    }
+
+                    case models.visualSearch.ShapeType.CIRCLE_GREEN => {
+                        <button class="circle" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#2ED2AE" onclick="shapeClick(this)"></button>
+                    }
+
+                    case models.visualSearch.ShapeType.CIRCLE_BLUE => {
+                        <button class="circle" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
+                    }
+
+                    case models.visualSearch.ShapeType.CIRCLE_RED => {
+                        <button class="circle" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#A51B00" onclick="shapeClick(this)"></button>
+                    }
+                }
+            }
+
+            <button class="circle" name = "target" style="left:@trial.quizzes(questionNo).positionXofTarget%;top:@trial.quizzes(questionNo).positionYofTarget%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
+
+        </div>
+        <input id="usedTime" name="usedTime" hidden/>
+        <input id="positionX" name="positionX" hidden/>
+        <input id="positionY" name="positionY" hidden/>
+        <input id = "isCorrect" name = "isCorrect" type="checkbox" hidden/>
+    </form>
+</div>
+@footer()

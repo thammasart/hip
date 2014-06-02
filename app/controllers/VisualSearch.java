@@ -7,6 +7,7 @@ import play.mvc.*;
 import play.data.*;
 
 import models.User;
+import models.visualSearch.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import views.html.iframe.*;
 import java.util.Date;
 
 public class VisualSearch extends Controller{
+
+    private static final Form<Answer> answerForm = Form.form(Answer.class);
 
     //แสดงหน้าข้อมูลการทดลอง
     @Security.Authenticated(Secured.class)
@@ -61,23 +64,88 @@ public class VisualSearch extends Controller{
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo){
-        return TODO;
+        String frameWidth = "800px";
+        String frameHeight = "500px";
+        String top = "142px";
+        String left = "30px";
+        switch (Trial.find.byId(trialId).frameSize){
+            case SMALLER :
+                frameWidth = "300px";
+                frameHeight = "200px";
+                top = "300px";
+                left = "270px";
+                break;
+            case SMALL :
+                frameWidth = "500px";
+                frameHeight = "300px";
+                top = "240px";
+                left = "160px";
+                break;
+            case MEDIUM :
+                frameWidth = "600px";
+                frameHeight = "400px";
+                top = "190px";
+                left = "120px";
+                break;
+            case BIG :
+                frameWidth = "800px";
+                frameHeight = "500px";
+                top = "142px";
+                left = "30px";
+                break;
+            case EXTRA :
+                frameWidth = "1000px";
+                frameHeight = "500px";
+                top = "142px";
+                left = "-70px";
+                break;
+            default :
+                frameWidth = "800px";
+                frameHeight = "500px";
+                top = "142px";
+                left = "30px";
+                break;
+        }
+
+        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left));
     }
 
 
     @Security.Authenticated(Secured.class)
     public static Result saveAnswer(long trialId, int questionNo){
-        return TODO;
+        Form<Answer> boundForm = answerForm.bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        Trial trial = Trial.find.byId(trialId);
+
+        if(boundForm.hasErrors()){
+            flash("error", "please correct the form above.");
+            return badRequest(views.html.home.render(user));
+        }
+
+        Answer answer = boundForm.get();
+        answer.user = user;
+        answer.quiz = trial.quizzes.get(questionNo);
+        answer.save();
+
+        questionNo++;
+        if(questionNo < trial.quizzes.size()){
+            return redirect(routes.VisualSearch.experiment(trialId, questionNo));
+        }
+        return redirect(routes.VisualSearch.report(user.username, trialId));
     }
 
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
     public static Result report(String username, long trialId){
         if(username.equals("") || trialId == 0){
-            return redirect(controllers.routes.SimonEffect.info());
+            return redirect(controllers.routes.VisualSearch.info());
         }
         User user = User.find.byId(username);
-        return TODO;
+        Trial trial = Trial.find.byId(trialId);
+        List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
+        double totalUsedTime = Answer.calculateTotalUsedTime(answers);
+        int score = Answer.calculateTotalScore(answers);
+        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
 
 }
