@@ -72,6 +72,7 @@ public class ExperimentSchedule extends Model{
         final String SIMONEFFECT = "SIMONEFFECT";
         final String MULLERLAYER = "MULLERLAYER";
         final String GARNERINTERFERENCE = "GARNERINTERFERENCE";
+        final String VISUALSEARCH = "VISUALSEARCH";
 
         if (expType.equals(BROWNPETERSON)){
             expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
@@ -103,6 +104,9 @@ public class ExperimentSchedule extends Model{
         else if (expType.equals(GARNERINTERFERENCE)){
             expList = getWorkingExperimentsByType(ExperimentType.GARNERINTERFERENCE);
         }
+        else if (expType.equals(VISUALSEARCH)){
+            expList = getWorkingExperimentsByType(ExperimentType.VISUALSEARCH);
+        }
         return expList;
 	}
 	
@@ -120,7 +124,7 @@ public class ExperimentSchedule extends Model{
                 case SIMONEFFECT : type = "Simon Effect";break;
                 case MULLERLAYER: type = "Muller Layer";break;
                 case GARNERINTERFERENCE : type = "Garner Interference";break;
-                case VISUALSEARCH : type = "Visaul Search";break;
+                case VISUALSEARCH : type = "Visual Search";break;
 				default : type = "Unknown";
 			}
 		}

@@ -80,6 +80,7 @@ public class Application extends Controller {
             case "SIMONEFFECT" : nextPage = redirect(routes.SimonEffect.proc()); break;
             case "MULLERLAYER" : nextPage = redirect(routes.MullerLayer.proc()); break;
             case "GARNERINTERFERENCE" : nextPage = redirect(routes.GarnerInterference.proc()); break;
+            case "VISUALSEARCH" : nextPage = redirect(routes.VisualSearch.proc()); break;
         }
 
         return nextPage;
@@ -111,6 +112,7 @@ public class Application extends Controller {
             case SIMONEFFECT : nextPage = redirect(routes.SimonEffect.experiment(trialId,0)); break;
             case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0)); break;
             case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0)); break;
+            case VISUALSEARCH: nextPage = redirect(routes.VisualSearch.experiment(trialId,0)); break;
         }
         return nextPage;
     }
