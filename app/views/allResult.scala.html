@@ -2,7 +2,8 @@
 @header("Human Information Processing Lab :: Home Page")
 
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css")">
-<body>
+<script src="@routes.Assets.at("javascripts/allResult.js")"></script>
+<body onload="setup();">
 <div class="fixSize">
     <!-- Page Header -->
     @nav(user)
@@ -62,16 +63,52 @@
             Time
         </div>  
    </div>  
-   <div class = "panelContainer" id = "">
-        <div class = "" id = "">
-            การทดลอง 
-        </div>  
+    
 
+
+    <div class = "selectExResultBox" id = "">
+        <div class = "dropDownTag" id = "">
+            การทดลอง
+        </div>  
+        <div class = "dropDownContainer" id = "">
+            <div class="btn-group">
+                <button data-toggle="dropdown" class=" dropdown-toggle"style="width:200%;"> Select Experiment <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdownSize">
+                    <li class="dropdownHeader" >ATTENTION</li>
+                    <li class="dropdownLi"><a href="#">Attention Blink</a></li>
+                    <li class="dropdownLi"><a href="#">Simon Effect</a></li>
+                    <li class="dropdownLi"><a href="#">Stroop Effect</a></li>
+                    <li class="dropdownLi"><a href="#">Visual Search</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdownHeader">SHOR-TERM MEMORY</li>
+                    <li class="dropdownLi"><a href="#">Brown-Peterson Task</a></li>
+                    <li class="dropdownLi"><a href="#">Magic Number 7</a></li>
+                    <li class="dropdownLi"><a href="#">Position Error</a></li>
+                    <li class="dropdownLi"><a href="#">Sternberg Search</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdownHeader">PERCEPTION</li>
+                    <li class="dropdownLi"><a href="#">Change Blindness</a></li>
+                    <li class="dropdownLi"><a href="#">Garner Interference</a></li>
+                    <li class="dropdownLi"><a href="#">Muller-Layer Illusion</a></li>
+                    <li class="dropdownLi"><a href="#">Signal Detection</a></li>
+                    <li class="divider"></li>
+                </ul>
+            </div>
+        </div>   
+    </div>  
+
+
+
+   <div class = "panelContainer" id = "">
         <div class = "panel panel-danger panelSize" id = "">
             <div class="panel-heading"> Panel Heading 1 </div>
             
             <ul class="list-group">
-                <li class="list-group-item"> item 1 </li>  
+                <li class="list-group-item"> Trial 
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear"></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>  
+                               
                 <li class="list-group-item"> item 2 </li>  
                 <li class="list-group-item"> item 3 </li>  
             </ul>
@@ -80,7 +117,10 @@
             <div class="panel-heading"> Panel Heading 2 </div>
             
             <ul class="list-group">
-                <li class="list-group-item"> item 1 </li>  
+                <li class="list-group-item"> Trial   
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear"></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
                 <li class="list-group-item"> item 2 </li>  
                 <li class="list-group-item"> item 3 </li>  
             </ul>
@@ -89,22 +129,31 @@
             <div class="panel-heading"> Panel Heading 3 </div>
             
             <ul class="list-group">
-                <li class="list-group-item"> item 1 </li>  
+                <li class="list-group-item"> Trial   
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear"></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
                 <li class="list-group-item"> item 2 </li>  
                 <li class="list-group-item"> item 3 </li>  
             </ul>
         </div>  
-        <div class = "panel panel-warning panelSize" id = "">
-            <div class="panel-heading"> Panel Heading 4 </div>
+        <div class = "panel panel-warning panelSize" >
+            <div class="panel-heading" style="background-color:#fddf71;"> Panel Heading 4 </div>
             
             <ul class="list-group">
-                <li class="list-group-item"> item 1 </li>  
+                <li class="list-group-item"> Trial   
+                        <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear"></button>
+                        <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
                 <li class="list-group-item"> item 2 </li>  
                 <li class="list-group-item"> item 3 </li>  
             </ul>
         </div>  
-
    </div>  
+    <div class="overlay" id="over">
+        <div class="box" >
+        </div>  
+    </div>
 
     @footer()
 </div>
