@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css")">
 <script src="@routes.Assets.at("javascripts/allResult.js")"></script>
-<body onload="setup();">
+<body >
 <div class="fixSize">
     <!-- Page Header -->
     @nav(user)
@@ -150,8 +150,9 @@
             </ul>
         </div>  
    </div>  
-    <div class="overlay" id="over">
+    <div class="overlay" id="overLay">
         <div class="box" >
+            <button onclick="closeOverlay()"> Close </button>
         </div>  
     </div>
 

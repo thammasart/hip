@@ -1,7 +1,7 @@
 
- function setup() { 
-    document.getElementById("over").hide();
- } 
  function overlayTrial() { 
-    document.getElementById("over").show();
+    document.getElementById("overLay").style.visibility = "visible";  
+ } 
+ function closeOverlay() { 
+    document.getElementById("overLay").style.visibility = "hidden";  
  } 
