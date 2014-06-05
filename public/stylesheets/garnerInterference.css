@@ -87,3 +87,11 @@
     margin-top:10px;
     margin-bottom:1%;
 }
+.ansSquare{
+    margin:0px auto;
+    display:none;
+}
+.ansBox{
+    margin:0 auto;
+    padding-top:5%;
+}

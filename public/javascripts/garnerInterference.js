@@ -53,10 +53,26 @@ function calculateTimeLeft()
 function delay(){
     clearInterval(delayTime);
     clearInterval(showTimerTime);
-    document.getElementById("word").innerHTML="";
-    document.getElementById("mc").style.display= "table";
+    document.getElementById("word").innerHTML= "";
+    
+    if(document.getElementById("sizePic").innerHTML == "small"){ 
+        document.getElementById("ansSquare").style.width= document.getElementById("lengthSmallSquare").innerHTML+"cm";
+        document.getElementById("ansBox").style.width= document.getElementById("lengthSmallSquare").innerHTML+"cm";
+        document.getElementById("ansBox").style.height= document.getElementById("lengthSmallSquare").innerHTML+"cm";
+    }   else{ 
+        document.getElementById("ansSquare").style.width= document.getElementById("lengthBigSquare").innerHTML+"cm";
+        document.getElementById("ansBox").style.width= document.getElementById("lengthBigSquare").innerHTML+"cm";
+        document.getElementById("ansBox").style.height= document.getElementById("lengthBigSquare").innerHTML+"cm";
+    }
 
-    delayTime2 = setInterval(function(){showQuestion()},5000);
+    if(document.getElementById("colorPic").innerHTML == "dark"){ 
+        document.getElementById("ansSquare").style.color= "#"+document.getElementById("colorDark").innerHTML; 
+    }   else{ 
+        document.getElementById("ansSquare").style.color= "#"+document.getElementById("colorLight").innerHTML; 
+    }
+    document.getElementById("ansSquare").style.display= "table";
+
+    //delayTime2 = setInterval(function(){showQuestion()},5000);
 }
 function showQuestion(){
     clearInterval(delayTime2);
