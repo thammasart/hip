@@ -154,3 +154,28 @@
     border-radius:10px;
     box-shadow: 0 0 20px 0 #303030;
 }
+.closeX{
+    border:none;
+    background-color:transparent;
+    margin-right:1%;
+    width:30px;
+}
+.OverlayExpName{
+    font-size:161%;
+    width:100%;
+    margin:1%;
+}
+.OverlayTagSize{
+    width:35%;
+    float:left;
+
+}
+.OverlayDateTag{
+    float:left;
+    margin: 0 1% 0 1%;
+    padding-top:0.5%;
+    font-size:120%;
+}
+.nav li {
+    padding:10px 30px;
+}
