@@ -1,4 +1,4 @@
-@(trial : models.visualSearch.Trial,questionNo : Integer,width : String, height : String, top : String, left : String )
+@(trial : models.visualSearch.Trial,questionNo : Integer,width : String, height : String, top : String, left : String , json : String )
 @header("Human Information Processing Lab :: Home Page")
 <!--
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
@@ -16,7 +16,9 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <body>
 
 <!-- Page Header -->
-<div class="">
+<script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/controllers/visualsearch.js")"></script>
+<div class="" ng-app="VisualSearchApp" ng-controller="VisualSearchController" ng-init="sharps = @json">
     <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
     <!-- Dashed line-->
     <div class="titleLine"></div>

@@ -403,4 +403,32 @@ public class Admin extends Controller {
         flash("success", "update success.");
         return ok(views.html.admin.experiment.edit.render(exp));
     }
+    public static Result saveSimonEffectParameter(long expId){
+        ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
+        DynamicForm  requestData = Form.form().bindFromRequest();
+
+        exp.name = requestData.get("name");
+        try{
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            exp.startDate = dateFormat.parse(requestData.get("startDate"));
+            exp.expireDate = dateFormat.parse(requestData.get("expireDate"));
+        } catch (ParseException e){
+            flash("date_error", "กรุณากรอกข้อมูลช่วงเวลาการทำทดลองให้ถูกต้อง");
+            return badRequest(views.html.admin.experiment.edit.render(exp));
+        }
+        exp.update();
+
+        List<models.simonEffect.Trial> trials = models.simonEffect.Trial.findInvolving(exp);
+
+        for(models.simonEffect.Trial trial : trials){
+
+            String blinkTimeString = requestData.get("blinkTime_" + trial.id);
+            double blinkTime = Double.parseDouble(blinkTimeString);
+            trial.blinkTime = blinkTime;
+            trial.update();
+        }
+
+        flash("success", "update success.");
+        return ok(views.html.admin.experiment.edit.render(exp));
+    }
 }
