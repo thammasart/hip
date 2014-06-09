@@ -110,7 +110,7 @@ public class StroopEffect extends Controller {
     }
 
     //ตรวจสอบว่าผู้ใช้ทำการทดลองหรือยัง
-    @Security.Authenticated(Secured.class)
+/*  @Security.Authenticated(Secured.class)
     public static Result checkUserTakeRepeatExperiment() {
         User user = User.find.where().eq("username", session().get("username")).findUnique();
         if(user == null) {
@@ -122,7 +122,7 @@ public class StroopEffect extends Controller {
         }
         models.stroopEffect.TimeLog.create(new Date(), user, Trial.find.byId(new Long(2))).save();
         return redirect(routes.StroopEffect.experiment(new Long(2),0));
-    }
+    }  */
 
     @Security.Authenticated(Secured.class)
     public static Result installQuestion(){

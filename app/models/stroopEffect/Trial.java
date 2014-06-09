@@ -22,8 +22,8 @@ public class Trial extends Model{
 
     @ManyToOne
     public ExperimentSchedule schedule;
-    @OneToMany
-    public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
+//    @OneToMany
+//    public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
     @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
