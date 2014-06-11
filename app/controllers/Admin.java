@@ -423,8 +423,22 @@ public class Admin extends Controller {
         for(models.simonEffect.Trial trial : trials){
 
             String blinkTimeString = requestData.get("blinkTime_" + trial.id);
+            String questionTypeString = requestData.get("questionType_" + trial.id);
+
             double blinkTime = Double.parseDouble(blinkTimeString);
+            models.simonEffect.QuestionType questionType = null;
+            if(questionTypeString.equals("ONEFEATURE"))
+                questionType = models.simonEffect.QuestionType.ONEFEATURE;
+            else if(questionTypeString.equals("TWOFEATURE"))
+                questionType = models.simonEffect.QuestionType.TWOFEATURE;
+
             trial.blinkTime = blinkTime;
+            trial.questionType = questionType;
+
+            for(models.simonEffect.Quiz quiz : trial.quizzes){
+                quiz.question = models.simonEffect.Question.findQuestionByType(questionType);
+                quiz.update();
+            }
             trial.update();
         }
 

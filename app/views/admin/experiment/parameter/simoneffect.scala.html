@@ -21,7 +21,7 @@
                 <div class="row" ng-init="feature_@trial.id = '@trial.questionType';blinkTime_@trial.id = @trial.blinkTime">
                     <h4>Question Feature</h4>
                     <label class="radio-inline">
-                        <input type="radio" ng-model="feature_@trial.id" value="@QuestionType.ONEFEATURE"
+                        <input type="radio" name="questionType_@trial.id" ng-model="feature_@trial.id" value="@QuestionType.ONEFEATURE"
                         > One Feature
                     </label>
                     <label class="radio-inline">
