@@ -127,6 +127,17 @@ GET     /visualSearch/experiment      controllers.VisualSearch.experiment(trialI
 POST    /visualSearch/experiment/save controllers.VisualSearch.saveAnswer(trialId:Long, questionNo:Int)
 GET     /visualSearch/report      	 controllers.VisualSearch.report(username:String ?= "", trial_id:Long ?= 0)
 
+GET     /changeBlindness	            controllers.ChangeBlindness.info()
+GET     /changeBlindness/info         controllers.ChangeBlindness.infoIframe()
+GET     /changeBlindness/proc		    controllers.ChangeBlindness.proc()
+GET     /changeBlindness/proci	    controllers.ChangeBlindness.procIframe()
+GET     /changeBlindness/demo            controllers.ChangeBlindness.demoPage()
+POST    /changeBlindness/reportDemo      	controllers.ChangeBlindness.demoReport()
+GET     /changeBlindness/experiment_inst   controllers.ChangeBlindness.experiment(trialId:Long, questionNo:Int)
+GET     /changeBlindness/experiment   controllers.ChangeBlindness.doExperiment(trialId:Long, questionNo:Int)
+POST    /changeBlindness/experiment/save  controllers.ChangeBlindness.saveAnswer(trialId:Long, questionNo:Int)
+GET     /changeBlindness/report      	controllers.ChangeBlindness.report(username:String ?= "", trial_id:Long ?= 0)
+
 GET     /user                       controllers.UserController.editProfile()
 POST	/user 		         	controllers.UserController.saveUserProfile()
 GET     /user/changepassword    controllers.UserController.changeUserPassword()

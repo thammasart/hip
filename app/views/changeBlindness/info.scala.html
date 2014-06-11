@@ -1,33 +1,34 @@
+@(user : User)
 @header("Human Information Processing Lab :: Home Page")
 <body>
+<div class="fixSize">
+    <!-- Page Header -->
+    @nav(user)
+    <!-- Content -->
+    <!-- Explanation -->
+    <div class="homeMainWindow">
+        <div class="infoContainer">
+            <!-- Right Panel -->
+            <div class="infoButton" >
+                <div align="center">
+                    <img src="@routes.Assets.at("images/perc01change_blindness.png")" class="divPngInfo">
+                    <h6 class="marginWord">Change Blindness</h6>
+                </div>
+                <!-- Buttons -->
+                <div class="infoButtonContainer">
+                    <div class="infoRedButton">
+                        <a href="@routes.Application.selectExperiment()" class=" btn btn-block btn-lg btn-danger"  ><span class="glyphicon glyphicon-chevron-left" ></span> ย้อนกลับ</a>  &nbsp;
+                    </div>
 
-<!-- Page Header -->
-
-    <div class="">
-          <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
-         <!-- Page Header Menu-->
-          <h6 align="center" class="topMenu">
-               <a href="#">หน้าแรก</a>&nbsp; | &nbsp;
-               <a href="about_hip.html">เกี่่ยวกับ HIP Lab</a>&nbsp; | &nbsp;
-               <a href="#">ผลการทดลอง</a>
-          </h6>
-          <!-- Dashed line-->
-          <div class="titleLine"></div>
+                    <div class="infoGreenButton">
+                        <a href="@routes.ChangeBlindness.proc()" class=" btn btn-block btn-lg btn-primary"> อ่านขั้นตอนการทดลอง<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="infoContent">
+                <iframe src="@routes.ChangeBlindness.infoIframe()" frameborder="0" width="450" height="350"></iframe>
+            </div>
+        </div>
     </div>
-
-<!-- Content -->
-<!-- Explanation -->
-<div class="infoContainer">
-    <div class="infoContent">
-        <iframe src="PCBIframe" frameborder="0" width="450" height="350"></iframe>
-    </div>
-    <!-- Right Panel -->  
-    <div class="infoButton" >
-        <img src="@routes.Assets.at("images/change_blindness.png")" class="divPngInfo"><h6 class="marginWord">Signal Detection</h6>
-    <!-- Buttons -->  
-      
-          <a href="@routes.Application.home()" class="btn btn-block btn-lg btn-danger"  ><span class="fui-arrow-left" ></span> ย้อนกลับ</a>  &nbsp; 
-          <a href="PCBProc" class="btn btn-block btn-lg btn-primary"><span class="fui-arrow-right"></span> อ่านขั้นตอนการทดลอง</a>
-    </div>
+    @footer()
 </div>
-@footer()
