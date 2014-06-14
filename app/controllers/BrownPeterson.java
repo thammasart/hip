@@ -97,7 +97,6 @@ public class BrownPeterson extends Controller {
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
         timeLog.endTime = new Date();
         timeLog.update();
-        System.out.println("TimeLog endTime: " + TimeLog.find.byId(timeLog.id).endTime);
         answers = new ArrayList<Answer>();
         return redirect(routes.BrownPeterson.report(user.username, trialId));
     }
