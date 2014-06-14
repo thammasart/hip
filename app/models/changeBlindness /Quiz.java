@@ -10,13 +10,15 @@ import java.util.ArrayList;
 public class Quiz extends Model{
     @Id
     public long id;
+    public int displayTime; // second
     @ManyToOne
     public Trial trial;
     @ManyToOne
     public Question question;
 
-    public Quiz(Trial trial, Question question){
+    public Quiz(Trial trial, int displayTime, Question question){
     	this.trial = trial;
+        this.displayTime = displayTime;
     	this.question = question;
     }
 

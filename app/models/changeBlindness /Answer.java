@@ -12,6 +12,8 @@ public class Answer extends Model{
     @Id
     public long id;
     public double usedTime;
+    public int positionOfChangeX;
+    public int positionOfChangeY;
     public boolean isCorrect;
     @ManyToOne
     public User user;
