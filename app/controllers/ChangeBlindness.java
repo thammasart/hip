@@ -48,12 +48,16 @@ public class ChangeBlindness extends Controller{
     //แสดงหน้าตัวอย่างการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result demoPage(){
-        return TODO;
+        return ok(demo.render());
     }
     //แสดงหน้าผลลัพธ์ตัวอย่างการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result demoReport(){
-        return TODO;
+        DynamicForm reportData = Form.form().bindFromRequest();
+        User user = User.find.byId(session().get("username"));
+        double time = Double.parseDouble(reportData.get("usedTime"));
+        int score = Integer.parseInt(reportData.get("score"));
+        return ok(demoReport.render(score,time,1,"Demo Report",user));
     }
 
     //แสดงหน้าการทดลอง

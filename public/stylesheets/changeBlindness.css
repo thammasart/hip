@@ -1,0 +1,83 @@
+.changeBlindnessExp{
+    width:100%;
+    height:537px;
+    margin:20px 0px 20px 0px;
+}
+.changeBlindnessWord{
+    text-align:center;
+    position:relative;
+    top:38%;
+}
+
+.changeBlindnessWord p{
+    font-size:40px;
+}
+
+.imgDiv{
+    margin:auto;
+    width:50%;
+    height:400px;
+    visibility:hidden;
+}
+
+.timerWord{
+    text-align: center;
+    font-size:40px;
+}
+
+.changeBlindnessImg{
+    position:absolute;
+    width:50%;
+    height:400px;
+    visibility:hidden;
+}
+
+.imgGray{
+    position:absolute;
+    width:50%;
+    height:400px;
+    background-color:gray;
+    visibility:hidden;
+}
+
+.CBanswerDiv{
+    position:relative;
+    width:5%;
+    height:60px;
+	top:260px;
+	left:38%;
+}
+
+.choice{
+    position:relative;
+    top:80px;
+    width:50;
+    margin-left:65%;
+}
+.ansButton{
+    width:25%;
+    height:5%;
+    font-size:22px;
+    float:left;
+    margin-left:17%;
+    visibility:hidden;
+}
+.navButtonContainer{
+    width:50%;
+    margin-left:25%;
+    margin-top:5%;
+}
+.stopImgButton{
+	position: absolute;
+    width:10%;
+    height:55px;
+	text-align: center;
+	color: white;
+    border-style: none;
+	border-radius: 10px;
+	background-color:red;
+	top:150px;
+    font-size:22px;
+    margin-left:65%;
+    visibility:hidden;
+}
