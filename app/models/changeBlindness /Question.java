@@ -12,8 +12,10 @@ public class Question extends Model{
     public long id;
     public String pathOfPic1;
     public String pathOfPic2;
-    public int positionOfChangeX;
-    public int positionOfChangeY;
+    public double answerAreaWidth;
+    public double answerAreaHeight;
+    public double positionOfChangeX;
+    public double positionOfChangeY;
     @OneToMany
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
@@ -22,9 +24,12 @@ public class Question extends Model{
         this.pathOfPic2 = "";
         this.positionOfChangeX = 0;
         this.positionOfChangeY = 0;
+        answerAreaWidth = 0;
+        answerAreaHeight = 0;
+
     }
 
-    public Question(String pathOfPic1, String pathOfPic2, int positionOfChangeX, int positionOfChangeY){
+    public Question(String pathOfPic1, String pathOfPic2, double positionOfChangeX, double positionOfChangeY){
         this.pathOfPic1 = pathOfPic1;
         this.pathOfPic2 = pathOfPic2;
         this.positionOfChangeX = positionOfChangeX;
