@@ -52,22 +52,26 @@ public class ChangeBlindnessUnitTest extends WithApplication {
 
     @Test
     public void createQuestionShouldWithParameterCorrect(){
-        Question question = new Question("path/of/pic1.jpg", "path/of/pic2.jpg",10 ,20);
+        Question question = Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20);
         assertEquals("path/of/pic1.jpg", question.pathOfPic1);
         assertEquals("path/of/pic2.jpg", question.pathOfPic2);
-        assertEquals(10, question.positionOfChangeX);
-        assertEquals(20, question.positionOfChangeY);
+        assertEquals(1.5, question.answerAreaWidth, 0.001);
+        assertEquals(1.9, question.answerAreaHeight, 0.001);
+        assertEquals(10, question.positionOfChangeX, 0.001);
+        assertEquals(20, question.positionOfChangeY, 0.001);
     }
 
     @Test
     public void queryQuestionShouldCorrect(){
-        new Question("path/of/pic1.jpg", "path/of/pic2.jpg",10 ,20).save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
         Question question = Question.find.byId(1L);
         assertNotNull(question);
         assertEquals("path/of/pic1.jpg", question.pathOfPic1);
         assertEquals("path/of/pic2.jpg", question.pathOfPic2);
-        assertEquals(10, question.positionOfChangeX);
-        assertEquals(20, question.positionOfChangeY);
+        assertEquals(1.5, question.answerAreaWidth, 0.001);
+        assertEquals(1.9, question.answerAreaHeight, 0.001);
+        assertEquals(10, question.positionOfChangeX, 0.001);
+        assertEquals(20, question.positionOfChangeY, 0.001);
     }
 
     @Test
@@ -75,7 +79,7 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        Question question = new Question("path/of/pic1.jpg", "path/of/pic2.jpg",10 ,20);
+        Question question = Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20);
         Quiz quiz = new Quiz(trial, 15, question);
 
         assertNotNull(quiz);
@@ -89,7 +93,7 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question("path/of/pic1.jpg", "path/of/pic2.jpg",10 ,20).save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
         Question question = Question.find.byId(1L);
         new Quiz(trial, 120, question).save();
         Quiz quiz = Quiz.find.byId(1L);
@@ -104,7 +108,7 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question("path/of/pic1.jpg", "path/of/pic2.jpg",10 ,20).save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
         Question question = Question.find.byId(1L);
         new Quiz(trial, 60, question).save();
         Quiz quiz = Quiz.find.byId(1L);
@@ -117,8 +121,8 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         assertNotNull(answer);
         assertEquals(user, answer.user);
         assertEquals(quiz, answer.quiz);
-        assertEquals(10, answer.positionOfChangeX);
-        assertEquals(20, answer.positionOfChangeY);
+        assertEquals(10, answer.positionOfChangeX, 0.001);
+        assertEquals(20, answer.positionOfChangeY, 0.001);
         assertEquals(10.5, answer.usedTime,0.001);
         assertTrue(answer.isCorrect);
     }
@@ -128,7 +132,7 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question("path/of/pic1.jpg", "path/of/pic2.jpg",10 ,20).save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
         Question question = Question.find.byId(1L);
         new Quiz(trial, 60, question).save();
         Quiz quiz = Quiz.find.byId(1L);
@@ -144,8 +148,8 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         assertNotNull(answer);
         assertEquals(user, answer.user);
         assertEquals(quiz, answer.quiz);
-        assertEquals(10, answer.positionOfChangeX);
-        assertEquals(20, answer.positionOfChangeY);
+        assertEquals(10, answer.positionOfChangeX,0.001);
+        assertEquals(20, answer.positionOfChangeY,0.001);
         assertEquals(10.5, answer.usedTime,0.001);
         assertTrue(answer.isCorrect);
     }
@@ -155,9 +159,9 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question("path/of/pic1.jpg", "path/of/pic2.jpg",10 ,20).save();
-        new Question("path/of/pic3.jpg", "path/of/pic4.jpg",30 ,40).save();
-        new Question("path/of/pic5.jpg", "path/of/pic6.jpg",100 ,200).save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
+        Question.create("path/of/pic3.jpg", "path/of/pic4.jpg",15,19,30 ,40).save();
+        Question.create("path/of/pic5.jpg", "path/of/pic6.jpg",5.0,15,100 ,200).save();
         Question question1 = Question.find.byId(1L);
         Question question2 = Question.find.byId(2L);
         Question question3 = Question.find.byId(3L);
