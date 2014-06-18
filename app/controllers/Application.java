@@ -98,7 +98,6 @@ public class Application extends Controller {
             return ok(views.html.trial.render(exp.experimentType.toString() ,user));
         }
         TimeLog.create(new Date(), user, trialId, exp).save();
-        
         Result nextPage = badRequest(views.html.trial.render(exp.experimentType.toString() , user));
 
         switch(exp.experimentType){

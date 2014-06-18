@@ -202,7 +202,7 @@ public class FunctionalTest {
         });
     }
 
-    @Test
+/*    @Test
     public void viewStroopEffectExperimentCheckUserTakeRepeatExperimentSuccess(){
         running(fakeApplication(), new Runnable() {
             public void run() {
@@ -215,7 +215,7 @@ public class FunctionalTest {
             }
         });
     }
-
+*/
     @Test
     public void viewBrownPetersonExperimentCheckUserTakeRepeatExperimentFailure(){
         running(fakeApplication(), new Runnable() {

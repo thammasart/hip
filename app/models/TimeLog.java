@@ -42,6 +42,10 @@ public class TimeLog extends Model{
 		return timeLog != null;
 	}
 
+	public static TimeLog findByUserAndTrialId(User user, Long trialId){
+		return TimeLog.find.where().eq("user", user).eq("trialId", trialId).findUnique();
+	}
+
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, TimeLog> find = new Finder(Long.class, TimeLog.class);
 }

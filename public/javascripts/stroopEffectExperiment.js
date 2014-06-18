@@ -47,4 +47,10 @@ function submitButtonClick(clicked_name){
      expDuration = d.getTime()-expDuration;
      document.getElementById("usedTime").value = expDuration/1000;
      document.getElementById("answer").value = clicked_name;
+     if (clicked_name.toUpperCase() == document.getElementById("inkColor").innerHTML.toUpperCase()){
+        document.getElementById("isCorrect").checked = true;
+     }
+     else{
+        document.getElementById("isCorrect").checked = false;
+     }
 }

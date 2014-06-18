@@ -101,4 +101,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     })
     .controller('MagicNumber7Ctrl', function($scope){
         $scope.word = /^[1-9]{1}\.[0-9]+$/;
+    })
+    .controller('SimonEffectCtrl', function($scope){
+        $scope.trials = [];
+        $scope.floatPattern = /^[0-1]{1}\.[0-9]+$/;
     });

@@ -1,8 +1,11 @@
 package models.simonEffect;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import models.ExperimentSchedule;
 
 import play.db.ebean.*;
+import play.libs.Json;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -43,5 +46,10 @@ public class Trial extends Model{
             Quiz quiz = Quiz.create(this);
             quiz.save();
         }
+    }
+
+    public String getTrialJson(){
+        JsonNode json = Json.toJson(this);
+        return Json.stringify(json);
     }
 }

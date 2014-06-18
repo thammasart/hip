@@ -1,8 +1,11 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.ExperimentSchedule;
 
 import play.*;
+import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
 
@@ -107,7 +110,9 @@ public class VisualSearch extends Controller{
                 break;
         }
 
-        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left));
+        String json = "[{top:3,left:5},{top:19,left:20}]";
+
+        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left,json));
     }
 
 

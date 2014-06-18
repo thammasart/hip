@@ -1,4 +1,4 @@
-package models.garnerInterference;
+package models.changeBlindness;
 
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
@@ -7,18 +7,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table (name="garner_interference_trial")
+@Table (name="change_blindness_trial")
 public class Trial extends Model{
     @Id
     public long id;
-    public double lengthBigSquare;
-    public double lengthSmallSquare;
-    public String color;
-    public Feature feature; // one feature or two feature
-    @ManyToOne
-    public Color colorDark;
-    @ManyToOne
-    public Color colorLight;
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany
@@ -35,11 +27,4 @@ public class Trial extends Model{
     @SuppressWarnings("unchecked")
     public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 
-    public static Trial create(ExperimentSchedule experimentSchedule) {
-        return null;
-    }
-
-    public void generateQuiz() {
-
-    }
 }
