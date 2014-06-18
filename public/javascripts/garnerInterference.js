@@ -8,6 +8,9 @@ var expDuration = 0;
 var d = 0;
 var score = 0;
 
+ function getQuestionType() { 
+    return document.getElementById("questionType").innerHTML.toString();
+ } 
 function setup(){
 
     var bigSQ = document.getElementsByClassName('bigSquare');
@@ -72,27 +75,63 @@ function delay(){
     }
     document.getElementById("ansSquare").style.display= "table";
 
-    //delayTime2 = setInterval(function(){showQuestion()},5000);
+    delayTime2 = setInterval(function(){showQuestion()},5000);
 }
 function showQuestion(){
     clearInterval(delayTime2);
+
+    var qColor =getQcolor();
+    var qSize=getQsize() ;    
     d = new Date();
     expDuration = d.getTime();
+    document.getElementById("ansBox").style.visibility = "hidden";
+    document.getElementById("ansBox").style.display= "none";
     document.getElementById("ic").style.visibility = "visible";
+    document.getElementById("ic").style.paddingTop= "3%";
     document.getElementById("yes").style.visibility = "visible";
     document.getElementById("no").style.visibility = "visible";
-    document.getElementById("q").style.marginTop = "10%";
-    document.getElementById("q").innerHTML = " ใช่สี่เหลี่ยมสีเข้มขนาดเล็กหรือไม่ " ;
+
+    if(getQuestionType()=="BOTH"){
+        document.getElementById("ques").innerHTML = "ใช้สี่เหลี่ยม"+qColor+qSize+"หรือไม่";
+    } else if (getQuestionType()=="COLOR"){
+        document.getElementById("ques").innerHTML = "ใช้สี่เหลี่ยม"+qColor+"หรือไม่";
+    } else if (getQuestionType()=="SIZE"){
+        document.getElementById("ques").innerHTML = "ใช้สี่เหลี่ยม"+qSize+"หรือไม่";
+    }
 }
 
+ function getQcolor() { 
+    if(document.getElementById("colorQuestion").innerHTML=="light"){
+        return "สีอ่อน";
+    }else  return "สีเข้ม";
+ } 
+ function getQsize() { 
+    if(document.getElementById("sizeQuestion").innerHTML=="big"){ 
+        return "ขนาดใหญ่";
+    } else return "ขนาดเล็ก"; 
+ }
 function done(name){
     d = new Date();
     expDuration = (d.getTime()-expDuration)/1000;
+    document.getElementById("usedTime").value = expDuration;
 
-    if(name == "yes"){
-        score = score+1;
-    }
-    document.getElementById("time").value = expDuration;
+    var colorM = document.getElementById("colorMatch").innerHTML;
+    var sizeM = document.getElementById("sizeMatch").innerHTML;
+
+    if(getQuestionType() == "COlOR"){
+        if((colorM == "true" && name == "yes") || (colorM == "false" && name == "no")){
+            document.getElementById("isCorrect").checked = true;
+        } else document.getElementById("isCorrect").checked = false;
+
+    }else if(getQuestionType() == "SIZE"){
+        if((sizeM== "true" && name == "yes") || (sizeM== "false" && name == "no")){
+            document.getElementById("isCorrect").checked = true;
+        } else document.getElementById("isCorrect").checked = false;
+
+    } else if (getQuestionType() == "BOTH"){
+        if((name == "yes" && sizeM =="true" && colorM == "true") || (name == "no" && (sizeM == "false"||colorM == "false"))){
+            document.getElementById("isCorrect").checked = true;
+        } else document.getElementById("isCorrect").checked = false;
+    } // end big if
     document.getElementById("score").value = score;
-
 }

@@ -28,10 +28,9 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         <span id="word" style="font-size:60px;"> </span>
     </div>
 
+        <div align="center"id="ic"  style="visibility:hidden; " > <h3 id="ques"> จำลักษณะของรูปทั้ง 4 แบบไว้ (ทั้งขนาดและสี)</h3> </div>
 
         <div class="mainContainer" align="center" id="mc" >
-            
-        <div align="center"id="ic"  style="visibility:hidden; " > <h3 id="q"> จำลักษณะของรูปทั้ง 4 แบบไว้ (ทั้งขนาดและสี)</h3> </div>
 
             <div class="bigSquare dark"id="x" style="margin-left:3.5%;">
                 <div class="absoluteSquare" ><div><span class="nameTag"> A </span></div></div>
@@ -46,19 +45,17 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                 <div class="absoluteSquare" ><div><span class="nameTag"> D </span></div></div>
             </div>
 
-            
-
-
-        <div align="center"id="ic2" class="underWord" > <h3 id="q"> เมื่อพร้อมแล้วให้กดปุ่ม เริ่มการทดลอง </h3> </div>
-        <div ><button class="btn btn-success startButton" onclick="return showTimer()"> เริ่มการทดลอง </button></div>
+            <div align="center"id="ic2" class="underWord" > <h3 > เมื่อพร้อมแล้วให้กดปุ่ม เริ่มการทดลอง </h3> </div>
+            <div ><button class="btn btn-success startButton" onclick="return showTimer()"> เริ่มการทดลอง </button></div>
         </div>
-            <div class="ansBox" id="ansBox">
-                <div class="smallSquare light ansSquare" id="ansSquare">
-                    <div class="absoluteSquare" ><div><span class="nameTag"></span></div></div>
-                </div>
+
+        <div class="ansBox" id="ansBox">
+            <div class="smallSquare light ansSquare" id="ansSquare">
+                <div class="absoluteSquare" ><div><span class="nameTag"></span></div></div>
             </div>
+        </div>
         
-            <form action="@routes.GarnerInterference.demoReport()" method="post">
+            <form action="@routes.GarnerInterference.saveAnswer(trial.id,questionNo)" id="answerForm" method="post">
            <!-- <div class="smallSquare dark sq" style="visibility:hidden;" id="sq">
             </div>
 --!>
@@ -75,11 +72,27 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             <div id="colorLight" hidden>@trial.colorLight.colorCode</div>
             <div id="colorPic" hidden>@trial.quizzes(questionNo).question.colorPic</div>
             <div id="sizePic" hidden>@trial.quizzes(questionNo).question.sizePic</div>
+            <div id="colorMatch" hidden>@trial.quizzes(questionNo).question.colorMatch</div>
+            <div id="sizeMatch" hidden>@trial.quizzes(questionNo).question.sizeMatch</div>
             <div id="colorQuestion" hidden>@trial.quizzes(questionNo).question.colorQuestion</div>
             <div id="sizeQuestion" hidden>@trial.quizzes(questionNo).question.sizeQuestion</div>
-            <div hidden> @trial.quizzes(questionNo).questionType</div>
+
+            @trial.quizzes(questionNo).questionType match{
+                case models.garnerInterference.QuestionType.BOTH => {
+                    <div id="questionType"  hidden>BOTH</div>
+                }
+                case models.garnerInterference.QuestionType.COLOR=> {
+                    <div id="questionType"  hidden>COLOR</div>
+                }
+                case models.garnerInterference.QuestionType.SIZE=> {
+                    <div id="questionType"  hidden>SIZE</div>
+                }
+            }
+
                 <input id="score" name="score" hidden/>
-                <input id="time" name="time" hidden/>
+                <input id="usedTime" name="usedTime" hidden/>
+                <input id="isCorrect" name="isCorrect" type="checkbox" hidden/>
+                <input id="usedTime" name="usedTime" hidden/>
             </form>
     </div>
     @footer()
