@@ -7,6 +7,7 @@ import play.mvc.*;
 import play.data.*;
 
 import models.User;
+import models.changeBlindness.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -63,13 +64,14 @@ public class ChangeBlindness extends Controller{
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo){
-        return TODO;
+        Trial trial = Trial.find.byId(trialId);
+        return ok(inst.render(trial,questionNo));
     }
 
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result doExperiment(long trialId, int questionNo){
-        return TODO;
+        return ok(exp.render(Trial.find.byId(trialId),questionNo));
     }
 
     @Security.Authenticated(Secured.class)

@@ -1,0 +1,35 @@
+@(trial : models.changeBlindness.Trial,questionNo : Integer)
+@header("Human Information Processing Lab :: Home Page")
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/simonEffect.css")">
+<body>
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center" style="margin-top:30px" >Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div class="expMainWindow">
+    <div class="simonIntroCenterWord"  >
+        <div class="simonIntroDiv">
+            <li> ให้ท่านสังเกตุความเปลี่ยนแปลงที่ปรากฏขึ้นในภาพ 2 ภาพที่ปรากฎสลับกัน</li>
+            <li> ระบบจะกำหนดระยะเวลา ที่ท่านสามารถทำการสังเกตุความเปลี่ยนแปลงนั้นได้</li>
+            <li> เพื่อตอบคำถาม ท่านสามารถกดปุ่มหยุดภาพก่อนเวลาในการตอบคำถามจะหมด</li>
+            <li> เมื่อหยุดภาพหรือหมดเวลาแล้ว ให้ท่านคลิกบนภาพตรงจุดที่ท่านเห็นว่ามีการเปลี่ยนแปลงเกิดขึ้น</li>
+            <p>เมื่อท่านพร้อมแล้วกดปุ่ม เริ่มการทดลอง</p>
+        </div>
+        <div class="procButtonGreen simonExpButton">
+            <a href="@routes.ChangeBlindness.doExperiment(trial.id,questionNo)" class="btn  btn-success " >เริ่มการทดลอง</a>
+        </div>
+    </div>
+
+</div>
+@footer()

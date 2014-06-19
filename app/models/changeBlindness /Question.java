@@ -16,22 +16,28 @@ public class Question extends Model{
     public double answerAreaHeight;
     public double positionOfChangeX;
     public double positionOfChangeY;
-    @OneToMany
-    public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(){
         this.pathOfPic1 = "";
         this.pathOfPic2 = "";
-        this.positionOfChangeX = 0;
-        this.positionOfChangeY = 0;
-        answerAreaWidth = 0;
-        answerAreaHeight = 0;
-
+        this.answerAreaWidth = 10.0;
+        this.answerAreaHeight = 10.0;
+        this.positionOfChangeX = 0.0;
+        this.positionOfChangeY = 0.0;
     }
 
     public Question(String pathOfPic1, String pathOfPic2, double positionOfChangeX, double positionOfChangeY){
         this.pathOfPic1 = pathOfPic1;
         this.pathOfPic2 = pathOfPic2;
+        this.positionOfChangeX = positionOfChangeX;
+        this.positionOfChangeY = positionOfChangeY;
+    }
+
+    public Question(String pathOfPic1, String pathOfPic2, double answerAreaWidth, double answerAreaHeight, double positionOfChangeX, double positionOfChangeY){
+        this.pathOfPic1 = pathOfPic1;
+        this.pathOfPic2 = pathOfPic2;
+        this.answerAreaWidth = answerAreaWidth;
+        this.answerAreaHeight = answerAreaHeight;
         this.positionOfChangeX = positionOfChangeX;
         this.positionOfChangeY = positionOfChangeY;
     }
