@@ -16,16 +16,14 @@ public class Question extends Model{
     public double answerAreaHeight;
     public double positionOfChangeX;
     public double positionOfChangeY;
-    @OneToMany
-    public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(){
         this.pathOfPic1 = "";
         this.pathOfPic2 = "";
-        this.positionOfChangeX = 0;
-        this.positionOfChangeY = 0;
-        this.answerAreaWidth = 0;
-        this.answerAreaHeight = 0;
+        this.answerAreaWidth = 10.0;
+        this.answerAreaHeight = 10.0;
+        this.positionOfChangeX = 0.0;
+        this.positionOfChangeY = 0.0;
     }
 
     public static Question create(String pathOfPic1, String pathOfPic2, double answerAreaWidth, 
@@ -38,6 +36,15 @@ public class Question extends Model{
         newQuestion.positionOfChangeX = positionOfChangeX;
         newQuestion.positionOfChangeY = positionOfChangeY;
         return newQuestion;
+    }
+
+    public Question(String pathOfPic1, String pathOfPic2, double answerAreaWidth, double answerAreaHeight, double positionOfChangeX, double positionOfChangeY){
+        this.pathOfPic1 = pathOfPic1;
+        this.pathOfPic2 = pathOfPic2;
+        this.answerAreaWidth = answerAreaWidth;
+        this.answerAreaHeight = answerAreaHeight;
+        this.positionOfChangeX = positionOfChangeX;
+        this.positionOfChangeY = positionOfChangeY;
     }
 
     @SuppressWarnings("unchecked")

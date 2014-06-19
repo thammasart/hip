@@ -15,6 +15,7 @@ public class Global extends GlobalSettings {
 			Ebean.save((List) Yaml.load("mullerLayer.yml"));
 			Ebean.save((List) Yaml.load("garnerInterference.yml"));
 			Ebean.save((List) Yaml.load("visualSearch.yml"));
+            Ebean.save((List) Yaml.load("changeBlindness.yml"));
 			Ebean.save((List) Yaml.load("user.yml"));
 		}
 	}

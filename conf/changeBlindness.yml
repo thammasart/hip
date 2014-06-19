@@ -1,0 +1,42 @@
+#Experiment Schedule
+- &ex23 !!models.ExperimentSchedule
+    name:           Ex21
+    noOfTrial:      3
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: CHANGEBLINDNESS
+- &ex24 !!models.ExperimentSchedule
+    name:           Ex22
+    noOfTrial:      3
+    startDate:      2014-01-30
+    expireDate:     2015-02-07
+    experimentType: CHANGEBLINDNESS
+#Trial
+- &round51 !!models.changeBlindness.Trial
+    schedule: *ex23
+- &round52 !!models.changeBlindness.Trial
+    schedule: *ex24
+#Question
+- &Question129 !!models.changeBlindness.Question
+    pathOfPic1: abc
+    pathOfPic2: abc
+    answerAreaWidth: 20.0
+    answerAreaHeight: 20.0
+    positionOfChangeX: 10.0
+    positionOfChangeY: 10.0
+- &Question130 !!models.changeBlindness.Question
+    pathOfPic1: cde
+    pathOfPic2: cde
+    answerAreaWidth: 20.0
+    answerAreaHeight: 20.0
+    positionOfChangeX: 2.0
+    positionOfChangeY: 2.0
+#Quiz
+- &Quiz125 !!models.changeBlindness.Quiz
+    displayTime: 60
+    trial: *round51
+    question: *Question129
+- &Quiz126 !!models.changeBlindness.Quiz
+    displayTime: 30
+    trial: *round52
+    question: *Question130
