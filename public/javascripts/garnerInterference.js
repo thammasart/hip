@@ -1,4 +1,3 @@
-var startTimer = setInterval(function() {showSquare()},2000);
 var showTimerTime = 0;
 var showTimerTime2 = 0;
 var count = 5;
@@ -7,11 +6,18 @@ var delayTime2 = 0;
 var expDuration = 0;
 var d = 0;
 var score = 0;
+var startTimer = 0; 
 
  function getQuestionType() { 
     return document.getElementById("questionType").innerHTML.toString();
  } 
-function setup(){
+function setup(qn){
+
+if(qn == 0 ){ 
+    startTimer = setInterval(function() {showSquare()},2000);
+}else{ 
+    startTimer = setInterval(function() {showTimer()},2000);
+}
 
     var bigSQ = document.getElementsByClassName('bigSquare');
     var smallSQ = document.getElementsByClassName('smallSquare');
@@ -40,6 +46,7 @@ function showSquare(){
 }
 
 function showTimer(){
+    clearInterval(startTimer);
     document.getElementById("mc").style.visibility = "hidden";
     document.getElementById("mc").style.display= "none";
     document.getElementById("ic").style.visibility = "hidden";
