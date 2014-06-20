@@ -1,14 +1,15 @@
 @(trial : models.changeBlindness.Trial,questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
+
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
 window.location.hash="no-back-button";
 window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
 window.onhashchange=function(){window.location.hash="no-back-button";}
-
 </script>
+
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/simonEffect.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/changeBlindness.css")">
 <body>
 
 <!-- Page Header -->
@@ -18,15 +19,15 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <div class="titleLine"></div>
 </div>
 <div class="expMainWindow">
-    <div class="simonIntroCenterWord"  >
-        <div class="simonIntroDiv">
-            <li> ให้ท่านสังเกตุความเปลี่ยนแปลงที่ปรากฏขึ้นในภาพ 2 ภาพที่ปรากฎสลับกัน</li>
-            <li> ระบบจะกำหนดระยะเวลา ที่ท่านสามารถทำการสังเกตุความเปลี่ยนแปลงนั้นได้</li>
-            <li> เพื่อตอบคำถาม ท่านสามารถกดปุ่มหยุดภาพก่อนเวลาในการตอบคำถามจะหมด</li>
-            <li> เมื่อหยุดภาพหรือหมดเวลาแล้ว ให้ท่านคลิกบนภาพตรงจุดที่ท่านเห็นว่ามีการเปลี่ยนแปลงเกิดขึ้น</li>
+    <div class="changeBlindnessIntroCenterWord"  >
+        <div class="changeBlindnessIntroDiv">
+            <p> 1. ให้ท่านสังเกตุความเปลี่ยนแปลงที่ปรากฏขึ้นในภาพ 2 ภาพที่ปรากฎสลับกัน</p>
+            <p> 2. ระบบจะกำหนดระยะเวลา ที่ท่านสามารถทำการสังเกตุความเปลี่ยนแปลงนั้นได้</p>
+            <p> 3. เพื่อตอบคำถาม ท่านสามารถกดปุ่มหยุดภาพก่อนเวลาในการตอบคำถามจะหมด</p>
+            <p> 4. เมื่อหยุดภาพหรือหมดเวลาแล้ว ให้ท่านคลิกบนภาพตรงจุดที่ท่านเห็นว่ามีการเปลี่ยนแปลงเกิดขึ้น</p>
             <p>เมื่อท่านพร้อมแล้วกดปุ่ม เริ่มการทดลอง</p>
         </div>
-        <div class="procButtonGreen simonExpButton">
+        <div class="procButtonGreen changeBlindnessExpButton">
             <a href="@routes.ChangeBlindness.doExperiment(trial.id,questionNo)" class="btn  btn-success " >เริ่มการทดลอง</a>
         </div>
     </div>

@@ -18,25 +18,69 @@
     schedule: *ex24
 #Question
 - &Question129 !!models.changeBlindness.Question
-    pathOfPic1: abc
-    pathOfPic2: abc
+    pathOfPic1: /assets/images/02a.jpg
+    pathOfPic2: /assets/images/02b.jpg
     answerAreaWidth: 20.0
-    answerAreaHeight: 20.0
-    positionOfChangeX: 10.0
-    positionOfChangeY: 10.0
+    answerAreaHeight: 15.0
+    positionOfChangeX: 25.0
+    positionOfChangeY: 45.0
 - &Question130 !!models.changeBlindness.Question
-    pathOfPic1: cde
-    pathOfPic2: cde
-    answerAreaWidth: 20.0
-    answerAreaHeight: 20.0
-    positionOfChangeX: 2.0
-    positionOfChangeY: 2.0
+    pathOfPic1: /assets/images/04a.jpg
+    pathOfPic2: /assets/images/04b.jpg
+    answerAreaWidth: 25.0
+    answerAreaHeight: 45.0
+    positionOfChangeX: 7.0
+    positionOfChangeY: 40.0
+- &Question131 !!models.changeBlindness.Question
+    pathOfPic1: /assets/images/01a.jpg
+    pathOfPic2: /assets/images/01b.jpg
+    answerAreaWidth: 10.0
+    answerAreaHeight: 10.0
+    positionOfChangeX: 46.0
+    positionOfChangeY: 43.0
+- &Question132 !!models.changeBlindness.Question
+    pathOfPic1: /assets/images/06a.jpg
+    pathOfPic2: /assets/images/06b.jpg
+    answerAreaWidth: 5.0
+    answerAreaHeight: 13.0
+    positionOfChangeX: 70.0
+    positionOfChangeY: 57.0
+- &Question133 !!models.changeBlindness.Question
+    pathOfPic1: /assets/images/07a.jpg
+    pathOfPic2: /assets/images/07b.jpg
+    answerAreaWidth: 5.0
+    answerAreaHeight: 8.0
+    positionOfChangeX: 75.0
+    positionOfChangeY: 39.0
+- &Question134 !!models.changeBlindness.Question
+    pathOfPic1: /assets/images/03a.jpg
+    pathOfPic2: /assets/images/03b.jpg
+    answerAreaWidth: 17.0
+    answerAreaHeight: 10.0
+    positionOfChangeX: 35.0
+    positionOfChangeY: 52.0
 #Quiz
 - &Quiz125 !!models.changeBlindness.Quiz
     displayTime: 60
     trial: *round51
     question: *Question129
 - &Quiz126 !!models.changeBlindness.Quiz
+    displayTime: 60
+    trial: *round51
+    question: *Question130
+- &Quiz127 !!models.changeBlindness.Quiz
+    displayTime: 60
+    trial: *round51
+    question: *Question131
+- &Quiz128 !!models.changeBlindness.Quiz
     displayTime: 30
     trial: *round52
-    question: *Question130
+    question: *Question132
+- &Quiz129 !!models.changeBlindness.Quiz
+    displayTime: 30
+    trial: *round52
+    question: *Question133
+- &Quiz130 !!models.changeBlindness.Quiz
+    displayTime: 30
+    trial: *round52
+    question: *Question134
