@@ -147,7 +147,7 @@
 }
 .box{
     background:#fff;
-    width:800px;
+    width:1000px;
     height:500px;
     margin:100px auto;
     padding:5px 15px;
@@ -166,15 +166,40 @@
     margin:1%;
 }
 .OverlayTagSize{
-    width:35%;
+    width:15%;
     float:left;
-
+    margin-left:2%;
+}
+.OverlayTextBoxContainer{
+    width:23%;
+    float:left;
+}
+.OverlayTextBox{
+    border-top-left-radius:6px;
+    border-bottom-left-radius:6px;
+    border:solid;
+    border-color:lightgray;
+}
+.Overlaybutton{
+    width:30px;
+    height:30px;
 }
 .OverlayDateTag{
     float:left;
     margin: 0 1% 0 1%;
     padding-top:0.5%;
     font-size:120%;
+    display:inline-block;
+}
+.findTrialButton{
+    height:148%;
+    margin-bottom:6.5%;
+}
+.trialInputContainer{
+    width:100%;
+    height:40px;
+    float:left;
+    display:inline-block;
 }
 .nav li {
     padding:10px 30px;
