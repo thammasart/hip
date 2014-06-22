@@ -73,21 +73,37 @@
 }
 
 .dropZone{
-    /*width:11.4%;*/
-    height:100%;
+    width:100%;
     border:thick solid;
     margin-left:1%;
     border-radius:15px;
     border-color:#BBC6D1;
     color:#556C82;
     background-color:white;
+    position:relative;
+}
+.dropZone:before{
+    display:block;
+    Content:"";
+    padding-top:100%;
 }
 
 .dropChar{
-    width:100px;
-    height:100px;
+   /* width:100px;
+    height:100px;*/
     font-size:60px;
     margin-left:-5%;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+
+}
+.dropChar div{
+    display:table;
+    width:100%;
+    height:100%;
 }
 .dropZoneBox{
     border:dashed;
