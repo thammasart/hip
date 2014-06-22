@@ -65,7 +65,7 @@ public class BrownPeterson extends Controller {
         List<Answer> answers = new ArrayList<Answer>();
         answers.add(answer);
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,answer.usedTime,1, "Report", user));
+        return ok(demoReport.render(score,answer.usedTime,1, "Report", user));
     }
 
     @Security.Authenticated(Secured.class)

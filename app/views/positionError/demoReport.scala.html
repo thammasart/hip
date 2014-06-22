@@ -17,9 +17,9 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         </div>
     </div>
     <div class="navContainer">
-        <a class="btn btn-danger navButton" href="@routes.PositionError.proc()"><span class="glyphicon glyphicon-th"></span> กลับไปขั้นตอนการทดลอง </a>
-        <a class="btn btn-primary navButton navButtonDemo" href="@routes.PositionError.demoPage()"><span class="glyphicon glyphicon-th-list"></span> ทดลองเล่นอีกครั้ง </a>
-        <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.POSITIONERROR.toString())"><span class="glyphicon glyphicon-stats"></span> เริ่มการทดลอง </a>
+        <a class="btn btn-danger navButton" href="@routes.PositionError.proc()"><span class="glyphicon glyphicon-chevron-left"></span>กลับไปขั้นตอนการทดลอง</a>
+        <a class="btn btn-primary navButton navButtonDemo" href="@routes.PositionError.demoPage()"><span class="glyphicon glyphicon-repeat"></span>ทดลองเล่นอีกครั้ง</a>
+        <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.POSITIONERROR.toString())"><span class="glyphicon glyphicon-th-list"></span>เลือก Trial การทดลอง</a>
     </div>
 </div>
 @footer()
