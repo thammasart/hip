@@ -69,19 +69,21 @@ document.onkeydown = checkKey;
 function checkKey(e) {
     if (isTimeToAnswer == true){
         e = e || window.event;
-        document.getElementById("answer").checked = false;
         if (e.keyCode == '37') {
             isTimeToAnswer = false;
             // left arrow
             calculateAnswerTime();
+            document.getElementById("answer").innerHTML = "left";
             if (question_direction == "left" && expDuration/1000 < 0.8)
                 document.getElementById("isCorrect").checked = true;
             document.forms["answerForm"].submit();
         }
         else if (e.keyCode == '38') {
             isTimeToAnswer = false;
+
             // up arrow
             calculateAnswerTime();
+            document.getElementById("answer").innerHTML = "up";
             if (question_direction == "up" && expDuration/1000 < 0.8)
                 document.getElementById("isCorrect").checked = true;
             document.forms["answerForm"].submit();
@@ -90,6 +92,7 @@ function checkKey(e) {
             isTimeToAnswer = false;
             // right arrow
             calculateAnswerTime();
+            document.getElementById("answer").innerHTML = "right";
             if (question_direction == "right" && expDuration/1000 < 0.8)
                 document.getElementById("isCorrect").checked = true;
             document.forms["answerForm"].submit();
@@ -98,6 +101,7 @@ function checkKey(e) {
             isTimeToAnswer = false;
             // down arrow
             calculateAnswerTime();
+            document.getElementById("answer").innerHTML = "down";
             if (question_direction == "down" && expDuration/1000 < 0.8)
                 document.getElementById("isCorrect").checked = true;
             document.forms["answerForm"].submit();

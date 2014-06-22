@@ -1,6 +1,6 @@
 @(trial : models.changeBlindness.Trial, questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
-<!--
+
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
@@ -9,7 +9,7 @@ window.location.hash="Again-No-back-button";//again because google chrome don't 
 window.onhashchange=function(){window.location.hash="no-back-button";}
 
 </script>
---!>
+
 <script src="@routes.Assets.at("javascripts/changeBlindness.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/changeBlindness.css")">
 <body onload="onLoad()">
@@ -20,29 +20,31 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <!-- Dashed line-->
     <div class="titleLine"></div>
 </div>
-<div class="changeBlindnessExp">
+<div id= "changeBlindnessExp" class="changeBlindnessExp">
     <div class="changeBlindnessWord"  >
         <p id="word" >  </p>
     </div>
     <p id="timerWord" class = "timerWord">  </p>
     <button id = "stopB"class="stopImgButton" href="@routes.ChangeBlindness.proc()" onclick="stopImg()"> หยุดภาพ </button>
     <div id = "imgDiv" class="imgDiv">
-        <img name = "X" id = "img1" class="changeBlindnessImg" onclick="done(this.name)" src=@trial.quizzes(questionNo).question.pathOfPic1 >
+        <img name = "X" id = "img1" class="changeBlindnessImg" onclick="done(this.name,event)" src=@trial.quizzes(questionNo).question.pathOfPic1 >
         <img name = "X" id = "imgGray" class="imgGray">
-        <img name = "X" id = "img2" class="changeBlindnessImg"  onclick="done(this.name)" src=@trial.quizzes(questionNo).question.pathOfPic2 >
-        <div name = "Y" id = "ansDiv" class = "CBanswerDiv" onclick="done(this.name)" ></div>
+        <img name = "X" id = "img2" class="changeBlindnessImg"  onclick="done(this.name,event)" src=@trial.quizzes(questionNo).question.pathOfPic2 >
+        <div name = "Y" id = "ansDiv" class = "CBanswerDiv" onclick="done(this.name,event)" ></div>
 
     </div>
-    <form id = "answerForm" action="@routes.ChangeBlindness.demoReport()" method="post" >
+    <form id = "answerForm" action="@routes.ChangeBlindness.saveAnswer(trial.id,questionNo)" method="post" >
         <div class="choice" align="center" id="choice" >
             <input id = "usedTime" name = "usedTime" type="text" hidden>
-            <input id = "score" name = "score" type="text" hidden/>
+            <input id = "positionOfChangeX" name = "positionOfChangeX" type="text" hidden>
+            <input id = "positionOfChangeY" name = "positionOfChangeY" type="text" hidden>
+            <input id = "isCorrect" name = "isCorrect" type="checkbox" hidden/>
         </div>
     </form>
 
 
     <p id = "quiz_displayTime" hidden>@trial.quizzes(questionNo).displayTime</p>
-    <p id = "question_pathOfPic1" > @trial.quizzes(questionNo).question.pathOfPic1</p>
+    <p id = "question_pathOfPic1" hidden> @trial.quizzes(questionNo).question.pathOfPic1</p>
     <p id = "question_pathOfPic2" hidden> @trial.quizzes(questionNo).question.pathOfPic2</p>
     <p id = "question_answerAreaWidth" hidden>@trial.quizzes(questionNo).question.answerAreaWidth</p>
     <p id = "question_answerAreaHeight" hidden>@trial.quizzes(questionNo).question.answerAreaHeight</p>

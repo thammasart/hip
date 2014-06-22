@@ -49,5 +49,4 @@ public class Question extends Model{
 
     @SuppressWarnings("unchecked")
     public static Finder<Long, Question> find = new Finder(Long.class, Question.class);
-
 }
