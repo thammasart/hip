@@ -23,6 +23,7 @@ function onLoad(){
 
     dragElements = document.querySelectorAll('#dragElements div');
     dropZone = document.querySelectorAll('#dropZone .dropChar');
+    dropZonePadding = document.querySelectorAll('.dropZone');
     dropZoneOrigin = document.querySelector('#dragElements');
     for (var j = 0; j < dragElements.length; j++) {
         // Event Listener for when the drag interaction starts.
@@ -179,6 +180,7 @@ function showWordSeries(){
 
 function showCharacter(){
     clearInterval(gapTime);
+        
     if (i < question.length){
         document.getElementById("word").innerHTML= question[i];
         i++;
@@ -197,6 +199,9 @@ function showBlank(){
 
 function showQuestionWord(){
     clearInterval(charTime);
+    for (var x = 0; x < dropZonePadding.length; x++) {
+        dropZonePadding[x].style.paddingTop = "8%";
+    }
     document.querySelector('.positionWord').style.top = "5%";
     document.getElementById("dragElements").style.visibility = "visible";
     var dropWidth = 1+(6*dragElements.length);

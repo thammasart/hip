@@ -76,7 +76,7 @@
     width:100%;
     border:thick solid;
     margin-left:1%;
-    border-radius:15px;
+    border-radius:15%;
     border-color:#BBC6D1;
     color:#556C82;
     background-color:white;
@@ -85,7 +85,7 @@
 .dropZone:before{
     display:block;
     Content:"";
-    padding-top:100%;
+/*    padding-top:100%;*/
 }
 
 .dropChar{
