@@ -72,25 +72,25 @@
         </div>  
         <div class = "dropDownContainer" id = "">
             <div class="btn-group">
-                <button data-toggle="dropdown" class=" dropdown-toggle"style="width:200%;"> Select Experiment <span class="caret"></span></button>
+                <button id="expName" data-toggle="dropdown" class=" dropdown-toggle"style="width:200%;"> Select Experiment <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdownSize">
                     <li class="dropdownHeader" >ATTENTION</li>
-                    <li class="dropdownLi"><a href="#">Attention Blink</a></li>
-                    <li class="dropdownLi"><a href="#">Simon Effect</a></li>
-                    <li class="dropdownLi"><a href="#">Stroop Effect</a></li>
-                    <li class="dropdownLi"><a href="#">Visual Search</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Attention Blink</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Simon Effect</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Stroop Effect</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Visual Search</a></li>
                     <li class="divider"></li>
                     <li class="dropdownHeader">SHOR-TERM MEMORY</li>
-                    <li class="dropdownLi"><a href="#">Brown-Peterson Task</a></li>
-                    <li class="dropdownLi"><a href="#">Magic Number 7</a></li>
-                    <li class="dropdownLi"><a href="#">Position Error</a></li>
-                    <li class="dropdownLi"><a href="#">Sternberg Search</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Brown-Peterson Task</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Magic Number 7</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Position Error</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Sternberg Search</a></li>
                     <li class="divider"></li>
                     <li class="dropdownHeader">PERCEPTION</li>
-                    <li class="dropdownLi"><a href="#">Change Blindness</a></li>
-                    <li class="dropdownLi"><a href="#">Garner Interference</a></li>
-                    <li class="dropdownLi"><a href="#">Muller-Layer Illusion</a></li>
-                    <li class="dropdownLi"><a href="#">Signal Detection</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Change Blindness</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Garner Interference</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Muller-Layer Illusion</a></li>
+                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Signal Detection</a></li>
                     <li class="divider"></li>
                 </ul>
             </div>
@@ -105,7 +105,7 @@
             
             <ul class="list-group">
                 <li class="list-group-item"> Trial 
-                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear"></button>
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
                     <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>  
                                
@@ -118,7 +118,7 @@
             
             <ul class="list-group">
                 <li class="list-group-item"> Trial   
-                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear"></button>
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
                     <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>
                 <li class="list-group-item"> item 2 </li>  
@@ -130,7 +130,7 @@
             
             <ul class="list-group">
                 <li class="list-group-item"> Trial   
-                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear"></button>
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
                     <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>
                 <li class="list-group-item"> item 2 </li>  
@@ -142,7 +142,7 @@
             
             <ul class="list-group">
                 <li class="list-group-item"> Trial   
-                        <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear"></button>
+                        <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
                         <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>
                 <li class="list-group-item"> item 2 </li>  
@@ -153,8 +153,8 @@
 <!--                     overlay                 --!>
     <div class="overlay" id="overLay">
         <div class="box" >
-           <div class = "OverlayExpName" id="">
-                Experiment Name [demo] 
+           <div class = "OverlayExpName" >
+               <div id="overlayHeader"> Experiment Name [demo] </div>
             <button onclick="closeOverlay()" class="trialTag glyphicon glyphicon-remove closeX"></button>
            </div>  
             <div>
