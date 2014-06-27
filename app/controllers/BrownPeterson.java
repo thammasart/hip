@@ -62,6 +62,9 @@ public class BrownPeterson extends Controller {
         Quiz quiz = new Quiz(123,5);
         quiz.question = question;
         answer.quiz = quiz;
+        
+        answer = new Answer(answer.firstWord,answer.secondWord,answer.thirdWord,answer.usedTime,answer.countdownResult,answer.user,answer.quiz);
+
         List<Answer> answers = new ArrayList<Answer>();
         answers.add(answer);
         int score = Answer.calculateTotalScore(answers);
