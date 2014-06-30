@@ -204,6 +204,18 @@ width:631px;
      font-family:Tahoma, 'Microsoft Sans Serif', AngsanaUPC, CordiaUPC;
      border-radius:25px;
 }
+.procPosError{
+    width:400px;
+    float:right;
+    line-height:200%;
+    margin:7%;
+}
+.procHeaderSize{
+    font-size:18px;
+}
+.procContentSize{
+    font-size:16px;
+}
 .procNotification{
      margin-left:1em;
      margin-right:1em;

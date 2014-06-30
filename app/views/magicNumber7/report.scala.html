@@ -19,10 +19,10 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                 <h3>เวลา : @{ BigDecimal(totalUsedTime).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble } วินาที</h3>
             </div>
         </div>
-        <div class="navContainer" style="margin-top:3%;">
-            <a class="btn btn-danger navButton" href="@routes.Application.selectExperiment()"><span class="glyphicon glyphicon-th"></span> &nbsp; เลือกการทดลองอื่น </a>
-            <a class="btn btn-primary navButton navButtonDemo" href="@routes.Application.chooseTrial(ExperimentType.MAGICNUMBER7.toString())"><span class="glyphicon glyphicon-th-list"></span> &nbsp; เลือกรอบการทดลอง</a>
-            <a class="btn btn-success navButton" href=""><span class="glyphicon glyphicon-stats"></span> &nbsp; ดูผลการทดลองเฉพาะชุดนี้ </a>
+        <div class="navContainer">
+            <a class="btn btn-danger navButton" href="@routes.MagicNumber7.proc()"><span class="glyphicon glyphicon-chevron-left"></span> &nbsp;กลับไปขั้นตอนการทดลอง</a>
+            <a class="btn btn-primary navButton navButtonDemo" href="@routes.Application.selectExperiment()"><span class="glyphicon glyphicon-th"></span> &nbsp;เลือกการทดลองอื่น</a>
+            <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.MAGICNUMBER7.toString())"><span class="glyphicon glyphicon-th-list"></span> &nbsp;เลือก Trial การทดลอง</a>
         </div>
    </div>
     @footer()
