@@ -279,9 +279,9 @@ width:631px;
     margin:0px auto;
     position: relative;
     top: -60%;
-    -webkit-transform: translateY(-192);
-    -ms-transform: translateY(-192%);
-    transform: translateY(-192%);
+    //-webkit-transform: translateY(-192%);
+    //-ms-transform: translateY(-192%);
+    //transform: translateY(-192%);
 }
 .questionWord{
     float:left;
@@ -307,7 +307,7 @@ width:631px;
     border: 2px solid green;
     margin:20px auto;
     margin-right:1em;
-    margin-left:1em; 
+    margin-left:6em;
 
 }
 

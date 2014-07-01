@@ -27,7 +27,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <button id = "stopB"class="stopImgButton" href="@routes.ChangeBlindness.proc()" onclick="stopImg()"> หยุดภาพ </button>
     <div id = "imgDiv" class="imgDiv">
         <img name = "X" id = "img1" class="changeBlindnessImg" onclick="done(this.name)" src="@routes.Assets.at("images/changeBlindness1.jpg")">
-        <img name = "X" id = "imgGray" class="imgGray">
+        <div name = "X" id = "imgGray" class="imgGray"></div>
         <img name = "X" id = "img2" class="changeBlindnessImg"  onclick="done(this.name)" src="@routes.Assets.at("images/changeBlindness2.jpg")">
         <div name = "Y" id = "ansDiv" class = "CBanswerDiv" onclick="done(this.name)" ></div>
 
