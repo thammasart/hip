@@ -58,60 +58,42 @@
 @keyframes hop {
   20% {
     transform:rotate(-10deg) translate(1em,-2em);
-    -webkit-transform:rotate(-10deg) translate(1em,-2em);
-    -ms-transform:rotate(-10deg) translate(1em,-2em);
     box-shadow: -0.2em 3em 0 -1em #b78e81;
   }
   40% {
     transform:rotate(10deg) translate(3em,-4em);
-    -webkit-transform:rotate(10deg) translate(3em,-4em);
-    -ms-transform:rotate(10deg) translate(3em,-4em);
     box-shadow: -0.2em 3.25em 0 -1.1em #b78e81;
   }
   60%,75% {
     transform:rotate(0) translate(4em,0);
-    -webkit-transform:rotate(0) translate(4em,0);
-    -ms-transform:rotate(0) translate(4em,0);
     box-shadow: -0.2em 1em 0 -0.75em #b78e81;
   }
 }
 
 @-webkit-keyframes hop {
   20% {
-    transform:rotate(-10deg) translate(1em,-2em);
     -webkit-transform:rotate(-10deg) translate(1em,-2em);
-    -ms-transform:rotate(-10deg) translate(1em,-2em);
     box-shadow: -0.2em 3em 0 -1em #b78e81;
   }
   40% {
-    transform:rotate(10deg) translate(3em,-4em);
     -webkit-transform:rotate(10deg) translate(3em,-4em);
-    -ms-transform:rotate(10deg) translate(3em,-4em);
     box-shadow: -0.2em 3.25em 0 -1.1em #b78e81;
   }
   60%,75% {
-    transform:rotate(0) translate(4em,0);
     -webkit-transform:rotate(0) translate(4em,0);
-    -ms-transform:rotate(0) translate(4em,0);
     box-shadow: -0.2em 1em 0 -0.75em #b78e81;
   }
 }
 @-ms-keyframes hop {
   20% {
-    transform:rotate(-10deg) translate(1em,-2em);
-    -webkit-transform:rotate(-10deg) translate(1em,-2em);
     -ms-transform:rotate(-10deg) translate(1em,-2em);
     box-shadow: -0.2em 3em 0 -1em #b78e81;
   }
   40% {
-    transform:rotate(10deg) translate(3em,-4em);
-    -webkit-transform:rotate(10deg) translate(3em,-4em);
     -ms-transform:rotate(10deg) translate(3em,-4em);
     box-shadow: -0.2em 3.25em 0 -1.1em #b78e81;
   }
   60%,75% {
-    transform:rotate(0) translate(4em,0);
-    -webkit-transform:rotate(0) translate(4em,0);
     -ms-transform:rotate(0) translate(4em,0);
     box-shadow: -0.2em 1em 0 -0.75em #b78e81;
   }
