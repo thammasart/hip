@@ -36,13 +36,13 @@ public class Answer extends Model{
 		this.quiz = quiz;
 
 		Question q = quiz.question;
-		if(!q.firstWord.equals(firstWord) && !q.firstWord.equals(secondWord) && !q.firstWord.equals(thirdWord)){
+		if(!q.firstWord.equalsIgnoreCase(firstWord) && !q.firstWord.equalsIgnoreCase(secondWord) && !q.firstWord.equalsIgnoreCase(thirdWord)){
 			this.isCorrect = false;
 		}
-		else if(!q.secondWord.equals(firstWord) && !q.secondWord.equals(secondWord) && !q.secondWord.equals(thirdWord)){
+		else if(!q.secondWord.equalsIgnoreCase(firstWord) && !q.secondWord.equalsIgnoreCase(secondWord) && !q.secondWord.equalsIgnoreCase(thirdWord)){
 			this.isCorrect = false;
 		}
-		else if(!q.thirdWord.equals(firstWord) && !q.thirdWord.equals(secondWord) && !q.thirdWord.equals(thirdWord)){
+		else if(!q.thirdWord.equalsIgnoreCase(firstWord) && !q.thirdWord.equalsIgnoreCase(secondWord) && !q.thirdWord.equalsIgnoreCase(thirdWord)){
 			this.isCorrect = false;
 		}
 		else{

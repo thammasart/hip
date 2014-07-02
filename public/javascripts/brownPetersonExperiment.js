@@ -16,7 +16,7 @@ var counter;
 function calculateTimeLeft()
 {
   count=count-1;
-        document.getElementById("timeLeft").innerHTML= " เวลาที่เหลือ " + (count-1) +" วินาท่ี " ;
+        document.getElementById("timeLeft").innerHTML= " เวลาที่เหลือ " + (count-1) +" วินาที " ;
 }
 function validate(evt) {
 
