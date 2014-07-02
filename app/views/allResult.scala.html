@@ -159,7 +159,7 @@
            </div>  
             <div>
                 <ul class="nav nav-tabs">
-                  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                  <li class="active"><a href="#01" data-toggle="tab">Home</a></li>
                   <li><a href="#profile" data-toggle="tab">Profile</a></li>
                   <li><a href="#messages" data-toggle="tab">Messages</a></li>
                   <li><a href="#settings" data-toggle="tab">Settings</a></li>
@@ -168,7 +168,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                 <!-- tab pane 1 --!>
-                  <div class="tab-pane active" id="home"> 
+                  <div class="tab-pane active" id="01"> 
 
                     <div class="trialInputContainer" >
                        <div class = "OverlayTagSize">
@@ -200,70 +200,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                        @for((trial,index) <- models.simonEffect.Trial.findAllTrial(2).zipWithIndex){
                                 <tr>
-                                    <td>1</td>
-                                    <td>16/05/14</td>
-                                    <td>16/05/14</td>
-                                    <td>Trial 01</td>
-                                    <td>12</td>
+                                    <td>@{index+1}</td>
+                                    <td>@trial.schedule.startDate</td>
+                                    <td>@trial.schedule.expireDate</td>
+                                    <td>@trial.schedule.name</td>
+                                    <td>@trial.id</td>
                                     <td><button class="btn btn-success btn-xs">select</button></td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>16/05/14</td>
-                                    <td>16/05/14</td>
-                                    <td>Trial 01</td>
-                                    <td>12</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>16/05/14</td>
-                                    <td>16/05/14</td>
-                                    <td>Trial 01</td>
-                                    <td>12</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>16/05/14</td>
-                                    <td>16/05/14</td>
-                                    <td>Trial 01</td>
-                                    <td>12</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>16/05/14</td>
-                                    <td>16/05/14</td>
-                                    <td>Trial 01</td>
-                                    <td>12</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>16/05/14</td>
-                                    <td>16/05/14</td>
-                                    <td>Trial 01</td>
-                                    <td>12</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>16/05/14</td>
-                                    <td>16/05/14</td>
-                                    <td>Trial 01</td>
-                                    <td>12</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>16/05/14</td>
-                                    <td>16/05/14</td>
-                                    <td>Trial 01</td>
-                                    <td>12</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
-                                </tr>
+                }
                             </tbody>
                         </table>
 

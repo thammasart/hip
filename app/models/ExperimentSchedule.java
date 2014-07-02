@@ -59,7 +59,6 @@ public class ExperimentSchedule extends Model{
 		return exps;
 	}
 
-
 	public static List<ExperimentSchedule> getWorkingExperimentsByType(String expType){
 		List<ExperimentSchedule> expList = null;
 		final String BROWNPETERSON = "BROWNPETERSON";
