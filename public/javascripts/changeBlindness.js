@@ -116,7 +116,7 @@ function timeToAnswer(){
     expDuration = d.getTime();
 }
 
-function done(type,subEvent){
+function done(subEvent){
 
     if (count <= 0){
         d = new Date();
@@ -138,10 +138,34 @@ function done(type,subEvent){
         document.getElementById("positionOfChangeX").value = percent_Of_x;
         document.getElementById("positionOfChangeY").value = percent_Of_y;
 
-        if (type == "X")
-            document.getElementById("isCorrect").checked = false;
-        else
-            document.getElementById("isCorrect").checked = true;
+        document.getElementById("isCorrect").checked = false;
+        document.forms["answerForm"].submit();
+    }
+}
+
+function doneCorrect(subEvent){
+
+    if (count <= 0){
+        d = new Date();
+        expDuration = d.getTime()-expDuration;
+        document.getElementById("usedTime").value = expDuration/1000;
+
+        var mainEvent = subEvent ? subEvent : window.event;
+
+        var rect = document.getElementById("imgDiv").getBoundingClientRect();
+        var x = mainEvent.clientX - rect.left;
+        var y = mainEvent.clientY - rect.top;
+
+        var width = rect.right - rect.left;
+        var height = rect.bottom - rect.top;
+
+        var percent_Of_x = (x/width) * 100;
+        var percent_Of_y = (y/height) * 100;
+
+        document.getElementById("positionOfChangeX").value = percent_Of_x;
+        document.getElementById("positionOfChangeY").value = percent_Of_y;
+
+        document.getElementById("isCorrect").checked = true;
         document.forms["answerForm"].submit();
     }
 }
