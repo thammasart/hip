@@ -75,18 +75,26 @@ function timeToAnswer(){
     expDuration = d.getTime();
 }
 
-function done(type){
+function done(){
     if (count <= 0){
         d = new Date();
         expDuration = d.getTime()-expDuration;
         document.getElementById("usedTime").value = expDuration/1000;
-        if (type == "X")
-            document.getElementById("score").value = 0;
-        else
-            document.getElementById("score").value = 1;
+        document.getElementById("score").value = 0;
         document.forms["answerForm"].submit();
     }
 }
+
+function doneCorrect(){
+    if (count <= 0){
+        d = new Date();
+        expDuration = d.getTime()-expDuration;
+        document.getElementById("usedTime").value = expDuration/1000;
+        document.getElementById("score").value = 1;
+        document.forms["answerForm"].submit();
+    }
+}
+
 
 function calculateTimeLeft(){
     count=count-1;
