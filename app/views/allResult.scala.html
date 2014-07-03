@@ -75,22 +75,23 @@
                 <button id="expName" data-toggle="dropdown" class=" dropdown-toggle"style="width:200%;"> Select Experiment <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdownSize">
                     <li class="dropdownHeader" >ATTENTION</li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Attention Blink</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Simon Effect</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Stroop Effect</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Visual Search</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Attentional Blink</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Simon Effect</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Stroop Effect</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Visual Search</a></li>
                     <li class="divider"></li>
                     <li class="dropdownHeader">SHOR-TERM MEMORY</li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Brown-Peterson Task</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Magic Number 7</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Position Error</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Sternberg Search</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Brown-Peterson Task</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Magic Number 7</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Position Error</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Exhaustive)</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Parallel)</a></li>
                     <li class="divider"></li>
                     <li class="dropdownHeader">PERCEPTION</li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Change Blindness</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Garner Interference</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Muller-Layer Illusion</a></li>
-                    <li class="dropdownLi" onclick="selectExperiment(this.innerHTML)"><a href="#">Signal Detection</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Change Blindness</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Garner Interference</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Muller-Lyer Illusion</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Signal Detection</a></li>
                     <li class="divider"></li>
                 </ul>
             </div>
@@ -159,16 +160,16 @@
            </div>  
             <div>
                 <ul class="nav nav-tabs">
-                  <li class="active"><a href="#01" data-toggle="tab">Home</a></li>
-                  <li><a href="#profile" data-toggle="tab">Profile</a></li>
-                  <li><a href="#messages" data-toggle="tab">Messages</a></li>
-                  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class="active"><a id="tab1"href="#0" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab2" href="#1" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab3" href="#2" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab4" href="#3" data-toggle="tab"></a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                <!-- tab pane 1 --!>
-                  <div class="tab-pane active" id="01"> 
+                <!-- tab pane 1 --------------------------------------------------------------------------------------------------!>
+                  <div class="tab-pane active" id="0"> 
 
                     <div class="trialInputContainer" >
                        <div class = "OverlayTagSize">
@@ -200,7 +201,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                        @for((trial,index) <- models.simonEffect.Trial.findAllTrial(2).zipWithIndex){
+                        @for((trial,index) <- models.simonEffect.Trial.findAllTrial(1).zipWithIndex){
                                 <tr>
                                     <td>@{index+1}</td>
                                     <td>@trial.schedule.startDate</td>
@@ -227,9 +228,13 @@
                     </div>
                   </div>
 
-                  <div class="tab-pane" id="profile">profile</div>
-                  <div class="tab-pane" id="messages">messages</div>
-                  <div class="tab-pane" id="settings">setting</div>
+                <!-- tab pane 2 --------------------------------------------------------------------------------------------------!>
+                  <div class="tab-pane" id="1">
+
+                  </div>
+
+                  <div class="tab-pane" id="2">messages</div>
+                  <div class="tab-pane" id="3">setting</div>
                 </div>
                 <script>
                   $(function () {
