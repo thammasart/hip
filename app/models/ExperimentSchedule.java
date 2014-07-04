@@ -48,6 +48,17 @@ public class ExperimentSchedule extends Model{
 		return experiments;
 	}
 
+//    @Override
+    public void save(){
+        this.startDate.setHours(0);
+        this.startDate.setMinutes(0);
+        this.startDate.setSeconds(0);
+        this.expireDate.setHours(23);
+        this.expireDate.setMinutes(59);
+        this.expireDate.setSeconds(59);
+        super.save();
+    }
+
 	public static List<ExperimentSchedule> getWorkingExperimentsByType(ExperimentType expType) {
 		List<ExperimentSchedule> allWorkingExp = getAllWorkingExperiments();
 		List<ExperimentSchedule> exps = new ArrayList<ExperimentSchedule>();
