@@ -110,6 +110,9 @@ public class Admin extends Controller {
         }
 
         ExperimentSchedule exp = boundForm.get();
+        exp.expireDate.setHours(23);
+        exp.expireDate.setMinutes(59);
+        exp.expireDate.setSeconds(59);
         exp.save();
         flash("success","Successfully");
         exp.generateTrials();
