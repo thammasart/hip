@@ -1,4 +1,6 @@
 @(trial : models.visualSearch.Trial,questionNo : Integer,width : String, height : String, top : String, left : String , json : String )
+@import models.visualSearch.Quiz
+@import models.visualSearch.Question
 @header("Human Information Processing Lab :: Home Page")
 <!--
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
@@ -18,12 +20,14 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <!-- Page Header -->
 <script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
 <script src="@routes.Assets.at("javascripts/controllers/visualsearch.js")"></script>
-<div class="" ng-app="VisualSearchApp" ng-controller="VisualSearchController" ng-init="sharps = @json">
+<div class="" >
     <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
     <!-- Dashed line-->
-    <div class="titleLine"></div>
+    <div class="titleLine"><!-- --></div>
 </div>
-<div class="expMainWindow">
+<div class="expMainWindow" ng-app="VisualSearchApp" ng-controller="VisualSearchController"
+     ng-init="sharps = @Quiz.findInvolving(trial).get(questionNo).question.sharps;
+     ">
     <div class="expCenterWord">
         <div class="inst" id="word"></div>
         <div class = "circleEx" id="circleEx" ></div>
@@ -32,36 +36,12 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
         <div class="visualArea" style="left:@left;top:@top;width:@width;height:@height;"id="visualArea">
 
-            @for(question <- trial.quizzes(questionNo).questions){
-                @question.shapeType match{
 
-                    case models.visualSearch.ShapeType.SQAURE_GREEN => {
-                        <button class="box" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#2ED2AE" onclick="shapeClick(this)"></button>
-                    }
 
-                    case models.visualSearch.ShapeType.SQAURE_BLUE => {
-                        <button class="box" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
-                    }
+        <button ng-repeat="sharp in sharps" class="box" name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:#2ED2AE" onclick="shapeClick(this)"></button>
 
-                    case models.visualSearch.ShapeType.SQAURE_RED => {
-                        <button class="box" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#A51B00" onclick="shapeClick(this)"></button>
-                    }
 
-                    case models.visualSearch.ShapeType.CIRCLE_GREEN => {
-                        <button class="circle" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#2ED2AE" onclick="shapeClick(this)"></button>
-                    }
-
-                    case models.visualSearch.ShapeType.CIRCLE_BLUE => {
-                        <button class="circle" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
-                    }
-
-                    case models.visualSearch.ShapeType.CIRCLE_RED => {
-                        <button class="circle" name = "noise" style="left:@question.positionX%;top:@question.positionY%;border-color:#A51B00" onclick="shapeClick(this)"></button>
-                    }
-                }
-            }
-
-            <button class="circle" name = "target" style="left:@trial.quizzes(questionNo).positionXofTarget%;top:@trial.quizzes(questionNo).positionYofTarget%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
+            <button class="circle" name = "target" style="left:@Quiz.findInvolving(trial).get(questionNo).positionXofTarget%;top:Quiz.findInvolving(trial).get(questionNo).positionYofTarget%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
 
         </div>
         <input id="usedTime" name="usedTime" hidden/>

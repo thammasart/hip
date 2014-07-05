@@ -128,12 +128,13 @@ public class VisualSearch extends Controller{
         }
 
         Answer answer = boundForm.get();
+        List<Quiz> quizzes = Quiz.findInvolving(trial);
         answer.user = user;
-        answer.quiz = trial.quizzes.get(questionNo);
+        answer.quiz = quizzes.get(questionNo);
         answer.save();
 
         questionNo++;
-        if(questionNo < trial.quizzes.size()){
+        if(questionNo < quizzes.size()){
             return redirect(routes.VisualSearch.experiment(trialId, questionNo));
         }
         return redirect(routes.VisualSearch.report(user.username, trialId));
@@ -145,12 +146,14 @@ public class VisualSearch extends Controller{
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.VisualSearch.info());
         }
+
         User user = User.find.byId(username);
         Trial trial = Trial.find.byId(trialId);
-        List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
+        List<Quiz> quizzes = Quiz.findInvolving(trial);
+        List<Answer> answers = Answer.findInvolving(user, quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        return ok(report.render(score,totalUsedTime,quizzes.size(), "Report", user));
     }
 
 }

@@ -1,7 +1,10 @@
 package models.visualSearch;
 
 import play.db.ebean.Model;
+import play.libs.Json;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name="visual_search_question")
@@ -11,11 +14,17 @@ public class Question extends Model{
     public ShapeType shapeType;
     public int positionX;
     public int positionY;
-    @ManyToOne
-    public Quiz quiz;
+    public String sharps;
 
-    public Question(Quiz quiz){
-    	this.quiz = quiz;
+    public Question(){
+    }
+
+    public static List<Question> findInvolving(Quiz quiz){
+        return Question.find.where().eq("quiz", quiz).findList();
+    }
+
+    public String getQustionJson(){
+        return Json.stringify(Json.toJson(this));
     }
 
     @SuppressWarnings("unchecked")

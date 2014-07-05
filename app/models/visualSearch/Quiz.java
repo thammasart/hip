@@ -14,11 +14,15 @@ public class Quiz extends Model{
     public int positionYofTarget;
     @ManyToOne
     public Trial trial;
-    @OneToMany
-    public List<Question> questions = new ArrayList<Question>();
+    @OneToOne
+    public Question question;
 
     public Quiz(Trial trial){
     	this.trial = trial;
+    }
+
+    public static List<Quiz> findInvolving(Trial trial){
+        return Quiz.find.where().eq("trial", trial).findList();
     }
 
     @SuppressWarnings("unchecked")

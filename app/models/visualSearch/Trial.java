@@ -2,6 +2,8 @@ package models.visualSearch;
 
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
+import play.libs.Json;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -21,8 +23,6 @@ public class Trial extends Model{
     public FrameSize frameSize;
     @ManyToOne
     public ExperimentSchedule schedule;
-    @OneToMany
-    public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
@@ -34,6 +34,10 @@ public class Trial extends Model{
 
     public static List<Trial> findInvolving(ExperimentSchedule ex){
         return find.where().eq("schedule", ex).findList();
+    }
+
+    public static void displayJson(){
+        System.out.println(Json.stringify(Json.toJson(Trial.find.byId(1L))));
     }
 
     @SuppressWarnings("unchecked")
