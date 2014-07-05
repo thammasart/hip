@@ -81,6 +81,7 @@ public class Application extends Controller {
             case "MULLERLAYER" : nextPage = redirect(routes.MullerLayer.proc()); break;
             case "GARNERINTERFERENCE" : nextPage = redirect(routes.GarnerInterference.proc()); break;
             case "VISUALSEARCH" : nextPage = redirect(routes.VisualSearch.proc()); break;
+            case "CHANGEBLINDNESS" : nextPage = redirect(routes.ChangeBlindness.proc()); break;
         }
 
         return nextPage;
@@ -98,7 +99,6 @@ public class Application extends Controller {
             return ok(views.html.trial.render(exp.experimentType.toString() ,user));
         }
         TimeLog.create(new Date(), user, trialId, exp).save();
-        
         Result nextPage = badRequest(views.html.trial.render(exp.experimentType.toString() , user));
 
         switch(exp.experimentType){
@@ -113,6 +113,7 @@ public class Application extends Controller {
             case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0)); break;
             case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0)); break;
             case VISUALSEARCH: nextPage = redirect(routes.VisualSearch.experiment(trialId,0)); break;
+            case CHANGEBLINDNESS : nextPage = redirect(routes.ChangeBlindness.experiment(trialId,0)); break;
         }
         return nextPage;
     }

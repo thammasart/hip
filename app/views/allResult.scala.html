@@ -1,13 +1,250 @@
 @(user : User,scoreList: List[Double])
 @header("Human Information Processing Lab :: Home Page")
 
-<body>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css")">
+<script src="@routes.Assets.at("javascripts/allResult.js")"></script>
+<body >
 <div class="fixSize">
     <!-- Page Header -->
     @nav(user)
 
-        @for(sc<-scoreList){
-            <p> @sc  = </p>
-        }
+   <div class = "graphContainer" id = "">
+
+        <div class = "experimentName" id = "">
+             Experiment name
+        </div>  
+        <div class = "graphBox" id = "">
+            <div class = "graphLineTag" style= "bottom:-3.5%;">0%</div>
+            <div class = "graphLineTag" style= "bottom:17%;">20%</div>
+            <div class = "graphLineTag" style= "bottom:37%;">40%</div>
+            <div class = "graphLineTag" style= "bottom:57%;">60%</div>
+            <div class = "graphLineTag" style= "bottom:77%;">80%</div>
+            <div class = "graphLineTag" style= "bottom:96%;">100%</div>
+
+            <div class = "graphLine" style= "bottom:0%;"></div>
+            <div class = "graphLine" style= "bottom:20%;"></div>
+            <div class = "graphLine" style= "bottom:40%;"></div>
+            <div class = "graphLine" style= "bottom:60%;"></div>
+            <div class = "graphLine" style= "bottom:80%;"></div>
+            <div class = "graphLine" style= "bottom:100%;"></div>
+
+             <div class = "beam beam1" style= "margin-left:20%;"></div>
+             <div class = "beam beam2" style= "margin-left:40%;"></div>
+             <div class = "beam beam3" style= "margin-left:60%;"></div>
+             <div class = "beam beam4" style= "margin-left:80%;"></div>
+
+        </div>        
+        <div class = "graphBox" style="margin-left:4%;" id = "">
+            <div class = "graphLineTag" style= "bottom:-3.5%;">0%</div>
+            <div class = "graphLineTag" style= "bottom:17%;">20%</div>
+            <div class = "graphLineTag" style= "bottom:37%;">40%</div>
+            <div class = "graphLineTag" style= "bottom:57%;">60%</div>
+            <div class = "graphLineTag" style= "bottom:77%;">80%</div>
+            <div class = "graphLineTag" style= "bottom:96%;">100%</div>
+
+            <div class = "graphLine" style= "bottom:0%;"></div>
+            <div class = "graphLine" style= "bottom:20%;"></div>
+            <div class = "graphLine" style= "bottom:40%;"></div>
+            <div class = "graphLine" style= "bottom:60%;"></div>
+            <div class = "graphLine" style= "bottom:80%;"></div>
+            <div class = "graphLine" style= "bottom:100%;"></div>
+
+             <div class = "beam beam1" style= "margin-left:20%;"></div>
+             <div class = "beam beam2" style= "margin-left:40%;"></div>
+             <div class = "beam beam3" style= "margin-left:60%;"></div>
+             <div class = "beam beam4" style= "margin-left:80%;"></div>
+
+        </div>        
+        
+        <div class = "graphTag" id = "">
+            Score
+        </div>  
+        <div class = "graphTag" id = "">
+            Time
+        </div>  
+   </div>  
+    
+
+
+    <div class = "selectExResultBox" id = "">
+        <div class = "dropDownTag" id = "">
+            การทดลอง
+        </div>  
+        <div class = "dropDownContainer" id = "">
+            <div class="btn-group">
+                <button id="expName" data-toggle="dropdown" class=" dropdown-toggle"style="width:200%;"> Select Experiment <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdownSize">
+                    <li class="dropdownHeader" >ATTENTION</li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Attentional Blink</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Simon Effect</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Stroop Effect</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Visual Search</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdownHeader">SHOR-TERM MEMORY</li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Brown-Peterson Task</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Magic Number 7</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Position Error</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Exhaustive)</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Parallel)</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdownHeader">PERCEPTION</li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Change Blindness</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Garner Interference</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Muller-Lyer Illusion</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Signal Detection</a></li>
+                    <li class="divider"></li>
+                </ul>
+            </div>
+        </div>   
+    </div>  
+
+
+
+   <div class = "panelContainer" id = "">
+        <div class = "panel panel-danger panelSize" id = "">
+            <div class="panel-heading"> Panel Heading 1 </div>
+            
+            <ul class="list-group">
+                <li class="list-group-item"> Trial 
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>  
+                               
+                <li class="list-group-item"> item 2 </li>  
+                <li class="list-group-item"> item 3 </li>  
+            </ul>
+        </div>  
+        <div class = "panel panel-info panelSize" id = "">
+            <div class="panel-heading"> Panel Heading 2 </div>
+            
+            <ul class="list-group">
+                <li class="list-group-item"> Trial   
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
+                <li class="list-group-item"> item 2 </li>  
+                <li class="list-group-item"> item 3 </li>  
+            </ul>
+        </div>  
+        <div class = "panel panel-success panelSize" id = "">
+            <div class="panel-heading"> Panel Heading 3 </div>
+            
+            <ul class="list-group">
+                <li class="list-group-item"> Trial   
+                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
+                <li class="list-group-item"> item 2 </li>  
+                <li class="list-group-item"> item 3 </li>  
+            </ul>
+        </div>  
+        <div class = "panel panel-warning panelSize" >
+            <div class="panel-heading" style="background-color:#fddf71;"> Panel Heading 4 </div>
+            
+            <ul class="list-group">
+                <li class="list-group-item"> Trial   
+                        <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
+                        <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
+                <li class="list-group-item"> item 2 </li>  
+                <li class="list-group-item"> item 3 </li>  
+            </ul>
+        </div>  
+   </div>  
+<!--                     overlay                 --!>
+    <div class="overlay" id="overLay">
+        <div class="box" >
+           <div class = "OverlayExpName" >
+               <div id="overlayHeader"> Experiment Name [demo] </div>
+            <button onclick="closeOverlay()" class="trialTag glyphicon glyphicon-remove closeX"></button>
+           </div>  
+            <div>
+                <ul class="nav nav-tabs">
+                  <li class="active"><a id="tab1"href="#0" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab2" href="#1" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab3" href="#2" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab4" href="#3" data-toggle="tab"></a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                <!-- tab pane 1 --------------------------------------------------------------------------------------------------!>
+                  <div class="tab-pane active" id="0"> 
+
+                    <div class="trialInputContainer" >
+                       <div class = "OverlayTagSize">
+                            Find trials active on
+                       </div>  
+                       <div class = " OverlayTextBoxContainer" >
+                            <input type="text" class="form-control trialTag" placeholder="start date" autocomplete="off"  style="float:left;"disabled>
+                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
+                       </div>  
+                       <div class = "OverlayTagSize" style="width:5%; margin-left:0;">
+                            To
+                       </div>  
+                       <div class = "OverlayTextBoxContainer" >
+                            <input type="text" class="form-control trialTag" placeholder="end date" autocomplete="off" style="float:left;" disabled>
+                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
+                       </div>  
+                    </div>
+
+                    <div class="">
+                        <table class="table table-striped overlayTable">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>start Date</th>
+                                    <th>Expire Date</th>
+                                    <th>Exp. Schedule Name</th>
+                                    <th>Trial ID</th>
+                                    <th>select</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        @for((trial,index) <- models.simonEffect.Trial.findAllTrial(1).zipWithIndex){
+                                <tr>
+                                    <td>@{index+1}</td>
+                                    <td>@trial.schedule.startDate</td>
+                                    <td>@trial.schedule.expireDate</td>
+                                    <td>@trial.schedule.name</td>
+                                    <td>@trial.id</td>
+                                    <td><button class="btn btn-success btn-xs">select</button></td>
+                                </tr>
+                }
+                            </tbody>
+                        </table>
+
+                        <div class="pagingContainer" align="center">
+                            <ul class="pagination">
+                              <li class="disabled"><a href="#">&laquo;</a></li>
+                              <li class="active"><a href="#">1</a></li>
+                              <li><a href="#">2</a></li>
+                              <li><a href="#">3</a></li>
+                              <li><a href="#">4</a></li>
+                              <li><a href="#">5</a></li>
+                              <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+
+                <!-- tab pane 2 --------------------------------------------------------------------------------------------------!>
+                  <div class="tab-pane" id="1">
+
+                  </div>
+
+                  <div class="tab-pane" id="2">messages</div>
+                  <div class="tab-pane" id="3">setting</div>
+                </div>
+                <script>
+                  $(function () {
+                    $('#myTab a:last').tab('show')
+                  })
+                </script>
+            </div>
+        </div>  
+
+    </div>
+
     @footer()
 </div>

@@ -17,9 +17,9 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         </div>
     </div>
     <div class="navContainer">
-        <a class="btn btn-danger navButton" href="@routes.VisualSearch.proc()"> กลับไปขั้นตอนการทดลอง </a>
-        <a class="btn btn-primary navButton navButtonDemo" href="@routes.VisualSearch.demoPage()"> ทดลองเล่นอีกครั้ง </a>
-        <a class="btn btn-success navButton" href="@routes.VisualSearch.experiment(1,1)"> เริ่มการทดลอง </a>
+        <a class="btn btn-danger navButton" href="@routes.VisualSearch.proc()"><span class="glyphicon glyphicon-chevron-left"></span>กลับไปขั้นตอนการทดลอง</a>
+        <a class="btn btn-primary navButton navButtonDemo" href="@routes.VisualSearch.demoPage()"><span class="glyphicon glyphicon-repeat"></span>ทดลองเล่นอีกครั้ง</a>
+        <a class="btn btn-success navButton" href="@routes.VisualSearch.experiment(1,1)"><span class="glyphicon glyphicon-th-list"></span>เลือก Trial การทดลอง</a>
     </div>
 </div>
 @footer()

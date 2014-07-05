@@ -1,7 +1,8 @@
 .mainContainer{
+    display:none;
     border:solid;
     border-color:white;
-    width:1000px;
+    width:1300px;
     margin:0 auto;
     height:465px;
     visibility:hidden;
@@ -62,7 +63,7 @@
 }
 .choice{
     position:relative;
-    top:-250px;
+    top:150px;
     width:50%;
     margin-left:25%;
     display:inline-block;
@@ -84,5 +85,13 @@
     height:60px;
     font-size:150%;
     margin-top:10px;
- 
+    margin-bottom:1%;
+}
+.ansSquare{
+    margin:0px auto;
+    display:none;
+}
+.ansBox{
+    margin:0 auto;
+    padding-top:5%;
 }

@@ -51,10 +51,27 @@ public class ChangeBlindnessUnitTest extends WithApplication {
     }
 
     @Test
+    public void createQuestionShouldWithParameterCorrect(){
+        Question question = Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20);
+        assertEquals("path/of/pic1.jpg", question.pathOfPic1);
+        assertEquals("path/of/pic2.jpg", question.pathOfPic2);
+        assertEquals(1.5, question.answerAreaWidth, 0.001);
+        assertEquals(1.9, question.answerAreaHeight, 0.001);
+        assertEquals(10, question.positionOfChangeX, 0.001);
+        assertEquals(20, question.positionOfChangeY, 0.001);
+    }
+
+    @Test
     public void queryQuestionShouldCorrect(){
-        new Question().save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
         Question question = Question.find.byId(1L);
         assertNotNull(question);
+        assertEquals("path/of/pic1.jpg", question.pathOfPic1);
+        assertEquals("path/of/pic2.jpg", question.pathOfPic2);
+        assertEquals(1.5, question.answerAreaWidth, 0.001);
+        assertEquals(1.9, question.answerAreaHeight, 0.001);
+        assertEquals(10, question.positionOfChangeX, 0.001);
+        assertEquals(20, question.positionOfChangeY, 0.001);
     }
 
     @Test
@@ -62,10 +79,12 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        Question question = new Question();
-        Quiz quiz = new Quiz(trial, question);
+        Question question = Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20);
+        Quiz quiz = new Quiz(trial, 15, question);
+
         assertNotNull(quiz);
         assertEquals(trial, quiz.trial);
+        assertEquals(15, quiz.displayTime);
         assertEquals(question, quiz.question);
     }
 
@@ -74,12 +93,13 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
         Question question = Question.find.byId(1L);
-        new Quiz(trial, question).save();
+        new Quiz(trial, 120, question).save();
         Quiz quiz = Quiz.find.byId(1L);
         assertNotNull(quiz);
         assertEquals(trial, quiz.trial);
+        assertEquals(120, quiz.displayTime);
         assertEquals(question, quiz.question);
     }
 
@@ -88,15 +108,23 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
         Question question = Question.find.byId(1L);
-        new Quiz(trial,question).save();
+        new Quiz(trial, 60, question).save();
         Quiz quiz = Quiz.find.byId(1L);
         User user = User.find.byId("test");
         Answer answer = new Answer(user, quiz);
+        answer.positionOfChangeX = 10;
+        answer.positionOfChangeY = 20;
+        answer.usedTime = 10.5;
+        answer.isCorrect = true;
         assertNotNull(answer);
         assertEquals(user, answer.user);
         assertEquals(quiz, answer.quiz);
+        assertEquals(10, answer.positionOfChangeX, 0.001);
+        assertEquals(20, answer.positionOfChangeY, 0.001);
+        assertEquals(10.5, answer.usedTime,0.001);
+        assertTrue(answer.isCorrect);
     }
 
     @Test
@@ -104,16 +132,26 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
         Question question = Question.find.byId(1L);
-        new Quiz(trial,question).save();
+        new Quiz(trial, 60, question).save();
         Quiz quiz = Quiz.find.byId(1L);
         User user = User.find.byId("test");
-        new Answer(user, quiz).save();
+        Answer temp = new Answer(user, quiz);
+        temp.positionOfChangeX = 10;
+        temp.positionOfChangeY = 20;
+        temp.usedTime = 10.5;
+        temp.isCorrect = true;
+        temp.save();
+
         Answer answer = Answer.find.byId(1L);
         assertNotNull(answer);
         assertEquals(user, answer.user);
         assertEquals(quiz, answer.quiz);
+        assertEquals(10, answer.positionOfChangeX,0.001);
+        assertEquals(20, answer.positionOfChangeY,0.001);
+        assertEquals(10.5, answer.usedTime,0.001);
+        assertTrue(answer.isCorrect);
     }
 
     @Test
@@ -121,22 +159,37 @@ public class ChangeBlindnessUnitTest extends WithApplication {
         ExperimentSchedule exp = ExperimentSchedule.find.byId(1L);
         new Trial(exp).save();
         Trial trial = Trial.find.byId(1L);
-        new Question().save();
-        new Question().save();
-        new Question().save();
+        Question.create("path/of/pic1.jpg", "path/of/pic2.jpg",1.5,1.9,10 ,20).save();
+        Question.create("path/of/pic3.jpg", "path/of/pic4.jpg",15,19,30 ,40).save();
+        Question.create("path/of/pic5.jpg", "path/of/pic6.jpg",5.0,15,100 ,200).save();
         Question question1 = Question.find.byId(1L);
         Question question2 = Question.find.byId(2L);
         Question question3 = Question.find.byId(3L);
-        new Quiz(trial, question1).save();
-        new Quiz(trial, question2).save();
-        new Quiz(trial, question3).save();
+        new Quiz(trial, 60, question1).save();
+        new Quiz(trial, 120, question2).save();
+        new Quiz(trial, 180, question3).save();
         Quiz quiz1 = Quiz.find.byId(1L);
         Quiz quiz2 = Quiz.find.byId(2L);
         Quiz quiz3 = Quiz.find.byId(3L);
         User user = User.find.byId("test");
-        new Answer(user, quiz1).save();
-        new Answer(user, quiz2).save();
-        new Answer(user, quiz3).save();
+        Answer temp1 = new Answer(user, quiz1);
+        temp1.positionOfChangeX = 10;
+        temp1.positionOfChangeY = 20;
+        temp1.isCorrect = true;
+        temp1.usedTime = 10.5;
+        temp1.save();
+        Answer temp2 = new Answer(user, quiz2);
+        temp2.positionOfChangeX = 20;
+        temp2.positionOfChangeX = 30;
+        temp2.isCorrect = false;
+        temp2.usedTime = 39.5;
+        temp2.save();
+        Answer temp3 = new Answer(user, quiz3);
+        temp3.positionOfChangeX = 100;
+        temp3.positionOfChangeX = 200;
+        temp3.usedTime = 2.05;
+        temp3.isCorrect = true;
+        temp3.save();
         List<Answer> answers = new ArrayList<Answer>();
         answers = Answer.findInvolving(user, trial.quizzes);
         assertNotNull(answers);

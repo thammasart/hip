@@ -7,17 +7,17 @@
     @nav(user)
             <div class="homeMainWindow">
                 <div class="homeMain">
-                    <div class="tile homeMenu1" id="slide01" ><img src="@routes.Assets.at("images/profile.png")" width="150" height="150"><br><br><br>
+                    <div class="tile homeMenu1" id="slide01" ><img src="@routes.Assets.at("images/userprofile.png")" width="150" height="150"><br><br><br>
                     <a href="@routes.UserController.editProfile()"  class="btn btn-block btn-lg btn-primary">
-                    <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;User Profile</a></div>
+                    <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;ข้อมูลผู้ใช้</a></div>
 
                     <div class="tile homeMenu1" id="slide02" ><img src="@routes.Assets.at("images/experiment.png")" width="150" height="150"><br><br><br>
                     <a href="@routes.Application.selectExperiment()"  class="btn btn-block btn-lg btn-primary">
-                    <span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp; Select Experiment </a></div>
+                    <span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;เลือกการทดลอง</a></div>
 
                     <div class="tile homeMenu1"  ><img src="@routes.Assets.at("images/result.png")" width="150" height="150"><br><br><br>
                     <a href="@routes.Application.showResult()"   class="btn btn-block btn-lg btn-primary">
-                    <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Experiment Result</a></div>
+                    <span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;ผลการทดลองทั้งหมด</a></div>
                 </div>
             </div>
     @footer()

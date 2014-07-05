@@ -44,7 +44,7 @@ public class Quiz extends Model{
         return  quiz;
     }
 
-    private static String randomPosition() {
+    public static String randomPosition() {
         Random random = new Random();
         return positions[random.nextInt(positions.length)];
 

@@ -204,6 +204,18 @@ width:631px;
      font-family:Tahoma, 'Microsoft Sans Serif', AngsanaUPC, CordiaUPC;
      border-radius:25px;
 }
+.procPosError{
+    width:400px;
+    float:right;
+    line-height:200%;
+    margin:7%;
+}
+.procHeaderSize{
+    font-size:18px;
+}
+.procContentSize{
+    font-size:16px;
+}
 .procNotification{
      margin-left:1em;
      margin-right:1em;
@@ -244,10 +256,8 @@ width:631px;
     height:150px;
     margin:0px auto;
     position: relative;
-    top: 50%;
-    -webkit-transform: translateY(40%);
-    -ms-transform: translateY(40%);
-    transform: translateY(40%);
+    top: 55%;
+
 }
 .questionBox{
     height:100px;
@@ -279,9 +289,6 @@ width:631px;
     margin:0px auto;
     position: relative;
     top: -60%;
-    -webkit-transform: translateY(-192);
-    -ms-transform: translateY(-192%);
-    transform: translateY(-192%);
 }
 .questionWord{
     float:left;
@@ -307,7 +314,7 @@ width:631px;
     border: 2px solid green;
     margin:20px auto;
     margin-right:1em;
-    margin-left:1em; 
+    margin-left:6em;
 
 }
 

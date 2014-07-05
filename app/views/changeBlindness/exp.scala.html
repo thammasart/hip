@@ -1,0 +1,55 @@
+@(trial : models.changeBlindness.Trial, questionNo : Integer)
+@header("Human Information Processing Lab :: Home Page")
+
+<script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
+ <script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+
+<script src="@routes.Assets.at("javascripts/changeBlindness.js")"></script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/changeBlindness.css")">
+<body onload="onLoad()">
+
+<!-- Page Header -->
+<div class="">
+    <h3 class="hipTitle"align="center" >Human Information Processing Lab</h3>
+    <!-- Dashed line-->
+    <div class="titleLine"></div>
+</div>
+<div id= "changeBlindnessExp" class="changeBlindnessExp">
+    <div class="changeBlindnessWord"  >
+        <p id="word" >  </p>
+    </div>
+    <p id="timerWord" class = "timerWord">  </p>
+    <button id = "stopB"class="stopImgButton" href="@routes.ChangeBlindness.proc()" onclick="stopImg()"> หยุดภาพ </button>
+    <div id = "imgDiv" class="imgDiv">
+        <img name = "X" id = "img1" class="changeBlindnessImg" onclick="done(event)" src=@trial.quizzes(questionNo).question.pathOfPic1 >
+        <div name = "X" id = "imgGray" class="imgGray"></div>
+        <img name = "X" id = "img2" class="changeBlindnessImg"  onclick="done(event)" src=@trial.quizzes(questionNo).question.pathOfPic2 >
+        <div name = "Y" id = "ansDiv" class = "CBanswerDiv" onclick="doneCorrect(event)" ></div>
+
+    </div>
+    <form id = "answerForm" action="@routes.ChangeBlindness.saveAnswer(trial.id,questionNo)" method="post" >
+        <div class="choice" align="center" id="choice" >
+            <input id = "usedTime" name = "usedTime" type="text" hidden>
+            <input id = "positionOfChangeX" name = "positionOfChangeX" type="text" hidden>
+            <input id = "positionOfChangeY" name = "positionOfChangeY" type="text" hidden>
+            <input id = "isCorrect" name = "isCorrect" type="checkbox" hidden/>
+        </div>
+    </form>
+
+
+    <p id = "quiz_displayTime" hidden>@trial.quizzes(questionNo).displayTime</p>
+    <p id = "question_pathOfPic1" hidden> @trial.quizzes(questionNo).question.pathOfPic1</p>
+    <p id = "question_pathOfPic2" hidden> @trial.quizzes(questionNo).question.pathOfPic2</p>
+    <p id = "question_answerAreaWidth" hidden>@trial.quizzes(questionNo).question.answerAreaWidth</p>
+    <p id = "question_answerAreaHeight" hidden>@trial.quizzes(questionNo).question.answerAreaHeight</p>
+    <p id = "question_positionOfChangeX" hidden>@trial.quizzes(questionNo).question.positionOfChangeX</p>
+    <p id = "question_positionOfChangeY" hidden>@trial.quizzes(questionNo).question.positionOfChangeY</p>
+
+</div>
+@footer()

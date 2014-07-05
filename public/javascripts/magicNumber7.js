@@ -76,7 +76,7 @@ function showQuestionWord(){
     ansZone[0].focus();
     document.getElementById("confirm").style.visibility = "visible";
     document.getElementById("word").innerHTML = " เติมตัวอักษรให้ถูกต้องตามลำดับ" ;
-    document.getElementById("cen").style.top = "15%" ;
+    document.getElementById("expcw").style.top= "10%" ;
 }
 function done(){
     d = new Date();

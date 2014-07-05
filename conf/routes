@@ -106,6 +106,8 @@ GET     /garner_interference/procIframe     controllers.GarnerInterference.procI
 GET     /garner_interference/demo           controllers.GarnerInterference.demoPage()
 POST    /garner_interference/reportDemo     controllers.GarnerInterference.demoReport()
 GET     /garner_interference/experiment     controllers.GarnerInterference.experiment(trialId:Long , questionNo:Int)
+POST    /garner_interference/experiment/save controllers.GarnerInterference.saveAnswer(trialId:Long , questionNo:Int)
+GET     /garner_interference/report         controllers.GarnerInterference.report(username:String ?="",trial_id:Long ?=0)
 
 GET     /positionError	            controllers.PositionError.info()
 GET     /positionError/info         controllers.PositionError.infoIframe()

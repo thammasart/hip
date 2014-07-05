@@ -48,6 +48,17 @@ public class ExperimentSchedule extends Model{
 		return experiments;
 	}
 
+//    @Override
+    public void save(){
+        this.startDate.setHours(0);
+        this.startDate.setMinutes(0);
+        this.startDate.setSeconds(0);
+        this.expireDate.setHours(23);
+        this.expireDate.setMinutes(59);
+        this.expireDate.setSeconds(59);
+        super.save();
+    }
+
 	public static List<ExperimentSchedule> getWorkingExperimentsByType(ExperimentType expType) {
 		List<ExperimentSchedule> allWorkingExp = getAllWorkingExperiments();
 		List<ExperimentSchedule> exps = new ArrayList<ExperimentSchedule>();
@@ -58,7 +69,6 @@ public class ExperimentSchedule extends Model{
 		}
 		return exps;
 	}
-
 
 	public static List<ExperimentSchedule> getWorkingExperimentsByType(String expType){
 		List<ExperimentSchedule> expList = null;
@@ -73,6 +83,7 @@ public class ExperimentSchedule extends Model{
         final String MULLERLAYER = "MULLERLAYER";
         final String GARNERINTERFERENCE = "GARNERINTERFERENCE";
         final String VISUALSEARCH = "VISUALSEARCH";
+        final String CHANGEBLINDNESS = "CHANGEBLINDNESS";
 
         if (expType.equals(BROWNPETERSON)){
             expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
@@ -107,6 +118,9 @@ public class ExperimentSchedule extends Model{
         else if (expType.equals(VISUALSEARCH)){
             expList = getWorkingExperimentsByType(ExperimentType.VISUALSEARCH);
         }
+        else if (expType.equals(CHANGEBLINDNESS)){
+            expList = getWorkingExperimentsByType(ExperimentType.CHANGEBLINDNESS);
+        }
         return expList;
 	}
 	
@@ -125,6 +139,7 @@ public class ExperimentSchedule extends Model{
                 case MULLERLAYER: type = "Muller Layer";break;
                 case GARNERINTERFERENCE : type = "Garner Interference";break;
                 case VISUALSEARCH : type = "Visual Search";break;
+                case CHANGEBLINDNESS : type = "Change Blindness";break;
 				default : type = "Unknown";
 			}
 		}
@@ -144,6 +159,7 @@ public class ExperimentSchedule extends Model{
             case MULLERLAYER: generateMullerLayerTrial();break;
             case GARNERINTERFERENCE: generateGarnerInterferenceTrial();break;
             case VISUALSEARCH: break;
+            case CHANGEBLINDNESS: break;
 		}
 	}
 

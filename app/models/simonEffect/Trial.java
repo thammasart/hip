@@ -34,6 +34,26 @@ public class Trial extends Model{
         return find.where().eq("schedule", ex).findList();
     }
 
+    public static List<Trial> findAllTrial(int feature){
+
+        if(feature == 1){ 
+            return find.where().eq("question_type",QuestionType.ONEFEATURE).findList();
+        }else if(feature == 2 ){ 
+            return find.where().eq("question_type",QuestionType.TWOFEATURE).findList();
+        }else{ 
+            return find.all();
+        }
+    }
+    
+    public static List<String> getFeature(){
+        List<String> expFeature = new ArrayList<String>();
+        expFeature.add("1-Feature");
+        expFeature.add("2-Feature");
+        
+        return expFeature;
+    }
+
+
     @SuppressWarnings("unchecked")
 	public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 
