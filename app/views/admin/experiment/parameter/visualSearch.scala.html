@@ -1,0 +1,116 @@
+@(exp: ExperimentSchedule)
+@import views.html.admin._
+@import models.visualSearch.Quiz
+@import models.visualSearch.Trial
+@import models.visualSearch.Question
+@import models.visualSearch.FrameSize
+@import views.html.admin.experiment._
+@import views.html.form._
+
+<div class="container" ng-app="ExperimentCreator">
+    <form role="form" name="parameter" class="form-horizontal" >
+
+        @exp_edit(exp)
+        <hr>
+        @error()
+
+        <div class="container" ng-controller="VisualSearchCtrl" ng-init="trials = @Trial.toJsonArray(Trial.findInvolving(exp))">
+            <div ng-repeat="trial in trials">
+                <h3>Trial {{$index + 1}}</h3>
+                <div class="well">
+                    <div class="row">
+
+                        <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
+                            <div class="col-md-3">
+                                <h4>Frame Size</h4>
+                                <select class="form-control" ng-model="trial.frameSize" ng-options="value for value in frameSizes">
+                                </select>
+                            </div>
+                            <div class="col-md-9">
+                                <h4 class="text-center">Noise</h4>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">Red Square</label>
+                                        <div class="col-md-6" style="margin-top:6px">
+                                            <input type="range" min="0" max="100" ng-model="trial.squareRed" >
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b>{{trial.squareRed}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">Blue Square</label>
+                                        <div class="col-md-6" style="margin-top:6px">
+                                            <input type="range" min="0" max="100" ng-model="trial.squareBlue" >
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b>{{trial.squareBlue}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">Green Square</label>
+                                        <div class="col-md-6" style="margin-top:6px">
+                                            <input type="range" min="0" max="100" ng-model="trial.squareGreen" >
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b>{{trial.squareGreen}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">Red Circle</label>
+                                        <div class="col-md-6" style="margin-top:6px">
+                                            <input type="range" min="0" max="100" ng-model="trial.circleRed" >
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b>{{trial.circleRed}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">Green Circle</label>
+                                        <div class="col-md-6" style="margin-top:6px">
+                                            <input type="range" min="0" max="100" ng-model="trial.circleGreen" >
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b>{{trial.circleGreen}}</b>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <script type="text/ng-template" id="preview.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">I'm a modal!</h3>
+                            </div>
+                            <div class="modal-body">
+                                <h3>this is body.</h3>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </script>
+                        <div class="col-md-3 col-sm-4">
+                            <button class="btn btn-primary" style="width: 50%;margin-bottom: 10px">Generate</button>
+                            <br />
+                            <button class="btn btn-success" ng-click="open()" style="width: 50%">Preview</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+<br>

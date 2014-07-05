@@ -1,4 +1,4 @@
-angular.module('ExperimentCreator', ['ui.bootstrap'])
+angular.module('ExperimentCreator', ['ui.bootstrap','uiSlider'])
     .controller('ExController', function($scope){
         $scope.word = /^[a-zA-Z0-9ก-๙_ \-]*$/;
         $scope.value = 3;
@@ -105,4 +105,35 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     .controller('SimonEffectCtrl', function($scope){
         $scope.trials = [];
         $scope.floatPattern = /^[0-1]{1}\.[0-9]+$/;
+    }).controller('VisualSearchCtrl', function($scope, $modal){
+
+        $scope.trials = [];
+
+        var Sharp = function(top,left){
+            var sharp = {
+                top : top,
+                left : left
+            }
+            return sharp;
+        }
+
+        $scope.frameSizes = ['SMALLER', 'SMALL', 'MEDIUM', 'BIG', 'EXTRA'];
+        $scope.open = function(){
+            var modalInstance = $modal.open({
+                templateUrl: 'preview.html',
+                controller: ModalInstanceCtrl,
+                size: 'lg'
+            });
+        };
     });
+
+var ModalInstanceCtrl = function ($scope, $modalInstance) {
+
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss();
+    };
+};

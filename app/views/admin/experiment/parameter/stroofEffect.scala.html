@@ -8,7 +8,7 @@
 @import views.html.form._
 
 <div class="container" ng-app="ExperimentCreator">
-<form role="form" class="form-horizontal" action="@routes.Admin.saveStroopEffectParameter(exp.id)" method="POST">
+<form role="form" name="parameter" class="form-horizontal" action="@routes.Admin.saveStroopEffectParameter(exp.id)" method="POST">
 
     @exp_edit(exp)
     <hr>

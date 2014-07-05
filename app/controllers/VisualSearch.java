@@ -73,32 +73,32 @@ public class VisualSearch extends Controller{
         String left = "30px";
         switch (Trial.find.byId(trialId).frameSize){
             case SMALLER :
-                frameWidth = "300px";
-                frameHeight = "200px";
+                frameWidth = Trial.SMALLER_WIDTH + "px";
+                frameHeight = Trial.SMALLER_HEIGHT + "px";
                 top = "300px";
                 left = "270px";
                 break;
             case SMALL :
-                frameWidth = "500px";
-                frameHeight = "300px";
+                frameWidth = Trial.SMALL_WIDTH + "px";
+                frameHeight = Trial.SMALL_HEIGHT + "px";
                 top = "240px";
                 left = "160px";
                 break;
             case MEDIUM :
-                frameWidth = "600px";
-                frameHeight = "400px";
+                frameWidth = Trial.MEDIUM_WIDTH + "px";
+                frameHeight = Trial.MEDIUM_HEIGHT + "px";
                 top = "190px";
                 left = "120px";
                 break;
             case BIG :
-                frameWidth = "800px";
-                frameHeight = "500px";
+                frameWidth = Trial.BIG_WIDTH + "px";
+                frameHeight = Trial.BIG_HEIGHT + "px";
                 top = "142px";
                 left = "30px";
                 break;
             case EXTRA :
-                frameWidth = "1000px";
-                frameHeight = "500px";
+                frameWidth = Trial.EXTRA_WIDTH + "px";
+                frameHeight = Trial.EXTRA_HEIGHT + "px";
                 top = "142px";
                 left = "-70px";
                 break;

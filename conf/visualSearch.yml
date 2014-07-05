@@ -14,56 +14,56 @@
 #Trial
 - &round45 !!models.visualSearch.Trial
     dense: 10
-    sqaureBlue: TRUE
-    sqaureGreen: TRUE
-    sqaureRed: TRUE
-    circleGreen: TRUE
-    circleRed: TRUE
+    squareBlue: 0
+    squareGreen: 0
+    squareRed: 0
+    circleGreen: 0
+    circleRed: 0
     frameSize: SMALLER
     schedule: *ex21
 - &round46 !!models.visualSearch.Trial
     dense: 20
-    sqaureBlue: TRUE
-    sqaureGreen: TRUE
-    sqaureRed: TRUE
-    circleGreen: TRUE
-    circleRed: TRUE
+    squareBlue: 0
+    squareGreen: 0
+    squareRed: 0
+    circleGreen: 0
+    circleRed: 0
     frameSize: SMALL
     schedule: *ex21
 - &round47 !!models.visualSearch.Trial
     dense: 30
-    sqaureBlue: TRUE
-    sqaureGreen: TRUE
-    sqaureRed: TRUE
-    circleGreen: TRUE
-    circleRed: TRUE
+    squareBlue: 0
+    squareGreen: 0
+    squareRed: 0
+    circleGreen: 0
+    circleRed: 0
     frameSize: MEDIUM
     schedule: *ex21
 - &round48 !!models.visualSearch.Trial
     dense: 40
-    sqaureBlue: TRUE
-    sqaureGreen: TRUE
-    sqaureRed: TRUE
-    circleGreen: TRUE
-    circleRed: TRUE
+    squareBlue: 0
+    squareGreen: 0
+    squareRed: 0
+    circleGreen: 0
+    circleRed: 0
     frameSize: BIG
     schedule: *ex22
 - &round49 !!models.visualSearch.Trial
     dense: 50
-    sqaureBlue: TRUE
-    sqaureGreen: TRUE
-    sqaureRed: TRUE
-    circleGreen: TRUE
-    circleRed: TRUE
+    squareBlue: 0
+    squareGreen: 0
+    squareRed: 0
+    circleGreen: 0
+    circleRed: 0
     frameSize: EXTRA
     schedule: *ex22
 - &round50 !!models.visualSearch.Trial
     dense: 60
-    sqaureBlue: TRUE
-    sqaureGreen: TRUE
-    sqaureRed: TRUE
-    circleGreen: TRUE
-    circleRed: TRUE
+    squareBlue: 0
+    squareGreen: 0
+    squareRed: 0
+    circleGreen: 0
+    circleRed: 0
     frameSize: EXTRA
     schedule: *ex22
 
@@ -72,37 +72,37 @@
     shapeType: SQAURE_GREEN
     positionX: 15
     positionY: 60
-    sharps: '[{top:2,left:2},{top:6,left:45},{top:80,left:65}, {top:69,left:55},{top:79,left:15}]'
+    sharps: '[{top:2,left:2,color:"green",sharp:"square"},{top:6,left:45,color:"red",sharp:"circle"},{top:80,left:65,color:"blue",sharp:"square"}, {top:69,left:55,color:"red",sharp:"square"},{top:79,left:15,color:"blue",sharp:"square"}]'
 
 - &Question80 !!models.visualSearch.Question
     shapeType: CIRCLE_GREEN
     positionX: 36
     positionY: 37
-    sharps: '[{top:2,left:2},{top:6,left:45},{top:80,left:65}, {top:69,left:55},{top:79,left:15}]'
+    sharps: '[{top:2,left:2,color:"green",sharp:"square"},{top:6,left:45,color:"blue",sharp:"square"},{top:80,left:65,color:"red",sharp:"circle"}, {top:69,left:55,color:"blue",sharp:"square"},{top:79,left:15,color:"red",sharp:"square"}]'
 
 - &Question81 !!models.visualSearch.Question
     shapeType: CIRCLE_RED
     positionX: 15
     positionY: 5
-    sharps: '[{top:2,left:2},{top:6,left:45},{top:80,left:65}, {top:69,left:55},{top:79,left:15}]'
+    sharps: '[{top:2,left:2,color:"green",sharp:"square"},{top:6,left:45,color:"red",sharp:"square"},{top:80,left:65,color:"blue",sharp:"square"}, {top:69,left:55,color:"blue",sharp:"square"},{top:79,left:15,color:"red",sharp:"circle"}]'
 
 - &Question82 !!models.visualSearch.Question
     shapeType: SQAURE_GREEN
     positionX: 2
     positionY: 2
-    sharps: '[{top:2,left:2},{top:6,left:45},{top:80,left:65}, {top:69,left:55},{top:79,left:15}]'
+    sharps: '[{top:2,left:2,color:"blue",sharp:"square"},{top:6,left:45,color:"red",sharp:"circle"},{top:80,left:65,color:"green",sharp:"square"}, {top:69,left:55,color:"red",sharp:"square"},{top:79,left:15,color:"blue",sharp:"square"}]'
 
 - &Question83 !!models.visualSearch.Question
     shapeType: CIRCLE_GREEN
     positionX: 80
     positionY: 9
-    sharps: '[{top:2,left:2},{top:6,left:45},{top:80,left:65}, {top:69,left:55},{top:79,left:15}]'
+    sharps: '[{top:2,left:2,color:"red",sharp:"circle"},{top:6,left:45,color:"red",sharp:"square"},{top:80,left:65,color:"blue",sharp:"square"}, {top:69,left:55,color:"green",sharp:"square"},{top:79,left:15,color:"blue",sharp:"square"}]'
 
 - &Question84 !!models.visualSearch.Question
     shapeType: CIRCLE_RED
     positionX: 20
     positionY: 30
-    sharps: '[{top:2,left:2},{top:6,left:45},{top:80,left:65}, {top:69,left:55},{top:79,left:15}]'
+    sharps: '[{top:2,left:2,color:"red",sharp:"square"},{top:6,left:45,color:"green",sharp:"square"},{top:80,left:65,color:"red",sharp:"circle"}, {top:69,left:55,color:"blue",sharp:"square"},{top:79,left:15,color:"blue",sharp:"square"}]'
 #Quiz
 - &Quiz119 !!models.visualSearch.Quiz
     positionXofTarget: 60

@@ -38,7 +38,8 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
 
 
-        <button ng-repeat="sharp in sharps" class="box" name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:#2ED2AE" onclick="shapeClick(this)"></button>
+        <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
+        name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" onclick="shapeClick(this)"></button>
 
 
             <button class="circle" name = "target" style="left:@Quiz.findInvolving(trial).get(questionNo).positionXofTarget%;top:Quiz.findInvolving(trial).get(questionNo).positionYofTarget%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
