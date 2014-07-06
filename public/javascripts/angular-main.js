@@ -247,10 +247,13 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
     $scope.width = width;
     $scope.height = height;
 
+    var row,column;
 
 
     $scope.ok = function () {
+        clearGrid();
         generateSharp(trial);
+
         //$modalInstance.close();
     };
 
@@ -263,6 +266,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
             case 'red' : colorText='#A51B00'; break;
             case 'blue': colorText='#57BAC9';break;
             case 'green': colorText='#2ED2AE'; break;
+            case 'error' : colorText="#FF0000";break;
         }
         return colorText;
     }
@@ -289,16 +293,82 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
             var obj = Sharp('green','square');
             $scope.sharps.push(obj);
         }
-        console.log($scope.sharps);
+    }
+    
+
+
+    var makeDense = function(){
+
+
+    }
+
+    $scope.init = function(){
+        row = Math.floor($scope.height / 30);
+        column = Math.floor($scope.width / 30);
+        $scope.grids = new Array(row);
+        for(var i = 0; i < row; i++){
+            $scope.grids[i] = new Array(column);
+        }
+        console.log($scope.grids);
+        var top = 0;
+        var left = 0;
+        var x_offset = 100/column;
+        var y_offset = 100/row;
+        for(var i = 0; i < row; i++){
+            for(var j =0; j < column; j++){
+                $scope.grids[i][j] = Grid(top, left);
+                left += x_offset;
+            }
+            top += y_offset;
+            left = 0;
+        }
+
+    }
+
+    var clearGrid = function(){
+        for(var i = 0; i < row; i++){
+            for(var j =0; j < column; j++){
+                $scope.grids[i][j].visit = false;
+                $scope.grids[i][j].sharp = {};
+            }
+        }
+    }
+
+    var randomGrid = function(){
+        var i = 0;
+        var j = 0;
+        var count = 0;
+        while(count < 200){
+           i = Math.floor((Math.random() * row));
+           j = Math.floor((Math.random() * column));
+           if(!$scope.grids[i][j].visit){
+               console.log('coutn: ' + count);
+               return $scope.grids[i][j];
+           }
+           count++;
+        }
     }
 
     var Sharp = function(color,sharp){
+        var grid = randomGrid();
         var sharp = {
-            top: Math.floor((Math.random() * 85) + 10),
-            left: Math.floor((Math.random() * 85) + 10),
+            top: grid.top,
+            left: grid.left,
             color: color,
             sharp: sharp
         }
+        grid.visit = true;
+        grid.sharp = sharp;
         return sharp;
+    }
+
+    var Grid = function(top,left){
+        var grid = {
+            top:top,
+            left:left,
+            sharp:{},
+            visit:false
+        }
+        return grid;
     }
 };
