@@ -297,11 +297,6 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
     
 
 
-    var makeDense = function(){
-
-
-    }
-
     $scope.init = function(){
         row = Math.floor($scope.height / 30);
         column = Math.floor($scope.width / 30);
@@ -322,7 +317,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
             top += y_offset;
             left = 0;
         }
-
+        generateSharp(trial);
     }
 
     var clearGrid = function(){
@@ -342,7 +337,6 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
            i = Math.floor((Math.random() * row));
            j = Math.floor((Math.random() * column));
            if(!$scope.grids[i][j].visit){
-               console.log('coutn: ' + count);
                return $scope.grids[i][j];
            }
            count++;
