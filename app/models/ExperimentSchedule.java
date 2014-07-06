@@ -158,10 +158,12 @@ public class ExperimentSchedule extends Model{
             case SIMONEFFECT : generateSimonEffectTrial(); break;
             case MULLERLAYER: generateMullerLayerTrial();break;
             case GARNERINTERFERENCE: generateGarnerInterferenceTrial();break;
-            case VISUALSEARCH: break;
+            case VISUALSEARCH: generateVisualSearchTrial(); break;
             case CHANGEBLINDNESS: break;
 		}
 	}
+
+
 
     private void generateGarnerInterferenceTrial() {
         for(int i=0; i < this.noOfTrial; i++){
@@ -170,7 +172,13 @@ public class ExperimentSchedule extends Model{
             trial.generateQuiz();
         }
     }
-
+    private void generateVisualSearchTrial() {
+        for(int i=0;i<this.noOfTrial;i++){
+            models.visualSearch.Trial trial = models.visualSearch.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
     private void generateMullerLayerTrial() {
         for(int i =0; i < this.noOfTrial; i++){
             models.mullerLayer.Trial trial = models.mullerLayer.Trial.create(this);

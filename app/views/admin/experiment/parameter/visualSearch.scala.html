@@ -1,9 +1,5 @@
 @(exp: ExperimentSchedule)
 @import views.html.admin._
-@import models.visualSearch.Quiz
-@import models.visualSearch.Trial
-@import models.visualSearch.Question
-@import models.visualSearch.FrameSize
 @import views.html.admin.experiment._
 @import views.html.form._
 
@@ -14,8 +10,8 @@
         <hr>
         @error()
 
-        <div class="container" ng-controller="VisualSearchCtrl" ng-init="trials = @Trial.toJsonArray(Trial.findInvolving(exp))">
-            <div ng-repeat="trial in trials">
+        <div class="container" ng-controller="VisualSearchCtrl" ng-init="init(@exp.id)">
+            <div ng-repeat="trial in trials" >
                 <h3>Trial {{$index + 1}}</h3>
                 <div class="well">
                     <div class="row">
@@ -23,8 +19,11 @@
                         <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
                             <div class="col-md-3">
                                 <h4>Frame Size</h4>
-                                <select class="form-control" ng-model="trial.frameSize" ng-options="value for value in frameSizes">
+                                <select class="form-control" ng-model="trial.quiz.frameSize" ng-options="value for value in frameSizes">
                                 </select>
+                                <p>Width: {{width(trial)}}</p>
+                                <p>Height: {{height(trial)}}</p>
+                                <p>Max Noise: {{max(trial)}}</p>
                             </div>
                             <div class="col-md-9">
                                 <h4 class="text-center">Noise</h4>
@@ -32,10 +31,10 @@
                                     <div class="row">
                                         <label class="control-label col-md-4">Red Square</label>
                                         <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="100" ng-model="trial.squareRed" >
+                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareRed" >
                                         </div>
                                         <div class="col-md-2">
-                                            <b>{{trial.squareRed}}</b>
+                                            <b>{{trial.quiz.squareRed}}</b>
                                         </div>
                                     </div>
                                 </div>
@@ -43,10 +42,10 @@
                                     <div class="row">
                                         <label class="control-label col-md-4">Blue Square</label>
                                         <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="100" ng-model="trial.squareBlue" >
+                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareBlue" >
                                         </div>
                                         <div class="col-md-2">
-                                            <b>{{trial.squareBlue}}</b>
+                                            <b>{{trial.quiz.squareBlue}}</b>
                                         </div>
                                     </div>
                                 </div>
@@ -54,10 +53,10 @@
                                     <div class="row">
                                         <label class="control-label col-md-4">Green Square</label>
                                         <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="100" ng-model="trial.squareGreen" >
+                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareGreen" >
                                         </div>
                                         <div class="col-md-2">
-                                            <b>{{trial.squareGreen}}</b>
+                                            <b>{{trial.quiz.squareGreen}}</b>
                                         </div>
                                     </div>
                                 </div>
@@ -65,34 +64,38 @@
                                     <div class="row">
                                         <label class="control-label col-md-4">Red Circle</label>
                                         <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="100" ng-model="trial.circleRed" >
+                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleRed" >
                                         </div>
                                         <div class="col-md-2">
-                                            <b>{{trial.circleRed}}</b>
+                                            <b>{{trial.quiz.circleRed}}</b>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <label class="control-label col-md-4">Green Circle</label>
+                                        <label class="control-label col-md-4" >Green Circle</label>
                                         <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="100" ng-model="trial.circleGreen" >
+                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleGreen" >
                                         </div>
                                         <div class="col-md-2">
-                                            <b>{{trial.circleGreen}}</b>
+                                            <b>{{trial.quiz.circleGreen}}</b>
                                         </div>
                                     </div>
                                 </div>
-
 
                             </div>
                         </div>
                         <script type="text/ng-template" id="preview.html">
                             <div class="modal-header">
-                                <h3 class="modal-title">I'm a modal!</h3>
+                                <h3 class="modal-title">Preview</h3>
                             </div>
-                            <div class="modal-body">
-                                <h3>this is body.</h3>
+                            <div class="modal-body" style="width:{{width}}px;height: {{height}}px;margin:auto">
+                                <div class="visualArea" style="width:{{width}}px;height:{{height}}px;visibility: visible;margin-left:0;left:0;top:0" id="visualArea">
+
+                                <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
+                                name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" ></button>
+
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-primary" ng-click="ok()">OK</button>
@@ -100,9 +103,9 @@
                             </div>
                         </script>
                         <div class="col-md-3 col-sm-4">
-                            <button class="btn btn-primary" style="width: 50%;margin-bottom: 10px">Generate</button>
+                            <button class="btn btn-primary" ng-click="generateSharp(trial)" style="width: 50%;margin-bottom: 10px">Generate</button>
                             <br />
-                            <button class="btn btn-success" ng-click="open()" style="width: 50%">Preview</button>
+                            <button class="btn btn-success" ng-click="open(trial)" style="width: 50%">Preview</button>
                         </div>
                     </div>
                 </div>
@@ -112,5 +115,5 @@
         </div>
     </form>
 </div>
-
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/visualSearch.css")">
 <br>

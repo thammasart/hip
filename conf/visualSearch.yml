@@ -11,6 +11,7 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: VISUALSEARCH
+
 #Trial
 - &round45 !!models.visualSearch.Trial
     dense: 10
@@ -21,6 +22,7 @@
     circleRed: 0
     frameSize: SMALLER
     schedule: *ex21
+
 - &round46 !!models.visualSearch.Trial
     dense: 20
     squareBlue: 0
@@ -30,6 +32,7 @@
     circleRed: 0
     frameSize: SMALL
     schedule: *ex21
+
 - &round47 !!models.visualSearch.Trial
     dense: 30
     squareBlue: 0
@@ -39,6 +42,7 @@
     circleRed: 0
     frameSize: MEDIUM
     schedule: *ex21
+
 - &round48 !!models.visualSearch.Trial
     dense: 40
     squareBlue: 0
@@ -72,37 +76,38 @@
     shapeType: SQAURE_GREEN
     positionX: 15
     positionY: 60
-    sharps: '[{top:2,left:2,color:"green",sharp:"square"},{top:6,left:45,color:"red",sharp:"circle"},{top:80,left:65,color:"blue",sharp:"square"}, {top:69,left:55,color:"red",sharp:"square"},{top:79,left:15,color:"blue",sharp:"square"}]'
+    sharps: '[{"top":2,"left":2,"color":"green","sharp":"square"},{"top":6,"left":45,"color":"red","sharp":"circle"},{"top":80,"left":65,"color":"blue","sharp":"square"}, {"top":69,"left":55,"color":"red","sharp":"square"},{"top":79,"left":15,"color":"blue","sharp":"square"}]'
 
 - &Question80 !!models.visualSearch.Question
     shapeType: CIRCLE_GREEN
     positionX: 36
     positionY: 37
-    sharps: '[{top:2,left:2,color:"green",sharp:"square"},{top:6,left:45,color:"blue",sharp:"square"},{top:80,left:65,color:"red",sharp:"circle"}, {top:69,left:55,color:"blue",sharp:"square"},{top:79,left:15,color:"red",sharp:"square"}]'
+    sharps: '[{"top":2,"left":2,"color":"green","sharp":"square"},{"top":6,"left":45,"color":"blue","sharp":"square"},{"top":80,"left":65,"color":"red","sharp":"circle"}, {"top":69,"left":55,"color":"blue","sharp":"square"},{"top":79,"left":15,"color":"red","sharp":"square"}]'
 
 - &Question81 !!models.visualSearch.Question
     shapeType: CIRCLE_RED
     positionX: 15
     positionY: 5
-    sharps: '[{top:2,left:2,color:"green",sharp:"square"},{top:6,left:45,color:"red",sharp:"square"},{top:80,left:65,color:"blue",sharp:"square"}, {top:69,left:55,color:"blue",sharp:"square"},{top:79,left:15,color:"red",sharp:"circle"}]'
+    sharps: '[{"top":2,"left":2,"color":"green","sharp":"square"},{"top":6,"left":45,"color":"red","sharp":"square"},{"top":80,"left":65,"color":"blue","sharp":"square"}, {"top":69,"left":55,"color":"blue","sharp":"square"},{"top":79,"left":15,"color":"red","sharp":"circle"}]'
 
 - &Question82 !!models.visualSearch.Question
     shapeType: SQAURE_GREEN
     positionX: 2
     positionY: 2
-    sharps: '[{top:2,left:2,color:"blue",sharp:"square"},{top:6,left:45,color:"red",sharp:"circle"},{top:80,left:65,color:"green",sharp:"square"}, {top:69,left:55,color:"red",sharp:"square"},{top:79,left:15,color:"blue",sharp:"square"}]'
+    sharps: '[{"top":2,"left":2,"color":"blue","sharp":"square"},{"top":6,"left":45,"color":"red","sharp":"circle"},{"top":80,"left":65,"color":"green","sharp":"square"}, {"top":69,"left":55,"color":"red","sharp":"square"},{"top":79,"left":15,"color":"blue","sharp":"square"}]'
 
 - &Question83 !!models.visualSearch.Question
     shapeType: CIRCLE_GREEN
     positionX: 80
     positionY: 9
-    sharps: '[{top:2,left:2,color:"red",sharp:"circle"},{top:6,left:45,color:"red",sharp:"square"},{top:80,left:65,color:"blue",sharp:"square"}, {top:69,left:55,color:"green",sharp:"square"},{top:79,left:15,color:"blue",sharp:"square"}]'
+    sharps: '[{"top":2,"left":2,"color":"red","sharp":"circle"},{"top":6,"left":45,"color":"red","sharp":"square"},{"top":80,"left":65,"color":"blue","sharp":"square"}, {"top":69,"left":55,"color":"green","sharp":"square"},{"top":79,"left":15,"color":"blue","sharp":"square"}]'
 
 - &Question84 !!models.visualSearch.Question
     shapeType: CIRCLE_RED
     positionX: 20
     positionY: 30
-    sharps: '[{top:2,left:2,color:"red",sharp:"square"},{top:6,left:45,color:"green",sharp:"square"},{top:80,left:65,color:"red",sharp:"circle"}, {top:69,left:55,color:"blue",sharp:"square"},{top:79,left:15,color:"blue",sharp:"square"}]'
+    sharps: '[{"top":2,"left":2,"color":"red","sharp":"square"},{"top":6,"left":45,"color":"green","sharp":"square"},{"top":80,"left":65,"color":"red","sharp":"circle"}, {"top":69,"left":55,"color":"blue","sharp":"square"},{"top":79,"left":15,"color":"blue","sharp":"square"}]'
+
 #Quiz
 - &Quiz119 !!models.visualSearch.Quiz
     positionXofTarget: 60
@@ -122,8 +127,8 @@
 - &Quiz122 !!models.visualSearch.Quiz
     positionXofTarget: 7
     positionYofTarget: 10
-    trial: *round48
     question: *Question81
+    trial: *round48
 - &Quiz123 !!models.visualSearch.Quiz
     positionXofTarget: 7
     positionYofTarget: 27
@@ -134,3 +139,5 @@
     positionYofTarget: 55
     trial: *round50
     question: *Question83
+
+

@@ -1,5 +1,6 @@
 package models.visualSearch;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -35,6 +36,9 @@ public class Trial extends Model{
     public FrameSize frameSize;
     @ManyToOne
     public ExperimentSchedule schedule;
+    @OneToOne(mappedBy = "trial",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    public Quiz quiz;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
@@ -49,7 +53,7 @@ public class Trial extends Model{
     }
 
     public static void displayJson(){
-        System.out.println(Json.stringify(Json.toJson(Trial.find.byId(1L))));
+        System.out.println(Json.stringify(Json.toJson(Trial.find.all().get(0))));
     }
     public String toJson(){
         return Json.stringify(Json.toJson(this));
@@ -70,4 +74,13 @@ public class Trial extends Model{
     @SuppressWarnings("unchecked")
     public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 
+    public static Trial create(ExperimentSchedule schedule) {
+        Trial trial = new Trial(schedule);
+        return trial;
+    }
+
+    public void generateQuiz() {
+        Quiz quiz = Quiz.create(this);
+        quiz.save();
+    }
 }
