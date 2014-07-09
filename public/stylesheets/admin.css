@@ -94,3 +94,33 @@ th{
 .block-top{
     margin-top:20px;
 }
+
+.adminIndexHeaderContainer{
+    height:60px;
+    width:100%;  
+}
+.adminIndexHeaderText{
+    font-size:x-large;
+    margin:0.5% 0 0 3%;
+    width:25%;
+    float:left;
+}
+.adminHeaderBtn{
+    float:right;
+    margin-top:0.5%;
+    margin-right:1%;
+}
+.adminGlyBtn{
+    margin-right:10px;
+}
+.adminUserinfoTableContainer{
+    width:96%;
+    margin:auto;
+}
+.modalWarning{
+    color:red;
+    font-size:large;
+}
+.modalDelete{
+    font-size:x-large;
+}

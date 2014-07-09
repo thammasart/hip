@@ -147,6 +147,7 @@ POST    /user/changepassword    controllers.UserController.saveUserPassword()
 
 GET     /admin                      controllers.Admin.index()
 GET     /admin/experiment           controllers.Admin.displayExperimentList()
+GET     /admin/experimentResult     controllers.Admin.RenderAdminExperimentResult()
 GET     /admin/experiment/add       controllers.Admin.addExperiment()
 POST    /admin/experiment           controllers.Admin.saveExperiment()
 GET     /admin/experiment/result/:id controllers.Admin.displayExperimentResult(id : Long)
