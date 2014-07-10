@@ -124,3 +124,19 @@ th{
 .modalDelete{
     font-size:x-large;
 }
+.adminFindByUser{
+    height:500px;
+}
+.adminFindResultTabContainer{   
+    width:96%;
+    margin-left:2%;
+}
+.RowCointainer{
+    width:30%;
+    margin:2% 2% 0 2%;
+    float:left;
+}
+.statusDropdown{
+    width:200px;
+    height:34px;
+}

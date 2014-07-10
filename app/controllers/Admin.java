@@ -51,6 +51,10 @@ public class Admin extends Controller {
     public static Result RenderAdminExperimentResult() {
         return ok(experiment_result.render(User.getAllUser()));
     }
+    @Security.Authenticated(Secured.class)
+    public static Result RenderAdminFindResult() {
+        return ok(find_result.render(User.getAllUser()));
+    }
 
     //ทำการเพิ่ม user account ใหม่เข้าไปในระบบ
     @Security.Authenticated(Secured.class)
