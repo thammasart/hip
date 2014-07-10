@@ -446,6 +446,7 @@ public class Admin extends Controller {
 
             for(models.simonEffect.Quiz quiz : trial.quizzes){
                 quiz.question = models.simonEffect.Question.findQuestionByType(questionType);
+                quiz.position = models.simonEffect.Quiz.randomPosition();
                 quiz.update();
             }
             trial.update();
@@ -454,4 +455,6 @@ public class Admin extends Controller {
         flash("success", "update success.");
         return ok(views.html.admin.experiment.edit.render(exp));
     }
+
+
 }
