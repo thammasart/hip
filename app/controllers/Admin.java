@@ -44,46 +44,166 @@ public class Admin extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result renderUserInfo() {
        // List<User> userList = User.find.all(); // I think it useless : who wrote it plz take care .
-        return ok(user_info.render(User.getAllUser()));
+        return ok(user_info.render(User.getAllUser(),User.find.byId(session().get("username"))));
+    }
+
+    //แสดงหน้าเพิ่ม user
+    @Security.Authenticated(Secured.class)
+    public static Result addUser(){
+       return ok(add_user.render(User.getAllUser()));
+    }
+
+    //แสดงหน้าแก้ไข user
+    @Security.Authenticated(Secured.class)
+    public static Result editUser(String userName){
+        return ok(edit_user.render(User.find.where().eq("username",userName).findUnique()));
+    }
+
+    //ทำการแก้ไข user account ในระบบ
+    public static Result type_editUser() {
+        DynamicForm stringForm = Form.form().bindFromRequest();
+        boolean userNotFound = false;
+        User oldUser = User.find.where().eq("username",stringForm.get("usrName")).findUnique();
+        if (oldUser != null){
+            Form<User> userForm = Form.form(User.class).bindFromRequest();
+            User newUser = userForm.get();
+            oldUser.firstName = newUser.firstName;
+            oldUser.lastName = newUser.lastName;
+            oldUser.gender = newUser.gender;
+            oldUser.birthDate = newUser.birthDate;
+            oldUser.year = newUser.year;
+            oldUser.eMail = newUser.eMail;
+            oldUser.section = newUser.section;
+            oldUser.semester = newUser.semester;
+            oldUser.academicYear = newUser.academicYear;
+            oldUser.faculty = newUser.faculty;
+            oldUser.department = newUser.department;
+
+            String userStatus = stringForm.get("userStatus");
+            if (userStatus.equalsIgnoreCase("ADMIN")){
+                oldUser.status = UserRole.ADMIN;
+            }
+            else if ((userStatus.equalsIgnoreCase("STUDENT"))){
+                oldUser.status = UserRole.STUDENT;
+            }
+            else{
+                oldUser.status = UserRole.GUEST;
+            }
+            //่้try catch
+            oldUser.update();
+        }
+        else{
+            userNotFound = true;
+        }
+
+        if (userNotFound){
+            String errorText = "No such a user in the database. ";
+            flash("nullUser", errorText);
+        }
+        else
+            flash("savedSuccess","Edit user successfully !");
+
+        return ok(user_info.render(User.getAllUser(),User.find.byId(session().get("username"))));
     }
 
     //ทำการเพิ่ม user account ใหม่เข้าไปในระบบ
-    @Security.Authenticated(Secured.class)
-    public static Result saveUser() {
+    private static Result type_addUser(){
         DynamicForm  stringForm = Form.form().bindFromRequest();
         String userString = stringForm.get("users");
-
-        if(userString.contains(" "))return TODO;
-        String[] result = userString.split("\r\n");
-
-        boolean userExist = false;
-        List<String> userExistName = new ArrayList<String>();
-        for(int i=0 ; i <result.length;i++){
-            List<User> users = User.find.where().eq("username",result[i]).findList();
-            if (users.size() == 0){
-                User temp = new User(result[i],result[i]);
-                temp.section = stringForm.get("section");
-                temp.semester = stringForm.get("semester");
-                temp.academicYear = stringForm.get("academicYear");
-                temp.department = stringForm.get("department");
-                temp.faculty = stringForm.get("faculty");
-                temp.save();
-            }
-            else{
-                userExist = true;
-                userExistName.add(result[i]);
-            }
+        boolean nullUser = false;
+        boolean whiteSpace = false;
+        if (userString.isEmpty() || userString.trim().isEmpty()){
+            nullUser = true;
         }
-        if (userExist){
-            String errorText = "Already has user: ";
-            for (String i : userExistName)
-                errorText = errorText + i + " ";
-            flash("userExisted", errorText);
+        if (userString.contains(" ")){
+            whiteSpace = true;
+        }
+
+        if (!nullUser && !whiteSpace){
+            String[] result = userString.split("\r\n");
+
+            boolean userExist = false;
+
+            List<String> userExistName = new ArrayList<String>();
+
+            for(int i=0 ; i <result.length;i++){
+                List<User> users = User.find.where().eq("username",result[i]).findList();
+                if (users.size() == 0){
+                    User temp = new User(result[i],result[i]);
+                    temp.year = Integer.parseInt(stringForm.get("year"));
+                    temp.gender = "";
+                    temp.section = stringForm.get("section");
+                    temp.semester = stringForm.get("semester");
+                    temp.academicYear = stringForm.get("academicYear");
+                    temp.department = stringForm.get("department");
+                    temp.faculty = stringForm.get("faculty");
+
+                    String userStatus = stringForm.get("userStatus");
+                    if (userStatus.equalsIgnoreCase("ADMIN")){
+                        temp.status = UserRole.ADMIN;
+                    }
+                    else if ((userStatus.equalsIgnoreCase("STUDENT"))){
+                        temp.status = UserRole.STUDENT;
+                    }
+                    else{
+                        temp.status = UserRole.GUEST;
+                    }
+
+                    temp.save();
+                }
+                else{
+                    userExist = true;
+                    userExistName.add(result[i]);
+                }
+            }
+            if (userExist){
+                String errorText = "Already has user: ";
+                for (String i : userExistName)
+                    errorText = errorText + i + " ";
+                flash("userExisted", errorText);
+            }
+            else
+                flash("savedSuccess","Add new user(s) successfully !");
+            return ok(user_info.render(User.getAllUser(),User.find.byId(session().get("username"))));
+        }
+        else {
+            if (nullUser)
+                flash("nullUser", "Please enter a username");
+            else
+                flash("nullUser", "Please do not use a white space in a username");
+            return redirect(routes.Admin.addUser());
+        }
+    }
+    //ทำการลบ user account ออกจากระบบ
+    private static Result type_deleteUser(){
+        DynamicForm  stringForm = Form.form().bindFromRequest();
+        String userString = stringForm.get("deleteUser");
+        String[] result = userString.split(":::::");
+        User currentUser = User.find.byId(session().get("username"));
+        String warning = "";
+        for(int i=0 ; i <result.length;i++){
+            User user = User.find.where().eq("username",result[i]).findUnique();
+            if (!currentUser.username.equals(user.username))
+                user.deleteUserAndRelative();
+            else
+                warning = " but except your user.";
+        }
+        flash("savedSuccess","Delete user(s) successfully !"+ warning);
+        return ok(user_info.render(User.getAllUser(),currentUser));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result saveUser(int mode) {
+        if (mode == 0)
+            return type_addUser();
+        else if (mode == 1)
+            return type_editUser();
+        else if (mode == 2){
+            return type_deleteUser();
         }
         else
-            flash("savedSuccess","Add Success");
+            return redirect(routes.Admin.renderUserInfo());
 
-        return ok(user_info.render(User.getAllUser()));
     }
     
     //แสดงผลหน้า experiment set ทั้งหมดในระบบ

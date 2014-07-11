@@ -1,0 +1,14 @@
+.borderDiv{
+    border-style: groove;
+	height: 500px;
+	margin-bottom: 3%;
+}
+.seperateFooter{
+    margin-top: 20%;
+}
+.submitNewUserButton{
+    margin-left: 5%;
+}
+.cancelNewUserButton{
+    margin-left: 5%;
+}

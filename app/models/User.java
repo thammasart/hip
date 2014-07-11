@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import play.data.format.Formats;
 
 @Entity
@@ -49,6 +50,22 @@ public class User extends Model{
 	public static User authenticate(String username, String password) {
 		return find.where().eq("username", username).eq("password", password).findUnique();
 	}
+
+    public int getAge(){
+        if (birthDate != null){
+            Date d = new Date();
+            long diff = d.getTime() - birthDate.getTime();
+            long days = TimeUnit.MILLISECONDS.toDays(diff);
+            long years = days/365;
+            return (int)years;
+        }
+        else
+            return 0;
+    }
+
+    public void deleteUserAndRelative(){
+        this.delete();
+    }
 
 	@SuppressWarnings("unchecked")
 	public static Finder<String,User> find = new Finder(String.class,User.class);

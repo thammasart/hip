@@ -13,9 +13,26 @@ border:solid 1px #95A5A6;
     margin:0px auto;
 }
 
-.addUserButton{
+.deleteSelectButton{
     float:right;
     margin-bottom:10px;
+    margin-right: 50px;
+}
+.userInfoButton{
+    float:right;
+    margin-bottom:10px;
+    margin-left: 10px;
+}
+.smallEditButton{
+    float:right;
+	margin-top:10px;
+    margin-bottom:10px;
+}
+.smallDelButton{
+    float:right;
+	margin-top:10px;
+    margin-bottom:10px;
+	margin-left: 5px;
 }
 .textArea{
     float: left;

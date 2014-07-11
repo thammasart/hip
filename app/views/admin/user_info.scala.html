@@ -1,46 +1,174 @@
-@(user : List[User])
+@(user : List[User],currentUser : User)
 @head_admin("Admin Panel")
 @nav_admin()
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/userInfo.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/jquery.dataTables.css")">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/deleteUser.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.11.0.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.dataTables.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/paging.js")"></script>
+
+<script type="text/javascript">
+		    /* Table initialisation */
+			$(document).ready(function() {
+                // Setup - add a text input to each footer cell
+                $('#userTable thead th').each( function () {
+                    var title = $('#userTable thead th').eq( $(this).index() ).text();
+                    if ($(this).attr('id') == "useless_cb" || $(this).attr('id') == "useless_btn")
+                        $(this).append('<input type="text"  / hidden>' );
+                        //$(this).html('<input type="text" placeholder=" '+title+'" / hidden>' );
+                    else
+                        $(this).append('<input type="text"/>' );
+                        //$(this).html('<input type="text" placeholder=" '+title+'" />' );
+                } );
+
+                // DataTable
+                var table = $('#userTable').DataTable({
+                                bSort: true,
+                                "iDisplayLength": 15,   // records per page
+                                "sDom": "t<'row'<'col-md-2'i> <'col-md-5'p> >",
+                                "sPaginationType": "bootstrap",
+                                "aoColumnDefs": [
+                                  { "bSortable": false, "aTargets": [ 0,15 ] }
+                                ],
+                                "order": [[ 1, "asc" ]]
+                            });
+
+                // Apply the filter
+                table.columns().eq( 0 ).each( function ( colIdx ) {
+                    $( 'input', table.column( colIdx ).header() ).on( 'keyup change', function () {
+                        table
+                            .column( colIdx )
+                            .search( this.value )
+                            .draw();
+                    } );
+                } );
+			});
+</script>
         <div class="adminBody">
 
             <h1 align="center"> User Information  </h1>
-            <div> <button id="slide01"  class="addUserButton"> Add User </button></div>
-            <table border="1" align="center" width="100%">
-                <tr class="tableContent">
-                    <th >Username </th>
-                    <th > Status </th>
-                    <th > Name </th>
-                    <th > Surname </th>
-                    <th > E-mail</th>
-                    <th > Birth Date</th>
-                    <th > Gender</th>
-                    <th > Year</th>
-                    <th > Section</th>
-                    <th > Semester</th>
-                    <th > AcademicYear</th>
-                    <th > Faculty</th>
-                    <th > Department</th>
-                </tr>
-                @for(user<- user){
-                <tr class="tableContent">
-                <td width="8%"> @user.username</td>
-                <td width="6%"> @user.status</td>
-                <td width="11%"> @user.firstName</td>
-                <td width="11%"> @user.lastName</td>
-                <td width="11%">@user.eMail</td>
-                <td width="8%"> @user.birthDate </td>
-                <td width="6%"> @user.gender </td>
-                <td width="4%"> @user.year</td>
-                <td width="6%"> @user.section</td>
-                <td width="4%"> @user.semester</td>
-                <td width="6%"> @user.academicYear</td>
-                <td width="9%"> @user.faculty</td>
-                <td width="9%"> @user.department</td>
-                </tr>
+            <div> <button id="exportButton" class="userInfoButton btn btn-default btn-sm glyphicon"> Export </button></div>
+            <div> <a  href="@routes.Admin.addUser()" type="button" id="addUserButton" class="userInfoButton btn btn-success btn-sm glyphicon glyphicon-plus"> Add User </a></div>
+            <div> <button id="deleteSelectButton" class="deleteSelectButton btn btn-danger btn-sm glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"> Del. Selected </button></div>
+
+            @if(flash.containsKey("userExisted")) {
+            <div class="customAlert alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @flash.get("userExisted")
+            </div>
+            }
+            @if(flash.containsKey("savedSuccess")){
+            <div class="customAlert alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @flash.get("savedSuccess")
+            </div>
+            }
+
+        </div>
+
+<!-- Modal -->
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Delete user(s)?</h4>
+                Experimental results of such user(s) will also be deleted.
+            </div>
+            <div class="modal-footer">
+                <form id="delUsersForm" action="@routes.Admin.saveUser(2)" method="post" >
+                    <button type="button" class="btn btn-default glyphicon" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger glyphicon glyphicon-remove" onclick="submitToDeleteMany()">Delete Users</button>
+                    <input type="text" id="deleteUsers" name="deleteUser" hidden>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="delidividualModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel2">Delete user?</h4>
+                Experimental results of such user will also be deleted.
+            </div>
+            <div class="modal-footer">
+                <form id="delForm" action="@routes.Admin.saveUser(2)" method="post" >
+                    <button type="button" class="btn btn-default glyphicon" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger glyphicon glyphicon-remove" onclick="submitToDelete()">Delete User</button>
+                    <input type="text" id="deleteUser" name="deleteUser" hidden>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="display" cellspacing="0" width="100%" id="userTable">
+    <thead>
+    <tr >
+        <th id="useless_cb"> &nbsp</th>
+        <th >Username </th>
+        <th > Status </th>
+        <th > Name </th>
+        <th > Surname </th>
+        <th > DOB</th>
+        <th > Email</th>
+        <th > Age</th>
+        <th > Gender</th>
+        <th > Year</th>
+        <th > Section</th>
+        <th > Sem.</th>
+        <th > A.Year</th>
+        <th > Dept.</th>
+        <th > Faculty</th>
+        <th id="useless_btn"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    @for(user<- user){
+    <tr class="tableContent">
+        <td width="5%">
+            @if(!currentUser.username.equals(user.username)){
+                <input name="checkDelete" id= ch_@user.username type="checkbox" class="checkbox">
+            }
+        </td>
+        <td width="8%"> @user.username</td>
+        <td width="6%"> @user.status</td>
+        <td width="11%"> @user.firstName</td>
+        <td width="11%"> @user.lastName</td>
+        <td width="8%">
+            @if(user.birthDate != null){
+            @user.birthDate.format("dd/MM/yyyy")
+            }
+        </td>
+        <td width="11%">@user.eMail</td>
+        <td width="11%">@user.getAge()</td>
+        <td width="6%"> @user.gender </td>
+        <td width="4%"> @user.year</td>
+        <td width="6%"> @user.section</td>
+        <td width="4%"> @user.semester</td>
+        <td width="6%"> @user.academicYear</td>
+        <td width="9%"> @user.department</td>
+        <td width="9%"> @user.faculty</td>
+
+        <td width="30%">
+            <div>
+                @if(!currentUser.username.equals(user.username)){
+                    <button id=@user.username class="smallDelButton btn btn-danger btn-xs" data-toggle="modal" data-target="#delidividualModal" onclick="delButtonPress(this)"> del </button>
                 }
-            </table>
-        </div>
-        <div id="slide01" class="adminBody">
-            @add_user(user)
-        </div>
+                <a  href="@routes.Admin.editUser(user.username)" type="button" id="editButton" class="smallEditButton btn btn-warning btn-xs"> edit </a>
+            </div>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>
+
 @footer()
