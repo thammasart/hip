@@ -49,6 +49,16 @@ public class Admin extends Controller {
 
     //แสดงหน้าเพิ่ม user
     @Security.Authenticated(Secured.class)
+    public static Result RenderAdminExperimentResult() {
+        return ok(experiment_result.render(User.getAllUser()));
+    }
+    @Security.Authenticated(Secured.class)
+    public static Result RenderAdminFindResult() {
+        return ok(find_result.render(User.getAllUser()));
+    }
+
+    //ทำการเพิ่ม user account ใหม่เข้าไปในระบบ
+    @Security.Authenticated(Secured.class)
     public static Result addUser(){
        return ok(add_user.render(User.getAllUser()));
     }
@@ -230,9 +240,6 @@ public class Admin extends Controller {
         }
 
         ExperimentSchedule exp = boundForm.get();
-        exp.expireDate.setHours(23);
-        exp.expireDate.setMinutes(59);
-        exp.expireDate.setSeconds(59);
         exp.save();
         flash("success","Successfully");
         exp.generateTrials();
@@ -560,6 +567,7 @@ public class Admin extends Controller {
 
             for(models.simonEffect.Quiz quiz : trial.quizzes){
                 quiz.question = models.simonEffect.Question.findQuestionByType(questionType);
+                quiz.position = models.simonEffect.Quiz.randomPosition();
                 quiz.update();
             }
             trial.update();
@@ -568,4 +576,6 @@ public class Admin extends Controller {
         flash("success", "update success.");
         return ok(views.html.admin.experiment.edit.render(exp));
     }
+
+
 }

@@ -1,21 +1,34 @@
 package models.visualSearch;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.db.ebean.Model;
+import play.libs.Json;
+
 import javax.persistence.*;
+import java.util.List;
+import java.util.Random;
 
 @Entity
 @Table (name="visual_search_question")
+
 public class Question extends Model{
     @Id
     public long id;
     public ShapeType shapeType;
     public int positionX;
     public int positionY;
-    @ManyToOne
-    public Quiz quiz;
+    @Column(columnDefinition = "TEXT")
+    public String sharps;
 
-    public Question(Quiz quiz){
-    	this.quiz = quiz;
+    public Question(){
+    }
+
+    public static List<Question> findInvolving(Quiz quiz){
+        return Question.find.where().eq("quiz", quiz).findList();
+    }
+
+    public String toStringJson(){
+        return Json.stringify(Json.toJson(this));
     }
 
     @SuppressWarnings("unchecked")

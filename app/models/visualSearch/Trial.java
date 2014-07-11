@@ -1,7 +1,10 @@
 package models.visualSearch;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
+import play.libs.Json;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -9,20 +12,33 @@ import java.util.ArrayList;
 @Entity
 @Table (name="visual_search_trial")
 public class Trial extends Model{
+
+    public static final int SMALLER_WIDTH = 300;
+    public static final int SMALLER_HEIGHT = 200;
+    public static final int SMALL_WIDTH = 500;
+    public static final int SMALL_HEIGHT = 300;
+    public static final int MEDIUM_WIDTH = 600;
+    public static final int MEDIUM_HEIGHT = 400;
+    public static final int BIG_WIDTH = 800;
+    public static final int BIG_HEIGHT = 500;
+    public static final int EXTRA_WIDTH = 1000;
+    public static final int EXTRA_HEIGHT = 500;
+
     @Id
     public long id;
     public ShapeType target = ShapeType.CIRCLE_BLUE;
     public int dense;
-    public boolean sqaureBlue;
-    public boolean sqaureGreen;
-    public boolean sqaureRed;
-    public boolean circleGreen;
-    public boolean circleRed;
+    public int squareBlue;
+    public int squareGreen;
+    public int squareRed;
+    public int circleGreen;
+    public int circleRed;
     public FrameSize frameSize;
     @ManyToOne
     public ExperimentSchedule schedule;
-    @OneToMany
-    public List<Quiz> quizzes = new ArrayList<Quiz>();
+    @OneToOne(mappedBy = "trial",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    public Quiz quiz;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
@@ -36,7 +52,35 @@ public class Trial extends Model{
         return find.where().eq("schedule", ex).findList();
     }
 
+    public static void displayJson(){
+        System.out.println(Json.stringify(Json.toJson(Trial.find.all().get(0))));
+    }
+    public String toJson(){
+        return Json.stringify(Json.toJson(this));
+    }
+    public static String toJsonArray(List<Trial> trials){
+        String result = "[";
+        for(int i=0;i< trials.size();i++){
+            result += trials.get(i).toJson();
+            if(i < trials.size() - 1){
+                result += ",";
+            }
+        }
+        result += "]";
+        return result;
+
+    }
+
     @SuppressWarnings("unchecked")
     public static Finder<Long, Trial> find = new Finder(Long.class, Trial.class);
 
+    public static Trial create(ExperimentSchedule schedule) {
+        Trial trial = new Trial(schedule);
+        return trial;
+    }
+
+    public void generateQuiz() {
+        Quiz quiz = Quiz.create(this);
+        quiz.save();
+    }
 }

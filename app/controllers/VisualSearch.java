@@ -73,32 +73,32 @@ public class VisualSearch extends Controller{
         String left = "30px";
         switch (Trial.find.byId(trialId).frameSize){
             case SMALLER :
-                frameWidth = "300px";
-                frameHeight = "200px";
+                frameWidth = Trial.SMALLER_WIDTH + "px";
+                frameHeight = Trial.SMALLER_HEIGHT + "px";
                 top = "300px";
                 left = "270px";
                 break;
             case SMALL :
-                frameWidth = "500px";
-                frameHeight = "300px";
+                frameWidth = Trial.SMALL_WIDTH + "px";
+                frameHeight = Trial.SMALL_HEIGHT + "px";
                 top = "240px";
                 left = "160px";
                 break;
             case MEDIUM :
-                frameWidth = "600px";
-                frameHeight = "400px";
+                frameWidth = Trial.MEDIUM_WIDTH + "px";
+                frameHeight = Trial.MEDIUM_HEIGHT + "px";
                 top = "190px";
                 left = "120px";
                 break;
             case BIG :
-                frameWidth = "800px";
-                frameHeight = "500px";
+                frameWidth = Trial.BIG_WIDTH + "px";
+                frameHeight = Trial.BIG_HEIGHT + "px";
                 top = "142px";
                 left = "30px";
                 break;
             case EXTRA :
-                frameWidth = "1000px";
-                frameHeight = "500px";
+                frameWidth = Trial.EXTRA_WIDTH + "px";
+                frameHeight = Trial.EXTRA_HEIGHT + "px";
                 top = "142px";
                 left = "-70px";
                 break;
@@ -128,12 +128,13 @@ public class VisualSearch extends Controller{
         }
 
         Answer answer = boundForm.get();
+        List<Quiz> quizzes = Quiz.findInvolving(trial);
         answer.user = user;
-        answer.quiz = trial.quizzes.get(questionNo);
+        answer.quiz = quizzes.get(questionNo);
         answer.save();
 
         questionNo++;
-        if(questionNo < trial.quizzes.size()){
+        if(questionNo < quizzes.size()){
             return redirect(routes.VisualSearch.experiment(trialId, questionNo));
         }
         return redirect(routes.VisualSearch.report(user.username, trialId));
@@ -145,12 +146,14 @@ public class VisualSearch extends Controller{
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.VisualSearch.info());
         }
+
         User user = User.find.byId(username);
         Trial trial = Trial.find.byId(trialId);
-        List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
+        List<Quiz> quizzes = Quiz.findInvolving(trial);
+        List<Answer> answers = Answer.findInvolving(user, quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        return ok(report.render(score,totalUsedTime,quizzes.size(), "Report", user));
     }
 
 }
