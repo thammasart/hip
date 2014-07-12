@@ -16,7 +16,6 @@ public class Quiz extends Model{
     public int positionXofTarget;
     public int positionYofTarget;
     public ShapeType target = ShapeType.CIRCLE_BLUE;
-    public int dense;
     public int squareBlue;
     public int squareGreen;
     public int squareRed;

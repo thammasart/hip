@@ -26,14 +26,6 @@ public class Trial extends Model{
 
     @Id
     public long id;
-    public ShapeType target = ShapeType.CIRCLE_BLUE;
-    public int dense;
-    public int squareBlue;
-    public int squareGreen;
-    public int squareRed;
-    public int circleGreen;
-    public int circleRed;
-    public FrameSize frameSize;
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToOne(mappedBy = "trial",cascade = CascadeType.ALL)

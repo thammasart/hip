@@ -11,7 +11,8 @@
         @error()
 
         <div class="container" ng-controller="VisualSearchCtrl" ng-init="init(@exp.id)">
-            <div ng-repeat="trial in trials" >
+            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
+            <div ng-hide="inProcess" ng-repeat="trial in trials" >
                 <h3>Trial {{$index + 1}}</h3>
                 <div class="well">
                     <div class="row">
@@ -93,7 +94,7 @@
                                 <div class="visualArea" style="width:{{width}}px;height:{{height}}px;visibility: visible;margin-left:0;left:0;top:0" id="visualArea">
 
                                 <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
-                                name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" ></button>
+                                name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" ng-click="showSharp(sharp)" ></button>
 
                                 </div>
                             </div>

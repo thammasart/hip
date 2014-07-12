@@ -14,9 +14,6 @@ import java.util.Random;
 public class Question extends Model{
     @Id
     public long id;
-    public ShapeType shapeType;
-    public int positionX;
-    public int positionY;
     @Column(columnDefinition = "TEXT")
     public String sharps;
 

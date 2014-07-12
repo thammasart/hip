@@ -247,12 +247,12 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
     $scope.width = width;
     $scope.height = height;
 
-    var row,column;
+    var x_offset;
+    var y_offset;
 
 
     $scope.ok = function () {
-        clearGrid();
-        generateSharp(trial);
+        generateSharps(trial);
 
         //$modalInstance.close();
     };
@@ -271,98 +271,94 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
         return colorText;
     }
 
-    var generateSharp = function(trial){
+    var generateSharps = function(trial){
         $scope.sharps = [];
         for(var i = 0; i < trial.quiz.circleRed;i++){
-            var obj = Sharp('red','circle');
-            $scope.sharps.push(obj);
+            var obj = createSharp('red','circle');
+            if(obj != null)
+                $scope.sharps.push(obj);
         }
         for(var i = 0; i < trial.quiz.circleGreen;i++){
-            var obj = Sharp('green','circle');
-            $scope.sharps.push(obj);
+            var obj = createSharp('green','circle');
+            if(obj != null)
+                $scope.sharps.push(obj);
         }
         for(var i = 0; i < trial.quiz.squareBlue;i++){
-            var obj = Sharp('blue','square');
-            $scope.sharps.push(obj);
+            var obj = createSharp('blue','square');
+            if(obj != null)
+                $scope.sharps.push(obj);
         }
         for(var i = 0; i < trial.quiz.squareRed;i++){
-            var obj = Sharp('red','square');
-            $scope.sharps.push(obj);
+            var obj = createSharp('red','square');
+            if(obj != null)
+                $scope.sharps.push(obj);
         }
         for(var i = 0; i < trial.quiz.squareGreen;i++){
-            var obj = Sharp('green','square');
-            $scope.sharps.push(obj);
+            var obj = createSharp('green','square');
+            if(obj != null)
+                $scope.sharps.push(obj);
         }
+    }
+
+    function createSharp(color, circle){
+        var top = 0;
+        var left = 0;
+
+        for(var i=0; i<200; i++){
+            top = Math.random() * (100 - y_offset);
+            left = Math.random() * (100 - x_offset);
+            if(!detectOtherCollission(top,left)){
+                return Sharp(top,left,color,circle);
+            }
+        }
+
+        return null;
+    }
+
+    function detectOtherCollission(top1, left1){
+        var right1 = left1 + x_offset;
+        var bottom1 = top1 + y_offset;
+        for(var i=0; i < $scope.sharps.length; i++){
+            if($scope.sharps[i] != null) {
+                var top2 = $scope.sharps[i].top;
+                var bottom2 = $scope.sharps[i].top + y_offset;
+                var left2 = $scope.sharps[i].left;
+                var right2 = $scope.sharps[i].left + x_offset;
+                if (((top1 < top2 && top2 < bottom1) ||
+                    (top1 < bottom2 && bottom2 < bottom1)) &&
+                    ((left1 < left2 && left2 < right1) ||
+                      (left1 < right2 && right2 < right1))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
 
 
     $scope.init = function(){
-        row = Math.floor($scope.height / 30);
-        column = Math.floor($scope.width / 30);
-        $scope.grids = new Array(row);
-        for(var i = 0; i < row; i++){
-            $scope.grids[i] = new Array(column);
-        }
-        console.log($scope.grids);
-        var top = 0;
-        var left = 0;
-        var x_offset = 100/column;
-        var y_offset = 100/row;
-        for(var i = 0; i < row; i++){
-            for(var j =0; j < column; j++){
-                $scope.grids[i][j] = Grid(top, left);
-                left += x_offset;
-            }
-            top += y_offset;
-            left = 0;
-        }
-        generateSharp(trial);
+        var row = Math.floor($scope.height / 30);
+        var column = Math.floor($scope.width / 30);
+        x_offset = Math.floor(100/column);
+        y_offset = Math.floor(100/row);
+
+        generateSharps(trial);
+
     }
 
-    var clearGrid = function(){
-        for(var i = 0; i < row; i++){
-            for(var j =0; j < column; j++){
-                $scope.grids[i][j].visit = false;
-                $scope.grids[i][j].sharp = {};
-            }
-        }
-    }
 
-    var randomGrid = function(){
-        var i = 0;
-        var j = 0;
-        var count = 0;
-        while(count < 200){
-           i = Math.floor((Math.random() * row));
-           j = Math.floor((Math.random() * column));
-           if(!$scope.grids[i][j].visit){
-               return $scope.grids[i][j];
-           }
-           count++;
-        }
-    }
-
-    var Sharp = function(color,sharp){
-        var grid = randomGrid();
+    var Sharp = function(top,left,color,sharp){
         var sharp = {
-            top: grid.top,
-            left: grid.left,
+            top: top,
+            left: left,
             color: color,
             sharp: sharp
         }
-        grid.visit = true;
-        grid.sharp = sharp;
         return sharp;
     }
 
-    var Grid = function(top,left){
-        var grid = {
-            top:top,
-            left:left,
-            sharp:{},
-            visit:false
-        }
-        return grid;
+    $scope.showSharp = function(sharp){
+        console.log(sharp);
     }
 };

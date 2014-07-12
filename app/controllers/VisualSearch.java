@@ -71,7 +71,7 @@ public class VisualSearch extends Controller{
         String frameHeight = "500px";
         String top = "142px";
         String left = "30px";
-        switch (Trial.find.byId(trialId).frameSize){
+        switch (Trial.find.byId(trialId).quiz.frameSize){
             case SMALLER :
                 frameWidth = Trial.SMALLER_WIDTH + "px";
                 frameHeight = Trial.SMALLER_HEIGHT + "px";
