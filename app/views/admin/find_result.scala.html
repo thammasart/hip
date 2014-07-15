@@ -3,6 +3,11 @@
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/dropDownCodePenIO.css ")">
 
 @nav_admin()
+    <script>
+        function goBack(){
+            window.history.back();
+        }
+    </script>
 <div class = "fixSize" >
     <h2 style="margin:0 2%;"> Find Results <h2>
 
@@ -110,12 +115,61 @@
                               </div>
                         </div>
                         <div class="divider"></div>
-                    </form>
+                        <div class ="adminFindByUserBtn" style="margin-right:20%;">
+                                <a href="" style="margin-left:10%;">
+                                    <button class="btn-lg btn btn-primary">
+                                        <span class="glyphicon glyphicon-search">
+                                        </span>&nbsp;&nbsp;Find by User
+                                    </button>
+                                </a>
+                        </div> 
+                                            </form>
+                        <div class ="adminFindByUserBtn">
+                                 <a href="@routes.Admin.RenderAdminExperimentResult()">
+                                    <button class="btn-lg btn btn-default" onclick="goBack()">
+                                        <span class="glyphicon glyphicon-chevron-left">
+                                        </span>&nbsp; cancel
+                                    </button>
+                                </a>
+                        </div>
                   </div>
 
               </div>
+<!--  _____________________________TAB Trial __________________________--!>
               <div class="tab-pane" id="1">
+                <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css")">
+    
+                <div class = "dropDownTag" id = "">
+                    Experiment
+                </div>  
+                <div class = "dropDownContainer" style="width:inherlit">
+                    <div class="btn-group">
+                        <button id="expName" data-toggle="dropdown" class=" dropdown-toggle"style="width:200%;"> Select Experiment <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdownSize">
+                            <li class="dropdownHeader" >ATTENTION</li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Attentional Blink</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Simon Effect</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Stroop Effect</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Visual Search</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdownHeader">SHOR-TERM MEMORY</li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Brown-Peterson Task</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Magic Number 7</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Position Error</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Exhaustive)</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Parallel)</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdownHeader">PERCEPTION</li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Change Blindness</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Garner Interference</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Muller-Lyer Illusion</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Signal Detection</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
               </div>
+
+
         </div>
     </div>
         <script>
