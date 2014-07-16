@@ -76,4 +76,15 @@ function setUp(differLenght,differChoice){
     }
     document.getElementById(differChoice-1).style.width = lineLength - differLenght+"%";
 
+    var ar = document.getElementsByClassName('lineArrow');
+    var arrowRight = document.getElementsByClassName('arrowPos');
+    for(var z =0;z<arrowRight.length;z++){
+        arrowRight[z].style.marginLeft =  ar[z].offsetWidth +"px";
+    }
+
+    var arrowMargin = document.getElementsByClassName('aps');
+    for(var zz = 0; zz<arrowMargin.length;zz++){
+        //arrowMargin[zz].style.marginLeft = ar[2].offsetWidth + 15 +"px";
+    }
+
 }

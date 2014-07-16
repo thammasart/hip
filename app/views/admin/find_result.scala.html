@@ -1,13 +1,9 @@
 @(user : List[User])
 @head_admin("Admin Panel")
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/dropDownCodePenIO.css ")">
+    <script src="@routes.Assets.at("javascripts/find_user.js")"></script>
 
 @nav_admin()
-    <script>
-        function goBack(){
-            window.history.back();
-        }
-    </script>
 <div class = "fixSize" >
     <h2 style="margin:0 2%;"> Find Results <h2>
 
@@ -23,7 +19,7 @@
                   <div class="adminFindByUser"> 
                     <form class="form-horizontal" role="form" style="font-size:18px">
                         <div class="RowCointainer" style="margin-left:15%">
-                          <div class="form-group">
+                          <div class="form-group findUserInput">
                             <label for="inputUsername" class="col-sm-2 control-label">Username</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="" placeholder="Username">
@@ -43,25 +39,25 @@
                                   </div>
                             </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group findUserInput">
                             <label for="inputName" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="" placeholder="Name">
                             </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group findUserInput">
                             <label for="inputSurname" class="col-sm-2 control-label">Surname</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="" placeholder="Surname">
                             </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group findUserInput">
                             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10">
                               <input type="email" class="form-control" id="" placeholder="Email">
                             </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group findUserInput">
                             <label for="inputDOB" class="col-sm-2 control-label">DOB</label>
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="" placeholder="DOB">
@@ -77,37 +73,37 @@
                     </div>
 
                         <div class="RowCointainer">
-                              <div class="form-group">
+                              <div class="form-group findUserInput">
                                 <label for="inputYear" class="col-sm-2 control-label">Year</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="" placeholder="Year">
                                 </div>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group findUserInput">
                                 <label for="inputSection" class="col-sm-2 control-label">Section</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="" placeholder="Section">
                                 </div>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group findUserInput">
                                 <label for="inputSemester" class="col-sm-2 control-label">Semester</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="" placeholder="Semester">
                                 </div>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group findUserInput">
                                 <label for="inputAcademicYear" class="col-sm-2 control-label">Academic Year</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="" placeholder="Academic Year">
                                 </div>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group findUserInput">
                                 <label for="inputDepartment" class="col-sm-2 control-label">Department</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="" placeholder="Department">
                                 </div>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group findUserInput">
                                 <label for="inputFaculty" class="col-sm-2 control-label">Faculty</label>
                                 <div class="col-sm-10">
                                   <input type="text" class="form-control" id="" placeholder="Faculty">
