@@ -80,11 +80,11 @@ function setUp(differLenght,differChoice){
     var arrowRight = document.getElementsByClassName('arrowPos');
     for(var z =0;z<arrowRight.length;z++){
         arrowRight[z].style.marginLeft =  ar[z].offsetWidth +"px";
+        if(hasClass(arrowRight[z],"aps")) {
+           arrowRight[z].style.marginLeft = ar[2].offsetWidth + 15 +"px";
+        }
     }
-
-    var arrowMargin = document.getElementsByClassName('aps');
-    for(var zz = 0; zz<arrowMargin.length;zz++){
-        //arrowMargin[zz].style.marginLeft = ar[2].offsetWidth + 15 +"px";
-    }
-
+}
+function hasClass(element, cls) {
+    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }
