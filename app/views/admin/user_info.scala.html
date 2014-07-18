@@ -3,10 +3,12 @@
 @nav_admin()
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/userInfo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/jquery.dataTables.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/dataTables.tableTools.css")">
 <script type="text/javascript" src="@routes.Assets.at("javascripts/deleteUser.js")"></script>
 <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.11.0.min.js")"></script>
 <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.dataTables.min.js")"></script>
 <script type="text/javascript" src="@routes.Assets.at("javascripts/paging.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/dataTables.tableTools.js")"></script>
 
 <script type="text/javascript">
 		    /* Table initialisation */
@@ -26,11 +28,23 @@
                 var table = $('#userTable').DataTable({
                                 bSort: true,
                                 "iDisplayLength": 15,   // records per page
-                                "sDom": "t<'row'<'col-md-2'i> <'col-md-5'p> >",
+                                "sDom": "t<'row'<'col-md-2'i> <'col-md-5'p> > <'hide' T>",
                                 "sPaginationType": "bootstrap",
                                 "aoColumnDefs": [
                                   { "bSortable": false, "aTargets": [ 0,15 ] }
                                 ],
+                                "tableTools": {
+                                    "sSwfPath": "@routes.Assets.at("/swf/copy_csv_xls_pdf.swf")",
+                                    "aButtons": [
+                                    {
+                                            "sExtends":     "xls",
+                                            "sButtonText": "",
+                                            "oSelectorOpts": {
+                                                page: 'current'
+                                            }
+                                    }
+                                     ]
+                                },
                                 "order": [[ 1, "asc" ]]
                             });
 
@@ -43,12 +57,28 @@
                             .draw();
                     } );
                 } );
+
 			});
 </script>
+
         <div class="adminBody">
 
             <h1 align="center"> User Information  </h1>
-            <div> <button id="exportButton" class="userInfoButton btn btn-default btn-sm glyphicon"> Export </button></div>
+            <!--<div> <button id="exportButton" class="userInfoButton btn btn-default btn-sm glyphicon"> Export </button></div>
+            !-->
+            <div class="DTTT_container">
+                <a class="userInfoButton btn btn-default btn-sm glyphicon" id="ToolTables_userTable_0">
+                    <span>Export</span>
+                    <div style="position: absolute; left: 0px; top: 0px; width: 54px; height: 29px; z-index: 99;">
+                        <embed id="ZeroClipboard_TableToolsMovie_1" src="/assets//swf/copy_csv_xls_pdf.swf"
+                               loop="false" menu="false" quality="best" bgcolor="#ffffff" width="54" height="29"
+                               name="ZeroClipboard_TableToolsMovie_1" align="middle" allowscriptaccess="always" allowfullscreen="false"
+                               type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               flashvars="id=1&amp;width=54&amp;height=29" wmode="transparent">
+                    </div>
+                </a>
+            </div>
+
             <div> <a  href="@routes.Admin.addUser()" type="button" id="addUserButton" class="userInfoButton btn btn-success btn-sm glyphicon glyphicon-plus"> Add User </a></div>
             <div> <button id="deleteSelectButton" class="deleteSelectButton btn btn-danger btn-sm glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"> Del. Selected </button></div>
 
