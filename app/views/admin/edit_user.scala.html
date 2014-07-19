@@ -1,0 +1,206 @@
+@(user : User)
+@head_admin("Admin Panel")
+@nav_admin()
+
+<script>
+    function submitEditedUser(){
+        var e = document.getElementById("statusInput");
+        var statusUser = e.options[e.selectedIndex].text;
+        document.getElementById("userStatus").value = statusUser;
+        document.forms["answerForm"].submit();
+    }
+</script>
+<div class="container borderDiv">
+
+    <h3 align="left">Edit User </h3>
+
+    <form id="answerForm" class="form-horizontal" action="@routes.Admin.saveUser(1)" method="post" >
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="username" class="col-sm-4 control-label">
+                    Username
+                </label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" autocomplete="off" value="@user.username" disabled>
+                    <input id = "usrName" name = "usrName" type="text" value="@user.username" hidden>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="status" class="col-sm-4 control-label">
+                    Status
+                </label>
+                <div class="col-sm-4">
+                    <select id="statusInput">
+
+                        <option value="student">STUDENT</option>
+                        <option value="student">GUEST</option>
+                        <option value="admin"
+                        @if(user.status == UserRole.ADMIN){
+                            selected="selected"
+                        }
+                        >ADMIN</option>
+
+                    </select>
+                    <input id="userStatus" name = "userStatus" type="text" value="" hidden>
+                </div>
+                <div>
+                    <label class="alertText" id="statusAlert"  > <i> *  Please choose status</i></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="firstName" class="col-sm-4 control-label">
+                    Name
+                </label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="firstnameInput" autocomplete="off" name="firstName" value="@user.firstName">
+                </div>
+                <div>
+                    <label class="alertText" id="firstnameAlert"  > <i> *  Please enter Firstname</i></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="col-sm-4 control-label">
+                    Surname
+                </label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="lastnameInput" autocomplete="off" name="lastName" value="@user.lastName">
+                </div>
+                <div>
+                    <label class="alertText" id="lastnameAlert"  > <i> *  Please enter Lastname</i></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="eMail" class="col-sm-4 control-label">
+                    Email
+                </label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="emailInput" autocomplete="off" name="eMail" value="@user.eMail">
+                </div>
+                <div>
+                    <label class="alertText" id="emailAlert"  > <i> *  Please enter e-mail</i></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="birthDate" class="col-sm-4 control-label">
+                    DOB
+                </label>
+                <div class="col-sm-4">
+                    <div class="input-group date" id="birthdate-picker">
+                        <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="birthDate" id="birthInputBox"
+                        @if(user.birthDate != null){
+                        value="@user.birthDate.format("dd/MM/yyyy")"
+                        } placeholder="dd/mm/yyyy">
+
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                            $(function () {
+                                $('#birthdate-picker').datetimepicker()
+                            });
+                        </script>
+            </div>
+            <div class="form-group">
+                <label for="gender" class="col-sm-4 control-label">
+                    Gender
+                </label>
+                <div class="col-sm-4">
+                    <label class="radio-inline">
+                        <input type="radio" value="male" name="gender" @if(user.gender.equals("male")){ checked }> ชาย
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="female" name="gender" @if(user.gender.equals("female")){ checked } > หญิง
+                    </label>
+                    <div hidden >
+                        <label class="radio-inline">
+                            <input id ="other" type="radio" value="other" name="gender" @if(user.gender.equals("") || user.gender.equals("other")){ checked }> อื่นๆ
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label class="alertText" id="genderAlert"  > <i> *  Please select your Gender</i></label>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-6">
+
+
+            <div class="form-group">
+                <label for="year" class="col-sm-4 control-label">
+                    Year
+                </label>
+                <div class="col-sm-2">
+                    <input style="width:110%;" type="number" min="1" max="7" class="form-control" id="yearInput" onkeypress='validateSemester(event)' autocomplete="off" name="year" value="@user.year">
+                </div>
+                <div>
+                    <label class="alertText" id="yearAlert"  > <i> *  Please enter Year</i></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="section" class="col-sm-4 control-label">
+                    Section
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" onkeypress='validateSemester(event)' autocomplete="off" name="section" id="sectionInput"value="@user.section">
+                </div>
+                <div>
+                    <label class="alertText" id="sectionAlert"  > <i> *  Please enter Section</i></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="semester" class="col-sm-4 control-label">
+                    Semester / Academic Year
+                </label>
+                <div class="col-sm-2">
+                    <input style="width:110%;"type="number" min="1" max="3" class="form-control" onkeypress='validateSemester(event)'id="semesterInput"  autocomplete="off" name="semester" value="@user.semester">
+                </div>
+                <div class="slash" > / </div>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="academicYear" onkeypress='validateSemester(event)' autocomplete="off" name="academicYear" value="@user.academicYear">
+                </div>
+                <div>
+                    <label class="alertText" id="semesterAlert"  > <i> *  Please enter semester </i></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="department" class="col-sm-4 control-label">
+                    Department
+                </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="departmentInput" autocomplete="off" name="department" value="@user.department">
+                </div>
+                <div>
+                    <label class="alertText" id="departmentAlert"  > <i> *  Please enter department</i></label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="faculty" class="col-sm-4 control-label">
+                    Faculty
+                </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="facultyInput" autocomplete="off" name="faculty" value="@user.faculty">
+                </div>
+                <div>
+                    <label class="alertText" id="facultyAlert"  > <i> *  Please enter faculty</i></label>
+                </div>
+            </div>
+
+        </div>
+        <div align="center">
+            <a href="@routes.Admin.renderUserInfo()" type="button" class="cancelNewUserButton btn btn-default glyphicon"> Cancel</a>
+            <button type="button"class="submitNewUserButton btn btn-success glyphicon glyphicon-floppy-saved" id="submit-button"  onclick="submitEditedUser()" > Save Change </button>
+        </div>
+    </form>
+
+</div>
+@footer()

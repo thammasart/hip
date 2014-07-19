@@ -13,9 +13,26 @@ border:solid 1px #95A5A6;
     margin:0px auto;
 }
 
-.addUserButton{
+.deleteSelectButton{
     float:right;
     margin-bottom:10px;
+    margin-right: 50px;
+}
+.userInfoButton{
+    float:right;
+    margin-bottom:10px;
+    margin-left: 10px;
+}
+.smallEditButton{
+    float:right;
+	margin-top:10px;
+    margin-bottom:10px;
+}
+.smallDelButton{
+    float:right;
+	margin-top:10px;
+    margin-bottom:10px;
+	margin-left: 5px;
 }
 .textArea{
     float: left;
@@ -93,4 +110,69 @@ th{
 
 .block-top{
     margin-top:20px;
+}
+
+.adminIndexHeaderContainer{
+    height:60px;
+    width:100%;  
+}
+.adminIndexHeaderText{
+    font-size:x-large;
+    margin:0.5% 0 0 3%;
+    width:25%;
+    float:left;
+}
+.adminHeaderBtn{
+    float:right;
+    margin-top:0.5%;
+    margin-right:1%;
+}
+.adminGlyBtn{
+    margin-right:10px;
+}
+.adminUserinfoTableContainer{
+    width:96%;
+    margin:auto;
+}
+.modalWarning{
+    color:red;
+    font-size:large;
+}
+.modalDelete{
+    font-size:x-large;
+}
+.adminFindByUser{
+    height:500px;
+}
+.adminFindResultTabContainer{   
+    width:96%;
+    margin-left:2%;
+}
+.RowCointainer{
+    width:30%;
+    margin:2% 2% 0 2%;
+    float:left;
+}
+.statusDropdown{
+    width: 200px;
+    height: 34px;
+    margin-left: 15px;
+    border-radius: 4px;
+    border-color: lightgray;
+}
+.divider{
+    float: left;
+    display: inline-block;
+    box-shadow: 2px 2px 0 lightgray;
+    width: 80%;
+    height: 1px;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+.adminFindByUserBtn{
+    float: right;
+    margin: 2% 0% 0 0;
+}
+.findUserInput input{
+    margin-left:15px;
 }

@@ -1,0 +1,178 @@
+@(user : List[User])
+@head_admin("Admin Panel")
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/dropDownCodePenIO.css ")">
+    <script src="@routes.Assets.at("javascripts/find_user.js")"></script>
+
+@nav_admin()
+<div class = "fixSize" >
+    <h2 style="margin:0 2%;"> Find Results <h2>
+
+    <div class="adminFindResultTabContainer">
+        <ul class="nav nav-tabs">
+          <li class="active"><a id="tab1"href="#0" data-toggle="tab">By User</a></li>
+          <li class=""><a id="tab2" href="#1" data-toggle="tab">By Trial</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+              <div class="tab-pane active" id="0"> 
+                  <div class="adminFindByUser"> 
+                    <form class="form-horizontal" role="form" style="font-size:18px">
+                        <div class="RowCointainer" style="margin-left:15%">
+                          <div class="form-group findUserInput">
+                            <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="" placeholder="Username">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputStatus" class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-10">
+                                <div class="dropdown">
+                                    <select name="one" class="dropdown-select statusDropdown">
+                                      <option value="">&nbsp;&nbsp;Status</option>
+                                      <option value="Student">&nbsp;&nbsp;Student</option>
+                                      <option value="Admin">&nbsp;&nbsp;Admin</option>
+                                      <option value="Guest">&nbsp;&nbsp;Guest</option>
+                                      <option value="TA">&nbsp;&nbsp;TA</option>
+                                    </select>
+                                  </div>
+                            </div>
+                          </div>
+                          <div class="form-group findUserInput">
+                            <label for="inputName" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="" placeholder="Name">
+                            </div>
+                          </div>
+                          <div class="form-group findUserInput">
+                            <label for="inputSurname" class="col-sm-2 control-label">Surname</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="" placeholder="Surname">
+                            </div>
+                          </div>
+                          <div class="form-group findUserInput">
+                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                              <input type="email" class="form-control" id="" placeholder="Email">
+                            </div>
+                          </div>
+                          <div class="form-group findUserInput">
+                            <label for="inputDOB" class="col-sm-2 control-label">DOB</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="" placeholder="DOB">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputGender" class="col-sm-2 control-label">Gender</label>
+                            <div class="col-sm-10">
+                                <input type="radio" name="gender" value="male">&nbsp;&nbsp; Male &nbsp;&nbsp;</input>
+                                <input type="radio" name="gender" value="female">&nbsp;&nbsp; Female &nbsp;&nbsp;</input>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="RowCointainer">
+                              <div class="form-group findUserInput">
+                                <label for="inputYear" class="col-sm-2 control-label">Year</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="" placeholder="Year">
+                                </div>
+                              </div>
+                              <div class="form-group findUserInput">
+                                <label for="inputSection" class="col-sm-2 control-label">Section</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="" placeholder="Section">
+                                </div>
+                              </div>
+                              <div class="form-group findUserInput">
+                                <label for="inputSemester" class="col-sm-2 control-label">Semester</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="" placeholder="Semester">
+                                </div>
+                              </div>
+                              <div class="form-group findUserInput">
+                                <label for="inputAcademicYear" class="col-sm-2 control-label">Academic Year</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="" placeholder="Academic Year">
+                                </div>
+                              </div>
+                              <div class="form-group findUserInput">
+                                <label for="inputDepartment" class="col-sm-2 control-label">Department</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="" placeholder="Department">
+                                </div>
+                              </div>
+                              <div class="form-group findUserInput">
+                                <label for="inputFaculty" class="col-sm-2 control-label">Faculty</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="" placeholder="Faculty">
+                                </div>
+                              </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class ="adminFindByUserBtn" style="margin-right:20%;">
+                                <a href="" style="margin-left:10%;">
+                                    <button class="btn-lg btn btn-primary">
+                                        <span class="glyphicon glyphicon-search">
+                                        </span>&nbsp;&nbsp;Find by User
+                                    </button>
+                                </a>
+                        </div> 
+                                            </form>
+                        <div class ="adminFindByUserBtn">
+                                 <a href="@routes.Admin.RenderAdminExperimentResult()">
+                                    <button class="btn-lg btn btn-default" onclick="goBack()">
+                                        <span class="glyphicon glyphicon-chevron-left">
+                                        </span>&nbsp; cancel
+                                    </button>
+                                </a>
+                        </div>
+                  </div>
+
+              </div>
+<!--  _____________________________TAB Trial __________________________--!>
+              <div class="tab-pane" id="1">
+                <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css")">
+    
+                <div class = "dropDownTag" id = "">
+                    Experiment
+                </div>  
+                <div class = "dropDownContainer" style="width:inherlit">
+                    <div class="btn-group">
+                        <button id="expName" data-toggle="dropdown" class=" dropdown-toggle"style="width:200%;"> Select Experiment <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdownSize">
+                            <li class="dropdownHeader" >ATTENTION</li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Attentional Blink</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Simon Effect</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Stroop Effect</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Visual Search</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdownHeader">SHOR-TERM MEMORY</li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Brown-Peterson Task</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Magic Number 7</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Position Error</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Exhaustive)</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Parallel)</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdownHeader">PERCEPTION</li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Change Blindness</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Garner Interference</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Muller-Lyer Illusion</a></li>
+                            <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Signal Detection</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+              </div>
+
+
+        </div>
+    </div>
+        <script>
+          $(function () {
+            $('#myTab a:last').tab('show')
+          })
+        </script>
+
+</div> 
+@footer()

@@ -1,22 +1,62 @@
 @(user : List[User])
-        <div class="container">
+@head_admin("Admin Panel")
+@nav_admin()
 
-            <h3 align="center">Add User </h3>
-        @if(flash.containsKey("userExisted")) {
-            <div class="alert alert-danger">@flash.get("userExisted")</div>
-        }
-        @if(flash.containsKey("savedSuccess")){
-            <div class="alert alert-success">@flash.get("savedSuccess")</div>
-        }
+<script>
+    function submitNewUsers(){
+        var e = document.getElementById("statusInput");
+        var statusUser = e.options[e.selectedIndex].text;
+        document.getElementById("userStatus").value = statusUser;
+        document.forms["answerForm"].submit();
 
-        <form id="answerForm" method="post" >
+    }
+</script>
+
+        <div class="container borderDiv">
+
+            <h3 align="left">Add New User </h3>
+
+        <form id="answerForm" action="@routes.Admin.saveUser(0)" method="post" >
           <div class="textArea">
+            <h4>**Username</h4>
+            <p><i>Enter a new line to seperate users</i></p>
             <textarea name="users" rows="10" cols="50" ></textarea>
+            <p><i><font color="red">**Required field</font></i></p>
+              @if(flash.containsKey("nullUser")) {
+              <div class="alert alert-dismissible alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  @flash.get("nullUser")
+              </div>
+              }
           </div>
                 <div class="addUserInput">
                   <div class="form-group">
+                        <label for="section" class="col-sm-4 control-label">
+                            Status
+                        </label>
+                          <select id="statusInput">
+
+                              <option value="student">STUDENT</option>
+                              <option value="student">GUEST</option>
+                              <option value="admin">ADMIN</option>
+
+                          </select>
+                        <input type="text" id="userStatus" name = "userStatus" hidden>
+                  </div>
+                  <div class="form-group">
+                        <label for="year" class="col-sm-4 control-label">
+                            Year
+                        </label>
+                      <div class="col-sm-1">
+                          <input style="width:50px;"type="number" min="1" max="7" class="form-control" onkeypress='validateSemester(event)'id="yearInput"  autocomplete="off" name="year" value="1">
+                      </div>
+                        <div>
+                            <label class="alertText" id="yearAlert"  > <i> *  Please enter Year</i></label>
+                        </div>
+                  </div>
+                  <div class="form-group">
                        <label for="section" class="col-sm-4 control-label"> 
-                              เซคชั่น 
+                              Section
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" onkeypress='validateSemester(event)' autocomplete="off" name="section" id="sectionInput">
@@ -26,14 +66,14 @@
                         </div>
                   </div>
                   <div class="form-group">
-                       <label for="semester" class="col-sm-4 control-label"> 
-                              ภาคเรียน / ปีการศึกษา
+                       <label for="semester" class="col-sm-4 control-label">
+                              Semester / Academic Year
                         </label>
                         <div class="col-sm-1">
                             <input style="width:50px;"type="number" min="1" max="3" class="form-control" onkeypress='validateSemester(event)'id="semesterInput"  autocomplete="off" name="semester">
                         </div>
                         <div class="slash" style="margin-left:30px;"> / </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <input type="text" class="form-control" id="academicYear" onkeypress='validateSemester(event)' autocomplete="off" name="academicYear" >
                         </div>
                         <div>
@@ -42,8 +82,8 @@
                   </div>
 
                   <div class="form-group">
-                       <label for="department" class="col-sm-4 control-label"> 
-                              ภาควิชา 
+                       <label for="department" class="col-sm-4 control-label">
+                           Department
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="departmentInput" autocomplete="off" name="department" >
@@ -55,8 +95,8 @@
 
 
                   <div class="form-group">
-                       <label for="faculty" class="col-sm-4 control-label"> 
-                              คณะ 
+                       <label for="faculty" class="col-sm-4 control-label">
+                           Faculty
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="facultyInput" autocomplete="off" name="faculty" >
@@ -66,9 +106,11 @@
                         </div>
                   </div>
                 </div>
-          <div>
-            <input type="submit"class="submitButton" > </input>
-          </div>
         </form>
-
+            <hr class="divider" width="100%">
+            <div align="center">
+                <a href="@routes.Admin.renderUserInfo()" type="button" class="cancelNewUserButton btn btn-default glyphicon"> Cancel</a>
+                <button type="button"class="submitNewUserButton btn btn-success glyphicon glyphicon-plus" onclick="submitNewUsers()"> Submit</button>
+            </div>
         </div>
+@footer()

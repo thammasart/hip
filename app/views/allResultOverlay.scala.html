@@ -1,0 +1,93 @@
+@(user :User)
+<!--                     overlay                 --!>
+    <div class="overlay" id="overLay">
+        <div class="box" >
+           <div class = "OverlayExpName" >
+               <div id="overlayHeader"> Experiment Name [demo] </div>
+            <button onclick="closeOverlay()" class="trialTag glyphicon glyphicon-remove closeX"></button>
+           </div>  
+            <div>
+                <ul class="nav nav-tabs">
+                  <li class="active"><a id="tab1"href="#0" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab2" href="#1" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab3" href="#2" data-toggle="tab"></a></li>
+                  <li class=""><a id="tab4" href="#3" data-toggle="tab"></a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                <!-- tab pane 1 --------------------------------------------------------------------------------------------------!>
+                  <div class="tab-pane active" id="0"> 
+
+                    <div class="trialInputContainer" >
+                       <div class = "OverlayTagSize">
+                            Find trials active on
+                       </div>  
+                       <div class = " OverlayTextBoxContainer" >
+                            <input type="text" class="form-control trialTag" placeholder="start date" autocomplete="off"  style="float:left;"disabled>
+                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
+                       </div>  
+                       <div class = "OverlayTagSize" style="width:5%; margin-left:0;">
+                            To
+                       </div>  
+                       <div class = "OverlayTextBoxContainer" >
+                            <input type="text" class="form-control trialTag" placeholder="end date" autocomplete="off" style="float:left;" disabled>
+                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
+                       </div>  
+                    </div>
+
+                    <div class="">
+                        <table class="table table-striped overlayTable">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>start Date</th>
+                                    <th>Expire Date</th>
+                                    <th>Exp. Schedule Name</th>
+                                    <th>Trial ID</th>
+                                    <th>select</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        @for((trial,index) <- models.simonEffect.Trial.findAllTrial(2).zipWithIndex){
+                                <tr>
+                                    <td>@{index+1}</td>
+                                    <td>@trial.schedule.startDate</td>
+                                    <td>@trial.schedule.expireDate</td>
+                                    <td>@trial.schedule.name</td>
+                                    <td>@trial.id</td>
+                                    <td><button class="btn btn-success btn-xs">select</button></td>
+                                </tr>
+                }
+                            </tbody>
+                        </table>
+
+                        <div class="pagingContainer" align="center">
+                            <ul class="pagination">
+                              <li class="disabled"><a href="#">&laquo;</a></li>
+                              <li class="active"><a href="#">1</a></li>
+                              <li><a href="#">2</a></li>
+                              <li><a href="#">3</a></li>
+                              <li><a href="#">4</a></li>
+                              <li><a href="#">5</a></li>
+                              <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+
+                <!-- tab pane 2 --------------------------------------------------------------------------------------------------!>
+                  <div class="tab-pane" id="1">
+
+                  </div>
+
+                  <div class="tab-pane" id="2">messages</div>
+                  <div class="tab-pane" id="3">setting</div>
+                </div>
+                <script>
+                  $(function () {
+                    $('#myTab a:last').tab('show')
+                  })
+                </script>
+            </div>
+        </div>  

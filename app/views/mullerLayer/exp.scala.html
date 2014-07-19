@@ -3,12 +3,17 @@
 @import models.mullerLayer.LineType
 @import models.mullerLayer.LenghtType
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<!--
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
 window.location.hash="no-back-button";
 window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
 window.onhashchange=function(){window.location.hash="no-back-button";}
 
+</script>
+--!>
+<script >
+    window.addEventListener('scroll',function(e){ alert(window.pageXOffset});
 </script>
 <script src="@routes.Assets.at("javascripts/mullerLayer.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
@@ -49,7 +54,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-left" href=""></div>
                                 <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                                <div class="mullerArrow arrow-right arrowPos" href="" ></div>
                             </div>
                         </button >
                         }
@@ -58,7 +63,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-right" href=""></div>
                                 <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
+                                <div class="mullerArrow arrow-left arrowPos aps" ></div>
                             </div>
                         </button >
                         }
@@ -67,7 +72,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-right" href=""></div>
                                 <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                                <div class="mullerArrow arrow-right arrowPos" href="" ></div>
                             </div>
                         </button >
                         }
@@ -76,7 +81,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-left" href=""></div>
                                 <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
+                                <div class="mullerArrow arrow-left arrowPos aps" ></div>
                             </div>
                         </button >
                         }
