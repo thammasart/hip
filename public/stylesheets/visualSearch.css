@@ -76,3 +76,7 @@
 .modal-lg {
     width:1000px;
 }
+
+::-ms-tooltip {
+    display: none;
+}
