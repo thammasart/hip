@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import play.test.WithApplication;
 import static play.test.Helpers.*;
 import models.brownPeterson.*;
-import java.util.List;
 import models.*;
 
 public class ExperimentScheduleTest extends WithApplication {
@@ -24,7 +23,7 @@ public class ExperimentScheduleTest extends WithApplication {
         Date nextYearDate = calendar.getTime();
 		new ExperimentSchedule("Experiment 1", 5, lastYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
 		
-		assertEquals(1, ExperimentSchedule.getAllWorkingExperiments().size());
+		assertEquals(1, ExperimentSchedule.findAllWorkingExperiments().size());
 	}
 
 	@Test
@@ -36,7 +35,7 @@ public class ExperimentScheduleTest extends WithApplication {
         Date nextYearDate = calendar.getTime();
 		new ExperimentSchedule("Experiment 1", 5, lastYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
 		
-		assertNotNull(ExperimentSchedule.getAllWorkingExperiments());
+		assertNotNull(ExperimentSchedule.findAllWorkingExperiments());
 	}
 
 	@Test
@@ -72,7 +71,7 @@ public class ExperimentScheduleTest extends WithApplication {
 		new ExperimentSchedule("Experiment 1", 5, lastYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
 		new ExperimentSchedule("Experiment 1", 5, lastYearDate, lastYearDate, ExperimentType.BROWNPETERSON).save();
 		new ExperimentSchedule("Experiment 1", 5, nextYearDate, nextYearDate, ExperimentType.BROWNPETERSON).save();
-		assertEquals(1, ExperimentSchedule.getWorkingExperimentsByType(ExperimentType.BROWNPETERSON).size());
+		assertEquals(1, ExperimentSchedule.findWorkingExperimentsByType(ExperimentType.BROWNPETERSON).size());
 	}
 
 	@Test

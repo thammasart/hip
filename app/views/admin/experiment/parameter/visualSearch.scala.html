@@ -20,66 +20,53 @@
                         <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
                             <div class="col-md-3">
                                 <h4>Frame Size</h4>
-                                <select class="form-control" ng-model="trial.quiz.frameSize" ng-options="value for value in frameSizes">
+                                <select class="form-control" style="margin-bottom:15px" ng-model="trial.quiz.frameSize" ng-options="value for value in frameSizes">
                                 </select>
                                 <p>Width: {{width(trial)}}</p>
                                 <p>Height: {{height(trial)}}</p>
                                 <p>Max Noise: {{max(trial)}}</p>
+                                <p ng-class="{'text-red' : max(trial) < totalNoise(trial)}">Total Noise: {{totalNoise(trial)}}</p>
+                                <p ng-show="max(trial) < totalNoise(trial)" class="text-danger">จำนวน Noise มากกว่าที่กำหนด!!</p>
                             </div>
                             <div class="col-md-9">
                                 <h4 class="text-center">Noise</h4>
                                 <div class="form-group">
                                     <div class="row">
                                         <label class="control-label col-md-4">Red Square</label>
-                                        <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareRed" >
-                                        </div>
-                                        <div class="col-md-2">
-                                            <b>{{trial.quiz.squareRed}}</b>
+                                        <div class="col-md-3" style="margin-top:6px">
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareRed" >
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label class="control-label col-md-4">Blue Square</label>
-                                        <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareBlue" >
-                                        </div>
-                                        <div class="col-md-2">
-                                            <b>{{trial.quiz.squareBlue}}</b>
+                                        <div class="col-md-3" style="margin-top:6px">
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareBlue" >
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label class="control-label col-md-4">Green Square</label>
-                                        <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareGreen" >
-                                        </div>
-                                        <div class="col-md-2">
-                                            <b>{{trial.quiz.squareGreen}}</b>
+                                        <div class="col-md-3" style="margin-top:6px">
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareGreen" >
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label class="control-label col-md-4">Red Circle</label>
-                                        <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleRed" >
-                                        </div>
-                                        <div class="col-md-2">
-                                            <b>{{trial.quiz.circleRed}}</b>
+                                        <div class="col-md-3" style="margin-top:6px">
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleRed" >
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label class="control-label col-md-4" >Green Circle</label>
-                                        <div class="col-md-6" style="margin-top:6px">
-                                            <input type="range" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleGreen" >
-                                        </div>
-                                        <div class="col-md-2">
-                                            <b>{{trial.quiz.circleGreen}}</b>
+                                        <div class="col-md-3" style="margin-top:6px">
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleGreen" >
                                         </div>
                                     </div>
                                 </div>
@@ -89,22 +76,51 @@
                         <script type="text/ng-template" id="preview.html">
                             <div class="modal-header" ng-init="init()">
                                 <h3 class="modal-title">Preview</h3>
+                                <div class="form-inline">
+                                    <div class="form-group" style="margin-bottom:10px">
+                                        <span class="label label-primary">Target</span> top :
+                                            <input class="inline-range"  type="range" ng-model="target.top" min="0.0" max="95.0" step="0.5" >
+                                            <input class="form-control input-range" type="text" ng-model="target.top" ng-pattern="floatPattern" >
+                                        Left :
+                                            <input class="inline-range"  type="range" ng-model="target.left" min="0.0" max="95.0" step="0.5">
+                                            <input class="form-control input-range" type="text" ng-model="target.left" ng-pattern="floatPattern" >
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                    <span class="label label-default">Noise</span>
+                                        top :
+                                        <input class="inline-range"  type="range" ng-model="editSharp.top" min="0.0" max="95.0" step="0.5" >
+                                        <input class="form-control input-range" type="text" ng-model="editSharp.top" ng-pattern="floatPattern" >
+                                        Left :
+                                        <input class="inline-range"  type="range" ng-model="editSharp.left" min="0.0" max="95.0" step="0.5">
+                                        <input class="form-control input-range" type="text" ng-model="editSharp.left" ng-pattern="floatPattern" >
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-body" style="width:{{width}}px;height: {{height}}px;margin:auto">
+
                                 <div class="visualArea" style="width:{{width}}px;height:{{height}}px;visibility: visible;margin-left:0;left:0;top:0" id="visualArea">
 
                                 <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
                                 name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" ng-click="showSharp(sharp)" ></button>
 
+                                <button ng-class="{'box':target.sharp == 'square', 'circle' : target.sharp == 'circle'}"
+                                name = "target" style="left:{{target.left}}%;top:{{target.top}}%;border-color:{{colorToString(target.color)}}" ></button>
+
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" ng-click="ok()">Generate</button>
+                                <button class="btn btn-primary pull-left" ng-click="generate()">Generate</button>
+                                <button class="btn btn-primary" ng-click="ok()">Confirm</button>
                                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                             </div>
                         </script>
                         <div class="col-md-3 col-sm-4">
-                            <button class="btn btn-success" ng-click="open(trial)" style="width: 50%">VISUAL EDITOR</button>
+                            <button ng-disabled="max(trial) < totalNoise(trial)" class="btn btn-success" ng-click="open(trial)" style="width: 100%;margin-bottom:10px">แสดงผล</button>
+                            <br />
+                            <button ng-disabled="" class="btn btn-primary" ng-click="save()" style="width: 100%;margin-bottom:20px">บันทึกข้อมูล</button>
+                            <br />
+                            <p class="text-danger" ng-show="trial.quiz.question.sharps == null">Trial นี้ยังไม่ได้ทำการ generate noise</p>
                         </div>
                     </div>
                 </div>

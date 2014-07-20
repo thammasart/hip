@@ -13,8 +13,8 @@ import java.util.Random;
 public class Quiz extends Model{
     @Id
     public long id;
-    public int positionXofTarget;
-    public int positionYofTarget;
+    public double positionXofTarget;
+    public double positionYofTarget;
     public ShapeType target = ShapeType.CIRCLE_BLUE;
     public int squareBlue;
     public int squareGreen;

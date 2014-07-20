@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Trial extends Model{
 	@Id
 	public long id;
-    public QuestionType questionType;        
-    public int numberOfQuiz;
+    public QuestionType questionType = QuestionType.ENGLISH;
+    public int numberOfQuiz = 3;
 
     @ManyToOne
     public ExperimentSchedule schedule;
@@ -22,10 +22,7 @@ public class Trial extends Model{
     public List<Quiz> quizzes = new ArrayList<Quiz>();
         
     //Constructor
-    public Trial(){
-        this.questionType = QuestionType.ENGLISH;
-        this.numberOfQuiz = 3;
-    }
+    public Trial(){}
 
 	public Trial(QuestionType questionType) {
             this.questionType = questionType;

@@ -80,16 +80,16 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
     })
     .controller('AttentionBlinkCtrl', function($scope){
-        $scope.word = /^[0-1]{1}\.[0-9]+$/;
+        $scope.word = /^[0-9]*\.?[0-9]+$/;
     })
     .controller('SignalDetectionCtrl', function($scope){
         $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
-        $scope.floatPattern = /^[0-1]{1}\.[0-9]+$/;
+        $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
     })
     .controller('StroofEffectCtrl', function($scope){
     })
     .controller('PositionErrorCtrl', function($scope){
-        $scope.word = /^[0-1]{1}\.[0-9]+$/;
+        $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.memorySet = [    {length: 3},
                                 {length: 5},
                                 {length: 7},
@@ -97,79 +97,47 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                                 {length: 12}];
     })
     .controller('SternbergSearchCtrl', function($scope){
-        $scope.word = /^[0-1]{1}\.[0-9]+$/;
+        $scope.word = /^[0-9]*\.?[0-9]+$/;
     })
     .controller('MagicNumber7Ctrl', function($scope){
-        $scope.word = /^[1-9]{1}\.[0-9]+$/;
+        $scope.word = /^[0-9]*\.?[0-9]+$/;
     })
     .controller('SimonEffectCtrl', function($scope){
         $scope.trials = [];
-        $scope.floatPattern = /^[0-1]{1}\.[0-9]+$/;
+        $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
     }).controller('VisualSearchCtrl', function($scope, $modal, $http){
 
         $scope.inProcess = false;
+        $scope.overNoise = false;
 
         $scope.trials = [];
-
-
-
-        $scope.generateSharp = function(trial){
-            $scope.sharps = [];
-            for(var i = 0; i < trial.quiz.circleRed;i++){
-                var obj = Sharp('red','circle');
-                $scope.sharps.push(obj);
-            }
-            for(var i = 0; i < trial.quiz.circleGreen;i++){
-                var obj = Sharp('green','circle');
-                $scope.sharps.push(obj);
-            }
-            for(var i = 0; i < trial.quiz.squareBlue;i++){
-                var obj = Sharp('blue','square');
-                $scope.sharps.push(obj);
-            }
-            for(var i = 0; i < trial.quiz.squareRed;i++){
-                var obj = Sharp('red','square');
-                $scope.sharps.push(obj);
-            }
-            for(var i = 0; i < trial.quiz.squareGreen;i++){
-                var obj = Sharp('green','square');
-                $scope.sharps.push(obj);
-            }
-            console.log($scope.sharps);
-        }
-
-        var Sharp = function(color,sharp){
-            var sharp = {
-                top: Math.floor((Math.random() * 85) + 10),
-                left: Math.floor((Math.random() * 85) + 10),
-                color: color,
-                sharp: sharp
-            }
-            return sharp;
-        }
 
         $scope.init = function(expId){
             $scope.inProcess = true;
             $http({method:'GET',url:'init',params:{exp_id:expId}}).success(function(result){
                 $scope.trials = result.trials;
-                calculateSharps();
                 $scope.inProcess = false;
+                console.log($scope.trials);
             }).error(function(result){
                 console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
 
-        var calculateSharps = function(){
-            for(var i=0;i < $scope.trials.length;i++){
-                var text =$scope.trials[i].quiz.question.sharps;
-                var obj = angular.fromJson(text);
-            }
+        $scope.save = function(){
+            $scope.inProcess = true;
+            $http({method:'POST',url:'saveVisualSearch',data:$scope.trials}).success(function(result){
+                $scope.inProcess = false;
+                console.log(result);
+            }).error(function(result){
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
         }
 
         $scope.frameSizes = ['SMALLER', 'SMALL', 'MEDIUM', 'BIG', 'EXTRA'];
         $scope.open = function(trial){
-            $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'preview.html',
                 controller: ModalInstanceCtrl,
                 size: 'lg',
@@ -187,24 +155,34 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                         return trial;
                     }
                 }
+
+            });
+
+            modalInstance.result.then(function (result){
+               trial.quiz.positionYofTarget = result.top;
+               trial.quiz.positionXofTarget = result.left;
             });
         };
 
         $scope.max = function(trial){
             var frameSize = trial.quiz.frameSize;
             if(frameSize == 'SMALLER')
-                return 15;
-            if(frameSize == 'SMALL')
-                return 20;
-            if(frameSize == 'MEDIUM')
-                return 25;
-            if(frameSize == 'BIG')
                 return 30;
+            if(frameSize == 'SMALL')
+                return 50;
+            if(frameSize == 'MEDIUM')
+                return 90;
+            if(frameSize == 'BIG')
+                return 140;
             if(frameSize == 'EXTRA')
-                return 35;
+                return 160;
 
             return 25;
         };
+
+        $scope.totalNoise = function(trial){
+            return trial.quiz.squareRed + trial.quiz.squareBlue + trial.quiz.squareGreen + trial.quiz.circleGreen + trial.quiz.circleRed;
+        }
 
         $scope.width = function(trial){
             var frameSize = trial.quiz.frameSize;
@@ -246,15 +224,23 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
     $scope.sharps = sharps;
     $scope.width = width;
     $scope.height = height;
+    $scope.editSharp = {};
+    $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
+    $scope.sequence = 1;
+    $scope.target = {};
+    $scope.editSharp = {};
+
 
     var x_offset;
     var y_offset;
 
 
-    $scope.ok = function () {
+    $scope.generate = function () {
         generateSharps(trial);
-
-        //$modalInstance.close();
+    };
+    $scope.ok = function () {
+        trial.quiz.question.sharps = angular.toJson($scope.sharps);
+        $modalInstance.close($scope.target);
     };
 
     $scope.cancel = function () {
@@ -298,6 +284,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
             if(obj != null)
                 $scope.sharps.push(obj);
         }
+
     }
 
     function createSharp(color, circle){
@@ -343,13 +330,14 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
         x_offset = Math.floor(100/column);
         y_offset = Math.floor(100/row);
 
-        generateSharps(trial);
-
+        $scope.target = Sharp(trial.quiz.positionYofTarget, trial.quiz.positionXofTarget, 'blue', 'circle');
+        $scope.sharps = angular.fromJson(trial.quiz.question.sharps);
     }
 
 
     var Sharp = function(top,left,color,sharp){
         var sharp = {
+            id: $scope.sequence++,
             top: top,
             left: left,
             color: color,
@@ -359,6 +347,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
     }
 
     $scope.showSharp = function(sharp){
-        console.log(sharp);
+        $scope.editSharp = sharp;
+        console.log($scope.editSharp);
     }
 };

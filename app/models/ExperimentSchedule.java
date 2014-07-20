@@ -1,11 +1,9 @@
 package models;
-import models.brownPeterson.Trial;
 import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.Date;
 import play.data.format.Formats;
 import java.util.List;
-import com.avaje.ebean.*;
 import java.util.ArrayList;
 import static play.data.validation.Constraints.*;
 
@@ -43,7 +41,7 @@ public class ExperimentSchedule extends Model{
 		this.experimentType = experimentType;
 	}
 
-	public static List<ExperimentSchedule> getAllWorkingExperiments() {
+	public static List<ExperimentSchedule> findAllWorkingExperiments() {
 		List<ExperimentSchedule> experiments = find.where().betweenProperties("startDate", "expireDate", new Date()).findList();
 		return experiments;
 	}
@@ -59,8 +57,8 @@ public class ExperimentSchedule extends Model{
         super.save();
     }
 
-	public static List<ExperimentSchedule> getWorkingExperimentsByType(ExperimentType expType) {
-		List<ExperimentSchedule> allWorkingExp = getAllWorkingExperiments();
+	public static List<ExperimentSchedule> findWorkingExperimentsByType(ExperimentType expType) {
+		List<ExperimentSchedule> allWorkingExp = findAllWorkingExperiments();
 		List<ExperimentSchedule> exps = new ArrayList<ExperimentSchedule>();
 		for(ExperimentSchedule exp : allWorkingExp) {
 			if(exp.experimentType == expType) {
@@ -70,7 +68,7 @@ public class ExperimentSchedule extends Model{
 		return exps;
 	}
 
-	public static List<ExperimentSchedule> getWorkingExperimentsByType(String expType){
+	public static List<ExperimentSchedule> findWorkingExperimentsByType(String expType){
 		List<ExperimentSchedule> expList = null;
 		final String BROWNPETERSON = "BROWNPETERSON";
 		final String STROOPEFFECT = "STROOPEFFECT";
@@ -86,45 +84,45 @@ public class ExperimentSchedule extends Model{
         final String CHANGEBLINDNESS = "CHANGEBLINDNESS";
 
         if (expType.equals(BROWNPETERSON)){
-            expList = getWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
+            expList = findWorkingExperimentsByType(ExperimentType.BROWNPETERSON);
         }
         else if (expType.equals(STROOPEFFECT)){
-            expList = getWorkingExperimentsByType(ExperimentType.STROOPEFFECT);
+            expList = findWorkingExperimentsByType(ExperimentType.STROOPEFFECT);
         }
         else if (expType.equals(SIGNALDETECTION)){
-            expList = getWorkingExperimentsByType(ExperimentType.SIGNALDETECTION);
+            expList = findWorkingExperimentsByType(ExperimentType.SIGNALDETECTION);
         }
         else if (expType.equals(ATTENTIONBLINK)){
-            expList = getWorkingExperimentsByType(ExperimentType.ATTENTIONBLINK);
+            expList = findWorkingExperimentsByType(ExperimentType.ATTENTIONBLINK);
         }
         else if (expType.equals(POSITIONERROR)){
-            expList = getWorkingExperimentsByType(ExperimentType.POSITIONERROR);
+            expList = findWorkingExperimentsByType(ExperimentType.POSITIONERROR);
         }
         else if (expType.equals(STERNBERGSEARCH)){
-            expList = getWorkingExperimentsByType(ExperimentType.STERNBERGSEARCH);
+            expList = findWorkingExperimentsByType(ExperimentType.STERNBERGSEARCH);
         }
         else if (expType.equals(MAGICNUMBER7)){
-            expList = getWorkingExperimentsByType(ExperimentType.MAGICNUMBER7);
+            expList = findWorkingExperimentsByType(ExperimentType.MAGICNUMBER7);
         }
         else if (expType.equals(SIMONEFFECT)){
-            expList = getWorkingExperimentsByType(ExperimentType.SIMONEFFECT);
+            expList = findWorkingExperimentsByType(ExperimentType.SIMONEFFECT);
         }
         else if (expType.equals(MULLERLAYER)){
-            expList = getWorkingExperimentsByType(ExperimentType.MULLERLAYER);
+            expList = findWorkingExperimentsByType(ExperimentType.MULLERLAYER);
         }
         else if (expType.equals(GARNERINTERFERENCE)){
-            expList = getWorkingExperimentsByType(ExperimentType.GARNERINTERFERENCE);
+            expList = findWorkingExperimentsByType(ExperimentType.GARNERINTERFERENCE);
         }
         else if (expType.equals(VISUALSEARCH)){
-            expList = getWorkingExperimentsByType(ExperimentType.VISUALSEARCH);
+            expList = findWorkingExperimentsByType(ExperimentType.VISUALSEARCH);
         }
         else if (expType.equals(CHANGEBLINDNESS)){
-            expList = getWorkingExperimentsByType(ExperimentType.CHANGEBLINDNESS);
+            expList = findWorkingExperimentsByType(ExperimentType.CHANGEBLINDNESS);
         }
         return expList;
 	}
 	
-	public String getExperimentTypeToString(){
+	public String findExperimentTypeToString(){
 		String type = "Unknown";
 		if(this.experimentType != null){
 			switch(this.experimentType){

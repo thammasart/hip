@@ -1,19 +1,13 @@
 package controllers;
 
-import play.*;
 import play.mvc.*;
 import play.data.*;
 import play.data.DynamicForm;
-import views.html.*;
 import models.*;
 import views.html.admin.*;
 import java.util.List;
 import java.util.ArrayList;
-import models.brownPeterson.*;
 
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.ArrayList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -385,7 +379,7 @@ public class Admin extends Controller {
         for(models.stroopEffect.Trial trial : trials ){
             String questionType = requestData.get("questionType-" + trial.id);
             if(!trial.questionType.toString().equals(questionType)){
-                trial.setQuestionType(questionType);
+                trial.toQuestionTYpe(questionType);
                 trial.randomNewQuestions();
             }
 

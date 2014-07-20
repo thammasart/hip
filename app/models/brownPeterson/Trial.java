@@ -37,6 +37,8 @@ public class Trial extends Model {
 		return trial;
 	}
 
+    public Trial(){}
+
 	public static Trial findById(int id) {
 		return find.byId(new Long(id));
 	}

@@ -1,4 +1,4 @@
-@(trial : models.visualSearch.Trial,questionNo : Integer,width : String, height : String, top : String, left : String , json : String )
+@(trial : models.visualSearch.Trial,questionNo : Integer,width : String, height : String, top : String, left : String)
 @import models.visualSearch.Quiz
 @import models.visualSearch.Question
 @header("Human Information Processing Lab :: Home Page")
@@ -34,7 +34,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     </div>
     <form action="@routes.VisualSearch.saveAnswer(trial.id,questionNo)" method="post" >
 
-        <div class="visualArea" style="left:@left;top:@top;width:@width;height:@height;"id="visualArea">
+        <div class="visualArea" style="left:@left;top:@top;width:@width;height:@height;" id="visualArea">
 
 
 

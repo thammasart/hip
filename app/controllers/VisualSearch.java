@@ -110,9 +110,7 @@ public class VisualSearch extends Controller{
                 break;
         }
 
-        String json = "[{top:3,left:5},{top:19,left:20}]";
-
-        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left,json));
+        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left));
     }
 
 
