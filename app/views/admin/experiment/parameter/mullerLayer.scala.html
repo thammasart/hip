@@ -24,26 +24,42 @@
                                     <th>บวก/ลบ ความยาวต่าง</th>
                                     <th>ความยาวของ choice</th>
                                     <th>จำนวน choice</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="quiz in trial.quizzes">
                                     <td>คำถามที่ {{$index + 1}}</td>
                                     <td><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="quiz.differLength" required /></td>
-                                    <td><input type="radio" ng-model="difference" /> + / <input type="radio" ng-model="difference" /> -</td>
+                                    <td><input type="radio" ng-model="difference" value="+" /> + / <input type="radio" ng-model="difference" value="-" /> -</td>
                                     <td>
-                                        <select style="width:100px;margin:auto;" class="form-control" ng-model="quiz.lengthType" ng-options="value for value in lengthTypes">
+                                        <select style="width:110px;margin:auto;" class="form-control" ng-model="quiz.lengthType" ng-options="value for value in lengthTypes">
                                         </select>
                                     </td>
                                     <td>
                                         <select style="width:60px;margin:auto;" class="form-control" ng-model="quiz.noOfChoice" ng-options="value for value in noOfChoices">
                                         </select>
                                     </td>
+                                    <td><button ng-click="open(trial)"><span class="glyphicon glyphicon-info-sign"></span></button></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <script type="text/ng-template" id="preview.html">
+                    <div class="modal-header" ng-init="init()" >
+                        <h3 class="modal-title">Preview</h3>
+                    </div>
+                    <div class="modal-body" style="width:800px;height:500px;margin:auto">
+                        <div class="visualArea" style="width:800px;height:500px;visibility: visible;margin-left:0;left:0;top:0">
+                            <canvas id="arrowPreview" width="800" height="500"></canvas>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-click="ok()">Confirm</button>
+                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                    </div>
+                </script>
             </div>
         </div>
     </form>

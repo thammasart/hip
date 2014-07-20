@@ -219,13 +219,14 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
 
     })
-    .controller('MullerLayerCtrl', function($scope, $http){
+    .controller('MullerLayerCtrl', function($scope, $http, $modal){
         $scope.inProcess = false;
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
         $scope.trials = [];
 
         $scope.noOfChoices = [3,4,5];
         $scope.lengthTypes = ['SHORT', 'MEDIUM','LONG'];
+        $scope.difference = '+';
 
         $scope.init = function(expId){
             $scope.inProcess = true;
@@ -238,7 +239,57 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 $scope.inProcess = false;
             });
         }
+
+        $scope.open = function(trial){
+            var modalInstance = $modal.open({
+                templateUrl: 'preview.html',
+                controller: MullerModalInstanceCtrl,
+                size: 'lg',
+                resolve: {
+                    trial : function(){
+                        return trial;
+                    }
+                }
+
+            });
+        };
     });
+
+var MullerModalInstanceCtrl = function($scope, $modalInstance, trial){
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss();
+    };
+
+    $scope.init = function(){
+        var canvas = document.getElementById("arrowPreview");
+        var context = canvas.getContext("2d");
+        context.beginPath();
+        context.moveTo(100, 100);
+        context.lineTo(150, 70);
+        context.moveTo(100,100);
+        context.lineTo(150,130);
+        context.moveTo(100,100);
+        context.lineTo(400, 100);
+        context.lineTo(350,70);
+        context.moveTo(400,100);
+        context.lineTo(350,130);
+        context.moveTo(100, 300);
+        context.lineTo(150, 270);
+        context.moveTo(100,300);
+        context.lineTo(150,330);
+        context.moveTo(100,300);
+        context.lineTo(400, 300);
+        context.lineTo(350,270);
+        context.moveTo(400,300);
+        context.lineTo(350,330);
+        context.closePath()
+        context.stroke();
+    }
+}
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height, trial) {
 
