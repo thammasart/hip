@@ -1,5 +1,7 @@
 package models.mullerLayer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.db.ebean.Model;
 import javax.persistence.*;
 
@@ -13,8 +15,10 @@ public class Quiz extends Model{
     public LenghtType lenghtType;
     public int differLenght;
     @ManyToOne
+    @JsonBackReference
     public Trial trial;
     @ManyToOne
+    @JsonBackReference
     public Question question;
 
     public Quiz(Trial trial, Question question){

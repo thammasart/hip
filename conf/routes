@@ -128,7 +128,7 @@ POST        /visualSearch/reportDemo                                controllers.
 GET         /visualSearch/experiment                                controllers.VisualSearch.experiment(trialId:Long, questionNo:Int)
 POST        /visualSearch/experiment/save                           controllers.VisualSearch.saveAnswer(trialId:Long, questionNo:Int)
 GET         /visualSearch/report                                    controllers.VisualSearch.report(username:String ?= "", trial_id:Long ?= 0)
-GET         /visualSearch/init                           controllers.VisualSearch.init(trialId:Long)
+GET         /visualSearch/init                                      controllers.VisualSearch.init(trialId:Long)
 
 GET         /changeBlindness                                        controllers.ChangeBlindness.info()
 GET         /changeBlindness/info                                   controllers.ChangeBlindness.infoIframe()
@@ -176,6 +176,7 @@ GET         /initial/BrownPeterson                                  controllers.
 
 GET         /admin/experiment/init                                  controllers.RequestController.init(exp_id : Long)
 POST        /admin/experiment/saveVisualSearch                      controllers.RequestController.saveVisualSearch()
+GET         /admin/experiment/mullerInit                            controllers.MullerLayer.initial(expId: Long)
 
 # Map Bootstrap images
 GET         /assets/fonts/glyphicons-halflings-regular.woff         controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.woff")

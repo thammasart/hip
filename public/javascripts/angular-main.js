@@ -222,6 +222,19 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     .controller('MullerLayerCtrl', function($scope, $http){
         $scope.inProcess = false;
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
+        $scope.trials = [];
+
+        $scope.init = function(expId){
+            $scope.inProcess = true;
+            $http({method:'GET',url:'mullerInit',params:{expId:expId}}).success(function(result){
+                $scope.trials = result.trials;
+                $scope.inProcess = false;
+                console.log($scope.trials);
+            }).error(function(result){
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+        }
     });
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height, trial) {
