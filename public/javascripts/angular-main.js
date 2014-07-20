@@ -105,7 +105,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     .controller('SimonEffectCtrl', function($scope){
         $scope.trials = [];
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
-    }).controller('VisualSearchCtrl', function($scope, $modal, $http){
+    })
+    .controller('VisualSearchCtrl', function($scope, $modal, $http){
 
         $scope.inProcess = false;
         $scope.overNoise = false;
@@ -217,6 +218,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
 
 
+    })
+    .controller('MullerLayerCtrl', function($scope, $http){
+        $scope.inProcess = false;
+        $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
     });
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height, trial) {

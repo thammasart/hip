@@ -1,0 +1,56 @@
+@(exp: ExperimentSchedule)
+@import views.html.admin._
+@import views.html.admin.experiment._
+@import views.html.form._
+
+<div class="container" ng-app="ExperimentCreator">
+    <form role="form" name="parameter" class="form-horizontal" >
+
+        @exp_edit(exp)
+        <hr>
+        @error()
+
+        <div class="container" ng-controller="MullerLayerCtrl" >
+            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
+            <div ng-hide="inProcess">
+                <h3>Trial {{1}}</h3>
+                <div class="well">
+                    <div class="row">
+                        <table class="table text-center admin">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ความยาวต่าง(cm)</th>
+                                    <th>บวก/ลบ ความยาวต่าง</th>
+                                    <th>ความยาวของ choice</th>
+                                    <th>จำนวน choice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>คำถามที่ {{1}}</td>
+                                    <td><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="length" required /></td>
+                                    <td><input type="radio" ng-model="difference" /> + / <input type="radio" ng-model="difference" /> -</td>
+                                    <td>
+                                        <select style="width:100px;margin:auto;" class="form-control">
+                                            <option>short</option>
+                                            <option>medium</option>
+                                            <option>long</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select style="width:60px;margin:auto;" class="form-control">
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
