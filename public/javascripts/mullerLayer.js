@@ -59,7 +59,7 @@ function doneDemo(name){
 
 }
 function setUp(differLenght,differChoice){
-    lenghtType = document.getElementById("lenghtType").innerHTML.toString();
+    lenghtType = document.getElementById("lengthType").innerHTML.toString();
    
     if(lenghtType == 1){
         lineLength = 30;

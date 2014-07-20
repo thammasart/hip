@@ -12,8 +12,8 @@
 
         <div class="container" ng-controller="MullerLayerCtrl" ng-init="init(@exp.id)">
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
-            <div ng-hide="inProcess">
-                <h3>Trial {{1}}</h3>
+            <div ng-hide="inProcess" ng-repeat="trial in trials">
+                <h3>Trial {{$index + 1}}</h3>
                 <div class="well">
                     <div class="row">
                         <table class="table text-center admin">
@@ -27,22 +27,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>คำถามที่ {{1}}</td>
-                                    <td><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="length" required /></td>
+                                <tr ng-repeat="quiz in trial.quizzes">
+                                    <td>คำถามที่ {{$index + 1}}</td>
+                                    <td><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="quiz.differLength" required /></td>
                                     <td><input type="radio" ng-model="difference" /> + / <input type="radio" ng-model="difference" /> -</td>
                                     <td>
-                                        <select style="width:100px;margin:auto;" class="form-control">
-                                            <option>short</option>
-                                            <option>medium</option>
-                                            <option>long</option>
+                                        <select style="width:100px;margin:auto;" class="form-control" ng-model="quiz.lengthType" ng-options="value for value in lengthTypes">
                                         </select>
                                     </td>
                                     <td>
-                                        <select style="width:60px;margin:auto;" class="form-control">
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <select style="width:60px;margin:auto;" class="form-control" ng-model="quiz.noOfChoice" ng-options="value for value in noOfChoices">
                                         </select>
                                     </td>
                                 </tr>

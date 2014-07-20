@@ -224,6 +224,9 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
         $scope.trials = [];
 
+        $scope.noOfChoices = [3,4,5];
+        $scope.lengthTypes = ['SHORT', 'MEDIUM','LONG'];
+
         $scope.init = function(expId){
             $scope.inProcess = true;
             $http({method:'GET',url:'mullerInit',params:{expId:expId}}).success(function(result){
