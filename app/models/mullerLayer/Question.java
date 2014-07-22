@@ -1,5 +1,6 @@
 package models.mullerLayer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.db.ebean.Model;
 import javax.persistence.*;
@@ -19,7 +20,7 @@ public class Question extends Model{
     public LineType line4;
     public LineType line5;
     @OneToMany(mappedBy = "question")
-    @JsonManagedReference
+    @JsonBackReference
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(){}

@@ -240,14 +240,14 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             });
         }
 
-        $scope.open = function(trial){
+        $scope.open = function(quiz){
             var modalInstance = $modal.open({
                 templateUrl: 'preview.html',
                 controller: MullerModalInstanceCtrl,
                 size: 'lg',
                 resolve: {
-                    trial : function(){
-                        return trial;
+                    quiz : function(){
+                        return quiz;
                     }
                 }
 
@@ -255,7 +255,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         };
     });
 
-var MullerModalInstanceCtrl = function($scope, $modalInstance, trial){
+var MullerModalInstanceCtrl = function($scope, $modalInstance, quiz){
+
+    var canvas = {};
+
     $scope.ok = function () {
         $modalInstance.close();
     };
@@ -265,29 +268,80 @@ var MullerModalInstanceCtrl = function($scope, $modalInstance, trial){
     };
 
     $scope.init = function(){
-        var canvas = document.getElementById("arrowPreview");
+
+        canvas = document.getElementById("arrowPreview");
+        var width = 800;
+        var height = 400;
+        var length = calculateLength(quiz);
+        var x = (800/2) - (length/2);
+        var y = 30;
+
+        var question = quiz.question;
+        drawLine(x, y, length, question.line1);
+        y += 70;
+        drawLine(x, y, length, question.line2);
+        y += 70;
+        drawLine(x, y, length, question.line3);
+        y += 70;
+        if(quiz.noOfChoices > 3) {
+            drawLine(x, y, length, question.line4);
+            y += 70;
+        }
+        if(quiz.noOfChoices > 4) {
+            drawLine(x, y, length, question.line5);
+            y += 70;
+        }
+
+
+    }
+
+    function calculateLength(quiz){
+        if(quiz.lengthType == 'SHORT'){
+            return 300;
+        }else if(quiz.lengthType == 'MEDIUM'){
+            return 400;
+        }else if(quiz.lengthType == 'LONG'){
+            return 500;
+        }
+        return 300;
+    }
+
+    function drawLine(x, y, length, type){
         var context = canvas.getContext("2d");
         context.beginPath();
-        context.moveTo(100, 100);
-        context.lineTo(150, 70);
-        context.moveTo(100,100);
-        context.lineTo(150,130);
-        context.moveTo(100,100);
-        context.lineTo(400, 100);
-        context.lineTo(350,70);
-        context.moveTo(400,100);
-        context.lineTo(350,130);
-        context.moveTo(100, 300);
-        context.lineTo(150, 270);
-        context.moveTo(100,300);
-        context.lineTo(150,330);
-        context.moveTo(100,300);
-        context.lineTo(400, 300);
-        context.lineTo(350,270);
-        context.moveTo(400,300);
-        context.lineTo(350,330);
-        context.closePath()
+        context.moveTo(x, y);
+        drawLeftArrow(x, y, type, context);
+        context.lineTo(x + length, y);
+        drawRightArrow(x + length, y, type, context);
+        context.closePath();
         context.stroke();
+    }
+
+    function drawLeftArrow(x, y, type, context){
+        if(type == 'LEFT' || type == 'IN'){
+            context.lineTo(x + 30, y - 30);
+            context.moveTo(x, y);
+            context.lineTo(x + 30, y + 30);
+            context.moveTo(x, y);
+        }
+        if(type == 'OUT'){
+            context.lineTo(x - 30, y - 30);
+            context.moveTo(x, y);
+            context.lineTo(x - 30, y + 30);
+            context.moveTo(x, y);
+        }
+    }
+    function drawRightArrow(x, y, type, context){
+        if(type == 'RIGHT' || type == 'IN'){
+            context.lineTo(x - 30, y - 30);
+            context.moveTo(x, y);
+            context.lineTo(x - 30, y + 30);
+        }
+        if(type == 'OUT'){
+            context.lineTo(x + 30, y - 30);
+            context.moveTo(x, y);
+            context.lineTo(x + 30, y + 30);
+        }
     }
 }
 

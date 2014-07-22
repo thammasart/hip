@@ -40,7 +40,7 @@
                                         <select style="width:60px;margin:auto;" class="form-control" ng-model="quiz.noOfChoice" ng-options="value for value in noOfChoices">
                                         </select>
                                     </td>
-                                    <td><button ng-click="open(trial)"><span class="glyphicon glyphicon-info-sign"></span></button></td>
+                                    <td><button ng-click="open(quiz)"><span class="glyphicon glyphicon-info-sign"></span></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,9 +50,9 @@
                     <div class="modal-header" ng-init="init()" >
                         <h3 class="modal-title">Preview</h3>
                     </div>
-                    <div class="modal-body" style="width:800px;height:500px;margin:auto">
-                        <div class="visualArea" style="width:800px;height:500px;visibility: visible;margin-left:0;left:0;top:0">
-                            <canvas id="arrowPreview" width="800" height="500"></canvas>
+                    <div class="modal-body" style="width:800px;height:400px;margin:auto">
+                        <div class="visualArea" style="width:800px;height:400px;visibility: visible;margin-left:0;left:0;top:0">
+                            <canvas id="arrowPreview" width="800" height="400"></canvas>
                         </div>
                     </div>
                     <div class="modal-footer">
