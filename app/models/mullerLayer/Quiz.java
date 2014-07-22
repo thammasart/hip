@@ -13,7 +13,7 @@ public class Quiz extends Model{
     public int noOfChoice;
     public int differChoice;
     public LengthType lengthType;
-    public int differLength;
+    public float differLength;
     @ManyToOne
     @JsonBackReference
     public Trial trial;
@@ -38,7 +38,7 @@ public class Quiz extends Model{
         quiz.trial = trial;
         quiz.noOfChoice = 3;
         quiz.differChoice = 2;
-        quiz.differLength = 2;
+        quiz.differLength = 1;
         quiz.lengthType = LengthType.MEDIUM;
         quiz.question = Question.generateQuestion();
         return quiz;

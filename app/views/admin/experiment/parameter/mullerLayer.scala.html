@@ -21,6 +21,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>ความยาวต่าง(cm)</th>
+                                    <th>(px)</th>
                                     <th>บวก/ลบ ความยาวต่าง</th>
                                     <th>ความยาวของ choice</th>
                                     <th>จำนวน choice</th>
@@ -30,7 +31,10 @@
                             <tbody>
                                 <tr ng-repeat="quiz in trial.quizzes">
                                     <td>คำถามที่ {{$index + 1}}</td>
-                                    <td><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="quiz.differLength" required /></td>
+                                    <td><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="quiz.differLength" required />
+
+                                    </td>
+                                    <td><span>{{quiz.differLength * 38 | number:0}}px</span></td>
                                     <td><input type="radio" ng-model="difference" value="+" /> + / <input type="radio" ng-model="difference" value="-" /> -</td>
                                     <td>
                                         <select style="width:110px;margin:auto;" class="form-control" ng-model="quiz.lengthType" ng-options="value for value in lengthTypes">

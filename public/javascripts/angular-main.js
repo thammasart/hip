@@ -277,22 +277,28 @@ var MullerModalInstanceCtrl = function($scope, $modalInstance, quiz){
         var y = 30;
 
         var question = quiz.question;
-        drawLine(x, y, length, question.line1);
+        drawLine(calculateStartX(1, x), y, calculateDifferenceLength(1,length), question.line1);
         y += 70;
-        drawLine(x, y, length, question.line2);
+        drawLine(calculateStartX(2, x), y, calculateDifferenceLength(2,length), question.line2);
         y += 70;
-        drawLine(x, y, length, question.line3);
+        drawLine(calculateStartX(3, x), y, calculateDifferenceLength(3,length), question.line3);
         y += 70;
         if(quiz.noOfChoices > 3) {
-            drawLine(x, y, length, question.line4);
+            drawLine(calculateStartX(4, x), y, calculateDifferenceLength(4,length), question.line4);
             y += 70;
         }
         if(quiz.noOfChoices > 4) {
-            drawLine(x, y, length, question.line5);
-            y += 70;
+            drawLine(calculateStartX(5, x), y, calculateDifferenceLength(5,length), question.line5);
         }
 
 
+    }
+
+    function calculateDifferenceLength(no, length){
+        return no == quiz.differChoice ? length - Math.floor((quiz.differLength * 38)) : length;
+    }
+    function calculateStartX(no, x){
+        return no == quiz.differChoice ? x + Math.floor((quiz.differLength * 38 / 2)) : x;
     }
 
     function calculateLength(quiz){
