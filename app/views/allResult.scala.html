@@ -28,19 +28,19 @@
             <div class = "graphLine" style= "bottom:80%;"></div>
             <div class = "graphLine" style= "bottom:100%;"></div>
 
-             <div class = "beam beam1" style= "margin-left:20%;"></div>
-             <div class = "beam beam2" style= "margin-left:40%;"></div>
-             <div class = "beam beam3" style= "margin-left:60%;"></div>
-             <div class = "beam beam4" style= "margin-left:80%;"></div>
+             <div id="sBeam1" class = "beam beam1" style= "margin-left:20%;"></div>
+             <div id="sBeam2" class = "beam beam2" style= "margin-left:40%;"></div>
+             <div id="sBeam3" class = "beam beam3" style= "margin-left:60%;"></div>
+             <div id="sBeam4" class = "beam beam4" style= "margin-left:80%;"></div>
 
         </div>        
         <div class = "graphBox" style="margin-left:4%;" id = "">
-            <div class = "graphLineTag" style= "bottom:-3.5%;">0%</div>
-            <div class = "graphLineTag" style= "bottom:17%;">20%</div>
-            <div class = "graphLineTag" style= "bottom:37%;">40%</div>
-            <div class = "graphLineTag" style= "bottom:57%;">60%</div>
-            <div class = "graphLineTag" style= "bottom:77%;">80%</div>
-            <div class = "graphLineTag" style= "bottom:96%;">100%</div>
+            <div id="line1" class = "graphLineTag" style= "bottom:-3.5%;">0</div>
+            <div id="line2" class = "graphLineTag" style= "bottom:17%;">20%</div>
+            <div id="line3" class = "graphLineTag" style= "bottom:37%;">40%</div>
+            <div id="line4" class = "graphLineTag" style= "bottom:57%;">60%</div>
+            <div id="line5" class = "graphLineTag" style= "bottom:77%;">80%</div>
+            <div id="line6" class = "graphLineTag" style= "bottom:96%;">100%</div>
 
             <div class = "graphLine" style= "bottom:0%;"></div>
             <div class = "graphLine" style= "bottom:20%;"></div>
@@ -49,10 +49,10 @@
             <div class = "graphLine" style= "bottom:80%;"></div>
             <div class = "graphLine" style= "bottom:100%;"></div>
 
-             <div class = "beam beam1" style= "margin-left:20%;"></div>
-             <div class = "beam beam2" style= "margin-left:40%;"></div>
-             <div class = "beam beam3" style= "margin-left:60%;"></div>
-             <div class = "beam beam4" style= "margin-left:80%;"></div>
+             <div id="tBeam1"class = "beam beam1" style= "margin-left:20%;"></div>
+             <div id="tBeam2"class = "beam beam2" style= "margin-left:40%;"></div>
+             <div id="tBeam3"class = "beam beam3" style= "margin-left:60%;"></div>
+             <div id="tBeam4"class = "beam beam4" style= "margin-left:80%;"></div>
 
         </div>        
         
@@ -74,6 +74,12 @@
             <div class="btn-group">
                 <button id="expName" data-toggle="dropdown" class=" dropdown-toggle"style="width:200%;"> Select Experiment <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdownSize">
+                    <li class="dropdownHeader" >test</li>
+                    <li class="dropdownLi" ><a href="#" onclick="setGraphTime(65,30,40,8)">1</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="setGraphTime(30,80,8,40)">2</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="setGraphTime(40,30,42,8)">3</a></li>
+                    <li class="dropdownLi" ><a href="#" onclick="setGraphTime(30,8,40,101)">4</a></li>
+                    <li class="divider"></li>
                     <li class="dropdownHeader" >ATTENTION</li>
                     <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Attentional Blink</a></li>
                     <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Simon Effect</a></li>
@@ -110,8 +116,9 @@
                     <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>  
                                
-                <li class="list-group-item"> item 2 </li>  
-                <li class="list-group-item"> item 3 </li>  
+                <li class="list-group-item" > Patacipants </li>  
+                <li class="list-group-item"> Avg.Score </li>  
+                <li class="list-group-item"> Avg.Time </li>  
             </ul>
         </div>  
         <div class = "panel panel-info panelSize" id = "">
@@ -122,8 +129,9 @@
                     <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
                     <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>
-                <li class="list-group-item"> item 2 </li>  
-                <li class="list-group-item"> item 3 </li>  
+                <li class="list-group-item"> Patacipants </li>  
+                <li class="list-group-item"> Avg.Score </li>  
+                <li class="list-group-item"> Avg.Time </li>  
             </ul>
         </div>  
         <div class = "panel panel-success panelSize" id = "">
@@ -134,8 +142,9 @@
                     <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
                     <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>
-                <li class="list-group-item"> item 2 </li>  
-                <li class="list-group-item"> item 3 </li>  
+                <li class="list-group-item"> Patacipants </li>  
+                <li class="list-group-item"> Avg.Score </li>  
+                <li class="list-group-item"> Avg.Time </li>  
             </ul>
         </div>  
         <div class = "panel panel-warning panelSize" >
@@ -146,8 +155,9 @@
                         <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
                         <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>
-                <li class="list-group-item"> item 2 </li>  
-                <li class="list-group-item"> item 3 </li>  
+                <li class="list-group-item"> Patacipants </li>  
+                <li class="list-group-item"> Avg.Score </li>  
+                <li class="list-group-item"> Avg.Time </li>  
             </ul>
         </div>  
    </div>  
