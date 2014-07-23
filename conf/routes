@@ -152,6 +152,7 @@ GET         /admin/findResult                                       controllers.
 GET         /admin/experiment                                       controllers.Admin.displayExperimentList()
 GET         /admin/experimentResult                                 controllers.Admin.RenderAdminExperimentResult()
 GET         /admin/experiment/add                                   controllers.Admin.addExperiment()
+
 GET         /admin/experiment/find                                  controllers.Admin.findExperiment()
 POST        /admin/experiment                                       controllers.Admin.saveExperiment(mode : Integer)
 GET         /admin/experiment/result/:id                            controllers.Admin.displayExperimentResult(id : Long)
