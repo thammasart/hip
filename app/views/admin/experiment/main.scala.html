@@ -41,7 +41,7 @@
                     <th>@exp.noOfTrial</th>
                     <th>@exp.startDate.format("dd/MM/yyyy")</th>
                     <th>@exp.expireDate.format("dd/MM/yyyy")</th>
-                    <th>@exp.getExperimentTypeToString()</th>
+                    <th>@exp.findExperimentTypeToString()</th>
                     <th>
                         <a href="@routes.Admin.displayExperimentResult(exp.id)"><button class="btn btn-default btn-xs">
                             result

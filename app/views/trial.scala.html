@@ -8,7 +8,7 @@
     @nav(user)
     <div class="homeMainWindow">
         <div class="trialContainer">
-            @for(exp <- ExperimentSchedule.getWorkingExperimentsByType(expType)) {
+            @for(exp <- ExperimentSchedule.findWorkingExperimentsByType(expType)) {
                 <h3>@exp.name</h3>
                 @exp.experimentType match {
                     case ExperimentType.GARNERINTERFERENCE=> {
