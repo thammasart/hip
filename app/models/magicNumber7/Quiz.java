@@ -16,8 +16,10 @@ public class Quiz extends Model{
     public int length;
 	@ManyToOne
 	public Trial trial;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.REMOVE)
 	public Question question;
+    @OneToMany(cascade=CascadeType.REMOVE)
+    public List<Answer> answers = new ArrayList<Answer>();
 
 	public Quiz(Trial trial, Question question){
 		this.trial = trial;

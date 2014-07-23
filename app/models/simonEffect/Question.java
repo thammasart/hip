@@ -20,7 +20,7 @@ public class Question extends Model{
     public String color;
     public char alphabet;
     public String direction;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     public List<Quiz> quizzes;
 
     public Question(String color,char alphabet , String direction) {

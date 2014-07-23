@@ -6,6 +6,7 @@ import play.libs.Json;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 @Entity
@@ -13,10 +14,9 @@ import java.util.Random;
 public class Quiz extends Model{
     @Id
     public long id;
-    public int positionXofTarget;
-    public int positionYofTarget;
+    public double positionXofTarget;
+    public double positionYofTarget;
     public ShapeType target = ShapeType.CIRCLE_BLUE;
-    public int dense;
     public int squareBlue;
     public int squareGreen;
     public int squareRed;
@@ -25,7 +25,8 @@ public class Quiz extends Model{
     public FrameSize frameSize;
     @OneToOne
     public Question question;
-
+    @OneToMany(cascade=CascadeType.REMOVE)
+    public List<Answer> answers = new ArrayList<Answer>();
     @OneToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     public Trial trial;

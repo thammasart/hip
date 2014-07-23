@@ -76,3 +76,43 @@
 .modal-lg {
     width:1000px;
 }
+
+::-ms-tooltip {
+    display: none;
+}
+
+.text-red{
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.blink{
+    -webkit-animation-name: blink;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+}
+
+@-webkit-keyframes blink {
+    0% {border-color:red}
+    50% {border-color:white}
+}
+
+@keyframes blink {
+    0% {border-color:red}
+    50% {border-color:white}
+}
+
+.inline-range{
+    display:inline !important;
+    width:170px !important;
+}
+.input-range{
+    width:70px !important;
+}

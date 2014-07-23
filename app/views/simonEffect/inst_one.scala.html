@@ -1,14 +1,18 @@
 @(trial : models.simonEffect.Trial,questionNo : Integer)
 @header("Human Information Processing Lab :: Home Page")
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/simonEffect.css")">
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
 window.location.hash="no-back-button";
 window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
 window.onhashchange=function(){window.location.hash="no-back-button";}
 
+function preventBack(){window.history.forward();}
+  setTimeout("preventBack()", 0);
+  window.onunload=function(){null};
+
 </script>
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/simonEffect.css")">
 <body>
 
 <!-- Page Header -->

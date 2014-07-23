@@ -19,7 +19,7 @@ public class Quiz extends Model {
     public Trial trial;
     @ManyToOne
     public Question question;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     public List<Answer> answers = new ArrayList<Answer>();
 
 

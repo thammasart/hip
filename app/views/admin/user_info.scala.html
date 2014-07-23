@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/userInfo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/jquery.dataTables.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/dataTables.tableTools.css")">
-<script type="text/javascript" src="@routes.Assets.at("javascripts/deleteUser.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/deleteRow.js")"></script>
 <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.11.0.min.js")"></script>
 <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.dataTables.min.js")"></script>
 <script type="text/javascript" src="@routes.Assets.at("javascripts/paging.js")"></script>
@@ -107,10 +107,10 @@
                 Experimental results of such user(s) will also be deleted.
             </div>
             <div class="modal-footer">
-                <form id="delUsersForm" action="@routes.Admin.saveUser(2)" method="post" >
+                <form id="delManyForm" action="@routes.Admin.saveUser(2)" method="post" >
                     <button type="button" class="btn btn-default glyphicon" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger glyphicon glyphicon-remove" onclick="submitToDeleteMany()">Delete Users</button>
-                    <input type="text" id="deleteUsers" name="deleteUser" hidden>
+                    <input type="text" id="deleteRows" name="deleteRow" hidden>
                 </form>
             </div>
         </div>
@@ -130,7 +130,7 @@
                 <form id="delForm" action="@routes.Admin.saveUser(2)" method="post" >
                     <button type="button" class="btn btn-default glyphicon" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger glyphicon glyphicon-remove" onclick="submitToDelete()">Delete User</button>
-                    <input type="text" id="deleteUser" name="deleteUser" hidden>
+                    <input type="text" id="deleteRow" name="deleteRow" hidden>
                 </form>
             </div>
         </div>

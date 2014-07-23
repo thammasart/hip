@@ -28,7 +28,7 @@ public class Trial extends Model {
 	@ManyToOne
 	public ExperimentSchedule schedule;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     public List<Quiz> quizzes = new ArrayList<Quiz>();
         
 	public static Trial create(ExperimentSchedule experimentSchedule){
@@ -36,6 +36,8 @@ public class Trial extends Model {
 		trial.schedule = experimentSchedule;
 		return trial;
 	}
+
+    public Trial(){}
 
 	public static Trial findById(int id) {
 		return find.byId(new Long(id));

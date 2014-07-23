@@ -1,8 +1,9 @@
 @(trial : models.mullerLayer.Trial, questionNo : Integer , lineType:List[models.mullerLayer.LineType])
 @header("Human Information Processing Lab :: Home Page")
 @import models.mullerLayer.LineType
-@import models.mullerLayer.LenghtType
+@import models.mullerLayer.LengthType
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
+<!--
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
  <script>
 window.location.hash="no-back-button";
@@ -10,10 +11,14 @@ window.location.hash="Again-No-back-button";//again because google chrome don't 
 window.onhashchange=function(){window.location.hash="no-back-button";}
 
 </script>
+--!>
+<script >
+    window.addEventListener('scroll',function(e){ alert(window.pageXOffset});
+</script>
 <script src="@routes.Assets.at("javascripts/mullerLayer.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/mullerLayer.css")">
-<body onload="setUp(@trial.quizzes(questionNo).differLenght,@trial.quizzes(questionNo).differChoice)">
+<body onload="setUp(@trial.quizzes(questionNo).differLength,@trial.quizzes(questionNo).differChoice)">
 <div class="fixSize">
     <!-- Page Header -->
     <div class="">
@@ -49,7 +54,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-left" href=""></div>
                                 <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                                <div class="mullerArrow arrow-right arrowPos" href="" ></div>
                             </div>
                         </button >
                         }
@@ -58,7 +63,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-right" href=""></div>
                                 <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
+                                <div class="mullerArrow arrow-left arrowPos aps" ></div>
                             </div>
                         </button >
                         }
@@ -67,7 +72,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-right" href=""></div>
                                 <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
+                                <div class="mullerArrow arrow-right arrowPos" href="" ></div>
                             </div>
                         </button >
                         }
@@ -76,28 +81,28 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                             <div class="arrowContainer">
                                 <div class="mullerArrow arrow-left" href=""></div>
                                 <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
+                                <div class="mullerArrow arrow-left arrowPos aps" ></div>
                             </div>
                         </button >
                         }
                     }
                 }
                 
-                @defining(trial.quizzes(questionNo).lenghtType){ lenghtTypes =>
-                   @lenghtTypes match{
-                        case LenghtType.SHORT => {
-                            <div id="lenghtType" hidden> 1 </div>
+                @defining(trial.quizzes(questionNo).lengthType){ lengthTypes =>
+                   @lengthTypes match{
+                        case LengthType.SHORT => {
+                            <div id="lengthType" hidden> 1 </div>
                         }
-                        case LenghtType.MIDDLE =>{
-                            <div id="lenghtType" hidden> 2 </div>
+                        case LengthType.MEDIUM =>{
+                            <div id="lengthType" hidden> 2 </div>
                         }
-                        case LenghtType.LONG =>{
-                            <div id="lenghtType" hidden> 3 </div>
+                        case LengthType.LONG =>{
+                            <div id="lengthType" hidden> 3 </div>
                         }
                     } 
                 }
                 <div id="differentChoice" hidden>  @trial.quizzes(questionNo).differChoice </div>
-                <div id="differentLenght" hidden>  @trial.quizzes(questionNo).differLenght </div>
+                <div id="differentLength" hidden>  @trial.quizzes(questionNo).differLength </div>
                 <input id="score" name="score" hidden/>
                 <input id="usedTime" name="usedTime" hidden/>
                 <input id="isCorrect" name="isCorrect" type="checkbox" hidden/>
