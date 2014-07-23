@@ -46,7 +46,7 @@ public class ExperimentSchedule extends Model{
 		return experiments;
 	}
 
-//    @Override
+    @Override
     public void save(){
         this.startDate.setHours(0);
         this.startDate.setMinutes(0);
