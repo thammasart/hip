@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.ExperimentSchedule;
 
+import models.TimeLog;
 import play.*;
 import play.libs.Json;
 import play.mvc.*;
@@ -136,6 +137,9 @@ public class VisualSearch extends Controller{
         if(questionNo < quizzes.size()){
             return redirect(routes.VisualSearch.experiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.VisualSearch.report(user.username, trialId));
     }
 

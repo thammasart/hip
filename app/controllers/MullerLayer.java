@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.ExperimentSchedule;
+import models.TimeLog;
 import models.User;
 import models.mullerLayer.*;
 
@@ -98,6 +99,9 @@ public class MullerLayer extends Controller {
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.MullerLayer.experiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.MullerLayer.report(user.username, trialId));
     }
     

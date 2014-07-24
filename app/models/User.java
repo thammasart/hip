@@ -63,10 +63,6 @@ public class User extends Model{
             return 0;
     }
 
-    public void deleteUserAndRelative(){
-        this.delete();
-    }
-
 	@SuppressWarnings("unchecked")
 	public static Finder<String,User> find = new Finder(String.class,User.class);
 }

@@ -68,6 +68,9 @@ public class AttentionBlink extends Controller {
         if(questionNo < trial.numberOfQuiz){
             return redirect(routes.AttentionBlink.experiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.AttentionBlink.report(user.username, trialId));
     }
     

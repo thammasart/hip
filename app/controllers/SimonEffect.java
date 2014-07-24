@@ -2,6 +2,7 @@ package controllers;
 
 import models.ExperimentSchedule;
 
+import models.TimeLog;
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -105,6 +106,9 @@ public class SimonEffect extends Controller {
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.SimonEffect.doExperiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.SimonEffect.report(user.username, trialId));
     }
 

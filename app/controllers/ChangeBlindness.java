@@ -2,6 +2,7 @@ package controllers;
 
 import models.ExperimentSchedule;
 
+import models.TimeLog;
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -94,6 +95,9 @@ public class ChangeBlindness extends Controller{
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.ChangeBlindness.doExperiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.ChangeBlindness.report(user.username, trialId));
     }
 

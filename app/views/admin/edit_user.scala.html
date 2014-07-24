@@ -4,9 +4,9 @@
 
 <script>
     function submitEditedUser(){
-        var e = document.getElementById("statusInput");
-        var statusUser = e.options[e.selectedIndex].text;
-        document.getElementById("userStatus").value = statusUser;
+        //var e = document.getElementById("statusInput");
+        //var statusUser = e.options[e.selectedIndex].text;
+        //document.getElementById("userStatus").value = statusUser;
         document.forms["answerForm"].submit();
     }
 </script>
@@ -26,7 +26,7 @@
                     <input id = "usrName" name = "usrName" type="text" value="@user.username" hidden>
                 </div>
             </div>
-
+<!--
             <div class="form-group">
                 <label for="status" class="col-sm-4 control-label">
                     Status
@@ -34,13 +34,26 @@
                 <div class="col-sm-4">
                     <select id="statusInput">
 
-                        <option value="student">STUDENT</option>
-                        <option value="student">GUEST</option>
+                        <option value="student"
+                        @if(user.status == UserRole.STUDENT){
+                            selected="selected"
+                        }
+                        >STUDENT</option>
+                        <option value="student"
+                        @if(user.status == UserRole.GUEST){
+                            selected="selected"
+                        }
+                        >GUEST</option>
                         <option value="admin"
                         @if(user.status == UserRole.ADMIN){
                             selected="selected"
                         }
                         >ADMIN</option>
+                        <option value="ta"
+                        @if(user.status == UserRole.TA){
+                            selected="selected"
+                        }
+                        >TA</option>
 
                     </select>
                     <input id="userStatus" name = "userStatus" type="text" value="" hidden>
@@ -49,6 +62,7 @@
                     <label class="alertText" id="statusAlert"  > <i> *  Please choose status</i></label>
                 </div>
             </div>
+!-->
 
             <div class="form-group">
                 <label for="firstName" class="col-sm-4 control-label">

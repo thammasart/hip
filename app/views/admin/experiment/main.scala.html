@@ -50,7 +50,7 @@
 <div class="container">
     <div class="page-header">
 
-        <h1>Experiment</h1>
+        <h1>Experiment Schedule</h1>
 
         <div class="row">
             <div class="col-md-6">
@@ -99,6 +99,8 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title" id="myModalLabel">Delete experiment schedule(s)?</h4>
                         Experimental results and answer will be deleted.
+                        <p></p>
+                        <font color="red">Warning: **This action cannot be undone**</font>
                     </div>
                     <div class="modal-footer">
                         <form id="delManyForm" action="@routes.Admin.saveExperiment(2)" method="post" >
@@ -119,6 +121,8 @@
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title" id="myModalLabel2">Delete experiment schedule?</h4>
                         Experimental results and answer will be deleted.
+                        <p></p>
+                        <font color="red">Warning: **This action cannot be undone**</font>
                     </div>
                     <div class="modal-footer">
                         <form id="delForm" action="@routes.Admin.saveExperiment(2)" method="post" >

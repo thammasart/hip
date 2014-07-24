@@ -80,6 +80,9 @@ public class StroopEffect extends Controller {
         if(questionNo < Trial.TOTAL_QUESTION){
             return redirect(routes.StroopEffect.experiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.StroopEffect.report(user.username, trialId));
     }
 

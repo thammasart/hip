@@ -88,16 +88,6 @@ public class Admin extends Controller {
             oldUser.faculty = newUser.faculty;
             oldUser.department = newUser.department;
 
-            String userStatus = stringForm.get("userStatus");
-            if (userStatus.equalsIgnoreCase("ADMIN")){
-                oldUser.status = UserRole.ADMIN;
-            }
-            else if ((userStatus.equalsIgnoreCase("STUDENT"))){
-                oldUser.status = UserRole.STUDENT;
-            }
-            else{
-                oldUser.status = UserRole.GUEST;
-            }
             //่้try catch
             oldUser.update();
         }
@@ -154,8 +144,17 @@ public class Admin extends Controller {
                     else if ((userStatus.equalsIgnoreCase("STUDENT"))){
                         temp.status = UserRole.STUDENT;
                     }
+                    else if ((userStatus.equalsIgnoreCase("TA"))){
+                        temp.status = UserRole.TA;
+                    }
+                    else if ((userStatus.equalsIgnoreCase("DUMMY"))){
+                        temp.status = UserRole.DUMMY;
+                    }
+                    else if ((userStatus.equalsIgnoreCase("SPECIAL"))){
+                        temp.status = UserRole.SPECIAL;
+                    }
                     else{
-                        temp.status = UserRole.GUEST;
+                        temp.status = UserRole.DUMMY;
                     }
 
                     temp.save();
@@ -192,8 +191,10 @@ public class Admin extends Controller {
         String warning = "";
         for(int i=0 ; i <result.length;i++){
             User user = User.find.where().eq("username",result[i]).findUnique();
-            if (!currentUser.username.equals(user.username))
-                user.deleteUserAndRelative();
+            if (!currentUser.username.equals(user.username)){
+                user.status = UserRole.DELETED;
+                user.save();
+            }
             else
                 warning = " but except your user.";
         }
@@ -305,15 +306,29 @@ public class Admin extends Controller {
             startDate = df.parse(startString);
             expireDate = df.parse(expireString);
             expireDate = new Date(expireDate.getTime() + 86400000 - 1);
-            expList = ExperimentSchedule.find.where().icontains("name", name)
-                    .eq("experimentType",expType)
-                    .ge("startDate", startDate)
-                    .le("expireDate", expireDate)
-                    .findList();
+            if (typeString.equalsIgnoreCase("All Type")){
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .ge("startDate", startDate)
+                        .le("expireDate", expireDate)
+                        .findList();
+            }
+            else{
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .eq("experimentType",expType)
+                        .ge("startDate", startDate)
+                        .le("expireDate", expireDate)
+                        .findList();
+            }
         } catch (ParseException e) {
-            expList = ExperimentSchedule.find.where().icontains("name", name)
-                    .eq("experimentType",expType)
-                    .findList();
+            if (typeString.equalsIgnoreCase("All Type")){
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .findList();
+            }
+            else{
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .eq("experimentType",expType)
+                        .findList();
+            }
         }
         flash("savedSuccess","Filter Search Successfully!");
         return ok(views.html.admin.experiment.main.render(expList));

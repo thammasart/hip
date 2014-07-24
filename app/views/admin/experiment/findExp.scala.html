@@ -24,6 +24,7 @@
                 </label>
                 <select id="typeInput">
 
+                    <option value="All_Type">All Type</option>
                     <option value="attention_blink">Attention Blink</option>
                     <option value="brown_peterson">Brown Peterson</option>
                     <option value="change_blindness">Change Blindness</option>
@@ -83,7 +84,7 @@
             </div>
         </div>
     </form>
-    <hr class="divider" width="100%">
+    <hr class="dividerUserInfo">
     <div align="right">
         <a href="@routes.Admin.displayExperimentList()" type="button" class="cancelNewUserButton btn btn-default glyphicon"> Cancel</a>
         <button type="button"class="submitNewUserButton btn btn-primary glyphicon glyphicon-search" onclick="submitFindExp()"> Find Exp.Schedule</button>

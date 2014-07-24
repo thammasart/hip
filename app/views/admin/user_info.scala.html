@@ -105,6 +105,8 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel">Delete user(s)?</h4>
                 Experimental results of such user(s) will also be deleted.
+                <p></p>
+                <font color="red">Warning: **This action cannot be undone**</font>
             </div>
             <div class="modal-footer">
                 <form id="delManyForm" action="@routes.Admin.saveUser(2)" method="post" >
@@ -125,6 +127,8 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel2">Delete user?</h4>
                 Experimental results of such user will also be deleted.
+                <p></p>
+                <font color="red">Warning: **This action cannot be undone**</font>
             </div>
             <div class="modal-footer">
                 <form id="delForm" action="@routes.Admin.saveUser(2)" method="post" >
@@ -187,13 +191,14 @@
         <td width="6%"> @user.academicYear</td>
         <td width="9%"> @user.department</td>
         <td width="9%"> @user.faculty</td>
-
         <td width="30%">
             <div>
-                @if(!currentUser.username.equals(user.username)){
-                    <button id=@user.username class="smallDelButton btn btn-danger btn-xs" data-toggle="modal" data-target="#delidividualModal" onclick="delButtonPress(this)"> del </button>
+                @if(user.status != UserRole.DELETED){
+                    @if(!currentUser.username.equals(user.username)){
+                        <button id=@user.username class="smallDelButton btn btn-danger btn-xs" data-toggle="modal" data-target="#delidividualModal" onclick="delButtonPress(this)"> del </button>
+                    }
+                    <a  href="@routes.Admin.editUser(user.username)" type="button" id="editButton" class="smallEditButton btn btn-warning btn-xs"> edit </a>
                 }
-                <a  href="@routes.Admin.editUser(user.username)" type="button" id="editButton" class="smallEditButton btn btn-warning btn-xs"> edit </a>
             </div>
         </td>
     </tr>
