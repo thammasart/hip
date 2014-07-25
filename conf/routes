@@ -16,6 +16,7 @@ GET         /back-form-trial                                        controllers.
 
 
 GET         /result                                                 controllers.Application.showResult()
+GET         /findExperiment                                  controllers.Application.findExpResult(exp_type : String) 
 
 GET         /muller-layer                                           controllers.MullerLayer.info()
 GET         /muller-layer/info                                      controllers.MullerLayer.infoIframe()

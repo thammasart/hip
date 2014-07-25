@@ -9,7 +9,7 @@ var expType;
     document.getElementById("overLay").style.visibility = "hidden";  
  } 
 
- function setGraph(gNumber,score,maxScore,time) { 
+ function setGraphScore(gNumber,score,maxScore,time) { 
     if(gNumber==1){ 
         document.getElementById("sBeam1").style.height = (score/maxScore)*100+"%";
     }else if(gNumber==2){ 

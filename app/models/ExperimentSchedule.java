@@ -7,6 +7,7 @@ import play.data.format.Formats;
 import java.util.List;
 import java.util.ArrayList;
 import static play.data.validation.Constraints.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -29,6 +30,7 @@ public class ExperimentSchedule extends Model{
 	public ExperimentType experimentType;
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    @JsonBackReference
     public List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
 
 	@OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)

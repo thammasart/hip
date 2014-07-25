@@ -3,12 +3,18 @@ package controllers;
 import play.*;
 import play.mvc.*;
 import play.data.*;
+import play.libs.Json;
 import views.html.*;
 import views.html.iframe.*;
 import models.*;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class Application extends Controller {
 
@@ -42,6 +48,47 @@ public class Application extends Controller {
         scores.add(models.brownPeterson.Answer.calculateAverageScore());
         return ok(allResult.render(user,scores));
     }
+    
+    @Security.Authenticated(Secured.class)
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result findExpResult(String expType){
+        List<ExperimentSchedule> exps = null;
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try { 
+                if(expType.equals("/attentionBlink")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.ATTENTIONBLINK).findList();
+                    List<models.attentionBlink.Trial> trialList = new ArrayList<models.attentionBlink.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(exp.attentionTrials);
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }else  
+                if(expType.equals("/simonEffect")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.SIMONEFFECT).findList();
+                    List<models.simonEffect.Trial> trialList = new ArrayList<models.simonEffect.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(exp.simontrials);
+                    }
+                    return ok(trialList.size()+"");
+            }
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error1");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error2");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error3");
+        }
+        return ok(result);
+    }
+    
 
     public static Result logout() {
         session().clear();

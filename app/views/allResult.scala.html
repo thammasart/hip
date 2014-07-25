@@ -2,12 +2,14 @@
 @header("Human Information Processing Lab :: Home Page")
 
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css")">
+<script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/ui/ui-bootstrap-tpls-0.11.0.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/controllers/allResultController.js")"></script>
 <script src="@routes.Assets.at("javascripts/allResult.js")"></script>
 <body >
-<div class="fixSize">
+<div class="fixSize" ng-app="AllResultApp" ng-controller="AllResultController">
     <!-- Page Header -->
     @nav(user)
-
    <div class = "graphContainer" id = "">
 
         <div class = "experimentName" id = "">
@@ -81,8 +83,8 @@
                     <li class="dropdownLi" ><a href="#" onclick="setGraphTime(30,8,40,101)">4</a></li>
                     <li class="divider"></li>
                     <li class="dropdownHeader" >ATTENTION</li>
-                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Attentional Blink</a></li>
-                    <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Simon Effect</a></li>
+                    <li class="dropdownLi" ><a href="#attentionBlink" onclick="selectExperiment(this.innerHTML)">Attentional Blink</a></li>
+                    <li class="dropdownLi" ><a href="#simonEffect" onclick="selectExperiment(this.innerHTML)">Simon Effect</a></li>
                     <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Stroop Effect</a></li>
                     <li class="dropdownLi" ><a href="#" onclick="selectExperiment(this.innerHTML)">Visual Search</a></li>
                     <li class="divider"></li>
@@ -112,7 +114,7 @@
             
             <ul class="list-group">
                 <li class="list-group-item"> Trial 
-                    <button onclick="overlayTrial()" class="glyphicon glyphicon-cog gear" name="gearButton" disabled></button>
+                    <button ng-click="open()" class="glyphicon glyphicon-cog gear" name="gearButton"></button>
                     <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
                 </li>  
                                

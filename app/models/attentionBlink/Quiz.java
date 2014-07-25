@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import play.db.ebean.Model.Finder;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name = "attention_blink_quiz")
@@ -18,9 +20,11 @@ public class Quiz extends Model{
         public boolean isCorrect = true;
 
         @ManyToOne
+        @JsonBackReference
         public Trial trial;
 
         @OneToOne(cascade=CascadeType.REMOVE)
+        @JsonManagedReference
         public Question question;
 
         @OneToMany(cascade=CascadeType.REMOVE)
