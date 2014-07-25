@@ -28,7 +28,7 @@
                 var table = $('#userTable').DataTable({
                                 bSort: true,
                                 "iDisplayLength": 15,   // records per page
-                                "sDom": "t<'row'<'col-md-2'i> <'col-md-5'p> > <'hide' T>",
+                                "sDom": "t<'row'<'col-md-2'i>  <'col-md-5'p> > <'hide' T>",
                                 "sPaginationType": "bootstrap",
                                 "aoColumnDefs": [
                                   { "bSortable": false, "aTargets": [ 0,15 ] }
@@ -58,14 +58,27 @@
                     } );
                 } );
 
+                $("#isShowDelete").click(function(){
+                    $("#userTable").dataTable().fnDraw();
+                });
+
 			});
+
+			    $.fn.dataTableExt.afnFiltering.push(
+                    function( oSettings, aData, iDataIndex ) {
+                      var nTr = oSettings.aoData[ iDataIndex ].nTr;
+                      // test for property on nTr
+                      var status = aData[2];
+                      var isShowDeleted = document.getElementById("isShowDelete").checked;
+                      return (isShowDeleted || status != "DELETED");
+                    }
+                );
+
 </script>
 
         <div class="adminBody">
 
             <h1 align="center"> User Information  </h1>
-            <!--<div> <button id="exportButton" class="userInfoButton btn btn-default btn-sm glyphicon"> Export </button></div>
-            !-->
             <div class="DTTT_container">
                 <a class="userInfoButton btn btn-default btn-sm glyphicon" id="ToolTables_userTable_0">
                     <span>Export</span>
@@ -140,7 +153,10 @@
         </div>
     </div>
 </div>
-
+<div id="divCheckBox">
+    <input type="checkbox" id="isShowDelete" checked="true">
+    Show Deleted users
+</div>
 
 <table class="display" cellspacing="0" width="100%" id="userTable">
     <thead>
@@ -167,7 +183,9 @@
     <tbody>
 
     @for(user<- user){
-    <tr class="tableContent">
+    <tr class="tableContent"
+        @if(user.status == UserRole.DELETED){style="color:red"}
+    >
         <td width="5%">
             @if(!currentUser.username.equals(user.username)){
                 <input name="checkDelete" id= ch_@user.username type="checkbox" class="checkbox">
@@ -205,5 +223,4 @@
     }
     </tbody>
 </table>
-
 @footer()
