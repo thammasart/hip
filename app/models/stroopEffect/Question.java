@@ -26,7 +26,7 @@ public class Question extends Model{
 
     public QuestionType questionType = QuestionType.ENGLISH;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     public List<Quiz> quizzes;
 
     public Question(){
@@ -73,13 +73,23 @@ public class Question extends Model{
         final String PURPLE = "purple";
         final String YELLOW = "yellow";
         String colorWord = "";
-        switch(colorWordTH){
-            case BLACK_TH : colorWord = BLACK;break;
-            case BLUE_TH : colorWord = BLUE;break;
-            case RED_TH : colorWord = RED;break;
-            case GREEN_TH : colorWord = GREEN;break;
-            case PURPLE_TH : colorWord = PURPLE;break;
-            case YELLOW_TH : colorWord = YELLOW;break;
+        if (colorWord.equals(BLACK_TH)){
+            colorWord = BLACK;
+        }
+        else if(colorWord.equals(BLUE_TH)){
+            colorWord = BLUE;
+        }
+        else if(colorWord.equals(RED_TH)){
+            colorWord = RED;
+        }
+        else if(colorWord.equals(GREEN_TH)){
+            colorWord = GREEN;
+        }
+        else if(colorWord.equals(PURPLE_TH)){
+            colorWord = PURPLE;
+        }
+        else if(colorWord.equals(YELLOW_TH)){
+            colorWord = YELLOW;
         }
         return colorWord;
     }

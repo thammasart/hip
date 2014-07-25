@@ -39,7 +39,9 @@
                               <option value="student">STUDENT</option>
                               <option value="student">GUEST</option>
                               <option value="admin">ADMIN</option>
-
+                              <option value="ta">TA</option>
+                              <option value="dummy">DUMMY</option>
+                              <option value="special">SPECIAL</option>
                           </select>
                         <input type="text" id="userStatus" name = "userStatus" hidden>
                   </div>
@@ -107,7 +109,7 @@
                   </div>
                 </div>
         </form>
-            <hr class="divider" width="100%">
+            <hr class="dividerUserInfo">
             <div align="center">
                 <a href="@routes.Admin.renderUserInfo()" type="button" class="cancelNewUserButton btn btn-default glyphicon"> Cancel</a>
                 <button type="button"class="submitNewUserButton btn btn-success glyphicon glyphicon-plus" onclick="submitNewUsers()"> Submit</button>

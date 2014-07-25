@@ -22,7 +22,7 @@ public class Question extends Model {
 	public String trigramType = Trial.WORD;
 	public String trigramLanguage = Trial.ENGLISH;
 
-	@OneToMany
+	@OneToMany(cascade=CascadeType.REMOVE)
 	public List<Quiz> quizzes = new ArrayList<Quiz>();
 
 	public Question (String firstWord, String secondWord,String thirdWord){

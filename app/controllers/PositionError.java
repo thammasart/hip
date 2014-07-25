@@ -1,6 +1,7 @@
 package controllers;
 
 import models.ExperimentSchedule;
+import models.TimeLog;
 import models.User;
 import models.positionError.*;
 
@@ -82,6 +83,9 @@ public class PositionError extends Controller{
         if(questionNo < 3){
             return redirect(routes.PositionError.experiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.PositionError.report(user.username, trialId));
     }
 

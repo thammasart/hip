@@ -5,7 +5,7 @@
 @nav_admin()
 <div class="container-fluid" ng-app="ExperimentCreator">
     <div class="row" ng-controller="ExController">
-        <form class="form-horizontal" name="create" role="form" action="@routes.Admin.saveExperiment()" method="POST">
+        <form class="form-horizontal" name="create" role="form" action="@routes.Admin.saveExperiment(0)" method="POST">
             <div class="col-md-9 col-sm-8">
                 <div class="form-group has-feedback"
                      ng-class="{0: 'has-success', 1:'has-error' , 2 : ''}[getInputStatus(create.name)]">

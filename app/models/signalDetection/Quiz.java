@@ -3,6 +3,8 @@ package models.signalDetection;
 import play.db.ebean.Model;
 import javax.persistence.*;
 import play.db.ebean.Model.Finder;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table (name="signal_detection_quiz")
@@ -13,11 +15,12 @@ public class Quiz extends Model{
     public double displayTime;
     public int noOfTarget;
     public int length;
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.REMOVE)
 	public Question question;
     @ManyToOne
     public Trial trial;
-
+    @OneToMany(cascade=CascadeType.REMOVE)
+    public List<Answer> answers = new ArrayList<Answer>();
     public Quiz(){
     	this.displayTime = 0;
     	this.noOfTarget = 0;

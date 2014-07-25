@@ -2,6 +2,8 @@ package models.positionError;
 
 import play.db.ebean.*;
 import javax.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table (name="position_error_quiz")
@@ -11,11 +13,12 @@ public class Quiz extends Model{
 
 	public int length = 7;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.REMOVE)
 	public Question question;
     @ManyToOne
     public Trial trial;
-
+    @OneToMany(cascade=CascadeType.REMOVE)
+    public List<Answer> answers = new ArrayList<Answer>();
     public Quiz(){}
 
     public Quiz(int length,Question question, Trial trial){

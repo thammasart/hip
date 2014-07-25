@@ -1,0 +1,93 @@
+@import views.html.admin._
+@head_admin("Admin Panel")
+
+@nav_admin()
+
+<script>
+    function submitFindExp(){
+        var e = document.getElementById("typeInput");
+        var statusUser = e.options[e.selectedIndex].text;
+        document.getElementById("expType").value = statusUser;
+        document.forms["answerForm"].submit();
+    }
+</script>
+
+<div class="container borderDiv">
+
+    <h3 align="left"> Find Experiment Schedule </h3>
+
+    <form id="answerForm" action="@routes.Admin.saveExperiment(1)" method="post" >
+        <div class="findExpInput">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    Experiment
+                </label>
+                <select id="typeInput">
+
+                    <option value="All_Type">All Type</option>
+                    <option value="attention_blink">Attention Blink</option>
+                    <option value="brown_peterson">Brown Peterson</option>
+                    <option value="change_blindness">Change Blindness</option>
+                    <option value="garner_interference">Garner Interference</option>
+                    <option value="magic_number7">Magic Number 7</option>
+                    <option value="Muller_layer">Muller Layer</option>
+                    <option value="position_error">Position Error</option>
+                    <option value="signal_detection">Signal Detection</option>
+                    <option value="simon_effect">Simon Effect</option>
+                    <option value="sternberg_search">Sternberg Search</option>
+                    <option value="stroop_effect">Stroop Effect</option>
+                    <option value="visual_search">Visual Search</option>
+
+                </select>
+                <input type="text" id="expType" name = "expType" hidden>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    Schedule Name
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" autocomplete="off" name="scheduleName" id="scheduleName">
+                </div>
+                <div>
+                    <label class="alertText" id="nameAlert"  > <i> *  Please enter Schedule Name</i></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    Active on
+                </label>
+                <div class="col-sm-3">
+                    <div class="input-group date" id="startdate-picker">
+                        <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="startDate" id="startInputBox" placeholder="dd/mm/yyyy">
+
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </div>
+                <label class="col-sm-1 control-label">
+                    to
+                </label>
+                <div class="col-sm-3">
+                    <div class="input-group date" id="enddate-picker">
+                        <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="expireDate" id="endInputBox" placeholder="dd/mm/yyyy">
+
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <p width="100%">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+
+                </div>
+                <script type="text/javascript">
+                            $(function () {
+                                $('#startdate-picker').datetimepicker();
+                                $('#enddate-picker').datetimepicker()
+                            });
+                </script>
+            </div>
+        </div>
+    </form>
+    <hr class="dividerUserInfo">
+    <div align="right">
+        <a href="@routes.Admin.displayExperimentList()" type="button" class="cancelNewUserButton btn btn-default glyphicon"> Cancel</a>
+        <button type="button"class="submitNewUserButton btn btn-primary glyphicon glyphicon-search" onclick="submitFindExp()"> Find Exp.Schedule</button>
+    </div>
+</div>
+@footer()

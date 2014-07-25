@@ -20,10 +20,10 @@ public class Quiz extends Model{
         @ManyToOne
         public Trial trial;
 
-        @OneToOne
+        @OneToOne(cascade=CascadeType.REMOVE)
         public Question question;
 
-        @OneToMany
+        @OneToMany(cascade=CascadeType.REMOVE)
         public List<Answer> answers = new ArrayList<Answer>();
 
         public static Quiz create(Trial trial){

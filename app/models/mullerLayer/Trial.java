@@ -1,5 +1,6 @@
 package models.mullerLayer;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.ExperimentSchedule;
 
 import play.db.ebean.Model;
@@ -16,7 +17,8 @@ public class Trial extends Model{
 
     @ManyToOne
     public ExperimentSchedule schedule;
-    @OneToMany
+    @OneToMany(mappedBy = "trial",cascade=CascadeType.REMOVE)
+    @JsonManagedReference
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Trial(ExperimentSchedule schedule){

@@ -24,7 +24,7 @@ public class Question extends Model{
     public boolean correctAnswer;
     public QuestionType questionType;
 
-    @OneToOne(mappedBy="question")
+    @OneToOne(mappedBy="question",cascade=CascadeType.REMOVE)
     public Quiz quiz;
 
 	public Question(String letter, String set, boolean correctAnswer, QuestionType questionType) {

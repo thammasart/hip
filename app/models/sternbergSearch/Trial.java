@@ -21,7 +21,7 @@ public class Trial extends Model{
     public QuestionType questionType;
     @ManyToOne
     public ExperimentSchedule schedule;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Trial(ExperimentSchedule schedule){

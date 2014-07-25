@@ -4,52 +4,173 @@
 @head_admin("Admin Panel")
 
 @nav_admin()
+
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/jquery.dataTables.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/dataTables.tableTools.css")">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/deleteRow.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.11.0.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.dataTables.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/paging.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/dataTables.tableTools.js")"></script>
+
+<script type="text/javascript">
+		    /* Table initialisation */
+			$(document).ready(function() {
+                // Setup - add a text input to each footer cell
+
+
+                // DataTable
+                var table = $('#expTable').DataTable({
+                                bSort: true,
+                                "iDisplayLength": 15,   // records per page
+                                "sDom": "t<'row'<'col-md-2'i> <'col-md-5'p> > <'hide' T>",
+                                "sPaginationType": "bootstrap",
+                                "aoColumnDefs": [
+                                  { "bSortable": false, "aTargets": [ 0,8 ] }
+                                ],
+                                "tableTools": {
+                                    "sSwfPath": "@routes.Assets.at("/swf/copy_csv_xls_pdf.swf")",
+                                    "aButtons": [
+                                    {
+                                            "sExtends":     "xls",
+                                            "sButtonText": "",
+                                            "oSelectorOpts": {
+                                                page: 'current'
+                                            }
+                                    }
+                                     ]
+                                },
+                                "order": [[ 1, "asc" ]]
+                            });
+
+			});
+</script>
+
+
 <div class="container">
     <div class="page-header">
+
+        <h1>Experiment Schedule</h1>
+
         <div class="row">
-            <div class="col-md-9 col-sm-8">
-                <h1>Experiment</h1>
+            <div class="col-md-6">
+            @if(flash.containsKey("savedSuccess")){
+
+                <div class="customAlert alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @flash.get("savedSuccess")
+                </div>
+            }
             </div>
-            <div class="col-md-3 col-sm-4">
-                <a href="@routes.Admin.addExperiment()">
-                    <button type="button" class="btn btn-success btn-save">+ADD</button>
-                </a>
-                <a href="#">
-                    <button type="button" class="btn btn-default btn-clear">Export</button>
-                </a>    
+            <div class="col-md-6">
+
+                <div class="DTTT_container">
+                    <a class="expInfoButton btn btn-default glyphicon btn-md" id="ToolTables_userTable_0">
+                        <span>Export</span>
+                        <div style="position: absolute; left: 0px; top: 0px; width: 54px; height: 29px; z-index: 99;">
+                            <embed id="ZeroClipboard_TableToolsMovie_1" src="/assets//swf/copy_csv_xls_pdf.swf"
+                                   loop="false" menu="false" quality="best" bgcolor="#ffffff" width="54" height="29"
+                                   name="ZeroClipboard_TableToolsMovie_1" align="middle" allowscriptaccess="always" allowfullscreen="false"
+                                   type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                   flashvars="id=1&amp;width=54&amp;height=29" wmode="transparent">
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a type="button" class="expInfoButton btn btn-success glyphicon btn-md" href="/admin/experiment/add">+Add</a>
+
+                </div>
+                <div>
+                    <a type="button" class="expInfoButton btn btn-primary glyphicon btn-md glyphicon-search" href="@routes.Admin.findExperiment()">Find Exp.Schedule</a>
+                </div>
+                <div>
+                    <button type="button" id="deleteSelectButton" class="deleteSelectButton btn btn-danger btn-md glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"> Del. Selected </button>
+                </div>
+
             </div>
         </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Delete experiment schedule(s)?</h4>
+                        Experimental results and answer will be deleted.
+                        <p></p>
+                        <font color="red">Warning: **This action cannot be undone**</font>
+                    </div>
+                    <div class="modal-footer">
+                        <form id="delManyForm" action="@routes.Admin.saveExperiment(2)" method="post" >
+                            <button type="button" class="btn btn-default glyphicon" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger glyphicon glyphicon-remove" onclick="submitToDeleteMany()">Delete Schedules</button>
+                            <input type="text" id="deleteRows" name="deleteRow" hidden>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="delidividualModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel2">Delete experiment schedule?</h4>
+                        Experimental results and answer will be deleted.
+                        <p></p>
+                        <font color="red">Warning: **This action cannot be undone**</font>
+                    </div>
+                    <div class="modal-footer">
+                        <form id="delForm" action="@routes.Admin.saveExperiment(2)" method="post" >
+                            <button type="button" class="btn btn-default glyphicon" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger glyphicon glyphicon-remove" onclick="submitToDelete()">Delete Schedule</button>
+                            <input type="text" id="deleteRow" name="deleteRow" hidden>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-       <table class="table">
+       <table id="expTable" class="table">
            <thead>
                <tr>
+                   <th id="useless_cb"></th>
                    <th>ID</th>
+                   <th>Experiment Type</th>
                    <th>Name</th>
-                   <th>Trial No.</th>
-                   <th>Start</th>
-                   <th>End</th>
-                   <th>type</th>
-                   <th>result</th>
-                   <th>#</th>
+                   <th>No. of Trials</th>
+                   <th>Start Date</th>
+                   <th>Expire Date</th>
+                   <th>Parameter</th>
+                   <th id="useless_btn"></th>
                </tr>
            </thead>
            <tbody>
                @for( exp <- expList){
                 <tr>
+                    <th>
+                        <input name="checkDelete" id= ch_@exp.id type="checkbox" class="checkbox">
+                    </th>
                     <th>@exp.id</th>
+                    <th>@exp.findExperimentTypeToString()</th>
                     <th>@exp.name</th>
                     <th>@exp.noOfTrial</th>
                     <th>@exp.startDate.format("dd/MM/yyyy")</th>
                     <th>@exp.expireDate.format("dd/MM/yyyy")</th>
-                    <th>@exp.getExperimentTypeToString()</th>
-                    <th>
-                        <a href="@routes.Admin.displayExperimentResult(exp.id)"><button class="btn btn-default btn-xs">
-                            result
-                        </button></a>
-                    </th>
                     <th>
                         <a href="@routes.Admin.displayParameter(exp.id)"><button class="btn btn-default btn-xs">
                             edit parameter
+                        </button></a>
+                    </th>
+                    <th>
+                        <button id=@exp.id class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delidividualModal" onclick="delButtonPress(this)">
+                            del
                         </button></a>
                     </th>
                 </tr>

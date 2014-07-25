@@ -1,19 +1,18 @@
 package controllers;
 
-import play.*;
 import play.mvc.*;
 import play.data.*;
 import play.data.DynamicForm;
-import views.html.*;
 import models.*;
 import views.html.admin.*;
 import java.util.List;
 import java.util.ArrayList;
-import models.brownPeterson.*;
 
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.Date;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -89,16 +88,6 @@ public class Admin extends Controller {
             oldUser.faculty = newUser.faculty;
             oldUser.department = newUser.department;
 
-            String userStatus = stringForm.get("userStatus");
-            if (userStatus.equalsIgnoreCase("ADMIN")){
-                oldUser.status = UserRole.ADMIN;
-            }
-            else if ((userStatus.equalsIgnoreCase("STUDENT"))){
-                oldUser.status = UserRole.STUDENT;
-            }
-            else{
-                oldUser.status = UserRole.GUEST;
-            }
             //่้try catch
             oldUser.update();
         }
@@ -155,8 +144,17 @@ public class Admin extends Controller {
                     else if ((userStatus.equalsIgnoreCase("STUDENT"))){
                         temp.status = UserRole.STUDENT;
                     }
+                    else if ((userStatus.equalsIgnoreCase("TA"))){
+                        temp.status = UserRole.TA;
+                    }
+                    else if ((userStatus.equalsIgnoreCase("DUMMY"))){
+                        temp.status = UserRole.DUMMY;
+                    }
+                    else if ((userStatus.equalsIgnoreCase("SPECIAL"))){
+                        temp.status = UserRole.SPECIAL;
+                    }
                     else{
-                        temp.status = UserRole.GUEST;
+                        temp.status = UserRole.DUMMY;
                     }
 
                     temp.save();
@@ -187,14 +185,16 @@ public class Admin extends Controller {
     //ทำการลบ user account ออกจากระบบ
     private static Result type_deleteUser(){
         DynamicForm  stringForm = Form.form().bindFromRequest();
-        String userString = stringForm.get("deleteUser");
+        String userString = stringForm.get("deleteRow");
         String[] result = userString.split(":::::");
         User currentUser = User.find.byId(session().get("username"));
         String warning = "";
         for(int i=0 ; i <result.length;i++){
             User user = User.find.where().eq("username",result[i]).findUnique();
-            if (!currentUser.username.equals(user.username))
-                user.deleteUserAndRelative();
+            if (!currentUser.username.equals(user.username)){
+                user.status = UserRole.DELETED;
+                user.save();
+            }
             else
                 warning = " but except your user.";
         }
@@ -202,6 +202,7 @@ public class Admin extends Controller {
         return ok(user_info.render(User.getAllUser(),currentUser));
     }
 
+    //แสดงหน้าUserหลังจาก เพิ่ม ลบ แก้ไข user แล้ว
     @Security.Authenticated(Secured.class)
     public static Result saveUser(int mode) {
         if (mode == 0)
@@ -229,9 +230,14 @@ public class Admin extends Controller {
         return ok(views.html.admin.experiment.add.render(expForm));
     }
 
-    //
+    //แสดงหน้าค้นหาการทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result saveExperiment() {
+    public static Result findExperiment() {
+        return ok(views.html.admin.experiment.findExp.render());
+    }
+
+    //เพิ่มExperiment แล้วแสดงผล
+    public static Result type_addExperiment(){
         Form<ExperimentSchedule> boundForm = expForm.bindFromRequest();
 
         if(boundForm.hasErrors()){
@@ -244,6 +250,114 @@ public class Admin extends Controller {
         flash("success","Successfully");
         exp.generateTrials();
         return redirect(routes.Admin.displayExperimentList());
+    }
+
+    //กรองExperiment แล้วแสดงผล
+    public static Result type_filterExperiment(){
+        DynamicForm  stringForm = Form.form().bindFromRequest();
+        String name = stringForm.get("scheduleName");
+        String typeString = stringForm.get("expType");
+        String startString = stringForm.get("startDate");
+        String expireString = stringForm.get("expireDate");
+        ExperimentType expType = ExperimentType.ATTENTIONBLINK;
+        if (typeString.equalsIgnoreCase("Attention Blink")){
+            expType = ExperimentType.ATTENTIONBLINK;
+        }
+        else if (typeString.equalsIgnoreCase("Brown Peterson")){
+            expType = ExperimentType.BROWNPETERSON;
+        }
+        else if (typeString.equalsIgnoreCase("Change Blindness")){
+            expType = ExperimentType.CHANGEBLINDNESS;
+        }
+        else if (typeString.equalsIgnoreCase("Garner Interference")){
+            expType = ExperimentType.GARNERINTERFERENCE;
+        }
+        else if (typeString.equalsIgnoreCase("Magic Number 7")){
+            expType = ExperimentType.MAGICNUMBER7;
+        }
+        else if (typeString.equalsIgnoreCase("Muller Layer")){
+            expType = ExperimentType.MULLERLAYER;
+        }
+        else if (typeString.equalsIgnoreCase("Position Error")){
+            expType = ExperimentType.POSITIONERROR;
+        }
+        else if (typeString.equalsIgnoreCase("Signal Detection")){
+            expType = ExperimentType.SIGNALDETECTION;
+        }
+        else if (typeString.equalsIgnoreCase("Simon Effect")){
+            expType = ExperimentType.SIMONEFFECT;
+        }
+        else if (typeString.equalsIgnoreCase("Sternberg Search")){
+            expType = ExperimentType.STERNBERGSEARCH;
+        }
+        else if (typeString.equalsIgnoreCase("Stroop Effect")){
+            expType = ExperimentType.STROOPEFFECT;
+        }
+        else if (typeString.equalsIgnoreCase("Visual Search")){
+            expType = ExperimentType.VISUALSEARCH;
+        }
+
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date startDate;
+        Date expireDate;
+        List<ExperimentSchedule> expList;
+        try {
+            startDate = df.parse(startString);
+            expireDate = df.parse(expireString);
+            expireDate = new Date(expireDate.getTime() + 86400000 - 1);
+            if (typeString.equalsIgnoreCase("All Type")){
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .ge("startDate", startDate)
+                        .le("expireDate", expireDate)
+                        .findList();
+            }
+            else{
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .eq("experimentType",expType)
+                        .ge("startDate", startDate)
+                        .le("expireDate", expireDate)
+                        .findList();
+            }
+        } catch (ParseException e) {
+            if (typeString.equalsIgnoreCase("All Type")){
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .findList();
+            }
+            else{
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .eq("experimentType",expType)
+                        .findList();
+            }
+        }
+        flash("savedSuccess","Filter Search Successfully!");
+        return ok(views.html.admin.experiment.main.render(expList));
+    }
+      
+    public static Result type_deleteExperiment(){
+        DynamicForm  stringForm = Form.form().bindFromRequest();
+        String userString = stringForm.get("deleteRow");
+        String[] result = userString.split(":::::");
+        for(int i=0 ; i <result.length;i++){
+            long expId = Long.parseLong(result[i]);
+            ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);
+            exp.deleteExpAndRelative();
+        }
+        flash("savedSuccess","Delete schedule(s) successfully !");
+        return redirect(routes.Admin.displayExperimentList());
+    }
+    //แสดงผลหน้า experiment set หลังจาก เพิ่ม ลบ ค้นหา แล้ว
+    @Security.Authenticated(Secured.class)
+    public static Result saveExperiment(int mode) {
+        if (mode == 0){
+            return type_addExperiment();
+        }
+        else if (mode == 1)
+            return type_filterExperiment();
+        else if (mode == 2)
+            return type_deleteExperiment();
+        else
+            return redirect(routes.Admin.displayExperimentList());
     }
 
     @Security.Authenticated(Secured.class)
@@ -385,7 +499,7 @@ public class Admin extends Controller {
         for(models.stroopEffect.Trial trial : trials ){
             String questionType = requestData.get("questionType-" + trial.id);
             if(!trial.questionType.toString().equals(questionType)){
-                trial.setQuestionType(questionType);
+                trial.toQuestionTYpe(questionType);
                 trial.randomNewQuestions();
             }
 

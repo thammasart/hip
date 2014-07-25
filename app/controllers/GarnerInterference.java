@@ -1,6 +1,7 @@
 package controllers;
 
 import models.ExperimentSchedule;
+import models.TimeLog;
 import models.User;
 import models.garnerInterference.*;
 
@@ -81,6 +82,9 @@ public class GarnerInterference extends Controller {
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.GarnerInterference.experiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.GarnerInterference.report(user.username, trialId));
     }
     

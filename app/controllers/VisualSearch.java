@@ -1,9 +1,11 @@
 package controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.ExperimentSchedule;
 
+import models.TimeLog;
 import play.*;
 import play.libs.Json;
 import play.mvc.*;
@@ -71,7 +73,7 @@ public class VisualSearch extends Controller{
         String frameHeight = "500px";
         String top = "142px";
         String left = "30px";
-        switch (Trial.find.byId(trialId).frameSize){
+        switch (Trial.find.byId(trialId).quiz.frameSize){
             case SMALLER :
                 frameWidth = Trial.SMALLER_WIDTH + "px";
                 frameHeight = Trial.SMALLER_HEIGHT + "px";
@@ -110,9 +112,7 @@ public class VisualSearch extends Controller{
                 break;
         }
 
-        String json = "[{top:3,left:5},{top:19,left:20}]";
-
-        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left,json));
+        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left));
     }
 
 
@@ -137,6 +137,9 @@ public class VisualSearch extends Controller{
         if(questionNo < quizzes.size()){
             return redirect(routes.VisualSearch.experiment(trialId, questionNo));
         }
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        timeLog.endTime = new Date();
+        timeLog.update();
         return redirect(routes.VisualSearch.report(user.username, trialId));
     }
 
@@ -156,4 +159,22 @@ public class VisualSearch extends Controller{
         return ok(report.render(score,totalUsedTime,quizzes.size(), "Report", user));
     }
 
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result init(long trialId) {
+        Trial trial = Trial.findById(trialId);
+        ObjectNode result = Json.newObject();
+        try{
+            JsonNode json = Json.toJson(trial);
+            result.put("message", "success");
+            result.put("status", "ok");
+            result.put("trial", json);
+        } catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+        return ok(result);
+    }
 }

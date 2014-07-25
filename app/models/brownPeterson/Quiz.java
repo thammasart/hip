@@ -22,7 +22,7 @@ public class Quiz extends Model{
 	@ManyToOne
 	public Question question;
 
-	@OneToMany(mappedBy="quiz")
+	@OneToMany(mappedBy="quiz",cascade=CascadeType.REMOVE)
 	public List<Answer> answers = new ArrayList<Answer>();
 
 	public static final int DEFAULT_FLASHTIME = 5;

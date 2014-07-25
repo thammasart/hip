@@ -14,7 +14,7 @@ public class Trial extends Model{
     public long id;
     @ManyToOne
     public ExperimentSchedule schedule;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     public List<Quiz> quizzes;
 
     public static final int TOTAL_QUESTION = 3;

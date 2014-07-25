@@ -1,7 +1,7 @@
 @(trial : models.mullerLayer.Trial, questionNo : Integer , lineType:List[models.mullerLayer.LineType])
 @header("Human Information Processing Lab :: Home Page")
 @import models.mullerLayer.LineType
-@import models.mullerLayer.LenghtType
+@import models.mullerLayer.LengthType
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
 <!--
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
@@ -18,7 +18,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <script src="@routes.Assets.at("javascripts/mullerLayer.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/mullerLayer.css")">
-<body onload="setUp(@trial.quizzes(questionNo).differLenght,@trial.quizzes(questionNo).differChoice)">
+<body onload="setUp(@trial.quizzes(questionNo).differLength,@trial.quizzes(questionNo).differChoice)">
 <div class="fixSize">
     <!-- Page Header -->
     <div class="">
@@ -88,21 +88,21 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                     }
                 }
                 
-                @defining(trial.quizzes(questionNo).lenghtType){ lenghtTypes =>
-                   @lenghtTypes match{
-                        case LenghtType.SHORT => {
-                            <div id="lenghtType" hidden> 1 </div>
+                @defining(trial.quizzes(questionNo).lengthType){ lengthTypes =>
+                   @lengthTypes match{
+                        case LengthType.SHORT => {
+                            <div id="lengthType" hidden> 1 </div>
                         }
-                        case LenghtType.MIDDLE =>{
-                            <div id="lenghtType" hidden> 2 </div>
+                        case LengthType.MEDIUM =>{
+                            <div id="lengthType" hidden> 2 </div>
                         }
-                        case LenghtType.LONG =>{
-                            <div id="lenghtType" hidden> 3 </div>
+                        case LengthType.LONG =>{
+                            <div id="lengthType" hidden> 3 </div>
                         }
                     } 
                 }
                 <div id="differentChoice" hidden>  @trial.quizzes(questionNo).differChoice </div>
-                <div id="differentLenght" hidden>  @trial.quizzes(questionNo).differLenght </div>
+                <div id="differentLength" hidden>  @trial.quizzes(questionNo).differLength </div>
                 <input id="score" name="score" hidden/>
                 <input id="usedTime" name="usedTime" hidden/>
                 <input id="isCorrect" name="isCorrect" type="checkbox" hidden/>

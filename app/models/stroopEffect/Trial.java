@@ -13,9 +13,9 @@ import java.util.ArrayList;
 public class Trial extends Model{
     @Id
     public long id;
-    @Column(nullable=false, length=2)
-    public long appearTime;
-    @Column(nullable=false, length=20)
+    @Column(nullable=true, length=2)
+    public long appearTime = 0L;
+    @Column(nullable=true, length=20)
     public QuestionType questionType = QuestionType.ENGLISH;
 
     public static final int TOTAL_QUESTION = 3;
@@ -24,7 +24,7 @@ public class Trial extends Model{
     public ExperimentSchedule schedule;
 //    @OneToMany
 //    public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public static Trial create(ExperimentSchedule experimentSchedule){
@@ -33,10 +33,7 @@ public class Trial extends Model{
         return trial;
     }
 
-    public Trial(){
-        appearTime = 0;
-        questionType = QuestionType.ENGLISH;
-    }
+    public Trial(){}
 
     public Trial(long appearTime,QuestionType type){
         this.appearTime = appearTime;
@@ -51,7 +48,7 @@ public class Trial extends Model{
         return find.where().eq("schedule", ex).findList();
     }
 
-    public void setQuestionType(String type){
+    public void toQuestionTYpe(String type){
         if(type.equals(QuestionType.ENGLISH.toString())){
             this.questionType = QuestionType.ENGLISH;
         }else if(type.equals(QuestionType.THAI.toString())){
