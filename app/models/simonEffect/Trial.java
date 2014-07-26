@@ -22,7 +22,7 @@ public class Trial extends Model{
     public int noOfQuiz = 3;
     public double totalScore = 0;
     public int totalUser = 0;
-    public double totalUseTime = 0;
+    public double totalUsedTime = 0;
 
 	@ManyToOne
     public ExperimentSchedule schedule;
@@ -41,10 +41,10 @@ public class Trial extends Model{
 
     public void updateResult(){
         this.totalScore = 0;
-        this.totalUseTime = 0;
+        this.totalUsedTime = 0;
         for(Quiz q:quizzes){
             this.totalScore += Answer.calculateTotalScore(q.answers);
-            this.totalScore += Answer.calculateTotalUsedTime(q.answers);
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
     }
