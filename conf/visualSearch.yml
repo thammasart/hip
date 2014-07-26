@@ -57,6 +57,7 @@
     squareRed: 5
     circleGreen: 5
     circleRed: 5
+    circleBlue: 1
     frameSize: SMALLER
     trial: *round45
     question: *Question79
@@ -68,6 +69,7 @@
     squareRed: 5
     circleGreen: 5
     circleRed: 5
+    circleBlue: 1
     frameSize: SMALL
     trial: *round46
     question: *Question80
@@ -79,6 +81,7 @@
     squareRed: 5
     circleGreen: 5
     circleRed: 5
+    circleBlue: 1
     frameSize: MEDIUM
     trial: *round47
     question: *Question84
@@ -90,6 +93,7 @@
     squareRed: 5
     circleGreen: 5
     circleRed: 5
+    circleBlue: 1
     frameSize: BIG
     question: *Question81
     trial: *round48
@@ -101,6 +105,7 @@
     squareRed: 5
     circleGreen: 5
     circleRed: 5
+    circleBlue: 1
     frameSize: EXTRA
     trial: *round49
     question: *Question82
@@ -112,6 +117,7 @@
     squareRed: 5
     circleGreen: 5
     circleRed: 5
+    circleBlue: 1
     frameSize: MEDIUM
     trial: *round50
     question: *Question83

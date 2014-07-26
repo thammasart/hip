@@ -130,11 +130,12 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $http({method:'POST',url:'saveVisualSearch',data:trial.quiz.question.sharps,
                 params:{trialId:trial.id,
                 circleGreen:trial.quiz.circleGreen, circleRed:trial.quiz.circleRed,
+                circleBlue: trial.quiz.circleBlue,
                 squareBlue:trial.quiz.squareBlue, squareRed:trial.quiz.squareRed,
                 squareGreen:trial.quiz.squareGreen,
                 positionXofTarget: trial.quiz.positionXofTarget, 
                 positionYofTarget: trial.quiz.positionYofTarget,
-                frameSize: trial.quiz.frameSize}})
+                frameSize: trial.quiz.frameSize, target: trial.quiz.target}})
             .success(function(result){
                 $scope.inProcess = false;
                 console.log(result);
@@ -145,6 +146,24 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         }
 
         $scope.frameSizes = ['SMALLER', 'SMALL', 'MEDIUM', 'BIG', 'EXTRA'];
+        $scope.targets = ['SQAURE_GREEN', 'SQAURE_BLUE', 'SQAURE_RED', 
+        'CIRCLE_GREEN', 'CIRCLE_BLUE', 'CIRCLE_RED'];
+
+        $scope.changeTargetValue = function(trial){
+            if(trial.quiz.target == 'SQAURE_GREEN')
+                trial.quiz.squareGreen = 1;
+            else if(trial.quiz.target == 'SQAURE_BLUE')
+                trial.quiz.squareBlue = 1;
+            else if(trial.quiz.target == 'SQAURE_RED')
+                trial.quiz.squareRed = 1;
+            else if (trial.quiz.target == 'CIRCLE_RED')
+                trial.quiz.circleRed = 1;
+            else if (trial.quiz.target == 'CIRCLE_BLUE')
+                trial.quiz.circleBlue = 1;
+            else if (trial.quiz.target == 'CIRCLE_GREEN')
+                trial.quiz.circleGreen = 1;
+        }
+
         $scope.open = function(trial){
             var modalInstance = $modal.open({
                 templateUrl: 'preview.html',
@@ -190,8 +209,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         };
 
         $scope.totalNoise = function(trial){
-            return trial.quiz.squareRed + trial.quiz.squareBlue + trial.quiz.squareGreen + trial.quiz.circleGreen + trial.quiz.circleRed;
+            return trial.quiz.squareRed + trial.quiz.squareBlue + trial.quiz.squareGreen + trial.quiz.circleGreen + trial.quiz.circleRed + trial.quiz.circleGreen;
         }
+
+
 
         $scope.width = function(trial){
             var frameSize = trial.quiz.frameSize;
@@ -369,6 +390,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
     $scope.sequence = 1;
     $scope.target = {};
     $scope.editSharp = {};
+    $scope.target = null;
 
 
     var x_offset;
@@ -397,34 +419,80 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
         return colorText;
     }
 
+    $scope.init = function(){
+        var row = Math.floor($scope.height / 30);
+        var column = Math.floor($scope.width / 30);
+        x_offset = Math.floor(100/column);
+        y_offset = Math.floor(100/row);
+
+        if(trial.quiz.target == 'CIRCLE_RED'){
+            $scope.target = Sharp(trial.quiz.positionYofTarget, trial.quiz.positionXofTarget, 'red', 'circle');
+        }
+        else if(trial.quiz.target == 'CIRCLE_GREEN'){
+            $scope.target = Sharp(trial.quiz.positionYofTarget, trial.quiz.positionXofTarget, 'green', 'circle');
+        }
+        else if(trial.quiz.target == 'SQAURE_BLUE'){
+            $scope.target = Sharp(trial.quiz.positionYofTarget, trial.quiz.positionXofTarget, 'blue', 'square');
+        }
+        else if(trial.quiz.target == 'SQAURE_RED'){
+            $scope.target = Sharp(trial.quiz.positionYofTarget, trial.quiz.positionXofTarget, 'red', 'square');
+        }
+        else if(trial.quiz.target == 'SQAURE_GREEN'){
+            $scope.target = Sharp(trial.quiz.positionYofTarget, trial.quiz.positionXofTarget, 'green', 'square');
+        }
+        else if(trial.quiz.target == 'CIRCLE_BLUE'){
+            $scope.target = Sharp(trial.quiz.positionYofTarget, trial.quiz.positionXofTarget, 'blue', 'circle');
+        }
+        $scope.sharps = angular.fromJson(trial.quiz.question.sharps);
+    }
+
     var generateSharps = function(trial){
         $scope.sharps = [];
-        for(var i = 0; i < trial.quiz.circleRed;i++){
-            var obj = createSharp('red','circle');
-            if(obj != null)
-                $scope.sharps.push(obj);
+        if(trial.quiz.target != 'CIRCLE_RED'){
+            for(var i = 0; i < trial.quiz.circleRed;i++){
+                var obj = createSharp('red','circle');
+                if(obj != null)
+                    $scope.sharps.push(obj);
+            }
         }
-        for(var i = 0; i < trial.quiz.circleGreen;i++){
-            var obj = createSharp('green','circle');
-            if(obj != null)
-                $scope.sharps.push(obj);
+        if(trial.quiz.target != 'CIRCLE_GREEN'){
+            for(var i = 0; i < trial.quiz.circleGreen;i++){
+                var obj = createSharp('green','circle');
+                if(obj != null)
+                    $scope.sharps.push(obj);
+            }
         }
-        for(var i = 0; i < trial.quiz.squareBlue;i++){
-            var obj = createSharp('blue','square');
-            if(obj != null)
-                $scope.sharps.push(obj);
+        if(trial.quiz.target != 'SQAURE_BLUE'){
+            for(var i = 0; i < trial.quiz.squareBlue;i++){
+                var obj = createSharp('blue','square');
+                if(obj != null)
+                    $scope.sharps.push(obj);
+            }
         }
-        for(var i = 0; i < trial.quiz.squareRed;i++){
-            var obj = createSharp('red','square');
-            if(obj != null)
-                $scope.sharps.push(obj);
-        }
-        for(var i = 0; i < trial.quiz.squareGreen;i++){
-            var obj = createSharp('green','square');
-            if(obj != null)
-                $scope.sharps.push(obj);
-        }
+        if(trial.quiz.target != 'SQAURE_RED'){
+            for(var i = 0; i < trial.quiz.squareRed;i++){
 
+                var obj = createSharp('red','square');
+                if(obj != null)
+                    $scope.sharps.push(obj);
+            }
+        }
+        if(trial.quiz.target == 'SQAURE_GREEN'){
+            for(var i = 0; i < trial.quiz.squareGreen;i++){
+
+                var obj = createSharp('green','square');
+                if(obj != null)
+                    $scope.sharps.push(obj);
+            }
+        }
+        if(trial.quiz.target == 'CIRCLE_BLUE'){
+            for(var i = 0; i < trial.quiz.circleBlue; i++){
+
+                var obj = createSharp('blue', 'circle');
+                if(obj != null)
+                    $scope.sharps.push(obj);
+            }
+        }
     }
 
     function createSharp(color, circle){
@@ -464,15 +532,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
     
 
 
-    $scope.init = function(){
-        var row = Math.floor($scope.height / 30);
-        var column = Math.floor($scope.width / 30);
-        x_offset = Math.floor(100/column);
-        y_offset = Math.floor(100/row);
-
-        $scope.target = Sharp(trial.quiz.positionYofTarget, trial.quiz.positionXofTarget, 'blue', 'circle');
-        $scope.sharps = angular.fromJson(trial.quiz.question.sharps);
-    }
+    
 
 
     var Sharp = function(top,left,color,sharp){

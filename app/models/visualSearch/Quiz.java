@@ -22,6 +22,7 @@ public class Quiz extends Model{
     public int squareRed;
     public int circleGreen;
     public int circleRed;
+    public int circleBlue;
     public FrameSize frameSize;
     @OneToOne
     public Question question;

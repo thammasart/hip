@@ -10,6 +10,7 @@ import models.visualSearch.Question;
 import models.visualSearch.Quiz;
 import models.visualSearch.Trial;
 import models.visualSearch.FrameSize;
+import models.visualSearch.ShapeType;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -51,8 +52,8 @@ public class RequestController extends Controller {
 
     @BodyParser.Of(BodyParser.Json.class)
     public static Result saveVisualSearch(long trialId , 
-            int circleGreen, int circleRed, int squareBlue, int squareRed, int squareGreen,
-            double positionXofTarget, double positionYofTarget, String frameSize) {
+            int circleGreen, int circleRed,int circleBlue, int squareBlue, int squareRed, int squareGreen,
+            double positionXofTarget, double positionYofTarget, String frameSize, String target) {
         ObjectNode result = Json.newObject();
         try {
             JsonNode json = request().body().asJson();
@@ -64,6 +65,7 @@ public class RequestController extends Controller {
             Quiz quiz = Quiz.find.byId(trial.quiz.id);
             quiz.circleGreen = circleGreen;
             quiz.circleRed = circleRed;
+            quiz.circleBlue = circleBlue;
             quiz.squareBlue = squareBlue;
             quiz.squareGreen = squareGreen;
             quiz.squareRed = squareRed;
@@ -79,6 +81,15 @@ public class RequestController extends Controller {
                 quiz.frameSize = FrameSize.BIG;
             else if(frameSize.equals("EXTRA"))
                 quiz.frameSize = FrameSize.EXTRA;
+
+            switch(target){
+                case "SQAURE_GREEN": quiz.target = ShapeType.SQAURE_GREEN;break;
+                case "SQAURE_BLUE": quiz.target = ShapeType.SQAURE_BLUE;break;
+                case "SQAURE_RED": quiz.target = ShapeType.SQAURE_RED;break;
+                case "CIRCLE_GREEN": quiz.target = ShapeType.CIRCLE_GREEN;break;
+                case "CIRCLE_BLUE": quiz.target = ShapeType.CIRCLE_BLUE;break;
+                case "CIRCLE_RED": quiz.target = ShapeType.CIRCLE_RED;break;
+            }
 
             quiz.update();
             result.put("message", "success");
