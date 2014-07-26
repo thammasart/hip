@@ -52,7 +52,7 @@ public class User extends Model{
 		if( user != null && user.status == UserRole.DELETED){
             return null;
         }
-        else if(username != user.username){
+        else if(!username.equals(user.username) || !password.equals(user.password)){
             return null;
         }
         return user;
