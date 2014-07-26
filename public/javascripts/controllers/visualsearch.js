@@ -15,9 +15,10 @@ angular.module('VisualSearchApp',[])
             console.log('init');
             $http({method:'GET',url:'init',params:{trialId:trialId}}).success(function(result){
                 $scope.trial = result.trial;
-                $scope.sharps = angular.fromJson($scope.trial.quiz.question.sharps);
                 console.log($scope.trial);
                 console.log($scope.sharps);
+                $scope.sharps = angular.fromJson($scope.trial.quiz.question.sharps);
+                
             }).error(function(result){
                 console.log('error:' + result);
             });

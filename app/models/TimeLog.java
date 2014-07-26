@@ -3,6 +3,7 @@ package models;
 import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class TimeLog extends Model{
@@ -16,6 +17,7 @@ public class TimeLog extends Model{
 	public long trialId;
 
 	@ManyToOne
+	@JsonManagedReference("timelog")
 	public ExperimentSchedule exp;
 
 	public TimeLog(Date startTime){

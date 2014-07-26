@@ -9,6 +9,7 @@ import models.ExperimentSchedule;
 import models.visualSearch.Question;
 import models.visualSearch.Quiz;
 import models.visualSearch.Trial;
+import models.visualSearch.FrameSize;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -49,35 +50,43 @@ public class RequestController extends Controller {
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public static Result saveVisualSearch() {
+    public static Result saveVisualSearch(long trialId , 
+            int circleGreen, int circleRed, int squareBlue, int squareRed, int squareGreen,
+            double positionXofTarget, double positionYofTarget, String frameSize) {
         ObjectNode result = Json.newObject();
         try {
             JsonNode json = request().body().asJson();
-            ObjectMapper mapper = new ObjectMapper();
-            List<Trial> trials = mapper.readValue(Json.stringify(json), mapper.getTypeFactory().constructCollectionType(List.class, Trial.class));
-            for(Trial trial : trials){
-                Question question = Question.find.byId(trial.quiz.question.id);
-                question.sharps = trial.quiz.question.sharps;
-                question.update();
-                Quiz quiz = Quiz.find.byId(trial.quiz.id);
-                quiz.circleGreen = trial.quiz.circleGreen;
-                quiz.circleRed = trial.quiz.circleRed;
-                quiz.squareBlue = trial.quiz.squareBlue;
-                quiz.squareGreen = trial.quiz.squareGreen;
-                quiz.squareRed = trial.quiz.squareRed;
-                quiz.positionXofTarget = trial.quiz.positionXofTarget;
-                quiz.positionYofTarget = trial.quiz.positionYofTarget;
-                quiz.frameSize = trial.quiz.frameSize;
-                quiz.update();
-            }
-            String jsonArray = mapper.writeValueAsString(trials);
-            json = Json.parse(jsonArray);
+            String sharps = Json.stringify(json);
+            Trial trial = Trial.find.byId(trialId);
+            Question question = Question.find.byId(trial.quiz.question.id);
+            question.sharps = sharps;
+            question.update();
+            Quiz quiz = Quiz.find.byId(trial.quiz.id);
+            quiz.circleGreen = circleGreen;
+            quiz.circleRed = circleRed;
+            quiz.squareBlue = squareBlue;
+            quiz.squareGreen = squareGreen;
+            quiz.squareRed = squareRed;
+            quiz.positionXofTarget = positionXofTarget;
+            quiz.positionYofTarget = positionYofTarget;
+            if(frameSize.equals("SMALLER"))
+                quiz.frameSize = FrameSize.SMALLER;
+            else if(frameSize.equals("SMALL"))
+                quiz.frameSize = FrameSize.SMALL;
+            else if(frameSize.equals("MEDIUM"))
+                quiz.frameSize = FrameSize.MEDIUM;
+            else if(frameSize.equals("BIG"))
+                quiz.frameSize = FrameSize.BIG;
+            else if(frameSize.equals("EXTRA"))
+                quiz.frameSize = FrameSize.EXTRA;
+
+            quiz.update();
             result.put("message", "success");
             result.put("status", "ok");
-            result.put("trials", json);
-        }catch (JsonProcessingException e) {
-            result.put("message", e.getMessage());
-            result.put("status", "json Process error");
+        // }
+        // catch (JsonProcessingException e) {
+        //     result.put("message", e.getMessage());
+        //     result.put("status", "json Process error");
         }catch(RuntimeException e){
             result.put("message", e.getMessage());
             result.put("status", "Runtime error");

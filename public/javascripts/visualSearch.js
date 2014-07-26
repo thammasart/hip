@@ -48,6 +48,8 @@ function shapeClick(shapeClick){
     document.getElementById("positionX").value = parseInt(shapeClick.style.left);
     document.getElementById("positionY").value = parseInt(shapeClick.style.top);
 
+    console.log(document.getElementById("positionY").value);
+
     if (shapeClick.name == "target")
         document.getElementById("isCorrect").checked = true;
     else

@@ -29,9 +29,10 @@ public class Trial extends Model{
     @Id
     public long id;
     @ManyToOne
+    @JsonManagedReference(value="visualSearch-trial")
     public ExperimentSchedule schedule;
     @OneToOne(mappedBy = "trial",cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value="trial")
     public Quiz quiz;
     public double totalScore = 0;
     public double totalUsedTime = 0;

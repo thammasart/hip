@@ -26,9 +26,10 @@ public class Quiz extends Model{
     @OneToOne
     public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonBackReference(value="answers")
     public List<Answer> answers = new ArrayList<Answer>();
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference(value="trial")
     public Trial trial;
 
     public Quiz(){}

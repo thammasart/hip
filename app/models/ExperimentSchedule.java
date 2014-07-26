@@ -7,6 +7,7 @@ import play.data.format.Formats;
 import java.util.List;
 import java.util.ArrayList;
 import static play.data.validation.Constraints.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -61,7 +62,12 @@ public class ExperimentSchedule extends Model{
 	@OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
 	public List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
 
+    @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    @JsonBackReference("visualSearch-trial")
+    public List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
+
     @OneToMany(mappedBy="exp", cascade=CascadeType.ALL)
+    @JsonBackReference("timelog")
     public List<TimeLog> timelog = new ArrayList<TimeLog>();
 
 

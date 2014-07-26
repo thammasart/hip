@@ -125,9 +125,17 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             });
         }
 
-        $scope.save = function(){
+        $scope.save = function(trial){
             $scope.inProcess = true;
-            $http({method:'POST',url:'saveVisualSearch',data:$scope.trials}).success(function(result){
+            $http({method:'POST',url:'saveVisualSearch',data:trial.quiz.question.sharps,
+                params:{trialId:trial.id,
+                circleGreen:trial.quiz.circleGreen, circleRed:trial.quiz.circleRed,
+                squareBlue:trial.quiz.squareBlue, squareRed:trial.quiz.squareRed,
+                squareGreen:trial.quiz.squareGreen,
+                positionXofTarget: trial.quiz.positionXofTarget, 
+                positionYofTarget: trial.quiz.positionYofTarget,
+                frameSize: trial.quiz.frameSize}})
+            .success(function(result){
                 $scope.inProcess = false;
                 console.log(result);
             }).error(function(result){
