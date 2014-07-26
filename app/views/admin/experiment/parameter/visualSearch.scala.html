@@ -118,7 +118,7 @@
                         <div class="col-md-3 col-sm-4">
                             <button ng-disabled="max(trial) < totalNoise(trial)" class="btn btn-success" ng-click="open(trial)" style="width: 100%;margin-bottom:10px">แสดงผล</button>
                             <br />
-                            <button ng-disabled="" class="btn btn-primary" ng-click="save()" style="width: 100%;margin-bottom:20px">บันทึกข้อมูล</button>
+                            <button ng-disabled="" class="btn btn-primary" ng-click="save(trial)" style="width: 100%;margin-bottom:20px">บันทึกข้อมูล</button>
                             <br />
                             <p class="text-danger" ng-show="trial.quiz.question.sharps == null">Trial นี้ยังไม่ได้ทำการ generate noise</p>
                         </div>

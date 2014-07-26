@@ -34,15 +34,10 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <form action="@routes.VisualSearch.saveAnswer(trial.id,questionNo)" method="post" >
 
         <div class="visualArea" style="left:@left;top:@top;width:@width;height:@height;" id="visualArea">
-
-
-
-        <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
-        name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" onclick="shapeClick(this)"></button>
-
-
-            <button class="circle" name = "target" style="left:{{trial.quiz.positionXofTarget}}%;top:{{trial.quiz.positionYofTarget}}%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
-
+            <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
+            name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" onclick="shapeClick(this)"></button>
+            <button class="circle" name = "target" style="left:{{trial.quiz.positionXofTarget}}%;top:{{trial.quiz.positionYofTarget}}%;border-color:#57BAC9"
+            onclick="shapeClick(this)"></button>
         </div>
         <input id="usedTime" name="usedTime" hidden/>
         <input id="positionX" name="positionX" hidden/>
