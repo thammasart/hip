@@ -28,7 +28,7 @@ function submitButtonClick(){
         document.getElementById("lastnameAlert").style.visibility = "visible";
         submitStatus = false;
     }else  document.getElementById("lastnameAlert").style.visibility = "hidden";
-
+/*
     if(document.getElementById("sectionInput").value ==""){
         document.getElementById("sectionAlert").style.visibility = "visible";
         submitStatus = false;
@@ -38,7 +38,7 @@ function submitButtonClick(){
         document.getElementById("semesterAlert").style.visibility = "visible";
         submitStatus = false;
     }else  document.getElementById("semesterAlert").style.visibility = "hidden";
-
+*/
     if(document.getElementById("yearInput").value ==""){
         document.getElementById("yearAlert").style.visibility = "visible";
         submitStatus = false;
@@ -48,7 +48,7 @@ function submitButtonClick(){
         document.getElementById("emailAlert").style.visibility = "visible";
         submitStatus = false;
     }else  document.getElementById("emailAlert").style.visibility = "hidden";
-
+/*
     if(document.getElementById("facultyInput").value ==""){
         document.getElementById("facultyAlert").style.visibility = "visible";
         submitStatus = false;
@@ -58,7 +58,7 @@ function submitButtonClick(){
         document.getElementById("departmentAlert").style.visibility = "visible";
         submitStatus = false;
     }else  document.getElementById("departmentAlert").style.visibility = "hidden";
-
+*/
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if(!(re.test(document.getElementById("emailInput").value))){
@@ -70,6 +70,6 @@ function submitButtonClick(){
         document.getElementById("genderAlert").style.visibility = "visible";
         submitStatus = false;
     }
-    document.getElementById("birthInputBox").disabled = false;
+    document.getElementById("birthInputBox").value = document.getElementById("birthInputBoxShow").value;
     return submitStatus;
 }
