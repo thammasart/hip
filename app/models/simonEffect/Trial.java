@@ -2,6 +2,8 @@ package models.simonEffect;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.ExperimentSchedule;
+import models.TimeLog;
+
 
 import play.db.ebean.*;
 import play.libs.Json;
@@ -18,6 +20,9 @@ public class Trial extends Model{
 	public QuestionType questionType;
 	public double blinkTime;
     public int noOfQuiz = 3;
+    public double totalScore = 0;
+    public int totalUser = 0;
+    public double totalUseTime = 0;
 
 	@ManyToOne
     public ExperimentSchedule schedule;
@@ -34,6 +39,16 @@ public class Trial extends Model{
         return find.where().eq("schedule", ex).findList();
     }
 
+    public void updateResult(){
+        this.totalScore = 0;
+        this.totalUseTime = 0;
+        for(Quiz q:quizzes){
+            this.totalScore += Answer.calculateTotalScore(q.answers);
+            this.totalScore += Answer.calculateTotalUsedTime(q.answers);
+        }
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+    }
+    
     public static List<Trial> findAllTrial(int feature){
 
         if(feature == 1){ 

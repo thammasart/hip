@@ -1,5 +1,7 @@
 package models.signalDetection;
 
+import models.TimeLog;
+
 import play.db.ebean.Model;
 import javax.persistence.*;
 import models.TimeLog;
@@ -16,6 +18,9 @@ public class Trial extends Model{
     public ExperimentSchedule schedule;
     @OneToMany(cascade=CascadeType.REMOVE)
     public List<Quiz> quizzes;
+    public double totalScore = 0;
+    public double totalUsedTime = 0;
+    public int totalUser = 0;
 
     public static final int TOTAL_QUESTION = 3;
     public Trial(){}
@@ -30,6 +35,16 @@ public class Trial extends Model{
         return find.where().eq("schedule", ex).findList();
     }
 
+    public void updateResult(){
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+        for(Quiz q:quizzes){
+            this.totalScore += Answer.calculateTotalScore(q.answers);
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+        }
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+    }
+    
     public void generateQuiz(){
         for(int i = 0; i < TOTAL_QUESTION; i++){
             Question question = new Question('Y', 'X');

@@ -1,5 +1,7 @@
 package models.positionError;
 
+import models.TimeLog;
+
 import play.db.ebean.*;
 import javax.persistence.*;
 import models.TimeLog;
@@ -16,6 +18,9 @@ public class Trial extends Model{
 	public double flashSpeed;
 	public double delayTime;
 	public QuestionType questionType;
+	public double totalScore = 0;
+    public double totalUsedTime = 0;
+    public int totalUser = 0;
 
     public int numberOfQuiz = 3;
 
@@ -37,6 +42,16 @@ public class Trial extends Model{
 		return newTrial;
 	}
 
+	public void updateResult(){
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+        for(Quiz q:quizzes){
+            this.totalScore += Answer.calculateTotalScore(q.answers);
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+        }
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+    }
+    
     public static Trial create(ExperimentSchedule schedule){
         Trial newTrial = new Trial(0.05,0.1,QuestionType.ENGLISH);
         newTrial.schedule = schedule;
