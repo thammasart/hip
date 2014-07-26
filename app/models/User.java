@@ -49,8 +49,10 @@ public class User extends Model{
 
 	public static User authenticate(String username, String password) {
         User user = find.where().eq("username", username).eq("password", password).findUnique();
-		if( user != null && user.status == UserRole.DELETED && username != user.username){
-
+		if( user != null && user.status == UserRole.DELETED){
+            return null;
+        }
+        else if(username != user.username){
             return null;
         }
         return user;
