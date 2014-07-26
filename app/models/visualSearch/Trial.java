@@ -1,5 +1,7 @@
 package models.visualSearch;
 
+import models.TimeLog;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
@@ -32,9 +34,18 @@ public class Trial extends Model{
     @OneToOne(mappedBy = "trial",cascade = CascadeType.ALL)
     @JsonManagedReference(value="trial")
     public Quiz quiz;
+    public double totalScore = 0;
+    public double totalUsedTime = 0;
+    public int totalUser = 0;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
+    }
+
+    public void updateResult(){
+        this.totalScore = Answer.calculateTotalScore(quiz.answers);
+        this.totalUsedTime = Answer.calculateTotalUsedTime(quiz.answers);
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
     }
 
     public static Trial findById(long id){

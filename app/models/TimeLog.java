@@ -39,6 +39,10 @@ public class TimeLog extends Model{
 		return timeLog;
 	}
 
+	public static int calaulateTotalUserTakeExp(ExperimentSchedule exps ,long trialId ){
+		return TimeLog.find.where().eq("exp",exps).eq("trialId",trialId).findList().size();
+	}
+
 	public static boolean isRepeatTrial(User user, long trialId, ExperimentSchedule exp){
 		TimeLog timeLog = TimeLog.find.where().eq("user", user).eq("trialId", trialId).eq("exp", exp).findUnique();
 		return timeLog != null;
