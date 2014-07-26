@@ -7,6 +7,7 @@
         //var e = document.getElementById("statusInput");
         //var statusUser = e.options[e.selectedIndex].text;
         //document.getElementById("userStatus").value = statusUser;
+        document.getElementById("birthInputBox").value =  document.getElementById("birthInputBoxShow").value;
         document.forms["answerForm"].submit();
     }
 </script>
@@ -103,11 +104,11 @@
                 </label>
                 <div class="col-sm-4">
                     <div class="input-group date" id="birthdate-picker">
-                        <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="birthDate" id="birthInputBox"
+                        <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" id="birthInputBoxShow"
                         @if(user.birthDate != null){
                         value="@user.birthDate.format("dd/MM/yyyy")"
-                        } placeholder="dd/mm/yyyy">
-
+                        } placeholder="dd/mm/yyyy" disabled>
+                        <input type="text" name="birthDate" id="birthInputBox" hidden>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                 </div>

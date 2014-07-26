@@ -1,7 +1,28 @@
 @(user : User)
 @import views.html.admin._
-@header("Human Information Processing Lab :: Home Page")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/date-picker/bootstrap-datetimepicker.min.css ")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css ")">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/adminUserInfo.css ")">
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.11.0.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/date-picker/moment.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/date-picker/bootstrap-datetimepicker.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/modernizr-2.6.2-respond-1.1.0.min.js")"></script>
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/admin.css ")">
+    <script src="@routes.Assets.at("javascripts/main.js")"></script>
+    <script src="@routes.Assets.at("javascripts/userProfile.js")"></script>
+    <title>Human Information Processing Lab :: Home Page</title>
+
+</head>
+
 <script src="@routes.Assets.at("javascripts/userProfile.js")"></script>
+
 <script>
 
     function initFocusPoniter(){
@@ -18,7 +39,7 @@
             <form role="form" class="form-horizontal" name="userProfileForm"  onsubmit="return submitButtonClick()"  action="@routes.UserController.saveUserProfile()" method="post">
               <div class="well">
                   <div class="form-group">
-                        <label for="username" class="col-sm-4 control-label"> 
+                        <label for="username" class="col-sm-4 control-label">
                               Username
                         </label>
                         <div class="col-sm-3">
@@ -31,7 +52,7 @@
                       </div>
                   </div>
                   <div class="form-group">
-                        <label for="firstName" class="col-sm-4 control-label"> 
+                        <label for="firstName" class="col-sm-4 control-label">
                               ชื่อ
                         </label>
                         <div class="col-sm-3">
@@ -42,7 +63,7 @@
                         </div>
                   </div>
                   <div class="form-group">
-                      <label for="lastName" class="col-sm-4 control-label"> 
+                      <label for="lastName" class="col-sm-4 control-label">
                               นามสกุล
                         </label>
                         <div class="col-sm-3">
@@ -53,7 +74,7 @@
                         </div>
                   </div>
                   <div class="form-group">
-                       <label for="gender" class="col-sm-4 control-label"> 
+                       <label for="gender" class="col-sm-4 control-label">
                               เพศ
                         </label>
                         <div class="col-sm-3">
@@ -74,16 +95,16 @@
                         </div>
                   </div>
                   <div class="form-group">
-                       <label for="birthDate" class="col-sm-4 control-label"> 
-                              วัน-เดือน-ปี เกิด 
+                       <label for="birthDate" class="col-sm-4 control-label">
+                              วัน-เดือน-ปี เกิด
                         </label>
                         <div class="col-sm-3">
                           <div class="input-group date" id="birthdate-picker">
-                              <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="birthDate" id="birthInputBox" 
+                              <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" id="birthInputBoxShow"
                               @if(user.birthDate != null){
                                 value="@user.birthDate.format("dd/MM/yyyy")"
                               } placeholder="dd/mm/yyyy" disabled>
-
+                              <input type="text" name="birthDate" id="birthInputBox" hidden>
                               <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                           </div>
                         </div>
@@ -94,8 +115,8 @@
                         </script>
                   </div>
                   <div class="form-group">
-                       <label for="eMail" class="col-sm-4 control-label"> 
-                              e-mail 
+                       <label for="eMail" class="col-sm-4 control-label">
+                              e-mail
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="emailInput" autocomplete="off" name="eMail" value="@user.eMail">
@@ -105,8 +126,8 @@
                         </div>
                   </div>
                   <div class="form-group">
-                       <label for="section" class="col-sm-4 control-label"> 
-                              เซคชั่น 
+                       <label for="section" class="col-sm-4 control-label">
+                              เซคชั่น
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" onkeypress='validateSemester(event)' autocomplete="off" name="section" id="sectionInput"value="@user.section" disabled>
@@ -116,7 +137,7 @@
                         </div>
                   </div>
                   <div class="form-group">
-                       <label for="semester" class="col-sm-4 control-label"> 
+                       <label for="semester" class="col-sm-4 control-label">
                               ภาคเรียน / ปีการศึกษา
                         </label>
                         <div class="col-sm-1">
@@ -131,7 +152,7 @@
                         </div>
                   </div>
                   <div class="form-group">
-                       <label for="year" class="col-sm-4 control-label"> 
+                       <label for="year" class="col-sm-4 control-label">
                               ชั้นปี
                         </label>
                         <div class="col-sm-1">
@@ -144,8 +165,8 @@
 
 
                   <div class="form-group">
-                       <label for="department" class="col-sm-4 control-label"> 
-                              ภาควิชา 
+                       <label for="department" class="col-sm-4 control-label">
+                              ภาควิชา
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="departmentInput" autocomplete="off" name="department" value="@user.department" disabled>
@@ -157,8 +178,8 @@
 
 
                   <div class="form-group">
-                       <label for="faculty" class="col-sm-4 control-label"> 
-                              คณะ 
+                       <label for="faculty" class="col-sm-4 control-label">
+                              คณะ
                         </label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="facultyInput" autocomplete="off" name="faculty" value="@user.faculty" disabled>
@@ -174,9 +195,9 @@
                   <button id="submit-button" type="submit" class="btn btn-success btn-lg" >Submit</button>
                   </div>
                   </div>
-            
+
           </div>
           </form>
 	</div>
-  
+
 @footer()
