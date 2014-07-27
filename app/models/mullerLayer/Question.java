@@ -30,6 +30,13 @@ public class Question extends Model{
 
     public static Question generateQuestion() {
         Question question = new Question();
+        shuffleLine(question);
+
+        question.save();
+        return question;
+    }
+
+    public static void shuffleLine(Question question){
         List<LineType> lines = new ArrayList<LineType>();
         for(LineType line : LineType.values()){
             lines.add(line);
@@ -40,8 +47,5 @@ public class Question extends Model{
         question.line3 = lines.get(2);
         question.line4 = lines.get(3);
         question.line5 = lines.get(4);
-
-        question.save();
-        return question;
     }
 }

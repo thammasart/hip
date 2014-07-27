@@ -45,6 +45,7 @@ public class ExperimentSchedule extends Model{
     public List<models.magicNumber7.Trial> magic7trials = new ArrayList<models.magicNumber7.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    @JsonBackReference("muller-trial")
     public List<models.mullerLayer.Trial> mullertrials = new ArrayList<models.mullerLayer.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)

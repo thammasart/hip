@@ -146,4 +146,24 @@ public class MullerLayer extends Controller {
 
         return ok(result);
     }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result saveAdmin() {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            json = request().body().asJson();
+            result.put("message", "success");
+            result.put("status", "ok");
+            result.put("trial", json);
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
 }

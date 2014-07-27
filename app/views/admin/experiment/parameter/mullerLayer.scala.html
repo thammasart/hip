@@ -12,6 +12,7 @@
 
         <div class="container" ng-controller="MullerLayerCtrl" ng-init="init(@exp.id)">
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
+            <button class="btn btn-primary" ng-click="openSummary()">ภาพรวม <span class="glyphicon glyphicon-eye-open"></span></button><button class="btn btn-success" ng-click="save()">SAVE</button>
             <div ng-hide="inProcess" ng-repeat="trial in trials">
                 <h3>Trial {{$index + 1}}</h3>
                 <div class="well">
@@ -35,13 +36,13 @@
 
                                     </td>
                                     <td><span>{{quiz.differLength * 38 | number:0}}px</span></td>
-                                    <td><input type="radio" ng-model="difference" value="+" /> + / <input type="radio" ng-model="difference" value="-" /> -</td>
+                                    <td><input type="radio" ng-model="quiz.isPositive" ng-value="true"  /> + / <input type="radio" ng-model="quiz.isPositive" ng-value="false"  /> -</td>
                                     <td>
                                         <select style="width:110px;margin:auto;" class="form-control" ng-model="quiz.lengthType" ng-options="value for value in lengthTypes">
                                         </select>
                                     </td>
                                     <td>
-                                        <select style="width:60px;margin:auto;" class="form-control" ng-model="quiz.noOfChoice" ng-options="value for value in noOfChoices">
+                                        <select style="width:60px;margin:auto;" class="form-control" ng-model="quiz.noOfChoice" ng-options="value for value in noOfChoices" ng-change="calculateDifferChoice(quiz)">
                                         </select>
                                     </td>
                                     <td><button ng-click="open(quiz)"><span class="glyphicon glyphicon-info-sign"></span></button></td>
@@ -58,6 +59,44 @@
                         <div class="visualArea" style="width:800px;height:400px;visibility: visible;margin-left:0;left:0;top:0">
                             <canvas id="arrowPreview" width="800" height="400"></canvas>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary pull-left" ng-click="shuffle()">shuffle</button>
+                        <button class="btn btn-primary" ng-click="ok()">Confirm</button>
+                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                    </div>
+                </script>
+                 <script type="text/ng-template" id="summary.html">
+                    <div class="modal-header" >
+                        <h3 class="modal-title">ภาพรวม</h3>
+                    </div>
+                    <div class="modal-body" style="width:800px;min-height:400px;margin:auto;">
+                        <table class="table text-center table-bordered">
+                         <thead>
+                            <tr>
+                                <th>Trial</th>
+                                <th>no.</th>
+                                <th>line1</th>
+                                <th>line2</th>
+                                <th>line3</th>
+                                <th>line4</th>
+                                <th>line5</th>
+                            </tr>
+                         </thead>
+                         <tbody ng-repeat="trial in trials">
+                            <tr ng-repeat="quiz in trial.quizzes">
+                                <td>{{trial.id}}</td>
+                                <td>{{$index + 1}}</td>
+                                <td ng-class="calculateBackground(quiz.question.line1, true)">{{quiz.question.line1}}</td>
+                                <td ng-class="calculateBackground(quiz.question.line2, true)">{{quiz.question.line2}}</td>
+                                <td ng-class="calculateBackground(quiz.question.line3, true)">{{quiz.question.line3}}</td>
+                                <td ng-class="calculateBackground(quiz.question.line4, quiz.noOfChoice > 3)">
+                                    {{quiz.noOfChoice > 3 ? quiz.question.line4 : ''}}</td>
+                                <td ng-class="calculateBackground(quiz.question.line5, quiz.noOfChoice > 4)">
+                                    {{quiz.noOfChoice > 4 ? quiz.question.line5 : ''}}</td>
+                            </tr>
+                         </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" ng-click="ok()">Confirm</button>

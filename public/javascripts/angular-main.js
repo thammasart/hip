@@ -255,7 +255,6 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
         $scope.noOfChoices = [3,4,5];
         $scope.lengthTypes = ['SHORT', 'MEDIUM','LONG'];
-        $scope.difference = '+';
 
         $scope.init = function(expId){
             $scope.inProcess = true;
@@ -282,7 +281,72 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
             });
         };
+
+        $scope.openSummary = function(){
+            var modalInstance = $modal.open({
+                templateUrl: 'summary.html',
+                controller: MullerSummaryInstanceCtrl,
+                size: 'lg',
+                resolve: {
+                    trials : function(){
+                        return $scope.trials;
+                    }
+                }
+
+            });
+        };
+
+        $scope.save = function(){
+            for(var i=0; i < $scope.trials.length; i++){
+                $scope.inProcess = true;
+                $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials[i]}).success(function(result){
+                $scope.inProcess = false;
+                console.log(result);
+            }).error(function(result){
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+            }
+        }
+
+        $scope.calculateDifferChoice = function(quiz){
+            if(quiz.differChoice > quiz.noOfChoice)
+                quiz.differChoice = Math.floor((Math.random() * quiz.noOfChoice) + 1);
+
+        }
     });
+
+var MullerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
+
+    $scope.trials = trials;
+
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss();
+    };
+
+    $scope.calculateBackground = function(type, show){
+
+        if(!show)
+            return ''
+
+        if(type == 'NONE')
+            return 'active'
+        if(type == 'LEFT')
+            return 'success'
+        if(type == 'RIGHT')
+            return 'info'
+        if(type == 'IN')
+            return 'warning'
+        if(type == 'OUT')
+            return 'danger'
+
+        return '';
+    }
+}
 
 var MullerModalInstanceCtrl = function($scope, $modalInstance, quiz){
 
@@ -306,28 +370,73 @@ var MullerModalInstanceCtrl = function($scope, $modalInstance, quiz){
         var y = 30;
 
         var question = quiz.question;
-        drawLine(calculateStartX(1, x), y, calculateDifferenceLength(1,length), question.line1);
+        drawLine(calculateStartX(1, x), y, calculateDifferenceLength(1,length), question.line1, 1);
         y += 70;
-        drawLine(calculateStartX(2, x), y, calculateDifferenceLength(2,length), question.line2);
+        drawLine(calculateStartX(2, x), y, calculateDifferenceLength(2,length), question.line2, 2);
         y += 70;
-        drawLine(calculateStartX(3, x), y, calculateDifferenceLength(3,length), question.line3);
+        drawLine(calculateStartX(3, x), y, calculateDifferenceLength(3,length), question.line3, 3);
         y += 70;
-        if(quiz.noOfChoices > 3) {
-            drawLine(calculateStartX(4, x), y, calculateDifferenceLength(4,length), question.line4);
+        if(quiz.noOfChoice > 3) {
+            drawLine(calculateStartX(4, x), y, calculateDifferenceLength(4,length), question.line4, 4);
             y += 70;
         }
-        if(quiz.noOfChoices > 4) {
-            drawLine(calculateStartX(5, x), y, calculateDifferenceLength(5,length), question.line5);
+        if(quiz.noOfChoice > 4) {
+            drawLine(calculateStartX(5, x), y, calculateDifferenceLength(5,length), question.line5, 5);
         }
 
 
+    }
+
+    $scope.shuffle = function(){
+        var question = quiz.question;
+        var array = [question.line1, question.line2, question.line3,
+                    question.line4, question.line5];
+        array = shuffle(array);
+        question.line1 = array[0];
+        question.line2 = array[1];
+        question.line3 = array[2];
+        question.line4 = array[3];
+        question.line5 = array[4];
+
+        quiz.differChoice = Math.floor((Math.random() * quiz.noOfChoice) + 1);
+
+        canvas.width = canvas.width;
+        $scope.init();
+    }
+
+    function shuffle(array) {
+      var currentIndex = array.length
+        , temporaryValue
+        , randomIndex
+        ;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
     }
 
     function calculateDifferenceLength(no, length){
-        return no == quiz.differChoice ? length - Math.floor((quiz.differLength * 38)) : length;
+        if(!quiz.isPositive)
+            return no == quiz.differChoice ? length - Math.floor((quiz.differLength * 38)) : length;
+        else
+            return no == quiz.differChoice ? length + Math.floor((quiz.differLength * 38)) : length;
     }
     function calculateStartX(no, x){
-        return no == quiz.differChoice ? x + Math.floor((quiz.differLength * 38 / 2)) : x;
+        if(!quiz.isPositive)
+            return no == quiz.differChoice ? x + Math.floor((quiz.differLength * 38 / 2)) : x;
+        else
+            return no == quiz.differChoice ? x - Math.floor((quiz.differLength * 38 / 2)) : x;
     }
 
     function calculateLength(quiz){
@@ -341,7 +450,7 @@ var MullerModalInstanceCtrl = function($scope, $modalInstance, quiz){
         return 300;
     }
 
-    function drawLine(x, y, length, type){
+    function drawLine(x, y, length, type, choice){
         var context = canvas.getContext("2d");
         context.beginPath();
         context.moveTo(x, y);
@@ -349,6 +458,9 @@ var MullerModalInstanceCtrl = function($scope, $modalInstance, quiz){
         context.lineTo(x + length, y);
         drawRightArrow(x + length, y, type, context);
         context.closePath();
+        var color = choice == quiz.differChoice ? 'blue' : 'black';
+        context.strokeStyle = color;
+        context.lineWidth=2;
         context.stroke();
     }
 
