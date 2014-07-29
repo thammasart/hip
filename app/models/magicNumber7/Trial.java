@@ -1,6 +1,8 @@
 package models.magicNumber7;
 
 import models.ExperimentSchedule;
+import models.TimeLog;
+
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -12,6 +14,9 @@ import java.util.ArrayList;
 public class Trial extends Model{
 	@Id
 	public long id;
+    public double totalScore = 0;
+    public double totalUsedTime = 0;
+    public int totalUser = 0;
     public QuestionType questionType;
     @ManyToOne
     public ExperimentSchedule schedule;
@@ -24,6 +29,19 @@ public class Trial extends Model{
     	this.schedule = schedule;
     }
 
+    public void updateResult(){
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+        for(Quiz q:quizzes){
+            for(Answer ans: q.answers){
+                this.totalScore += ans.score;
+            } 
+            this.totalScore = this.totalScore/q.length;
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+        }
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+    }
+    
     public static Trial create(ExperimentSchedule schedule, QuestionType questionType){
     	Trial newTrial = new Trial(schedule);
     	newTrial.questionType = questionType;

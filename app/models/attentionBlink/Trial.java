@@ -1,5 +1,7 @@
 package models.attentionBlink;
+
 import models.ExperimentSchedule;
+import models.TimeLog;
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -16,6 +18,9 @@ public class Trial extends Model{
 	public long id;
     public QuestionType questionType = QuestionType.ENGLISH;
     public int numberOfQuiz = 3;
+    public int totalUser = 0;
+    public double totalScore = 0;
+    public double totalUsedTime = 0;
 
     @ManyToOne
     @JsonManagedReference
@@ -31,6 +36,16 @@ public class Trial extends Model{
 	public Trial(QuestionType questionType) {
             this.questionType = questionType;
 	}
+
+    public void updateResult(){
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+        for(Quiz q:quizzes){
+            this.totalScore += Answer.calculateTotalScore(q.answers);
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+        }
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+    }
 
     public static Trial create(ExperimentSchedule ex){
         Trial trial = new Trial();

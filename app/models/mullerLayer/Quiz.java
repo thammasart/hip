@@ -16,8 +16,9 @@ public class Quiz extends Model{
     public int differChoice;
     public LengthType lengthType;
     public float differLength;
+    public boolean isPositive = false;
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference("trial")
     public Trial trial;
     @ManyToOne
     @JsonManagedReference

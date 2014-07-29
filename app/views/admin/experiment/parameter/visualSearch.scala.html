@@ -22,6 +22,9 @@
                                 <h4>Frame Size</h4>
                                 <select class="form-control" style="margin-bottom:15px" ng-model="trial.quiz.frameSize" ng-options="value for value in frameSizes">
                                 </select>
+                                <h4>Target</h4>
+                                <select class="form-control" style="margin-bottom:15px" ng-model="trial.quiz.target" ng-options="value for value in targets" ng-change="changeTargetValue(trial)" >
+                                </select>
                                 <p>Width: {{width(trial)}}</p>
                                 <p>Height: {{height(trial)}}</p>
                                 <p>Max Noise: {{max(trial)}}</p>
@@ -34,7 +37,8 @@
                                     <div class="row">
                                         <label class="control-label col-md-4">Red Square</label>
                                         <div class="col-md-3" style="margin-top:6px">
-                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareRed" >
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareRed" 
+                                            ng-disabled="trial.quiz.target=='SQAURE_RED'">
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +46,8 @@
                                     <div class="row">
                                         <label class="control-label col-md-4">Blue Square</label>
                                         <div class="col-md-3" style="margin-top:6px">
-                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareBlue" >
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareBlue" 
+                                            ng-disabled="trial.quiz.target=='SQAURE_BLUE'">
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +55,8 @@
                                     <div class="row">
                                         <label class="control-label col-md-4">Green Square</label>
                                         <div class="col-md-3" style="margin-top:6px">
-                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareGreen" >
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareGreen" 
+                                            ng-disabled="trial.quiz.target=='SQAURE_GREEN'">
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +64,8 @@
                                     <div class="row">
                                         <label class="control-label col-md-4">Red Circle</label>
                                         <div class="col-md-3" style="margin-top:6px">
-                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleRed" >
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleRed" 
+                                            ng-disabled="trial.quiz.target=='CIRCLE_RED'">
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +73,17 @@
                                     <div class="row">
                                         <label class="control-label col-md-4" >Green Circle</label>
                                         <div class="col-md-3" style="margin-top:6px">
-                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleGreen" >
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleGreen" 
+                                            ng-disabled="trial.quiz.target=='CIRCLE_GREEN'">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-md-4" >Blue Circle</label>
+                                        <div class="col-md-3" style="margin-top:6px">
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleBlue" 
+                                            ng-disabled="trial.quiz.target=='CIRCLE_BLUE'">
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +135,7 @@
                         <div class="col-md-3 col-sm-4">
                             <button ng-disabled="max(trial) < totalNoise(trial)" class="btn btn-success" ng-click="open(trial)" style="width: 100%;margin-bottom:10px">แสดงผล</button>
                             <br />
-                            <button ng-disabled="" class="btn btn-primary" ng-click="save()" style="width: 100%;margin-bottom:20px">บันทึกข้อมูล</button>
+                            <button ng-disabled="" class="btn btn-primary" ng-click="save(trial)" style="width: 100%;margin-bottom:20px">บันทึกข้อมูล</button>
                             <br />
                             <p class="text-danger" ng-show="trial.quiz.question.sharps == null">Trial นี้ยังไม่ได้ทำการ generate noise</p>
                         </div>

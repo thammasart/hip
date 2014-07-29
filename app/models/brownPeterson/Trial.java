@@ -1,6 +1,8 @@
 package models.brownPeterson;
 
 import models.*;
+import models.TimeLog;
+
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -15,6 +17,9 @@ public class Trial extends Model {
 	public static final String NON_SENSE = "nonsense";
 	public static final String ENGLISH = "english";
 	public static final String THAI = "thai";
+	public double totalScore = 0;
+    public double totalUsedTime = 0;
+    public int totalUser = 0;
 
 	@Id
 	public long id;
@@ -46,6 +51,16 @@ public class Trial extends Model {
 	public static List<Trial> findInvolving(ExperimentSchedule ex){
 		return find.where().eq("schedule", ex).findList();
 	}
+
+	public void updateResult(){
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+        for(Quiz q:quizzes){
+            this.totalScore += Answer.calculateTotalScore(q.answers);
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+        }
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+    }
 
 	public int calculateAverageScore(){
 		int totalScore = 0;

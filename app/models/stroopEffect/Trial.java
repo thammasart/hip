@@ -3,6 +3,8 @@ package models.stroopEffect;
 import play.db.ebean.Model;
 import javax.persistence.*;
 
+import models.TimeLog;
+
 import models.ExperimentSchedule;
 
 import java.util.List;
@@ -17,6 +19,9 @@ public class Trial extends Model{
     public long appearTime = 0L;
     @Column(nullable=true, length=20)
     public QuestionType questionType = QuestionType.ENGLISH;
+    public double totalScore = 0;
+    public double totalUsedTime = 0;
+    public int totalUser = 0;
 
     public static final int TOTAL_QUESTION = 3;
 
@@ -40,6 +45,16 @@ public class Trial extends Model{
         this.questionType = type;
     }
 
+    public void updateResult(){
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+        for(Quiz q:quizzes){
+            this.totalScore += Answer.calculateTotalScore(q.answers);
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+        }
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+    }
+    
     public static Trial findById(long id){
         return find.byId(new Long(id));
     }

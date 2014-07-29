@@ -62,9 +62,13 @@ public class UserController extends Controller {
         User user = User.find.byId(session().get("username"));
         if (User.authenticate(user.username,requestData.get("oldPassword")) != null){
             if (requestData.get("newPassword").equals(requestData.get("confirmPassword"))){
-                user.password = requestData.get("newPassword");
-                user.update();
-                flash("success","Change password complete!!!");
+                if (!requestData.get("newPassword").trim().isEmpty()){
+                    user.password = requestData.get("newPassword");
+                    user.update();
+                    flash("success","Change password complete!!!");
+                }else{
+                    flash("error","Empty Password");
+                }
             }
             else
                 flash("error","Confirm password is not match.");

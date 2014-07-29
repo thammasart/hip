@@ -48,7 +48,17 @@ public class User extends Model{
 	}
 
 	public static User authenticate(String username, String password) {
-		return find.where().eq("username", username).eq("password", password).findUnique();
+        User user = find.where().eq("username", username).eq("password", password).findUnique();
+		if(user == null){
+            return null;
+        }
+        else if(user.status == UserRole.DELETED){
+            return null;
+        }
+        else if(!username.equals(user.username) || !password.equals(user.password)){
+            return null;
+        }
+        return user;
 	}
 
     public int getAge(){

@@ -20,6 +20,9 @@ public class Application extends Controller {
 
 
 	public static Result index() {
+        if(session().toString() != "{}"){
+            return redirect(routes.Application.home());
+        }
         return ok(index.render(Form.form(UserForm.class)));
     }
 

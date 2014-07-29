@@ -1,5 +1,7 @@
 package models.changeBlindness;
 
+import models.TimeLog;
+
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
 import javax.persistence.*;
@@ -15,9 +17,22 @@ public class Trial extends Model{
     public ExperimentSchedule schedule;
     @OneToMany(cascade=CascadeType.REMOVE)
     public List<Quiz> quizzes = new ArrayList<Quiz>();
+    public double totalScore = 0;
+    public double totalUsedTime = 0;
+    public int totalUser = 0;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
+    }
+
+    public void updateResult(){
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+        for(Quiz q:quizzes){
+            this.totalScore += Answer.calculateTotalScore(q.answers);
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+        }
+        this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
     }
 
     public static List<Trial> findInvolving(ExperimentSchedule ex){

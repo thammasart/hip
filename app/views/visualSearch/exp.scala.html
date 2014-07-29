@@ -29,20 +29,16 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
      ng-init="init(@trial.id)">
     <div class="expCenterWord">
         <div class="inst" id="word"></div>
-        <div class = "circleEx" id="circleEx" ></div>
+        <div ng-class="{'boxEx':target.sharp == 'square', 'circleEx' : target.sharp == 'circle'}" id="circleEx" 
+        style="border-color:{{colorToString(target.color)}}"></div>
     </div>
     <form action="@routes.VisualSearch.saveAnswer(trial.id,questionNo)" method="post" >
 
         <div class="visualArea" style="left:@left;top:@top;width:@width;height:@height;" id="visualArea">
-
-
-
-        <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
-        name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" onclick="shapeClick(this)"></button>
-
-
-            <button class="circle" name = "target" style="left:{{trial.quiz.positionXofTarget}}%;top:{{trial.quiz.positionYofTarget}}%;border-color:#57BAC9" onclick="shapeClick(this)"></button>
-
+            <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
+            name = "noise" style="left:{{sharp.left}}%;top:{{sharp.top}}%;border-color:{{colorToString(sharp.color)}}" onclick="shapeClick(this)"></button>
+            <button ng-class="{'box':target.sharp == 'square', 'circle' : target.sharp == 'circle'}" name = "target" style="left:{{target.left}}%;top:{{target.top}}%;border-color:{{colorToString(target.color)}}"
+            onclick="shapeClick(this)"></button>
         </div>
         <input id="usedTime" name="usedTime" hidden/>
         <input id="positionX" name="positionX" hidden/>

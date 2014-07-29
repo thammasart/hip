@@ -46,6 +46,7 @@ public class ExperimentSchedule extends Model{
     public List<models.magicNumber7.Trial> magic7trials = new ArrayList<models.magicNumber7.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    @JsonBackReference("muller-trial")
     public List<models.mullerLayer.Trial> mullertrials = new ArrayList<models.mullerLayer.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
@@ -63,7 +64,12 @@ public class ExperimentSchedule extends Model{
 	@OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
 	public List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
 
+    @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    @JsonBackReference("visualSearch-trial")
+    public List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
+
     @OneToMany(mappedBy="exp", cascade=CascadeType.ALL)
+    @JsonBackReference("timelog")
     public List<TimeLog> timelog = new ArrayList<TimeLog>();
 
 

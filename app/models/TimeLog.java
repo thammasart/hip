@@ -3,6 +3,7 @@ package models;
 import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class TimeLog extends Model{
@@ -16,6 +17,7 @@ public class TimeLog extends Model{
 	public long trialId;
 
 	@ManyToOne
+	@JsonManagedReference("timelog")
 	public ExperimentSchedule exp;
 
 	public TimeLog(Date startTime){
@@ -35,6 +37,10 @@ public class TimeLog extends Model{
 		timeLog.endTime = null;
 		timeLog.exp = exp;
 		return timeLog;
+	}
+
+	public static int calaulateTotalUserTakeExp(ExperimentSchedule exps ,long trialId ){
+		return TimeLog.find.where().eq("exp",exps).eq("trialId",trialId).findList().size();
 	}
 
 	public static boolean isRepeatTrial(User user, long trialId, ExperimentSchedule exp){
