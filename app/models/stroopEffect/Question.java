@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 import play.db.ebean.Model.Finder;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table (name="stroop_engword_question")
@@ -27,6 +28,7 @@ public class Question extends Model{
     public QuestionType questionType = QuestionType.ENGLISH;
 
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonBackReference
     public List<Quiz> quizzes;
 
     public Question(){

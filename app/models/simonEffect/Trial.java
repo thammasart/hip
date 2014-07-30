@@ -1,6 +1,8 @@
 package models.simonEffect;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import models.ExperimentSchedule;
 import models.TimeLog;
 
@@ -24,9 +26,12 @@ public class Trial extends Model{
     public int totalUser = 0;
     public double totalUsedTime = 0;
 
-	@ManyToOne
+    @ManyToOne
+    @JsonManagedReference
     public ExperimentSchedule schedule;
+
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonManagedReference
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Trial(ExperimentSchedule schedule, QuestionType questionType, double blinkTime){

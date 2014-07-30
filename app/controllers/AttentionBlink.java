@@ -82,6 +82,7 @@ public class AttentionBlink extends Controller {
         }
         User user = User.find.byId(username);
         Trial trial = Trial.find.byId(trialId);
+        trial.updateResult();
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);

@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table (name="stroop_quiz")
 public class Quiz extends Model{
@@ -16,10 +19,13 @@ public class Quiz extends Model{
     public long id;
 
     @ManyToOne
+    @JsonBackReference
     public Trial trial;
     @ManyToOne
+    @JsonManagedReference
     public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonBackReference
     public List<Answer> answers = new ArrayList<Answer>();
 
     public static Quiz create(Trial trial,Question question){

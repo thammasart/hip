@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name = "simon_effect_quiz")
@@ -16,9 +18,11 @@ public class Quiz extends Model{
 	public long id;
 	public String position;
 
-	@ManyToOne
+    @ManyToOne
+    @JsonBackReference
     public Trial trial;
     @ManyToOne
+    @JsonManagedReference
     public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
     public List<Answer> answers = new ArrayList<Answer>();

@@ -70,15 +70,33 @@ public class Application extends Controller {
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
                     return ok(result);
-                }else  
+                }
+                else  
                 if(expType.equals("/simonEffect")){
                     exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.SIMONEFFECT).findList();
                     List<models.simonEffect.Trial> trialList = new ArrayList<models.simonEffect.Trial>();
                     for(ExperimentSchedule exp:exps){
                         trialList.addAll(exp.simontrials);
                     }
-                    return ok(trialList.size()+"");
-            }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/stroopEffect")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.STROOPEFFECT).findList();
+                    List<models.stroopEffect.Trial> trialList = new ArrayList<models.stroopEffect.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(exp.stroopTrials);
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
         }catch (JsonProcessingException e) {
             result.put("message", e.getMessage());
             result.put("status", "error1");
@@ -92,7 +110,6 @@ public class Application extends Controller {
         return ok(result);
     }
     
-
     public static Result logout() {
         session().clear();
         flash("success", "You've been logged out");

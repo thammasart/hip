@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table (name="stroop_answer")
 public class Answer extends Model{
@@ -21,6 +23,7 @@ public class Answer extends Model{
     @ManyToOne
     public User user;
     @ManyToOne
+    @JsonManagedReference
     public Quiz quiz;
 
     public Answer(String answer,double usedTime){

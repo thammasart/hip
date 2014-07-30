@@ -1,14 +1,3 @@
-var expType;
- function getExpType() { 
-    return expType;
- } 
- function overlayTrial() { 
-    document.getElementById("overLay").style.visibility = "visible";  
- } 
- function closeOverlay() { 
-    document.getElementById("overLay").style.visibility = "hidden";  
- } 
-
  function setGraphScore(gNumber,score,maxScore,time) { 
     if(gNumber==1){ 
         document.getElementById("sBeam1").style.height = (score/maxScore)*100+"%";
@@ -41,14 +30,11 @@ var expType;
         document.getElementById("line6").innerHTML = max+"sec";
  } 
  function selectExperiment(expName) { 
-    expType = expName;
+    var expType = expName;
     document.getElementById("expName").innerHTML = expName +' <span class="caret"></span>';
-    document.getElementById("overlayHeader").innerHTML = expName;
-    
-    for (var i=0;i<document.getElementsByName('gearButton').length;i++){
-        document.getElementsByName('gearButton')[i].disabled=false;
-        document.getElementsByName('gearButton')[i].style.backgroundColor = "white";
-    }
+    document.getElementById("expNameHeader").innerHTML = expName;
+    //document.getElementById("overlayHeader1").innerHTML = expName;
+
         if(expName=="Attentional Blink"){ 
             document.getElementById("tab1").style.display = "block";
             document.getElementById("tab2").style.display = "block";

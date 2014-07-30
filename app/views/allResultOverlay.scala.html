@@ -4,8 +4,8 @@
     <div class="overlay" id="overLay" ng-init="init()">
         <div class="box" >
            <div class = "OverlayExpName" >
-               <div id="overlayHeader"> Experiment Name [demo] </div>
-            <button onclick="closeOverlay()" class="trialTag glyphicon glyphicon-remove closeX"></button>
+               <div id="overlayHeader1"> Experiment Name [demo] </div>
+            <button ng-click="ok()" class="trialTag glyphicon glyphicon-remove closeX"></button>
            </div>  
             <div>
                 <ul class="nav nav-tabs">
@@ -56,7 +56,7 @@
                                     <td>{{trial.schedule.expireDate}}</td>
                                     <td>{{trial.schedule.name}}</td>
                                     <td>{{trial.id}}</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
+                                    <td><button class="btn btn-success btn-xs" ng-click="sel()">select</button></td>
                                 </tr>
                             </tbody>
                         </table>
