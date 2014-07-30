@@ -137,7 +137,7 @@ public class VisualSearch extends Controller{
         if(questionNo < quizzes.size()){
             return redirect(routes.VisualSearch.experiment(trialId, questionNo));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.VisualSearch.report(user.username, trialId));

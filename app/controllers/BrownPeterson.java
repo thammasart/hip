@@ -97,7 +97,7 @@ public class BrownPeterson extends Controller {
         for(Answer ans : answers){
             ans.save();
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         answers = new ArrayList<Answer>();
