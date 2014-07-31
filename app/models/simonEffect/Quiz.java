@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name = "simon_effect_quiz")
@@ -22,7 +21,7 @@ public class Quiz extends Model{
     @JsonBackReference
     public Trial trial;
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
     public List<Answer> answers = new ArrayList<Answer>();

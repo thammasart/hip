@@ -23,7 +23,7 @@ public class Trial extends Model{
     public double totalUsedTime = 0;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonManagedReference("attentionBlinkBackRef")
     public ExperimentSchedule schedule;
 
     @OneToMany(cascade=CascadeType.REMOVE)

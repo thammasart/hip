@@ -60,7 +60,7 @@ public class Answer extends Model{
 
 	public static List<Answer> findInvolving(ExperimentSchedule exp){
 		List<Answer> answers = new ArrayList<Answer>();
-		for(Trial trial : exp.trials){
+		for(Trial trial : exp.browntrials){
 			for(Quiz quiz : trial.quizzes){
 				answers.addAll(quiz.answers);
 			}

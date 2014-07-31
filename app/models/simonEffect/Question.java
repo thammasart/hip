@@ -21,7 +21,7 @@ public class Question extends Model{
     public String color;
     public char alphabet;
     public String direction;
-    @OneToMany(cascade=CascadeType.REMOVE)
+    @OneToMany(cascade=CascadeType.REMOVE,mappedBy="question")
     @JsonManagedReference
     public List<Quiz> quizzes;
 
