@@ -303,7 +303,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         function save(index){
             if(index < $scope.trials.length){
                 $scope.inProcess = true;
-                $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials[index].quizzes[0]})
+                $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
                     console.log(result);

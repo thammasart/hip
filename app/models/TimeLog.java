@@ -17,7 +17,6 @@ public class TimeLog extends Model{
 	public long trialId;
 
 	@ManyToOne
-	@JsonManagedReference("timelog")
 	public ExperimentSchedule exp;
 
 	public TimeLog(Date startTime){

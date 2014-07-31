@@ -21,7 +21,6 @@ public class Trial extends Model{
     public int totalUser = 0;
 
     @ManyToOne
-    @JsonManagedReference("muller-trial")
     public ExperimentSchedule schedule;
     @OneToMany(mappedBy = "trial",cascade=CascadeType.REMOVE)
     @JsonManagedReference("trial")

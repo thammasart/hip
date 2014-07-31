@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -153,12 +154,34 @@ public class MullerLayer extends Controller {
         JsonNode json;
         try {
             json = request().body().asJson();
-            ObjectMapper mapper = new ObjectMapper();
             String jsonString = Json.stringify(json);
-            Quiz quiz = mapper.readValue(jsonString, Quiz.class);
+            ObjectMapper mapper = new ObjectMapper();
+            List<Trial> trials = mapper.readValue(jsonString, new TypeReference<List<Trial>>(){});
+            for(Trial trial : trials){
+                for(Quiz go : trial.quizzes){
+                    Quiz quiz = Quiz.find.byId(go.id);
+                    quiz.differChoice = go.differChoice;
+                    quiz.differLength = go.differLength;
+                    quiz.isPositive = go.isPositive;
+                    quiz.lengthType = go.lengthType;
+                    quiz.noOfChoice = go.noOfChoice;
+                    Question question = Question.find.byId(go.question.id);
+                    question.line1 = go.question.line1;
+                    question.line2 = go.question.line2;
+                    question.line3 = go.question.line3;
+                    question.line4 = go.question.line4;
+                    question.line5 = go.question.line5;
+                    question.update();
+                    quiz.update();
+                }
+            }
+
+
             result.put("message", "success");
             result.put("status", "ok");
-            result.put("trial", json);
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
         }catch(RuntimeException e){
             result.put("message", e.getMessage());
             result.put("status", "error");
