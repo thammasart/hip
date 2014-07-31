@@ -297,16 +297,25 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         };
 
         $scope.save = function(){
-            for(var i=0; i < $scope.trials.length; i++){
+            save(0);
+        }
+
+        function save(index){
+            if(index < $scope.trials.length){
                 $scope.inProcess = true;
-                $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials[i]}).success(function(result){
-                $scope.inProcess = false;
-                console.log(result);
-            }).error(function(result){
-                console.log('error:' + result);
-                $scope.inProcess = false;
-            });
+                $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials[index].quizzes[0]})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                    index++;
+                    save(index);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                    return;
+                });
             }
+            return;
         }
 
         $scope.calculateDifferChoice = function(quiz){

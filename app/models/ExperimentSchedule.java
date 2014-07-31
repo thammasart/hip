@@ -64,8 +64,7 @@ public class ExperimentSchedule extends Model{
 	public List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("visualSearch-trial")
-    public List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
+    private List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
 
     @OneToMany(mappedBy="exp", cascade=CascadeType.ALL)
     @JsonBackReference("timelog")

@@ -29,7 +29,6 @@ public class Trial extends Model{
     @Id
     public long id;
     @ManyToOne
-    @JsonManagedReference(value="visualSearch-trial")
     public ExperimentSchedule schedule;
     @OneToOne(mappedBy = "trial",cascade = CascadeType.ALL)
     @JsonManagedReference(value="trial")
@@ -43,8 +42,9 @@ public class Trial extends Model{
     }
 
     public void updateResult(){
-        this.totalScore = Answer.calculateTotalScore(quiz.answers);
-        this.totalUsedTime = Answer.calculateTotalUsedTime(quiz.answers);
+        List<Answer> answers = Answer.find.where().eq("quiz", quiz).findList();
+        this.totalScore = Answer.calculateTotalScore(answers);
+        this.totalUsedTime = Answer.calculateTotalUsedTime(answers);
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
     }
 

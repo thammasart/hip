@@ -5,6 +5,8 @@ import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table (name="muller_layer_answer")
@@ -16,7 +18,7 @@ public class Answer extends Model{
     public boolean isCorrect;
     @ManyToOne
     public User user;
-    @ManyToOne 
+    @ManyToOne
     public Quiz quiz;
 
     public Answer(User user, Quiz quiz){

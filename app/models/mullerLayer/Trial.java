@@ -36,8 +36,9 @@ public class Trial extends Model{
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
-            this.totalScore += Answer.calculateTotalScore(q.answers);
-            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+            List<Answer> answers = Answer.find.where().eq("quiz", q).findList();
+            this.totalScore += Answer.calculateTotalScore(answers);
+            this.totalUsedTime += Answer.calculateTotalUsedTime(answers);
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
     }

@@ -21,10 +21,9 @@ public class Quiz extends Model{
     @JsonBackReference("trial")
     public Trial trial;
     @ManyToOne
-    @JsonManagedReference
     public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
-    public List<Answer> answers = new ArrayList<Answer>();
+    private List<Answer> answers = new ArrayList<Answer>();
 
     public Quiz(Trial trial, Question question){
     	this.trial = trial;

@@ -153,6 +153,9 @@ public class MullerLayer extends Controller {
         JsonNode json;
         try {
             json = request().body().asJson();
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonString = Json.stringify(json);
+            Quiz quiz = mapper.readValue(jsonString, Quiz.class);
             result.put("message", "success");
             result.put("status", "ok");
             result.put("trial", json);

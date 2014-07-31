@@ -19,7 +19,6 @@ public class Answer extends Model{
     @ManyToOne
     public User user;
     @ManyToOne
-    @JsonManagedReference("answers")
     public Quiz quiz;
 
     public Answer(User user, Quiz quiz){

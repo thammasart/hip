@@ -20,8 +20,7 @@ public class Question extends Model{
     public LineType line4;
     public LineType line5;
     @OneToMany(mappedBy = "question")
-    @JsonBackReference
-    public List<Quiz> quizzes = new ArrayList<Quiz>();
+    private List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(){}
 
