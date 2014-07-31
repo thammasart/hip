@@ -4,15 +4,12 @@
     <div class="overlay" id="overLay" ng-init="init()">
         <div class="box" >
            <div class = "OverlayExpName" >
-               <div id="overlayHeader1"> Experiment Name [demo] </div>
+               <div > {{title}} </div>
             <button ng-click="ok()" class="trialTag glyphicon glyphicon-remove closeX"></button>
            </div>  
             <div>
                 <ul class="nav nav-tabs">
-                  <li class="active"><a id="tab1"href="#0" data-toggle="tab"></a></li>
-                  <li class=""><a id="tab2" href="#1" data-toggle="tab"></a></li>
-                  <li class=""><a id="tab3" href="#2" data-toggle="tab"></a></li>
-                  <li class=""><a id="tab4" href="#3" data-toggle="tab"></a></li>
+                  <li ng-repeat="questionType in questionTypes"  class=""><a href="#{{$index}}" data-toggle="tab">{{questionType}}</a></li>
                 </ul>
 
                 <!-- Tab panes -->

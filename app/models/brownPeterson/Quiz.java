@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table (name="brown_peterson_quiz")
 public class Quiz extends Model{
@@ -17,12 +19,15 @@ public class Quiz extends Model{
 	public int flashTime =5;
 
 	@ManyToOne
+        @JsonBackReference
 	public Trial trial;
 
 	@ManyToOne
+        @JsonBackReference
 	public Question question;
 
 	@OneToMany(mappedBy="quiz",cascade=CascadeType.REMOVE)
+        @JsonBackReference
 	public List<Answer> answers = new ArrayList<Answer>();
 
 	public static final int DEFAULT_FLASHTIME = 5;

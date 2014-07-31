@@ -30,56 +30,43 @@ public class ExperimentSchedule extends Model{
 	public ExperimentType experimentType;
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("attentionBlinkBackRef")
-    public List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
+    private List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("brownPetersonBackRef")
-    public List<models.brownPeterson.Trial> browntrials = new ArrayList<models.brownPeterson.Trial>();
+    private List<models.brownPeterson.Trial> browntrials = new ArrayList<models.brownPeterson.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("changeBlindnessBackRef")
-    public List<models.changeBlindness.Trial> changeBlindnesstrials = new ArrayList<models.changeBlindness.Trial>();
+    private List<models.changeBlindness.Trial> changeBlindnesstrials = new ArrayList<models.changeBlindness.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("garnerInterferenceBackRef")
-    public List<models.garnerInterference.Trial> garnertrials = new ArrayList<models.garnerInterference.Trial>();
+    private List<models.garnerInterference.Trial> garnertrials = new ArrayList<models.garnerInterference.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("magicNumber7BackRef")
-    public List<models.magicNumber7.Trial> magic7trials = new ArrayList<models.magicNumber7.Trial>();
+    private List<models.magicNumber7.Trial> magic7trials = new ArrayList<models.magicNumber7.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("muller-trial")
-    public List<models.mullerLayer.Trial> mullertrials = new ArrayList<models.mullerLayer.Trial>();
+    private List<models.mullerLayer.Trial> mullertrials = new ArrayList<models.mullerLayer.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("positionErrorBackRef")
-    public List<models.positionError.Trial> positionErrortrials = new ArrayList<models.positionError.Trial>();
+    private List<models.positionError.Trial> positionErrortrials = new ArrayList<models.positionError.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("signalDetectionBackRef")
-    public List<models.signalDetection.Trial> signaltrials = new ArrayList<models.signalDetection.Trial>();
-
-    @JsonBackReference("simonEffectBackRef")
-    @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.simonEffect.Trial> simontrials = new ArrayList<models.simonEffect.Trial>();
+    private List<models.signalDetection.Trial> signaltrials = new ArrayList<models.signalDetection.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("sternbergSearchBackRef")
-    public List<models.sternbergSearch.Trial> sternbergSearchtrials = new ArrayList<models.sternbergSearch.Trial>();
+    private List<models.simonEffect.Trial> simontrials = new ArrayList<models.simonEffect.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("stroopEffectBackRef")
-    public List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
+    private List<models.sternbergSearch.Trial> sternbergSearchtrials = new ArrayList<models.sternbergSearch.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    @JsonBackReference("visualSearch-trial")
-    public List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
+    private List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
+
+    @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    private List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
 
     @OneToMany(mappedBy="exp", cascade=CascadeType.ALL)
-    @JsonBackReference("timelog")
-    public List<TimeLog> timelog = new ArrayList<TimeLog>();
+    private List<TimeLog> timelog = new ArrayList<TimeLog>();
 
 
 	public ExperimentSchedule(String name, int noOfTrial, Date startDate, Date expireDate, ExperimentType experimentType) {
