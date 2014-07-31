@@ -83,7 +83,7 @@ public class PositionError extends Controller{
         if(questionNo < 3){
             return redirect(routes.PositionError.experiment(trialId, questionNo));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.PositionError.report(user.username, trialId));

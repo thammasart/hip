@@ -106,7 +106,7 @@ public class SimonEffect extends Controller {
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.SimonEffect.doExperiment(trialId, questionNo));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.SimonEffect.report(user.username, trialId));

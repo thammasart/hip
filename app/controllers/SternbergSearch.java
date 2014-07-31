@@ -91,7 +91,7 @@ public class SternbergSearch extends Controller{
         if(questionNo < trial.oneCharIsCorrect + trial.oneCharIsInCorrect + trial.twoCharIsCorrect + trial.twoCharIsInCorrect){
             return redirect(routes.SternbergSearch.experiment(trialId, questionNo, true));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.SternbergSearch.report(user.username, trialId));

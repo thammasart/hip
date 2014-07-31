@@ -95,7 +95,7 @@ public class ChangeBlindness extends Controller{
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.ChangeBlindness.doExperiment(trialId, questionNo));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.ChangeBlindness.report(user.username, trialId));
