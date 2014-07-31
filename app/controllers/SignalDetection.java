@@ -92,7 +92,7 @@ public class SignalDetection extends Controller{
         if(questionNo < Trial.TOTAL_QUESTION){
             return redirect(routes.SignalDetection.experiment(trialId, questionNo));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.SignalDetection.report(user.username, trialId));

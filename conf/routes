@@ -16,6 +16,7 @@ GET         /back-form-trial                                        controllers.
 
 
 GET         /result                                                 controllers.Application.showResult()
+GET         /findExperiment                                  controllers.Application.findExpResult(exp_type : String) 
 
 GET         /muller-layer                                           controllers.MullerLayer.info()
 GET         /muller-layer/info                                      controllers.MullerLayer.infoIframe()
@@ -182,6 +183,8 @@ GET         /admin/experiment/init                                  controllers.
 POST        /admin/experiment/saveVisualSearch                      controllers.RequestController.saveVisualSearch(trialId : Long , circleGreen : Integer, circleRed : Integer, circleBlue: Integer,squareBlue : Integer, squareRed : Integer, squareGreen: Integer, positionXofTarget : Double, positionYofTarget:Double, frameSize : String, target : String)
 GET         /admin/experiment/mullerInit                            controllers.MullerLayer.initial(expId: Long)
 PUT 		/admin/experiment/saveMullerTrial 						controllers.MullerLayer.saveAdmin()
+
+GET     /admin/experiment/init      controllers.RequestController.init(exp_id : Long)
 
 # Map Bootstrap images
 GET         /assets/fonts/glyphicons-halflings-regular.woff         controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.woff")

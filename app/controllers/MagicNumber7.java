@@ -83,7 +83,7 @@ public class MagicNumber7 extends Controller{
         if(questionNo < trial.numberOfQuiz){
             return redirect(routes.MagicNumber7.experiment(trialId, questionNo));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.MagicNumber7.report(user.username, trialId));

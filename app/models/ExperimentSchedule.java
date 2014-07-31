@@ -30,10 +30,11 @@ public class ExperimentSchedule extends Model{
 	public ExperimentType experimentType;
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    @JsonBackReference
     public List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
 
-	@OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-	public List<models.brownPeterson.Trial> trials = new ArrayList<models.brownPeterson.Trial>();
+    @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    public List<models.brownPeterson.Trial> trials = new ArrayList<models.brownPeterson.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
     public List<models.changeBlindness.Trial> changeBlindnesstrials = new ArrayList<models.changeBlindness.Trial>();
@@ -53,14 +54,16 @@ public class ExperimentSchedule extends Model{
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
     public List<models.signalDetection.Trial> signaltrials = new ArrayList<models.signalDetection.Trial>();
 
+    @JsonBackReference
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
     public List<models.simonEffect.Trial> simontrials = new ArrayList<models.simonEffect.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
     public List<models.sternbergSearch.Trial> sternbergSearchtrials = new ArrayList<models.sternbergSearch.Trial>();
 
-	@OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-	public List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
+    @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
+    @JsonBackReference
+    public List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
     private List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();

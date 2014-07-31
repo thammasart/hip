@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table (name = "attention_blink_answer")
@@ -20,6 +21,7 @@ public class Answer extends Model{
         @ManyToOne
         public User user;
         @ManyToOne 
+        @JsonBackReference
         public Quiz quiz;
 
 	public Answer(boolean answer,double usedTime) {

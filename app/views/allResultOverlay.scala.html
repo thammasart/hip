@@ -1,10 +1,11 @@
 @(user :User)
 <!--                     overlay                 --!>
-    <div class="overlay" id="overLay">
+<script type="text/ng-template" id="preview.html" >
+    <div class="overlay" id="overLay" ng-init="init()">
         <div class="box" >
            <div class = "OverlayExpName" >
-               <div id="overlayHeader"> Experiment Name [demo] </div>
-            <button onclick="closeOverlay()" class="trialTag glyphicon glyphicon-remove closeX"></button>
+               <div id="overlayHeader1"> Experiment Name [demo] </div>
+            <button ng-click="ok()" class="trialTag glyphicon glyphicon-remove closeX"></button>
            </div>  
             <div>
                 <ul class="nav nav-tabs">
@@ -49,16 +50,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                        @for((trial,index) <- models.simonEffect.Trial.findAllTrial(2).zipWithIndex){
-                                <tr>
-                                    <td>@{index+1}</td>
-                                    <td>@trial.schedule.startDate</td>
-                                    <td>@trial.schedule.expireDate</td>
-                                    <td>@trial.schedule.name</td>
-                                    <td>@trial.id</td>
-                                    <td><button class="btn btn-success btn-xs">select</button></td>
+                                <tr ng-repeat="trial in trials">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{trial.schedule.startDate | date :"yyyy-MM-dd"}}</td>
+                                    <td>{{trial.schedule.expireDate}}</td>
+                                    <td>{{trial.schedule.name}}</td>
+                                    <td>{{trial.id}}</td>
+                                    <td><button class="btn btn-success btn-xs" ng-click="sel()">select</button></td>
                                 </tr>
-                }
                             </tbody>
                         </table>
 
@@ -91,3 +90,4 @@
                 </script>
             </div>
         </div>  
+</script>

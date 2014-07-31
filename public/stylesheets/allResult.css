@@ -83,7 +83,7 @@
 .panelSize{
     width:48%;
     margin-right:2%;
-    height:40%;
+    height:45%;
     margin-top:1%;
     float:left;
     
@@ -143,7 +143,6 @@
     background:rgba(100,100,100,0.8);
     width:100%;
     height:inherit;
-    visibility:hidden;
 }
 .box{
     background:#fff;

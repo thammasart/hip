@@ -68,7 +68,7 @@ public class AttentionBlink extends Controller {
         if(questionNo < trial.numberOfQuiz){
             return redirect(routes.AttentionBlink.experiment(trialId, questionNo));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.AttentionBlink.report(user.username, trialId));
@@ -82,6 +82,7 @@ public class AttentionBlink extends Controller {
         }
         User user = User.find.byId(username);
         Trial trial = Trial.find.byId(trialId);
+        trial.updateResult();
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);

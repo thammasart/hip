@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table (name = "attention_blink_trial")
 public class Trial extends Model{
@@ -21,9 +23,11 @@ public class Trial extends Model{
     public double totalUsedTime = 0;
 
     @ManyToOne
+    @JsonManagedReference
     public ExperimentSchedule schedule;
 
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonManagedReference
     public List<Quiz> quizzes = new ArrayList<Quiz>();
         
     //Constructor

@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import play.db.ebean.Model.Finder;
 
@@ -21,6 +22,7 @@ public class Question extends Model{
     public char alphabet;
     public String direction;
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonManagedReference
     public List<Quiz> quizzes;
 
     public Question(String color,char alphabet , String direction) {

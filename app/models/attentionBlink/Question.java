@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.List;
 import play.db.ebean.Model.Finder;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table (name = "attention_blink_question")
@@ -25,6 +26,7 @@ public class Question extends Model{
     public QuestionType questionType;
 
     @OneToOne(mappedBy="question",cascade=CascadeType.REMOVE)
+    @JsonBackReference
     public Quiz quiz;
 
 	public Question(String letter, String set, boolean correctAnswer, QuestionType questionType) {

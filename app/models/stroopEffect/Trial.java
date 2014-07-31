@@ -10,6 +10,8 @@ import models.ExperimentSchedule;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table (name="stroop_trial")
 public class Trial extends Model{
@@ -26,10 +28,12 @@ public class Trial extends Model{
     public static final int TOTAL_QUESTION = 3;
 
     @ManyToOne
+    @JsonManagedReference
     public ExperimentSchedule schedule;
 //    @OneToMany
 //    public List<TimeLog> timeLogs = new ArrayList<TimeLog>();
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonManagedReference
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public static Trial create(ExperimentSchedule experimentSchedule){

@@ -100,7 +100,7 @@ public class MullerLayer extends Controller {
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.MullerLayer.experiment(trialId, questionNo));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId);
+        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         return redirect(routes.MullerLayer.report(user.username, trialId));
