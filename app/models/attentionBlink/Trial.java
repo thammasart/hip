@@ -23,7 +23,6 @@ public class Trial extends Model{
     public double totalUsedTime = 0;
 
     @ManyToOne
-    @JsonManagedReference
     public ExperimentSchedule schedule;
 
     @OneToMany(cascade=CascadeType.REMOVE)

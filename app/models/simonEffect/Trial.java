@@ -87,9 +87,4 @@ public class Trial extends Model{
             quiz.save();
         }
     }
-
-    public String getTrialJson(){
-        JsonNode json = Json.toJson(this);
-        return Json.stringify(json);
-    }
 }

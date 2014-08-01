@@ -63,12 +63,17 @@ public class Application extends Controller {
                     exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.ATTENTIONBLINK).findList();
                     List<models.attentionBlink.Trial> trialList = new ArrayList<models.attentionBlink.Trial>();
                     for(ExperimentSchedule exp:exps){
-                        trialList.addAll(exp.attentionTrials);
+                        trialList.addAll(models.attentionBlink.Trial.findInvolving(exp));
                     }
                     ObjectMapper mapper = new ObjectMapper();
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    models.attentionBlink.QuestionType[] questionTypes = models.attentionBlink.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  
@@ -76,7 +81,7 @@ public class Application extends Controller {
                     exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.SIMONEFFECT).findList();
                     List<models.simonEffect.Trial> trialList = new ArrayList<models.simonEffect.Trial>();
                     for(ExperimentSchedule exp:exps){
-                        trialList.addAll(exp.simontrials);
+                        trialList.addAll(models.simonEffect.Trial.findInvolving(exp));
                     }
                     ObjectMapper mapper = new ObjectMapper();
                     String jsonArray = mapper.writeValueAsString(trialList);
@@ -89,7 +94,137 @@ public class Application extends Controller {
                     exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.STROOPEFFECT).findList();
                     List<models.stroopEffect.Trial> trialList = new ArrayList<models.stroopEffect.Trial>();
                     for(ExperimentSchedule exp:exps){
-                        trialList.addAll(exp.stroopTrials);
+                        trialList.addAll(models.stroopEffect.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/visualSearch")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.VISUALSEARCH).findList();
+                    List<models.visualSearch.Trial> trialList = new ArrayList<models.visualSearch.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.visualSearch.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/brownPeterson")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.BROWNPETERSON).findList();
+                    List<models.brownPeterson.Trial> trialList = new ArrayList<models.brownPeterson.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.brownPeterson.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/magicNumber7")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.MAGICNUMBER7).findList();
+                    List<models.magicNumber7.Trial> trialList = new ArrayList<models.magicNumber7.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.magicNumber7.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/positionError")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.POSITIONERROR).findList();
+                    List<models.positionError.Trial> trialList = new ArrayList<models.positionError.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.positionError.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/sternbergSearchExhaustive")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.STERNBERGSEARCH).findList();
+                    List<models.sternbergSearch.Trial> trialList = new ArrayList<models.sternbergSearch.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.sternbergSearch.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/sternbergSearchParallel")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.STERNBERGSEARCH).findList();
+                    List<models.sternbergSearch.Trial> trialList = new ArrayList<models.sternbergSearch.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.sternbergSearch.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/changeBlindness")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.CHANGEBLINDNESS).findList();
+                    List<models.changeBlindness.Trial> trialList = new ArrayList<models.changeBlindness.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.changeBlindness.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/garnerInterference")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.GARNERINTERFERENCE).findList();
+                    List<models.garnerInterference.Trial> trialList = new ArrayList<models.garnerInterference.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.garnerInterference.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/mullerLayer")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.MULLERLAYER).findList();
+                    List<models.mullerLayer.Trial> trialList = new ArrayList<models.mullerLayer.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.mullerLayer.Trial.findInvolving(exp));
+                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonArray = mapper.writeValueAsString(trialList);
+                    json = Json.parse(jsonArray);
+                    result.put("trials",json);
+                    return ok(result);
+                }
+                else  
+                if(expType.equals("/signalDetection")){
+                    exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.SIGNALDETECTION).findList();
+                    List<models.signalDetection.Trial> trialList = new ArrayList<models.signalDetection.Trial>();
+                    for(ExperimentSchedule exp:exps){
+                        trialList.addAll(models.signalDetection.Trial.findInvolving(exp));
                     }
                     ObjectMapper mapper = new ObjectMapper();
                     String jsonArray = mapper.writeValueAsString(trialList);
@@ -101,6 +236,7 @@ public class Application extends Controller {
             result.put("message", e.getMessage());
             result.put("status", "error1");
         }catch(RuntimeException e){
+            e.printStackTrace();
             result.put("message", e.getMessage());
             result.put("status", "error2");
         }catch(Exception e){

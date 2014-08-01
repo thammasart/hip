@@ -4,6 +4,7 @@ import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name="brown_peterson_answer")
@@ -24,6 +25,7 @@ public class Answer extends Model{
 	@ManyToOne
 	public User user;
 	@ManyToOne
+        @JsonManagedReference
 	public Quiz quiz;
 
 	public Answer(String firstWord,String secondWord,String thirdWord,double usedTime,String countdownResult, User user, Quiz quiz){
@@ -60,7 +62,7 @@ public class Answer extends Model{
 
 	public static List<Answer> findInvolving(ExperimentSchedule exp){
 		List<Answer> answers = new ArrayList<Answer>();
-		for(Trial trial : exp.trials){
+		for(Trial trial : models.brownPeterson.Trial.findInvolving(exp)){
 			for(Quiz quiz : trial.quizzes){
 				answers.addAll(quiz.answers);
 			}

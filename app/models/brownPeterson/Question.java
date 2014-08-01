@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table (name="brown_peterson_question")
 public class Question extends Model {
@@ -23,6 +24,7 @@ public class Question extends Model {
 	public String trigramLanguage = Trial.ENGLISH;
 
 	@OneToMany(cascade=CascadeType.REMOVE)
+        @JsonManagedReference
 	public List<Quiz> quizzes = new ArrayList<Quiz>();
 
 	public Question (String firstWord, String secondWord,String thirdWord){
