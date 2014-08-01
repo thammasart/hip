@@ -1,11 +1,18 @@
 package controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.ExperimentSchedule;
 import models.TimeLog;
 import models.User;
 import models.garnerInterference.*;
 
+import models.garnerInterference.Answer;
+import models.garnerInterference.Trial;
 import play.*;
+import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
 
@@ -103,4 +110,30 @@ public class GarnerInterference extends Controller {
     }
 
 
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result initial(long id) {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            ExperimentSchedule exp = ExperimentSchedule.find.byId(id);
+            List<Trial> trials = Trial.findInvolving(exp);
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonArray = mapper.writeValueAsString(trials);
+            json = Json.parse(jsonArray);
+            result.put("message", "success");
+            result.put("status", "ok");
+            result.put("trials", json);
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
 }

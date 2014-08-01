@@ -64,6 +64,12 @@
     colorDark: *color2
     colorLight: *color3
     feature: ONEFEATURE
+    noOfColorQuestion: 1
+    noOfFakeColorQuestion: 1
+    noOfSizeQuestion: 1
+    noOfFakeSizeQuestion: 1
+    noOfBiDimensionQuestion: 1
+    noOfFakeBiDimentsionQuestion: 1
     schedule: *ex19
 - &round40 !!models.garnerInterference.Trial
     lengthBigSquare: 5
@@ -72,6 +78,12 @@
     colorDark: *color4
     colorLight: *color5
     feature: TWOFEATURE
+    noOfColorQuestion: 1
+    noOfFakeColorQuestion: 1
+    noOfSizeQuestion: 1
+    noOfFakeSizeQuestion: 1
+    noOfBiDimensionQuestion: 1
+    noOfFakeBiDimentsionQuestion: 1
     schedule: *ex19
 - &round41 !!models.garnerInterference.Trial
     lengthBigSquare: 10
@@ -80,6 +92,12 @@
     colorDark: *color6
     colorLight: *color7
     feature: ONEFEATURE
+    noOfColorQuestion: 1
+    noOfFakeColorQuestion: 1
+    noOfSizeQuestion: 1
+    noOfFakeSizeQuestion: 1
+    noOfBiDimensionQuestion: 1
+    noOfFakeBiDimentsionQuestion: 1
     schedule: *ex19
 - &round42 !!models.garnerInterference.Trial
     lengthBigSquare: 10
@@ -88,6 +106,12 @@
     colorDark: *color8
     colorLight: *color9
     feature: TWOFEATURE
+    noOfColorQuestion: 1
+    noOfFakeColorQuestion: 1
+    noOfSizeQuestion: 1
+    noOfFakeSizeQuestion: 1
+    noOfBiDimensionQuestion: 1
+    noOfFakeBiDimentsionQuestion: 1
     schedule: *ex20
 - &round43 !!models.garnerInterference.Trial
     lengthBigSquare: 10
@@ -96,6 +120,12 @@
     colorDark: *color10
     colorLight: *color11
     feature: ONEFEATURE
+    noOfColorQuestion: 1
+    noOfFakeColorQuestion: 1
+    noOfSizeQuestion: 1
+    noOfFakeSizeQuestion: 1
+    noOfBiDimensionQuestion: 1
+    noOfFakeBiDimentsionQuestion: 1
     schedule: *ex20
 - &round44 !!models.garnerInterference.Trial
     lengthBigSquare: 5
@@ -104,6 +134,12 @@
     colorDark: *color3
     colorLight: *color1
     feature: TWOFEATURE
+    noOfColorQuestion: 1
+    noOfFakeColorQuestion: 1
+    noOfSizeQuestion: 1
+    noOfFakeSizeQuestion: 1
+    noOfBiDimensionQuestion: 1
+    noOfFakeBiDimentsionQuestion: 1
     schedule: *ex20
 #Question
 - &Question67 !!models.garnerInterference.Question
