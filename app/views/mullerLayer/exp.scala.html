@@ -38,23 +38,17 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
         <div class="mainContainer" style="margin-top: 50px" align="center" id="mc" ng-app="MullerLayerApp" ng-controller="MullerLayerController" ng-init="init(@trial.id, @questionNo)">
             <form id="answerForm"  action="@routes.MullerLayer.saveAnswer(trial.id,questionNo)" method="post">
-                <div class="visualArea" style="width:800px;height:400px;margin-left:0;left:0;top:0">
+                <div class="visualArea" style="width:1200px;height:400px;margin-left:0;left:0;top:0;position: relative">
                     <canvas id="arrowPreview" width="800" height="400"></canvas>
+                    <button type="submit" class="btn btn-success"  onclick="return done(1)" style="position: absolute;top:10px" >เลือก</button>
+                    <button type="submit" class="btn btn-success"  onclick="return done(2)" style="position: absolute;top:80px" >เลือก</button>
+                    <button type="submit" class="btn btn-success"  onclick="return done(3)" style="position: absolute;top:150px" >เลือก</button>
+                    <button ng-if="quiz.noOfChoice > 3" type="submit" class="btn btn-success"  onclick="return done(4)" style="position: absolute;top:210px" >เลือก</button>
+                    <button ng-if="quiz.noOfChoice > 4" type="submit" class="btn btn-success"  onclick="return done(5)" style="position: absolute;top:280px" >เลือก</button>
                 </div>
-                <div class="row center-block" style="width:100%">
-                    <div class="col-md-2" ng-class="calculateOffset()">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 1" onclick="return done()"  >เส้นที่ 1</button></div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 2" onclick="return done()" >เส้นที่ 2</button></div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 3" onclick="return done()" >เส้นที่ 3</button></div>
-                    <div ng-if="quiz.noOfChoice > 3" class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 4" onclick="return done()" >เส้นที่ 4</button></div>
-                    <div ng-if="quiz.noOfChoice > 4" class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 5" onclick="return done()" >เส้นที่ 5</button></div>
-                </div>
+
                 <input id="usedTime" name="usedTime" hidden/>
-                <input name="choice" value="{{choice}}" hidden />
+                <input id="choice" name="choice"  hidden />
             </form>
         </div>
     </div>

@@ -36,10 +36,11 @@ function showQuestion(){
     document.getElementById("ic").style.visibility = "visible";  
 }
 
-function done(){
+function done(choice){
     d = new Date();
     expDuration = (d.getTime()-expDuration)/1000;
     document.getElementById("usedTime").value = expDuration;
+    document.getElementById("choice").value = choice;
 }
 function doneDemo(name){
     d = new Date();
