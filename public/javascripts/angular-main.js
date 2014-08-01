@@ -323,14 +323,14 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 quiz.differChoice = Math.floor((Math.random() * quiz.noOfChoice) + 1);
 
         }
-    }).controller('GardnerController', function($scope, $http, $modal){
+    }).controller('GarnerController', function($scope, $http, $modal){
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
         $scope.inProcess = false;
         $scope.trials = [];
 
         $scope.init = function(expId){
             $scope.inProcess = true;
-            $http({method:'GET',url:'gardnerInit',params:{expId:expId}}).success(function(result){
+            $http({method:'GET',url:'garnerInit',params:{expId:expId}}).success(function(result){
                 $scope.trials = result.trials;
                 $scope.inProcess = false;
                 console.log($scope.trials);
