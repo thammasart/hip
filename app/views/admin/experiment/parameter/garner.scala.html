@@ -50,8 +50,8 @@
                             <div class="row">
                                 <select class="form-control" style="width:100px; display:inline" ng-model="trial.color" ng-options="color for color in colors">
                                 </select>
-                                <span style="margin: 0px 5px 0px 20px">สีเข้ม </span> <button class="btn btn-primary"><span class="glyphicon glyphicon-adjust"></span></button>
-                                <span style="margin: 0px 5px 0px 20px">สีอ่อน </span> <button class="btn btn-info"><span class="glyphicon glyphicon-adjust"></span></button>
+                                <span style="margin: 0px 5px 0px 20px">สีเข้ม </span> <button class="btn" style="background-color: #{{trial.colorDark.colorCode}}"><span class="glyphicon glyphicon-adjust"></span></button>
+                                <span style="margin: 0px 5px 0px 20px">สีอ่อน </span> <button class="btn" style="background-color: #{{trial.colorLight.colorCode}}"><span class="glyphicon glyphicon-adjust"></span></button>
                             </div>
                         </div>
                     </div>
