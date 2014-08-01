@@ -82,19 +82,22 @@ public class MullerLayer extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result saveAnswer(long trialId, int questionNo){
-        System.out.println("in save Answer");
         Form<Answer> boundForm = answerForm.bindFromRequest();
         User user = User.find.byId(session().get("username"));
         Trial trial = Trial.find.byId(trialId);
 
+        DynamicForm boundRequest = Form.form().bindFromRequest("choice");
+        int choice = Integer.parseInt(boundRequest.data().get("choice"));
+
         if(boundForm.hasErrors()){
-            System.out.println("bad request");
-            System.out.println(boundForm.errors().toString());
             flash("error", "please correct the form above.");
             return badRequest(views.html.home.render(user));
         }
 
         Answer answer = boundForm.get();
+        if(trial.quizzes.get(questionNo).differChoice == choice){
+            answer.isCorrect = true;
+        }
         answer.user = user;
         answer.quiz = trial.quizzes.get(questionNo);
         answer.save();
@@ -158,6 +161,7 @@ public class MullerLayer extends Controller {
         try {
             Trial trial = Trial.find.byId(trialId);
             Quiz quiz = trial.quizzes.get(questionNo);
+            quiz.differChoice = 0;
             json = Json.toJson(quiz);
             result.put("message", "success");
             result.put("status", "ok");

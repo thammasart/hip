@@ -28,33 +28,33 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
           <!-- Dashed line-->
           <div class="titleLine"></div>
     </div>
-    <div class="expMainWindow" style="height:507px;">
+    <div style="margin:0px 0px 20px 0px">
 
-    <div class="expCenterWord">
-        <p id="word"> </p>
-    </div>
+        <div class="expCenterWord">
+            <p id="word"> </p>
+        </div>
 
-        <div align="center"id="ic"  style="padding-top:12px; visibility:hidden;" > <h3> คลิกเส้นที่มีความยาวต่างจากเส้นอื่น  </h3> </div>
+        <div align="center"id="ic"  style="visibility:hidden;" > <h3> เลือกเส้นที่มีความยาวต่างจากเส้นอื่น  </h3> </div>
 
-        <div class="mainContainer" align="center" id="mc" ng-app="MullerLayerApp" ng-controller="MullerLayerController" ng-init="init(@trial.id, @questionNo)">
+        <div class="mainContainer" style="margin-top: 50px" align="center" id="mc" ng-app="MullerLayerApp" ng-controller="MullerLayerController" ng-init="init(@trial.id, @questionNo)">
             <form id="answerForm"  action="@routes.MullerLayer.saveAnswer(trial.id,questionNo)" method="post">
                 <div class="visualArea" style="width:800px;height:400px;margin-left:0;left:0;top:0">
                     <canvas id="arrowPreview" width="800" height="400"></canvas>
                 </div>
                 <div class="row center-block" style="width:100%">
                     <div class="col-md-2" ng-class="calculateOffset()">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 1)" onclick="return done()"  >line 1</button></div>
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 1" onclick="return done()"  >เส้นที่ 1</button></div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 2)" onclick="return done()" >line 2</button></div>
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 2" onclick="return done()" >เส้นที่ 2</button></div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 3)" onclick="return done()" >line 3</button></div>
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 3" onclick="return done()" >เส้นที่ 3</button></div>
                     <div ng-if="quiz.noOfChoice > 3" class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 4)" onclick="return done()" >line 4</button></div>
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 4" onclick="return done()" >เส้นที่ 4</button></div>
                     <div ng-if="quiz.noOfChoice > 4" class="col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 5)" onclick="return done()" >line 5</button></div>
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="choice = 5" onclick="return done()" >เส้นที่ 5</button></div>
                 </div>
                 <input id="usedTime" name="usedTime" hidden/>
-                <input id="isCorrect" name="isCorrect" type="checkbox" ng-checked="correct" hidden/>
+                <input name="choice" value="{{choice}}" hidden />
             </form>
         </div>
     </div>
