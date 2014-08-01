@@ -324,9 +324,11 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
         }
     }).controller('GarnerController', function($scope, $http, $modal){
-        $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
+        $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
         $scope.trials = [];
+
+        $scope.colors = ['red', 'blue', 'yellow', 'green', 'grey'];
 
         $scope.init = function(expId){
             $scope.inProcess = true;

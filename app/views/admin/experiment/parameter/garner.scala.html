@@ -12,8 +12,8 @@
 
         <div class="container" ng-controller="GarnerController" ng-init="init(@exp.id)">
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
-            <div ng-hide="inProcess">
-                <h3>Trial 1</h3>
+            <div ng-hide="inProcess" ng-repeat="trial in trials">
+                <h3>Trial {{$index + 1}}</h3>
                 <div class="well">
                     <div class="row">
                         <div class="col-md-6">
@@ -21,38 +21,34 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>สี</th>
-                                        <th>ขนาด</th>
-                                        <th>Bi-Dimension</th>
+                                        <th class="text-left">สี</th>
+                                        <th class="text-left">ขนาด</th>
+                                        <th class="text-left">Bi-Dimension</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>จำนวนข้อจริง</td>
-                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" value="0" ></td>
-                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" value="0" ></td>
-                                        <td><input style="width:50%" class="form-control" type="number" min="0" max="5" value="0" ></td>
+                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfColorQuestion" ></td>
+                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfSizeQuestion" ></td>
+                                        <td><input style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfBiDimensionQuestion" ></td>
                                     </tr>
                                     <tr>
                                         <td>จำนวนข้อลวง</td>
-                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" value="0" ></td>
-                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" value="0" ></td>
-                                        <td><input style="width:50%" class="form-control" type="number" min="0" max="5" value="0" ></td>
+                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeColorQuestion" ></td>
+                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeSizeQuestion" ></td>
+                                        <td><input style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeBiDimentsionQuestion" ></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="col-md-6">
                             <div class="row" style="margin-bottom: 10px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดเล็ก </span>
-                                <input style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" value="5.0" > cm</div>
+                                <input style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" ng-model="trial.lengthSmallSquare" > cm</div>
                             <div class="row" style="margin-bottom: 20px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดใหญ่ </span>
-                                <input style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" value="5.5" > cm</div>
+                                <input style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" ng-model="trial.lengthBigSquare" > cm</div>
                             <div class="row">
-                                <select class="form-control" style="width:100px; display:inline">
-                                    <option>Red</option>
-                                    <option>Green</option>
-                                    <option>Blue</option>
-                                    <option>Gray</option>
+                                <select class="form-control" style="width:100px; display:inline" ng-model="trial.color" ng-options="color for color in colors">
                                 </select>
                                 <span style="margin: 0px 5px 0px 20px">สีเข้ม </span> <button class="btn btn-primary"><span class="glyphicon glyphicon-adjust"></span></button>
                                 <span style="margin: 0px 5px 0px 20px">สีอ่อน </span> <button class="btn btn-info"><span class="glyphicon glyphicon-adjust"></span></button>
