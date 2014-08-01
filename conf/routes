@@ -16,7 +16,7 @@ GET         /back-form-trial                                        controllers.
 
 
 GET         /result                                                 controllers.Application.showResult()
-GET         /findExperiment                                  controllers.Application.findExpResult(exp_type : String) 
+GET         /findExperiment                                         controllers.Application.findExpResult(exp_type : String)
 
 GET         /muller-layer                                           controllers.MullerLayer.info()
 GET         /muller-layer/info                                      controllers.MullerLayer.infoIframe()
@@ -27,6 +27,7 @@ POST        /muller-layer/reportDemo                                controllers.
 GET         /muller-layer/experiment                                controllers.MullerLayer.experiment(trialId:Long,questionNo:Int)
 POST        /muller-layer/experiment/save                           controllers.MullerLayer.saveAnswer(trialId:Long, questionNo:Int)
 GET         /muller-layer/report                                    controllers.MullerLayer.report(username:String ?="", trial_id:Long ?=0)
+GET         /muller-layer/findQuestion                              controllers.MullerLayer.findQuestion(trialId: Long, questionNo: Int)
 
 GET         /brown-peterson                                         controllers.BrownPeterson.info()
 GET         /brown-peterson/info                                    controllers.BrownPeterson.infoIframe()
@@ -182,20 +183,20 @@ GET         /initial/BrownPeterson                                  controllers.
 GET         /admin/experiment/init                                  controllers.RequestController.init(exp_id : Long)
 POST        /admin/experiment/saveVisualSearch                      controllers.RequestController.saveVisualSearch(trialId : Long , circleGreen : Integer, circleRed : Integer, circleBlue: Integer,squareBlue : Integer, squareRed : Integer, squareGreen: Integer, positionXofTarget : Double, positionYofTarget:Double, frameSize : String, target : String)
 GET         /admin/experiment/mullerInit                            controllers.MullerLayer.initial(expId: Long)
-PUT 		/admin/experiment/saveMullerTrial 						controllers.MullerLayer.saveAdmin()
+PUT         /admin/experiment/saveMullerTrial                       controllers.MullerLayer.saveAdmin()
 
-GET     /admin/experiment/init      controllers.RequestController.init(exp_id : Long)
+GET         /admin/experiment/init                                  controllers.RequestController.init(exp_id : Long)
 
 # Map Bootstrap images
 GET         /assets/fonts/glyphicons-halflings-regular.woff         controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.woff")
 GET         /assets/fonts/glyphicons-halflings-regular.eot          controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.eot")
 GET         /assets/fonts/glyphicons-halflings-regular.ttf          controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.ttf")
 GET         /assets/fonts/glyphicons-halflings-regular.svg          controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.svg")
-GET 	/assets/fonts/lato/lato-regular-webfont.woff				controllers.Assets.at(path="/public", file="/fonts/Lato/lato-regular-webfont.woff")
-GET 	/assets/fonts/lato/lato-bold-webfont.woff				controllers.Assets.at(path="/public", file="/fonts/Lato/lato-regular-webfont.woff")
-GET 	/assets/fonts/lato/lato-bold-webfont.ttf				controllers.Assets.at(path="/public", file="/fonts/Lato/lato-bold-webfont.ttf")
-GET 	/assets/fonts/lato/lato-regular-webfont.ttf				controllers.Assets.at(path="/public", file="/fonts/Lato/lato-regular-webfont.ttf")
-GET 	/assets/fonts/lato/lato-bold-webfont.svg				controllers.Assets.at(path="/public", file="/fonts/Lato/lato-bold-webfont.svg")
-GET 	/assets/fonts/lato/lato-regular-webfont.svg				controllers.Assets.at(path="/public", file="/fonts/Lato/lato-regular-webfont.svg")
+GET         /assets/fonts/lato/lato-regular-webfont.woff            controllers.Assets.at(path="/public", file="/fonts/Lato/lato-regular-webfont.woff")
+GET         /assets/fonts/lato/lato-bold-webfont.woff               controllers.Assets.at(path="/public", file="/fonts/Lato/lato-regular-webfont.woff")
+GET         /assets/fonts/lato/lato-bold-webfont.ttf                controllers.Assets.at(path="/public", file="/fonts/Lato/lato-bold-webfont.ttf")
+GET         /assets/fonts/lato/lato-regular-webfont.ttf             controllers.Assets.at(path="/public", file="/fonts/Lato/lato-regular-webfont.ttf")
+GET         /assets/fonts/lato/lato-bold-webfont.svg                controllers.Assets.at(path="/public", file="/fonts/Lato/lato-bold-webfont.svg")
+GET         /assets/fonts/lato/lato-regular-webfont.svg             controllers.Assets.at(path="/public", file="/fonts/Lato/lato-regular-webfont.svg")
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                                           controllers.Assets.at(path="/public", file)

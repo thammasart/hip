@@ -21,6 +21,8 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <body onload="setUp(@trial.quizzes(questionNo).differLength,@trial.quizzes(questionNo).differChoice)">
 <div class="fixSize">
     <!-- Page Header -->
+    <script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/controllers/mullerLayer.js")"></script>
     <div class="">
           <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
           <!-- Dashed line-->
@@ -34,80 +36,27 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
         <div align="center"id="ic"  style="padding-top:12px; visibility:hidden;" > <h3> คลิกเส้นที่มีความยาวต่างจากเส้นอื่น  </h3> </div>
 
-        <div class="mainContainer" align="center" id="mc">
+        <div class="mainContainer" align="center" id="mc" ng-app="MullerLayerApp" ng-controller="MullerLayerController" ng-init="init(@trial.id, @questionNo)">
             <form id="answerForm"  action="@routes.MullerLayer.saveAnswer(trial.id,questionNo)" method="post">
-                @for((line, index)  <- lineType.zipWithIndex){
-
-                        
-
-
-                    @line match{
-                        case LineType.NONE => {
-                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoice)" id="@index">
-                            <div class="arrowContainer">
-                                <div class="lineArrow" ></div>
-                            </div>
-                        </button >
-                        }
-                        case LineType.OUT =>{
-                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoice)" id="@index">
-                            <div class="arrowContainer">
-                                <div class="mullerArrow arrow-left" href=""></div>
-                                <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-right arrowPos" href="" ></div>
-                            </div>
-                        </button >
-                        }
-                        case LineType.IN=>{
-                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoice)" id="@index" >
-                            <div class="arrowContainer">
-                                <div class="mullerArrow arrow-right" href=""></div>
-                                <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-left arrowPos aps" ></div>
-                            </div>
-                        </button >
-                        }
-                        case LineType.RIGHT=>{
-                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoice)" id="@index">
-                            <div class="arrowContainer">
-                                <div class="mullerArrow arrow-right" href=""></div>
-                                <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-right arrowPos" href="" ></div>
-                            </div>
-                        </button >
-                        }
-                        case LineType.LEFT=>{
-                        <button class="arrowButton" type="submit" onclick="return done(this.id,@trial.quizzes(questionNo).differChoice)" id="@index">
-                            <div class="arrowContainer">
-                                <div class="mullerArrow arrow-left" href=""></div>
-                                <div class="lineArrow" ></div>
-                                <div class="mullerArrow arrow-left arrowPos aps" ></div>
-                            </div>
-                        </button >
-                        }
-                    }
-                }
-                
-                @defining(trial.quizzes(questionNo).lengthType){ lengthTypes =>
-                   @lengthTypes match{
-                        case LengthType.SHORT => {
-                            <div id="lengthType" hidden> 1 </div>
-                        }
-                        case LengthType.MEDIUM =>{
-                            <div id="lengthType" hidden> 2 </div>
-                        }
-                        case LengthType.LONG =>{
-                            <div id="lengthType" hidden> 3 </div>
-                        }
-                    } 
-                }
-                <div id="differentChoice" hidden>  @trial.quizzes(questionNo).differChoice </div>
-                <div id="differentLength" hidden>  @trial.quizzes(questionNo).differLength </div>
-                <input id="score" name="score" hidden/>
+                <div class="visualArea" style="width:800px;height:400px;margin-left:0;left:0;top:0">
+                    <canvas id="arrowPreview" width="800" height="400"></canvas>
+                </div>
+                <div class="row center-block" style="width:100%">
+                    <div class="col-md-2" ng-class="calculateOffset()">
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 1)" onclick="return done()"  >line 1</button></div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 2)" onclick="return done()" >line 2</button></div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 3)" onclick="return done()" >line 3</button></div>
+                    <div ng-if="quiz.noOfChoice > 3" class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 4)" onclick="return done()" >line 4</button></div>
+                    <div ng-if="quiz.noOfChoice > 4" class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="correct = (quiz.differChoice == 5)" onclick="return done()" >line 5</button></div>
+                </div>
                 <input id="usedTime" name="usedTime" hidden/>
-                <input id="isCorrect" name="isCorrect" type="checkbox" hidden/>
-            </div>
-        </form>
+                <input id="isCorrect" name="isCorrect" type="checkbox" ng-checked="correct" hidden/>
+            </form>
+        </div>
     </div>
     @footer()
 </div>

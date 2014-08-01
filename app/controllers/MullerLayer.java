@@ -82,11 +82,14 @@ public class MullerLayer extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result saveAnswer(long trialId, int questionNo){
+        System.out.println("in save Answer");
         Form<Answer> boundForm = answerForm.bindFromRequest();
         User user = User.find.byId(session().get("username"));
         Trial trial = Trial.find.byId(trialId);
 
         if(boundForm.hasErrors()){
+            System.out.println("bad request");
+            System.out.println(boundForm.errors().toString());
             flash("error", "please correct the form above.");
             return badRequest(views.html.home.render(user));
         }
@@ -137,6 +140,28 @@ public class MullerLayer extends Controller {
         }catch (JsonProcessingException e) {
             result.put("message", e.getMessage());
             result.put("status", "error");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result findQuestion(long trialId, int questionNo) {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            Trial trial = Trial.find.byId(trialId);
+            Quiz quiz = trial.quizzes.get(questionNo);
+            json = Json.toJson(quiz);
+            result.put("message", "success");
+            result.put("status", "ok");
+            result.put("quiz", json);
         }catch(RuntimeException e){
             result.put("message", e.getMessage());
             result.put("status", "error");

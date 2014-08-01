@@ -36,16 +36,10 @@ function showQuestion(){
     document.getElementById("ic").style.visibility = "visible";  
 }
 
-function done(id,correctAnswer){
+function done(){
     d = new Date();
     expDuration = (d.getTime()-expDuration)/1000;
     document.getElementById("usedTime").value = expDuration;
-
-    if(id == correctAnswer-1){
-        document.getElementById("isCorrect").checked = true;
-    }else{
-        document.getElementById("isCorrect").checked = false;
-    }
 }
 function doneDemo(name){
     d = new Date();

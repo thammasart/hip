@@ -12,7 +12,14 @@
 
         <div class="container" ng-controller="MullerLayerCtrl" ng-init="init(@exp.id)">
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
-            <button class="btn btn-primary" ng-click="openSummary()">ภาพรวม <span class="glyphicon glyphicon-eye-open"></span></button><button class="btn btn-success" ng-click="save()">SAVE</button>
+            <div class="row">
+                <div class="col-md-2 col-sm-2">
+                    <button class="btn btn-primary" ng-click="openSummary()">ภาพรวม <span class="glyphicon glyphicon-eye-open"></span></button>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <button ng-click="save()" class="btn btn-success btn-save" ng-disabled="parameter.$invalid">+SAVE ALL</button>
+                </div>
+            </div>
             <div ng-hide="inProcess" ng-repeat="trial in trials">
                 <h3>Trial {{$index + 1}}</h3>
                 <div class="well">
