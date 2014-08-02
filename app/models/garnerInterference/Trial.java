@@ -84,7 +84,7 @@ public class Trial extends Model{
         }
 
         trial.lengthBigSquare = new BigDecimal((random.nextDouble() * 5) + 5, new MathContext(2, RoundingMode.DOWN)).doubleValue();
-        trial.lengthSmallSquare = trial.lengthBigSquare - new BigDecimal(random.nextDouble() + 0.5, new MathContext(2, RoundingMode.DOWN)).doubleValue();
+        trial.lengthSmallSquare = trial.lengthBigSquare - new BigDecimal(random.nextDouble() + 0.2, new MathContext(2, RoundingMode.DOWN)).doubleValue();
         trial.noOfBiDimensionQuestion = random.nextInt(3);
         trial.noOfColorQuestion = random.nextInt(3);
         trial.noOfSizeQuestion = random.nextInt(3);

@@ -48,10 +48,27 @@
                             <div class="row" style="margin-bottom: 20px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดใหญ่ </span>
                                 <input style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" ng-model="trial.lengthBigSquare" > cm</div>
                             <div class="row">
-                                <select class="form-control" style="width:100px; display:inline" ng-model="trial.color" ng-options="color for color in colors">
+                                <select class="form-control" style="width:100px; display:inline" ng-model="trial.color" ng-options="color for color in colors" ng-change="generateColor(trial)">
                                 </select>
-                                <span style="margin: 0px 5px 0px 20px">สีเข้ม </span> <button class="btn" style="background-color: #{{trial.colorDark.colorCode}}"><span class="glyphicon glyphicon-adjust"></span></button>
-                                <span style="margin: 0px 5px 0px 20px">สีอ่อน </span> <button class="btn" style="background-color: #{{trial.colorLight.colorCode}}"><span class="glyphicon glyphicon-adjust"></span></button>
+                                <span style="margin: 0px 5px 0px 20px">สีเข้ม </span>
+                                <button class="btn" style="background-color: #{{trial.colorDark.colorCode}}" ng-click="show(trial.color, trial.colorDark, $index, DARK)">
+                                    <span class="glyphicon glyphicon-adjust"></span></button>
+                                <span style="margin: 0px 5px 0px 20px">สีอ่อน </span>
+                                <button class="btn" style="background-color: #{{trial.colorLight.colorCode}}" ng-click="show(trial.color, trial.colorLight, $index, LIGHT)">
+                                    <span class="glyphicon glyphicon-adjust"></span></button>
+                            </div>
+                            <div class="row" style="margin-top:15px">
+                                <accordion>
+                                    <accordion-group is-open="open[$index]" heading="Color Editor">
+                                        <div class="row" style="padding-left: 10px">
+                                            <button ng-repeat="color in showColors[$index].colors | orderBy:'saturation'"
+                                            ng-class="{'border-active': color.id == targets[$parent.$index].id}"
+                                            class="btn" style="background-color: #{{color.colorCode}}; margin-right:8px"
+                                            ng-click="changeColor(trial, color, $parent.$index)">
+                                                <span class="glyphicon glyphicon-adjust"></span></button>
+                                        </div>
+                                    </accordion-group>
+                                </accordion>
                             </div>
                         </div>
                     </div>

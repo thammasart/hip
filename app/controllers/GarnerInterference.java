@@ -123,6 +123,10 @@ public class GarnerInterference extends Controller {
             result.put("message", "success");
             result.put("status", "ok");
             result.put("trials", json);
+            List<Color> colors = Color.find.all();
+            jsonArray = mapper.writeValueAsString(colors);
+            json = Json.parse(jsonArray);
+            result.put("colors", json);
         }catch (JsonProcessingException e) {
             result.put("message", e.getMessage());
             result.put("status", "error");

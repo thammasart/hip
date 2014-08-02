@@ -323,17 +323,30 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 quiz.differChoice = Math.floor((Math.random() * quiz.noOfChoice) + 1);
 
         }
-    }).controller('GarnerController', function($scope, $http, $modal){
+    }).controller('GarnerController', function($scope, $http){
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
         $scope.trials = [];
 
         $scope.colors = ['red', 'blue', 'yellow', 'green', 'grey'];
 
+        $scope.DARK = 0;
+        $scope.LIGHT = 1;
+
+        $scope.allColors = [];
+        $scope.showColors = [];
+        $scope.targets = [];
+        $scope.open = [];
+        $scope.modes = [];
+
         $scope.init = function(expId){
             $scope.inProcess = true;
+            initAllColors();
+
             $http({method:'GET',url:'garnerInit',params:{expId:expId}}).success(function(result){
                 $scope.trials = result.trials;
+                initOpen();
+                calculateAllColors(result.colors);
                 $scope.inProcess = false;
                 console.log($scope.trials);
             }).error(function(result){
@@ -341,7 +354,77 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 $scope.inProcess = false;
             });
         }
+
+        function initOpen(){
+            for(var i=0; i < $scope.trials.length; i++){
+                $scope.open.push(false);
+                $scope.showColors.push({colors:[]});
+                $scope.modes.push($scope.DARK);
+            }
+        }
+
+        $scope.show = function(color, colorObj, index, mode){
+            for(var i=0; i<$scope.allColors.length; i++){
+                if(color == $scope.allColors[i].name){
+                    $scope.showColors[index].colors = $scope.allColors[i].objs;
+                    break;
+                }
+            }
+            $scope.modes[index] = mode;
+            $scope.targets[index] = colorObj;
+            $scope.open[index] = true;
+        }
+        $scope.changeColor = function(trial, color, index){
+            if($scope.modes[index] == $scope.DARK)
+                trial.colorDark = color;
+            else
+                trial.colorLight = color;
+            $scope.open[index] = false;
+        }
+
+        function calculateAllColors(colors){
+            for(var i=0; i<colors.length; i++){
+                for(var j=0; j < $scope.allColors.length; j++){
+                    if(colors[i].color == $scope.allColors[j].name){
+                        $scope.allColors[j].objs.push(colors[i]);
+                    }
+
+                }
+            }
+        }
+
+        function initAllColors() {
+            for(var i=0; i<$scope.colors.length; i++){
+                var obj = {
+                    name: $scope.colors[i],
+                    objs: []
+                }
+                $scope.allColors.push(obj);
+            }
+        }
+
+        $scope.generateColor = function(trial){
+            for(var i=0; i<$scope.allColors.length; i++){
+                if(trial.color == $scope.allColors[i].name){
+                    trial.colorDark =  $scope.allColors[i].objs[Math.floor(Math.random() * $scope.allColors[i].objs.length)];
+                    trial.colorLight = calculateColor(trial.colorDark, $scope.allColors[i].objs)
+                    if(trial.colorDark.saturation < trial.colorLight.saturation){
+                        var temp = trial.colorDark;
+                        trial.colorDark = trial.colorLight;
+                        trial.colorLight = temp;
+                    }
+                    break;
+                }
+            }
+        }
+
+        function calculateColor(colorDark, colors){
+            var colorLight = colors[Math.floor(Math.random() * colors.length)];
+            return colorLight.id != colorDark.id ? colorLight : calculateColor(colorDark, colors);
+        }
+
     });
+
 
 var MullerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
 
