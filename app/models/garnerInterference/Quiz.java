@@ -1,6 +1,7 @@
 package models.garnerInterference;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.List;
@@ -17,10 +18,10 @@ public class Quiz extends Model{
     @ManyToOne
     @JsonBackReference
     public Trial trial;
-    @ManyToOne
+    @OneToOne
     public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
-    public List<Answer> answers = new ArrayList<Answer>();
+    private List<Answer> answers = new ArrayList<Answer>();
 
     public Quiz(){}
 
@@ -41,5 +42,9 @@ public class Quiz extends Model{
         question.save();
         quiz.question = question;
         return quiz;
+    }
+
+    public List<Answer> findAnswers() {
+        return answers;
     }
 }

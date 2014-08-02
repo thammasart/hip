@@ -1,5 +1,6 @@
 package models.garnerInterference;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.Random;
@@ -15,6 +16,9 @@ public class Question extends Model{
     public String sizeQuestion;
     public boolean colorMatch;
     public boolean sizeMatch;
+
+    @OneToOne(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private Quiz quiz;
 
     public static final String[] SIZES = {"big", "small"};
     public static final String[] COLORS = {"dark", "light"};

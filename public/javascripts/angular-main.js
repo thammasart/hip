@@ -297,25 +297,19 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         };
 
         $scope.save = function(){
-            save(0);
+            save();
         }
 
-        function save(index){
-            if(index < $scope.trials.length){
-                $scope.inProcess = true;
-                $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials})
-                .success(function(result){
-                    $scope.inProcess = false;
-                    console.log(result);
-                    index++;
-                    save(index);
-                }).error(function(result){
-                    console.log('error:' + result);
-                    $scope.inProcess = false;
-                    return;
-                });
-            }
-            return;
+        function save(){
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials})
+            .success(function(result){
+                $scope.inProcess = false;
+                console.log(result);
+            }).error(function(result){
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
         }
 
         $scope.calculateDifferChoice = function(quiz){
@@ -338,6 +332,9 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.targets = [];
         $scope.open = [];
         $scope.modes = [];
+
+        var SIZES = ["big", "small"];
+        var COLORS = ["dark", "light"];
 
         $scope.init = function(expId){
             $scope.inProcess = true;
@@ -382,6 +379,18 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.open[index] = false;
         }
 
+        $scope.saveAll = function(){
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveGarnerTrials',data:$scope.trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+
         function calculateAllColors(colors){
             for(var i=0; i<colors.length; i++){
                 for(var j=0; j < $scope.allColors.length; j++){
@@ -403,7 +412,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             }
         }
 
-        $scope.generateColor = function(trial){
+        $scope.generateColor = function(trial, index){
+            $scope.open[index] = false;
             for(var i=0; i<$scope.allColors.length; i++){
                 if(trial.color == $scope.allColors[i].name){
                     trial.colorDark =  $scope.allColors[i].objs[Math.floor(Math.random() * $scope.allColors[i].objs.length)];
@@ -421,6 +431,97 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         function calculateColor(colorDark, colors){
             var colorLight = colors[Math.floor(Math.random() * colors.length)];
             return colorLight.id != colorDark.id ? colorLight : calculateColor(colorDark, colors);
+        }
+
+        $scope.generateQuestion = function(trial){
+            trial.quizzes = [];
+            for(var i=0; i < trial.noOfColorQuestion; i++) {
+                trial.quizzes.push(Quiz('COLOR',true));
+            }
+            for(var i=0; i < trial.noOfFakeColorQuestion; i++) {
+                trial.quizzes.push(Quiz('COLOR', false));
+            }
+            for(var i=0; i < trial.noOfSizeQuestion; i++) {
+                trial.quizzes.push(Quiz('SIZE', true));
+            }
+            for(var i=0; i < trial.noOfFakeSizeQuestion; i++) {
+                trial.quizzes.push(Quiz('SIZE', false));
+            }
+            for(var i=0; i < trial.noOfBiDimensionQuestion; i++) {
+                trial.quizzes.push(Quiz('BOTH', true));
+            }
+            for(var i=0; i < trial.noOfFakeBiDimentsionQuestion; i++) {
+                trial.quizzes.push(Quiz('BOTH', false));
+            }
+
+            console.log(trial);
+        }
+
+        function Quiz(questionType, isNotFake){
+            return {
+              questionType : questionType,
+              question : createQuestion(questionType, isNotFake)
+            };
+        }
+
+        function createQuestion(questionType, isNotFake){
+            if(questionType == 'COLOR')
+                return createColorQuestion(isNotFake);
+            else if(questionType == 'SIZE')
+                return createSizeQuestion(isNotFake);
+            else
+                return createBiDimensionQuestion(isNotFake);
+
+        }
+        function Question(){
+            return {
+                colorPic:'',
+                sizePic:'',
+                colorQuestion:'',
+                sizeQuestion:'',
+                colorMatch:false,
+                sizeMatch:false
+            };
+        }
+
+        function createColorQuestion(isNotFake){
+            var question = Question();
+            question.colorPic = generateColorPic();
+            question.colorQuestion = isNotFake ? question.colorPic : calculateColorFake(question.colorPic);
+            question.colorMatch = isNotFake ? true : false;
+            question.sizePic = generateSizePic();
+            return question;
+        }
+        function createSizeQuestion(isNotFake){
+            var question = Question();
+            question.sizePic = generateSizePic();
+            question.sizeQuestion = isNotFake ? question.sizePic : calculateSizeFake(question.sizePic);
+            question.sizeMatch = isNotFake ? true : false;
+            question.colorPic = generateColorPic();
+            return question;
+        }
+        function createBiDimensionQuestion(isNotFake){
+            var question = Question();
+            question.colorPic = generateColorPic();
+            question.colorQuestion = isNotFake ? question.colorPic : calculateColorFake(question.colorPic);
+            question.colorMatch = isNotFake ? true : false;
+            question.sizePic = generateSizePic();
+            question.sizeQuestion = isNotFake ? question.sizePic : calculateSizeFake(question.sizePic);
+            question.sizeMatch = isNotFake ? true : false;
+            return question;
+        }
+
+        function generateColorPic(){
+            return COLORS[Math.floor(Math.random() * COLORS.length)];
+        }
+        function calculateColorFake(colorPic){
+            return colorPic == COLORS[0] ? COLORS[1] : COLORS[0];
+        }
+        function generateSizePic(){
+            return SIZES[Math.floor(Math.random() * SIZES.length)];
+        }
+        function calculateSizeFake(sizePic){
+            return sizePic == SIZES[0] ? SIZES[1] : SIZES[0];
         }
 
     });

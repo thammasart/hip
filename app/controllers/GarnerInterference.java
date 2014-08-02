@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -134,6 +135,69 @@ public class GarnerInterference extends Controller {
             result.put("message", e.getMessage());
             result.put("status", "error");
         }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result saveTrials() {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            json = request().body().asJson();
+            String jsonString = Json.stringify(json);
+            ObjectMapper mapper = new ObjectMapper();
+            List<Trial> trials = mapper.readValue(jsonString, new TypeReference<List<Trial>>(){});
+            for(Trial temp : trials){
+                Trial trial = Trial.find.byId(temp.id);
+                trial.color = temp.color;
+                trial.lengthBigSquare = temp.lengthBigSquare;
+                trial.lengthSmallSquare = temp.lengthSmallSquare;
+                trial.noOfBiDimensionQuestion = temp.noOfBiDimensionQuestion;
+                trial.noOfColorQuestion = temp.noOfColorQuestion;
+                trial.noOfSizeQuestion = temp.noOfSizeQuestion;
+                trial.noOfFakeBiDimentsionQuestion = temp.noOfFakeBiDimentsionQuestion;
+                trial.noOfFakeColorQuestion = temp.noOfFakeColorQuestion;
+                trial.noOfFakeSizeQuestion = temp.noOfFakeSizeQuestion;
+                trial.colorDark = Color.find.byId(temp.colorDark.id);
+                trial.colorLight = Color.find.byId(temp.colorLight.id);
+                System.out.println("quizzes size : " + trial.quizzes.size());
+                List<Quiz> quizzes = trial.quizzes;
+                trial.quizzes = new ArrayList<>();
+                trial.update();
+                for(Quiz obj : quizzes){
+                    obj.delete();
+                }
+
+                for(Quiz quiz : temp.quizzes){
+                    Question question = new Question();
+                    question.colorMatch = quiz.question.colorMatch;
+                    question.colorPic = quiz.question.colorPic;
+                    question.colorQuestion = quiz.question.colorQuestion;
+                    question.sizeMatch = quiz.question.sizeMatch;
+                    question.sizePic = quiz.question.sizePic;
+                    question.sizeQuestion = quiz.question.sizeQuestion;
+                    question.save();
+                    Quiz obj = new Quiz(trial, question);
+                    obj.questionType = quiz.questionType;
+                    obj.save();
+                }
+            }
+            result.put("message", "success");
+            result.put("status", "ok");
+        }catch (JsonProcessingException e) {
+            e.printStackTrace();
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            e.printStackTrace();
             result.put("message", e.getMessage());
             result.put("status", "error");
         }

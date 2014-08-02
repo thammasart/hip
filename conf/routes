@@ -184,8 +184,9 @@ GET         /admin/experiment/init                                  controllers.
 POST        /admin/experiment/saveVisualSearch                      controllers.RequestController.saveVisualSearch(trialId : Long , circleGreen : Integer, circleRed : Integer, circleBlue: Integer,squareBlue : Integer, squareRed : Integer, squareGreen: Integer, positionXofTarget : Double, positionYofTarget:Double, frameSize : String, target : String)
 GET         /admin/experiment/mullerInit                            controllers.MullerLayer.initial(expId: Long)
 PUT         /admin/experiment/saveMullerTrial                       controllers.MullerLayer.saveAdmin()
+PUT         /admin/experiment/saveGarnerTrials                      controllers.GarnerInterference.saveTrials()
 
-GET         /admin/experiment/garnerInit                           controllers.GarnerInterference.initial(expId: Long)
+GET         /admin/experiment/garnerInit                            controllers.GarnerInterference.initial(expId: Long)
 
 # Map Bootstrap images
 GET         /assets/fonts/glyphicons-halflings-regular.woff         controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.woff")
