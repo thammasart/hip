@@ -317,7 +317,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 quiz.differChoice = Math.floor((Math.random() * quiz.noOfChoice) + 1);
 
         }
-    }).controller('GarnerController', function($scope, $http){
+    }).controller('GarnerController', function($scope, $http, $modal){
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
         $scope.trials = [];
@@ -332,6 +332,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.targets = [];
         $scope.open = [];
         $scope.modes = [];
+        $scope.generateSuccess = [];
+        var timeout = {};
 
         var SIZES = ["big", "small"];
         var COLORS = ["dark", "light"];
@@ -357,6 +359,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 $scope.open.push(false);
                 $scope.showColors.push({colors:[]});
                 $scope.modes.push($scope.DARK);
+                $scope.generateSuccess.push(false);
             }
         }
 
@@ -433,7 +436,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return colorLight.id != colorDark.id ? colorLight : calculateColor(colorDark, colors);
         }
 
-        $scope.generateQuestion = function(trial){
+        $scope.generateQuestion = function(trial, index){
             trial.quizzes = [];
             for(var i=0; i < trial.noOfColorQuestion; i++) {
                 trial.quizzes.push(Quiz('COLOR',true));
@@ -453,8 +456,16 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             for(var i=0; i < trial.noOfFakeBiDimentsionQuestion; i++) {
                 trial.quizzes.push(Quiz('BOTH', false));
             }
+            trial.quizzes = shuffle(trial.quizzes);
+            $scope.generateSuccess[index] = true;
 
             console.log(trial);
+        }
+
+        function destroyAlert(index){
+            console.log('destroy alert - ' + index);
+            $scope.generateSuccess[index] = false;
+            console.log($scope.generateSuccess);
         }
 
         function Quiz(questionType, isNotFake){
@@ -524,8 +535,81 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return sizePic == SIZES[0] ? SIZES[1] : SIZES[0];
         }
 
+        $scope.openSummary = function(){
+            var modalInstance = $modal.open({
+                templateUrl: 'summary.html',
+                controller: GarnerSummaryInstanceCtrl,
+                size: 'lg',
+                resolve: {
+                    trials : function(){
+                        return $scope.trials;
+                    }
+                }
+
+            });
+        };
+
+        function shuffle(array) {
+            var currentIndex = array.length
+                , temporaryValue
+                , randomIndex
+                ;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
     });
 
+var GarnerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
+
+    $scope.trials = trials;
+
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss();
+    };
+
+    $scope.showTextQuestion = function(quiz){
+        if(quiz.questionType == 'COLOR')
+            return quiz.question.colorQuestion == 'dark' ? 'สีเข้ม' : 'สีอ่อน';
+        if(quiz.questionType == 'SIZE')
+            return quiz.question.sizeQuestion == 'big' ? 'ขนาดใหญ่' : 'ขนาดเล็ก';
+        if(quiz.questionType == 'BOTH')
+            var text = quiz.question.colorQuestion == 'dark' ? 'สีเข้ม' : 'สีอ่อน';
+            text += quiz.question.sizeQuestion == 'big' ? 'ขนาดใหญ่' : 'ขนาดเล็ก';
+            return  text ;
+    }
+
+    $scope.showTextPicDisplay = function(quiz){
+        var text = quiz.question.colorQuestion == 'dark' ? 'สีเข้ม' : 'สีอ่อน';
+        text += quiz.question.sizeQuestion == 'big' ? 'ขนาดใหญ่' : 'ขนาดเล็ก';
+        return  text ;
+    }
+    $scope.showAnswer = function(quiz){
+        if(quiz.questionType == 'COLOR')
+            return quiz.question.colorMatch ? 'glyphicon-ok' : 'glyphicon glyphicon-remove';
+        if(quiz.questionType == 'SIZE')
+            return quiz.question.sizeMatch ? 'glyphicon-ok' : 'glyphicon glyphicon-remove';
+        if(quiz.questionType == 'BOTH')
+            return quiz.question.colorMatch && quiz.question.sizeMatch ? 'glyphicon-ok' : 'glyphicon glyphicon-remove';
+    }
+}
 
 var MullerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
 
