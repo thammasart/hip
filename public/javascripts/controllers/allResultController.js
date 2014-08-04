@@ -1,3 +1,4 @@
+var gNumber = 0;
 angular.module('AllResultApp', ['ui.bootstrap'])
     .controller('AllResultController',function($scope,$http,$location,$rootScope,$modal){
         
@@ -18,7 +19,8 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 console.log($scope.trials);
             });
         }
-        $scope.open = function(){
+        $scope.open = function(num){
+            gNumber = num;
             var modalInstance = $modal.open({
                 templateUrl: 'preview.html',
                 controller: resultModalInstanceCtrl,
@@ -53,8 +55,29 @@ angular.module('AllResultApp', ['ui.bootstrap'])
             $modalInstance.dismiss();
         };
 
-        $scope.sel = function () {
-            alert("hello");
+        $scope.sel = function (totalScore,totalUsedTime,totalUser) {
+
+            if(gNumber == 1){
+                document.getElementById("graphUser1").innerHTML = totalUser;
+                document.getElementById("graphTime1").innerHTML = totalUsedTime;
+                document.getElementById("graphScore1").innerHTML = totalScore;
+            }else
+            if(gNumber == 2){
+                document.getElementById("graphUser2").innerHTML = totalUser;
+                document.getElementById("graphTime2").innerHTML = totalUsedTime;
+                document.getElementById("graphScore2").innerHTML = totalScore;
+            }else
+            if(gNumber == 3){
+                document.getElementById("graphUser3").innerHTML = totalUser;
+                document.getElementById("graphTime3").innerHTML = totalUsedTime;
+                document.getElementById("graphScore3").innerHTML = totalScore;
+            }else
+            if(gNumber == 4){
+                document.getElementById("graphUser4").innerHTML = totalUser;
+                document.getElementById("graphTime4").innerHTML = totalUsedTime;
+                document.getElementById("graphScore4").innerHTML = totalScore;
+            }
+            $modalInstance.close();
         };
     }
 

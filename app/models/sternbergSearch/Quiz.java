@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import play.db.ebean.Model.Finder;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "sternberg_search_quiz")
 public class Quiz extends Model {
@@ -16,8 +19,10 @@ public class Quiz extends Model {
     public String questionChar;
     public boolean isTrue;
     @ManyToOne
+    @JsonBackReference
     public Trial trial;
     @ManyToOne
+    @JsonManagedReference
     public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
     public List<Answer> answers = new ArrayList<Answer>();

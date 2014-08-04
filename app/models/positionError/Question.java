@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name="position_error_question")
@@ -21,6 +22,7 @@ public class Question extends Model{
 	public QuestionType questionType;
 
 	@OneToMany
+        @JsonManagedReference
 	public List<Quiz> quizzes = new ArrayList<Quiz>();
 
 

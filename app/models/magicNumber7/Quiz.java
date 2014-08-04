@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import play.db.ebean.Model.Finder;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name = "magic_number_7_quiz")
@@ -15,8 +17,10 @@ public class Quiz extends Model{
 	public int chunkSize;
     public int length;
 	@ManyToOne
+        @JsonBackReference
 	public Trial trial;
 	@ManyToOne(cascade=CascadeType.REMOVE)
+        @JsonManagedReference
 	public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
     public List<Answer> answers = new ArrayList<Answer>();

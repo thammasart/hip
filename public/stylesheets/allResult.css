@@ -213,3 +213,8 @@
     display:block;
     margin-top:-25px;
 }
+.graphValue{
+    float:right;
+    margin-right:20%;
+}
+
