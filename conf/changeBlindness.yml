@@ -18,43 +18,43 @@
     schedule: *ex24
 #Question
 - &Question129 !!models.changeBlindness.Question
-    pathOfPic1: /assets/images/02a.jpg
-    pathOfPic2: /assets/images/02b.jpg
+    pathOfPic1: /assets/images/changeBlindness/02a.jpg
+    pathOfPic2: /assets/images/changeBlindness/02b.jpg
     answerAreaWidth: 20.0
     answerAreaHeight: 15.0
     positionOfChangeX: 25.0
     positionOfChangeY: 45.0
 - &Question130 !!models.changeBlindness.Question
-    pathOfPic1: /assets/images/04a.jpg
-    pathOfPic2: /assets/images/04b.jpg
+    pathOfPic1: /assets/images/changeBlindness/04a.jpg
+    pathOfPic2: /assets/images/changeBlindness/04b.jpg
     answerAreaWidth: 25.0
     answerAreaHeight: 45.0
     positionOfChangeX: 7.0
     positionOfChangeY: 40.0
 - &Question131 !!models.changeBlindness.Question
-    pathOfPic1: /assets/images/01a.jpg
-    pathOfPic2: /assets/images/01b.jpg
+    pathOfPic1: /assets/images/changeBlindness/01a.jpg
+    pathOfPic2: /assets/images/changeBlindness/01b.jpg
     answerAreaWidth: 10.0
     answerAreaHeight: 10.0
     positionOfChangeX: 46.0
     positionOfChangeY: 43.0
 - &Question132 !!models.changeBlindness.Question
-    pathOfPic1: /assets/images/06a.jpg
-    pathOfPic2: /assets/images/06b.jpg
+    pathOfPic1: /assets/images/changeBlindness/06a.jpg
+    pathOfPic2: /assets/images/changeBlindness/06b.jpg
     answerAreaWidth: 5.0
     answerAreaHeight: 13.0
     positionOfChangeX: 70.0
     positionOfChangeY: 57.0
 - &Question133 !!models.changeBlindness.Question
-    pathOfPic1: /assets/images/07a.jpg
-    pathOfPic2: /assets/images/07b.jpg
+    pathOfPic1: /assets/images/changeBlindness/07a.jpg
+    pathOfPic2: /assets/images/changeBlindness/07b.jpg
     answerAreaWidth: 5.0
     answerAreaHeight: 8.0
     positionOfChangeX: 75.0
     positionOfChangeY: 39.0
 - &Question134 !!models.changeBlindness.Question
-    pathOfPic1: /assets/images/03a.jpg
-    pathOfPic2: /assets/images/03b.jpg
+    pathOfPic1: /assets/images/changeBlindness/03a.jpg
+    pathOfPic2: /assets/images/changeBlindness/03b.jpg
     answerAreaWidth: 17.0
     answerAreaHeight: 10.0
     positionOfChangeX: 35.0

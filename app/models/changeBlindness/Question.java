@@ -1,13 +1,18 @@
 package models.changeBlindness;
 
+import play.Play;
 import play.db.ebean.Model;
 import javax.persistence.*;
+import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 
 @Entity
 @Table (name="change_blindness_question")
 public class Question extends Model{
+
+    public static final String PATH = "/assets/images/changeBlindness/";
+
     @Id
     public long id;
     public String pathOfPic1;
@@ -49,4 +54,5 @@ public class Question extends Model{
 
     @SuppressWarnings("unchecked")
     public static Finder<Long, Question> find = new Finder(Long.class, Question.class);
+
 }
