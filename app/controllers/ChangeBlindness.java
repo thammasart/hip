@@ -1,9 +1,15 @@
 package controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.ExperimentSchedule;
 
 import models.TimeLog;
 import play.*;
+import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
 
@@ -115,4 +121,75 @@ public class ChangeBlindness extends Controller{
         return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
 
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result initial(long id) {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            ExperimentSchedule exp = ExperimentSchedule.find.byId(id);
+            List<Trial> trials = Trial.findInvolving(exp);
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonArray = mapper.writeValueAsString(trials);
+            json = Json.parse(jsonArray);
+            result.put("message", "success");
+            result.put("status", "ok");
+            result.put("trials", json);
+            List<Question> questions = Question.find.all();
+            jsonArray = mapper.writeValueAsString(questions);
+            json = Json.parse(jsonArray);
+            result.put("questions", json);
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result saveTrials() {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            json = request().body().asJson();
+            String jsonString = Json.stringify(json);
+            ObjectMapper mapper = new ObjectMapper();
+            List<Trial> trials = mapper.readValue(jsonString, new TypeReference<List<Trial>>(){});
+            for(Trial obj : trials){
+                Trial trial = Trial.find.byId(obj.id);
+                List<Quiz> quizzes = trial.quizzes;
+                for(Quiz temp : quizzes){
+                    Quiz quiz = Quiz.find.byId(temp.id);
+                    quiz.delete();
+                }
+                trial.quizzes = new ArrayList<>();
+                for(Quiz temp : obj.quizzes){
+                    Question question = Question.find.byId(temp.question.id);
+                    Quiz quiz = new Quiz(trial, question);
+                    quiz.save();
+                }
+                trial.displayTime = obj.displayTime;
+                trial.update();
+            }
+            result.put("message", "success");
+            result.put("status", "ok");
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
 }

@@ -33,6 +33,8 @@
         @mullerLayer(exp)
     }case ExperimentType.GARNERINTERFERENCE => {
         @garner(exp)
+    }case ExperimentType.CHANGEBLINDNESS => {
+        @changeBlindness(exp)
     }
     case _ => {
         <h1>Experiment type is not found!!</h1>

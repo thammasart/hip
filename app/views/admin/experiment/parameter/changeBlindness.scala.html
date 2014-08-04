@@ -1,0 +1,39 @@
+@(exp: ExperimentSchedule)
+@import views.html.admin._
+@import views.html.admin.experiment._
+@import views.html.form._
+
+<div class="container" ng-app="ExperimentCreator">
+    <form role="form" name="parameter" class="form-horizontal" >
+
+        @exp_edit(exp)
+        <hr>
+        @error()
+
+        <div class="container" ng-controller="ChangeBlindnessController" ng-init="init(@exp.id)">
+            <div ng-hide="inProcess" class="row">
+                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
+            </div>
+            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
+            <div ng-hide="inProcess" ng-repeat="obj in trials">
+                <h3>Trial {{$index + 1}}</h3>
+                <div class="well" style="padding-left: 20px">
+                    <div class="row">
+                        <span style="margin-right: 20px">เวลาในการทำโจทย์ </span><input type="number" min="15" max="300" ng-model="obj.trial.displayTime" class="form-control" style="display: inline;width:100px" >
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3" ng-repeat="pic in obj.pictures" style="height: 200px;border-bottom: 1px solid #C5BBBB;border-right: 1px solid #C5BBBB">
+                            <div class="col-md-9">
+                                <img class="thumbnail" ng-src="{{pic.question.pathOfPic1}}" style="width:70%;" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="checkbox" style="margin-top:30px" ng-model="pic.selected" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

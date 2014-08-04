@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class Trial extends Model{
     @Id
     public long id;
+    public int displayTime = 60;
+
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "trial")

@@ -7,15 +7,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table (name="change_blindness_quiz")
 public class Quiz extends Model{
     @Id
     public long id;
-    public int displayTime; // second
     @ManyToOne
     @JsonBackReference
     public Trial trial;
@@ -26,9 +22,8 @@ public class Quiz extends Model{
 
     public Quiz(){}
 
-    public Quiz(Trial trial, int displayTime, Question question){
+    public Quiz(Trial trial, Question question){
     	this.trial = trial;
-        this.displayTime = displayTime;
     	this.question = question;
     }
 
@@ -42,7 +37,6 @@ public class Quiz extends Model{
     public static Quiz create(Trial trial, List<Question> questions) {
         Quiz quiz = new Quiz();
         quiz.trial = trial;
-        quiz.displayTime = 60;
         Question question = questions.get(new Random().nextInt(questions.size()));
         quiz.question = question;
         questions.remove(question);

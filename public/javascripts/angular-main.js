@@ -333,7 +333,6 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.open = [];
         $scope.modes = [];
         $scope.generateSuccess = [];
-        var timeout = {};
 
         var SIZES = ["big", "small"];
         var COLORS = ["dark", "light"];
@@ -571,6 +570,73 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return array;
         }
 
+    }).controller('ChangeBlindnessController', function($scope, $http) {
+        $scope.inProcess = false;
+        $scope.trials = [];
+
+        $scope.init = function(expId){
+            $http({method:'GET',url:'changeBlindnessInit',params:{expId:expId}}).success(function(result){
+                initTrials(result.trials,result.questions);
+                $scope.inProcess = false;
+            }).error(function(result){
+                $scope.inProcess = false;
+            });
+        }
+
+        $scope.saveAll = function(){
+            var trials = [];
+            for(var i=0; i<$scope.trials.length; i++){
+                $scope.trials[i].trial.quizzes = [];
+                for(var j=0; j<$scope.trials[i].pictures.length; j++){
+                    if($scope.trials[i].pictures[j].selected){
+                        $scope.trials[i].trial.quizzes.push({question:$scope.trials[i].pictures[j].question});
+                    }
+                }
+                trials.push($scope.trials[i].trial);
+            }
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveChangeBlindnessTrials',data:trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+        function initTrials(trials, questions){
+            for(var i=0; i<trials.length; i++){
+                var obj = {
+                    trial: trials[i],
+                    pictures: []
+                }
+                $scope.trials.push(obj);
+            }
+            console.log($scope.trials);
+            initPictures(questions);
+        }
+
+        function initPictures(questions){
+            for(var i=0; i<$scope.trials.length; i++){
+                for(var j=0; j<questions.length; j++){
+                    var obj = {
+                        question: questions[j],
+                        selected: isCurrentQuestion($scope.trials[i], questions[j])
+                    }
+                    $scope.trials[i].pictures.push(obj);
+                }
+            }
+
+        }
+
+        function isCurrentQuestion(obj, question){
+            for(var i=0; i<obj.trial.quizzes.length; i++){
+                if(obj.trial.quizzes[i].question.id == question.id){
+                    return true;
+                }
+            }
+            return false;
+        }
     });
 
 var GarnerSummaryInstanceCtrl = function($scope, $modalInstance, trials){

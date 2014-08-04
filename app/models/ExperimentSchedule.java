@@ -1,15 +1,12 @@
 package models;
 
-import play.Play;
 import play.db.ebean.*;
 import javax.persistence.*;
-import java.io.File;
 import java.util.Date;
 import play.data.format.Formats;
 import java.util.List;
 import java.util.ArrayList;
 import static play.data.validation.Constraints.*;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
