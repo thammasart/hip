@@ -9,6 +9,8 @@ import models.ExperimentSchedule;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table (name="signal_detection_trial")
 public class Trial extends Model{
@@ -17,6 +19,7 @@ public class Trial extends Model{
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonManagedReference
     public List<Quiz> quizzes;
     public double totalScore = 0;
     public double totalUsedTime = 0;

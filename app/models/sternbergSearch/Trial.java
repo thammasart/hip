@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table (name = "sternberg_search_trial")
 public class Trial extends Model{
@@ -27,6 +29,7 @@ public class Trial extends Model{
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonManagedReference
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Trial(ExperimentSchedule schedule){

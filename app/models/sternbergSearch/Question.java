@@ -8,6 +8,8 @@ import java.util.Random;
 
 import play.db.ebean.Model.Finder;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table (name = "sternberg_search_question")
 public class Question extends Model{
@@ -20,6 +22,7 @@ public class Question extends Model{
     public String memorySet;
     public QuestionType questionType;
     @OneToMany
+    @JsonBackReference
     public List<Quiz> quizzes;
 
     public Question(){}

@@ -5,6 +5,9 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table (name="change_blindness_quiz")
 public class Quiz extends Model{
@@ -12,6 +15,7 @@ public class Quiz extends Model{
     public long id;
     public int displayTime; // second
     @ManyToOne
+    @JsonBackReference
     public Trial trial;
     @ManyToOne
     public Question question;

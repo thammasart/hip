@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table (name="signal_detection_question")
 public class Question extends Model{
@@ -14,6 +16,7 @@ public class Question extends Model{
     public char noise;
 
     @OneToMany
+    @JsonManagedReference
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(){}

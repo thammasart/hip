@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import play.db.ebean.Model.Finder;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table (name = "magic_number_7_question")
@@ -21,6 +22,7 @@ public class Question extends Model{
     public String memorySet;
     public QuestionType questionType;
     @OneToMany
+    @JsonBackReference
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(){}

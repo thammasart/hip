@@ -4,6 +4,8 @@ import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name="position_error_quiz")
@@ -14,8 +16,10 @@ public class Quiz extends Model{
 	public int length = 7;
 
 	@ManyToOne(cascade=CascadeType.REMOVE)
+        @JsonBackReference
 	public Question question;
     @ManyToOne
+    @JsonManagedReference
     public Trial trial;
     @OneToMany(cascade=CascadeType.REMOVE)
     public List<Answer> answers = new ArrayList<Answer>();

@@ -8,6 +8,7 @@ import models.TimeLog;
 import models.ExperimentSchedule;
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table (name="position_error_trial")
@@ -27,6 +28,7 @@ public class Trial extends Model{
 	@ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany(cascade=CascadeType.REMOVE)
+    @JsonBackReference
     public List<Quiz> quizzes;
 
 	public Trial(double flashSpeed, double delayTime, QuestionType questionType){
