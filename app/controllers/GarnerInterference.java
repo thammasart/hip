@@ -166,7 +166,7 @@ public class GarnerInterference extends Controller {
                 trial.colorLight = Color.find.byId(temp.colorLight.id);
                 System.out.println("quizzes size : " + trial.quizzes.size());
                 List<Quiz> quizzes = trial.quizzes;
-                trial.quizzes = new ArrayList<>();
+                trial.quizzes = new ArrayList<Quiz>();
                 trial.update();
                 for(Quiz obj : quizzes){
                     obj.delete();
