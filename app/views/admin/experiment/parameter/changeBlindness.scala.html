@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-md-3" ng-repeat="pic in obj.pictures" style="height: 200px;border-bottom: 1px solid #C5BBBB;border-right: 1px solid #C5BBBB">
                             <div class="col-md-9">
-                                <img class="thumbnail" ng-src="{{pic.question.pathOfPic1}}" style="width:70%;" />
+                                <img class="thumbnail" ng-src="{{pic.question.pathOfPic1}}" ng-click="open(pic.question.pathOfPic1)" style="width:70%;cursor: pointer;" />
                             </div>
                             <div class="col-md-3">
                                 <input type="checkbox" style="margin-top:30px" ng-model="pic.selected" />
@@ -34,6 +34,14 @@
                     </div>
                 </div>
             </div>
+            <script type="text/ng-template" id="preview.html">
+            <div class="modal-body" style="width:800px;min-height:200px;margin:auto;">
+                <img class="thumbnail" ng-src="{{pic}}" style="max-width: 800px" />
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+            </div>
+            </script>
         </div>
     </form>
 </div>

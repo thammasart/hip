@@ -570,7 +570,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return array;
         }
 
-    }).controller('ChangeBlindnessController', function($scope, $http) {
+    }).controller('ChangeBlindnessController', function($scope, $http, $modal) {
         $scope.inProcess = false;
         $scope.trials = [];
 
@@ -604,6 +604,20 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                     $scope.inProcess = false;
                 });
         }
+
+        $scope.open = function(pic){
+            var modalInstance = $modal.open({
+                templateUrl: 'preview.html',
+                controller: ChangeBlindnessInstanceCtrl,
+                size: 'lg',
+                resolve: {
+                    pic : function(){
+                        return pic;
+                    }
+                }
+
+            });
+        };
         function initTrials(trials, questions){
             for(var i=0; i<trials.length; i++){
                 var obj = {
@@ -638,6 +652,15 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return false;
         }
     });
+
+var ChangeBlindnessInstanceCtrl = function($scope, $modalInstance, pic) {
+
+    $scope.pic = pic;
+
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+}
 
 var GarnerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
 
