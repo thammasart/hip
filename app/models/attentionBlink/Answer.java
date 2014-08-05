@@ -21,7 +21,6 @@ public class Answer extends Model{
         @ManyToOne
         public User user;
         @ManyToOne 
-        @JsonBackReference
         public Quiz quiz;
 
 	public Answer(boolean answer,double usedTime) {

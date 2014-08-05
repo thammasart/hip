@@ -79,8 +79,81 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.trigramLanguages = [];
 
     })
-    .controller('AttentionBlinkCtrl', function($scope){
+    .controller('AttentionBlinkCtrl', function($scope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
+        $scope.inProcess = false;
+
+        $scope.questionTypes = ['THAI','ENGLISH','NUMBER'];
+
+        $scope.init = function(expId) {
+            $http({method: 'GET', url: 'attentionBlinkInit', params: {expId: expId}}).success(function (result) {
+                $scope.trials = result.trials;
+                $scope.inProcess = false;
+                console.log($scope.trials);
+            }).error(function (result) {
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+        }
+
+        $scope.refresh = function(trial){
+            for(var i=0; i<trial.quizzes.length; i++){
+                $scope.generateQuestion(trial.quizzes[i], trial.questionType);
+            }
+        }
+
+        $scope.generateQuestion = function(quiz, questionType){
+            var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var THAI_CASE = "กขคฆงจฉชฌญฎฐฒณดถทธนบผพภมยรลวศษสหฬอ";
+            var NUMBER_CASE = '0123456789';
+            if(questionType == 'THAI'){
+                quiz.question.questionType = 'THAI';
+                generateTextQuestion(quiz, THAI_CASE);
+            }else if(questionType == 'ENGLISH'){
+                quiz.question.questionType = 'ENGLISH';
+                generateTextQuestion(quiz, ENGLISH_CASE);
+            }else if(questionType == 'NUMBER'){
+                quiz.question.questionType = 'NUMBER';
+                generateTextQuestion(quiz, NUMBER_CASE);
+            }
+        }
+
+        $scope.saveAll = function(){
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+
+        function generateTextQuestion(quiz, CASE){
+
+            var text = generateText(CASE,quiz.numberOfTarget);
+            quiz.question.letter = text;
+            if(quiz.isCorrect){
+                text = generateText(CASE,quiz.length);
+                var start = Math.floor(Math.random() * (quiz.length - quiz.numberOfTarget));
+                var sub = text.substr(start, quiz.numberOfTarget);
+                quiz.question.set = text.replace(sub, quiz.question.letter);
+            }else{
+                text = generateText(CASE,quiz.length);
+                while(text.search(quiz.question.letter) != -1)
+                    text = generateText(CASE,quiz.length);
+                quiz.question.set = text;
+            }
+        }
+
+        function generateText(CASE, length){
+            var text = '';
+            for(var i=0; i<length; i++){
+                text += CASE.charAt(Math.floor(Math.random() * CASE.length));
+            }
+            return text;
+        }
     })
     .controller('SignalDetectionCtrl', function($scope){
         $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
