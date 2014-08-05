@@ -40,8 +40,8 @@ public class Trial extends Model{
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
-            this.totalScore += Answer.calculateTotalScore(q.answers);
-            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+            this.totalScore += Answer.calculateTotalScore(q.findAnswers());
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
         this.totalScore /=totalUser;

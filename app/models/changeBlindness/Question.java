@@ -2,12 +2,12 @@ package models.changeBlindness;
 
 import play.db.ebean.Model;
 import javax.persistence.*;
-import java.util.List;
-import java.util.ArrayList;
+
 
 @Entity
 @Table (name="change_blindness_question")
 public class Question extends Model{
+
     @Id
     public long id;
     public String pathOfPic1;
@@ -49,4 +49,5 @@ public class Question extends Model{
 
     @SuppressWarnings("unchecked")
     public static Finder<Long, Question> find = new Finder(Long.class, Question.class);
+
 }

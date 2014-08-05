@@ -7,7 +7,6 @@ import play.data.format.Formats;
 import java.util.List;
 import java.util.ArrayList;
 import static play.data.validation.Constraints.*;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -193,10 +192,17 @@ public class ExperimentSchedule extends Model{
             case MULLERLAYER: generateMullerLayerTrial();break;
             case GARNERINTERFERENCE: generateGarnerInterferenceTrial();break;
             case VISUALSEARCH: generateVisualSearchTrial(); break;
-            case CHANGEBLINDNESS: break;
+            case CHANGEBLINDNESS:generateChangeBlindnessTrial();break;
 		}
 	}
 
+    private void generateChangeBlindnessTrial() {
+        for(int i=0; i < this.noOfTrial; i++){
+            models.changeBlindness.Trial trial = models.changeBlindness.Trial.create(this);
+            trial.save();
+            trial.generateQuiz();
+        }
+    }
 
 
     private void generateGarnerInterferenceTrial() {
