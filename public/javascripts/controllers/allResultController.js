@@ -1,4 +1,5 @@
 var gNumber = 0;
+var gTime = new Array(0,0,0,0);
 angular.module('AllResultApp', ['ui.bootstrap'])
     .controller('AllResultController',function($scope,$http,$location,$rootScope,$modal){
         
@@ -61,23 +62,43 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 document.getElementById("graphUser1").innerHTML = totalUser;
                 document.getElementById("graphTime1").innerHTML = totalUsedTime;
                 document.getElementById("graphScore1").innerHTML = totalScore;
+                gTime[0]=totalUsedTime;
             }else
             if(gNumber == 2){
                 document.getElementById("graphUser2").innerHTML = totalUser;
                 document.getElementById("graphTime2").innerHTML = totalUsedTime;
                 document.getElementById("graphScore2").innerHTML = totalScore;
+                gTime[1]=totalUsedTime;
             }else
             if(gNumber == 3){
                 document.getElementById("graphUser3").innerHTML = totalUser;
                 document.getElementById("graphTime3").innerHTML = totalUsedTime;
                 document.getElementById("graphScore3").innerHTML = totalScore;
+                gTime[2]=totalUsedTime;
             }else
             if(gNumber == 4){
                 document.getElementById("graphUser4").innerHTML = totalUser;
                 document.getElementById("graphTime4").innerHTML = totalUsedTime;
                 document.getElementById("graphScore4").innerHTML = totalScore;
+                gTime[3]=totalUsedTime;
             }
-            $modalInstance.close();
+                var max =-99;
+
+                for(var iTime = 0; iTime <gTime.length;iTime++){ 
+                    if(gTime[iTime]>max)
+                        max =gTime[iTime];
+                }
+                    document.getElementById("tBeam1").style.height = (gTime[0]/max)*100+"%";
+                    document.getElementById("tBeam2").style.height = (gTime[1]/max)*100+"%";
+                    document.getElementById("tBeam3").style.height = (gTime[2]/max)*100+"%";
+                    document.getElementById("tBeam4").style.height = (gTime[3]/max)*100+"%";
+
+                    document.getElementById("line2").innerHTML = max*0.2+"sec";
+                    document.getElementById("line3").innerHTML = max*0.4+"sec";
+                    document.getElementById("line4").innerHTML = max*0.6+"sec";
+                    document.getElementById("line5").innerHTML = max*0.8+"sec";
+                    document.getElementById("line6").innerHTML = max+"sec";
+                   $modalInstance.close();
         };
     }
 
