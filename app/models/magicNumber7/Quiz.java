@@ -17,13 +17,16 @@ public class Quiz extends Model{
 	public int chunkSize;
     public int length;
 	@ManyToOne
-        @JsonBackReference
+    @JsonBackReference
 	public Trial trial;
-	@ManyToOne(cascade=CascadeType.REMOVE)
-        @JsonManagedReference
+	@OneToOne(cascade=CascadeType.REMOVE)
 	public Question question;
     @OneToMany(cascade=CascadeType.REMOVE)
-    public List<Answer> answers = new ArrayList<Answer>();
+    private List<Answer> answers = new ArrayList<Answer>();
+
+    public List<Answer> findAnswers(){
+        return answers;
+    }
 
 	public Quiz(Trial trial, Question question){
 		this.trial = trial;

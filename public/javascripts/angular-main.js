@@ -226,8 +226,62 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     .controller('SternbergSearchCtrl', function($scope){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
     })
-    .controller('MagicNumber7Ctrl', function($scope){
+    .controller('MagicNumber7Ctrl', function($scope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
+        $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
+        $scope.inProcess = false;
+
+        $scope.init = function(expId) {
+            $scope.inProcess = true;
+            $http({method: 'GET', url: 'MagicSevenInit', params: {expId: expId}}).success(function (result) {
+                $scope.trials = result.trials;
+                $scope.inProcess = false;
+                console.log($scope.trials);
+            }).error(function (result) {
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+        }
+
+        $scope.generateQuestion = function(quiz, questionType){
+            var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var THAI_CASE = "กขคฆงจฉชฌญฎฐฒณดถทธนบผพภมยรลวศษสหฬอ";
+            var NUMBER_CASE = '0123456789';
+
+            if(questionType == 'THAI'){
+                generateText(quiz, THAI_CASE);
+            }else if(questionType == 'ENGLISH'){
+                generateText(quiz, ENGLISH_CASE);
+            }else{
+                generateText(quiz, NUMBER_CASE);
+            }
+        }
+
+        $scope.saveAll = function(){
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveMagicSevenTrials',data:$scope.trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+
+        function generateText(quiz, CASE){
+            var text = '';
+            for(var i=0; i<quiz.length; i++){
+                text += CASE.charAt(Math.floor(Math.random() * CASE.length));
+            }
+            quiz.question.memorySet = text;
+        }
+
+        $scope.refresh = function(trial){
+            for(var i=0; i<trial.quizzes.length; i++){
+                $scope.generateQuestion(trial.quizzes[i], trial.questionType);
+            }
+        }
     })
     .controller('SimonEffectCtrl', function($scope){
         $scope.trials = [];
