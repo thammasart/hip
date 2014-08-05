@@ -3,7 +3,7 @@
 @head_admin("add question")
 
 @nav_admin()
-<div class="container">
+<div class="container" ng-app="BrownPetersonApp" ng-controller="BrownPetersonQuestionCtrl" ng-init="init()">
     @if(flash.containsKey("success")){
             <div class="alert alert-success">@flash.get("success")</div>
         }
@@ -11,9 +11,9 @@
             <div class="alert alert-danger">@flash.get("error")</div>
         }
     <div class="row">
-        <div class="col-md-3 col-sm-6 sub-button">
+        <div class="col-md-3 col-sm-6 sub-button pull-right" style="margin-bottom: 20px">
             <a href="@routes.Admin.addBrownPetersonQuestion()">
-                <button type="button" class="btn btn-default btn-xs">add questions</button>
+                <button type="button" class="btn btn-default btn-xs pull-right">+add questions</button>
             </a>
         </div>
     </div>
@@ -30,19 +30,27 @@
             </tr>
         </thead>
         <tbody>
-            @for(question <- models.brownPeterson.Question.find.all()){
-                <tr>
-                    <td>@question.id</td>
-                    <td>@question.firstWord</td>
-                    <td>@question.secondWord</td>
-                    <td>@question.thirdWord</td>
-                    <td>@question.trigramType</td>
-                    <td>@question.trigramLanguage</td>
-                    <td><a href="@routes.Admin.deleteBrownPetersonQuestion(question.id)" class="btn btn-xs btn-danger">delete</a></td>
-                </tr>
-            }
+            <tr>
+                <td><input class="form-control" style="width:100px;margin: auto" ng-model="idText"></td>
+                <td><input class="form-control" style="width:100px;margin: auto" ng-model="firstWord"></td>
+                <td><input class="form-control" style="width:100px;margin: auto" ng-model="secondWord"></td>
+                <td><input class="form-control" style="width:100px;margin: auto" ng-model="thirdWord"></td>
+                <td><select class="form-control" style="width:150px;margin:auto" ng-model="trigramType" ng-options="value for value in trigramTypes"></select></td>
+                <td><select class="form-control" style="width:150px;margin:auto" ng-model="trigramLanguage" ng-options="value for value in trigramLanguages"></select></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="question in questions | filter:{id:idText, trigramType:trigramType,trigramLanguage:trigramLanguage,firstWord:firstWord,secondWord:secondWord,thirdWord:thirdWord}">
+                <td>{{question.id}}</td>
+                <td>{{question.firstWord}}</td>
+                <td>{{question.secondWord}}</td>
+                <td>{{question.thirdWord}}</td>
+                <td>{{question.trigramType}}</td>
+                <td>{{question.trigramLanguage}}</td>
+                <td><a  class="btn btn-xs btn-danger" ng-click="delete(question, $index)">delete</a></td>
+            </tr>
         </tbody>
     </table>
 </div>
-
+@angular()
+<script type="text/javascript" src="@routes.Assets.at("javascripts/controllers/brownPeterson.js")"></script>
 @footer()

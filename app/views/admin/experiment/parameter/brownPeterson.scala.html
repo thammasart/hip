@@ -13,8 +13,8 @@
         <div class="container" ng-controller="BrownPetersonCtrl" ng-init="init(@exp.id)">
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
                 <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
-                <a class="btn btn-xs btn-default pull-right" style="margin-right: 10px">+add question</a>
-                <a href="" class="btn btn-xs btn-default pull-right" style="margin-right: 10px" >show question</a>
+                <a href="@routes.Admin.addBrownPetersonQuestion()" class="btn btn-xs btn-default pull-right" style="margin-right: 10px">+add question</a>
+                <a href="@routes.Admin.displayBrownPetersonQuestionList()" class="btn btn-xs btn-default pull-right" style="margin-right: 10px" >show question</a>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
                 <h3>Trial {{$index + 1}}</h3>

@@ -191,6 +191,8 @@ PUT         /admin/experiment/saveGarnerTrials                      controllers.
 PUT         /admin/experiment/saveChangeBlindnessTrials             controllers.ChangeBlindness.saveTrials()
 PUT         /admin/experiment/saveAttentionBlinkTrials             controllers.AttentionBlink.saveTrials()
 PUT         /admin/experiment/saveBrownPetersonTrials             controllers.BrownPeterson.saveTrials()
+GET         /admin/experiment/brown-peterson/brownPetersonQuestion  controllers.BrownPeterson.findAllQuestions()
+DELETE         /admin/experiment/brown-peterson/brownPetersonDeleteQuestion  controllers.BrownPeterson.deleteQuestion(id:Long)
 
 GET         /admin/experiment/garnerInit                            controllers.GarnerInterference.initial(expId: Long)
 

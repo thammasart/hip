@@ -12,14 +12,7 @@
     @if(flash.containsKey("error")){
             <div class="alert alert-danger">@flash.get("error")</div>
         }
-    <div class="row">
-        <div class="col-md-3 col-sm-6 sub-button">
-            <a href="@routes.Admin.displayBrownPetersonQuestionList()">
-                <button type="button" class="btn btn-default btn-xs">show questions</button>
-            </a>
-        </div>
-    </div>
-    <br>
+
     <form role="form" action="@routes.Admin.saveBrownPetersonQuestion()" method="POST">
         <div class="row">
             <div class="col-md-6">
@@ -27,6 +20,7 @@
                     <label class="control-label">Add Question</label>
                     <textarea class="form-control" rows="10" name="questions"></textarea>
                 </div>
+                <button type="submit" class="btn btn-primary btn-lg pull-right">Submit</button>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -51,10 +45,17 @@
                         <input type="radio" name="trigramLanguage" value="@Trial.THAI" 
                         > ไทย 
                     </label>
+                    <div class="row" style="margin-top:20px">
+                        <div class="col-md-3 col-sm-6 sub-button">
+                            <a href="@routes.Admin.displayBrownPetersonQuestionList()">
+                                <button type="button" class="btn btn-default btn-xs">show questions</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+
     </form>
     <br>
 </div>
@@ -65,6 +66,7 @@
         <p>เช่น</p>
         <p>circle,school,white</p>
         <p>paper,teacher,wheel</p>
+        <p>** ใช้กับการทดลอง Brown-Peterson Task ทุกการทดลอง **</p>
     </div>
 </div>
 
