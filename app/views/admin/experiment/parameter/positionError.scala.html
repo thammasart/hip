@@ -1,9 +1,5 @@
 @(exp : ExperimentSchedule)
 @import views.html.admin._
-@import models.positionError.Trial
-@import models.positionError.Quiz
-@import models.positionError.Question
-@import models.positionError.QuestionType
 @import views.html.admin.experiment._
 @import views.html.form._
 
@@ -63,22 +59,28 @@
                         <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
                             <div class="panel panel-default">
                                 <div class="panel-heading">Question</div>
-                                <table class="table text-center">
+                                <table class="table text-center" style="width:500px">
                                     <thead>
                                     <tr>
                                         <th>No.</th>
                                         <th>Question</th>
                                         <th>#</th>
+                                        <th>#</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="quiz in trial.quizzes">
-                                        <td>{{$index + 1}}</td>
-                                        <td>{{quiz.question.memorySet}}</td>
-                                        <td><button class="btn btn-primary btn-xs" ng-click="generateQuestion(quiz, trial.questionType)" >random</button></td>
+                                    <tr ng-repeat="quiz in trial.quizzes" style="height: 52px">
+                                        <td style="width:100px">{{$index + 1}}</td>
+                                        <td style="width:200px" ng-switch="isEditable[$parent.$index][$index]">
+                                            <span ng-switch-when="false" style="width:100%;display: block">{{quiz.question.memorySet}}</span>
+                                            <input ng-switch-when="true" class="form-control" type="text" ng-model="quiz.question.memorySet" >
+                                        </td>
+                                        <td style="width:100px"><button class="btn btn-primary btn-xs" ng-click="edit($parent.$index, $index)" >{{editText($parent.$index,$index)}}</button></td>
+                                        <td style="width:100px"><button class="btn btn-primary btn-xs" ng-click="generateQuestion(quiz, trial.questionType)" >random</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
+                                <p class="text-danger">**การแก้ไข memory set จะไม่จำกัดจำนวนตัวอักษร**</p>
                             </div>
                         </div>
                     </div>

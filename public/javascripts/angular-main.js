@@ -221,17 +221,45 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
         $scope.inProcess = false;
+        $scope.isEditable = [];
 
         $scope.init = function(expId) {
             $scope.inProcess = true;
             $http({method: 'GET', url: 'PositionErrorInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                initEditable();
                 $scope.inProcess = false;
                 console.log($scope.trials);
             }).error(function (result) {
                 console.log('error:' + result);
                 $scope.inProcess = false;
             });
+        }
+
+        function initEditable(){
+            for(var i=0; i<$scope.trials.length; i++){
+                $scope.isEditable.push([]);
+                for(var j=0; j<$scope.trials[i].quizzes.length; j++){
+                    $scope.isEditable[i].push(false);
+                }
+            }
+            console.log($scope.isEditable);
+        }
+
+        $scope.edit = function(i, j){
+            if($scope.isEditable[i][j]){
+                console.log('save');
+            }else{
+                console.log('edit');
+            }
+            $scope.isEditable[i][j] = !$scope.isEditable[i][j];
+        }
+
+        $scope.editText = function(i, j){
+            if($scope.isEditable[i][j]){
+                return 'ok';
+            }
+            return 'edit';
         }
 
         $scope.generateQuestion = function(quiz, questionType){
