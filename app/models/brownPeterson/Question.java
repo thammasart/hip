@@ -23,9 +23,12 @@ public class Question extends Model {
 	public String trigramType = Trial.WORD;
 	public String trigramLanguage = Trial.ENGLISH;
 
-	@OneToMany(cascade=CascadeType.REMOVE)
-        @JsonManagedReference
-	public List<Quiz> quizzes = new ArrayList<Quiz>();
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy = "question")
+	private List<Quiz> quizzes = new ArrayList<Quiz>();
+
+    public List<Quiz> findQuizzes(){
+        return quizzes;
+    }
 
 	public Question (String firstWord, String secondWord,String thirdWord){
 		this.firstWord = firstWord;

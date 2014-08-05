@@ -19,16 +19,14 @@ public class Quiz extends Model{
 	public int flashTime =5;
 
 	@ManyToOne
-        @JsonBackReference
+    @JsonBackReference
 	public Trial trial;
 
 	@ManyToOne
-        @JsonBackReference
 	public Question question;
 
 	@OneToMany(mappedBy="quiz",cascade=CascadeType.REMOVE)
-        @JsonBackReference
-	public List<Answer> answers = new ArrayList<Answer>();
+	private List<Answer> answers = new ArrayList<Answer>();
 
 	public static final int DEFAULT_FLASHTIME = 5;
 	public static final int DEFAULT_INITCOUNTDOWN = 100;
@@ -72,6 +70,10 @@ public class Quiz extends Model{
 		question = questions.get(index);
 		update();
 	}
+
+    public List<Answer> findAnswer(){
+        return answers;
+    }
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long, Quiz> find = new Finder(Long.class, Quiz.class);

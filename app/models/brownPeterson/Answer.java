@@ -25,7 +25,6 @@ public class Answer extends Model{
 	@ManyToOne
 	public User user;
 	@ManyToOne
-        @JsonManagedReference
 	public Quiz quiz;
 
 	public Answer(String firstWord,String secondWord,String thirdWord,double usedTime,String countdownResult, User user, Quiz quiz){
@@ -64,7 +63,7 @@ public class Answer extends Model{
 		List<Answer> answers = new ArrayList<Answer>();
 		for(Trial trial : models.brownPeterson.Trial.findInvolving(exp)){
 			for(Quiz quiz : trial.quizzes){
-				answers.addAll(quiz.answers);
+				answers.addAll(quiz.findAnswer());
 			}
 		}
 		return answers;

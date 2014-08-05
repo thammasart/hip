@@ -185,10 +185,12 @@ POST        /admin/experiment/saveVisualSearch                      controllers.
 GET         /admin/experiment/mullerInit                            controllers.MullerLayer.initial(expId: Long)
 GET         /admin/experiment/changeBlindnessInit                   controllers.ChangeBlindness.initial(expId: Long)
 GET         /admin/experiment/attentionBlinkInit                   controllers.AttentionBlink.initial(expId: Long)
+GET         /admin/experiment/brownPetersonInit                     controllers.BrownPeterson.initial(expId: Long)
 PUT         /admin/experiment/saveMullerTrial                       controllers.MullerLayer.saveAdmin()
 PUT         /admin/experiment/saveGarnerTrials                      controllers.GarnerInterference.saveTrials()
 PUT         /admin/experiment/saveChangeBlindnessTrials             controllers.ChangeBlindness.saveTrials()
 PUT         /admin/experiment/saveAttentionBlinkTrials             controllers.AttentionBlink.saveTrials()
+PUT         /admin/experiment/saveBrownPetersonTrials             controllers.BrownPeterson.saveTrials()
 
 GET         /admin/experiment/garnerInit                            controllers.GarnerInterference.initial(expId: Long)
 

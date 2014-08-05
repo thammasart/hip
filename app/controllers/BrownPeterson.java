@@ -1,11 +1,17 @@
 package controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.brownPeterson.*;
 import models.*;
 import models.brownPeterson.Answer;
 import models.brownPeterson.Quiz;
 import models.brownPeterson.Trial;
 import play.*;
+import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
 
@@ -148,4 +154,85 @@ public class BrownPeterson extends Controller {
     }
 
 
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result initial(long id) {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            ExperimentSchedule exp = ExperimentSchedule.find.byId(id);
+            List<Trial> trials = Trial.findInvolving(exp);
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonArray = mapper.writeValueAsString(trials);
+            json = Json.parse(jsonArray);
+            result.put("trials", json);
+            List<Question> wordEnglish = Question.find.where().eq("trigramType", Trial.WORD).eq("trigramLanguage", Trial.ENGLISH).findList();
+            List<Question> wordThai = Question.find.where().eq("trigramType", Trial.WORD).eq("trigramLanguage", Trial.THAI).findList();
+            List<Question> nonsenseThai = Question.find.where().eq("trigramType", Trial.NON_SENSE).eq("trigramLanguage", Trial.THAI).findList();
+            List<Question> nonsenseEng = Question.find.where().eq("trigramType", Trial.NON_SENSE).eq("trigramLanguage", Trial.ENGLISH).findList();
+            jsonArray = mapper.writeValueAsString(wordEnglish);
+            json = Json.parse(jsonArray);
+            result.put("wordEnglish", json);
+            jsonArray = mapper.writeValueAsString(wordThai);
+            json = Json.parse(jsonArray);
+            result.put("wordThai", json);
+            jsonArray = mapper.writeValueAsString(nonsenseThai);
+            json = Json.parse(jsonArray);
+            result.put("nonsenseThai", json);
+            jsonArray = mapper.writeValueAsString(nonsenseEng);
+            json = Json.parse(jsonArray);
+            result.put("nonsenseEng", json);
+            result.put("message", "success");
+            result.put("status", "ok");
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result saveTrials() {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            json = request().body().asJson();
+            String jsonString = Json.stringify(json);
+            ObjectMapper mapper = new ObjectMapper();
+            List<Trial> trials = mapper.readValue(jsonString, new TypeReference<List<Trial>>(){});
+            for(Trial obj : trials){
+                Trial trial = Trial.find.byId(obj.id);
+                List<Quiz> quizzes = obj.quizzes;
+                for(Quiz temp : quizzes){
+                    Quiz quiz = Quiz.find.byId(temp.id);
+                    quiz.flashTime = temp.flashTime;
+                    quiz.initCountdown = temp.initCountdown;
+                    quiz.question = Question.find.byId(temp.question.id);
+                    quiz.update();
+                }
+                trial.trigramLanguage = obj.trigramLanguage;
+                trial.trigramType = obj.trigramType;
+                trial.update();
+            }
+            result.put("message", "success");
+            result.put("status", "ok");
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
 }

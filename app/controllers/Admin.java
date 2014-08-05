@@ -459,9 +459,9 @@ public class Admin extends Controller {
     }
     public static Result deleteBrownPetersonQuestion(long questionId){
         models.brownPeterson.Question question = models.brownPeterson.Question.find.byId(questionId);
-        if(question.quizzes.size() > 0){
+        if(question.findQuizzes().size() > 0){
             flash("error", "ไม่สามารถลบได้ เนื่องจากถูกใช้งานอยู่");
-            System.out.println(question.quizzes.size());
+            System.out.println(question.findQuizzes().size());
         }else{
             question.delete();
             flash("success", "ลบคำถามเรียบร้อยแล้ว");

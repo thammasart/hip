@@ -72,14 +72,68 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return false;
         }
     })
-    .controller('BrownPetersonCtrl', function($scope){
-        $scope.initCountdowns = [];
-        $scope.flashTimes = [];
-        $scope.trigramTypes = [];
-        $scope.trigramLanguages = [];
+    .controller('BrownPetersonCtrl', function($scope, $http){
+        $scope.trigramTypes = ['word', 'nonsense'];
+        $scope.trigramLanguages = ['english','thai'];
+        $scope.trials = [];
+        $scope.nonsenseThai = [];
+        $scope.nonsenseEnglish = [];
+        $scope.wordThai = [];
+        $scope.wordEnglish = [];
+        $scope.inProcess = false;
+
+        $scope.init = function(expId) {
+            $scope.inProcess = true;
+            $http({method: 'GET', url: 'brownPetersonInit', params: {expId: expId}}).success(function (result) {
+                $scope.trials = result.trials;
+                $scope.nonsenseThai = result.nonsenseThai;
+                $scope.nonsenseEnglish = result.nonsenseEng;
+                $scope.wordThai = result.wordThai;
+                $scope.wordEnglish = result.wordEnglish;
+                $scope.inProcess = false;
+                console.log($scope.trials);
+            }).error(function (result) {
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+        }
+
+        $scope.refresh = function(trial){
+            for(var i=0; i<trial.quizzes.length; i++){
+                trial.quizzes[i].question = findQuestion(trial.trigramType, trial.trigramLanguage);
+            }
+        }
+
+        $scope.saveAll = function(){
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveBrownPetersonTrials',data:$scope.trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+        function findQuestion(trigramType, trigramLanguage){
+            if(trigramType == 'word'){
+                if(trigramLanguage == 'english'){
+                    return $scope.wordEnglish[Math.floor(Math.random() * $scope.wordEnglish.length)];
+                }else{
+                    return $scope.wordThai[Math.floor(Math.random() * $scope.wordThai.length)];
+                }
+            }else{
+                if(trigramLanguage == 'english'){
+                    return $scope.nonsenseEnglish[Math.floor(Math.random() * $scope.nonsenseEnglish.length)];
+                }else{
+                    return $scope.nonsenseThai[Math.floor(Math.random() * $scope.nonsenseThai.length)];
+                }
+            }
+        }
 
     })
     .controller('AttentionBlinkCtrl', function($scope, $http){
+        $scope.trials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
 

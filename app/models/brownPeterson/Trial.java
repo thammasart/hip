@@ -59,8 +59,8 @@ public class Trial extends Model {
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
-            this.totalScore += Answer.calculateTotalScore(q.answers);
-            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+            this.totalScore += Answer.calculateTotalScore(q.findAnswer());
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswer());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
     }
@@ -68,7 +68,7 @@ public class Trial extends Model {
 	public int calculateAverageScore(){
 		int totalScore = 0;
 		for(Quiz quiz : this.quizzes){
-			totalScore += Answer.calculateTotalScore(quiz.answers);
+			totalScore += Answer.calculateTotalScore(quiz.findAnswer());
 		}
 		//return totalScore/this.calculateTotalUser();
         return 1;
