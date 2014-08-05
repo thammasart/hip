@@ -44,6 +44,8 @@ public class Trial extends Model{
             this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.update();
     }
 
     public static Trial create(ExperimentSchedule ex){
