@@ -15,14 +15,18 @@ public class Quiz extends Model{
 
 	public int length = 7;
 
-	@ManyToOne(cascade=CascadeType.REMOVE)
-        @JsonBackReference
+	@OneToOne(cascade=CascadeType.REMOVE)
 	public Question question;
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     public Trial trial;
-    @OneToMany(cascade=CascadeType.REMOVE)
-    public List<Answer> answers = new ArrayList<Answer>();
+    @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "quiz")
+    private List<Answer> answers = new ArrayList<Answer>();
+
+    public List<Answer> findAnswers(){
+        return answers;
+    }
+
     public Quiz(){}
 
     public Quiz(int length,Question question, Trial trial){
