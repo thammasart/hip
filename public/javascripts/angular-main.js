@@ -363,7 +363,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             var question = trial.quizzes[0].question;
             trial.quizzes = [];
             generateOneCharCorrectQuiz(trial, question);
-
+            generateTwoCharCorrectQuiz(trial, question);
             if(trial.questionType == 'THAI'){
                 generateOneCharInCorrectQuiz(trial, question, THAI_CASE);
             }else if(trial.questionType == 'ENGLISH'){
@@ -373,6 +373,37 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             }
 
             console.log(trial);
+        }
+
+        function generateTwoCharCorrectQuiz(trial, question){
+            if(trial.length < 2)
+                return;
+            var temp = [];
+            for(var i=0; i<trial.twoCharIsCorrect; i++){
+                var text = generateTwoChar(temp, question.memorySet);
+                var quiz = Quiz(text, true, question);
+                trial.quizzes.push(quiz);
+            }
+        }
+
+        function generateTwoChar(array, memorySet){
+            var index = Math.floor(Math.random() * (memorySet.length - 1));
+            var text = '';
+            text += memorySet.charAt(index);
+            text += memorySet.charAt(index + 1);
+            if(duplicateQuestion(array, text)){
+                text = generateTwoChar(array, memorySet);
+            }else{
+                array.push(text);
+            }
+            return text;
+        }
+        function duplicateQuestion(array, text){
+            for(var i=0; i<array.length; i++){
+                if(array[i] == text)
+                    return true;
+            }
+            return false;
         }
 
         function generateOneCharCorrectQuiz(trial, question){

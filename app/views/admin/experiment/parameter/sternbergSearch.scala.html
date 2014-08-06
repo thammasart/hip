@@ -47,7 +47,7 @@
                                             <input type="number" min="0" max="10"  class="form-control center-block input-two-word "
                                                    ng-model="trial.oneCharIsInCorrect" required></td>
                                         <td>
-                                            <input type="number" min="0" max="10"  class="form-control center-block input-two-word "
+                                            <input type="number" min="0" max="{{trial.length - 1}}"  class="form-control center-block input-two-word "
                                                    ng-model="trial.twoCharIsCorrect" required></td>
                                         <td>
                                             <input type="number" min="0" max="10" class="form-control center-block input-two-word "
@@ -64,7 +64,6 @@
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Memory Set Language</h4>
                             <select class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
-                            <button style="margin-top:10px;margin-bottom: 10px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
                         </div>
                     </div>
                     <div class="row">
