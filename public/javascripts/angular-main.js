@@ -268,10 +268,13 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             var NUMBER_CASE = '0123456789';
 
             if(questionType == 'THAI'){
+                quiz.question.questionType = 'THAI';
                 generateText(quiz, THAI_CASE);
             }else if(questionType == 'ENGLISH'){
+                quiz.question.questionType = 'ENGLISH';
                 generateText(quiz, ENGLISH_CASE);
             }else{
+                quiz.question.questionType = 'NUMBER';
                 generateText(quiz, NUMBER_CASE);
             }
         }
@@ -305,6 +308,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
     })
     .controller('SternbergSearchCtrl', function($scope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
+        $scope.showQuiz = true;
+        var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var THAI_CASE = "กขคฆงจฉชฌญฎฐฒณดถทธนบผพภมยรลวศษสหฬอ";
+        var NUMBER_CASE = '0123456789';
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
         $scope.inProcess = false;
@@ -319,6 +326,119 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 console.log('error:' + result);
                 $scope.inProcess = false;
             });
+        }
+
+        $scope.generateQuestion = function(trial){
+
+            if(trial.questionType == 'THAI'){
+                trial.quizzes[0].question.questionType = 'THAI';
+                generateText(trial, THAI_CASE);
+            }else if(trial.questionType == 'ENGLISH'){
+                trial.quizzes[0].question.questionType = 'ENGLISH';
+                generateText(trial, ENGLISH_CASE);
+            }else{
+                trial.quizzes[0].question.questionType = 'NUMBER';
+                generateText(trial, NUMBER_CASE);
+            }
+
+            generateQuiz(trial);
+        }
+
+        function generateText(trial, CASE){
+            var charSet = generateCharSet(CASE);
+            var temp = angular.copy(charSet);
+            var text = '';
+            for(var i=0; i<trial.length; i++){
+                if(temp.length == 0){
+                    temp = angular.copy(charSet);
+                }
+                var index = Math.floor(Math.random() * temp.length);
+                text += temp[index];
+                temp.splice(index, 1);
+            }
+            trial.quizzes[0].question.memorySet = text;
+        }
+
+        function generateQuiz(trial){
+            var question = trial.quizzes[0].question;
+            trial.quizzes = [];
+            generateOneCharCorrectQuiz(trial, question);
+
+            if(trial.questionType == 'THAI'){
+                generateOneCharInCorrectQuiz(trial, question, THAI_CASE);
+            }else if(trial.questionType == 'ENGLISH'){
+                generateOneCharInCorrectQuiz(trial, question, ENGLISH_CASE);
+            }else{
+                generateOneCharInCorrectQuiz(trial, question, NUMBER_CASE);
+            }
+
+            console.log(trial);
+        }
+
+        function generateOneCharCorrectQuiz(trial, question){
+            var quizSet = generateCharSet(question.memorySet);
+            var temp = angular.copy(quizSet);
+            for(var i=0; i<trial.oneCharIsCorrect; i++){
+                if(temp.length == 0){
+                    temp = angular.copy(quizSet);
+                }
+                var index = Math.floor(Math.random() * temp.length);
+                var quiz = Quiz(temp[index], true, question);
+                temp.splice(index, 1);
+                trial.quizzes.push(quiz);
+            }
+        }
+
+        function generateOneCharInCorrectQuiz(trial, question, CASE){
+            var quizSet = generateCharSet(CASE);
+            var temp = angular.copy(quizSet);
+            for(var i=0; i<trial.oneCharIsInCorrect; i++){
+                if(temp.length == 0){
+                    temp = angular.copy(quizSet);
+                }
+                var questionChar = generateChar(temp, question.memorySet);
+                var quiz = Quiz(questionChar, false, question);
+                trial.quizzes.push(quiz);
+            }
+
+        }
+
+        function generateChar(quizSet, memorySet){
+            var index = Math.floor(Math.random() * quizSet.length);
+            var questionChar = quizSet[index];
+            if(memorySet.search(questionChar) > -1){
+                questionChar = generateChar(quizSet, memorySet);
+            }else{
+                quizSet.splice(index, 1);
+            }
+
+            return questionChar;
+        }
+
+        function generateCharSet(CASE){
+            var quizSet = [];
+            for(var i=0; i<CASE.length; i++){
+                quizSet.push(CASE.charAt(i));
+            }
+            return quizSet;
+        }
+
+        function Quiz(questionChar, isTrue, question){
+            return {
+                questionChar: questionChar,
+                isTrue: isTrue,
+                question: question
+            }
+        }
+
+        $scope.getQuestion = function(questionChar){
+            if(questionChar.length <= 1){
+                return questionChar;
+            }
+            var text = questionChar.charAt(0);
+            text += ' และ ';
+            text += questionChar.charAt(1);
+            return text;
         }
 
     })
@@ -346,10 +466,13 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             var NUMBER_CASE = '0123456789';
 
             if(questionType == 'THAI'){
+                quiz.question.questionType = 'THAI';
                 generateText(quiz, THAI_CASE);
             }else if(questionType == 'ENGLISH'){
+                quiz.question.questionType = 'ENGLISH';
                 generateText(quiz, ENGLISH_CASE);
             }else{
+                quiz.question.questionType = 'NUMBER';
                 generateText(quiz, NUMBER_CASE);
             }
         }

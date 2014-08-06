@@ -41,7 +41,7 @@
                                             <input type="number" min="1" max="6"  class="form-control center-block input-two-word "
                                                   ng-model="trial.length" required></td>
                                         <td>
-                                            <input type="number" min="0" max="10"  class="form-control center-block input-two-word "
+                                            <input type="number" min="0" max="{{trial.length}}"  class="form-control center-block input-two-word "
                                                    ng-model="trial.oneCharIsCorrect" required></td>
                                         <td>
                                             <input type="number" min="0" max="10"  class="form-control center-block input-two-word "
@@ -64,28 +64,26 @@
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Memory Set Language</h4>
                             <select class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
+                            <button style="margin-top:10px;margin-bottom: 10px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
                             <div class="panel panel-default">
-                                <div class="panel-heading">Question</div>
-                                <table class="table text-center">
-                                    <thead>
-                                    <tr>
-                                        <th>Memory Set</th>
-                                        <th>#</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><span style="margin-right: 5px" ng-repeat="quiz in trial.quizzes" ng-class="{'memory-set':quiz.isTrue}">{{quiz.questionChar}}</span></td>
-                                        <td><button class="btn btn-primary btn-xs">random</button></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="panel-heading">Memory Set</div>
+                                <div class="panel-body">
+                                    <p class="lead text-center" style="margin:0px">{{trial.quizzes[0].question.memorySet}}
+                                        <span class="btn btn-primary btn-xs pull-right" ng-click="generateQuestion(trial)">random</span></p>
+                                </div>
+                                <div class="panel-footer">
+                                    <button class="btn btn-default" ng-click="showQuiz = !showQuiz">แสดงคำถาม</button>
+                                    <div collapse="showQuiz" style="width:300px">
+                                        <ul class="list-group">
+                                            <li class="list-group-item"  ng-repeat="quiz in trial.quizzes" ng-class="{'memory-set':quiz.isTrue}">มี {{getQuestion(quiz.questionChar)}} หรือไม่</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <p style="margin-left: 20px" class="text-info">** ตัวอักษรสีน้ำเงินคือคำตอบที่ถูกต้อง **</p>
                         </div>
                     </div>
                 </div>
