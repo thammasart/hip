@@ -5,6 +5,7 @@ import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 import play.db.ebean.Model.Finder;
 
@@ -50,6 +51,8 @@ public class Quiz extends Model {
         question.save();
         newQuiz.question = question;
         newQuiz.trial = trial;
+        newQuiz.isTrue = true;
+        newQuiz.questionChar = Character.toString(question.memorySet.charAt(new Random().nextInt(question.memorySet.length())));
         return newQuiz;
     }
 

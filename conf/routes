@@ -196,6 +196,7 @@ PUT         /admin/experiment/saveAttentionBlinkTrials             controllers.A
 PUT         /admin/experiment/saveBrownPetersonTrials             controllers.BrownPeterson.saveTrials()
 PUT         /admin/experiment/saveMagicSevenTrials              controllers.MagicNumber7.saveTrials()
 PUT         /admin/experiment/savePositionErrorTrials              controllers.PositionError.saveTrials()
+PUT         /admin/experiment/saveSternBergTrials              controllers.SternbergSearch.saveTrials()
 GET         /admin/experiment/brown-peterson/brownPetersonQuestion  controllers.BrownPeterson.findAllQuestions()
 DELETE         /admin/experiment/brown-peterson/brownPetersonDeleteQuestion  controllers.BrownPeterson.deleteQuestion(id:Long)
 

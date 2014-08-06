@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -131,6 +132,61 @@ public class SternbergSearch extends Controller{
             result.put("message", "success");
             result.put("status", "ok");
             result.put("trials", json);
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result saveTrials() {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            json = request().body().asJson();
+            String jsonString = Json.stringify(json);
+            ObjectMapper mapper = new ObjectMapper();
+            List<Trial> trials = mapper.readValue(jsonString, new TypeReference<List<Trial>>(){});
+            for(Trial obj : trials){
+                Trial trial = Trial.find.byId(obj.id);
+                Question q = obj.quizzes.get(0).question;
+                Question question = Question.find.byId(q.id);
+                question.memorySet = q.memorySet;
+                question.questionType = q.questionType;
+                question.update();
+                List<Quiz> unUseQuiz = new ArrayList<>(trial.quizzes);
+
+                trial.quizzes = new ArrayList<>();
+                List<Quiz> quizzes = obj.quizzes;
+                for(Quiz temp : quizzes){
+                    Quiz quiz = new Quiz(trial, question);
+                    quiz.isTrue = temp.isTrue;
+                    quiz.questionChar = temp.questionChar;
+                    quiz.save();
+                }
+                trial.questionType = obj.questionType;
+                trial.length = obj.length;
+                trial.oneCharIsCorrect = obj.oneCharIsCorrect;
+                trial.oneCharIsInCorrect = obj.oneCharIsInCorrect;
+                trial.twoCharIsCorrect = obj.twoCharIsCorrect;
+                trial.twoCharIsInCorrect = obj.twoCharIsInCorrect;
+                trial.update();
+
+                for(Quiz go : unUseQuiz){
+                    Quiz quiz = Quiz.find.byId(go.id);
+                    quiz.delete();
+                }
+            }
+            result.put("message", "success");
+            result.put("status", "ok");
         }catch (JsonProcessingException e) {
             result.put("message", e.getMessage());
             result.put("status", "error");

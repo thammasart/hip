@@ -21,11 +21,11 @@ public class Trial extends Model{
     public double totalUsedTime = 0;
     public int totalUser = 0;
 	public double blinkTime;
-	public int oneCharIsCorrect;
-	public int oneCharIsInCorrect;
-	public int twoCharIsCorrect;
-	public int twoCharIsInCorrect;
-    public QuestionType questionType;
+	public int oneCharIsCorrect = 1;
+	public int oneCharIsInCorrect = 0;
+	public int twoCharIsCorrect = 0;
+	public int twoCharIsInCorrect = 0;
+    public QuestionType questionType = QuestionType.ENGLISH;
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "trial")
@@ -40,9 +40,6 @@ public class Trial extends Model{
         Trial trial = new Trial(schedule);
         trial.length = 3;
         trial.blinkTime = 0.3;
-        trial.oneCharIsCorrect = 3;
-        trial.oneCharIsInCorrect = 3;
-        trial.questionType = QuestionType.ENGLISH;
         return trial;
 
     }

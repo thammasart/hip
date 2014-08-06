@@ -375,7 +375,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 generateTwoCharInCorrectQuiz(trial, question, NUMBER_CASE);
             }
 
-            console.log(trial);
+            trial.quizzes = shuffle(trial.quizzes);
         }
 
         function generateTwoCharInCorrectQuiz(trial, question, CASE){
@@ -498,6 +498,39 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             text += ' และ ';
             text += questionChar.charAt(1);
             return text;
+        }
+        $scope.saveAll = function(){
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveSternBergTrials',data:$scope.trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+
+        function shuffle(array) {
+            var currentIndex = array.length
+                , temporaryValue
+                , randomIndex
+                ;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
         }
 
     })
