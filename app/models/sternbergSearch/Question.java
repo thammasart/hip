@@ -21,9 +21,8 @@ public class Question extends Model{
     public long id;
     public String memorySet;
     public QuestionType questionType;
-    @OneToMany
-    @JsonBackReference
-    public List<Quiz> quizzes;
+    @OneToMany(mappedBy = "question")
+    private List<Quiz> quizzes;
 
     public Question(){}
     public Question(String memorySet, QuestionType questionType) {

@@ -303,8 +303,24 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         }
 
     })
-    .controller('SternbergSearchCtrl', function($scope){
+    .controller('SternbergSearchCtrl', function($scope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
+        $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
+        $scope.trials = [];
+        $scope.inProcess = false;
+
+        $scope.init = function(expId) {
+            $scope.inProcess = true;
+            $http({method: 'GET', url: 'sternbergInit', params: {expId: expId}}).success(function (result) {
+                $scope.trials = result.trials;
+                $scope.inProcess = false;
+                console.log($scope.trials);
+            }).error(function (result) {
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+        }
+
     })
     .controller('MagicNumber7Ctrl', function($scope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;

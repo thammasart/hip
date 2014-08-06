@@ -188,6 +188,7 @@ GET         /admin/experiment/attentionBlinkInit                   controllers.A
 GET         /admin/experiment/brownPetersonInit                     controllers.BrownPeterson.initial(expId: Long)
 GET         /admin/experiment/MagicSevenInit                        controllers.MagicNumber7.initial(expId: Long)
 GET         /admin/experiment/PositionErrorInit                        controllers.PositionError.initial(expId: Long)
+GET         /admin/experiment/sternbergInit                        controllers.SternbergSearch.initial(expId: Long)
 PUT         /admin/experiment/saveMullerTrial                       controllers.MullerLayer.saveAdmin()
 PUT         /admin/experiment/saveGarnerTrials                      controllers.GarnerInterference.saveTrials()
 PUT         /admin/experiment/saveChangeBlindnessTrials             controllers.ChangeBlindness.saveTrials()

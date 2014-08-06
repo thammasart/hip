@@ -201,3 +201,8 @@ th{
 .border-active {
     border: 3px solid #0600ff;
 }
+
+.memory-set{
+    font-weight: bold;
+    color: #003DFF;
+}
