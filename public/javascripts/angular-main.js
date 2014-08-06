@@ -366,13 +366,41 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             generateTwoCharCorrectQuiz(trial, question);
             if(trial.questionType == 'THAI'){
                 generateOneCharInCorrectQuiz(trial, question, THAI_CASE);
+                generateTwoCharInCorrectQuiz(trial, question, THAI_CASE);
             }else if(trial.questionType == 'ENGLISH'){
                 generateOneCharInCorrectQuiz(trial, question, ENGLISH_CASE);
+                generateTwoCharInCorrectQuiz(trial, question, ENGLISH_CASE);
             }else{
                 generateOneCharInCorrectQuiz(trial, question, NUMBER_CASE);
+                generateTwoCharInCorrectQuiz(trial, question, NUMBER_CASE);
             }
 
             console.log(trial);
+        }
+
+        function generateTwoCharInCorrectQuiz(trial, question, CASE){
+            if(trial.length < 2)
+                return;
+
+            var quizSet = generateCharSetExceptMemorySet(CASE, question.memorySet);
+            var temp = angular.copy(quizSet);
+            for(var i=0; i<trial.twoCharIsInCorrect; i++){
+                var text = question.memorySet.charAt(Math.floor(Math.random() * (question.memorySet.length - 1) ));
+                var index = Math.floor(Math.random() * temp.length);
+                text += temp[index];
+                temp.splice(index, 1);
+                trial.quizzes.push(Quiz(text, false, question));
+            }
+        }
+
+        function generateCharSetExceptMemorySet(CASE, memorySet){
+            var quizSet = [];
+            for(var i=0; i<CASE.length; i++){
+                var char = CASE.charAt(i);
+                if(memorySet.search(char) == -1)
+                    quizSet.push(CASE.charAt(i));
+            }
+            return quizSet;
         }
 
         function generateTwoCharCorrectQuiz(trial, question){
