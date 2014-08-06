@@ -23,7 +23,6 @@ public class Answer extends Model{
     @ManyToOne
     public User user;
     @ManyToOne
-    @JsonManagedReference
     public Quiz quiz;
 
     public Answer(String answer,double usedTime){

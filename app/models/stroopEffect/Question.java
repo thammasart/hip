@@ -7,8 +7,6 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
-import play.db.ebean.Model.Finder;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table (name="stroop_engword_question")
@@ -27,9 +25,8 @@ public class Question extends Model{
 
     public QuestionType questionType = QuestionType.ENGLISH;
 
-    @OneToMany(cascade=CascadeType.REMOVE)
-    @JsonBackReference
-    public List<Quiz> quizzes;
+    @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "question")
+    private List<Quiz> quizzes;
 
     public Question(){
         colorWord = "Black";
@@ -56,12 +53,12 @@ public class Question extends Model{
         if(this.questionType == QuestionType.ENGLISH){
             colorWord = this.colorWord;
         }else if(this.questionType == QuestionType.THAI){
-            colorWord = getEnglishColorWord(this.colorWord);
+            colorWord = findEnglishColorWord(this.colorWord);
         }
         return colorWord.equalsIgnoreCase(inkColor);
     }
 
-    public String getEnglishColorWord(String colorWordTH){
+    public String findEnglishColorWord(String colorWordTH){
         final String BLACK_TH = "ดำ";
         final String BLUE_TH = "น้ำเงิน";
         final String RED_TH = "แดง";
@@ -75,22 +72,22 @@ public class Question extends Model{
         final String PURPLE = "purple";
         final String YELLOW = "yellow";
         String colorWord = "";
-        if (colorWord.equals(BLACK_TH)){
+        if (colorWordTH.equals(BLACK_TH)){
             colorWord = BLACK;
         }
-        else if(colorWord.equals(BLUE_TH)){
+        else if(colorWordTH.equals(BLUE_TH)){
             colorWord = BLUE;
         }
-        else if(colorWord.equals(RED_TH)){
+        else if(colorWordTH.equals(RED_TH)){
             colorWord = RED;
         }
-        else if(colorWord.equals(GREEN_TH)){
+        else if(colorWordTH.equals(GREEN_TH)){
             colorWord = GREEN;
         }
-        else if(colorWord.equals(PURPLE_TH)){
+        else if(colorWordTH.equals(PURPLE_TH)){
             colorWord = PURPLE;
         }
-        else if(colorWord.equals(YELLOW_TH)){
+        else if(colorWordTH.equals(YELLOW_TH)){
             colorWord = YELLOW;
         }
         return colorWord;

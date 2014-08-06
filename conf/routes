@@ -189,6 +189,7 @@ GET         /admin/experiment/brownPetersonInit                     controllers.
 GET         /admin/experiment/MagicSevenInit                        controllers.MagicNumber7.initial(expId: Long)
 GET         /admin/experiment/PositionErrorInit                        controllers.PositionError.initial(expId: Long)
 GET         /admin/experiment/sternbergInit                        controllers.SternbergSearch.initial(expId: Long)
+GET         /admin/experiment/stroofEffectInit                        controllers.StroopEffect.initial(expId: Long)
 PUT         /admin/experiment/saveMullerTrial                       controllers.MullerLayer.saveAdmin()
 PUT         /admin/experiment/saveGarnerTrials                      controllers.GarnerInterference.saveTrials()
 PUT         /admin/experiment/saveChangeBlindnessTrials             controllers.ChangeBlindness.saveTrials()
@@ -197,6 +198,7 @@ PUT         /admin/experiment/saveBrownPetersonTrials             controllers.Br
 PUT         /admin/experiment/saveMagicSevenTrials              controllers.MagicNumber7.saveTrials()
 PUT         /admin/experiment/savePositionErrorTrials              controllers.PositionError.saveTrials()
 PUT         /admin/experiment/saveSternBergTrials              controllers.SternbergSearch.saveTrials()
+PUT         /admin/experiment/saveStroofEffectTrials              controllers.StroopEffect.saveTrials()
 GET         /admin/experiment/brown-peterson/brownPetersonQuestion  controllers.BrownPeterson.findAllQuestions()
 DELETE         /admin/experiment/brown-peterson/brownPetersonDeleteQuestion  controllers.BrownPeterson.deleteQuestion(id:Long)
 

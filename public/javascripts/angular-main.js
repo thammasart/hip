@@ -209,11 +209,103 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return text;
         }
     })
-    .controller('SignalDetectionCtrl', function($scope){
+    .controller('SignalDetectionCtrl', function($scope, $http){
         $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
     })
-    .controller('StroofEffectCtrl', function($scope){
+    .controller('StroofEffectCtrl', function($scope, $http){
+        $scope.questionTypes = ['THAI', 'ENGLISH'];
+        $scope.trials = [];
+        $scope.inProcess = false;
+
+        var matchEnglish = [];
+        var matchThai = [];
+        var notMatchEnglish = [];
+        var notMatchThai = [];
+
+        $scope.init = function(expId) {
+            $scope.inProcess = true;
+            $http({method: 'GET', url: 'stroofEffectInit', params: {expId: expId}}).success(function (result) {
+                $scope.trials = result.trials;
+                initQuestion(result.questions);
+                $scope.inProcess = false;
+                console.log($scope.trials);
+            }).error(function (result) {
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+        }
+
+        $scope.randomQuestion = function(quiz, questionType){
+            if(questionType == 'ENGLISH'){
+                if(quiz.question.match){
+                    quiz.question = angular.copy(matchEnglish[Math.floor(Math.random() * matchEnglish.length)]);
+                }else{
+                    quiz.question = angular.copy(notMatchEnglish[Math.floor(Math.random() * matchEnglish.length)]);
+                }
+            }else{
+                if(quiz.question.match){
+                    quiz.question = angular.copy(matchThai[Math.floor(Math.random() * matchEnglish.length)]);
+                }else{
+                    quiz.question = angular.copy(notMatchThai[Math.floor(Math.random() * matchEnglish.length)]);
+                }
+            }
+        }
+
+        $scope.refresh = function(trial){
+            for(var i=0; i<trial.quizzes.length; i++){
+                $scope.randomQuestion(trial.quizzes[i], trial.questionType);
+            }
+        }
+
+        $scope.saveAll = function(){
+            $scope.inProcess = true;
+            resetQuestion();
+            $http({method:'PUT',url:'saveStroofEffectTrials',data:$scope.trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+
+        function resetQuestion(){
+            for(var i=0; i<$scope.trials.length; i++){
+                for(var j=0; j<$scope.trials[i].quizzes.length; j++){
+                    $scope.trials[i].quizzes[j].question = getNewQuestion($scope.trials[i].quizzes[j].question);
+                }
+            }
+        }
+
+        function getNewQuestion(question){
+            return {
+                id:question.id,
+                colorWord:question.colorWord,
+                inkColor:question.inkColor,
+                questionType: question.questionType
+            }
+        }
+
+        function initQuestion(questions){
+            for(var i=0; i<questions.length; i++){
+                if(questions[i].questionType == 'ENGLISH'){
+                    if(questions[i].match){
+                        matchEnglish.push(questions[i]);
+                    }else{
+                        notMatchEnglish.push(questions[i])
+                    }
+                }else{
+                    if(questions[i].match){
+                        matchThai.push(questions[i]);
+                    }else{
+                        notMatchThai.push(questions[i])
+                    }
+                }
+            }
+
+        }
     })
     .controller('PositionErrorCtrl', function($scope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
