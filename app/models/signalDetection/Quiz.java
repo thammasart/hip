@@ -19,13 +19,17 @@ public class Quiz extends Model{
     public int noOfTarget;
     public int length;
     @ManyToOne(cascade=CascadeType.REMOVE)
-    @JsonBackReference
 	public Question question;
     @ManyToOne
     @JsonBackReference
     public Trial trial;
     @OneToMany(cascade=CascadeType.REMOVE)
-    public List<Answer> answers = new ArrayList<Answer>();
+    private List<Answer> answers = new ArrayList<Answer>();
+
+    public List<Answer> findAnswers(){
+        return answers;
+    }
+
     public Quiz(){
     	this.displayTime = 0;
     	this.noOfTarget = 0;

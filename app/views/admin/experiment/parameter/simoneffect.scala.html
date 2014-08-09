@@ -1,47 +1,53 @@
 @(exp : ExperimentSchedule)
 @import views.html.admin._
-@import models.simonEffect.Trial
-@import models.simonEffect.Quiz
-@import models.simonEffect.Question
-@import models.simonEffect.QuestionType
 @import views.html.admin.experiment._
 @import views.html.form._
 
 <div class="container" ng-app="ExperimentCreator">
-    <form role="form" name="parameter" class="form-horizontal" action="@routes.Admin.saveSimonEffectParameter(exp.id)" method="POST">
+    <form role="form" name="parameter" class="form-horizontal" >
 
         @exp_edit(exp)
         <hr>
         @error()
-        <div class="container" ng-controller="SimonEffectCtrl" >
-
-            @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
-            <h3>Trial @{index + 1}</h3>
-            <div class="well">
-                <div class="row" ng-init="feature_@trial.id = '@trial.questionType';blinkTime_@trial.id = @trial.blinkTime">
-                    <h4>Question Feature</h4>
-                    <label class="radio-inline">
-                        <input type="radio" name="questionType_@trial.id" ng-model="feature_@trial.id" value="@QuestionType.ONEFEATURE"
-                        > One Feature
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="questionType_@trial.id" ng-model="feature_@trial.id" value="@QuestionType.TWOFEATURE"
-                        > Two Feature
-                    </label>
-                    <br />
-                    <div class="form-group">
-                        <label class="col-sm-2">Blink Time</label>
-                        <div class="col-sm-2" ng-class="{true: 'has-error', false : ''}[parameter.blinkTime_@{trial.id}.$invalid]">
-                            <input type="text" class="form-control" name="blinkTime_@trial.id" ng-model="blinkTime_@trial.id" ng-pattern="floatPattern"
-                                   required>
+        <div class="container" ng-controller="SimonEffectCtrl" ng-init="init(@exp.id)" >
+            <div ng-repeat="trial in trials">
+            <h3>Trial {{$index + 1}}</h3>
+                <div class="well">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Question</h4>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Color</th>
+                                        <th>Alphabet</th>
+                                        <th>Display position</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center" ng-repeat="quiz in trial.quizzes">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{quiz.question.color}}</td>
+                                        <td>{{quiz.question.alphabet}}</td>
+                                        <td>{{quiz.position}}</td>
+                                        <td><button class="btn btn-primary btn-xs" ng-click="randomQuestion(quiz, trial.questionType)">random</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Question Feature</h4>
+                            <select class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-sm-3">Blink Time</label>
+                                <input type="text" style="width:100px" class="form-control" ng-model="trial.blinkTime" ng-pattern="floatPattern"
+                                required>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            }
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-md-offset-8 col-sm-offset-8">
-                    <button type="submit" class="btn btn-success btn-save" ng-disabled="parameter.$invalid">+SAVE ALL</button>
                 </div>
             </div>
         </div>

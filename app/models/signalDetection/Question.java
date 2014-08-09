@@ -15,9 +15,8 @@ public class Question extends Model{
     public char target;
     public char noise;
 
-    @OneToMany
-    @JsonManagedReference
-    public List<Quiz> quizzes = new ArrayList<Quiz>();
+    @OneToMany(mappedBy = "question")
+    private List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public Question(){}
 

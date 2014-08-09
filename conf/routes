@@ -190,6 +190,7 @@ GET         /admin/experiment/MagicSevenInit                        controllers.
 GET         /admin/experiment/PositionErrorInit                        controllers.PositionError.initial(expId: Long)
 GET         /admin/experiment/sternbergInit                        controllers.SternbergSearch.initial(expId: Long)
 GET         /admin/experiment/stroofEffectInit                        controllers.StroopEffect.initial(expId: Long)
+GET         /admin/experiment/SimonEffectInit                        controllers.SimonEffect.initial(expId: Long)
 PUT         /admin/experiment/saveMullerTrial                       controllers.MullerLayer.saveAdmin()
 PUT         /admin/experiment/saveGarnerTrials                      controllers.GarnerInterference.saveTrials()
 PUT         /admin/experiment/saveChangeBlindnessTrials             controllers.ChangeBlindness.saveTrials()

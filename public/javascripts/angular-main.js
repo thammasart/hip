@@ -687,9 +687,26 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             }
         }
     })
-    .controller('SimonEffectCtrl', function($scope){
+    .controller('SimonEffectCtrl', function($scope, $http){
         $scope.trials = [];
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
+
+        $scope.questionTypes = ['ONEFEATURE','TWOFEATURE'];
+        $scope.trials = [];
+        $scope.inProcess = false;
+
+        $scope.init = function(expId) {
+            $scope.inProcess = true;
+            $http({method: 'GET', url: 'SimonEffectInit', params: {expId: expId}}).success(function (result) {
+                $scope.trials = result.trials;
+                $scope.questions = result.questions;
+                $scope.inProcess = false;
+                console.log($scope.trials);
+            }).error(function (result) {
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+        }
     })
     .controller('VisualSearchCtrl', function($scope, $modal, $http){
 
@@ -902,7 +919,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 quiz.differChoice = Math.floor((Math.random() * quiz.noOfChoice) + 1);
 
         }
-    }).controller('GarnerController', function($scope, $http, $modal){
+    })
+    .controller('GarnerController', function($scope, $http, $modal){
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
         $scope.trials = [];
@@ -1155,7 +1173,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return array;
         }
 
-    }).controller('ChangeBlindnessController', function($scope, $http, $modal) {
+    })
+    .controller('ChangeBlindnessController', function($scope, $http, $modal) {
         $scope.inProcess = false;
         $scope.trials = [];
 

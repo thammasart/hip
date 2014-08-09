@@ -20,14 +20,13 @@ public class Trial extends Model{
 	@Id
 	public long id;
 	public QuestionType questionType;
-	public double blinkTime;
+	public double blinkTime = 0.5;
     public int noOfQuiz = 3;
     public double totalScore = 0;
     public int totalUser = 0;
     public double totalUsedTime = 0;
 
     @ManyToOne
-    @JsonManagedReference
     public ExperimentSchedule schedule;
 
     @OneToMany(cascade=CascadeType.REMOVE)
@@ -48,8 +47,8 @@ public class Trial extends Model{
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
-            this.totalScore += Answer.calculateTotalScore(q.answers);
-            this.totalUsedTime += Answer.calculateTotalUsedTime(q.answers);
+            this.totalScore += Answer.calculateTotalScore(q.findAnswers());
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
     }
