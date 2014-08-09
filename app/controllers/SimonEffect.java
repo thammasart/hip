@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -146,6 +147,46 @@ public class SimonEffect extends Controller {
             jsonArray = mapper.writeValueAsString(questions);
             json = Json.parse(jsonArray);
             result.put("questions", json);
+            result.put("message", "success");
+            result.put("status", "ok");
+        }catch (JsonProcessingException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result saveTrials() {
+        ObjectNode result = Json.newObject();
+        JsonNode json;
+        try {
+            json = request().body().asJson();
+            String jsonString = Json.stringify(json);
+            ObjectMapper mapper = new ObjectMapper();
+            List<Trial> trials = mapper.readValue(jsonString, new TypeReference<List<Trial>>(){});
+            for(Trial obj : trials){
+                Trial trial = Trial.find.byId(obj.id);
+                List<Quiz> quizzes = obj.quizzes;
+                for(Quiz temp : quizzes){
+                    Quiz quiz = Quiz.find.byId(temp.id);
+                    Question question = Question.find.byId(temp.question.id);
+                    quiz.question = question;
+                    quiz.position = temp.position;
+                    quiz.update();
+
+                }
+                trial.questionType = obj.questionType;
+                trial.blinkTime = obj.blinkTime;
+                trial.update();
+            }
             result.put("message", "success");
             result.put("status", "ok");
         }catch (JsonProcessingException e) {

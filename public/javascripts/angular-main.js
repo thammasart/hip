@@ -692,20 +692,61 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
 
         $scope.questionTypes = ['ONEFEATURE','TWOFEATURE'];
+        $scope.positions = ['up', 'down', 'right', 'left'];
         $scope.trials = [];
+        var questions = [];
+        var oneFeatureQuestion = [];
+
         $scope.inProcess = false;
 
         $scope.init = function(expId) {
             $scope.inProcess = true;
             $http({method: 'GET', url: 'SimonEffectInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
-                $scope.questions = result.questions;
+                questions = result.questions;
+                initQuestion();
                 $scope.inProcess = false;
                 console.log($scope.trials);
             }).error(function (result) {
                 console.log('error:' + result);
                 $scope.inProcess = false;
             });
+        }
+
+        $scope.randomQuestion = function(quiz, questionType){
+            if(questionType == 'ONEFEATURE'){
+                quiz.question = oneFeatureQuestion[Math.floor(Math.random() * oneFeatureQuestion.length)];
+            }else{
+                quiz.question = questions[Math.floor(Math.random() * questions.length)];
+            }
+            quiz.position = $scope.positions[Math.floor(Math.random() * $scope.positions.length)];
+        }
+
+        $scope.refresh = function(trial){
+            for(var i=0; i<trial.quizzes.length; i++){
+                $scope.randomQuestion(trial.quizzes[i], trial.questionType);
+            }
+        }
+
+        $scope.saveAll = function(){
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveSimonEffectTrials',data:$scope.trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+
+        function initQuestion(){
+            for(var i=0; i<questions.length; i++){
+                if(questions[i].color == 'red' && questions[i].alphabet == 'X'||
+                    questions[i].color == 'green' && questions[i].alphabet == 'O'){
+                    oneFeatureQuestion.push(questions[i]);
+                }
+            }
         }
     })
     .controller('VisualSearchCtrl', function($scope, $modal, $http){

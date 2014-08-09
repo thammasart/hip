@@ -10,7 +10,10 @@
         <hr>
         @error()
         <div class="container" ng-controller="SimonEffectCtrl" ng-init="init(@exp.id)" >
-            <div ng-repeat="trial in trials">
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
+            </div>
+            <div ng-repeat="trial in trials" ng-hide="inProcess">
             <h3>Trial {{$index + 1}}</h3>
                 <div class="well">
                     <div class="row">
@@ -31,7 +34,7 @@
                                         <td>{{$index + 1}}</td>
                                         <td>{{quiz.question.color}}</td>
                                         <td>{{quiz.question.alphabet}}</td>
-                                        <td>{{quiz.position}}</td>
+                                        <td><select class="form-control" style="width:100px;margin:auto" ng-model="quiz.position" ng-options="value for value in positions"></select></td>
                                         <td><button class="btn btn-primary btn-xs" ng-click="randomQuestion(quiz, trial.questionType)">random</button></td>
                                     </tr>
                                 </tbody>
@@ -46,6 +49,7 @@
                                 <input type="text" style="width:100px" class="form-control" ng-model="trial.blinkTime" ng-pattern="floatPattern"
                                 required>
                             </div>
+                            <button style="margin-top:10px;margin-bottom: 10px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
                         </div>
                     </div>
                 </div>

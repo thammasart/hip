@@ -200,6 +200,7 @@ PUT         /admin/experiment/saveMagicSevenTrials              controllers.Magi
 PUT         /admin/experiment/savePositionErrorTrials              controllers.PositionError.saveTrials()
 PUT         /admin/experiment/saveSternBergTrials              controllers.SternbergSearch.saveTrials()
 PUT         /admin/experiment/saveStroofEffectTrials              controllers.StroopEffect.saveTrials()
+PUT         /admin/experiment/saveSimonEffectTrials              controllers.SimonEffect.saveTrials()
 GET         /admin/experiment/brown-peterson/brownPetersonQuestion  controllers.BrownPeterson.findAllQuestions()
 DELETE         /admin/experiment/brown-peterson/brownPetersonDeleteQuestion  controllers.BrownPeterson.deleteQuestion(id:Long)
 
