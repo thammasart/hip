@@ -50,7 +50,7 @@ public class Trial extends Model{
     
     public void generateQuiz(){
         for(int i = 0; i < TOTAL_QUESTION; i++){
-            Question question = new Question('Y', 'X');
+            Question question = Question.create();
             question.save();
             Quiz.create(0.1, 1,15, this, question).save();
         }

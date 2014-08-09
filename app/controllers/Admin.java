@@ -1,5 +1,6 @@
 package controllers;
 
+import org.joda.time.LocalDate;
 import play.mvc.*;
 import play.data.*;
 import play.data.DynamicForm;
@@ -246,6 +247,8 @@ public class Admin extends Controller {
         }
 
         ExperimentSchedule exp = boundForm.get();
+        exp.startDate = LocalDate.fromDateFields(exp.startDate).toDateTimeAtStartOfDay().toDate();
+        exp.expireDate = LocalDate.fromDateFields(exp.expireDate).toDateMidnight().toDate();
         exp.save();
         flash("success","Successfully");
         exp.generateTrials();

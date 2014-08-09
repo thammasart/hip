@@ -1,5 +1,7 @@
 package controllers;
 
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -327,4 +329,31 @@ public class Application extends Controller {
         return ok(views.html.trial.render(experimentType, user));
     }
 
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result saveExperiment(Long id, String name, Long startDate, Long expireDate) {
+        ObjectNode result = Json.newObject();
+        try {
+            ExperimentSchedule exp = ExperimentSchedule.find.byId(id);
+            if (!name.isEmpty()) {
+                exp.name = name;
+            }
+            if (startDate != -1) {
+                exp.startDate = LocalDate.fromDateFields(new Date(startDate)).toDateTimeAtStartOfDay().toDate();
+            }
+            if (expireDate != -1) {
+                exp.expireDate = LocalDate.fromDateFields(new Date(expireDate)).toDateMidnight().toDate();
+            }
+            exp.update();
+            result.put("message", "success");
+            result.put("status", "ok");
+        } catch (RuntimeException e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        } catch (Exception e) {
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
 }

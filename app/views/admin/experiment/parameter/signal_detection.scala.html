@@ -7,63 +7,59 @@
 @import views.html.form._
 
 <div class="container" ng-app="ExperimentCreator">
-<form role="form" name="parameter" class="form-horizontal" action="@routes.Admin.saveSignalDetectionParameter(exp.id)" method="POST">
+    <form role="form" name="parameter" class="form-horizontal">
 
-@exp_edit(exp)
-    <hr>
-    @error()
+        @exp_edit(exp)
+        <hr>
+        @error()
 
-<div class="container" ng-controller="SignalDetectionCtrl">
-    @for((trial, index) <- Trial.findInvolving(exp).zipWithIndex){
-        <h3>Trial @{index + 1}</h3>
-            <div class="row">
-                <div class="col-md-offset-0 col-sm-offset-0 col-md-12 col-sm-">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Question</div>
-                        <table class="table text-center">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>ระบุ Target</th>
-                                    <th>ระบุ Noise</th>
-                                    <th>ความยาวของโจทย์</th>
-                                    <th>จำนวน Target</th>
-                                    <th>ระยะเวลาปรากฎ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for((quiz, index) <- Quiz.find.where().eq("trial", trial).findList().zipWithIndex){
-                                    <tr>
-                                        <td>@{index + 1}</td>
-                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.target_@{quiz.id}.$invalid]">
-                                            <input type="text" ng-pattern="single" name="target_@quiz.id" ng-init="target@quiz.id = '@quiz.question.target'"
-                                                   ng-model="target@quiz.id" class="form-control center-block input-one-word"></div></td>
-                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.noise_@{quiz.id}.$invalid]">
-                                            <input type="text" ng-pattern="single" name="noise_@quiz.id" ng-init="noise@quiz.id = '@quiz.question.noise' "
-                                                   ng-model="noise@quiz.id" class="form-control center-block input-one-word"></div></td>
-                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.length_@{quiz.id}.$invalid]">
-                                            <input type="number" min="1" max="60" name="length_@quiz.id" ng-init="length@quiz.id = @quiz.length"
-                                                   ng-model="length@quiz.id" class="form-control center-block input-two-word"></div></td>
-                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.noOfTarget_@{quiz.id}.$invalid]">
-                                            <input type="number" min="0" max="3" name="noOfTarget_@quiz.id" ng-init="noOfTarget@quiz.id =@quiz.noOfTarget"
-                                                   ng-model="noOfTarget@quiz.id" class="form-control center-block input-two-word"></div></td>
-                                        <td><div ng-class="{true : 'has-error', false : '' }[parameter.displayTime_@{quiz.id}.$invalid]">
-                                            <input type="text" ng-pattern="floatPattern" name="displayTime_@quiz.id" ng-init="displayTime@quiz.id = '@quiz.displayTime'"
-                                                   ng-model="displayTime@quiz.id" class="form-control center-block input-two-word"></div></td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+        <div class="container" ng-controller="SignalDetectionCtrl" ng-init="init(@exp.id)">
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
+            </div>
+            <div ng-repeat="trial in trials" ng-hide="inProcess">
+                <h3>Trial {{$index + 1}}</h3>
+                    <div class="row">
+                        <div class="col-md-offset-0 col-sm-offset-0 col-md-12 col-sm-">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Question</div>
+                                <table class="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>ระบุ Target</th>
+                                            <th>ระบุ Noise</th>
+                                            <th>ความยาวของโจทย์</th>
+                                            <th>จำนวน Target</th>
+                                            <th>ระยะเวลาปรากฎ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="quiz in trial.quizzes">
+                                            <td>{{$index + 1}}</td>
+                                            <td>
+                                                <input type="text" ng-pattern="single"
+                                                       ng-model="quiz.question.target" class="form-control center-block input-one-word"></td>
+                                            <td>
+                                                <input type="text" ng-pattern="single"
+                                                       ng-model="quiz.question.noise" class="form-control center-block input-one-word"></td>
+                                            <td>
+                                                <input type="number" min="1" max="60"
+                                                       ng-model="quiz.length" class="form-control center-block input-two-word"></td>
+                                            <td>
+                                                <input type="number" min="0" max="3"
+                                                       ng-model="quiz.noOfTarget" class="form-control center-block input-two-word"></td>
+                                            <td>
+                                                <input type="text" ng-pattern="floatPattern"
+                                                       ng-model="quiz.displayTime" class="form-control center-block input-two-word"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                 </div>
+            </div>
         </div>
-    }
-    <div class="row">
-        <div class="col-md-4 col-sm-4 col-md-offset-8 col-sm-offset-8">
-            <button type="submit" class="btn btn-success btn-save" ng-disabled="parameter.$invalid">+SAVE ALL</button>
-        </div>
-    </div>
+    </form>
 </div>
-</form>
-    </div>
 <br>

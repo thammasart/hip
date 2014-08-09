@@ -1,7 +1,21 @@
 angular.module('ExperimentCreator', ['ui.bootstrap'])
-    .controller('ExController', function($scope){
+    .controller('ExController', function($scope, $rootScope, $http){
         $scope.word = /^[a-zA-Z0-9ก-๙_ \-]*$/;
         $scope.value = 3;
+        $scope.isEditName = false;
+        $scope.isEditDate = false;
+        $scope.startDateOpened = false;
+        $scope.expireDateOpened = false;
+        $scope.inProcess = false;
+        $scope.today = new Date();
+
+        $scope.init = function(){
+            $rootScope.exp = {
+                name : '',
+                startDate : $scope.today,
+                expireDate :$scope.today
+            }
+        }
 
         $scope.getInputStatus = function(input){
             if(input.$pristine)
@@ -11,25 +25,48 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return 1;
         };
 
+        $scope.checkDisabled = function(disabled){
+            return disabled ? 'disabled' : '';
+        }
 
-        $scope.today = function() {
-            $scope.dt = new Date();
-            $scope.startDate = new Date();
-            $scope.expireDate = new Date();
-        };
-        $scope.today();
+        $scope.editName = function(){
+            if($scope.isEditName){
+                $scope.save('name');
+            }
 
-        $scope.stringToDate = function(value){
-            return new Date(value);
-        };
+            $scope.isEditName = !$scope.isEditName;
+
+        }
+
+        $scope.textEdit = function(editable){
+            return editable ? 'save' : 'edit';
+        }
+
+        $scope.save =function(field){
+            var name = '', startDate = -1, expireDate = -1;
+            if(field == 'name')
+                name = $rootScope.exp.name;
+            else if(field == 'date') {
+                $scope.isEditDate = false;
+                startDate = new Date($rootScope.exp.startDate).getTime();
+                expireDate = new Date($rootScope.exp.expireDate).getTime();
+            }
+
+            $http({method:'PUT',url:'saveExperiment',params:{id:$rootScope.exp.id,name:name, startDate:startDate, expireDate:expireDate}})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
+
+        $rootScope.exp = {};
 
         $scope.showWeeks = true;
         $scope.toggleWeeks = function () {
             $scope.showWeeks = ! $scope.showWeeks;
-        };
-
-        $scope.clear = function () {
-            $scope.dt = null;
         };
 
         // Disable weekend selection
@@ -46,10 +83,13 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $event.preventDefault();
             $event.stopPropagation();
 
-            if(target === 0)
+            if(target === 0 ) {
                 $scope.startDateOpened = true;
-            else if(target === 1)
+                $scope.isEditDate = true;
+            }else if(target === 1) {
                 $scope.expireDateOpened = true;
+                $scope.isEditDate = true;
+            }
         };
 
         $scope.dateOptions = {
@@ -60,19 +100,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'dd-MM-yyyy'];
         $scope.format = $scope.formats[3];
 
-        $scope.checkDateValid = function(input){
-            if($scope.startDate <= $scope.expireDate){
-                input.startDate.$setValidity('startDate', true);
-                input.expireDate.$setValidity('expireDate', true);
-                return true;
-            }
-
-            input.startDate.$setValidity('startDate', false);
-            input.expireDate.$setValidity('expireDate', false);
-            return false;
-        }
     })
-    .controller('BrownPetersonCtrl', function($scope, $http){
+    .controller('BrownPetersonCtrl', function($scope, $rootScope, $http){
         $scope.trigramTypes = ['word', 'nonsense'];
         $scope.trigramLanguages = ['english','thai'];
         $scope.trials = [];
@@ -81,11 +110,13 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.wordThai = [];
         $scope.wordEnglish = [];
         $scope.inProcess = false;
+        $rootScope.exp = {};
 
         $scope.init = function(expId) {
             $scope.inProcess = true;
             $http({method: 'GET', url: 'brownPetersonInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 $scope.nonsenseThai = result.nonsenseThai;
                 $scope.nonsenseEnglish = result.nonsenseEng;
                 $scope.wordThai = result.wordThai;
@@ -132,7 +163,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         }
 
     })
-    .controller('AttentionBlinkCtrl', function($scope, $http){
+    .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http){
         $scope.trials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
@@ -142,6 +173,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.init = function(expId) {
             $http({method: 'GET', url: 'attentionBlinkInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
                 console.log($scope.trials);
             }).error(function (result) {
@@ -209,11 +241,38 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             return text;
         }
     })
-    .controller('SignalDetectionCtrl', function($scope, $http){
+    .controller('SignalDetectionCtrl', function($scope, $rootScope, $http){
         $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
+        $rootScope.exp = {};
+        $scope.trials = [];
+        $scope.inProcess = false;
+
+        $scope.init = function(expId) {
+            $http({method: 'GET', url: 'signalDetectionInit', params: {expId: expId}}).success(function (result) {
+                $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
+                $scope.inProcess = false;
+                console.log($scope.trials);
+            }).error(function (result) {
+                console.log('error:' + result);
+                $scope.inProcess = false;
+            });
+        }
+
+        $scope.saveAll = function(){
+            $scope.inProcess = true;
+            $http({method:'PUT',url:'saveSignalDetectionTrials',data:$scope.trials})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
     })
-    .controller('StroofEffectCtrl', function($scope, $http){
+    .controller('StroofEffectCtrl', function($scope, $rootScope, $http){
         $scope.questionTypes = ['THAI', 'ENGLISH'];
         $scope.trials = [];
         $scope.inProcess = false;
@@ -227,6 +286,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method: 'GET', url: 'stroofEffectInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 initQuestion(result.questions);
                 $scope.inProcess = false;
                 console.log($scope.trials);
@@ -307,7 +367,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
         }
     })
-    .controller('PositionErrorCtrl', function($scope, $http){
+    .controller('PositionErrorCtrl', function($scope, $rootScope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.memorySet = [ 3, 5, 7, 10, 12];
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
@@ -319,6 +379,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method: 'GET', url: 'PositionErrorInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 initEditable();
                 $scope.inProcess = false;
                 console.log($scope.trials);
@@ -398,7 +459,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         }
 
     })
-    .controller('SternbergSearchCtrl', function($scope, $http){
+    .controller('SternbergSearchCtrl', function($scope, $rootScope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.showQuiz = true;
         var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -412,6 +473,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method: 'GET', url: 'sternbergInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
                 console.log($scope.trials);
             }).error(function (result) {
@@ -626,7 +688,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         }
 
     })
-    .controller('MagicNumber7Ctrl', function($scope, $http){
+    .controller('MagicNumber7Ctrl', function($scope, $rootScope, $http){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
@@ -636,6 +698,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method: 'GET', url: 'MagicSevenInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
                 console.log($scope.trials);
             }).error(function (result) {
@@ -687,7 +750,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             }
         }
     })
-    .controller('SimonEffectCtrl', function($scope, $http){
+    .controller('SimonEffectCtrl', function($scope, $rootScope, $http){
         $scope.trials = [];
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
 
@@ -703,6 +766,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method: 'GET', url: 'SimonEffectInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 questions = result.questions;
                 initQuestion();
                 $scope.inProcess = false;
@@ -749,7 +813,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             }
         }
     })
-    .controller('VisualSearchCtrl', function($scope, $modal, $http){
+    .controller('VisualSearchCtrl', function($scope, $rootScope, $modal, $http){
 
         $scope.inProcess = false;
         $scope.overNoise = false;
@@ -760,6 +824,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method:'GET',url:'init',params:{exp_id:expId}}).success(function(result){
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
                 console.log($scope.trials);
             }).error(function(result){
@@ -891,7 +956,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
 
     })
-    .controller('MullerLayerCtrl', function($scope, $http, $modal){
+    .controller('MullerLayerCtrl', function($scope, $rootScope, $http, $modal){
         $scope.inProcess = false;
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
         $scope.trials = [];
@@ -903,6 +968,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method:'GET',url:'mullerInit',params:{expId:expId}}).success(function(result){
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
                 console.log($scope.trials);
             }).error(function(result){
@@ -961,7 +1027,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
         }
     })
-    .controller('GarnerController', function($scope, $http, $modal){
+    .controller('GarnerController', function($scope, $rootScope, $http, $modal){
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
         $scope.trials = [];
@@ -987,6 +1053,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
 
             $http({method:'GET',url:'garnerInit',params:{expId:expId}}).success(function(result){
                 $scope.trials = result.trials;
+                $rootScope.exp = $scope.trials[0].schedule;
                 initOpen();
                 calculateAllColors(result.colors);
                 $scope.inProcess = false;
@@ -1215,12 +1282,13 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         }
 
     })
-    .controller('ChangeBlindnessController', function($scope, $http, $modal) {
+    .controller('ChangeBlindnessController', function($scope, $rootScope, $http, $modal) {
         $scope.inProcess = false;
         $scope.trials = [];
 
         $scope.init = function(expId){
             $http({method:'GET',url:'changeBlindnessInit',params:{expId:expId}}).success(function(result){
+                $rootScope.exp = result.trials[0].schedule;
                 initTrials(result.trials,result.questions);
                 $scope.inProcess = false;
             }).error(function(result){
@@ -1298,7 +1366,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         }
     });
 
-var ChangeBlindnessInstanceCtrl = function($scope, $modalInstance, pic) {
+var ChangeBlindnessInstanceCtrl = function($scope, $rootScope, $modalInstance, pic) {
 
     $scope.pic = pic;
 
@@ -1307,7 +1375,7 @@ var ChangeBlindnessInstanceCtrl = function($scope, $modalInstance, pic) {
     };
 }
 
-var GarnerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
+var GarnerSummaryInstanceCtrl = function($scope, $rootScope, $modalInstance, trials){
 
     $scope.trials = trials;
 
@@ -1345,7 +1413,7 @@ var GarnerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
     }
 }
 
-var MullerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
+var MullerSummaryInstanceCtrl = function($scope, $rootScope, $modalInstance, trials){
 
     $scope.trials = trials;
 
@@ -1377,7 +1445,7 @@ var MullerSummaryInstanceCtrl = function($scope, $modalInstance, trials){
     }
 }
 
-var MullerModalInstanceCtrl = function($scope, $modalInstance, quiz){
+var MullerModalInstanceCtrl = function($scope, $rootScope, $modalInstance, quiz){
 
     var canvas = {};
 
@@ -1521,7 +1589,7 @@ var MullerModalInstanceCtrl = function($scope, $modalInstance, quiz){
     }
 }
 
-var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height, trial) {
+var ModalInstanceCtrl = function ($scope, $rootScope, $modalInstance, sharps, width, height, trial) {
 
     $scope.sharps = sharps;
     $scope.width = width;

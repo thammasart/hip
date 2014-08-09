@@ -191,6 +191,7 @@ GET         /admin/experiment/PositionErrorInit                        controlle
 GET         /admin/experiment/sternbergInit                        controllers.SternbergSearch.initial(expId: Long)
 GET         /admin/experiment/stroofEffectInit                        controllers.StroopEffect.initial(expId: Long)
 GET         /admin/experiment/SimonEffectInit                        controllers.SimonEffect.initial(expId: Long)
+GET         /admin/experiment/signalDetectionInit                    controllers.SignalDetection.initial(expId: Long)
 PUT         /admin/experiment/saveMullerTrial                       controllers.MullerLayer.saveAdmin()
 PUT         /admin/experiment/saveGarnerTrials                      controllers.GarnerInterference.saveTrials()
 PUT         /admin/experiment/saveChangeBlindnessTrials             controllers.ChangeBlindness.saveTrials()
@@ -201,10 +202,12 @@ PUT         /admin/experiment/savePositionErrorTrials              controllers.P
 PUT         /admin/experiment/saveSternBergTrials              controllers.SternbergSearch.saveTrials()
 PUT         /admin/experiment/saveStroofEffectTrials              controllers.StroopEffect.saveTrials()
 PUT         /admin/experiment/saveSimonEffectTrials              controllers.SimonEffect.saveTrials()
+PUT         /admin/experiment/saveSignalDetectionTrials              controllers.SignalDetection.saveTrials()
 GET         /admin/experiment/brown-peterson/brownPetersonQuestion  controllers.BrownPeterson.findAllQuestions()
 DELETE         /admin/experiment/brown-peterson/brownPetersonDeleteQuestion  controllers.BrownPeterson.deleteQuestion(id:Long)
 
 GET         /admin/experiment/garnerInit                            controllers.GarnerInterference.initial(expId: Long)
+PUT         /admin/experiment/saveExperiment                            controllers.Application.saveExperiment(id: Long, name: String, startDate: Long, expireDate: Long)
 
 # Map Bootstrap images
 GET         /assets/fonts/glyphicons-halflings-regular.woff         controllers.Assets.at(path="/public", file="/stylesheets/fonts/glyphicons-halflings-regular.woff")

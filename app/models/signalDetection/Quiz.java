@@ -16,9 +16,9 @@ public class Quiz extends Model{
     public long id;
 
     public double displayTime;
-    public int noOfTarget;
-    public int length;
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    public int noOfTarget = 1;
+    public int length = 10;
+    @OneToOne(cascade=CascadeType.REMOVE)
 	public Question question;
     @ManyToOne
     @JsonBackReference

@@ -4,6 +4,7 @@ import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.Date;
 import play.data.format.Formats;
+
 import java.util.List;
 import java.util.ArrayList;
 import static play.data.validation.Constraints.*;
@@ -292,6 +293,7 @@ public class ExperimentSchedule extends Model{
     public void deleteExpAndRelative(){
         this.delete();
     }
+
 
 	@SuppressWarnings("unchecked")
 	public static Finder<Long,ExperimentSchedule> find = new Finder(Long.class,ExperimentSchedule.class);
