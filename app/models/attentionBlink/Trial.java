@@ -45,6 +45,7 @@ public class Trial extends Model{
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
         this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
         this.update();
     }
 

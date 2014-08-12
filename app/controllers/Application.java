@@ -89,6 +89,11 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    models.simonEffect.QuestionType[] questionTypes = models.simonEffect.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  
@@ -102,6 +107,11 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    models.stroopEffect.QuestionType[] questionTypes = models.stroopEffect.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  
@@ -115,6 +125,7 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
                     return ok(result);
                 }
                 else  
@@ -128,6 +139,11 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    /*models.brownPeterson.QuestionType[] questionTypes = models.brownPeterson.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);*/
                     return ok(result);
                 }
                 else  
@@ -141,6 +157,11 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    models.magicNumber7.QuestionType[] questionTypes = models.magicNumber7.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  
@@ -154,6 +175,11 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    models.positionError.QuestionType[] questionTypes = models.positionError.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  
@@ -167,6 +193,11 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    models.sternbergSearch.QuestionType[] questionTypes = models.sternbergSearch.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  
@@ -180,6 +211,11 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    models.sternbergSearch.QuestionType[] questionTypes = models.sternbergSearch.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  
@@ -193,6 +229,7 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
                     return ok(result);
                 }
                 else  
@@ -206,6 +243,11 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    models.garnerInterference.QuestionType[] questionTypes = models.garnerInterference.QuestionType.values();
+                    jsonArray = mapper.writeValueAsString(questionTypes);
+                    json = Json.parse(jsonArray);
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  
@@ -219,6 +261,7 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
                     return ok(result);
                 }
                 else  
@@ -232,6 +275,7 @@ public class Application extends Controller {
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
                     return ok(result);
                 }
         }catch (JsonProcessingException e) {
