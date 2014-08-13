@@ -163,9 +163,9 @@ public class SternbergSearch extends Controller{
                 question.memorySet = q.memorySet;
                 question.questionType = q.questionType;
                 question.update();
-                List<Quiz> unUseQuiz = new ArrayList<>(trial.quizzes);
+                List<Quiz> unUseQuiz = new ArrayList<Quiz>(trial.quizzes);
 
-                trial.quizzes = new ArrayList<>();
+                trial.quizzes = new ArrayList<Quiz>();
                 List<Quiz> quizzes = obj.quizzes;
                 for(Quiz temp : quizzes){
                     Quiz quiz = new Quiz(trial, question);

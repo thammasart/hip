@@ -59,7 +59,14 @@ function showQuestionWord(){
     clearInterval(questionTime);
     document.getElementById("me").style.visibility = "visible";
     document.getElementById("maiMe").style.visibility = "visible";
-    document.getElementById("word").innerHTML=" มี "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1) + " ติดกันหรือไม่";
+    document.getElementById("word").innerHTML = " มี "+  question_letter.charAt(0);
+    for (var i=1; i<question_letter.length;i++ ){
+        document.getElementById("word").innerHTML += " และ " + question_letter.charAt(i);
+    }
+    if (question_letter.length == 0)
+        document.getElementById("word").innerHTML += " หรือไม่";
+    else
+        document.getElementById("word").innerHTML += " ติดกันหรือไม่";
     d = new Date();
     expDuration = d.getTime();
 }

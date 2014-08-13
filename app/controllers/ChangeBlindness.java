@@ -169,7 +169,7 @@ public class ChangeBlindness extends Controller{
                     Quiz quiz = Quiz.find.byId(temp.id);
                     quiz.delete();
                 }
-                trial.quizzes = new ArrayList<>();
+                trial.quizzes = new ArrayList<Quiz>();
                 for(Quiz temp : obj.quizzes){
                     Question question = Question.find.byId(temp.question.id);
                     Quiz quiz = new Quiz(trial, question);
