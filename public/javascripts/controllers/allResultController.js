@@ -19,8 +19,36 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 $scope.trials = result.trials;
                 $scope.questionTypes = result.questionTypes;
                 console.log($scope.trials);
+                clearGraph();
             });
         }
+        
+         function clearGraph() { 
+            document.getElementById("tBeam1").style.height = 0;
+            document.getElementById("tBeam2").style.height = 0;
+            document.getElementById("tBeam3").style.height = 0;
+            document.getElementById("tBeam4").style.height = 0;
+
+            document.getElementById("sBeam1").style.height = 0;
+            document.getElementById("sBeam2").style.height = 0;
+            document.getElementById("sBeam3").style.height = 0;
+            document.getElementById("sBeam4").style.height = 0;
+
+            document.getElementById("graphUser1").innerHTML = "n/a";
+            document.getElementById("graphUser2").innerHTML = "n/a";
+            document.getElementById("graphUser3").innerHTML = "n/a";
+            document.getElementById("graphUser4").innerHTML = "n/a";
+
+            document.getElementById("graphScore1").innerHTML = "n/a";
+            document.getElementById("graphScore2").innerHTML = "n/a";
+            document.getElementById("graphScore3").innerHTML = "n/a";
+            document.getElementById("graphScore4").innerHTML = "n/a";
+
+            document.getElementById("graphTime1").innerHTML = "n/a";
+            document.getElementById("graphTime2").innerHTML = "n/a";
+            document.getElementById("graphTime3").innerHTML = "n/a";
+            document.getElementById("graphTime4").innerHTML = "n/a";
+         } 
         $scope.open = function(num){
             gNumber = num;
             var modalInstance = $modal.open({
@@ -57,8 +85,18 @@ angular.module('AllResultApp', ['ui.bootstrap'])
             $modalInstance.dismiss();
         };
 
-        $scope.sel = function (totalScore,totalUsedTime,totalUser) {
+    Object.size = function(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
 
+    // Get the size of an object
+
+        $scope.sel = function (totalScore,totalUsedTime,totalUser,trialIndex) {
+            var size = Object.size(trials[trialIndex].quizzes);
             if(gNumber == 1){
                 document.getElementById("graphUser1").innerHTML = totalUser;
                 document.getElementById("graphTime1").innerHTML = totalUsedTime;
@@ -98,10 +136,10 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                     document.getElementById("tBeam3").style.height = (gTime[2]/max)*100+"%";
                     document.getElementById("tBeam4").style.height = (gTime[3]/max)*100+"%";
 
-                    document.getElementById("sBeam1").style.height = (gScore[0]/max)*100+"%";
-                    document.getElementById("sBeam2").style.height = (gScore[1]/max)*100+"%";
-                    document.getElementById("sBeam3").style.height = (gScore[2]/max)*100+"%";
-                    document.getElementById("sBeam4").style.height = (gScore[3]/max)*100+"%";
+                    document.getElementById("sBeam1").style.height = (gScore[0]/size)*100+"%";
+                    document.getElementById("sBeam2").style.height = (gScore[1]/size)*100+"%";
+                    document.getElementById("sBeam3").style.height = (gScore[2]/size)*100+"%";
+                    document.getElementById("sBeam4").style.height = (gScore[3]/size)*100+"%";
 
                     document.getElementById("line2").innerHTML = max*0.2+"sec";
                     document.getElementById("line3").innerHTML = max*0.4+"sec";
