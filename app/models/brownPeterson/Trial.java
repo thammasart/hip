@@ -55,7 +55,7 @@ public class Trial extends Model {
 		return find.where().eq("schedule", ex).findList();
 	}
 
-	public void updateResult(){
+    public void updateResult(){
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
@@ -63,6 +63,9 @@ public class Trial extends Model {
             this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswer());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
 
 	public int calculateAverageScore(){

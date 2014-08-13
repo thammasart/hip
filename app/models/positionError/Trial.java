@@ -45,7 +45,7 @@ public class Trial extends Model{
 		return newTrial;
 	}
 
-	public void updateResult(){
+    public void updateResult(){
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
@@ -53,6 +53,9 @@ public class Trial extends Model{
             this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
     
     public static Trial create(ExperimentSchedule schedule){

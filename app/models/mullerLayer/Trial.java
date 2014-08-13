@@ -35,11 +35,13 @@ public class Trial extends Model{
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
-            List<Answer> answers = Answer.find.where().eq("quiz", q).findList();
-            this.totalScore += Answer.calculateTotalScore(answers);
-            this.totalUsedTime += Answer.calculateTotalUsedTime(answers);
+            //this.totalScore += Answer.calculateTotalScore(q.findAnswers());
+            //this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
     
     public static List<Trial> findInvolving(ExperimentSchedule ex){

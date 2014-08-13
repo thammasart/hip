@@ -1,5 +1,6 @@
 var gNumber = 0;
 var gTime = new Array(0,0,0,0);
+var gScore = new Array(0,0,0,0);
 angular.module('AllResultApp', ['ui.bootstrap'])
     .controller('AllResultController',function($scope,$http,$location,$rootScope,$modal){
         
@@ -63,24 +64,28 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 document.getElementById("graphTime1").innerHTML = totalUsedTime;
                 document.getElementById("graphScore1").innerHTML = totalScore;
                 gTime[0]=totalUsedTime;
+                gScore[0]=totalScore;
             }else
             if(gNumber == 2){
                 document.getElementById("graphUser2").innerHTML = totalUser;
                 document.getElementById("graphTime2").innerHTML = totalUsedTime;
                 document.getElementById("graphScore2").innerHTML = totalScore;
                 gTime[1]=totalUsedTime;
+                gScore[1]=totalScore;
             }else
             if(gNumber == 3){
                 document.getElementById("graphUser3").innerHTML = totalUser;
                 document.getElementById("graphTime3").innerHTML = totalUsedTime;
                 document.getElementById("graphScore3").innerHTML = totalScore;
                 gTime[2]=totalUsedTime;
+                gScore[2]=totalScore;
             }else
             if(gNumber == 4){
                 document.getElementById("graphUser4").innerHTML = totalUser;
                 document.getElementById("graphTime4").innerHTML = totalUsedTime;
                 document.getElementById("graphScore4").innerHTML = totalScore;
                 gTime[3]=totalUsedTime;
+                gScore[3]=totalScore;
             }
                 var max =-99;
 
@@ -92,6 +97,11 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                     document.getElementById("tBeam2").style.height = (gTime[1]/max)*100+"%";
                     document.getElementById("tBeam3").style.height = (gTime[2]/max)*100+"%";
                     document.getElementById("tBeam4").style.height = (gTime[3]/max)*100+"%";
+
+                    document.getElementById("sBeam1").style.height = (gScore[0]/max)*100+"%";
+                    document.getElementById("sBeam2").style.height = (gScore[1]/max)*100+"%";
+                    document.getElementById("sBeam3").style.height = (gScore[2]/max)*100+"%";
+                    document.getElementById("sBeam4").style.height = (gScore[3]/max)*100+"%";
 
                     document.getElementById("line2").innerHTML = max*0.2+"sec";
                     document.getElementById("line3").innerHTML = max*0.4+"sec";

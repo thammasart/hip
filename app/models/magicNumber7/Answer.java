@@ -41,7 +41,13 @@ public class Answer extends Model{
         }
         return answers;
     }
-
+    public static double calculateTotalScore(List<Answer> answers){
+        double avgScore = 0;
+        for(Answer ans:answers){
+                   avgScore += ans.score;
+        }
+        return avgScore;
+    }
     public static double calculateTotalUsedTime(List<Answer> answers){
         double totalUsedTime = 0;
         for(Answer ans : answers){

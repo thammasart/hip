@@ -100,6 +100,7 @@ public class SternbergSearch extends Controller{
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
+        Trial.find.byId(trialId).updateResult();
         return redirect(routes.SternbergSearch.report(user.username, trialId));
     }
 

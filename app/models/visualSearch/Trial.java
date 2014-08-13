@@ -42,10 +42,16 @@ public class Trial extends Model{
     }
 
     public void updateResult(){
-        List<Answer> answers = Answer.find.where().eq("quiz", quiz).findList();
-        this.totalScore = Answer.calculateTotalScore(answers);
-        this.totalUsedTime = Answer.calculateTotalUsedTime(answers);
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+    //    for(Quiz q:quizzes){
+    //        this.totalScore += Answer.calculateTotalScore(q.findAnswers());
+    //        this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
+     //   }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
 
     public static Trial findById(long id){
