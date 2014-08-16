@@ -8,13 +8,18 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.expireDateOpened = false;
         $scope.inProcess = false;
         $scope.today = new Date();
+        $scope.dl = new Date();
+        $rootScope.exp = {}
 
-        $scope.init = function(){
-            $rootScope.exp = {
-                name : '',
-                startDate : $scope.today,
-                expireDate :$scope.today
-            }
+        $scope.init = function() {
+            $rootScope.$watch('exp', function () {
+                if($rootScope.exp.expireDate) {
+                    $scope.expireDate = new Date($rootScope.exp.expireDate);
+                }
+                if($rootScope.exp.startDate) {
+                    $scope.startDate = new Date($rootScope.exp.startDate);
+                }
+            });
         }
 
         $scope.getInputStatus = function(input){
@@ -93,8 +98,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         };
 
         $scope.dateOptions = {
-            'year-format': "'yy'",
-            'starting-day': 1
+            formatYear: 'yy',
+            startingDay: 1
         };
 
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'dd-MM-yyyy'];
@@ -116,7 +121,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method: 'GET', url: 'brownPetersonInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
-                $rootScope.exp = $scope.trials[0].schedule;
+                $rootScope.exp = angular.copy($scope.trials[0].schedule);
                 $scope.nonsenseThai = result.nonsenseThai;
                 $scope.nonsenseEnglish = result.nonsenseEng;
                 $scope.wordThai = result.wordThai;
@@ -133,6 +138,9 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             for(var i=0; i<trial.quizzes.length; i++){
                 trial.quizzes[i].question = findQuestion(trial.trigramType, trial.trigramLanguage);
             }
+        }
+        $scope.randomQuestion = function(quiz, trigramType, trigramLanguage){
+            quiz.question = findQuestion(trigramType, trigramLanguage);
         }
 
         $scope.saveAll = function(){

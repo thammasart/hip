@@ -12,9 +12,12 @@
 
         <div class="container" ng-controller="BrownPetersonCtrl" ng-init="init(@exp.id)">
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
-                <a href="@routes.Admin.addBrownPetersonQuestion()" class="btn btn-xs btn-default pull-right" style="margin-right: 10px">+add question</a>
-                <a href="@routes.Admin.displayBrownPetersonQuestionList()" class="btn btn-xs btn-default pull-right" style="margin-right: 10px" >show question</a>
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+                <a href="@routes.Admin.addBrownPetersonQuestion()" class="btn btn-xs btn-default pull-right" style="margin-right: 10px;margin-top:8px">
+                    <span class="glyphicon glyphicon-plus"></span> add question</a>
+                <a href="@routes.Admin.displayBrownPetersonQuestionList()" class="btn btn-xs btn-default pull-right" style="margin-right: 10px;margin-top:8px;" >
+                    <span class="glyphicon glyphicon-th-list"></span> show question</a>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
                 <h3>Trial {{$index + 1}}</h3>
@@ -23,49 +26,57 @@
                         <div class="col-md-9 col-sm-8 trial-box-left">
                             <div class="form-group" ng-repeat="quiz in trial.quizzes">
                                 <label class="control-label col-sm-4">คำถามที่ {{$index + 1}} :  ตัวเลขเริ่มนับถอยหลัง</label>
-                                <div class="col-sm-2">
+                                <div class="col-sm-2 form-invalid">
                                     <input type="number" min="1" max="999" class="form-control"
                                            ng-model="quiz.initCountdown" required>
                                 </div>
-                                <label for="flashTime" class="control-label col-sm-4">จำนวนวินาทีนับถอยหลัง</label>
-                                <div class="col-sm-2">
+                                <label class="control-label col-sm-4">จำนวนวินาทีนับถอยหลัง</label>
+                                <div class="col-sm-2 form-invalid">
                                     <input type="number" min="1" max="20" class="form-control" ng-model="quiz.flashTime" required>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Question</div>
+                                        <table class="table text-center">
+                                            <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Question</th>
+                                                <th>#</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="quiz in trial.quizzes">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{quiz.question.firstWord + ', ' + quiz.question.secondWord + ', ' + quiz.question.thirdWord}}</td>
+                                                <td><button class="btn btn-xs btn-primary" ng-disabled="parameter.$invalid" ng-click="randomQuestion(quiz, trial.trigramType, trial.trigramLanguage)">random</button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Trigram Type</h4>
-                            <select class="form-control" ng-model="trial.trigramType" style="width:120px" ng-options="value for value in trigramTypes"></select>
+                            <select class="form-control" ng-model="trial.trigramType" ng-change="refresh(trial)" style="width:120px" ng-options="value for value in trigramTypes"></select>
                             <h4>Trigram Language</h4>
-                            <select class="form-control" ng-model="trial.trigramLanguage" style="width:120px" ng-options="value for value in trigramLanguages"></select>
-                            <button style="margin-top:20px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
+                            <select class="form-control" ng-model="trial.trigramLanguage" ng-change="refresh(trial)" style="width:120px" ng-options="value for value in trigramLanguages"></select>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial)" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
-                    <div class="row">
 
-                        <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Question</div>
-                                <table class="table text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Question</th>
-                                            <th>#</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="quiz in trial.quizzes">
-                                            <td>{{$index + 1}}</td>
-                                            <td>{{quiz.question.firstWord + ', ' + quiz.question.secondWord + ', ' + quiz.question.thirdWord}}</td>
-                                            <td>#</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+            </div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
         </div>
     </form>
