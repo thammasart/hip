@@ -140,10 +140,10 @@ public class Application extends Controller {
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
 
-                    /*models.brownPeterson.QuestionType[] questionTypes = models.brownPeterson.QuestionType.values();
+                    models.brownPeterson.QuestionType[] questionTypes = models.brownPeterson.QuestionType.values();
                     jsonArray = mapper.writeValueAsString(questionTypes);
                     json = Json.parse(jsonArray);
-                    result.put("questionTypes",json);*/
+                    result.put("questionTypes",json);
                     return ok(result);
                 }
                 else  

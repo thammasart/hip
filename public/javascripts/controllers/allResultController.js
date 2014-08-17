@@ -17,6 +17,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
             $http({method : 'GET',url : 'findExperiment' ,params : { exp_type:path}})
             .success(function(result){
                 $scope.trials = result.trials;
+                //cut here Questiontype
                 $scope.questionTypes = result.questionTypes;
                 console.log($scope.trials);
                 clearGraph();
@@ -85,18 +86,20 @@ angular.module('AllResultApp', ['ui.bootstrap'])
             $modalInstance.dismiss();
         };
 
-    Object.size = function(obj) {
-        var size = 0, key;
-        for (key in obj) {
-            if (obj.hasOwnProperty(key)) size++;
-        }
-        return size;
-    };
+        Object.size = function(obj) {
+            var size = 0, key;
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            }
+            return size;
+        };
 
     // Get the size of an object
 
         $scope.sel = function (totalScore,totalUsedTime,totalUser,trialIndex) {
             var size = Object.size(trials[trialIndex].quizzes);
+            console.log(size);
+            console.log(questionTypes);
             if(gNumber == 1){
                 document.getElementById("graphUser1").innerHTML = totalUser;
                 document.getElementById("graphTime1").innerHTML = totalUsedTime;
