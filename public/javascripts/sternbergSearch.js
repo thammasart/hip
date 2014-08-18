@@ -67,7 +67,10 @@ function showQuestionWord(){
     document.getElementById("word").innerHTML = "มี " + quiz_questionChar.charAt(0);
     for (var j = 1;j < quiz_questionChar.length;j++)
         document.getElementById("word").innerHTML += " และ " + quiz_questionChar.charAt(j);
-    document.getElementById("word").innerHTML += " หรือไม่";
+    if (quiz_questionChar.length > 1)
+        document.getElementById("word").innerHTML += " ติดกันหรือไม่";
+    else
+        document.getElementById("word").innerHTML += " หรือไม่";
     d = new Date();
     expDuration = d.getTime();
 }

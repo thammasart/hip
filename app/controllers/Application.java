@@ -318,19 +318,41 @@ public class Application extends Controller {
             return redirect(routes.Application.index());
         }
         Result nextPage = TODO;
-        switch(expType){
-            case "BROWNPETERSON" : nextPage = redirect(routes.BrownPeterson.proc());break;
-            case "STROOPEFFECT" : nextPage = redirect(routes.StroopEffect.proc()); break;
-            case "ATTENTIONBLINK" : nextPage = redirect(routes.AttentionBlink.proc()); break;
-            case "SIGNALDETECTION" : nextPage = redirect(routes.SignalDetection.proc()); break;
-            case "POSITIONERROR" : nextPage = redirect(routes.PositionError.proc()); break;
-            case "STERNBERGSEARCH" : nextPage = redirect(routes.SternbergSearch.proc()); break;
-            case "MAGICNUMBER7" : nextPage = redirect(routes.MagicNumber7.proc()); break;
-            case "SIMONEFFECT" : nextPage = redirect(routes.SimonEffect.proc()); break;
-            case "MULLERLAYER" : nextPage = redirect(routes.MullerLayer.proc()); break;
-            case "GARNERINTERFERENCE" : nextPage = redirect(routes.GarnerInterference.proc()); break;
-            case "VISUALSEARCH" : nextPage = redirect(routes.VisualSearch.proc()); break;
-            case "CHANGEBLINDNESS" : nextPage = redirect(routes.ChangeBlindness.proc()); break;
+        if (expType.equals("BROWNPETERSON")){
+            nextPage = redirect(routes.BrownPeterson.proc());
+        }
+        else if (expType.equals("STROOPEFFECT")){
+            nextPage = redirect(routes.StroopEffect.proc());
+        }
+        else if (expType.equals("ATTENTIONBLINK")){
+            nextPage = redirect(routes.AttentionBlink.proc());
+        }
+        else if (expType.equals("SIGNALDETECTION")){
+            nextPage = redirect(routes.SignalDetection.proc());
+        }
+        else if (expType.equals("POSITIONERROR")){
+            nextPage = redirect(routes.PositionError.proc());
+        }
+        else if (expType.equals("STERNBERGSEARCH")){
+            nextPage = redirect(routes.SternbergSearch.proc());
+        }
+        else if (expType.equals("MAGICNUMBER7")){
+            nextPage = redirect(routes.MagicNumber7.proc());
+        }
+        else if (expType.equals("SIMONEFFECT")){
+            nextPage = redirect(routes.SimonEffect.proc());
+        }
+        else if (expType.equals("MULLERLAYER")){
+            nextPage = redirect(routes.MullerLayer.proc());
+        }
+        else if (expType.equals("GARNERINTERFERENCE")){
+            nextPage = redirect(routes.GarnerInterference.proc());
+        }
+        else if (expType.equals("VISUALSEARCH")){
+            nextPage = redirect(routes.VisualSearch.proc());
+        }
+        else if (expType.equals("CHANGEBLINDNESS")){
+            nextPage = redirect(routes.ChangeBlindness.proc());
         }
 
         return nextPage;

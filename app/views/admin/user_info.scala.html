@@ -20,7 +20,7 @@
                         $(this).append('<input type="text"  / hidden>' );
                         //$(this).html('<input type="text" placeholder=" '+title+'" / hidden>' );
                     else
-                        $(this).append('<input type="text"/>' );
+                        $(this).append('<input type="text" placeholder="Search"/>' );
                         //$(this).html('<input type="text" placeholder=" '+title+'" />' );
                 } );
 
@@ -92,7 +92,7 @@
                 </a>
             </div>
 
-            <div> <a  href="@routes.Admin.addUser()" type="button" id="addUserButton" class="userInfoButton btn btn-success btn-sm glyphicon glyphicon-plus"> Add User </a></div>
+            <div> <a  href="@routes.Admin.addUser( new String() )" type="button" id="addUserButton" class="userInfoButton btn btn-success btn-sm glyphicon glyphicon-plus"> Add User </a></div>
             <div> <button id="deleteSelectButton" class="deleteSelectButton btn btn-danger btn-sm glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal"> Del. Selected </button></div>
 
             @if(flash.containsKey("userExisted")) {
@@ -223,4 +223,4 @@
     }
     </tbody>
 </table>
-@footer()
+@adminfooter()

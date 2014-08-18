@@ -82,13 +82,23 @@ public class RequestController extends Controller {
             else if(frameSize.equals("EXTRA"))
                 quiz.frameSize = FrameSize.EXTRA;
 
-            switch(target){
-                case "SQAURE_GREEN": quiz.target = ShapeType.SQAURE_GREEN;break;
-                case "SQAURE_BLUE": quiz.target = ShapeType.SQAURE_BLUE;break;
-                case "SQAURE_RED": quiz.target = ShapeType.SQAURE_RED;break;
-                case "CIRCLE_GREEN": quiz.target = ShapeType.CIRCLE_GREEN;break;
-                case "CIRCLE_BLUE": quiz.target = ShapeType.CIRCLE_BLUE;break;
-                case "CIRCLE_RED": quiz.target = ShapeType.CIRCLE_RED;break;
+            if (target.equals("SQAURE_GREEN")){
+                quiz.target = ShapeType.SQAURE_GREEN;
+            }
+            else if (target.equals("SQAURE_BLUE")){
+                quiz.target = ShapeType.SQAURE_BLUE;
+            }
+            else if (target.equals("SQAURE_RED")){
+                quiz.target = ShapeType.SQAURE_RED;
+            }
+            else if (target.equals("CIRCLE_GREEN")){
+                quiz.target = ShapeType.CIRCLE_GREEN;
+            }
+            else if (target.equals("CIRCLE_BLUE")){
+                quiz.target = ShapeType.CIRCLE_BLUE;
+            }
+            else if (target.equals("CIRCLE_RED")){
+                quiz.target = ShapeType.CIRCLE_RED;
             }
 
             quiz.update();
