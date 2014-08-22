@@ -350,7 +350,6 @@ width:631px;
     padding:10px 100px;
     border-color:#BDC3C7;
     border-top-style:dashed;
-    
 }
 .topMenu{
     font-size:large;
@@ -518,4 +517,10 @@ padding-top:8em;
 .trialContainer{
     width:30%;
     margin:0px auto;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+body {
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
