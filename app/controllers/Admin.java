@@ -59,8 +59,8 @@ public class Admin extends Controller {
 
     //ทำการเพิ่ม user account ใหม่เข้าไปในระบบ
     @Security.Authenticated(Secured.class)
-    public static Result addUser(){
-       return ok(add_user.render(User.getAllUser()));
+    public static Result addUser(String userNames){
+       return ok(add_user.render(User.getAllUser(),userNames));
     }
 
     //แสดงหน้าแก้ไข user
@@ -169,7 +169,8 @@ public class Admin extends Controller {
                 String errorText = "Already has user: ";
                 for (String i : userExistName)
                     errorText = errorText + i + " ";
-                flash("userExisted", errorText);
+                flash("nullUser", errorText);
+                return redirect(routes.Admin.addUser(userString));
             }
             else
                 flash("savedSuccess","Add new user(s) successfully !");
@@ -180,7 +181,7 @@ public class Admin extends Controller {
                 flash("nullUser", "Please enter a username");
             else
                 flash("nullUser", "Please do not use a white space in a username");
-            return redirect(routes.Admin.addUser());
+            return redirect(routes.Admin.addUser(userString));
         }
     }
     //ทำการลบ user account ออกจากระบบ
@@ -190,6 +191,10 @@ public class Admin extends Controller {
         String[] result = userString.split(":::::");
         User currentUser = User.find.byId(session().get("username"));
         String warning = "";
+        if (result.length == 1 && result[0].equals("")){
+            flash("userExisted","No records selected!");
+            return ok(user_info.render(User.getAllUser(),currentUser));
+        }
         for(int i=0 ; i <result.length;i++){
             User user = User.find.where().eq("username",result[i]).findUnique();
             if (!currentUser.username.equals(user.username)){
@@ -242,7 +247,7 @@ public class Admin extends Controller {
         Form<ExperimentSchedule> boundForm = expForm.bindFromRequest();
 
         if(boundForm.hasErrors()){
-            flash("error", "please correct the form above.");
+            flash("error", "Please input experiment schedule name.");
             return badRequest(views.html.admin.experiment.add.render(expForm));
         }
 
@@ -250,7 +255,7 @@ public class Admin extends Controller {
         exp.startDate = LocalDate.fromDateFields(exp.startDate).toDateTimeAtStartOfDay().toDate();
         exp.expireDate = LocalDate.fromDateFields(exp.expireDate).toDateMidnight().toDate();
         exp.save();
-        flash("success","Successfully");
+        flash("savedSuccess","Experiment Schedule added!");
         exp.generateTrials();
         return redirect(routes.Admin.displayExperimentList());
     }
@@ -341,6 +346,10 @@ public class Admin extends Controller {
         DynamicForm  stringForm = Form.form().bindFromRequest();
         String userString = stringForm.get("deleteRow");
         String[] result = userString.split(":::::");
+        if (result.length == 1 && result[0].equals("")){
+            flash("savedFail","No records selected!");
+            return redirect(routes.Admin.displayExperimentList());
+        }
         for(int i=0 ; i <result.length;i++){
             long expId = Long.parseLong(result[i]);
             ExperimentSchedule exp = ExperimentSchedule.find.byId(expId);

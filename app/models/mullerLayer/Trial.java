@@ -19,6 +19,7 @@ public class Trial extends Model{
     public double totalScore = 0;
     public double totalUsedTime = 0;
     public int totalUser = 0;
+    public int displayTime = 10;
 
     @ManyToOne
     public ExperimentSchedule schedule;

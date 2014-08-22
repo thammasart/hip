@@ -27,7 +27,12 @@ function showInstruction (){
     question_correctAnswer = document.getElementById("correctAnswer").innerHTML;
     trial_blinkTime = document.getElementById("blinkTime").innerHTML;
     genQuestion();
-    document.getElementById("word").innerHTML=" ค้นหา "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1) + " ที่อยู่ติดกัน";
+    if (question_letter.length == 1)
+        document.getElementById("word").innerHTML=" ค้นหา "+ question_letter.charAt(0);
+    else if (question_letter.length == 2)
+        document.getElementById("word").innerHTML=" ค้นหา "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1) + " ที่อยู่ติดกัน";
+    else if (question_letter.length == 3)
+        document.getElementById("word").innerHTML=" ค้นหา "+ question_letter.charAt(0) +", " + question_letter.charAt(1)+ " และ " + question_letter.charAt(2) +" ที่อยู่ติดกัน";
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
 function showTimer(){
@@ -59,14 +64,13 @@ function showQuestionWord(){
     clearInterval(questionTime);
     document.getElementById("me").style.visibility = "visible";
     document.getElementById("maiMe").style.visibility = "visible";
-    document.getElementById("word").innerHTML = " มี "+  question_letter.charAt(0);
-    for (var i=1; i<question_letter.length;i++ ){
-        document.getElementById("word").innerHTML += " และ " + question_letter.charAt(i);
-    }
-    if (question_letter.length == 0)
-        document.getElementById("word").innerHTML += " หรือไม่";
-    else
-        document.getElementById("word").innerHTML += " ติดกันหรือไม่";
+    if (question_letter.length == 1)
+        document.getElementById("word").innerHTML=" มี "+ question_letter.charAt(0) + " อยู่หรือไม่";
+    else if (question_letter.length == 2)
+        document.getElementById("word").innerHTML=" มี "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1) + " ติดกันหรือไม่";
+    else if (question_letter.length == 3)
+        document.getElementById("word").innerHTML=" มี "+ question_letter.charAt(0) +", " + question_letter.charAt(1) + "และ" + question_letter.charAt(2) +" ติดกันหรือไม่";
+
     d = new Date();
     expDuration = d.getTime();
 }
