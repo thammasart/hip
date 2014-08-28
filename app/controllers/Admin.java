@@ -47,10 +47,29 @@ public class Admin extends Controller {
         return ok(user_info.render(User.getAllUser(),User.find.byId(session().get("username"))));
     }
 
+    //Method ไว้ดึง Object AnswerResult ทั้งหมด
+    public static List<AnswerResult> getAllResult(){
+        List<AnswerResult> answers = new ArrayList<AnswerResult>();
+        answers.addAll(models.attentionBlink.Answer.find.all());
+        answers.addAll(models.brownPeterson.Answer.find.all());
+        answers.addAll(models.changeBlindness.Answer.find.all());
+        answers.addAll(models.garnerInterference.Answer.find.all());
+        answers.addAll(models.magicNumber7.Answer.find.all());
+        answers.addAll(models.mullerLayer.Answer.find.all());
+        answers.addAll(models.positionError.Answer.find.all());
+        answers.addAll(models.signalDetection.Answer.find.all());
+        answers.addAll(models.sternbergSearch.Answer.find.all());
+        answers.addAll(models.stroopEffect.Answer.find.all());
+        answers.addAll(models.visualSearch.Answer.find.all());
+
+        return answers;
+    }
+
+
     //แสดงหน้าเพิ่ม user
     @Security.Authenticated(Secured.class)
     public static Result RenderAdminExperimentResult() {
-        return ok(experiment_result.render(User.getAllUser()));
+        return ok(experiment_result.render(getAllResult()));
     }
     @Security.Authenticated(Secured.class)
     public static Result RenderAdminFindResult() {
