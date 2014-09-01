@@ -5,6 +5,7 @@ import play.mvc.*;
 import play.data.*;
 import play.data.DynamicForm;
 import models.*;
+import com.avaje.ebean.*;
 import views.html.admin.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class Admin extends Controller {
     //Method ไว้ดึง Object AnswerResult ทั้งหมด
     public static List<AnswerResult> getAllResult(){
         List<AnswerResult> answers = new ArrayList<AnswerResult>();
+
         answers.addAll(models.attentionBlink.Answer.find.all());
         answers.addAll(models.brownPeterson.Answer.find.all());
         answers.addAll(models.changeBlindness.Answer.find.all());
@@ -58,9 +60,33 @@ public class Admin extends Controller {
         answers.addAll(models.mullerLayer.Answer.find.all());
         answers.addAll(models.positionError.Answer.find.all());
         answers.addAll(models.signalDetection.Answer.find.all());
+        answers.addAll(models.simonEffect.Answer.find.all());
         answers.addAll(models.sternbergSearch.Answer.find.all());
         answers.addAll(models.stroopEffect.Answer.find.all());
         answers.addAll(models.visualSearch.Answer.find.all());
+
+        return answers;
+    }
+
+    //Method ไว้ดึง Object AnswerResult จาก User ที่กำหนด
+    public static List<AnswerResult> getResultByUser(List<User> users){
+
+        List<AnswerResult> answers = new ArrayList<AnswerResult>();
+
+        for (int i =0;i< users.size() ;i++){
+            answers.addAll(models.attentionBlink.Answer.find.where().eq("user" ,users.get(i)).findList());
+            answers.addAll(models.brownPeterson.Answer.find.where().eq("user", users.get(i)).findList());
+            answers.addAll(models.changeBlindness.Answer.find.where().eq("user", users.get(i)).findList());
+            answers.addAll(models.garnerInterference.Answer.find.where().eq("user", users.get(i)).findList());
+            answers.addAll(models.magicNumber7.Answer.find.where().eq("user", users.get(i)).findList());
+            answers.addAll(models.mullerLayer.Answer.find.where().eq("user", users.get(i)).findList());
+            answers.addAll(models.positionError.Answer.find.where().eq("user" ,users.get(i)).findList());
+            answers.addAll(models.signalDetection.Answer.find.where().eq("user" ,users.get(i)).findList());
+            answers.addAll(models.simonEffect.Answer.find.where().eq("user" ,users.get(i)).findList());
+            answers.addAll(models.sternbergSearch.Answer.find.where().eq("user" ,users.get(i)).findList());
+            answers.addAll(models.stroopEffect.Answer.find.where().eq("user" ,users.get(i)).findList());
+            answers.addAll(models.visualSearch.Answer.find.where().eq("user" ,users.get(i)).findList());
+        }
 
         return answers;
     }
@@ -74,6 +100,180 @@ public class Admin extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result RenderAdminFindResult() {
         return ok(find_result.render(User.getAllUser()));
+    }
+    @Security.Authenticated(Secured.class)
+    public static Result RenderAdminFindResultPost() {
+        DynamicForm stringForm = Form.form().bindFromRequest();
+        String username = stringForm.get("username");
+
+        User temp = new User(username,"");
+
+        List<User> users = new ArrayList<User>();
+        //if (!username.equals("")){
+        //    users.add(User.find.where().eq("username",username).findUnique());
+        //    return ok(experiment_result.render(getResultByUser(users)));
+        //}else{
+            boolean isFirst = true;
+            String oql ="  find  user ";
+            String firstName = stringForm.get("firstname");
+            String lastName = stringForm.get("lastname");
+            String email = stringForm.get("eMail");
+            String gender = stringForm.get("gender");
+            if (gender == null)
+                gender = "";
+            String status = stringForm.get("status");
+            UserRole role = null;
+            if (status.equals("Admin")){
+                role = UserRole.ADMIN;
+            }else if (status.equals("Student")){
+                role = UserRole.STUDENT;
+            }else if (status.equals("Guest")){
+                role = UserRole.GUEST;
+            }else if (status.equals("TA")){
+                role = UserRole.TA;
+            }
+            String section = stringForm.get("section");
+            String semester = stringForm.get("semester");
+            String academicYear = stringForm.get("academicYear");
+            String faculty = stringForm.get("faculty");
+            String department = stringForm.get("department");
+
+            if (stringForm.get("birthDate").equals("")){
+
+                if (role == null){
+                    if (stringForm.get("year").equals("")){
+                    users = User.find.where().icontains("username", username)
+                            .icontains("firstName", firstName)
+                            .icontains("lastName", lastName)
+                            .istartsWith("gender", gender)
+                            .icontains("eMail", email)
+                            .icontains("section", section)
+                            .icontains("semester", semester)
+                            .icontains("academicYear", academicYear)
+                            .icontains("faculty", faculty)
+                            .icontains("department", department)
+                            .findList();
+                    }else{
+                        int year = Integer.valueOf(stringForm.get("year")).intValue();
+                        users = User.find.where().icontains("username", username)
+                                .icontains("firstName", firstName)
+                                .icontains("lastName",lastName)
+                                .istartsWith("gender", gender)
+                                .icontains("eMail", email)
+                                .eq("year",year)
+                                .icontains("section",section)
+                                .icontains("semester",semester)
+                                .icontains("academicYear",academicYear)
+                                .icontains("faculty",faculty)
+                                .icontains("department",department)
+                                .findList();
+                    }
+                }else{
+                    if (stringForm.get("year").equals("")){
+                        users = User.find.where().icontains("username", username)
+                                .icontains("firstName", firstName)
+                                .icontains("lastName", lastName)
+                                .eq("status",role)
+                                .istartsWith("gender", gender)
+                                .icontains("eMail", email)
+                                .icontains("section", section)
+                                .icontains("semester", semester)
+                                .icontains("academicYear", academicYear)
+                                .icontains("faculty", faculty)
+                                .icontains("department", department)
+                                .findList();
+                    }else{
+                        int year = Integer.valueOf(stringForm.get("year")).intValue();
+                        users = User.find.where().icontains("username", username)
+                                .icontains("firstName", firstName)
+                                .icontains("lastName",lastName)
+                                .eq("status",role)
+                                .istartsWith("gender", gender)
+                                .icontains("eMail", email)
+                                .eq("year",year)
+                                .icontains("section",section)
+                                .icontains("semester",semester)
+                                .icontains("academicYear",academicYear)
+                                .icontains("faculty",faculty)
+                                .icontains("department",department)
+                                .findList();
+                    }
+                }
+            }
+            else{
+                Date dob;
+                try{
+                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    dob = dateFormat.parse(stringForm.get("birthDate"));
+                }catch (ParseException e){
+                    dob = new Date();
+                }
+                if (role == null){
+                    if (stringForm.get("year").equals("")){
+                        users = User.find.where().icontains("username", username)
+                                .icontains("firstName", firstName)
+                                .icontains("lastName", lastName)
+                                .istartsWith("gender", gender)
+                                .icontains("eMail", email)
+                                .eq("birthDate",dob)
+                                .icontains("section", section)
+                                .icontains("semester", semester)
+                                .icontains("academicYear", academicYear)
+                                .icontains("faculty", faculty)
+                                .icontains("department", department)
+                                .findList();
+                    }else{
+                        int year = Integer.valueOf(stringForm.get("year")).intValue();
+                        users = User.find.where().icontains("username", username)
+                                .icontains("firstName", firstName)
+                                .icontains("lastName",lastName)
+                                .istartsWith("gender", gender)
+                                .icontains("eMail", email)
+                                .eq("birthDate", dob)
+                                .eq("year", year)
+                                .icontains("section",section)
+                                .icontains("semester",semester)
+                                .icontains("academicYear",academicYear)
+                                .icontains("faculty",faculty)
+                                .icontains("department",department)
+                                .findList();
+                    }
+                }else{
+                    if (stringForm.get("year").equals("")){
+                        users = User.find.where().icontains("username", username)
+                                .icontains("firstName", firstName)
+                                .icontains("lastName", lastName)
+                                .eq("status", role)
+                                .istartsWith("gender", gender)
+                                .icontains("eMail", email)
+                                .eq("birthDate", dob)
+                                .icontains("section", section)
+                                .icontains("semester", semester)
+                                .icontains("academicYear", academicYear)
+                                .icontains("faculty", faculty)
+                                .icontains("department", department)
+                                .findList();
+                    }else{
+                        int year = Integer.valueOf(stringForm.get("year")).intValue();
+                        users = User.find.where().icontains("username", username)
+                                .icontains("firstName", firstName)
+                                .icontains("lastName",lastName)
+                                .eq("status", role)
+                                .istartsWith("gender", gender)
+                                .icontains("eMail", email)
+                                .eq("birthDate", dob)
+                                .eq("year", year)
+                                .icontains("section",section)
+                                .icontains("semester",semester)
+                                .icontains("academicYear",academicYear)
+                                .icontains("faculty",faculty)
+                                .icontains("department",department)
+                                .findList();
+                    }
+                }
+            }
+            return ok(experiment_result.render(getResultByUser(users)));
+        //}
     }
 
     //ทำการเพิ่ม user account ใหม่เข้าไปในระบบ
