@@ -90,7 +90,7 @@ public class Answer extends Model implements AnswerResult{
         return this.usedTime;
     }
     public TimeLog getTimeLog(){
-        return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id));
+        return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
     }
 	@SuppressWarnings("unchecked")
     public static Model.Finder<Long,Answer> find = new Finder(Long.class, Answer.class);
