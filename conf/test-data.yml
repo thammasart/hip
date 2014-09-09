@@ -93,26 +93,32 @@
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex1
+    status: CLOSE
 - &round2 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex1
+    status: CLOSE
 - &round3 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word 
     schedule: *ex1
+    status: CLOSE
 - &round4 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex2
+    status: CLOSE
 - &round5 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex2
+    status: CLOSE
 - &round6 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word 
     schedule: *ex2
+    status: CLOSE
 
 - &quiz1 !!models.brownPeterson.Quiz
     initCountdown:                 100

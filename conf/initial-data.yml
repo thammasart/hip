@@ -291,27 +291,32 @@
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex1
+    status: CLOSE
 - &round2 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex1
+    status: CLOSE
 - &round3 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word 
     schedule: *ex1
+    status: CLOSE
 - &round4 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex2
+    status: CLOSE
 - &round5 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex2
+    status: CLOSE
 - &round6 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word 
     schedule: *ex2
-
+    status: CLOSE
 
 - &quiz1 !!models.brownPeterson.Quiz
     initCountdown:                 100
@@ -501,26 +506,32 @@
     appearTime:       5
     questionType:    ENGLISH
     schedule: *ex3
+    status: CLOSE
 - &round8 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    ENGLISH
     schedule: *ex3
+    status: CLOSE
 - &round9 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    ENGLISH
     schedule: *ex3
+    status: CLOSE
 - &round10 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    THAI
     schedule: *ex4
+    status: CLOSE
 - &round11 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    THAI
     schedule: *ex4
+    status: CLOSE
 - &round12 !!models.stroopEffect.Trial
     appearTime:       5
     questionType:    THAI
     schedule: *ex4
+    status: CLOSE
 
 #Question
 - &Question13 !!models.stroopEffect.Question
@@ -628,6 +639,7 @@
 #Trial
 - &round13 !!models.signalDetection.Trial
     schedule: *ex5
+    status: CLOSE
 
 #Question
 - &Question22 !!models.signalDetection.Question
@@ -666,18 +678,22 @@
     questionType: ENGLISH
     numberOfQuiz: 3
     schedule: *ex7
+    status: CLOSE
 - &round15 !!models.attentionBlink.Trial
     questionType: NUMBER
     numberOfQuiz: 3
     schedule: *ex7
+    status: CLOSE
 - &round16 !!models.attentionBlink.Trial
     questionType: ENGLISH
     numberOfQuiz: 3
     schedule: *ex8
+    status: CLOSE
 - &round17 !!models.attentionBlink.Trial
     questionType: THAI
     numberOfQuiz: 3
     schedule: *ex8
+    status: CLOSE
 #Question
 - &Question25 !!models.attentionBlink.Question
     letter: ab
@@ -833,6 +849,7 @@
     delayTime: 1
     questionType: ENGLISH
     schedule: *ex9
+    status: CLOSE
 
 #Question
 - &Question37 !!models.positionError.Question
