@@ -1,7 +1,9 @@
 package models.garnerInterference;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import models.TimeLog;
+import models.TrialStatus;
 
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
@@ -30,6 +32,8 @@ public class Trial extends Model{
     public int noOfFakeSizeQuestion = 1;
     public int noOfBiDimensionQuestion = 1;
     public int noOfFakeBiDimentsionQuestion = 1;
+
+    public TrialStatus status = TrialStatus.CLOSE;
 
     public String color = "grey";
     public Feature feature = Feature.TWOFEATURE; // one feature or two feature

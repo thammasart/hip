@@ -1,9 +1,10 @@
 package models.mullerLayer;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import models.ExperimentSchedule;
 import models.TimeLog;
-
+import models.TrialStatus;
 
 import play.db.ebean.Model;
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Trial extends Model{
     public double totalUsedTime = 0;
     public int totalUser = 0;
     public int displayTime = 10;
+    public TrialStatus status = TrialStatus.CLOSE;
 
     @ManyToOne
     public ExperimentSchedule schedule;

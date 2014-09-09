@@ -1,9 +1,11 @@
 package models.visualSearch;
 
-import models.TimeLog;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.ExperimentSchedule;
+
+import models.TimeLog;
+import models.TrialStatus;
+
 import play.db.ebean.Model;
 import play.libs.Json;
 
@@ -36,6 +38,7 @@ public class Trial extends Model{
     public double totalScore = 0;
     public double totalUsedTime = 0;
     public int totalUser = 0;
+    public TrialStatus status = TrialStatus.CLOSE;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;

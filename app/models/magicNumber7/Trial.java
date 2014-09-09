@@ -2,7 +2,7 @@ package models.magicNumber7;
 
 import models.ExperimentSchedule;
 import models.TimeLog;
-
+import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -27,6 +27,7 @@ public class Trial extends Model{
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public int numberOfQuiz = 3;
+    public TrialStatus status = TrialStatus.CLOSE;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;

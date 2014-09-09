@@ -1,7 +1,9 @@
 package models.positionError;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import models.TimeLog;
+import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -25,6 +27,7 @@ public class Trial extends Model{
     public int totalUser = 0;
 
     public int numberOfQuiz = 3;
+    public TrialStatus status = TrialStatus.CLOSE;
 
 	@ManyToOne
     public ExperimentSchedule schedule;

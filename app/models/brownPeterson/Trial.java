@@ -2,7 +2,7 @@ package models.brownPeterson;
 
 import models.*;
 import models.TimeLog;
-
+import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -22,6 +22,7 @@ public class Trial extends Model {
 	public double totalScore = 0;
     public double totalUsedTime = 0;
     public int totalUser = 0;
+    public TrialStatus status = TrialStatus.CLOSE;
 
 	@Id
 	public long id;

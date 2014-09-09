@@ -2,6 +2,7 @@ package models.attentionBlink;
 
 import models.ExperimentSchedule;
 import models.TimeLog;
+import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Trial extends Model{
     public int totalUser = 0;
     public double totalScore = 0;
     public double totalUsedTime = 0;
+    public TrialStatus status = TrialStatus.CLOSE;
 
     @ManyToOne
     public ExperimentSchedule schedule;
