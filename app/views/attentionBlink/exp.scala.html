@@ -1,4 +1,4 @@
-@(trial : models.attentionBlink.Trial, questionNo : Integer)
+@(trial : models.attentionBlink.Trial, questionNo : Integer, isPreview:Boolean)
 @header("Human Information Processing Lab :: Home Page")
 
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
@@ -25,7 +25,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     </div>
     <div class="choice" align="center" id="choice" >
 
-        <form id = "answerForm" action="@routes.AttentionBlink.saveAnswer(trial.id,questionNo)" method="post">
+        <form id = "answerForm" action="@routes.AttentionBlink.saveAnswer(trial.id,questionNo,isPreview)" method="post">
             <button type="submit" class="btn btn-danger ansButton" id = "maiMe" name = "maiMe" class="Button" onclick="return submitButtonClick(this.name)"/>ไม่มี</button >
             <button type="submit" class="btn btn-success ansButton" id = "me" name = "me" class="Button" onclick="return submitButtonClick(this.name)"/>มี</button >
             <input id = "answer" name = "answer" type="checkbox" hidden/>

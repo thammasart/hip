@@ -45,9 +45,9 @@ GET         /attention-blink/proc                                   controllers.
 GET         /attention-blink/proci                                  controllers.AttentionBlink.procIframe()
 GET         /attention-blink/demo                                   controllers.AttentionBlink.demoPage()
 POST        /attention-blink/reportDemo                             controllers.AttentionBlink.demoReport()
-GET         /attention-blink/experiment                             controllers.AttentionBlink.experiment(trialId:Long, questionNo:Int)
-POST        /attention-blink/experiment/save                        controllers.AttentionBlink.saveAnswer(trialId:Long, questionNo:Int)
-GET         /attention-blink/report                                 controllers.AttentionBlink.report(username:String ?= "", trial_id:Long ?= 0)
+GET         /attention-blink/experiment                             controllers.AttentionBlink.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
+POST        /attention-blink/experiment/save                        controllers.AttentionBlink.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
+GET         /attention-blink/report                                 controllers.AttentionBlink.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
 
 GET         /stroop_effect                                          controllers.StroopEffect.info()
 GET         /stroop_effect/info                                     controllers.StroopEffect.infoIframe()
