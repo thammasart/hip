@@ -373,7 +373,7 @@ public class Application extends Controller {
         Result nextPage = badRequest(views.html.trial.render(exp.experimentType.toString() , user));
 
         switch(exp.experimentType){
-            case BROWNPETERSON : nextPage = redirect(routes.BrownPeterson.experiment(trialId,0));break;
+            case BROWNPETERSON : nextPage = redirect(routes.BrownPeterson.experiment(trialId,0,false));break;
             case STROOPEFFECT : nextPage = redirect(routes.StroopEffect.experiment(trialId,0)); break;
             case ATTENTIONBLINK : nextPage = redirect(routes.AttentionBlink.experiment(trialId,0,false)); break;
             case SIGNALDETECTION : nextPage = redirect(routes.SignalDetection.experiment(trialId,0)); break;

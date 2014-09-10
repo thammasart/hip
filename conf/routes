@@ -35,9 +35,9 @@ GET         /brown-peterson/proc                                    controllers.
 GET         /brown-peterson/proci                                   controllers.BrownPeterson.procIframe()
 GET         /brown-peterson/demo                                    controllers.BrownPeterson.demoPage()
 POST        /brown-peterson/reportDemo                              controllers.BrownPeterson.reportDemo(first:String,second:String,third:String)
-GET         /brown-peterson/experiment                              controllers.BrownPeterson.experiment(trialId:Long, questionNo:Int)
-POST        /brown-peterson/experiment/save                         controllers.BrownPeterson.saveAnswer(trialId:Long, questionNo:Int)
-GET         /brown-peterson/report                                  controllers.BrownPeterson.report(username:String ?= "", trial_id:Long ?= 0)
+GET         /brown-peterson/experiment                              controllers.BrownPeterson.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
+POST        /brown-peterson/experiment/save                         controllers.BrownPeterson.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
+GET         /brown-peterson/report                                  controllers.BrownPeterson.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
 
 GET         /attention-blink                                        controllers.AttentionBlink.info()
 GET         /attention-blink/info                                   controllers.AttentionBlink.infoIframe()
