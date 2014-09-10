@@ -92,10 +92,10 @@ public class Answer extends Model implements AnswerResult{
 		return totalScore;
 	}
 
-    public ExperimentSchedule getExperimentSchedule(){
+    public ExperimentSchedule getExperimentScheduleObject(){
         return this.quiz.trial.schedule;
     }
-    public long getTrialId(){
+    public long getTrialIdLong(){
         return this.quiz.trial.id;
     }
     public String getParameterType(){
@@ -112,22 +112,22 @@ public class Answer extends Model implements AnswerResult{
 
         return type;
     }
-    public User getUser(){
+    public User getUserObject(){
         return this.user;
     }
-    public long getQuestionId(){
+    public long getQuestionIdLong(){
         return this.quiz.question.id.longValue();
     }
-    public long getQuizId(){
+    public long getQuizIdLong(){
         return this.quiz.id;
     }
-    public String getIsCorrect(){
+    public String getIsCorrectString(){
         return String.valueOf(this.isCorrect);
     }
-    public double getUsedTime(){
+    public double getUsedTimeDouble(){
         return this.usedTime;
     }
-    public TimeLog getTimeLog(){
+    public TimeLog getTimeLogObject(){
         return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
     }
 
