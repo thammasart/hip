@@ -1,6 +1,6 @@
 @(exp : ExperimentSchedule)
 
-<div class="row" ng-controller="ExController"  >
+<div class="row" ng-controller="ExController" ng-init="init()" >
     <div class="col-md-8 col-sm-8">
         <div class="form-group">
             <label  class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
@@ -15,8 +15,8 @@
             <label class="col-sm-2 control-label">เริ่ม</label>
             <div class="input-group date col-sm-3" style="float:left">
                 <input type="text" name="startDate" class="form-control" datepicker-popup="{{format}}"
-                       ng-model="exp.startDate" is-open="startDateOpened"
-                       datepicker-options="dateOptions" max-date="exp.expireDate" disabled   ng-required="true" close-text="Close" />
+                       ng-model="startDate" is-open="startDateOpened" disabled
+                       datepicker-options="dateOptions" close-text="Close" />
                 <span class="input-group-btn">
                    <button class="btn btn-default" ng-click="open($event, 0)"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
@@ -26,8 +26,8 @@
             <label class="col-sm-2 control-label">สิ้นสุด</label>
             <div class="input-group date col-sm-3" style="float:left">
                 <input type="text" name="expireDate" class="form-control" datepicker-popup="{{format}}"
-                       ng-model="exp.expireDate"  disabled
-                       is-open="expireDateOpened" min-date="exp.startDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                       ng-model="expireDate"  disabled
+                       is-open="expireDateOpened" min-date="startDate" datepicker-options="dateOptions" close-text="Close" />
                 <span class="input-group-btn">
                    <button class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>

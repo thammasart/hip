@@ -1,4 +1,4 @@
-angular.module('ExperimentCreator', ['ui.bootstrap'])
+angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
     .controller('ExController', function($scope, $rootScope, $http){
         $scope.word = /^[a-zA-Z0-9ก-๙_ \-]*$/;
         $scope.value = 3;
@@ -8,13 +8,18 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         $scope.expireDateOpened = false;
         $scope.inProcess = false;
         $scope.today = new Date();
+        $scope.dl = new Date();
+        $rootScope.exp = {}
 
-        $scope.init = function(){
-            $rootScope.exp = {
-                name : '',
-                startDate : $scope.today,
-                expireDate :$scope.today
-            }
+        $scope.init = function() {
+            $rootScope.$watch('exp', function () {
+                if($rootScope.exp.expireDate) {
+                    $scope.expireDate = new Date($rootScope.exp.expireDate);
+                }
+                if($rootScope.exp.startDate) {
+                    $scope.startDate = new Date($rootScope.exp.startDate);
+                }
+            });
         }
 
         $scope.getInputStatus = function(input){
@@ -93,15 +98,16 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
         };
 
         $scope.dateOptions = {
-            'year-format': "'yy'",
-            'starting-day': 1
+            formatYear: 'yy',
+            startingDay: 1
         };
 
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'dd-MM-yyyy'];
         $scope.format = $scope.formats[3];
 
     })
-    .controller('BrownPetersonCtrl', function($scope, $rootScope, $http){
+    .controller('BrownPetersonCtrl', function($scope, $rootScope, $http, toaster){
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
         $scope.trigramTypes = ['word', 'nonsense'];
         $scope.trigramLanguages = ['english','thai'];
         $scope.trials = [];
@@ -116,7 +122,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
             $scope.inProcess = true;
             $http({method: 'GET', url: 'brownPetersonInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
-                $rootScope.exp = $scope.trials[0].schedule;
+                $rootScope.exp = angular.copy($scope.trials[0].schedule);
                 $scope.nonsenseThai = result.nonsenseThai;
                 $scope.nonsenseEnglish = result.nonsenseEng;
                 $scope.wordThai = result.wordThai;
@@ -134,16 +140,21 @@ angular.module('ExperimentCreator', ['ui.bootstrap'])
                 trial.quizzes[i].question = findQuestion(trial.trigramType, trial.trigramLanguage);
             }
         }
+        $scope.randomQuestion = function(quiz, trigramType, trigramLanguage){
+            quiz.question = findQuestion(trigramType, trigramLanguage);
+        }
 
         $scope.saveAll = function(){
             $scope.inProcess = true;
             $http({method:'PUT',url:'saveBrownPetersonTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                     console.log(result);
                 }).error(function(result){
                     console.log('error:' + result);
                     $scope.inProcess = false;
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
         function findQuestion(trigramType, trigramLanguage){

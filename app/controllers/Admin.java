@@ -640,15 +640,15 @@ public class Admin extends Controller {
         return ok(views.html.admin.experiment.edit.render(exp));
     }
 
-    public static Result displayBrownPetersonQuestionList(){
-        return ok(views.html.admin.experiment.displayQuestions.render());
+    public static Result displayBrownPetersonQuestionList(long id){
+        return ok(views.html.admin.experiment.displayQuestions.render(id));
     }
 
-    public static Result addBrownPetersonQuestion(){
-        return ok(views.html.admin.experiment.addQuestion.render());
+    public static Result addBrownPetersonQuestion(long id){
+        return ok(views.html.admin.experiment.addQuestion.render(id));
     }
 
-    public static Result saveBrownPetersonQuestion(){
+    public static Result saveBrownPetersonQuestion(long id){
         DynamicForm  questionForm = Form.form().bindFromRequest();
         String tempQuestion = questionForm.get("questions");
         String trigramType = questionForm.get("trigramType");
@@ -672,14 +672,14 @@ public class Admin extends Controller {
                                 " [" + questions[counter] + "]" +
                                 " โปรดลองใหม่อีกครั้ง";
                 flash("error", warning);
-                return badRequest(views.html.admin.experiment.addQuestion.render());
+                return badRequest(views.html.admin.experiment.addQuestion.render(id));
             }
             counter++;
         }
 
         flash("success", "update success.");
         
-        return ok(views.html.admin.experiment.displayQuestions.render());
+        return ok(views.html.admin.experiment.displayQuestions.render(8L));
     }
 
     public static Result randomBrownPetersonQuestion(long expId, long quizId){
@@ -687,17 +687,6 @@ public class Admin extends Controller {
         quiz.randomToNewQuestion();
         flash("success", "เปลี่ยนแปลงคำถามเรียบร้อยแล้ว");
         return redirect(routes.Admin.displayParameter(expId));
-    }
-    public static Result deleteBrownPetersonQuestion(long questionId){
-        models.brownPeterson.Question question = models.brownPeterson.Question.find.byId(questionId);
-        if(question.findQuizzes().size() > 0){
-            flash("error", "ไม่สามารถลบได้ เนื่องจากถูกใช้งานอยู่");
-            System.out.println(question.findQuizzes().size());
-        }else{
-            question.delete();
-            flash("success", "ลบคำถามเรียบร้อยแล้ว");
-        }
-        return redirect(routes.Admin.displayBrownPetersonQuestionList());
     }
 
     public static Result displayExperimentResult(long expId){
