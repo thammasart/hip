@@ -107,6 +107,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
 
     })
     .controller('BrownPetersonCtrl', function($scope, $rootScope, $http, toaster){
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
         $scope.trigramTypes = ['word', 'nonsense'];
         $scope.trigramLanguages = ['english','thai'];
         $scope.trials = [];
@@ -153,7 +154,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 }).error(function(result){
                     console.log('error:' + result);
                     $scope.inProcess = false;
-                    toaster.pop('success', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
         function findQuestion(trigramType, trigramLanguage){

@@ -1,6 +1,8 @@
+@(expId : Long)
+
 @import views.html.admin._
 
-@head_admin("add question")
+@head_admin("List of Brown-Peterson Task Question")
 
 @nav_admin()
 <div class="container" ng-app="BrownPetersonApp" ng-controller="BrownPetersonQuestionCtrl" ng-init="init()">
@@ -16,16 +18,25 @@
         </div>
         <div class="col-md-7 col-sm-7 sub-button pull-right" style="margin-bottom: 20px">
 
-            <button class="btn btn-primary pull-right" ><span class="glyphicon glyphicon-chevron-left"> </span> Back to Edit Parameter</button>
-            <a href="@routes.Admin.addBrownPetersonQuestion()" class="btn btn-default pull-right" style="margin-right: 20px;">
+            <a
+                @if(expId != null){
+                    href="@routes.Admin.displayParameter(expId)"
+                }else{
+                    href="@routes.Admin.displayExperimentList()"
+                }
+               class="btn btn-primary pull-right" ><span class="glyphicon glyphicon-chevron-left"> </span> Back to Edit Parameter</a>
+            <a href="@routes.Admin.addBrownPetersonQuestion(expId)" class="btn btn-default pull-right" style="margin-right: 20px;">
             <span class="glyphicon glyphicon-plus"> </span> add questions
             </a>
-            <button class="btn btn-danger pull-right" style="margin-right: 60px;"><span class="glyphicon glyphicon-remove"> </span> Del. Select</button>
+            <button class="btn btn-danger pull-right" style="margin-right: 60px;" ng-click="openDeleteSelectedDialog()">
+                <span class="glyphicon glyphicon-remove"> </span> Del. Select</button>
         </div>
     </div>
+    <hr />
     <table class="table text-center">
         <thead>
             <tr>
+                <th>#</th>
                 <th>ID</th>
                 <th>First Word</th>
                 <th>Second Word</th>
@@ -37,25 +48,70 @@
         </thead>
         <tbody>
             <tr>
-                <td><input class="form-control" style="width:100px;margin: auto" ng-model="idText"></td>
-                <td><input class="form-control" style="width:100px;margin: auto" ng-model="firstWord"></td>
-                <td><input class="form-control" style="width:100px;margin: auto" ng-model="secondWord"></td>
-                <td><input class="form-control" style="width:100px;margin: auto" ng-model="thirdWord"></td>
-                <td><select class="form-control" style="width:150px;margin:auto" ng-model="trigramType" ng-options="value for value in trigramTypes"></select></td>
-                <td><select class="form-control" style="width:150px;margin:auto" ng-model="trigramLanguage" ng-options="value for value in trigramLanguages"></select></td>
+                <td></td>
+                <td><input class="form-control text-center" style="width:100px;margin: auto" ng-model="idText" placeholder="search"></td>
+                <td><input class="form-control text-center" style="width:100px;margin: auto" ng-model="firstWord" placeholder="search"></td>
+                <td><input class="form-control text-center" style="width:100px;margin: auto" ng-model="secondWord" placeholder="search"></td>
+                <td><input class="form-control text-center" style="width:100px;margin: auto" ng-model="thirdWord" placeholder="search"></td>
+                <td><select class="form-control text-center" style="width:150px;margin:auto" ng-model="trigramType"
+                            ng-change="refreshPage()"
+                            ng-options="type.name for type in trigramTypes">
+                        <option>select</option>
+                    </select></td>
+                <td><select class="form-control text-center" style="width:150px;margin:auto" ng-model="trigramLanguage"
+                            ng-change="refreshPage()"
+                            ng-options="lang.name for lang in trigramLanguages"></select></td>
                 <td></td>
             </tr>
-            <tr ng-repeat="question in questions | filter:{id:idText, trigramType:trigramType,trigramLanguage:trigramLanguage,firstWord:firstWord,secondWord:secondWord,thirdWord:thirdWord}">
+            <tr ng-repeat="question in questions | filter:{id:idText, trigramType:trigramType.value,trigramLanguage:trigramLanguage.value,firstWord:firstWord,secondWord:secondWord,thirdWord:thirdWord}">
+                <td><input class="checkbox" type="checkbox" ng-model="question.checked"></td>
                 <td>{{question.id}}</td>
                 <td>{{question.firstWord}}</td>
                 <td>{{question.secondWord}}</td>
                 <td>{{question.thirdWord}}</td>
                 <td>{{question.trigramType}}</td>
                 <td>{{question.trigramLanguage}}</td>
-                <td><a  class="btn btn-xs btn-danger" ng-click="delete(question, $index)">delete</a></td>
+                <td><a  class="btn btn-xs btn-danger" ng-click="openDeleteDialog(question, $index)">delete</a></td>
             </tr>
         </tbody>
     </table>
+    <div ng-hide="true" class="bottom-paging" style="margin:auto; text-align:center">
+        <ul class="pagination center-block">
+            <li ng-click="prevPage()" style="cursor: pointer"><a>&laquo;</a></li>
+            <li ng-click="showPage(1)" style="cursor: pointer"><a>หน้าแรก</a></li>
+            <li class="active"><a>{{currentPage+'/'+
+                numPages()}}</a></li>
+            <li ng-click="showPage(numPages())" style="cursor: pointer"><a>หน้าสุดท้าย</a></li>
+            <li ng-click="nextPage()" style="cursor: pointer"><a>&raquo;</a></li>
+        </ul>
+    </div>
+    <script type="text/ng-template" id="deleteDialog.html">
+        <div class="modal-header">
+            <h3 class="modal-title">ลบคำถาม</h3>
+        </div>
+        <div class="modal-body">
+            <h4>คุณต้องการลบคำถาม #{{question.id}} หรือไม่?</h4>
+            <h5 class="text-danger" style="margin-top:20px">Warning: **This action cannot be undone**</h5>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-danger" ng-click="ok()"><span class="glyphicon glyphicon-remove"> </span> Delete Question</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="deleteQuestions.html">
+        <div class="modal-header"  ng-init="init()">
+            <h3 class="modal-title">ลบคำถาม</h3>
+        </div>
+        <div class="modal-body">
+            <h4>{{deleteText}}</h4>
+            <h5 class="text-danger" style="margin-top:20px">Warning: **This action cannot be undone**</h5>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-danger" ng-click="ok()"><span class="glyphicon glyphicon-remove"> </span> Delete Questions</button>
+        </div>
+    </script>
+    <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
 </div>
 @angular()
 <script type="text/javascript" src="@routes.Assets.at("javascripts/controllers/brownPeterson.js")"></script>

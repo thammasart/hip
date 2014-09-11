@@ -15,9 +15,9 @@
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
                 <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
-                <a href="@routes.Admin.addBrownPetersonQuestion()" class="btn btn-xs btn-default pull-right" style="margin-right: 10px;margin-top:8px">
+                <a href="@routes.Admin.addBrownPetersonQuestion(exp.id)" class="btn btn-xs btn-default pull-right" style="margin-right: 10px;margin-top:8px">
                     <span class="glyphicon glyphicon-plus"></span> add question</a>
-                <a href="@routes.Admin.displayBrownPetersonQuestionList()" class="btn btn-xs btn-default pull-right" style="margin-right: 10px;margin-top:8px;" >
+                <a href="@routes.Admin.displayBrownPetersonQuestionList(exp.id)" class="btn btn-xs btn-default pull-right" style="margin-right: 10px;margin-top:8px;" >
                     <span class="glyphicon glyphicon-th-list"></span> show question</a>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
@@ -29,11 +29,11 @@
                                 <label class="control-label col-sm-4">คำถามที่ {{$index + 1}} :  ตัวเลขเริ่มนับถอยหลัง</label>
                                 <div class="col-sm-2 form-invalid">
                                     <input type="number" min="1" max="999" class="form-control"
-                                           ng-model="quiz.initCountdown" required>
+                                           ng-model="quiz.initCountdown" ng-pattern="regIneger" required>
                                 </div>
                                 <label class="control-label col-sm-4">จำนวนวินาทีนับถอยหลัง</label>
                                 <div class="col-sm-2 form-invalid">
-                                    <input type="number" min="1" max="20" class="form-control" ng-model="quiz.flashTime" required>
+                                    <input type="number" min="1" max="20" class="form-control" ng-model="quiz.flashTime" ng-pattern="regIneger" required>
                                 </div>
                             </div>
                             <div class="row">

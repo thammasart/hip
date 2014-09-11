@@ -280,4 +280,35 @@ public class BrownPeterson extends Controller {
 
         return ok(result);
     }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result deleteQuestions() {
+        ObjectNode result = Json.newObject();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = request().body().asJson();
+            String jsonArray = Json.stringify(jsonNode);
+            Long[] ids = mapper.readValue(jsonArray, Long[].class);
+
+            for(long id: ids ) {
+                Question question = Question.find.byId(id);
+                question.delete();
+            }
+
+            List<Question> questions = Question.find.all();
+            jsonArray = mapper.writeValueAsString(questions);
+            JsonNode json = Json.parse(jsonArray);
+            result.put("questions", json);
+            result.put("message", "success");
+            result.put("status", "ok");
+        }catch(RuntimeException e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }catch(Exception e){
+            result.put("message", e.getMessage());
+            result.put("status", "error");
+        }
+
+        return ok(result);
+    }
 }
