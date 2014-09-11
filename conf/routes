@@ -98,9 +98,9 @@ GET         /magic_number7/proc                                     controllers.
 GET         /magic_number7/proci                                    controllers.MagicNumber7.procIframe()
 GET         /magic_number7/demo                                     controllers.MagicNumber7.demoPage()
 POST        /magic_number7/reportDemo                               controllers.MagicNumber7.demoReport(length:Int)
-GET         /magic_number7/experiment                               controllers.MagicNumber7.experiment(trialId:Long, questionNo:Int)
-POST        /magic_number7/experiment/save                          controllers.MagicNumber7.saveAnswer(trialId:Long, questionNo:Int)
-GET         /magic_number7/report                                   controllers.MagicNumber7.report(username:String ?= "", trial_id:Long ?= 0)
+GET         /magic_number7/experiment                               controllers.MagicNumber7.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
+POST        /magic_number7/experiment/save                          controllers.MagicNumber7.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
+GET         /magic_number7/report                                   controllers.MagicNumber7.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
 
 GET         /garner_interference                                    controllers.GarnerInterference.info()
 GET         /garner_interference/info                               controllers.GarnerInterference.infoIframe()

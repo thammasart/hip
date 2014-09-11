@@ -379,7 +379,7 @@ public class Application extends Controller {
             case SIGNALDETECTION : nextPage = redirect(routes.SignalDetection.experiment(trialId,0)); break;
             case POSITIONERROR : nextPage = redirect(routes.PositionError.experiment(trialId,0)); break;
             case STERNBERGSEARCH : nextPage = redirect(routes.SternbergSearch.experiment(trialId,0,false)); break;
-            case MAGICNUMBER7 : nextPage = redirect(routes.MagicNumber7.experiment(trialId,0)); break;
+            case MAGICNUMBER7 : nextPage = redirect(routes.MagicNumber7.experiment(trialId,0,false)); break;
             case SIMONEFFECT : nextPage = redirect(routes.SimonEffect.experiment(trialId,0)); break;
             case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0)); break;
             case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0,false)); break;
