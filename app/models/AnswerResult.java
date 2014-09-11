@@ -4,13 +4,13 @@ import java.util.Date;
 
 public interface AnswerResult {
 
-    public ExperimentSchedule getExperimentSchedule();
-    public long getTrialId();
+    public ExperimentSchedule getExperimentScheduleObject();
+    public long getTrialIdLong();
     public String getParameterType();
-    public User getUser();
-    public long getQuestionId();
-    public long getQuizId();
-    public String getIsCorrect();
-    public double getUsedTime();
-    public TimeLog getTimeLog();
+    public User getUserObject();
+    public long getQuestionIdLong();
+    public long getQuizIdLong();
+    public String getIsCorrectString();
+    public double getUsedTimeDouble();
+    public TimeLog getTimeLogObject();
 }

@@ -95,16 +95,16 @@
             <tbody>
         @for(answer<- answers){
                 <tr>
-                    <th>@answer.getExperimentSchedule().name</th>
-                    <th>@answer.getTrialId()</th>
+                    <th>@answer.getExperimentScheduleObject().name</th>
+                    <th>@answer.getTrialIdLong()</th>
                     <th>@answer.getParameterType()</th>
-                    <th>@answer.getUser().username</th>
-                    <th>@answer.getQuestionId()</th>
-                    <th>@answer.getQuizId()</th>
-                    <th>@answer.getIsCorrect()</th>
-                    <th>@answer.getUsedTime()</th>
-                    <th>@answer.getTimeLog().startTime.format("dd/MM/yyyy")</th>
-                    <th>@answer.getTimeLog().endTime.format("dd/MM/yyyy")</th>
+                    <th>@answer.getUserObject().username</th>
+                    <th>@answer.getQuestionIdLong()</th>
+                    <th>@answer.getQuizIdLong()</th>
+                    <th>@answer.getIsCorrectString()</th>
+                    <th>@answer.getUsedTimeDouble()</th>
+                    <th>@answer.getTimeLogObject().startTime.format("dd/MM/yyyy")</th>
+                    <th>@answer.getTimeLogObject().endTime.format("dd/MM/yyyy")</th>
         }
             </tbody>
         </table>
