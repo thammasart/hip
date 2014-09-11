@@ -24,9 +24,9 @@ GET         /muller-layer/proc                                      controllers.
 GET         /muller-layer/proci                                     controllers.MullerLayer.procIframe()
 GET         /muller-layer/demo                                      controllers.MullerLayer.demoPage()
 POST        /muller-layer/reportDemo                                controllers.MullerLayer.demoReport()
-GET         /muller-layer/experiment                                controllers.MullerLayer.experiment(trialId:Long,questionNo:Int)
-POST        /muller-layer/experiment/save                           controllers.MullerLayer.saveAnswer(trialId:Long, questionNo:Int)
-GET         /muller-layer/report                                    controllers.MullerLayer.report(username:String ?="", trial_id:Long ?=0)
+GET         /muller-layer/experiment                                controllers.MullerLayer.experiment(trialId:Long,questionNo:Int, isPreview:Boolean)
+POST        /muller-layer/experiment/save                           controllers.MullerLayer.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
+GET         /muller-layer/report                                    controllers.MullerLayer.report(username:String ?="", trial_id:Long ?=0, isPreview:Boolean)
 GET         /muller-layer/findQuestion                              controllers.MullerLayer.findQuestion(trialId: Long, questionNo: Int)
 
 GET         /brown-peterson                                         controllers.BrownPeterson.info()

@@ -381,7 +381,7 @@ public class Application extends Controller {
             case STERNBERGSEARCH : nextPage = redirect(routes.SternbergSearch.experiment(trialId,0,false)); break;
             case MAGICNUMBER7 : nextPage = redirect(routes.MagicNumber7.experiment(trialId,0,false)); break;
             case SIMONEFFECT : nextPage = redirect(routes.SimonEffect.experiment(trialId,0)); break;
-            case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0)); break;
+            case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0,false)); break;
             case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0,false)); break;
             case VISUALSEARCH: nextPage = redirect(routes.VisualSearch.experiment(trialId,0)); break;
             case CHANGEBLINDNESS : nextPage = redirect(routes.ChangeBlindness.experiment(trialId,0,false)); break;

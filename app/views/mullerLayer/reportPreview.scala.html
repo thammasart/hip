@@ -18,9 +18,10 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             </div>
         </div>
         <div class="navContainer">
-            <a class="btn btn-success navButton" style="float:right;" onclick="window.close()"><span class="glyphicon glyphicon-th-list"></span> &nbsp;เลือก Trial การทดลอง</a>
-
-            <a href="@routes.Application.chooseTrial(ExperimentType.ATTENTIONBLINK.toString())" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >Share this</a>
+            <a class="btn btn-danger navButton" href="@routes.MullerLayer.proc()"><span class="glyphicon glyphicon-chevron-left"></span> &nbsp;กลับไปขั้นตอนการทดลอง</a>
+            <a class="btn btn-primary navButton navButtonDemo" href="@routes.Application.selectExperiment()"><span class="glyphicon glyphicon-th"></span> &nbsp;เลือกการทดลองอื่น</a>
+            <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.MULLERLAYER.toString())"><span class="glyphicon glyphicon-th-list"></span> &nbsp;เลือก Trial การทดลอง</a>
+        </div>
     </div>
     
     @footer()

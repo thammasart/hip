@@ -55,7 +55,7 @@ public class MullerLayer extends Controller {
     }
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId,int questionNo){
+    public static Result experiment(long trialId,int questionNo, boolean isPreview){
         Trial t = Trial.find.byId(trialId);
         List<LineType> lt = new ArrayList<LineType>();
         int noOfDeleteLines = 5-t.quizzes.get(questionNo).noOfChoice;
@@ -68,7 +68,7 @@ public class MullerLayer extends Controller {
         for(int i = 0 ; i <noOfDeleteLines;i++){
             lt.remove(i);
         }
-        return ok(exp.render(Trial.find.byId(trialId), questionNo,lt));
+        return ok(exp.render(Trial.find.byId(trialId), questionNo,lt, isPreview));
     }
 
 
@@ -81,7 +81,7 @@ public class MullerLayer extends Controller {
         return ok(demoReport.render(score,time,1,"Demo Report",user));
     }
     @Security.Authenticated(Secured.class)
-    public static Result saveAnswer(long trialId, int questionNo){
+    public static Result saveAnswer(long trialId, int questionNo, boolean isPreview){
         Form<Answer> boundForm = answerForm.bindFromRequest();
         User user = User.find.byId(session().get("username"));
         Trial trial = Trial.find.byId(trialId);
@@ -104,18 +104,18 @@ public class MullerLayer extends Controller {
 
         questionNo++;
         if(questionNo < trial.quizzes.size()){
-            return redirect(routes.MullerLayer.experiment(trialId, questionNo));
+            return redirect(routes.MullerLayer.experiment(trialId, questionNo, isPreview));
         }
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         Trial.find.byId(trialId).updateResult();
-        return redirect(routes.MullerLayer.report(user.username, trialId));
+        return redirect(routes.MullerLayer.report(user.username, trialId, isPreview));
     }
     
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result report(String username, long trialId){
+    public static Result report(String username, long trialId, boolean isPreview){
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.AttentionBlink.info());
         }
@@ -124,7 +124,12 @@ public class MullerLayer extends Controller {
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        if(isPreview){
+            return ok(reportPreview.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        }
+        else{
+            return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        }
     }
 
 
