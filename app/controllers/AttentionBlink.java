@@ -50,12 +50,12 @@ public class AttentionBlink extends Controller {
     }
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId,int questionNo){
-        return ok(exp.render(Trial.find.byId(trialId), questionNo));
+    public static Result experiment(long trialId,int questionNo, boolean isPreview){
+        return ok(exp.render(Trial.find.byId(trialId), questionNo, isPreview));
     }
 
     @Security.Authenticated(Secured.class)
-    public static Result saveAnswer(long trialId, int questionNo){
+    public static Result saveAnswer(long trialId, int questionNo, boolean isPreview){
         Form<Answer> boundForm = answerForm.bindFromRequest();
         User user = User.find.byId(session().get("username"));
         Trial trial = Trial.find.byId(trialId);
@@ -72,18 +72,18 @@ public class AttentionBlink extends Controller {
 
         questionNo++;
         if(questionNo < trial.numberOfQuiz){
-            return redirect(routes.AttentionBlink.experiment(trialId, questionNo));
+            return redirect(routes.AttentionBlink.experiment(trialId, questionNo, isPreview));
         }
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         Trial.find.byId(trialId).updateResult();
-        return redirect(routes.AttentionBlink.report(user.username, trialId));
+        return redirect(routes.AttentionBlink.report(user.username, trialId, isPreview));
     }
     
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result report(String username, long trialId){
+    public static Result report(String username, long trialId, boolean isPreview){
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.AttentionBlink.info());
         }
@@ -93,7 +93,10 @@ public class AttentionBlink extends Controller {
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        if(isPreview)
+            return ok(reportPreview.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        else
+            return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
 
     @Security.Authenticated(Secured.class)

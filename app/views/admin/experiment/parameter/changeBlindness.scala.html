@@ -16,7 +16,9 @@
             </div>
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" ng-repeat="obj in trials">
-                <h3>Trial {{$index + 1}}</h3>
+                <h3>Trial - {{$index + 1}}<span> </span>
+                    <a href="/brown-peterson/experiment?trialId={{trial.id}}&questionNo=0&isPreview=true)" style="margin-left:30px" class="btn btn-default">
+                        Preview Trial</a></h3>
                 <div class="well" style="padding-left: 20px">
                     <div class="row">
                         <span style="margin-right: 20px">เวลาในการทำโจทย์ </span><input type="number" min="15" max="300" ng-model="obj.trial.displayTime" class="form-control" style="display: inline;width:100px" >

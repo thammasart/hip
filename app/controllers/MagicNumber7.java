@@ -63,12 +63,12 @@ public class MagicNumber7 extends Controller{
     }
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId,int questionNo){
-        return ok(exp.render(Trial.find.byId(trialId), questionNo));
+    public static Result experiment(long trialId,int questionNo, boolean isPreview){
+        return ok(exp.render(Trial.find.byId(trialId), questionNo, isPreview));
     }
 
     @Security.Authenticated(Secured.class)
-    public static Result saveAnswer(long trialId, int questionNo){
+    public static Result saveAnswer(long trialId, int questionNo, boolean isPreview){
         DynamicForm reportData = Form.form().bindFromRequest();
         double time = Double.parseDouble(reportData.get("usedTime"));
         int score = Integer.parseInt(reportData.get("score"));
@@ -87,18 +87,18 @@ public class MagicNumber7 extends Controller{
 
         questionNo++;
         if(questionNo < trial.numberOfQuiz){
-            return redirect(routes.MagicNumber7.experiment(trialId, questionNo));
+            return redirect(routes.MagicNumber7.experiment(trialId, questionNo, isPreview));
         }
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
         Trial.find.byId(trialId).updateResult();
-        return redirect(routes.MagicNumber7.report(user.username, trialId));
+        return redirect(routes.MagicNumber7.report(user.username, trialId, isPreview));
     }
 
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result report(String username, long trialId){
+    public static Result report(String username, long trialId, boolean isPreview){
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.MagicNumber7.info());
         }
@@ -106,7 +106,12 @@ public class MagicNumber7 extends Controller{
         Trial trial = Trial.find.byId(trialId);
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
-        return ok(report.render(answers,totalUsedTime, "Report", user));
+        if(isPreview){
+            return ok(report.render(answers,totalUsedTime, "Report", user));
+        }
+        else{
+            return ok(report.render(answers,totalUsedTime, "Report", user));
+        }
     }
 
     @Security.Authenticated(Secured.class)

@@ -31,7 +31,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
   <h3 align="center" id="timeLeft"> &nbsp </h3>  
   <span class="headerBox" id="ansTag">คำตอบ</span>
   <span class="headerNumberBox" id="numberTag">ใส่ตัวเลข</span>
-        <form id = "answerForm" action="@routes.BrownPeterson.saveAnswer(trialId, questionNo)" method="post">
+        <form id = "answerForm" action="@routes.BrownPeterson.saveAnswer(trialId,questionNo,false)" method="post">
           <input maxlength="20" id = "firstWord" name = "firstWord" type="text" placeholder="   คำตอบ" autofocus />
           <input maxlength="20"id = "secondWord" name = "secondWord" type="text" placeholder="   คำตอบ" />
           <input maxlength="20" id = "thirdWord" name = "thirdWord" type="text" placeholder="  คำตอบ"  />

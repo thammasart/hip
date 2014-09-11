@@ -1,4 +1,4 @@
-@(trial : models.garnerInterference.Trial, questionNo : Integer )
+@(trial : models.garnerInterference.Trial, questionNo : Integer , isPreview:Boolean)
 @header("Human Information Processing Lab :: Home Page")
 <script src="@routes.Assets.at("javascripts/submitButton.js")"></script>
 <!--
@@ -55,7 +55,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             </div>
         </div>
         
-            <form action="@routes.GarnerInterference.saveAnswer(trial.id,questionNo)" id="answerForm" method="post">
+            <form action="@routes.GarnerInterference.saveAnswer(trial.id,questionNo,isPreview)" id="answerForm" method="post">
            <!-- <div class="smallSquare dark sq" style="visibility:hidden;" id="sq">
             </div>
 --!>

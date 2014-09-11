@@ -373,18 +373,18 @@ public class Application extends Controller {
         Result nextPage = badRequest(views.html.trial.render(exp.experimentType.toString() , user));
 
         switch(exp.experimentType){
-            case BROWNPETERSON : nextPage = redirect(routes.BrownPeterson.experiment(trialId,0));break;
+            case BROWNPETERSON : nextPage = redirect(routes.BrownPeterson.experiment(trialId,0,false));break;
             case STROOPEFFECT : nextPage = redirect(routes.StroopEffect.experiment(trialId,0)); break;
-            case ATTENTIONBLINK : nextPage = redirect(routes.AttentionBlink.experiment(trialId,0)); break;
-            case SIGNALDETECTION : nextPage = redirect(routes.SignalDetection.experiment(trialId,0)); break;
+            case ATTENTIONBLINK : nextPage = redirect(routes.AttentionBlink.experiment(trialId,0,false)); break;
+            case SIGNALDETECTION : nextPage = redirect(routes.SignalDetection.experiment(trialId,0,false)); break;
             case POSITIONERROR : nextPage = redirect(routes.PositionError.experiment(trialId,0)); break;
             case STERNBERGSEARCH : nextPage = redirect(routes.SternbergSearch.experiment(trialId,0,false)); break;
-            case MAGICNUMBER7 : nextPage = redirect(routes.MagicNumber7.experiment(trialId,0)); break;
-            case SIMONEFFECT : nextPage = redirect(routes.SimonEffect.experiment(trialId,0)); break;
-            case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0)); break;
-            case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0)); break;
+            case MAGICNUMBER7 : nextPage = redirect(routes.MagicNumber7.experiment(trialId,0,false)); break;
+            case SIMONEFFECT : nextPage = redirect(routes.SimonEffect.experiment(trialId,0,false)); break;
+            case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0,false)); break;
+            case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0,false)); break;
             case VISUALSEARCH: nextPage = redirect(routes.VisualSearch.experiment(trialId,0)); break;
-            case CHANGEBLINDNESS : nextPage = redirect(routes.ChangeBlindness.experiment(trialId,0)); break;
+            case CHANGEBLINDNESS : nextPage = redirect(routes.ChangeBlindness.experiment(trialId,0,false)); break;
         }
         return nextPage;
     }

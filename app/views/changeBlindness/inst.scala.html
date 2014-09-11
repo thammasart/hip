@@ -1,4 +1,4 @@
-@(trial : models.changeBlindness.Trial,questionNo : Integer)
+@(trial : models.changeBlindness.Trial,questionNo : Integer, isPreview:Boolean)
 @header("Human Information Processing Lab :: Home Page")
 
 <script src="@routes.Assets.at("javascripts/disableNavigatorFunction.js")"></script>
@@ -28,7 +28,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             <p>เมื่อท่านพร้อมแล้วกดปุ่ม เริ่มการทดลอง</p>
         </div>
         <div class="procButtonGreen changeBlindnessExpButton">
-            <a href="@routes.ChangeBlindness.doExperiment(trial.id,questionNo)" class="btn  btn-success " >เริ่มการทดลอง</a>
+            <a href="@routes.ChangeBlindness.doExperiment(trial.id,questionNo,isPreview)" class="btn  btn-success " >เริ่มการทดลอง</a>
         </div>
     </div>
 
