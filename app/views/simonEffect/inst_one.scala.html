@@ -1,4 +1,4 @@
-@(trial : models.simonEffect.Trial,questionNo : Integer)
+@(trial : models.simonEffect.Trial,questionNo : Integer, isPreview:Boolean)
 @header("Human Information Processing Lab :: Home Page")
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/simonEffect.css")">
@@ -31,7 +31,7 @@ function preventBack(){window.history.forward();}
         </div>
         <img  class = "simonIntroImg" src="@routes.Assets.at("images/simon_one_feature.png")">
         <div class="procButtonGreen simonExpButton">
-            <a href="@routes.SimonEffect.doExperiment(trial.id,questionNo)" class="btn  btn-success " >เริ่มการทดลอง</a>
+            <a href="@routes.SimonEffect.doExperiment(trial.id,questionNo,isPreview)" class="btn  btn-success " >เริ่มการทดลอง</a>
         </div>
     </div>
 
