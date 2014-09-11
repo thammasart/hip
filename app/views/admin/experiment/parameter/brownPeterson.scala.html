@@ -21,7 +21,9 @@
                     <span class="glyphicon glyphicon-th-list"></span> show question</a>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
-                <h3>Trial {{$index + 1}}</h3>
+                <h3>Trial - {{$index + 1}}<span> </span>
+                    <a href="@routes.BrownPeterson.experiment({{trial.id}}, 0, true)" style="margin-left:30px" class="btn btn-default">Preview Trial</a></h3>
+
                 <div class="well">
                     <div class="row">
                         <div class="col-md-9 col-sm-8 trial-box-left">
