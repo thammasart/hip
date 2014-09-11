@@ -1,0 +1,29 @@
+@(answers : List[models.magicNumber7.Answer],totalUsedTime: Double,title : String, user : User)
+@header("Human Information Processing Lab :: Report Page")
+<script>
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+</script>
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
+<body>
+<div class="fixSize">
+    @nav(user)
+    <div class="expMainWindow" style="height:initial; min-height:470px;">
+        <div class="expMainWindowFrame" style="padding-top:0.5%;" >
+            <div class="expCenterWord">
+                @for(ans <- answers){
+                    <h3>ข้อที่ @(ans.id - answers.get(0).id + 1 ) : @ans.score/@ans.quiz.length</h3>
+                }
+                <h3>เวลา : @{ BigDecimal(totalUsedTime).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble } วินาที</h3>
+            </div>
+        </div>
+        <div class="navContainer">
+            <a class="btn btn-danger navButton" href="@routes.MagicNumber7.proc()"><span class="glyphicon glyphicon-chevron-left"></span> &nbsp;กลับไปขั้นตอนการทดลอง</a>
+            <a class="btn btn-primary navButton navButtonDemo" href="@routes.Application.selectExperiment()"><span class="glyphicon glyphicon-th"></span> &nbsp;เลือกการทดลองอื่น</a>
+            <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.MAGICNUMBER7.toString())"><span class="glyphicon glyphicon-th-list"></span> &nbsp;เลือก Trial การทดลอง</a>
+        </div>
+   </div>
+    @footer()
+</div>
