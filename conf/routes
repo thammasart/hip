@@ -77,9 +77,9 @@ GET         /signal_detection/proc                                  controllers.
 GET         /signal_detection/proci                                 controllers.SignalDetection.procIframe()
 GET         /signal_detection/demo                                  controllers.SignalDetection.demoPage()
 POST        /signal_detection/reportDemo                            controllers.SignalDetection.reportDemo()
-GET         /signal_detection/experiment                            controllers.SignalDetection.experiment(trialId:Long, questionNo:Int)
-POST        /signal_detection/experiment/save                       controllers.SignalDetection.saveAnswer(trialId:Long, questionNo:Int)
-GET         /signal_detection/report                                controllers.SignalDetection.report(username:String ?= "", trial_id:Long ?= 0)
+GET         /signal_detection/experiment                            controllers.SignalDetection.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
+POST        /signal_detection/experiment/save                       controllers.SignalDetection.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
+GET         /signal_detection/report                                controllers.SignalDetection.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
 
 GET         /simon_effect                                           controllers.SimonEffect.info()
 GET         /simon_effect/info                                      controllers.SimonEffect.infoIframe()
