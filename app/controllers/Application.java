@@ -384,7 +384,7 @@ public class Application extends Controller {
             case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0)); break;
             case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0)); break;
             case VISUALSEARCH: nextPage = redirect(routes.VisualSearch.experiment(trialId,0)); break;
-            case CHANGEBLINDNESS : nextPage = redirect(routes.ChangeBlindness.experiment(trialId,0)); break;
+            case CHANGEBLINDNESS : nextPage = redirect(routes.ChangeBlindness.experiment(trialId,0,false)); break;
         }
         return nextPage;
     }
