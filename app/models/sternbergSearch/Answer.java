@@ -1,5 +1,8 @@
 package models.sternbergSearch;
 
+import models.AnswerResult;
+import models.ExperimentSchedule;
+import models.TimeLog;
 import models.User;
 import models.sternbergSearch.*;
 
@@ -10,7 +13,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table (name = "sternberg_search_answer")
-public class Answer extends Model{
+public class Answer extends Model implements AnswerResult{
 
     @Id
     public long id;
@@ -58,7 +61,39 @@ public class Answer extends Model{
         }
         return totalUsedTime;
     }
-
+    public ExperimentSchedule getExperimentScheduleObject(){
+        return this.quiz.trial.schedule;
+    }
+    public long getTrialIdLong(){
+        return this.quiz.trial.id;
+    }
+    public String getParameterType(){
+        List<Quiz> quizzes = this.quiz.trial.quizzes;
+        for (int i =0;i<quizzes.size();i++){
+            Quiz q = quizzes.get(i);
+            if (q.questionChar.length() > 1)
+                return "Parallel Search";
+        }
+        return "Exhaustive Search";
+    }
+    public User getUserObject(){
+        return this.user;
+    }
+    public long getQuestionIdLong(){
+        return this.quiz.question.id;
+    }
+    public long getQuizIdLong(){
+        return this.quiz.id;
+    }
+    public String getIsCorrectString(){
+        return String.valueOf(this.isCorrect);
+    }
+    public double getUsedTimeDouble(){
+        return this.usedTime;
+    }
+    public TimeLog getTimeLogObject(){
+        return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
+    }
 	@SuppressWarnings("unchecked")
 	public static Finder<Long,Answer> find = new Finder(Long.class,Answer.class);
 }

@@ -104,6 +104,7 @@ public class ChangeBlindness extends Controller{
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
+        Trial.find.byId(trialId).updateResult();
         return redirect(routes.ChangeBlindness.report(user.username, trialId));
     }
 
@@ -168,7 +169,7 @@ public class ChangeBlindness extends Controller{
                     Quiz quiz = Quiz.find.byId(temp.id);
                     quiz.delete();
                 }
-                trial.quizzes = new ArrayList<>();
+                trial.quizzes = new ArrayList<Quiz>();
                 for(Quiz temp : obj.quizzes){
                     Question question = Question.find.byId(temp.question.id);
                     Quiz quiz = new Quiz(trial, question);

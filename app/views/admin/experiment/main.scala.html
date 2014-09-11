@@ -33,10 +33,7 @@
                                     "aButtons": [
                                     {
                                             "sExtends":     "xls",
-                                            "sButtonText": "",
-                                            "oSelectorOpts": {
-                                                page: 'current'
-                                            }
+                                            "sButtonText": ""
                                     }
                                      ]
                                 },
@@ -59,6 +56,13 @@
                 <div class="customAlert alert alert-dismissible alert-success">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     @flash.get("savedSuccess")
+                </div>
+            }
+            @if(flash.containsKey("savedFail")){
+
+                <div class="customAlert alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @flash.get("savedFail")
                 </div>
             }
             </div>
@@ -178,4 +182,4 @@
            </tbody>
        </table>
 </div>
-@footer()
+@adminfooter()

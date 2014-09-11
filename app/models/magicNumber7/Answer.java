@@ -1,5 +1,8 @@
 package models.magicNumber7;
 
+import models.AnswerResult;
+import models.ExperimentSchedule;
+import models.TimeLog;
 import models.User;
 
 import play.db.ebean.*;
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table (name = "magic_number_7_answer")
-public class Answer extends Model{
+public class Answer extends Model implements AnswerResult{
 
     @Id
     public long id;
@@ -41,7 +44,13 @@ public class Answer extends Model{
         }
         return answers;
     }
-
+    public static double calculateTotalScore(List<Answer> answers){
+        double avgScore = 0;
+        for(Answer ans:answers){
+                   avgScore += ans.score;
+        }
+        return avgScore;
+    }
     public static double calculateTotalUsedTime(List<Answer> answers){
         double totalUsedTime = 0;
         for(Answer ans : answers){
@@ -49,7 +58,40 @@ public class Answer extends Model{
         }
         return totalUsedTime;
     }
-
+    public ExperimentSchedule getExperimentScheduleObject(){
+        return this.quiz.trial.schedule;
+    }
+    public long getTrialIdLong(){
+        return this.quiz.trial.id;
+    }
+    public String getParameterType(){
+        if (this.quiz.trial.questionType == QuestionType.ENGLISH)
+            return "English";
+        else if (this.quiz.trial.questionType == QuestionType.THAI)
+            return "Thai";
+        else if (this.quiz.trial.questionType == QuestionType.NUMBER)
+            return "Number";
+        else
+            return "Null";
+    }
+    public User getUserObject(){
+        return this.user;
+    }
+    public long getQuestionIdLong(){
+        return this.quiz.question.id;
+    }
+    public long getQuizIdLong(){
+        return this.quiz.id;
+    }
+    public String getIsCorrectString(){
+        return String.valueOf(this.score);
+    }
+    public double getUsedTimeDouble(){
+        return this.usedTime;
+    }
+    public TimeLog getTimeLogObject(){
+        return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
+    }
 	@SuppressWarnings("unchecked")
 	public static Finder<Long,Answer> find = new Finder(Long.class,Answer.class);
 }

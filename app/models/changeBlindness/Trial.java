@@ -1,7 +1,9 @@
 package models.changeBlindness;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import models.TimeLog;
+import models.TrialStatus;
 
 import models.ExperimentSchedule;
 import play.db.ebean.Model;
@@ -25,6 +27,7 @@ public class Trial extends Model{
     public double totalUsedTime = 0;
     public int totalUser = 0;
     public static final int noOfQuiz = 1;
+    public TrialStatus status = TrialStatus.CLOSE;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
@@ -38,6 +41,9 @@ public class Trial extends Model{
             this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
 
     public static List<Trial> findInvolving(ExperimentSchedule ex){

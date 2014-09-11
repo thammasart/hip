@@ -23,13 +23,13 @@ public class User extends Model{
     public String gender ="";
     @Formats.DateTime(pattern="dd/MM/yyyy")
     public Date   birthDate;
-    public String section;
-    public String semester;
-    public String academicYear;
+    public String section="";
+    public String semester="";
+    public String academicYear="";
     public int year = 1;
     public String eMail ="";
-    public String faculty;
-    public String department;
+    public String faculty="";
+    public String department="";
 
 
 	@OneToMany

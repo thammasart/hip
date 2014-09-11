@@ -1,9 +1,10 @@
 package models.mullerLayer;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import models.ExperimentSchedule;
 import models.TimeLog;
-
+import models.TrialStatus;
 
 import play.db.ebean.Model;
 import javax.persistence.*;
@@ -19,6 +20,8 @@ public class Trial extends Model{
     public double totalScore = 0;
     public double totalUsedTime = 0;
     public int totalUser = 0;
+    public int displayTime = 10;
+    public TrialStatus status = TrialStatus.CLOSE;
 
     @ManyToOne
     public ExperimentSchedule schedule;
@@ -35,11 +38,13 @@ public class Trial extends Model{
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
-            List<Answer> answers = Answer.find.where().eq("quiz", q).findList();
-            this.totalScore += Answer.calculateTotalScore(answers);
-            this.totalUsedTime += Answer.calculateTotalUsedTime(answers);
+            this.totalScore += Answer.calculateTotalScore(q.findAnswers());
+            this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
     
     public static List<Trial> findInvolving(ExperimentSchedule ex){

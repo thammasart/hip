@@ -1,5 +1,8 @@
 package models.stroopEffect;
 
+import models.AnswerResult;
+import models.ExperimentSchedule;
+import models.TimeLog;
 import models.User;
 
 import play.db.ebean.Model;
@@ -11,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name="stroop_answer")
-public class Answer extends Model{
+public class Answer extends Model implements AnswerResult{
 
     @Id
     public long id;
@@ -63,7 +66,45 @@ public class Answer extends Model{
         }
         return totalScore;
     }
+    public ExperimentSchedule getExperimentScheduleObject(){
+        return this.quiz.trial.schedule;
+    }
+    public long getTrialIdLong(){
+        return this.quiz.trial.id;
+    }
+    public String getParameterType(){
+        String type = "";
+        if (this.quiz.question.questionType == QuestionType.ENGLISH)
+            return "English ";
+        else if (this.quiz.question.questionType == QuestionType.THAI)
+            return "Thai ";
+        else if (this.quiz.question.questionType == QuestionType.SHAPE)
+            return "Shape ";
+        if (this.quiz.question.isMatch()){
+            type = type + "Match";
+        }
+        else type = type + "Not-Match";
 
+        return type;
+    }
+    public User getUserObject(){
+        return this.user;
+    }
+    public long getQuestionIdLong(){
+        return this.quiz.question.id;
+    }
+    public long getQuizIdLong(){
+        return this.quiz.id;
+    }
+    public String getIsCorrectString(){
+        return String.valueOf(this.isCorrect);
+    }
+    public double getUsedTimeDouble(){
+        return this.usedTime;
+    }
+    public TimeLog getTimeLogObject(){
+        return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
+    }
     @SuppressWarnings("unchecked")
     public static Finder<Long,Answer> find = new Finder(Long.class,Answer.class);
 

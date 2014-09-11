@@ -140,6 +140,7 @@ public class VisualSearch extends Controller{
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
+        Trial.find.byId(trialId).updateResult();
         return redirect(routes.VisualSearch.report(user.username, trialId));
     }
 

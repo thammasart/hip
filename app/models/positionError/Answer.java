@@ -1,5 +1,6 @@
 package models.positionError;
 
+import models.AnswerResult;
 import models.User;
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table (name="position_error_answer")
-public class Answer extends Model{
+public class Answer extends Model implements AnswerResult{
 	@Id
 	public long id;
 
@@ -58,7 +59,39 @@ public class Answer extends Model{
 		}
 		return totalUsedTime;
 	}
-
+    public ExperimentSchedule getExperimentScheduleObject(){
+        return this.quiz.trial.schedule;
+    }
+    public long getTrialIdLong(){
+        return this.quiz.trial.id;
+    }
+    public String getParameterType(){
+        if (this.quiz.trial.questionType == QuestionType.ENGLISH)
+            return "English";
+        else if (this.quiz.trial.questionType == QuestionType.THAI)
+            return "Thai";
+        else if (this.quiz.trial.questionType == QuestionType.NUMBER)
+            return "Number";
+        return "Null";
+    }
+    public User getUserObject(){
+        return this.user;
+    }
+    public long getQuestionIdLong(){
+        return this.quiz.question.id;
+    }
+    public long getQuizIdLong(){
+        return this.quiz.id;
+    }
+    public String getIsCorrectString(){
+        return String.valueOf(this.isCorrect);
+    }
+    public double getUsedTimeDouble(){
+        return this.usedTime;
+    }
+    public TimeLog getTimeLogObject(){
+        return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
+    }
 	@SuppressWarnings("unchecked")
     public static Model.Finder<Long,Answer> find = new Finder(Long.class, Answer.class);
 

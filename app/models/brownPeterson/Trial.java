@@ -2,7 +2,7 @@ package models.brownPeterson;
 
 import models.*;
 import models.TimeLog;
-
+import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -22,6 +22,7 @@ public class Trial extends Model {
 	public double totalScore = 0;
     public double totalUsedTime = 0;
     public int totalUser = 0;
+    public TrialStatus status = TrialStatus.CLOSE;
 
 	@Id
 	public long id;
@@ -55,7 +56,7 @@ public class Trial extends Model {
 		return find.where().eq("schedule", ex).findList();
 	}
 
-	public void updateResult(){
+    public void updateResult(){
         this.totalScore = 0;
         this.totalUsedTime = 0;
         for(Quiz q:quizzes){
@@ -63,6 +64,9 @@ public class Trial extends Model {
             this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswer());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
 
 	public int calculateAverageScore(){

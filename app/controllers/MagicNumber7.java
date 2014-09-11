@@ -92,6 +92,7 @@ public class MagicNumber7 extends Controller{
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
+        Trial.find.byId(trialId).updateResult();
         return redirect(routes.MagicNumber7.report(user.username, trialId));
     }
 

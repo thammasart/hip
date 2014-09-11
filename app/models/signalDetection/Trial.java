@@ -1,6 +1,7 @@
 package models.signalDetection;
 
 import models.TimeLog;
+import models.TrialStatus;
 
 import play.db.ebean.Model;
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Trial extends Model{
     public double totalScore = 0;
     public double totalUsedTime = 0;
     public int totalUser = 0;
+    public TrialStatus status = TrialStatus.CLOSE;
 
     public static final int TOTAL_QUESTION = 3;
     public Trial(){}
@@ -46,6 +48,9 @@ public class Trial extends Model{
             this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
     
     public void generateQuiz(){

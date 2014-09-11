@@ -1,8 +1,8 @@
 package models.sternbergSearch;
 
 import models.ExperimentSchedule;
-
 import models.TimeLog;
+import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;
@@ -26,6 +26,8 @@ public class Trial extends Model{
 	public int twoCharIsCorrect = 0;
 	public int twoCharIsInCorrect = 0;
     public QuestionType questionType = QuestionType.ENGLISH;
+    public TrialStatus status = TrialStatus.CLOSE;
+    
     @ManyToOne
     public ExperimentSchedule schedule;
     @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "trial")
@@ -52,6 +54,9 @@ public class Trial extends Model{
             this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
         }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
 
     public static Trial create(ExperimentSchedule schedule, int length, double blinkTime, int oneCharIsCorrect, int oneCharIsInCorrect, int twoCharIsCorrect, int twoCharIsInCorrect, QuestionType questionType){

@@ -1,5 +1,8 @@
 package models.simonEffect;
 
+import models.AnswerResult;
+import models.ExperimentSchedule;
+import models.TimeLog;
 import models.User;
 import models.sternbergSearch.*;
 
@@ -10,7 +13,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table (name = "simon_effect_answer")
-public class Answer extends Model{
+public class Answer extends Model implements AnswerResult{
     @Id
     public long id;
     public String answer;
@@ -52,7 +55,37 @@ public class Answer extends Model{
         }
         return answers;
     }
-
+    public ExperimentSchedule getExperimentScheduleObject(){
+        return this.quiz.trial.schedule;
+    }
+    public long getTrialIdLong(){
+        return this.quiz.trial.id;
+    }
+    public String getParameterType(){
+        if (this.quiz.trial.questionType == QuestionType.ONEFEATURE)
+            return "1-Feature";
+        else if (this.quiz.trial.questionType == QuestionType.TWOFEATURE)
+            return "2-Feature";
+        return "Null";
+    }
+    public User getUserObject(){
+        return this.user;
+    }
+    public long getQuestionIdLong(){
+        return this.quiz.question.id;
+    }
+    public long getQuizIdLong(){
+        return this.quiz.id;
+    }
+    public String getIsCorrectString(){
+        return String.valueOf(this.isCorrect);
+    }
+    public double getUsedTimeDouble(){
+        return this.usedTime;
+    }
+    public TimeLog getTimeLogObject(){
+        return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
+    }
     @SuppressWarnings("unchecked")
 	public static Finder<Long,Answer> find = new Finder(Long.class,Answer.class);
 

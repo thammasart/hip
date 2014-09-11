@@ -89,8 +89,9 @@ public class StroopEffect extends Controller {
         TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
         timeLog.endTime = new Date();
         timeLog.update();
-        trial.updateResult();
-        trial.update();
+        Trial.find.byId(trialId).updateResult();
+        //trial.updateResult();
+        //trial.update();
         return redirect(routes.StroopEffect.report(user.username, trialId));
     }
 

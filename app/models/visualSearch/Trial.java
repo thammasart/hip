@@ -1,9 +1,11 @@
 package models.visualSearch;
 
-import models.TimeLog;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.ExperimentSchedule;
+
+import models.TimeLog;
+import models.TrialStatus;
+
 import play.db.ebean.Model;
 import play.libs.Json;
 
@@ -36,16 +38,23 @@ public class Trial extends Model{
     public double totalScore = 0;
     public double totalUsedTime = 0;
     public int totalUser = 0;
+    public TrialStatus status = TrialStatus.CLOSE;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
     }
 
     public void updateResult(){
-        List<Answer> answers = Answer.find.where().eq("quiz", quiz).findList();
-        this.totalScore = Answer.calculateTotalScore(answers);
-        this.totalUsedTime = Answer.calculateTotalUsedTime(answers);
+        this.totalScore = 0;
+        this.totalUsedTime = 0;
+    //    for(Quiz q:quizzes){
+    //        this.totalScore += Answer.calculateTotalScore(q.findAnswers());
+    //        this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
+     //   }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
+        this.totalScore /=totalUser;
+        this.totalUsedTime /=totalUser;
+        this.update();
     }
 
     public static Trial findById(long id){

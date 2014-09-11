@@ -107,6 +107,7 @@ public class BrownPeterson extends Controller {
         timeLog.endTime = new Date();
         timeLog.update();
         answers = new ArrayList<Answer>();
+        Trial.find.byId(trialId).updateResult();
         return redirect(routes.BrownPeterson.report(user.username, trialId));
     }
     

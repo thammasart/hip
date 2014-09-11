@@ -151,6 +151,7 @@ POST        /user/changepassword                                    controllers.
 
 GET         /admin                                                  controllers.Admin.index()
 GET         /admin/findResult                                       controllers.Admin.RenderAdminFindResult()
+POST        /admin/findResult                                       controllers.Admin.RenderAdminFindResultPost()
 GET         /admin/experiment                                       controllers.Admin.displayExperimentList()
 GET         /admin/experimentResult                                 controllers.Admin.RenderAdminExperimentResult()
 GET         /admin/experiment/add                                   controllers.Admin.addExperiment()
@@ -161,7 +162,7 @@ GET         /admin/experiment/result/:id                            controllers.
 
 POST        /userInfo                                               controllers.Admin.saveUser(mode : Integer)
 GET         /userInfo                                               controllers.Admin.renderUserInfo()
-GET         /addUser                                                controllers.Admin.addUser()
+GET         /addUser                                                controllers.Admin.addUser(userNames : String)
 GET         /editUser                                               controllers.Admin.editUser(userName : String)
 GET         /admin/experiment/parameter                             controllers.Admin.displayParameter(id:Long)
 POST        /admin/experiment/parameter/brownPeterson               controllers.Admin.saveBrownPetersonParameter(id:Long)
