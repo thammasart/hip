@@ -128,9 +128,9 @@ GET         /visualSearch/proc                                      controllers.
 GET         /visualSearch/proci                                     controllers.VisualSearch.procIframe()
 GET         /visualSearch/demo                                      controllers.VisualSearch.demoPage()
 POST        /visualSearch/reportDemo                                controllers.VisualSearch.demoReport()
-GET         /visualSearch/experiment                                controllers.VisualSearch.experiment(trialId:Long, questionNo:Int)
-POST        /visualSearch/experiment/save                           controllers.VisualSearch.saveAnswer(trialId:Long, questionNo:Int)
-GET         /visualSearch/report                                    controllers.VisualSearch.report(username:String ?= "", trial_id:Long ?= 0)
+GET         /visualSearch/experiment                                controllers.VisualSearch.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
+POST        /visualSearch/experiment/save                           controllers.VisualSearch.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
+GET         /visualSearch/report                                    controllers.VisualSearch.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
 GET         /visualSearch/init                                      controllers.VisualSearch.init(trialId:Long)
 
 GET         /changeBlindness                                        controllers.ChangeBlindness.info()

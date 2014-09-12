@@ -68,7 +68,7 @@ public class VisualSearch extends Controller{
 
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId, int questionNo){
+    public static Result experiment(long trialId, int questionNo,boolean isPreview){
         String frameWidth = "800px";
         String frameHeight = "500px";
         String top = "142px";
@@ -112,7 +112,7 @@ public class VisualSearch extends Controller{
                 break;
         }
 
-        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left));
+        return ok(exp.render(Trial.find.byId(trialId),questionNo,frameWidth,frameHeight,top,left,isPreview));
     }
 
 

@@ -383,7 +383,7 @@ public class Application extends Controller {
             case SIMONEFFECT : nextPage = redirect(routes.SimonEffect.experiment(trialId,0,false)); break;
             case MULLERLAYER : nextPage = redirect(routes.MullerLayer.experiment(trialId,0,false)); break;
             case GARNERINTERFERENCE: nextPage = redirect(routes.GarnerInterference.experiment(trialId,0,false)); break;
-            case VISUALSEARCH: nextPage = redirect(routes.VisualSearch.experiment(trialId,0)); break;
+            case VISUALSEARCH: nextPage = redirect(routes.VisualSearch.experiment(trialId,0,false)); break;
             case CHANGEBLINDNESS : nextPage = redirect(routes.ChangeBlindness.experiment(trialId,0,false)); break;
         }
         return nextPage;
