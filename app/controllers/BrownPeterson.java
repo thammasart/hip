@@ -100,14 +100,16 @@ public class BrownPeterson extends Controller {
         if(questionNo < Trial.TOTAL_QUESTION){
             return redirect(routes.BrownPeterson.experiment(trialId, questionNo, isPreview));
         }
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            answers = new ArrayList<Answer>();
+            Trial.find.byId(trialId).updateResult();
+        }
         for(Answer ans : answers){
             ans.save();
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        answers = new ArrayList<Answer>();
-        Trial.find.byId(trialId).updateResult();
         return redirect(routes.BrownPeterson.report(user.username, trialId, isPreview));
     }
     

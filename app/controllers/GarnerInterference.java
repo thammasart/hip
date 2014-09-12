@@ -90,10 +90,12 @@ public class GarnerInterference extends Controller {
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.GarnerInterference.experiment(trialId, questionNo, isPreview));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        Trial.find.byId(trialId).updateResult();
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            Trial.find.byId(trialId).updateResult();
+        }
         return redirect(routes.GarnerInterference.report(user.username, trialId, isPreview));
     }
     

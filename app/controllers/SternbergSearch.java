@@ -97,10 +97,12 @@ public class SternbergSearch extends Controller{
         if(questionNo < trial.oneCharIsCorrect + trial.oneCharIsInCorrect + trial.twoCharIsCorrect + trial.twoCharIsInCorrect){
             return redirect(routes.SternbergSearch.experiment(trialId, questionNo, true,isPreview));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        Trial.find.byId(trialId).updateResult();
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            Trial.find.byId(trialId).updateResult();
+        }
         return redirect(routes.SternbergSearch.report(user.username, trialId, isPreview));
     }
 

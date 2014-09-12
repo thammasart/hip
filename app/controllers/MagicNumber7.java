@@ -89,10 +89,12 @@ public class MagicNumber7 extends Controller{
         if(questionNo < trial.numberOfQuiz){
             return redirect(routes.MagicNumber7.experiment(trialId, questionNo, isPreview));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        Trial.find.byId(trialId).updateResult();
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            Trial.find.byId(trialId).updateResult();
+        }
         return redirect(routes.MagicNumber7.report(user.username, trialId, isPreview));
     }
 
