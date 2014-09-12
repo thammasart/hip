@@ -1,4 +1,4 @@
-@(trial : models.visualSearch.Trial,questionNo : Integer,width : String, height : String, top : String, left : String)
+@(trial : models.visualSearch.Trial,questionNo : Integer,width : String, height : String, top : String, left : String, isPreview:Boolean)
 @import models.visualSearch.Quiz
 @import models.visualSearch.Question
 @header("Human Information Processing Lab :: Home Page")
@@ -32,7 +32,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
         <div ng-class="{'boxEx':target.sharp == 'square', 'circleEx' : target.sharp == 'circle'}" id="circleEx" 
         style="border-color:{{colorToString(target.color)}}"></div>
     </div>
-    <form action="@routes.VisualSearch.saveAnswer(trial.id,questionNo)" method="post" >
+    <form action="@routes.VisualSearch.saveAnswer(trial.id,questionNo,isPreview)" method="post" >
 
         <div class="visualArea" style="left:@left;top:@top;width:@width;height:@height;" id="visualArea">
             <button ng-repeat="sharp in sharps" ng-class="{'box':sharp.sharp == 'square', 'circle' : sharp.sharp == 'circle'}"
