@@ -118,9 +118,9 @@ GET         /positionError/proc                                     controllers.
 GET         /positionError/proci                                    controllers.PositionError.procIframe()
 GET         /positionError/demo                                     controllers.PositionError.demoPage()
 POST        /positionError/reportDemo                               controllers.PositionError.demoReport()
-GET         /positionError/experiment                               controllers.PositionError.experiment(trialId:Long, questionNo:Int)
-POST        /positionError/experiment/save                          controllers.PositionError.saveAnswer(trialId:Long, questionNo:Int)
-GET         /positionError/report                                   controllers.PositionError.report(username:String ?= "", trial_id:Long ?= 0)
+GET         /positionError/experiment                               controllers.PositionError.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
+POST        /positionError/experiment/save                          controllers.PositionError.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
+GET         /positionError/report                                   controllers.PositionError.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
 
 GET         /visualSearch                                           controllers.VisualSearch.info()
 GET         /visualSearch/info                                      controllers.VisualSearch.infoIframe()
