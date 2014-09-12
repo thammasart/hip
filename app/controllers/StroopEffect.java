@@ -62,13 +62,13 @@ public class StroopEffect extends Controller {
 
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result experiment(long trialId, int questionNo){
+    public static Result experiment(long trialId, int questionNo, boolean isPreview){
 
-        return ok(exp.render(Trial.find.byId(trialId), questionNo));
+        return ok(exp.render(Trial.find.byId(trialId), questionNo, isPreview));
     }
 
     @Security.Authenticated(Secured.class)
-    public static Result saveAnswer(long trialId, int questionNo){
+    public static Result saveAnswer(long trialId, int questionNo, boolean isPreview){
         Form<Answer> boundForm = answerForm.bindFromRequest();
         User user = User.find.byId(session().get("username"));
         Trial trial = Trial.find.byId(trialId);
@@ -84,20 +84,22 @@ public class StroopEffect extends Controller {
 
         questionNo++;
         if(questionNo < Trial.TOTAL_QUESTION){
-            return redirect(routes.StroopEffect.experiment(trialId, questionNo));
+            return redirect(routes.StroopEffect.experiment(trialId, questionNo, isPreview));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        Trial.find.byId(trialId).updateResult();
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            Trial.find.byId(trialId).updateResult();
+        }
         //trial.updateResult();
         //trial.update();
-        return redirect(routes.StroopEffect.report(user.username, trialId));
+        return redirect(routes.StroopEffect.report(user.username, trialId, isPreview));
     }
 
     //แสดงหน้าผลลัพธ์การทดลอง
     @Security.Authenticated(Secured.class)
-    public static Result report(String username, Long trialId){
+    public static Result report(String username, Long trialId, boolean isPreview){
         if(username.equals("") || trialId == 0){
             return redirect(controllers.routes.StroopEffect.info());
         }
@@ -106,7 +108,12 @@ public class StroopEffect extends Controller {
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
-        return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        if(isPreview){
+            return ok(reportPreview.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        }
+        else{
+            return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        }
     }
 
     @Security.Authenticated(Secured.class)
