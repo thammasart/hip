@@ -1,9 +1,10 @@
 @(exp : ExperimentSchedule)
 
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/onOffSwitch.css ")">
 <div class="row" ng-controller="ExController" ng-init="init()" >
     <div class="col-md-8 col-sm-8">
         <div class="form-group">
-            <label  class="col-sm-2 control-label">ตั้งชื่อชุดคำถาม</label>
+            <label  class="col-sm-3 control-label">Experiment Schedual Name</label>
             <div class="col-sm-4">
                 <input ng-disabled="!isEditName" type="text" class="form-control" ng-model="exp.name" ng-pattern="word">
             </div>
@@ -12,8 +13,8 @@
             <div ng-show="inProcess"><img src="@routes.Assets.at("images/loading-small.gif")" ></div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">เริ่ม</label>
-            <div class="input-group date col-sm-3" style="float:left">
+            <label class="col-sm-3 control-label">Start Date</label>
+            <div class="input-group date col-sm-4" style="float:left">
                 <input type="text" name="startDate" class="form-control" datepicker-popup="{{format}}"
                        ng-model="startDate" is-open="startDateOpened" disabled
                        datepicker-options="dateOptions" close-text="Close" />
@@ -23,8 +24,8 @@
             </div>
         </div>
         <div class="form-group"  >
-            <label class="col-sm-2 control-label">สิ้นสุด</label>
-            <div class="input-group date col-sm-3" style="float:left">
+            <label class="col-sm-3 control-label">End Date</label>
+            <div class="input-group date col-sm-4" style="float:left">
                 <input type="text" name="expireDate" class="form-control" datepicker-popup="{{format}}"
                        ng-model="expireDate"  disabled
                        is-open="expireDateOpened" min-date="startDate" datepicker-options="dateOptions" close-text="Close" />
@@ -39,9 +40,21 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">การทดลอง</label>
+            <label class="col-sm-3 control-label">Experiment Type</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" disabled value="@exp.experimentType">
+            </div>
+        </div>
+        <div class="form-group"> 
+            <label class="col-sm-3 control-label"> status</label>
+            <div class="col-sm-4">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
             </div>
         </div>
     </div>

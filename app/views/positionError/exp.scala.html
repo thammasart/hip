@@ -1,4 +1,4 @@
-@(trial : models.positionError.Trial, questionNo : Integer)
+@(trial : models.positionError.Trial, questionNo : Integer, isPreview:Boolean)
 @header("Human Information Processing Lab :: Home Page")
 
 <script src="@routes.Assets.at("javascripts/formHandle.js")"></script>
@@ -38,7 +38,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                 </div>
             </div>
         </div>
-        <form action="@routes.PositionError.saveAnswer(trial.id,questionNo)" method="post" >
+        <form action="@routes.PositionError.saveAnswer(trial.id,questionNo,isPreview)" method="post" >
             <div class="choice" align="center" id="choice" >
                 <button type="submit" class="btn btn-success ansButton" id="confirm"  name="confirm"onclick="return done()"  > ยืนยัน </button>
                 <input id = "answer" name = "answer" type="text" hidden/>
