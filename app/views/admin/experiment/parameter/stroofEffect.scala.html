@@ -11,8 +11,11 @@
         @error()
 
         <div class="container" ng-controller="StroofEffectCtrl" ng-init="init(@exp.id)">
+            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid"
+                        ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
                 <h3>Trial - {{$index + 1}}<span> </span>
@@ -38,8 +41,8 @@
                                         <tr ng-repeat="quiz in trial.quizzes">
                                             <td>{{$index + 1}}</td>
                                             <td>{{quiz.question.colorWord}}</td>
-                                            <td>{{quiz.question.inkColor}}</td>
-                                            <td><input type="checkbox" ng-model="quiz.question.match">
+                                            <td><div style="width:60px;height:30px;background-color:{{quiz.question.inkColor}};margin:auto"></div></td>
+                                            <td><input type="checkbox" ng-model="quiz.question.match" ng-change="log(quiz.question.match)">
                                             </td>
                                             <td><a class="btn btn-xs btn-primary" ng-click="randomQuestion(quiz, trial.questionType)">random</a></td>
                                         </tr>

@@ -207,6 +207,8 @@ GET         /admin/experiment/brown-peterson/brownPetersonQuestion  controllers.
 DELETE         /admin/experiment/brown-peterson/brownPetersonDeleteQuestion  controllers.BrownPeterson.deleteQuestion(id:Long)
 POST         /admin/experiment/brown-peterson/brownPetersonDeleteQuestions  controllers.BrownPeterson.deleteQuestions()
 
+GET         /report/download                                    controllers.ExportController.download()
+
 GET         /admin/experiment/garnerInit                            controllers.GarnerInterference.initial(expId: Long)
 PUT         /admin/experiment/saveExperiment                            controllers.Application.saveExperiment(id: Long, name: String, startDate: Long, expireDate: Long)
 
