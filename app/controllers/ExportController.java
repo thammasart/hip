@@ -29,8 +29,15 @@ public class ExportController extends Controller {
             Row headerRow = userSheet.createRow(0);
             Cell idHeaderCell = headerRow.createCell(0);
             idHeaderCell.setCellValue("ID");
-            Cell passwordCell = headerRow.createCell(1);
-            passwordCell.setCellValue("IsCorrect");
+            Cell firstCell = headerRow.createCell(1);
+            firstCell.setCellValue("first word");
+            Cell secondCell = headerRow.createCell(2);
+            firstCell.setCellValue("second word");
+            Cell thirdCell = headerRow.createCell(3);
+            firstCell.setCellValue("third word");
+
+            Cell correctCell = headerRow.createCell(4);
+            correctCell.setCellValue("IsCorrect");
             Statement stmt = DB.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             int row = 1;
@@ -40,8 +47,14 @@ public class ExportController extends Controller {
                 Row dataRow = userSheet.createRow(row);
                 Cell dataId = dataRow.createCell(0);
                 dataId.setCellValue(username);
-                Cell dataPwd = dataRow.createCell(1);
-                dataPwd.setCellValue(correct);
+                Cell dataFirst = dataRow.createCell(1);
+                dataFirst.setCellValue(rs.getString("first_word"));
+                Cell dataSecond = dataRow.createCell(2);
+                dataSecond.setCellValue(rs.getString("second_word"));
+                Cell dataThird = dataRow.createCell(3);
+                dataThird.setCellValue(rs.getString("third_word"));
+                Cell dataCorrect = dataRow.createCell(4);
+                dataCorrect.setCellValue(correct);
                 row++;
             }
             File file = new File("user.xls");
