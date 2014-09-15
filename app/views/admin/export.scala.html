@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Export Data</title>
+</head>
+<body>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Trial</th>
+                <th>Quiz</th>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>Attention Blink</th>
+            <th><button>Trial</button></th>
+            <th><button>Quiz</button></th>
+            <th><button>Question</button></th>
+            <th><button>Answer</button></th>
+        </tr>
+        <tr>
+            <th>Brown Peterson</th>
+            <th><a href="@routes.ExportController.downloadBrownPetersonTrial()"><button>Trial</button></a></th>
+            <th><a href="@routes.ExportController.downloadBrownPetersonQuiz()"><button>Quiz</button></a></th>
+            <th><a href="@routes.ExportController.downloadBrownPetersonQuestion()"><button>Question</button></a></th>
+            <th><a href="@routes.ExportController.downloadBrownPetersonAnswer()"><button>Answer</button></a></th>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

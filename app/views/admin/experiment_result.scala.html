@@ -21,15 +21,6 @@
                                 "iDisplayLength": 15,   // records per page
                                 "sDom": "t<'row'<'col-md-2'i>  <'col-md-5'p> > <'hide' T>",
                                 "sPaginationType": "bootstrap",
-                                "tableTools": {
-                                    "sSwfPath": "@routes.Assets.at("/swf/copy_csv_xls_pdf.swf")",
-                                    "aButtons": [
-                                    {
-                                            "sExtends":     "xls",
-                                            "sButtonText": ""
-                                    }
-                                     ]
-                                },
                                 "order": [[ 1, "asc" ]]
                             });
 
@@ -50,24 +41,25 @@
 
 </script>
 
+<script>
+
+    function newWindow(){
+        window.open("@routes.ExportController.downloadPage()", "Export","width=800, height=600");
+    }
+
+</script>
+
 <div class = "fixSize" >
 
    <div class = "adminIndexHeaderContainer" >
         <div class ="adminIndexHeaderText">
              Experiment Results
         </div>
-       <div class="DTTT_container">
-        <button class ="btn-default btn adminHeaderBtn">
+
+       <button class ="btn-default btn adminHeaderBtn" onclick="newWindow()">
             Export
-            <div style="position: absolute; left: 0px; top: 0px; width: 54px; height: 29px; z-index: 99;">
-                <embed id="ZeroClipboard_TableToolsMovie_1" src="/assets//swf/copy_csv_xls_pdf.swf"
-                       loop="false" menu="false" quality="best" bgcolor="#ffffff" width="54" height="29"
-                       name="ZeroClipboard_TableToolsMovie_1" align="middle" allowscriptaccess="always" allowfullscreen="false"
-                       type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
-                       flashvars="id=1&amp;width=54&amp;height=29" wmode="transparent">
-            </div>
         </button >
-       </div>
+
 
         <a href="@routes.Admin.RenderAdminFindResult()">
             <button class ="btn-primary btn adminHeaderBtn" >
