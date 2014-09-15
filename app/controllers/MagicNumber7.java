@@ -61,6 +61,18 @@ public class MagicNumber7 extends Controller{
         trial.quizzes.add(quiz);
         return ok(demo.render(trial, 0));
     }
+
+    //แสดงหน้า preview
+    public static Result preview(long trialId){
+        User user = User.find.byId(session().get("username"));
+        List<Answer> answers = Answer.find.where().eq("user",user).findList();
+        for(Answer ans:answers){
+            if(ans.quiz.trial.id == trialId)
+                ans.delete();
+        }
+        return redirect(routes.MagicNumber7.experiment(trialId, 0, true));
+    }
+
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo, boolean isPreview){
@@ -89,10 +101,12 @@ public class MagicNumber7 extends Controller{
         if(questionNo < trial.numberOfQuiz){
             return redirect(routes.MagicNumber7.experiment(trialId, questionNo, isPreview));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        Trial.find.byId(trialId).updateResult();
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            Trial.find.byId(trialId).updateResult();
+        }
         return redirect(routes.MagicNumber7.report(user.username, trialId, isPreview));
     }
 
@@ -107,7 +121,7 @@ public class MagicNumber7 extends Controller{
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         if(isPreview){
-            return ok(report.render(answers,totalUsedTime, "Report", user));
+            return ok(reportPreview.render(answers,totalUsedTime, "Report", user));
         }
         else{
             return ok(report.render(answers,totalUsedTime, "Report", user));

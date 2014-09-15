@@ -53,6 +53,18 @@ public class MullerLayer extends Controller {
     public static Result demoPage(){
         return ok(demo.render());
     }
+
+    //แสดงหน้า preview
+    public static Result preview(long trialId){
+        User user = User.find.byId(session().get("username"));
+        List<Answer> answers = Answer.find.where().eq("user",user).findList();
+        for(Answer ans:answers){
+            if(ans.quiz.trial.id == trialId)
+                ans.delete();
+        }
+        return redirect(routes.MullerLayer.experiment(trialId, 0, true));
+    }
+    
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo, boolean isPreview){
@@ -106,10 +118,12 @@ public class MullerLayer extends Controller {
         if(questionNo < trial.quizzes.size()){
             return redirect(routes.MullerLayer.experiment(trialId, questionNo, isPreview));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        Trial.find.byId(trialId).updateResult();
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            Trial.find.byId(trialId).updateResult();
+        }
         return redirect(routes.MullerLayer.report(user.username, trialId, isPreview));
     }
     

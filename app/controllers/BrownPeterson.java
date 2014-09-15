@@ -77,6 +77,17 @@ public class BrownPeterson extends Controller {
         return ok(demoReport.render(score,answer.usedTime,1, "Report", user));
     }
 
+    //แสดงหน้า preview
+    public static Result preview(long trialId){
+        User user = User.find.byId(session().get("username"));
+        List<Answer> answers = Answer.find.where().eq("user",user).findList();
+        for(Answer ans:answers){
+            if(ans.quiz.trial.id == trialId)
+                ans.delete();
+        }
+        return redirect(routes.BrownPeterson.experiment(trialId, 0, true));
+    }
+
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo, boolean isPreview){
         return ok(exp.render(Trial.find.byId(trialId), questionNo, isPreview));
@@ -100,14 +111,16 @@ public class BrownPeterson extends Controller {
         if(questionNo < Trial.TOTAL_QUESTION){
             return redirect(routes.BrownPeterson.experiment(trialId, questionNo, isPreview));
         }
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            answers = new ArrayList<Answer>();
+            Trial.find.byId(trialId).updateResult();
+        }
         for(Answer ans : answers){
             ans.save();
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        answers = new ArrayList<Answer>();
-        Trial.find.byId(trialId).updateResult();
         return redirect(routes.BrownPeterson.report(user.username, trialId, isPreview));
     }
     

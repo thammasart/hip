@@ -62,6 +62,17 @@ public class PositionError extends Controller{
         return ok(demoReport.render(score,answer.usedTime,1,"Demo Report",user));
     }
 
+    //แสดงหน้า preview
+    public static Result preview(long trialId){
+        User user = User.find.byId(session().get("username"));
+        List<Answer> answers = Answer.find.where().eq("user",user).findList();
+        for(Answer ans:answers){
+            if(ans.quiz.trial.id == trialId)
+                ans.delete();
+        }
+        return redirect(routes.PositionError.experiment(trialId, 0, true));
+    }
+
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo, boolean isPreview){
@@ -89,10 +100,12 @@ public class PositionError extends Controller{
         if(questionNo < 3){
             return redirect(routes.PositionError.experiment(trialId, questionNo,isPreview));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        Trial.find.byId(trialId).updateResult();
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            Trial.find.byId(trialId).updateResult();
+        }
         return redirect(routes.PositionError.report(user.username, trialId,isPreview));
     }
 

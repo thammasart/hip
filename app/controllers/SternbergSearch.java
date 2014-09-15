@@ -70,6 +70,17 @@ public class SternbergSearch extends Controller{
         return ok(demoReport.render(score,time,2,"Demo Report",user));
     }
 
+    //แสดงหน้า preview
+    public static Result preview(long trialId){
+        User user = User.find.byId(session().get("username"));
+        List<Answer> answers = Answer.find.where().eq("user",user).findList();
+        for(Answer ans:answers){
+            if(ans.quiz.trial.id == trialId)
+                ans.delete();
+        }
+        return redirect(routes.SternbergSearch.experiment(trialId, 0, false, true));
+    }
+
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo,boolean isShowQuestion, boolean isPreview){
@@ -97,10 +108,12 @@ public class SternbergSearch extends Controller{
         if(questionNo < trial.oneCharIsCorrect + trial.oneCharIsInCorrect + trial.twoCharIsCorrect + trial.twoCharIsInCorrect){
             return redirect(routes.SternbergSearch.experiment(trialId, questionNo, true,isPreview));
         }
-        TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
-        timeLog.endTime = new Date();
-        timeLog.update();
-        Trial.find.byId(trialId).updateResult();
+        else if(!isPreview){
+            TimeLog timeLog = TimeLog.findByUserAndTrialId(user, trialId,trial.schedule);
+            timeLog.endTime = new Date();
+            timeLog.update();
+            Trial.find.byId(trialId).updateResult();
+        }
         return redirect(routes.SternbergSearch.report(user.username, trialId, isPreview));
     }
 
