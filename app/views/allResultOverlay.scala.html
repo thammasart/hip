@@ -50,10 +50,10 @@
                                 <tr ng-repeat="trial in trials">
                                     <td>{{$index+1}}</td>
                                     <td>{{trial.schedule.startDate | date :"yyyy-MM-dd"}}</td>
-                                    <td>{{trial.schedule.expireDate}}</td>
+                                    <td>{{trial.schedule.expireDate | date :"yyyy-MM-dd"}}</td>
                                     <td>{{trial.schedule.name}}</td>
                                     <td>{{trial.id}}</td>
-                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial.totalScore,trial.totalUsedTime,trial.totalUser,$index)">select</button></td>
+                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial.totalScore,trial.totalUsedTime,trial.totalUser,$index,1)">select</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -75,9 +75,117 @@
                 <!-- tab pane 2 --------------------------------------------------------------------------------------------------!>
                   <div class="tab-pane" id="1">
 
+                    <div class="trialInputContainer" >
+                       <div class = "OverlayTagSize">
+                            Find trials active on
+                       </div>  
+                       <div class = " OverlayTextBoxContainer" >
+                            <input type="text" class="form-control trialTag" placeholder="start date" autocomplete="off"  style="float:left;"disabled>
+                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
+                       </div>  
+                       <div class = "OverlayTagSize" style="width:5%; margin-left:0;">
+                            To
+                       </div>  
+                       <div class = "OverlayTextBoxContainer" >
+                            <input type="text" class="form-control trialTag" placeholder="end date" autocomplete="off" style="float:left;" disabled>
+                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
+                       </div>  
+                    </div>
+
+                    <div class="">
+                        <table class="table table-striped overlayTable">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>start Date</th>
+                                    <th>Expire Date</th>
+                                    <th>Exp. Schedule Name</th>
+                                    <th>Trial ID</th>
+                                    <th>select</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="trial2 in trials2">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{trial2.schedule.startDate | date :"yyyy-MM-dd"}}</td>
+                                    <td>{{trial2.schedule.expireDate| date :"yyyy-MM-dd"}}</td>
+                                    <td>{{trial2.schedule.name}}</td>
+                                    <td>{{trial2.id}}</td>
+                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial2.totalScore,trial2.totalUsedTime,trial2.totalUser,$index,2)">select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="pagingContainer" align="center">
+                            <ul class="pagination">
+                              <li class="disabled"><a href="#">&laquo;</a></li>
+                              <li class="active"><a href="#">1</a></li>
+                              <li><a href="#">2</a></li>
+                              <li><a href="#">3</a></li>
+                              <li><a href="#">4</a></li>
+                              <li><a href="#">5</a></li>
+                              <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
                   </div>
 
-                  <div class="tab-pane" id="2">messages</div>
+                  <div class="tab-pane" id="2">
+                    <div class="trialInputContainer" >
+                       <div class = "OverlayTagSize">
+                            Find trials active on
+                       </div>  
+                       <div class = " OverlayTextBoxContainer" >
+                            <input type="text" class="form-control trialTag" placeholder="start date" autocomplete="off"  style="float:left;"disabled>
+                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
+                       </div>  
+                       <div class = "OverlayTagSize" style="width:5%; margin-left:0;">
+                            To
+                       </div>  
+                       <div class = "OverlayTextBoxContainer" >
+                            <input type="text" class="form-control trialTag" placeholder="end date" autocomplete="off" style="float:left;" disabled>
+                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
+                       </div>  
+                    </div>
+
+                    <div class="">
+                        <table class="table table-striped overlayTable">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>start Date</th>
+                                    <th>Expire Date</th>
+                                    <th>Exp. Schedule Name</th>
+                                    <th>Trial ID</th>
+                                    <th>select</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="trial3 in trials3">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{trial3.schedule.startDate | date :"yyyy-MM-dd"}}</td>
+                                    <td>{{trial3.schedule.expireDate| date :"yyyy-MM-dd"}}</td>
+                                    <td>{{trial3.schedule.name}}</td>
+                                    <td>{{trial3.id}}</td>
+                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial3.totalScore,trial3.totalUsedTime,trial3.totalUser,$index,3)">select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="pagingContainer" align="center">
+                            <ul class="pagination">
+                              <li class="disabled"><a href="#">&laquo;</a></li>
+                              <li class="active"><a href="#">1</a></li>
+                              <li><a href="#">2</a></li>
+                              <li><a href="#">3</a></li>
+                              <li><a href="#">4</a></li>
+                              <li><a href="#">5</a></li>
+                              <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+
                   <div class="tab-pane" id="3">setting</div>
                 </div>
                 <script>

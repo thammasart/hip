@@ -1,10 +1,12 @@
-var gNumber = 0;
+var gNumer = 0;
 var gTime = new Array(0,0,0,0);
 var gScore = new Array(0,0,0,0);
 angular.module('AllResultApp', ['ui.bootstrap'])
     .controller('AllResultController',function($scope,$http,$location,$rootScope,$modal){
         
         $scope.trials = [];
+        $scope.trials2 = [];
+        $scope.trials3 = [];
         $scope.questionTypes = [];
         $rootScope.$watch(function(){return $location.path()},function(path){
             //console.log($location.path());
@@ -17,6 +19,8 @@ angular.module('AllResultApp', ['ui.bootstrap'])
             $http({method : 'GET',url : 'findExperiment' ,params : { exp_type:path}})
             .success(function(result){
                 $scope.trials = result.trials;
+                $scope.trials2 = result.trials2;
+                $scope.trials3 = result.trials3;
                 //cut here Questiontype
                 $scope.questionTypes = result.questionTypes;
                 console.log($scope.trials);
@@ -50,6 +54,8 @@ angular.module('AllResultApp', ['ui.bootstrap'])
             document.getElementById("graphTime3").innerHTML = "n/a";
             document.getElementById("graphTime4").innerHTML = "n/a";
          } 
+
+
         $scope.open = function(num){
             gNumber = num;
             var modalInstance = $modal.open({
@@ -60,6 +66,12 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                     trials : function(){
                         return $scope.trials;
                     },
+                    trials2 : function(){
+                        return $scope.trials2;
+                    },
+                    trials3 : function(){
+                        return $scope.trials3;
+                    },
                     questionTypes : function(){
                         return $scope.questionTypes;
                     }
@@ -69,12 +81,17 @@ angular.module('AllResultApp', ['ui.bootstrap'])
         };
     }
 );
-    var resultModalInstanceCtrl= function($scope, $modalInstance,trials,questionTypes){
+    var resultModalInstanceCtrl= function($scope, $modalInstance,trials,trials2,trials3,questionTypes){
         
         $scope.trials =[];
+        $scope.trials2 =[];
+        $scope.trials3 =[];
         $scope.questionTypes =[];
+
         $scope.init = function(){
             $scope.trials = trials;
+            $scope.trials2 = trials2;
+            $scope.trials3 = trials3;
             $scope.questionTypes = questionTypes;
             $scope.title = trials[0].schedule.experimentType;
         };
@@ -96,8 +113,15 @@ angular.module('AllResultApp', ['ui.bootstrap'])
 
     // Get the size of an object
 
-        $scope.sel = function (totalScore,totalUsedTime,totalUser,trialIndex) {
-            var size = Object.size(trials[trialIndex].quizzes);
+        $scope.sel = function (totalScore,totalUsedTime,totalUser,trialIndex,qTypeNumber) {
+            if(qTypeNumber == 1){
+                var size = Object.size(trials[trialIndex].quizzes);
+            }else if(qTypeNumber ==2){
+                var size = Object.size(trials2[trialIndex].quizzes);
+            }else if(qTypeNumber ==3){
+                var size = Object.size(trials3[trialIndex].quizzes);
+            }
+
             console.log(size);
             console.log(questionTypes);
             if(gNumber == 1){
