@@ -66,6 +66,17 @@ public class VisualSearch extends Controller{
         return ok(demoReport.render(score,time,1,"Demo Report",user));
     }
 
+    //แสดงหน้า preview
+    public static Result preview(long trialId){
+        User user = User.find.byId(session().get("username"));
+        List<Answer> answers = Answer.find.where().eq("user",user).findList();
+        for(Answer ans:answers){
+            if(ans.quiz.trial.id == trialId)
+                ans.delete();
+        }
+        return redirect(routes.VisualSearch.experiment(trialId, 0, true));
+    }
+
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo,boolean isPreview){

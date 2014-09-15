@@ -28,6 +28,7 @@ GET         /muller-layer/experiment                                controllers.
 POST        /muller-layer/experiment/save                           controllers.MullerLayer.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /muller-layer/report                                    controllers.MullerLayer.report(username:String ?="", trial_id:Long ?=0, isPreview:Boolean)
 GET         /muller-layer/findQuestion                              controllers.MullerLayer.findQuestion(trialId: Long, questionNo: Int)
+GET         /muller-layer/preview                                   controllers.MullerLayer.preview(trialId:Long)
 
 GET         /brown-peterson                                         controllers.BrownPeterson.info()
 GET         /brown-peterson/info                                    controllers.BrownPeterson.infoIframe()
@@ -38,6 +39,7 @@ POST        /brown-peterson/reportDemo                              controllers.
 GET         /brown-peterson/experiment                              controllers.BrownPeterson.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /brown-peterson/experiment/save                         controllers.BrownPeterson.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /brown-peterson/report                                  controllers.BrownPeterson.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
+GET         /brown-peterson/preview                                 controllers.BrownPeterson.preview(trialId:Long)
 
 GET         /attention-blink                                        controllers.AttentionBlink.info()
 GET         /attention-blink/info                                   controllers.AttentionBlink.infoIframe()
@@ -62,6 +64,7 @@ POST        /stroop_effect/reportDemo                               controllers.
 GET         /stroop_effect/experiment                               controllers.StroopEffect.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /stroop_effect/experiment/save                          controllers.StroopEffect.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /stroop-effect/report                                   controllers.StroopEffect.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
+GET         /stroop-effect/preview                                   controllers.StroopEffect.preview(trialId:Long)
 
 GET         /sternberg_search                                       controllers.SternbergSearch.info()
 GET         /sternberg_search/info                                  controllers.SternbergSearch.infoIframe()
@@ -72,6 +75,7 @@ POST        /sternberg_search/experiment/save                       controllers.
 GET         /sternberg_search/report                                controllers.SternbergSearch.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
 GET         /sternberg_search/demo                                  controllers.SternbergSearch.demoPage()
 POST        /sternberg_search/reportDemo                            controllers.SternbergSearch.demoReport()
+GET         /sternberg_search/preview                               controllers.SternbergSearch.preview(trialId:Long)
 
 GET         /signal_detection                                       controllers.SignalDetection.info()
 GET         /signal_detection/info                                  controllers.SignalDetection.infoIframe()
@@ -82,6 +86,7 @@ POST        /signal_detection/reportDemo                            controllers.
 GET         /signal_detection/experiment                            controllers.SignalDetection.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /signal_detection/experiment/save                       controllers.SignalDetection.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /signal_detection/report                                controllers.SignalDetection.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
+GET         /signal_detection/preview                               controllers.SignalDetection.preview(trialId:Long)
 
 GET         /simon_effect                                           controllers.SimonEffect.info()
 GET         /simon_effect/info                                      controllers.SimonEffect.infoIframe()
@@ -93,6 +98,7 @@ GET         /simon_effect/experiment_inst                           controllers.
 GET         /simon_effect/experiment                                controllers.SimonEffect.doExperiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /simon_effect/experiment/save                           controllers.SimonEffect.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /simon_effect/report                                    controllers.SimonEffect.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
+GET         /simon_effect/preview                                   controllers.SimonEffect.preview(trialId:Long)
 
 GET         /magic_number7                                          controllers.MagicNumber7.info()
 GET         /magic_number7/info                                     controllers.MagicNumber7.infoIframe()
@@ -103,6 +109,7 @@ POST        /magic_number7/reportDemo                               controllers.
 GET         /magic_number7/experiment                               controllers.MagicNumber7.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /magic_number7/experiment/save                          controllers.MagicNumber7.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /magic_number7/report                                   controllers.MagicNumber7.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
+GET         /magic_number7/preview                                  controllers.MagicNumber7.preview(trialId:Long)
 
 GET         /garner_interference                                    controllers.GarnerInterference.info()
 GET         /garner_interference/info                               controllers.GarnerInterference.infoIframe()
@@ -113,6 +120,7 @@ POST        /garner_interference/reportDemo                         controllers.
 GET         /garner_interference/experiment                         controllers.GarnerInterference.experiment(trialId:Long , questionNo:Int, isPreview:Boolean)
 POST        /garner_interference/experiment/save                    controllers.GarnerInterference.saveAnswer(trialId:Long , questionNo:Int, isPreview:Boolean)
 GET         /garner_interference/report                             controllers.GarnerInterference.report(username:String ?="",trial_id:Long ?=0, isPreview:Boolean)
+GET         /garner_interference/preview                            controllers.GarnerInterference.preview(trialId:Long)
 
 GET         /positionError                                          controllers.PositionError.info()
 GET         /positionError/info                                     controllers.PositionError.infoIframe()
@@ -123,6 +131,7 @@ POST        /positionError/reportDemo                               controllers.
 GET         /positionError/experiment                               controllers.PositionError.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /positionError/experiment/save                          controllers.PositionError.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /positionError/report                                   controllers.PositionError.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
+GET         /positionError/preview                                  controllers.PositionError.preview(trialId:Long)
 
 GET         /visualSearch                                           controllers.VisualSearch.info()
 GET         /visualSearch/info                                      controllers.VisualSearch.infoIframe()
@@ -134,6 +143,7 @@ GET         /visualSearch/experiment                                controllers.
 POST        /visualSearch/experiment/save                           controllers.VisualSearch.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /visualSearch/report                                    controllers.VisualSearch.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
 GET         /visualSearch/init                                      controllers.VisualSearch.init(trialId:Long)
+GET         /visualSearch/preview                                   controllers.VisualSearch.preview(trialId:Long)
 
 GET         /changeBlindness                                        controllers.ChangeBlindness.info()
 GET         /changeBlindness/info                                   controllers.ChangeBlindness.infoIframe()
@@ -145,6 +155,7 @@ GET         /changeBlindness/experiment_inst                        controllers.
 GET         /changeBlindness/experiment                             controllers.ChangeBlindness.doExperiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /changeBlindness/experiment/save                        controllers.ChangeBlindness.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /changeBlindness/report                                 controllers.ChangeBlindness.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
+GET         /changeBlindness/preview                                controllers.ChangeBlindness.preview(trialId:Long)
 
 GET         /user                                                   controllers.UserController.editProfile()
 POST        /user                                                   controllers.UserController.saveUserProfile()

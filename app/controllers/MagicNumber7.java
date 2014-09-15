@@ -61,6 +61,18 @@ public class MagicNumber7 extends Controller{
         trial.quizzes.add(quiz);
         return ok(demo.render(trial, 0));
     }
+
+    //แสดงหน้า preview
+    public static Result preview(long trialId){
+        User user = User.find.byId(session().get("username"));
+        List<Answer> answers = Answer.find.where().eq("user",user).findList();
+        for(Answer ans:answers){
+            if(ans.quiz.trial.id == trialId)
+                ans.delete();
+        }
+        return redirect(routes.MagicNumber7.experiment(trialId, 0, true));
+    }
+
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo, boolean isPreview){
