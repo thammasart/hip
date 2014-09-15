@@ -342,6 +342,34 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 });
         }
 
+        $scope.log = function(text){
+            console.log(text);
+        }
+
+        $scope.changeMatch = function(quiz, questionType){
+            if(quiz.question.match){
+               if(questionType == 'THAI'){
+                    assignQuestion(quiz, matchThai);
+               }else{
+                    assignQuestion(quiz, matchEnglish);
+               }
+            }else{
+               if(questionType == 'THAI'){
+                   assignQuestion(quiz, notMatchThai);
+              }else{
+                   assignQuestion(quiz, notMatchEnglish);
+              }
+            }
+        }
+
+        function assignQuestion(quiz, questions){
+            for(var i=0; i<questions.length; i++){
+               if(quiz.question.colorWord == questions[i].colorWord){
+                   quiz.question = questions[i];
+               }
+            }
+        }
+
         function resetQuestion(){
             for(var i=0; i<$scope.trials.length; i++){
                 for(var j=0; j<$scope.trials[i].quizzes.length; j++){
