@@ -17,7 +17,7 @@
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" ng-repeat="obj in trials">
                 <h3>Trial - {{$index + 1}}<span> </span>
-                    <a href="/brown-peterson/experiment?trialId={{trial.id}}&questionNo=0&isPreview=true)" style="margin-left:30px" class="btn btn-default">
+                    <a href="/changeBlindness/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
                         Preview Trial</a></h3>
                 <div class="well" style="padding-left: 20px">
                     <div class="row">
