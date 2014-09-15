@@ -121,7 +121,7 @@ public class MagicNumber7 extends Controller{
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         if(isPreview){
-            return ok(report.render(answers,totalUsedTime, "Report", user));
+            return ok(reportPreview.render(answers,totalUsedTime, "Report", user));
         }
         else{
             return ok(report.render(answers,totalUsedTime, "Report", user));
