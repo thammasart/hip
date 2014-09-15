@@ -118,15 +118,26 @@ public class Application extends Controller {
                 if(expType.equals("/stroopEffect")){
                     exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.STROOPEFFECT).findList();
                     List<models.stroopEffect.Trial> trialList = new ArrayList<models.stroopEffect.Trial>();
+                    List<models.stroopEffect.Trial> trialList2 = new ArrayList<models.stroopEffect.Trial>();
+                    List<models.stroopEffect.Trial> trialList3 = new ArrayList<models.stroopEffect.Trial>();
                     models.stroopEffect.QuestionType[] questionTypes = models.stroopEffect.QuestionType.values();
 
-                    for(ExperimentSchedule exp:exps){
-                        trialList.addAll(models.stroopEffect.Trial.findInvolving(exp));
-                    }
+                        trialList.addAll(models.stroopEffect.Trial.findAllTrial(1));
+                        trialList2.addAll(models.stroopEffect.Trial.findAllTrial(2));
+                        trialList3.addAll(models.stroopEffect.Trial.findAllTrial(3));
+
                     ObjectMapper mapper = new ObjectMapper();
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    jsonArray = mapper.writeValueAsString(trialList2);
+                    json = Json.parse(jsonArray);
+                    result.put("trials2",json);
+
+                    jsonArray = mapper.writeValueAsString(trialList3);
+                    json = Json.parse(jsonArray);
+                    result.put("trials3",json);
 
                     jsonArray = mapper.writeValueAsString(questionTypes);
                     json = Json.parse(jsonArray);
@@ -172,15 +183,26 @@ public class Application extends Controller {
                 if(expType.equals("/magicNumber7")){
                     exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.MAGICNUMBER7).findList();
                     List<models.magicNumber7.Trial> trialList = new ArrayList<models.magicNumber7.Trial>();
+                    List<models.magicNumber7.Trial> trialList2 = new ArrayList<models.magicNumber7.Trial>();
+                    List<models.magicNumber7.Trial> trialList3 = new ArrayList<models.magicNumber7.Trial>();
                     models.magicNumber7.QuestionType[] questionTypes = models.magicNumber7.QuestionType.values();
 
-                    for(ExperimentSchedule exp:exps){
-                        trialList.addAll(models.magicNumber7.Trial.findInvolving(exp));
-                    }
+                        trialList.addAll(models.magicNumber7.Trial.findAllTrial(1));
+                        trialList2.addAll(models.magicNumber7.Trial.findAllTrial(2));
+                        trialList3.addAll(models.magicNumber7.Trial.findAllTrial(3));
+
                     ObjectMapper mapper = new ObjectMapper();
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    jsonArray = mapper.writeValueAsString(trialList2);
+                    json = Json.parse(jsonArray);
+                    result.put("trials2",json);
+
+                    jsonArray = mapper.writeValueAsString(trialList3);
+                    json = Json.parse(jsonArray);
+                    result.put("trials3",json);
 
                     jsonArray = mapper.writeValueAsString(questionTypes);
                     json = Json.parse(jsonArray);
@@ -191,15 +213,26 @@ public class Application extends Controller {
                 if(expType.equals("/positionError")){
                     exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.POSITIONERROR).findList();
                     List<models.positionError.Trial> trialList = new ArrayList<models.positionError.Trial>();
+                    List<models.positionError.Trial> trialList2 = new ArrayList<models.positionError.Trial>();
+                    List<models.positionError.Trial> trialList3 = new ArrayList<models.positionError.Trial>();
                     models.positionError.QuestionType[] questionTypes = models.positionError.QuestionType.values();
 
-                    for(ExperimentSchedule exp:exps){
-                        trialList.addAll(models.positionError.Trial.findInvolving(exp));
-                    }
+                        trialList.addAll(models.positionError.Trial.findAllTrial(1));
+                        trialList2.addAll(models.positionError.Trial.findAllTrial(2));
+                        trialList3.addAll(models.positionError.Trial.findAllTrial(3));
+
                     ObjectMapper mapper = new ObjectMapper();
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    jsonArray = mapper.writeValueAsString(trialList2);
+                    json = Json.parse(jsonArray);
+                    result.put("trials2",json);
+
+                    jsonArray = mapper.writeValueAsString(trialList3);
+                    json = Json.parse(jsonArray);
+                    result.put("trials3",json);
 
                     jsonArray = mapper.writeValueAsString(questionTypes);
                     json = Json.parse(jsonArray);
@@ -262,15 +295,26 @@ public class Application extends Controller {
                 if(expType.equals("/garnerInterference")){
                     exps = ExperimentSchedule.find.where().eq("experimentType",ExperimentType.GARNERINTERFERENCE).findList();
                     List<models.garnerInterference.Trial> trialList = new ArrayList<models.garnerInterference.Trial>();
+                    List<models.garnerInterference.Trial> trialList2 = new ArrayList<models.garnerInterference.Trial>();
+                    List<models.garnerInterference.Trial> trialList3 = new ArrayList<models.garnerInterference.Trial>();
                     models.garnerInterference.QuestionType[] questionTypes = models.garnerInterference.QuestionType.values();
 
-                    for(ExperimentSchedule exp:exps){
-                        trialList.addAll(models.garnerInterference.Trial.findInvolving(exp));
-                    }
+                        trialList.addAll(models.garnerInterference.Trial.findAllTrial(1));
+                        trialList2.addAll(models.garnerInterference.Trial.findAllTrial(2));
+                        trialList3.addAll(models.garnerInterference.Trial.findAllTrial(3));
+
                     ObjectMapper mapper = new ObjectMapper();
                     String jsonArray = mapper.writeValueAsString(trialList);
                     json = Json.parse(jsonArray);
                     result.put("trials",json);
+
+                    jsonArray = mapper.writeValueAsString(trialList2);
+                    json = Json.parse(jsonArray);
+                    result.put("trials2",json);
+
+                    jsonArray = mapper.writeValueAsString(trialList3);
+                    json = Json.parse(jsonArray);
+                    result.put("trials3",json);
 
                     jsonArray = mapper.writeValueAsString(questionTypes);
                     json = Json.parse(jsonArray);

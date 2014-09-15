@@ -57,6 +57,19 @@ public class Trial extends Model{
         return find.where().eq("schedule", ex).findList();
     }
 
+    public static List<Trial> findAllTrial(int feature){
+
+        if(feature == 1){ 
+            return find.where().eq("feature",Feature.ONEFEATURE).findList();
+        }else if(feature == 2 ){ 
+            return find.where().eq("feature",Feature.ONEFEATURE).findList();
+        }else if(feature == 3 ){ 
+            return find.where().eq("feature",Feature.TWOFEATURE).findList();
+        }else{ 
+            return find.all();
+        }
+    }
+
     public void updateResult(){
         this.totalScore = 0;
         this.totalUsedTime = 0;

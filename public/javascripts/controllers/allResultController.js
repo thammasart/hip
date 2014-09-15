@@ -7,6 +7,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
         $scope.trials = [];
         $scope.trials2 = [];
         $scope.trials3 = [];
+        $scope.trials4 = [];
         $scope.questionTypes = [];
         $rootScope.$watch(function(){return $location.path()},function(path){
             //console.log($location.path());
@@ -21,6 +22,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 $scope.trials = result.trials;
                 $scope.trials2 = result.trials2;
                 $scope.trials3 = result.trials3;
+                $scope.trials4 = result.trials4;
                 //cut here Questiontype
                 $scope.questionTypes = result.questionTypes;
                 console.log($scope.trials);
@@ -72,6 +74,9 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                     trials3 : function(){
                         return $scope.trials3;
                     },
+                    trials4 : function(){
+                        return $scope.trials4;
+                    },
                     questionTypes : function(){
                         return $scope.questionTypes;
                     }
@@ -81,17 +86,19 @@ angular.module('AllResultApp', ['ui.bootstrap'])
         };
     }
 );
-    var resultModalInstanceCtrl= function($scope, $modalInstance,trials,trials2,trials3,questionTypes){
+    var resultModalInstanceCtrl= function($scope, $modalInstance,trials,trials2,trials3,trials4,questionTypes){
         
         $scope.trials =[];
         $scope.trials2 =[];
         $scope.trials3 =[];
+        $scope.trials4 =[];
         $scope.questionTypes =[];
 
         $scope.init = function(){
             $scope.trials = trials;
             $scope.trials2 = trials2;
             $scope.trials3 = trials3;
+            $scope.trials4 = trials4;
             $scope.questionTypes = questionTypes;
             $scope.title = trials[0].schedule.experimentType;
         };
@@ -120,7 +127,10 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 var size = Object.size(trials2[trialIndex].quizzes);
             }else if(qTypeNumber ==3){
                 var size = Object.size(trials3[trialIndex].quizzes);
+            }else if(qTypeNumber ==4){
+                var size = Object.size(trials4[trialIndex].quizzes);
             }
+
 
             console.log(size);
             console.log(questionTypes);

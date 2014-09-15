@@ -58,6 +58,19 @@ public class Trial extends Model{
         return newTrial;
     }
 
+    public static List<Trial> findAllTrial(int feature){
+
+        if(feature == 1){ 
+            return find.where().eq("question_type",QuestionType.THAI).findList();
+        }else if(feature == 2 ){ 
+            return find.where().eq("question_type",QuestionType.ENGLISH).findList();
+        }else if(feature == 3 ){ 
+            return find.where().eq("question_type",QuestionType.NUMBER).findList();
+        }else{ 
+            return find.all();
+        }
+    }
+
     public static List<Trial> findInvolving(ExperimentSchedule ex){
         return find.where().eq("schedule", ex).findList();
     }
