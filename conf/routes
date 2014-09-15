@@ -48,6 +48,8 @@ POST        /attention-blink/reportDemo                             controllers.
 GET         /attention-blink/experiment                             controllers.AttentionBlink.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /attention-blink/experiment/save                        controllers.AttentionBlink.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /attention-blink/report                                 controllers.AttentionBlink.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
+GET         /attention-blink/preview                             	controllers.AttentionBlink.preview(trialId:Long)
+
 
 GET         /stroop_effect                                          controllers.StroopEffect.info()
 GET         /stroop_effect/info                                     controllers.StroopEffect.infoIframe()

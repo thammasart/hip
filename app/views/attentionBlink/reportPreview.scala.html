@@ -17,10 +17,8 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                 <h3>เวลา : @{ BigDecimal(totalUsedTime).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble } วินาที</h3>
             </div>
         </div>
-        <div class="navContainer">
-            <a class="btn btn-success navButton" style="float:right;" onclick="window.close()"><span class="glyphicon glyphicon-th-list"></span> &nbsp;เลือก Trial การทดลอง</a>
+    <div class="navContainer">
 
-            <a href="@routes.Application.chooseTrial(ExperimentType.ATTENTIONBLINK.toString())" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >Share this</a>
     </div>
     
     @footer()
