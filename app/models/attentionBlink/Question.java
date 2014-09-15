@@ -8,6 +8,22 @@ import play.db.ebean.Model.Finder;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import play.db.DB;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 @Entity
 @Table (name = "attention_blink_question")
 public class Question extends Model{
@@ -138,6 +154,88 @@ public class Question extends Model{
         for(Question question : questions){
             if(question.quiz == null)
                 question.delete();
+        }
+    }
+
+    public static void exportToFile(Workbook wb){
+
+        try{
+            int headerRowIndex = 0;
+            int col = 0;
+            //wb = new HSSFWorkbook();
+            Sheet userSheet = wb.createSheet("Question");
+
+            Row headerRow = userSheet.createRow(headerRowIndex++);
+            Cell tableName = headerRow.createCell(0);
+            tableName.setCellValue("Attention Blink Question");
+
+            headerRow = userSheet.createRow(headerRowIndex++);
+
+            Cell idHeaderCell = headerRow.createCell(col++);
+            idHeaderCell.setCellValue("ID");
+
+            Cell firstCell = headerRow.createCell(col++);
+            firstCell.setCellValue("Letter");
+
+            Cell secondCell = headerRow.createCell(col++);
+            secondCell.setCellValue("Set");
+
+            Cell thirdCell = headerRow.createCell(col++);
+            thirdCell.setCellValue("Correct Answer");
+
+            Cell userCell = headerRow.createCell(col++);
+            userCell.setCellValue("Question Type");
+
+            Cell quizCell = headerRow.createCell(col++);
+            quizCell.setCellValue("Quiz Id");
+
+            List<Question> tempList = find.all();
+
+            int listSize = tempList.size();
+            for(int row=headerRowIndex;row-headerRowIndex<listSize;row++){
+                Question temp = tempList.get(row-headerRowIndex);
+
+                col = 0;
+
+                Row dataRow = userSheet.createRow(row);
+
+                Cell dataId = dataRow.createCell(col++);
+                dataId.setCellValue(temp.id);
+
+                Cell data1 = dataRow.createCell(col++);
+                data1.setCellValue(temp.letter);
+
+                Cell data2 = dataRow.createCell(col++);
+                data2.setCellValue(temp.set);
+
+                Cell data3 = dataRow.createCell(col++);
+                data3.setCellValue(temp.correctAnswer);
+
+                String type = "";
+                if (temp.questionType == QuestionType.THAI)
+                    type = "Thai";
+                else if (temp.questionType == QuestionType.ENGLISH)
+                    type = "English";
+                else if (temp.questionType == QuestionType.NUMBER)
+                    type = "Number";
+
+                Cell data4 = dataRow.createCell(col++);
+                data4.setCellValue(type);
+
+                Cell data5 = dataRow.createCell(col++);
+                data5.setCellValue(temp.quiz.id);
+
+            }
+
+            //File file = new File("brown_peterson_user.xls");
+            //FileOutputStream out = new FileOutputStream(file);
+            //wb.write(out);
+            //out.close();
+            //return file;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            //return null;
         }
     }
 

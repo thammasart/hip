@@ -108,58 +108,87 @@ public class Answer extends Model implements AnswerResult{
 		return totalScore;
 	}
 
-    public static File exportToFile(){
+    public static void exportToFile(Workbook wb){
 
         try{
-            Workbook wb = new HSSFWorkbook();
-            Sheet userSheet = wb.createSheet("test");
-            Row headerRow = userSheet.createRow(0);
-            Cell idHeaderCell = headerRow.createCell(0);
+            int headerRowIndex = 0;
+            int col = 0;
+            //wb = new HSSFWorkbook();
+            Sheet userSheet = wb.createSheet("Answer");
+
+            Row headerRow = userSheet.createRow(headerRowIndex++);
+
+            Cell tableName = headerRow.createCell(0);
+            tableName.setCellValue("Brown Peterson Answer");
+
+            headerRow = userSheet.createRow(headerRowIndex++);
+            Cell idHeaderCell = headerRow.createCell(col++);
             idHeaderCell.setCellValue("ID");
-            Cell firstCell = headerRow.createCell(1);
+
+            Cell firstCell = headerRow.createCell(col++);
             firstCell.setCellValue("first word");
-            Cell secondCell = headerRow.createCell(2);
-            firstCell.setCellValue("second word");
-            Cell thirdCell = headerRow.createCell(3);
-            firstCell.setCellValue("third word");
 
+            Cell secondCell = headerRow.createCell(col++);
+            secondCell.setCellValue("second word");
 
-            Cell userCell = headerRow.createCell(4);
-            userCell.setCellValue("UserName");
-            Cell correctCell = headerRow.createCell(5);
+            Cell thirdCell = headerRow.createCell(col++);
+            thirdCell.setCellValue("third word");
+
+            Cell correctCell = headerRow.createCell(col++);
             correctCell.setCellValue("IsCorrect");
-            Cell timeCell = headerRow.createCell(6);
-            firstCell.setCellValue("Used time");
-            List<Answer> tempList = find.all();
-            for(int row=1;row-1<tempList.size();row++){
-                Answer temp = tempList.get(row-1);
-                Row dataRow = userSheet.createRow(row);
-                Cell dataId = dataRow.createCell(0);
-                dataId.setCellValue(temp.id);
-                Cell dataFirst = dataRow.createCell(1);
-                dataFirst.setCellValue(temp.firstWord);
-                Cell dataSecond = dataRow.createCell(2);
-                dataSecond.setCellValue(temp.secondWord);
-                Cell dataThird = dataRow.createCell(3);
-                dataThird.setCellValue(temp.thirdWord);
-                Cell userCorrect = dataRow.createCell(4);
-                userCorrect.setCellValue(temp.user.username);
-                Cell dataCorrect = dataRow.createCell(5);
-                dataCorrect.setCellValue(temp.isCorrect);
-                Cell timeCorrect = dataRow.createCell(6);
-                timeCorrect.setCellValue(temp.usedTime);
 
-                row++;
+            Cell timeCell = headerRow.createCell(col++);
+            timeCell.setCellValue("Used time");
+
+            Cell userCell = headerRow.createCell(col++);
+            userCell.setCellValue("UserName");
+
+            Cell quizCell = headerRow.createCell(col++);
+            quizCell.setCellValue("Quiz Id");
+
+            List<Answer> tempList = find.all();
+
+            int listSize = tempList.size();
+            for(int row=headerRowIndex;row-headerRowIndex<listSize;row++){
+                Answer temp = tempList.get(row-headerRowIndex);
+                col = 0;
+                Row dataRow = userSheet.createRow(row);
+
+                Cell dataId = dataRow.createCell(col++);
+                dataId.setCellValue(temp.id);
+
+                Cell dataFirst = dataRow.createCell(col++);
+                dataFirst.setCellValue(temp.firstWord);
+
+                Cell dataSecond = dataRow.createCell(col++);
+                dataSecond.setCellValue(temp.secondWord);
+
+                Cell dataThird = dataRow.createCell(col++);
+                dataThird.setCellValue(temp.thirdWord);
+
+                Cell dataCorrect = dataRow.createCell(col++);
+                dataCorrect.setCellValue(temp.isCorrect);
+
+                Cell dataTime = dataRow.createCell(col++);
+                dataTime.setCellValue(temp.usedTime);
+
+                Cell userId = dataRow.createCell(col++);
+                userId.setCellValue(temp.user.username);
+
+                Cell quizId = dataRow.createCell(col++);
+                quizId.setCellValue(temp.quiz.id);
+
             }
-            File file = new File("brown_peterson_user.xls");
-            FileOutputStream out = new FileOutputStream(file);
-            wb.write(out);
-            out.close();
-            return file;
+
+            //File file = new File("brown_peterson_user.xls");
+            //FileOutputStream out = new FileOutputStream(file);
+            //wb.write(out);
+            //out.close();
+            //return file;
 
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            //return null;
         }
     }
 

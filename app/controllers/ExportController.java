@@ -19,6 +19,8 @@ import java.sql.Statement;
 
 import views.html.admin.*;
 
+
+
 /**
  * Created by ohmini on 12/9/2557.
  */
@@ -27,165 +29,39 @@ public class ExportController extends Controller {
     public static Result downloadPage(){
         return ok(export.render());
     }
-    //Not Complete
-    public static Result downloadBrownPetersonTrial() throws IOException {
 
-        String sql = "SELECT * FROM brown_peterson_trial a LEFT JOIN user u ON(a.user_username = u.username)";
-        try{
-            Workbook wb = new HSSFWorkbook();
-            Sheet userSheet = wb.createSheet("test");
-            Row headerRow = userSheet.createRow(0);
-            Cell idHeaderCell = headerRow.createCell(0);
-            idHeaderCell.setCellValue("ID");
-            Cell firstCell = headerRow.createCell(1);
-            firstCell.setCellValue("first word");
-            Cell secondCell = headerRow.createCell(2);
-            firstCell.setCellValue("second word");
-            Cell thirdCell = headerRow.createCell(3);
-            firstCell.setCellValue("third word");
+    public static Result downloadAttentionBlink() throws IOException{
 
-            Cell correctCell = headerRow.createCell(4);
-            correctCell.setCellValue("IsCorrect");
-            Statement stmt = DB.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            int row = 1;
-            while(rs.next()){
-                String username = rs.getString("username");
-                boolean correct = rs.getBoolean("is_correct");
-                Row dataRow = userSheet.createRow(row);
-                Cell dataId = dataRow.createCell(0);
-                dataId.setCellValue(username);
-                Cell dataFirst = dataRow.createCell(1);
-                dataFirst.setCellValue(rs.getString("first_word"));
-                Cell dataSecond = dataRow.createCell(2);
-                dataSecond.setCellValue(rs.getString("second_word"));
-                Cell dataThird = dataRow.createCell(3);
-                dataThird.setCellValue(rs.getString("third_word"));
-                Cell dataCorrect = dataRow.createCell(4);
-                dataCorrect.setCellValue(correct);
-                row++;
-            }
-            File file = new File("user.xls");
-            FileOutputStream out = new FileOutputStream(file);
-            wb.write(out);
-            out.close();
-            return ok(file);
+        Workbook wb = new HSSFWorkbook();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        models.attentionBlink.Trial.exportToFile(wb);
+        models.attentionBlink.Quiz.exportToFile(wb);
+        models.attentionBlink.Question.exportToFile(wb);
+        models.attentionBlink.Answer.exportToFile(wb);
 
-        return badRequest();
-    }
-    //Not Complete
-    public static Result downloadBrownPetersonQuiz() throws IOException {
+        File file = new File("attention_blink.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
 
-        String sql = "SELECT * FROM brown_peterson_answer a LEFT JOIN user u ON(a.user_username = u.username)";
-        try{
-            Workbook wb = new HSSFWorkbook();
-            Sheet userSheet = wb.createSheet("test");
-            Row headerRow = userSheet.createRow(0);
-            Cell idHeaderCell = headerRow.createCell(0);
-            idHeaderCell.setCellValue("ID");
-            Cell firstCell = headerRow.createCell(1);
-            firstCell.setCellValue("first word");
-            Cell secondCell = headerRow.createCell(2);
-            firstCell.setCellValue("second word");
-            Cell thirdCell = headerRow.createCell(3);
-            firstCell.setCellValue("third word");
-
-            Cell correctCell = headerRow.createCell(4);
-            correctCell.setCellValue("IsCorrect");
-            Statement stmt = DB.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            int row = 1;
-            while(rs.next()){
-                String username = rs.getString("username");
-                boolean correct = rs.getBoolean("is_correct");
-                Row dataRow = userSheet.createRow(row);
-                Cell dataId = dataRow.createCell(0);
-                dataId.setCellValue(username);
-                Cell dataFirst = dataRow.createCell(1);
-                dataFirst.setCellValue(rs.getString("first_word"));
-                Cell dataSecond = dataRow.createCell(2);
-                dataSecond.setCellValue(rs.getString("second_word"));
-                Cell dataThird = dataRow.createCell(3);
-                dataThird.setCellValue(rs.getString("third_word"));
-                Cell dataCorrect = dataRow.createCell(4);
-                dataCorrect.setCellValue(correct);
-                row++;
-            }
-            File file = new File("user.xls");
-            FileOutputStream out = new FileOutputStream(file);
-            wb.write(out);
-            out.close();
-            return ok(file);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return badRequest();
-    }
-    //Not Complete
-    public static Result downloadBrownPetersonQuestion() throws IOException {
-
-        String sql = "SELECT * FROM brown_peterson_answer a LEFT JOIN user u ON(a.user_username = u.username)";
-        try{
-            Workbook wb = new HSSFWorkbook();
-            Sheet userSheet = wb.createSheet("test");
-            Row headerRow = userSheet.createRow(0);
-            Cell idHeaderCell = headerRow.createCell(0);
-            idHeaderCell.setCellValue("ID");
-            Cell firstCell = headerRow.createCell(1);
-            firstCell.setCellValue("first word");
-            Cell secondCell = headerRow.createCell(2);
-            firstCell.setCellValue("second word");
-            Cell thirdCell = headerRow.createCell(3);
-            firstCell.setCellValue("third word");
-
-            Cell correctCell = headerRow.createCell(4);
-            correctCell.setCellValue("IsCorrect");
-            Statement stmt = DB.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            int row = 1;
-            while(rs.next()){
-                String username = rs.getString("username");
-                boolean correct = rs.getBoolean("is_correct");
-                Row dataRow = userSheet.createRow(row);
-                Cell dataId = dataRow.createCell(0);
-                dataId.setCellValue(username);
-                Cell dataFirst = dataRow.createCell(1);
-                dataFirst.setCellValue(rs.getString("first_word"));
-                Cell dataSecond = dataRow.createCell(2);
-                dataSecond.setCellValue(rs.getString("second_word"));
-                Cell dataThird = dataRow.createCell(3);
-                dataThird.setCellValue(rs.getString("third_word"));
-                Cell dataCorrect = dataRow.createCell(4);
-                dataCorrect.setCellValue(correct);
-                row++;
-            }
-            File file = new File("user.xls");
-            FileOutputStream out = new FileOutputStream(file);
-            wb.write(out);
-            out.close();
-            return ok(file);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return badRequest();
+        return ok(file);
     }
 
-    public static Result downloadBrownPetersonAnswer() throws IOException {
+    public static Result downloadBrownPeterson() throws IOException{
 
-        File f = models.brownPeterson.Answer.exportToFile();
+        Workbook wb = new HSSFWorkbook();
 
-        if (f!=null)
-            return ok(f);
-        else
-            return badRequest();
+        models.brownPeterson.Trial.exportToFile(wb);
+        models.brownPeterson.Quiz.exportToFile(wb);
+        models.brownPeterson.Question.exportToFile(wb);
+        models.brownPeterson.Answer.exportToFile(wb);
+
+        File file = new File("brown_peterson.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
     }
 
 }
