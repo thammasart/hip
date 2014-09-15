@@ -18,11 +18,8 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
             </div>
         </div>
         <div class="navContainer">
-            <a class="btn btn-danger navButton" href="@routes.ChangeBlindness.proc()"><span class="glyphicon glyphicon-chevron-left"></span> &nbsp;กลับไปขั้นตอนการทดลอง</a>
-            <a class="btn btn-primary navButton navButtonDemo" href="@routes.Application.selectExperiment()"><span class="glyphicon glyphicon-th"></span> &nbsp;เลือกการทดลองอื่น</a>
-            <a class="btn btn-success navButton" href="@routes.Application.chooseTrial(ExperimentType.CHANGEBLINDNESS.toString())"><span class="glyphicon glyphicon-th-list"></span> &nbsp;เลือก Trial การทดลอง</a>
+
         </div>
     </div>
-
     @footer()
 </div>
