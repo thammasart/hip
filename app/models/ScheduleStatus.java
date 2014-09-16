@@ -1,5 +1,5 @@
 package models;
 
-public enum TrialStatus{
+public enum ScheduleStatus{
 	CLOSE, OPEN, DISABLED
 }

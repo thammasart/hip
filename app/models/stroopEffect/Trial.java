@@ -5,7 +5,6 @@ import javax.persistence.*;
 
 import models.TimeLog;
 import models.ExperimentSchedule;
-import models.TrialStatus;
 
 import java.util.List;
 import java.util.ArrayList;

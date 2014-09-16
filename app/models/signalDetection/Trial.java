@@ -1,7 +1,6 @@
 package models.signalDetection;
 
 import models.TimeLog;
-import models.TrialStatus;
 
 import play.db.ebean.Model;
 import javax.persistence.*;

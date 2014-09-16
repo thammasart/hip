@@ -3,7 +3,6 @@ package models.garnerInterference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import models.TimeLog;
-import models.TrialStatus;
 
 import models.ExperimentSchedule;
 import play.db.ebean.Model;

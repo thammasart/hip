@@ -29,6 +29,8 @@ public class ExperimentSchedule extends Model{
 	public Date expireDate;
 	public ExperimentType experimentType;
 
+    public ScheduleStatus status = ScheduleStatus.CLOSE;
+
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
     private List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
 

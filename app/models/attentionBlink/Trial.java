@@ -2,7 +2,6 @@ package models.attentionBlink;
 
 import models.ExperimentSchedule;
 import models.TimeLog;
-import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;

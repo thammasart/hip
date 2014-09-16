@@ -2,7 +2,6 @@ package models.brownPeterson;
 
 import models.*;
 import models.TimeLog;
-import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;

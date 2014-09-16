@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import models.ExperimentSchedule;
 import models.TimeLog;
-import models.TrialStatus;
 
 import play.db.ebean.Model;
 import javax.persistence.*;

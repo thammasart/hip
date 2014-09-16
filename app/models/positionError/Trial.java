@@ -3,7 +3,6 @@ package models.positionError;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import models.TimeLog;
-import models.TrialStatus;
 
 import play.db.ebean.*;
 import javax.persistence.*;
