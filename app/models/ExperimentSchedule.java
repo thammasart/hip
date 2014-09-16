@@ -28,7 +28,6 @@ public class ExperimentSchedule extends Model{
 	@Formats.DateTime(pattern="dd-MM-yyyy")
 	public Date expireDate;
 	public ExperimentType experimentType;
-
     public ScheduleStatus status = ScheduleStatus.CLOSE;
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
