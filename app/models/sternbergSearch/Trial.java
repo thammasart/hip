@@ -26,7 +26,6 @@ public class Trial extends Model{
 	public int twoCharIsCorrect = 0;
 	public int twoCharIsInCorrect = 0;
     public QuestionType questionType = QuestionType.ENGLISH;
-    public TrialStatus status = TrialStatus.CLOSE;
     
     @ManyToOne
     public ExperimentSchedule schedule;

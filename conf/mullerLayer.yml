@@ -14,22 +14,16 @@
 #Trial
 - &round33 !!models.mullerLayer.Trial
     schedule: *ex17
-    status: CLOSE
 - &round34 !!models.mullerLayer.Trial
     schedule: *ex17
-    status: CLOSE
 - &round35 !!models.mullerLayer.Trial
     schedule: *ex17
-    status: CLOSE
 - &round36 !!models.mullerLayer.Trial
     schedule: *ex18
-    status: CLOSE
 - &round37 !!models.mullerLayer.Trial
     schedule: *ex18
-    status: CLOSE
 - &round38 !!models.mullerLayer.Trial
     schedule: *ex18
-    status: CLOSE
 #Question
 - &Question64 !!models.mullerLayer.Question
     line1: NONE

@@ -15,11 +15,9 @@
 - &round51 !!models.changeBlindness.Trial
     displayTime: 60
     schedule: *ex23
-    status: CLOSE
 - &round52 !!models.changeBlindness.Trial
     displayTime: 30
     schedule: *ex24
-    status: CLOSE
 #Question
 - &Question129 !!models.changeBlindness.Question
     pathOfPic1: /assets/images/changeBlindness/02a.jpg

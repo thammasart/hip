@@ -16,22 +16,18 @@
     questionType: ENGLISH
     numberOfQuiz: 1
     schedule: *ex13
-    status: CLOSE
 - &round24 !!models.magicNumber7.Trial
     questionType: NUMBER
     numberOfQuiz: 3
     schedule: *ex13
-    status: CLOSE
 - &round25 !!models.magicNumber7.Trial
     questionType: THAI
     numberOfQuiz: 5
     schedule: *ex14
-    status: CLOSE
 - &round26 !!models.magicNumber7.Trial
     questionType: ENGLISH
     numberOfQuiz: 7
     schedule: *ex14
-    status: CLOSE
 #Question
 - &Question44 !!models.magicNumber7.Question
     memorySet: ABCDE

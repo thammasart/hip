@@ -16,32 +16,26 @@
     questionType: ONEFEATURE
     blinkTime: 0.5
     schedule: *ex15
-    status: CLOSE
 - &round28 !!models.simonEffect.Trial
     questionType: TWOFEATURE
     blinkTime: 0.5
     schedule: *ex15
-    status: CLOSE
 - &round29 !!models.simonEffect.Trial
     questionType: ONEFEATURE
     blinkTime: 0.5
     schedule: *ex15
-    status: CLOSE
 - &round30 !!models.simonEffect.Trial
     questionType: TWOFEATURE
     blinkTime: 0.5
     schedule: *ex16
-    status: CLOSE
 - &round31 !!models.simonEffect.Trial
     questionType: ONEFEATURE
     blinkTime: 0.5
     schedule: *ex16
-    status: CLOSE
 - &round32 !!models.simonEffect.Trial
     questionType: TWOFEATURE
     blinkTime: 0.5
     schedule: *ex16
-    status: CLOSE
 #Question
 - &Question60 !!models.simonEffect.Question
     alphabet: O

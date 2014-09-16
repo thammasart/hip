@@ -71,7 +71,6 @@
     noOfBiDimensionQuestion: 1
     noOfFakeBiDimentsionQuestion: 1
     schedule: *ex19
-    status: CLOSE
 - &round40 !!models.garnerInterference.Trial
     lengthBigSquare: 5
     lengthSmallSquare: 3
@@ -86,7 +85,6 @@
     noOfBiDimensionQuestion: 1
     noOfFakeBiDimentsionQuestion: 1
     schedule: *ex19
-    status: CLOSE
 - &round41 !!models.garnerInterference.Trial
     lengthBigSquare: 10
     lengthSmallSquare: 7
@@ -101,7 +99,6 @@
     noOfBiDimensionQuestion: 1
     noOfFakeBiDimentsionQuestion: 1
     schedule: *ex19
-    status: CLOSE
 - &round42 !!models.garnerInterference.Trial
     lengthBigSquare: 10
     lengthSmallSquare: 3
@@ -116,7 +113,6 @@
     noOfBiDimensionQuestion: 1
     noOfFakeBiDimentsionQuestion: 1
     schedule: *ex20
-    status: CLOSE
 - &round43 !!models.garnerInterference.Trial
     lengthBigSquare: 10
     lengthSmallSquare: 5
@@ -131,7 +127,6 @@
     noOfBiDimensionQuestion: 1
     noOfFakeBiDimentsionQuestion: 1
     schedule: *ex20
-    status: CLOSE
 - &round44 !!models.garnerInterference.Trial
     lengthBigSquare: 5
     lengthSmallSquare: 4
@@ -146,7 +141,6 @@
     noOfBiDimensionQuestion: 1
     noOfFakeBiDimentsionQuestion: 1
     schedule: *ex20
-    status: CLOSE
 #Question
 - &Question67 !!models.garnerInterference.Question
     colorPic: dark

@@ -27,7 +27,6 @@ public class Trial extends Model{
     public int totalUser = 0;
 
     public int numberOfQuiz = 3;
-    public TrialStatus status = TrialStatus.CLOSE;
 
 	@ManyToOne
     public ExperimentSchedule schedule;

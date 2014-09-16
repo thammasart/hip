@@ -21,7 +21,6 @@
     twoCharIsInCorrect: 0
     questionType: ENGLISH
     schedule: *ex11
-    status: CLOSE
 - &round20 !!models.sternbergSearch.Trial
     length: 3
     blinkTime: 0.3
@@ -31,7 +30,6 @@
     twoCharIsInCorrect: 0
     questionType: NUMBER
     schedule: *ex11
-    status: CLOSE
 - &round21 !!models.sternbergSearch.Trial
     length: 2
     blinkTime: 0.4
@@ -41,7 +39,6 @@
     twoCharIsInCorrect: 1
     questionType: ENGLISH
     schedule: *ex12
-    status: CLOSE
 - &round22 !!models.sternbergSearch.Trial
     length: 4
     blinkTime: 0.2
@@ -51,7 +48,6 @@
     twoCharIsInCorrect: 2
     questionType: THAI
     schedule: *ex12
-    status: CLOSE
 #Question
 - &Question40 !!models.sternbergSearch.Question
     memorySet: J

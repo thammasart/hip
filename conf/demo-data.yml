@@ -98,17 +98,14 @@
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex1
-    status: CLOSE
 - &round2 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word
     schedule: *ex1
-    status: CLOSE
 - &round3 !!models.brownPeterson.Trial
     trigramLanguage:       english
     trigramType:    word 
     schedule: *ex1
-    status: CLOSE
 - &quiz1 !!models.brownPeterson.Quiz
     initCountdown:                 100
     flashTime:                 5

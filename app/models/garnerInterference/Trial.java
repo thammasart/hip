@@ -33,8 +33,6 @@ public class Trial extends Model{
     public int noOfBiDimensionQuestion = 1;
     public int noOfFakeBiDimentsionQuestion = 1;
 
-    public TrialStatus status = TrialStatus.CLOSE;
-
     public String color = "grey";
     public Feature feature = Feature.TWOFEATURE; // one feature or two feature
     @ManyToOne

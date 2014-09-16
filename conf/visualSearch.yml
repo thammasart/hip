@@ -15,25 +15,16 @@
 #Trial
 - &round45 !!models.visualSearch.Trial
     schedule: *ex21
-    status: CLOSE
-
 - &round46 !!models.visualSearch.Trial
     schedule: *ex21
-    status: CLOSE
-
 - &round47 !!models.visualSearch.Trial
     schedule: *ex21
-    status: CLOSE
-
 - &round48 !!models.visualSearch.Trial
     schedule: *ex22
-    status: CLOSE
 - &round49 !!models.visualSearch.Trial
     schedule: *ex22
-    status: CLOSE
 - &round50 !!models.visualSearch.Trial
     schedule: *ex22
-    status: CLOSE
 
 #Question
 - &Question79 !!models.visualSearch.Question

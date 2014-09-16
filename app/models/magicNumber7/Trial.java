@@ -27,7 +27,6 @@ public class Trial extends Model{
     public List<Quiz> quizzes = new ArrayList<Quiz>();
 
     public int numberOfQuiz = 3;
-    public TrialStatus status = TrialStatus.CLOSE;
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
