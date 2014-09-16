@@ -4,6 +4,7 @@
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:        2015-02-07
+    status:         CLOSE
 
 #Question
 - &Question1 !!models.brownPeterson.Question

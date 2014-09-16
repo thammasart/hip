@@ -5,12 +5,14 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: BROWNPETERSON
+    status:         CLOSE
 - &ex2 !!models.ExperimentSchedule
     name:           Ex2
     noOfTrial:      3
     startDate:      2012-01-30
     expireDate:     2013-02-07
     experimentType: BROWNPETERSON
+    status:         CLOSE
 
 #Question
 - &Question1 !!models.brownPeterson.Question

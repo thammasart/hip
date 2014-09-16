@@ -5,12 +5,14 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: MAGICNUMBER7
+    status:         CLOSE
 - &ex14 !!models.ExperimentSchedule
     name:           Ex14
     noOfTrial:      2
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: MAGICNUMBER7
+    status:         CLOSE
     #Trial
 - &round23 !!models.magicNumber7.Trial
     questionType: ENGLISH

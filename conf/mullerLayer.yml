@@ -5,12 +5,14 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: MULLERLAYER
+    status:         CLOSE
 - &ex18 !!models.ExperimentSchedule
     name:           Ex18
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: MULLERLAYER
+    status:         CLOSE
 #Trial
 - &round33 !!models.mullerLayer.Trial
     schedule: *ex17

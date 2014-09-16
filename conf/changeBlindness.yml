@@ -5,12 +5,14 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: CHANGEBLINDNESS
+    status:         CLOSE
 - &ex24 !!models.ExperimentSchedule
     name:           Ex22
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: CHANGEBLINDNESS
+    status:         CLOSE
 #Trial
 - &round51 !!models.changeBlindness.Trial
     displayTime: 60

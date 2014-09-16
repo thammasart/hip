@@ -5,12 +5,14 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: STERNBERGSEARCH
+    status:         CLOSE
 - &ex12 !!models.ExperimentSchedule
     name:           Ex12
     noOfTrial:      2
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: STERNBERGSEARCH
+    status:         CLOSE
 #Trial
 - &round19 !!models.sternbergSearch.Trial
     length: 1

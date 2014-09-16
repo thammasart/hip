@@ -5,12 +5,14 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: GARNERINTERFERENCE
+    status:         CLOSE
 - &ex20 !!models.ExperimentSchedule
     name:           Ex20
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: GARNERINTERFERENCE
+    status:         CLOSE
 #Color
 - &color1 !!models.garnerInterference.Color
     colorCode: E88C8C

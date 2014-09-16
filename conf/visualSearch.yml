@@ -5,12 +5,14 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: VISUALSEARCH
+    status:         CLOSE
 - &ex22 !!models.ExperimentSchedule
     name:           Ex20
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: VISUALSEARCH
+    status:         CLOSE
 
 #Trial
 - &round45 !!models.visualSearch.Trial

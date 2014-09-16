@@ -5,12 +5,14 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: SIMONEFFECT
+    status:         CLOSE
 - &ex16 !!models.ExperimentSchedule
     name:           Ex16
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: SIMONEFFECT
+    status:         CLOSE
 #Trial
 - &round27 !!models.simonEffect.Trial
     questionType: ONEFEATURE

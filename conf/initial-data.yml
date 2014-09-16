@@ -5,60 +5,70 @@
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: BROWNPETERSON
+    status:         CLOSE
 - &ex2 !!models.ExperimentSchedule
     name:           Ex2
     noOfTrial:      3
     startDate:      2012-01-30
     expireDate:     2013-02-07
     experimentType: BROWNPETERSON
+    status:         CLOSE
 - &ex3 !!models.ExperimentSchedule
     name:           Ex3
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: STROOPEFFECT
+    status:         CLOSE
 - &ex4 !!models.ExperimentSchedule
     name:           Ex4
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2014-02-07
     experimentType: STROOPEFFECT
+    status:         CLOSE
 - &ex5 !!models.ExperimentSchedule
     name:           Ex5
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: SIGNALDETECTION
+    status:         CLOSE
 - &ex6 !!models.ExperimentSchedule
     name:           Ex6
     noOfTrial:      3
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: SIGNALDETECTION
+    status:         CLOSE
 - &ex7 !!models.ExperimentSchedule
     name:           Ex7
     noOfTrial:      2
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: ATTENTIONBLINK
+    status:         CLOSE
 - &ex8 !!models.ExperimentSchedule
     name:           Ex8
     noOfTrial:      2
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: ATTENTIONBLINK
+    status:         CLOSE
 - &ex9 !!models.ExperimentSchedule
     name:           Ex9
     noOfTrial:      1
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: POSITIONERROR
+    status:         CLOSE
 - &ex10 !!models.ExperimentSchedule
     name:           Ex10
     noOfTrial:      1
     startDate:      2014-01-30
     expireDate:     2015-02-07
     experimentType: POSITIONERROR
+    status:         CLOSE
 
 #Question
 - &Question1 !!models.brownPeterson.Question
