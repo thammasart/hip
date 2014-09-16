@@ -64,7 +64,7 @@ POST        /stroop_effect/reportDemo                               controllers.
 GET         /stroop_effect/experiment                               controllers.StroopEffect.experiment(trialId:Long, questionNo:Int, isPreview:Boolean)
 POST        /stroop_effect/experiment/save                          controllers.StroopEffect.saveAnswer(trialId:Long, questionNo:Int, isPreview:Boolean)
 GET         /stroop-effect/report                                   controllers.StroopEffect.report(username:String ?= "", trial_id:Long ?= 0, isPreview:Boolean)
-GET         /stroop-effect/preview                                   controllers.StroopEffect.preview(trialId:Long)
+GET         /stroop_effect/preview                                  controllers.StroopEffect.preview(trialId:Long)
 
 GET         /sternberg_search                                       controllers.SternbergSearch.info()
 GET         /sternberg_search/info                                  controllers.SternbergSearch.infoIframe()
