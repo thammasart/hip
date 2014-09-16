@@ -6,6 +6,22 @@ import java.util.List;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import play.db.DB;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 @Entity
 @Table (name="brown_peterson_answer")
 public class Answer extends Model implements AnswerResult{
@@ -91,6 +107,90 @@ public class Answer extends Model implements AnswerResult{
 		}
 		return totalScore;
 	}
+
+    public static void exportToFile(Workbook wb){
+
+        try{
+            int headerRowIndex = 0;
+            int col = 0;
+            //wb = new HSSFWorkbook();
+            Sheet userSheet = wb.createSheet("Answer");
+
+            Row headerRow = userSheet.createRow(headerRowIndex++);
+
+            Cell tableName = headerRow.createCell(0);
+            tableName.setCellValue("Brown Peterson Answer");
+
+            headerRow = userSheet.createRow(headerRowIndex++);
+            Cell idHeaderCell = headerRow.createCell(col++);
+            idHeaderCell.setCellValue("ID");
+
+            Cell firstCell = headerRow.createCell(col++);
+            firstCell.setCellValue("first word");
+
+            Cell secondCell = headerRow.createCell(col++);
+            secondCell.setCellValue("second word");
+
+            Cell thirdCell = headerRow.createCell(col++);
+            thirdCell.setCellValue("third word");
+
+            Cell correctCell = headerRow.createCell(col++);
+            correctCell.setCellValue("IsCorrect");
+
+            Cell timeCell = headerRow.createCell(col++);
+            timeCell.setCellValue("Used time");
+
+            Cell userCell = headerRow.createCell(col++);
+            userCell.setCellValue("UserName");
+
+            Cell quizCell = headerRow.createCell(col++);
+            quizCell.setCellValue("Quiz Id");
+
+            List<Answer> tempList = find.all();
+
+            int listSize = tempList.size();
+            for(int row=headerRowIndex;row-headerRowIndex<listSize;row++){
+                Answer temp = tempList.get(row-headerRowIndex);
+                col = 0;
+                Row dataRow = userSheet.createRow(row);
+
+                Cell dataId = dataRow.createCell(col++);
+                dataId.setCellValue(temp.id);
+
+                Cell dataFirst = dataRow.createCell(col++);
+                dataFirst.setCellValue(temp.firstWord);
+
+                Cell dataSecond = dataRow.createCell(col++);
+                dataSecond.setCellValue(temp.secondWord);
+
+                Cell dataThird = dataRow.createCell(col++);
+                dataThird.setCellValue(temp.thirdWord);
+
+                Cell dataCorrect = dataRow.createCell(col++);
+                dataCorrect.setCellValue(temp.isCorrect);
+
+                Cell dataTime = dataRow.createCell(col++);
+                dataTime.setCellValue(temp.usedTime);
+
+                Cell userId = dataRow.createCell(col++);
+                userId.setCellValue(temp.user.username);
+
+                Cell quizId = dataRow.createCell(col++);
+                quizId.setCellValue(temp.quiz.id);
+
+            }
+
+            //File file = new File("brown_peterson_user.xls");
+            //FileOutputStream out = new FileOutputStream(file);
+            //wb.write(out);
+            //out.close();
+            //return file;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            //return null;
+        }
+    }
 
     public ExperimentSchedule getExperimentScheduleObject(){
         return this.quiz.trial.schedule;
