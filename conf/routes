@@ -221,8 +221,11 @@ DELETE         /admin/experiment/brown-peterson/brownPetersonDeleteQuestion  con
 POST         /admin/experiment/brown-peterson/brownPetersonDeleteQuestions  controllers.BrownPeterson.deleteQuestions()
 
 GET         /report/download                                    controllers.ExportController.downloadPage()
-GET         /report/download/brown-peterson              controllers.ExportController.downloadBrownPeterson()
 GET         /report/download/attention-blink              controllers.ExportController.downloadAttentionBlink()
+GET         /report/download/brown_peterson              controllers.ExportController.downloadBrownPeterson()
+GET         /report/download/change_blindness             controllers.ExportController.downloadChangeBlindness()
+GET         /report/download/garner_interference             controllers.ExportController.downloadGarnerInterference()
+GET         /report/download/magic_number_7             controllers.ExportController.downloadMagicNumber7()
 
 GET         /admin/experiment/garnerInit                            controllers.GarnerInterference.initial(expId: Long)
 PUT         /admin/experiment/saveExperiment                            controllers.Application.saveExperiment(id: Long, name: String, startDate: Long, expireDate: Long)

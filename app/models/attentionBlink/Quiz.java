@@ -126,10 +126,10 @@ public class Quiz extends Model {
                 data4.setCellValue(temp.isCorrect);
 
                 Cell data5 = dataRow.createCell(col++);
-                data4.setCellValue(temp.trial.id);
+                data5.setCellValue(temp.trial.id);
 
                 Cell data6 = dataRow.createCell(col++);
-                data4.setCellValue(temp.question.id);
+                data6.setCellValue(temp.question.id);
 
                 String answers_id = "";
 
