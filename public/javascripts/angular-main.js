@@ -484,7 +484,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         }
 
     })
-    .controller('SternbergSearchCtrl', function($scope, $rootScope, $http){
+    .controller('SternbergSearchCtrl', function($scope, $rootScope, $http, toaster){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.showQuiz = true;
         var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -493,6 +493,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
         $scope.inProcess = false;
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
 
         $scope.init = function(expId) {
             $scope.inProcess = true;
@@ -683,10 +684,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $http({method:'PUT',url:'saveSternBergTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
 
@@ -713,7 +714,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         }
 
     })
-    .controller('MagicNumber7Ctrl', function($scope, $rootScope, $http){
+    .controller('MagicNumber7Ctrl', function($scope, $rootScope, $http, toaster){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
@@ -754,10 +755,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $http({method:'PUT',url:'saveMagicSevenTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
 

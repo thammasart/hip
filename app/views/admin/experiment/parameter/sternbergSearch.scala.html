@@ -15,8 +15,11 @@
         @error()
 
         <div class="container" ng-controller="SternbergSearchCtrl" ng-init="init(@exp.id)">
+            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid"
+                        ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
                 <h3>Trial - {{$index + 1}}<span> </span>
@@ -42,22 +45,23 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
+                                        <td class="form-invalid">
                                             <input type="number" min="1" max="6"  class="form-control center-block input-two-word "
+                                                   ng-pattern="regIneger"
                                                   ng-model="trial.length" required></td>
-                                        <td>
+                                        <td class="form-invalid">
                                             <input type="number" min="0" max="{{trial.length}}"  class="form-control center-block input-two-word "
-                                                   ng-model="trial.oneCharIsCorrect" required></td>
-                                        <td>
+                                                   ng-model="trial.oneCharIsCorrect" ng-pattern="regIneger" required></td>
+                                        <td class="form-invalid">
                                             <input type="number" min="0" max="10"  class="form-control center-block input-two-word "
-                                                   ng-model="trial.oneCharIsInCorrect" required></td>
-                                        <td>
+                                                   ng-model="trial.oneCharIsInCorrect" ng-pattern="regIneger" required></td>
+                                        <td class="form-invalid">
                                             <input type="number" min="0" max="{{trial.length - 1}}"  class="form-control center-block input-two-word "
-                                                   ng-model="trial.twoCharIsCorrect" required></td>
-                                        <td>
+                                                   ng-model="trial.twoCharIsCorrect" ng-pattern="regIneger" required></td>
+                                        <td class="form-invalid">
                                             <input type="number" min="0" max="10" class="form-control center-block input-two-word "
-                                                   ng-model="trial.twoCharIsInCorrect" required></td>
-                                        <td>
+                                                   ng-model="trial.twoCharIsInCorrect" ng-pattern="regIneger" required></td>
+                                        <td class="form-invalid">
                                             <input type="text" class="form-control center-block input-two-word"
                                                    ng-pattern="word"
                                                    ng-model="trial.blinkTime"
@@ -69,6 +73,8 @@
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Memory Set Language</h4>
                             <select class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
                     <div class="row">
@@ -77,10 +83,11 @@
                                 <div class="panel-heading">Memory Set</div>
                                 <div class="panel-body">
                                     <p class="lead text-center" style="margin:0px">{{trial.quizzes[0].question.memorySet}}
-                                        <span class="btn btn-primary btn-xs pull-right" ng-click="generateQuestion(trial)">random</span></p>
+                                        <span class="btn btn-primary btn-xs pull-right" ng-click="generateQuestion(trial)" ng-disabled="parameter.$invalid">random</span></p>
+
                                 </div>
                                 <div class="panel-footer">
-                                    <button class="btn btn-default" ng-click="showQuiz = !showQuiz">แสดงคำถาม</button>
+                                    <button class="btn btn-primary" ng-click="showQuiz = !showQuiz" ng-disabled="parameter.$invalid">แสดงคำถาม</button>
                                     <div collapse="showQuiz" style="width:300px">
                                         <ul class="list-group">
                                             <li class="list-group-item"  ng-repeat="quiz in trial.quizzes" ng-class="{'memory-set':quiz.isTrue}">มี {{getQuestion(quiz.questionChar)}} หรือไม่</li>
@@ -92,6 +99,11 @@
                     </div>
                 </div>
             </div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+            </div>
+            <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>
 </div>
