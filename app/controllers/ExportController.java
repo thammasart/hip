@@ -57,4 +57,59 @@ public class ExportController extends Controller {
         return ok(file);
     }
 
+    public static Result downloadChangeBlindness() throws IOException{
+
+        Workbook wb = new HSSFWorkbook();
+
+        models.changeBlindness.Trial.exportToFile(wb);
+        models.changeBlindness.Quiz.exportToFile(wb);
+        models.changeBlindness.Question.exportToFile(wb);
+        models.changeBlindness.Answer.exportToFile(wb);
+
+        File file = new File("change_blindness.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+
+    }
+
+    public static Result downloadGarnerInterference() throws IOException{
+
+        Workbook wb = new HSSFWorkbook();
+
+        models.garnerInterference.Trial.exportToFile(wb);
+        models.garnerInterference.Quiz.exportToFile(wb);
+        models.garnerInterference.Question.exportToFile(wb);
+        models.garnerInterference.Color.exportToFile(wb);
+        models.garnerInterference.Answer.exportToFile(wb);
+
+        File file = new File("garner_interference.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+
+    }
+
+    public static Result downloadMagicNumber7() throws IOException{
+
+        Workbook wb = new HSSFWorkbook();
+
+        models.magicNumber7.Trial.exportToFile(wb);
+        models.magicNumber7.Quiz.exportToFile(wb);
+        models.magicNumber7.Question.exportToFile(wb);
+        models.magicNumber7.Answer.exportToFile(wb);
+
+        File file = new File("magic_number_7.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+
+    }
+
 }
