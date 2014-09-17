@@ -284,6 +284,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         }
     })
     .controller('StroofEffectCtrl', function($scope, $rootScope, $http){
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
         $scope.questionTypes = ['THAI', 'ENGLISH'];
         $scope.trials = [];
         $scope.inProcess = false;
@@ -340,10 +341,6 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                     console.log('error:' + result);
                     $scope.inProcess = false;
                 });
-        }
-
-        $scope.log = function(text){
-            console.log(text);
         }
 
         $scope.changeMatch = function(quiz, questionType){

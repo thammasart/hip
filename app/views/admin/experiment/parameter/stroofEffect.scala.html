@@ -42,7 +42,7 @@
                                             <td>{{$index + 1}}</td>
                                             <td>{{quiz.question.colorWord}}</td>
                                             <td><div style="width:60px;height:30px;background-color:{{quiz.question.inkColor}};margin:auto"></div></td>
-                                            <td><input type="checkbox" ng-model="quiz.question.match" ng-change="log(quiz.question.match)">
+                                            <td><input type="checkbox" ng-model="quiz.question.match" >
                                             </td>
                                             <td><a class="btn btn-xs btn-primary" ng-click="randomQuestion(quiz, trial.questionType)">random</a></td>
                                         </tr>
@@ -55,9 +55,9 @@
                             <select class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
                             <div class="form-group" style="margin-top:10px">
                                 <label class="col-sm-3 col-md-3">Appear Time</label>
-                                <div class="col-sm-3 col-md-2">
+                                <div class="col-sm-3 col-md-2 form-invalid">
                                     <input type="number" class="form-control center-block input-two-word" class="form-control"
-                                    ng-model="trial.appearTime" min="1" max="20"
+                                    ng-model="trial.appearTime" min="1" max="10" ng-pattern="regIneger"
                                     required>
                                 </div>
                             </div>
