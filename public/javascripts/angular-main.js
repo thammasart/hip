@@ -128,9 +128,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 $scope.wordThai = result.wordThai;
                 $scope.wordEnglish = result.wordEnglish;
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -150,9 +148,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 .success(function(result){
                     $scope.inProcess = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
-                    console.log(result);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
                     toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
@@ -174,7 +170,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         }
 
     })
-    .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http){
+    .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http, toaster){
         $scope.trials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
@@ -186,9 +182,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 $scope.trials = result.trials;
                 $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -220,10 +214,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
 
@@ -252,7 +246,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             return text;
         }
     })
-    .controller('SignalDetectionCtrl', function($scope, $rootScope, $http){
+    .controller('SignalDetectionCtrl', function($scope, $rootScope, $http, toaster){
         $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
         $rootScope.exp = {};
@@ -264,9 +258,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 $scope.trials = result.trials;
                 $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -276,14 +268,14 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $http({method:'PUT',url:'saveSignalDetectionTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
     })
-    .controller('StroofEffectCtrl', function($scope, $rootScope, $http){
+    .controller('StroofEffectCtrl', function($scope, $rootScope, $http, toaster){
         $scope.regIneger = /^(0|[1-9][0-9]*)$/;
         $scope.questionTypes = ['THAI', 'ENGLISH'];
         $scope.trials = [];
@@ -301,9 +293,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 $rootScope.exp = $scope.trials[0].schedule;
                 initQuestion(result.questions);
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -336,10 +326,11 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $http({method:'PUT',url:'saveStroofEffectTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
+
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
 

@@ -61,11 +61,19 @@
                                     required>
                                 </div>
                             </div>
-                            <button style="margin-top:10px;margin-bottom: 10px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial)" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+            </div>
+            <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>
 </div>
