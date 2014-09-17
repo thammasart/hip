@@ -719,6 +719,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
         $scope.inProcess = false;
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
 
         $scope.init = function(expId) {
             $scope.inProcess = true;
@@ -796,9 +797,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 questions = result.questions;
                 initQuestion();
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }

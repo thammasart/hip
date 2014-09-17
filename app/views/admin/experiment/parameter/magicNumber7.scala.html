@@ -11,12 +11,16 @@
         @error()
 
         <div class="container" ng-controller="MagicNumber7Ctrl" ng-init="init(@exp.id)">
+            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid"
+                        ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
                 <h3>Trial - {{$index + 1}}<span> </span>
-                    <a href="/magic_number7/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
+                    <a href="/magic_number7/preview?trialId={{trial.id}}" ng-disabled="parameter.$invalid"
+                       style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
                         Preview Trial</a></h3>
                 <div class="well">
                     <div class="row">
@@ -33,13 +37,13 @@
                                 <tbody>
                                     <tr ng-repeat="quiz in trial.quizzes">
                                         <td>{{$index + 1}}</td>
-                                        <td>
+                                        <td class="form-invalid">
                                             <input type="number" min="3" max="12"  class="form-control center-block input-two-word "
-                                                   ng-model="quiz.length" required></td>
-                                        <td>
-                                            <input type="number" min="0" max="12"  class="form-control center-block input-two-word "
-                                                   ng-model="quiz.chunkSize" required></td>
-                                        <td>
+                                                   ng-pattern="regIneger" ng-model="quiz.length" required></td>
+                                        <td class="form-invalid">
+                                            <input type="number" min="0" max="{{quiz.length}}"  class="form-control center-block input-two-word "
+                                                   ng-pattern="regIneger" ng-model="quiz.chunkSize" required></td>
+                                        <td class="form-invalid">
                                             <input type="text" class="form-control center-block input-two-word"
                                                    ng-pattern="word"
                                                    ng-model="quiz.displayTime"
@@ -52,7 +56,10 @@
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Memory Set Language</h4>
                             <select class="form-control" ng-model="trial.questionType" ng-options="value for value in questionTypes" style="width: 150px"></select>
-                            <button style="margin-top:20px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial)" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
                     <div class="row">
@@ -72,7 +79,7 @@
                                         <tr ng-repeat="quiz in trial.quizzes" >
                                             <td>{{$index + 1}}</td>
                                             <td>{{quiz.question.memorySet}}</td>
-                                            <td><button class="btn btn-xs btn-primary" ng-click="generateQuestion(quiz, trial.questionType)">random</button></td>
+                                            <td><button ng-disabled="parameter.$invalid" class="btn btn-xs btn-primary" ng-click="generateQuestion(quiz, trial.questionType)">random</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -81,6 +88,11 @@
                     </div>
                 </div>
             </div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px;margin-bottom:20px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+            </div>
+            <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>
 </div>
