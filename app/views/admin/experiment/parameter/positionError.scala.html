@@ -10,34 +10,55 @@
         <hr>
         @error()
         <div class="container" ng-controller="PositionErrorCtrl" ng-init="init(@exp.id)">
+            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid"
+                        ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
                 <h3>Trial - {{$index + 1}}<span> </span>
                     <a href="/positionError/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
                         Preview Trial</a></h3>
-
                 <div class="well">
                     <div class="row">
-                        <div class="col-md-6 col-sm-5 trial-box-left">
-                            <div class="form-group">
-                                <div class="col-sm-offset-4 col-md-offset-3"><strong>ความยาว Memory Set</strong></div>
-                            </div>
-                            <div class="form-group " ng-repeat="quiz in trial.quizzes">
-                                <label class="col-sm-4 col-md-3 control-label">คำถามที่ {{$index + 1}}</label>
-                                <div class="col-md-2 col-sm-2" >
-                                    <select class="form-control" ng-model="quiz.length" ng-options="value for value in memorySet">
-                                    </select>
-                                </div>
+                        <div class="col-md-offset-0 col-sm-offset-0 col-md-8 col-sm-8">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Question</div>
+                                <table class="table text-center">
+                                    <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>ความยาวของ Memory set</th>
+                                        <th>Question</th>
+                                        <th>#</th>
+                                        <th>#</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="quiz in trial.quizzes" style="height: 52px">
+                                        <td style="width:100px">{{$index + 1}}</td>
+                                        <td><select style="margin:auto;width:80px" class="form-control" ng-model="quiz.length" ng-options="value for value in memorySet"></td>
+                                        <td style="width:200px" class="form-invalid" ng-switch="isEditable[$parent.$index][$index]">
+                                            <span ng-switch-when="false" style="width:100%;display: block">{{quiz.question.memorySet}}</span>
+                                            <input ng-switch-when="true" class="form-control" type="text"
+                                                   ng-minlength="3" ng-maxlength="12"
+                                                   ng-model="quiz.question.memorySet" required >
+                                        </td>
+                                        <td style="width:100px"><button ng-disabled="parameter.$invalid" class="btn btn-primary btn-xs" ng-click="edit($parent.$index, $index)" >{{editText($parent.$index,$index)}}</button></td>
+                                        <td style="width:100px"><button ng-disabled="parameter.$invalid" class="btn btn-primary btn-xs" ng-click="generateQuestion(quiz, trial.questionType)" >random</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <p class="text-danger">**การแก้ไข memory set จะไม่จำกัดจำนวนตัวอักษร**</p>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-7 trial-box-right">
+                        <div class="col-md-4 col-sm-4">
                             <h4>Memory Set Language</h4>
                             <select class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
                             <div class="form-group" style="margin-top:10px">
                                 <label class="col-sm-3 col-md-3">Flash Speed</label>
-                                <div class="col-sm-3 col-md-2">
+                                <div class="col-sm-3 col-md-2 form-invalid">
                                     <input type="text" class="form-control center-block input-two-word"
                                            ng-pattern="word" class="form-control"
                                            ng-model="trial.flashSpeed"
@@ -53,41 +74,19 @@
                                            required>
                                 </div>
                             </div>
-                            <button style="margin-top:10px;margin-bottom: 10px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Question</div>
-                                <table class="table text-center" style="width:500px">
-                                    <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Question</th>
-                                        <th>#</th>
-                                        <th>#</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="quiz in trial.quizzes" style="height: 52px">
-                                        <td style="width:100px">{{$index + 1}}</td>
-                                        <td style="width:200px" ng-switch="isEditable[$parent.$index][$index]">
-                                            <span ng-switch-when="false" style="width:100%;display: block">{{quiz.question.memorySet}}</span>
-                                            <input ng-switch-when="true" class="form-control" type="text" ng-model="quiz.question.memorySet" >
-                                        </td>
-                                        <td style="width:100px"><button class="btn btn-primary btn-xs" ng-click="edit($parent.$index, $index)" >{{editText($parent.$index,$index)}}</button></td>
-                                        <td style="width:100px"><button class="btn btn-primary btn-xs" ng-click="generateQuestion(quiz, trial.questionType)" >random</button></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <p class="text-danger">**การแก้ไข memory set จะไม่จำกัดจำนวนตัวอักษร**</p>
-                            </div>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial)" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+            </div>
+            <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>
 </div>

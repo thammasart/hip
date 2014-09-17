@@ -394,7 +394,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
 
         }
     })
-    .controller('PositionErrorCtrl', function($scope, $rootScope, $http){
+    .controller('PositionErrorCtrl', function($scope, $rootScope, $http, toaster){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.memorySet = [ 3, 5, 7, 10, 12];
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
@@ -409,9 +409,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 $rootScope.exp = $scope.trials[0].schedule;
                 initEditable();
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -464,10 +462,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $http({method:'PUT',url:'savePositionErrorTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
 
