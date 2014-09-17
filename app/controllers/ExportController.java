@@ -112,4 +112,40 @@ public class ExportController extends Controller {
 
     }
 
+    public static Result downloadMullerLayer() throws IOException{
+
+        Workbook wb = new HSSFWorkbook();
+
+        models.mullerLayer.Trial.exportToFile(wb);
+        models.mullerLayer.Quiz.exportToFile(wb);
+        models.mullerLayer.Question.exportToFile(wb);
+        models.mullerLayer.Answer.exportToFile(wb);
+
+        File file = new File("muller_layer.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+
+    }
+
+    public static Result downloadPositionError() throws IOException{
+
+        Workbook wb = new HSSFWorkbook();
+
+        models.positionError.Trial.exportToFile(wb);
+        models.positionError.Quiz.exportToFile(wb);
+        models.positionError.Question.exportToFile(wb);
+        models.positionError.Answer.exportToFile(wb);
+
+        File file = new File("position_error.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+
+    }
+
 }
