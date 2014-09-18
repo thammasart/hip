@@ -12,6 +12,11 @@
 
         <div class="container" ng-controller="VisualSearchCtrl" ng-init="init(@exp.id)">
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid"
+                        ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+            </div>
             <div ng-hide="inProcess" ng-repeat="trial in trials" >
                 <h3>Trial - {{$index + 1}}<span> </span>
                     <a href="/visualSearch/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
@@ -75,7 +80,8 @@
                                     <div class="row">
                                         <label class="control-label col-md-4" >Green Circle</label>
                                         <div class="col-md-3" style="margin-top:6px">
-                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleGreen" 
+                                            <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleGreen"
+
                                             ng-disabled="trial.quiz.target=='CIRCLE_GREEN'">
                                         </div>
                                     </div>
@@ -98,21 +104,21 @@
                                 <div class="form-inline">
                                     <div class="form-group" style="margin-bottom:10px">
                                         <span class="label label-primary">Target</span> top :
-                                            <input class="inline-range"  type="range" ng-model="target.top" min="0.0" max="95.0" step="0.5" >
-                                            <input class="form-control input-range" type="text" ng-model="target.top" ng-pattern="floatPattern" >
+                                            <input required class="inline-range"  type="range" ng-model="target.top" min="0.0" max="95.0" step="0.5" >
+                                            <input disabled required class="form-control input-range" type="text" ng-model="target.top" ng-pattern="floatPattern" >
                                         Left :
-                                            <input class="inline-range"  type="range" ng-model="target.left" min="0.0" max="95.0" step="0.5">
-                                            <input class="form-control input-range" type="text" ng-model="target.left" ng-pattern="floatPattern" >
+                                            <input required class="inline-range"  type="range" ng-model="target.left" min="0.0" max="95.0" step="0.5">
+                                            <input disabled required class="form-control input-range" type="text" ng-model="target.left" ng-pattern="floatPattern" >
                                     </div>
                                     <br />
                                     <div class="form-group">
                                     <span class="label label-default">Noise</span>
                                         top :
-                                        <input class="inline-range"  type="range" ng-model="editSharp.top" min="0.0" max="95.0" step="0.5" >
-                                        <input class="form-control input-range" type="text" ng-model="editSharp.top" ng-pattern="floatPattern" >
+                                        <input required class="inline-range"  type="range" ng-model="editSharp.top" min="0.0" max="95.0" step="0.5" >
+                                        <input disabled required class="form-control input-range" type="text" ng-model="editSharp.top" ng-pattern="floatPattern" >
                                         Left :
-                                        <input class="inline-range"  type="range" ng-model="editSharp.left" min="0.0" max="95.0" step="0.5">
-                                        <input class="form-control input-range" type="text" ng-model="editSharp.left" ng-pattern="floatPattern" >
+                                        <input required class="inline-range"  type="range" ng-model="editSharp.left" min="0.0" max="95.0" step="0.5">
+                                        <input disabled required class="form-control input-range" type="text" ng-model="editSharp.left" ng-pattern="floatPattern" >
                                     </div>
                                 </div>
                             </div>
@@ -128,24 +134,28 @@
 
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary pull-left" ng-click="generate()">Generate</button>
-                                <button class="btn btn-primary" ng-click="ok()">Confirm</button>
-                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            <div class="modal-footer" style="text-align:center">
+                                <button class="btn btn-primary" ng-disabled="parameter.$invalid" ng-click="generate()">Generate</button>
+                                <button class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                    <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
+                                <button class="btn btn-primary pull-right" ng-disabled="parameter.$invalid"  ng-click="ok()">Confirm</button>
+                                <button class="btn btn-warning pull-right" ng-disabled="parameter.$invalid" ng-click="cancel()">Cancel</button>
                             </div>
                         </script>
                         <div class="col-md-3 col-sm-4">
-                            <button ng-disabled="max(trial) < totalNoise(trial)" class="btn btn-success" ng-click="open(trial)" style="width: 100%;margin-bottom:10px">แสดงผล</button>
-                            <br />
-                            <button ng-disabled="" class="btn btn-primary" ng-click="save(trial)" style="width: 100%;margin-bottom:20px">บันทึกข้อมูล</button>
-                            <br />
+                            <button ng-disabled="max(trial) < totalNoise(trial)" class="btn btn-primary" ng-click="open(trial)" style="margin-top:20px;padding:6px 33px;margin-left:auto;margin-right:auto">Generate Question</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                             <p class="text-danger" ng-show="trial.quiz.question.sharps == null">Trial นี้ยังไม่ได้ทำการ generate noise</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+            </div>
+            <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>
 </div>

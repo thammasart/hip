@@ -838,7 +838,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             }
         }
     })
-    .controller('VisualSearchCtrl', function($scope, $rootScope, $modal, $http){
+    .controller('VisualSearchCtrl', function($scope, $rootScope, $modal, $http, toaster){
 
         $scope.inProcess = false;
         $scope.overNoise = false;
@@ -858,7 +858,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             });
         }
 
-        $scope.save = function(trial){
+        var isSaveSuccess = true;
+        function save(trial, index, length){
             $scope.inProcess = true;
             $http({method:'POST',url:'saveVisualSearch',data:trial.quiz.question.sharps,
                 params:{trialId:trial.id,
@@ -870,12 +871,24 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 positionYofTarget: trial.quiz.positionYofTarget,
                 frameSize: trial.quiz.frameSize, target: trial.quiz.target}})
             .success(function(result){
-                $scope.inProcess = false;
-                console.log(result);
+                if(isSaveSuccess && index == length - 1){
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
+                    $scope.inProcess = false;
+                }
             }).error(function(result){
-                console.log('error:' + result);
-                $scope.inProcess = false;
+                isSaveSuccess = false;
+                if(!isSaveSuccess && index == length - 1){
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
+                    isSaveSuccess = true;
+                    $scope.inProcess = false;
+                }
             });
+        }
+
+        $scope.saveAll = function(){
+            for(var i=0; i<$scope.trials.length; i++){
+                save($scope.trials[i], i, $scope.trials.length);
+            }
         }
 
         $scope.frameSizes = ['SMALLER', 'SMALL', 'MEDIUM', 'BIG', 'EXTRA'];
