@@ -777,7 +777,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             }
         }
     })
-    .controller('SimonEffectCtrl', function($scope, $rootScope, $http){
+    .controller('SimonEffectCtrl', function($scope, $rootScope, $http, toaster){
         $scope.trials = [];
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
 
@@ -821,10 +821,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $scope.inProcess = true;
             $http({method:'PUT',url:'saveSimonEffectTrials',data:$scope.trials})
                 .success(function(result){
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                     $scope.inProcess = false;
-                    console.log(result);
                 }).error(function(result){
-                    console.log('error:' + result);
+                toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                     $scope.inProcess = false;
                 });
         }
