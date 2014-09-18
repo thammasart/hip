@@ -985,6 +985,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         $scope.inProcess = false;
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
         $scope.trials = [];
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
 
         $scope.noOfChoices = [3,4,5];
         $scope.lengthTypes = ['SHORT', 'MEDIUM','LONG'];
@@ -1593,7 +1594,7 @@ var MullerModalInstanceCtrl = function($scope, $rootScope, $modalInstance, quiz)
             context.lineTo(x + 30, y + 30);
             context.moveTo(x, y);
         }
-        if(type == 'OUT'){
+        if(type == 'OUT' || type == 'RIGHT'){
             context.lineTo(x - 30, y - 30);
             context.moveTo(x, y);
             context.lineTo(x - 30, y + 30);
@@ -1606,7 +1607,7 @@ var MullerModalInstanceCtrl = function($scope, $rootScope, $modalInstance, quiz)
             context.moveTo(x, y);
             context.lineTo(x - 30, y + 30);
         }
-        if(type == 'OUT'){
+        if(type == 'OUT' || type == 'LEFT'){
             context.lineTo(x + 30, y - 30);
             context.moveTo(x, y);
             context.lineTo(x + 30, y + 30);

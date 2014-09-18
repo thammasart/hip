@@ -11,22 +11,25 @@
         @error()
 
         <div class="container" ng-controller="MullerLayerCtrl" ng-init="init(@exp.id)">
-            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div class="row">
-                <div class="col-md-2 col-sm-2">
-                    <button class="btn btn-primary" ng-click="openSummary()">ภาพรวม <span class="glyphicon glyphicon-eye-open"></span></button>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <button ng-click="save()" class="btn btn-success btn-save" ng-disabled="parameter.$invalid">+SAVE ALL</button>
+                <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
+                <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+
+                    <button class="btn btn-success" style="padding: 6px 60px;float:right;margin-left:20px" ng-disabled="parameter.$invalid"
+                            ng-click="save()">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+                    <button class="btn btn-primary pull-right" ng-click="openSummary()" ng-disabled="parameter.$invalid">
+                        <span class="glyphicon glyphicon-eye-open"> </span> Overview</button>
                 </div>
             </div>
             <div ng-hide="inProcess" ng-repeat="trial in trials">
                 <h3>Trial - {{$index + 1}}<span> </span>
-                    <a href="/muller-layer/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
+                    <a ng-disabled="parameter.$invalid" href="/muller-layer/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
                         Preview Trial</a></h3>
                 <div class="well">
                     <div class="row">
-                        <table class="table text-center admin">
+                        <div class="col-md-9">
+                            <table class="table text-center admin">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -41,11 +44,11 @@
                             <tbody>
                                 <tr ng-repeat="quiz in trial.quizzes">
                                     <td>คำถามที่ {{$index + 1}}</td>
-                                    <td><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="quiz.differLength" required />
+                                    <td class="form-invalid"><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="quiz.differLength" required />
 
                                     </td>
                                     <td><span>{{quiz.differLength * 38 | number:0}}px</span></td>
-                                    <td><input type="radio" ng-model="quiz.isPositive" ng-value="true"  /> + / <input type="radio" ng-model="quiz.isPositive" ng-value="false"  /> -</td>
+                                    <td><input type="radio" ng-model="quiz.isPositive" ng-value="true"  /> + / <input type="radio" ng-model="quiz.isPositive" ng-value="false"   /> -</td>
                                     <td>
                                         <select style="width:110px;margin:auto;" class="form-control" ng-model="quiz.lengthType" ng-options="value for value in lengthTypes">
                                         </select>
@@ -54,10 +57,18 @@
                                         <select style="width:60px;margin:auto;" class="form-control" ng-model="quiz.noOfChoice" ng-options="value for value in noOfChoices" ng-change="calculateDifferChoice(quiz)">
                                         </select>
                                     </td>
-                                    <td><button ng-click="open(quiz)"><span class="glyphicon glyphicon-info-sign"></span></button></td>
+                                    <td><button class="btn btn-xs btn-info" ng-disabled="parameter.$invalid" ng-click="open(quiz)">Show Question</button></td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>เวลาในการทำโจทย์</h4>
+                        <input type="number" min="0" max="60" style="width:100px" ng-pattern="regIneger"
+                               ng-model="trial.displayTime" class="form-control" required>
+                        <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                            <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
+                    </div>
                     </div>
                 </div>
                 <script type="text/ng-template" id="preview.html">
@@ -70,9 +81,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary pull-left" ng-click="shuffle()">shuffle</button>
-                        <button class="btn btn-primary" ng-click="ok()">Confirm</button>
-                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-warning" ng-click="shuffle()">shuffle</button>
+                        <button class="btn btn-primary" style="padding:6px 60px" ng-click="ok()">OK</button>
                     </div>
                 </script>
                  <script type="text/ng-template" id="summary.html">
@@ -108,11 +118,15 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" ng-click="ok()">Confirm</button>
-                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-primary" ng-click="ok()">OK</button>
                     </div>
                 </script>
             </div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px;margin-bottom:20px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+            </div>
+            <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>
 </div>
