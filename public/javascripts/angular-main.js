@@ -981,7 +981,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
 
 
     })
-    .controller('MullerLayerCtrl', function($scope, $rootScope, $http, $modal){
+    .controller('MullerLayerCtrl', function($scope, $rootScope, $http, $modal, toaster){
         $scope.inProcess = false;
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
         $scope.trials = [];
@@ -996,9 +996,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                 $scope.trials = result.trials;
                 $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function(result){
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -1040,10 +1038,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials})
             .success(function(result){
                 $scope.inProcess = false;
-                console.log(result);
+                toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
             }).error(function(result){
-                console.log('error:' + result);
                 $scope.inProcess = false;
+                toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
             });
         }
 
@@ -1053,10 +1051,11 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
 
         }
     })
-    .controller('GarnerController', function($scope, $rootScope, $http, $modal){
+    .controller('GarnerController', function($scope, $rootScope, $http, $modal, toaster){
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
         $scope.trials = [];
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
 
         $scope.colors = ['red', 'blue', 'yellow', 'green', 'grey'];
 
@@ -1100,15 +1099,17 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         }
 
         $scope.show = function(color, colorObj, index, mode){
-            for(var i=0; i<$scope.allColors.length; i++){
-                if(color == $scope.allColors[i].name){
-                    $scope.showColors[index].colors = $scope.allColors[i].objs;
-                    break;
+            if(!$scope.open[index]){
+                for(var i=0; i<$scope.allColors.length; i++){
+                    if(color == $scope.allColors[i].name){
+                        $scope.showColors[index].colors = $scope.allColors[i].objs;
+                        break;
+                    }
                 }
+                $scope.modes[index] = mode;
+                $scope.targets[index] = colorObj;
             }
-            $scope.modes[index] = mode;
-            $scope.targets[index] = colorObj;
-            $scope.open[index] = true;
+            $scope.open[index] = !$scope.open[index];
         }
         $scope.changeColor = function(trial, color, index){
             if($scope.modes[index] == $scope.DARK)
@@ -1123,9 +1124,9 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             $http({method:'PUT',url:'saveGarnerTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
+                    toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
-                    console.log('error:' + result);
+                    toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                     $scope.inProcess = false;
                 });
         }
@@ -1173,6 +1174,16 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         }
 
         $scope.generateQuestion = function(trial, index){
+            if( trial.noOfBiDimensionQuestion == 0 &&
+                trial.noOfColorQuestion == 0 &&
+                trial.noOfSizeQuestion == 0 &&
+                trial.noOfFakeBiDimentsionQuestion == 0 &&
+                trial.noOfFakeColorQuestion == 0 &&
+                trial.noOfFakeSizeQuestion == 0){
+                    toaster.pop('warning', 'ไม่มีจำนวนคำถาม โปรดตรวจสอบอีกครั้ง', '', 5000);
+                    return;
+                }
+
             trial.quizzes = [];
             for(var i=0; i < trial.noOfColorQuestion; i++) {
                 trial.quizzes.push(Quiz('COLOR',true));
@@ -1195,7 +1206,6 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             trial.quizzes = shuffle(trial.quizzes);
             $scope.generateSuccess[index] = true;
 
-            console.log(trial);
         }
 
         function destroyAlert(index){

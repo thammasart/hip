@@ -9,18 +9,20 @@ import models.ExperimentSchedule;
 import models.TimeLog;
 import models.User;
 import models.mullerLayer.*;
-
-import play.*;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.libs.Json;
-import play.mvc.*;
-import play.data.*;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
+import play.mvc.BodyParser;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
+import views.html.iframe.muller_layer_iframe;
+import views.html.iframe.muller_layer_proc_iframe;
 import views.html.mullerLayer.*;
-import views.html.iframe.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 //import models.attentionBlink.*;
 
@@ -207,6 +209,8 @@ public class MullerLayer extends Controller {
             ObjectMapper mapper = new ObjectMapper();
             List<Trial> trials = mapper.readValue(jsonString, new TypeReference<List<Trial>>(){});
             for(Trial trial : trials){
+                Trial t = Trial.find.byId(trial.id);
+                t.displayTime = trial.displayTime;
                 for(Quiz go : trial.quizzes){
                     Quiz quiz = Quiz.find.byId(go.id);
                     quiz.differChoice = go.differChoice;
@@ -223,6 +227,7 @@ public class MullerLayer extends Controller {
                     question.update();
                     quiz.update();
                 }
+                t.update();
             }
 
 

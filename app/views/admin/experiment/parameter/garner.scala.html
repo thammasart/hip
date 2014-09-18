@@ -11,20 +11,22 @@
         @error()
 
         <div class="container" ng-controller="GarnerController" ng-init="init(@exp.id)">
-
-            <div ng-hide="inProcess" class="row">
-                <button class="btn btn-primary" ng-click="openSummary()">ภาพรวม
-                <span class="glyphicon glyphicon-eye-open"></span></button>
-                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
-            </div>
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;margin-left:20px" ng-disabled="parameter.$invalid"
+                        ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+                <button ng-disabled="parameter.$invalid" class="btn btn-primary pull-right" ng-click="openSummary()"><span class="glyphicon glyphicon-eye-open"> </span> Overview
+                    </button>
+
+            </div>
             <div ng-hide="inProcess" ng-repeat="trial in trials">
                 <h3>Trial - {{$index + 1}}<span> </span>
-                    <a href="/garner_interference/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
+                    <a ng-disabled="parameter.$invalid" href="/garner_interference/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
                         Preview Trial</a></h3>
                 <div class="well">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -37,37 +39,47 @@
                                 <tbody>
                                     <tr>
                                         <td>จำนวนข้อจริง</td>
-                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfColorQuestion" ></td>
-                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfSizeQuestion" ></td>
-                                        <td><input style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfBiDimensionQuestion" ></td>
+                                        <td class="form-invalid"><input required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfColorQuestion" ></td>
+                                        <td class="form-invalid"><input required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfSizeQuestion" ></td>
+                                        <td class="form-invalid"><input required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfBiDimensionQuestion" ></td>
                                     </tr>
                                     <tr>
                                         <td>จำนวนข้อลวง</td>
-                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeColorQuestion" ></td>
-                                        <td><input style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeSizeQuestion" ></td>
-                                        <td><input style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeBiDimentsionQuestion" ></td>
+                                        <td class="form-invalid"><input required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeColorQuestion" ></td>
+                                        <td class="form-invalid"><input required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeSizeQuestion" ></td>
+                                        <td class="form-invalid"><input required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeBiDimentsionQuestion" ></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="row" style="margin-left:30px">
-                                <button ng-disabled="generateSuccess[$index]" class="btn btn-primary" ng-click="generateQuestion(trial, $index)">generate question</button>
-                                <div style="margin-top:10px" class="alert alert-success" role="alert" ng-show="generateSuccess[$index]">สร้างคำถามใหม่สำเร็จ<span class="pull-right glyphicon glyphicon-remove" ng-click="generateSuccess[$index] = false"></span></div>
-                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="row" style="margin-bottom: 10px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดเล็ก </span>
-                                <input style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" ng-model="trial.lengthSmallSquare" > cm</div>
-                            <div class="row" style="margin-bottom: 20px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดใหญ่ </span>
-                                <input style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" ng-model="trial.lengthBigSquare" > cm</div>
+                        <div class="col-md-7">
                             <div class="row">
-                                <select class="form-control" style="width:100px; display:inline" ng-model="trial.color" ng-options="color for color in colors" ng-change="generateColor(trial, $index)">
-                                </select>
-                                <span style="margin: 0px 5px 0px 20px">สีเข้ม </span>
-                                <button class="btn" style="background-color: #{{trial.colorDark.colorCode}}" ng-click="show(trial.color, trial.colorDark, $index, DARK)">
-                                    <span class="glyphicon glyphicon-adjust"></span></button>
-                                <span style="margin: 0px 5px 0px 20px">สีอ่อน </span>
-                                <button class="btn" style="background-color: #{{trial.colorLight.colorCode}}" ng-click="show(trial.color, trial.colorLight, $index, LIGHT)">
-                                    <span class="glyphicon glyphicon-adjust"></span></button>
+                                <div class="col-md-7">
+                                    <div class="row form-invalid" style="margin-bottom: 10px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดเล็ก </span>
+                                        <input required style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control " type="text" ng-model="trial.lengthSmallSquare" > cm</div>
+                                    <div class="row form-invalid" style="margin-bottom: 20px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดใหญ่ </span>
+                                        <input required style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" ng-model="trial.lengthBigSquare" > cm</div>
+                                    <div class="row">
+                                        <select class="form-control" style="width:100px; display:inline" ng-model="trial.color" ng-options="color for color in colors" ng-change="generateColor(trial, $index)">
+                                        </select>
+                                        <span style="margin: 0px 5px 0px 20px">สีเข้ม </span>
+                                        <button ng-disabled="parameter.$invalid" class="btn" style="background-color: #{{trial.colorDark.colorCode}}" ng-click="show(trial.color, trial.colorDark, $index, DARK)">
+                                            <span class="glyphicon glyphicon-adjust"></span></button>
+                                        <span style="margin: 0px 5px 0px 20px">สีอ่อน </span>
+                                        <button ng-disabled="parameter.$invalid" class="btn" style="background-color: #{{trial.colorLight.colorCode}}" ng-click="show(trial.color, trial.colorLight, $index, LIGHT)">
+                                            <span class="glyphicon glyphicon-adjust"></span></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <button style="margin-top:20px;padding: 6px 33px" ng-disabled="generateSuccess[$index]|| parameter.$invalid"
+                                            class="btn btn-primary" ng-click="generateQuestion(trial, $index)">Generate Question</button>
+                                    <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                        <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
+                                    <div style="margin-top:10px" class="alert alert-success"
+                                         role="alert" ng-show="generateSuccess[$index]">สร้างคำถามใหม่สำเร็จ
+                                        <span class="pull-right glyphicon glyphicon-remove"
+                                              ng-click="generateSuccess[$index] = false"></span></div>
+                                </div>
                             </div>
                             <div class="row" style="margin-top:15px">
                                 <accordion>
@@ -115,10 +127,15 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" ng-click="ok()">Confirm</button>
+                        <button class="btn btn-primary" ng-click="ok()">OK</button>
                     </div>
                 </script>
             </div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;margin-bottom:20px" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
+            </div>
+            <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>
 </div>
