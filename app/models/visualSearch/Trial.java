@@ -11,6 +11,22 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import play.db.DB;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 @Entity
 @Table (name="visual_search_trial")
 public class Trial extends Model{
@@ -36,6 +52,65 @@ public class Trial extends Model{
     public double totalScore = 0;
     public double totalUsedTime = 0;
     public int totalUser = 0;
+
+    public static void exportToFile(Workbook wb){
+
+        try{
+            int headerRowIndex = 0;
+
+            int col = 0;
+
+            //wb = new HSSFWorkbook();
+            Sheet userSheet = wb.createSheet("Trial");
+
+            Row headerRow = userSheet.createRow(headerRowIndex++);
+            Cell tableName = headerRow.createCell(0);
+            tableName.setCellValue("Visual Search Trial");
+
+            headerRow = userSheet.createRow(headerRowIndex++);
+
+            Cell someCell = headerRow.createCell(col++);
+            someCell.setCellValue("ID");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Experiment Schedule Id");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Quiz Id");
+
+            List<Trial> tempList = find.all();
+
+            int listSize = tempList.size();
+            for(int row=headerRowIndex;row-headerRowIndex<listSize;row++){
+
+                col = 0;
+
+                Trial temp = tempList.get(row-headerRowIndex);
+                Row dataRow = userSheet.createRow(row);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.id);
+
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.schedule.id);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.quiz.id);
+
+            }
+
+            //File file = new File("brown_peterson_user.xls");
+            //FileOutputStream out = new FileOutputStream(file);
+            //wb.write(out);
+            //out.close();
+            //return file;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            //return null;
+        }
+    }
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
