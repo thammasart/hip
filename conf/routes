@@ -226,6 +226,8 @@ GET         /report/download/brown_peterson              controllers.ExportContr
 GET         /report/download/change_blindness             controllers.ExportController.downloadChangeBlindness()
 GET         /report/download/garner_interference             controllers.ExportController.downloadGarnerInterference()
 GET         /report/download/magic_number_7             controllers.ExportController.downloadMagicNumber7()
+GET         /report/download/muller_layer             controllers.ExportController.downloadMullerLayer()
+GET         /report/download/position_error             controllers.ExportController.downloadPositionError()
 
 GET         /admin/experiment/garnerInit                            controllers.GarnerInterference.initial(expId: Long)
 PUT         /admin/experiment/saveExperiment                            controllers.Application.saveExperiment(id: Long, name: String, startDate: Long, expireDate: Long)
