@@ -9,6 +9,24 @@ import java.util.List;
 import java.util.ArrayList;
 import static play.data.validation.Constraints.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import play.db.DB;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 @Entity
 public class ExperimentSchedule extends Model{
@@ -69,6 +87,254 @@ public class ExperimentSchedule extends Model{
     @OneToMany(mappedBy="exp", cascade=CascadeType.ALL)
     private List<TimeLog> timelog = new ArrayList<TimeLog>();
 
+
+    public static void exportToFile(Workbook wb){
+
+        try{
+            int headerRowIndex = 0;
+            int col = 0;
+            //wb = new HSSFWorkbook();
+            Sheet userSheet = wb.createSheet("ExperimentSchedule");
+
+            Row headerRow = userSheet.createRow(headerRowIndex++);
+
+            Cell someCell = headerRow.createCell(0);
+            someCell.setCellValue("ExperimentSchedule");
+
+            headerRow = userSheet.createRow(headerRowIndex++);
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("ID");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Name");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Start Date(dd/MM/yyyy HH:mm:ss)");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Expire Date(dd/MM/yyyy HH:mm:ss)");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Experiment Type");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("ExperimentSchedule Status");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Trial Ids");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("TimeLog Ids");
+
+            List<ExperimentSchedule> tempList = find.all();
+
+            int listSize = tempList.size();
+            for(int row=headerRowIndex;row-headerRowIndex<listSize;row++){
+                ExperimentSchedule temp = tempList.get(row-headerRowIndex);
+                col = 0;
+                Row dataRow = userSheet.createRow(row);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.id);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.name);
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(df.format(temp.startDate));
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(df.format(temp.expireDate));
+
+                String type = "";
+                if (temp.experimentType == ExperimentType.ATTENTIONBLINK)
+                    type = "Attention Blink";
+                else if (temp.experimentType == ExperimentType.BROWNPETERSON)
+                    type = "Brown Peterson";
+                else if (temp.experimentType == ExperimentType.CHANGEBLINDNESS)
+                    type = "Change Blindness";
+                else if (temp.experimentType == ExperimentType.GARNERINTERFERENCE)
+                    type = "Garnener Interference";
+                else if (temp.experimentType == ExperimentType.MAGICNUMBER7)
+                    type = "Magic Number 7";
+                else if (temp.experimentType == ExperimentType.MULLERLAYER)
+                    type = "Muller Layer";
+                else if (temp.experimentType == ExperimentType.POSITIONERROR)
+                    type = "Position Error";
+                else if (temp.experimentType == ExperimentType.SIGNALDETECTION)
+                    type = "Signal Detection";
+                else if (temp.experimentType == ExperimentType.SIMONEFFECT)
+                    type = "Simon Effect";
+                else if (temp.experimentType == ExperimentType.STERNBERGSEARCH)
+                    type = "Strenberg Search";
+                else if (temp.experimentType == ExperimentType.STROOPEFFECT)
+                    type = "Stroop Effect";
+                else if (temp.experimentType == ExperimentType.VISUALSEARCH)
+                    type = "Visual Search";
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(type);
+
+                type = "";
+                if (temp.status == ScheduleStatus.OPEN)
+                    type = "Open";
+                else if (temp.status == ScheduleStatus.CLOSE)
+                    type = "Close";
+                else if (temp.status == ScheduleStatus.DISABLED)
+                    type = "Disabled";
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(type);
+
+                String trial_Id = "";
+                someCell = dataRow.createCell(col++);
+                if (temp.attentionTrials.size() > 0){
+                    trial_Id = trial_Id + "Attention Blink: ";
+                    int subListSize = temp.attentionTrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.attentionTrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.attentionTrials.get(i).id);
+                    }
+                }
+                if (temp.browntrials.size() > 0){
+                    trial_Id = trial_Id + "Brown Peterson: ";
+                    int subListSize = temp.browntrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.browntrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.browntrials.get(i).id);
+                    }
+                }
+                if (temp.changeBlindnesstrials.size() > 0){
+                    trial_Id = trial_Id + "Change Blindness: ";
+                    int subListSize = temp.changeBlindnesstrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.changeBlindnesstrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.changeBlindnesstrials.get(i).id);
+                    }
+                }
+                if (temp.garnertrials.size() > 0){
+                    trial_Id = trial_Id + "Garner Interference: ";
+                    int subListSize = temp.garnertrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.garnertrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.garnertrials.get(i).id);
+                    }
+                }
+                if (temp.magic7trials.size() > 0){
+                    trial_Id = trial_Id + "Magic Number 7: ";
+                    int subListSize = temp.magic7trials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.magic7trials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.magic7trials.get(i).id);
+                    }
+                }
+                if (temp.mullertrials.size() > 0){
+                    trial_Id = trial_Id + "Muller Layer: ";
+                    int subListSize = temp.mullertrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.mullertrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.mullertrials.get(i).id);
+                    }
+                }
+                if (temp.positionErrortrials.size() > 0){
+                    trial_Id = trial_Id + "Position Error: ";
+                    int subListSize = temp.positionErrortrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.positionErrortrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.positionErrortrials.get(i).id);
+                    }
+                }
+                if (temp.signaltrials.size() > 0){
+                    trial_Id = trial_Id + "Signal Detection: ";
+                    int subListSize = temp.signaltrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.signaltrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.signaltrials.get(i).id);
+                    }
+                }
+                if (temp.simontrials.size() > 0){
+                    trial_Id = trial_Id + "Simon Effect: ";
+                    int subListSize = temp.simontrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.simontrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.simontrials.get(i).id);
+                    }
+                }
+                if (temp.sternbergSearchtrials.size() > 0){
+                    trial_Id = trial_Id + "Strenberg Search: ";
+                    int subListSize = temp.sternbergSearchtrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.sternbergSearchtrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.sternbergSearchtrials.get(i).id);
+                    }
+                }
+                if (temp.stroopTrials.size() > 0){
+                    trial_Id = trial_Id + "Stroop Effect: ";
+                    int subListSize = temp.stroopTrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.stroopTrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.stroopTrials.get(i).id);
+                    }
+                }
+                if (temp.visualSearchTrials.size() > 0){
+                    trial_Id = trial_Id + "Visual Search: ";
+                    int subListSize = temp.visualSearchTrials.size();
+                    for (int i=0;i<subListSize;i++){
+                        if (i < subListSize-1)
+                            trial_Id = trial_Id + String.valueOf( temp.visualSearchTrials.get(i).id) + ",";
+                        else
+                            trial_Id = trial_Id + String.valueOf( temp.visualSearchTrials.get(i).id);
+                    }
+                }
+                someCell.setCellValue(trial_Id);
+
+                String timeLog_Id = "";
+                int subListSize2 = temp.timelog.size();
+                for (int i=0;i<subListSize2;i++){
+                    if (i < subListSize2-1)
+                        trial_Id = trial_Id + String.valueOf( temp.timelog.get(i).id) + ",";
+                    else
+                        trial_Id = trial_Id + String.valueOf( temp.timelog.get(i).id);
+                }
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(timeLog_Id);
+
+            }
+
+            //File file = new File("brown_peterson_user.xls");
+            //FileOutputStream out = new FileOutputStream(file);
+            //wb.write(out);
+            //out.close();
+            //return file;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            //return null;
+        }
+    }
 
 	public ExperimentSchedule(String name, int noOfTrial, Date startDate, Date expireDate, ExperimentType experimentType) {
 		this.name = name;

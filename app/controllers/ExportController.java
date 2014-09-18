@@ -1,5 +1,8 @@
 package controllers;
 
+import models.ExperimentSchedule;
+import models.TimeLog;
+import models.User;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import org.apache.poi.ss.usermodel.Workbook;
@@ -146,6 +149,122 @@ public class ExportController extends Controller {
 
         return ok(file);
 
+    }
+
+    public static Result downloadSignalDetection() throws IOException{
+        Workbook wb = new HSSFWorkbook();
+
+        models.signalDetection.Trial.exportToFile(wb);
+        models.signalDetection.Quiz.exportToFile(wb);
+        models.signalDetection.Question.exportToFile(wb);
+        models.signalDetection.Answer.exportToFile(wb);
+
+        File file = new File("signal_detection.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+    }
+
+    public static Result downloadSimonEffect() throws IOException{
+        Workbook wb = new HSSFWorkbook();
+
+        models.simonEffect.Trial.exportToFile(wb);
+        models.simonEffect.Quiz.exportToFile(wb);
+        models.simonEffect.Question.exportToFile(wb);
+        models.simonEffect.Answer.exportToFile(wb);
+
+        File file = new File("simon_effect.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+    }
+
+    public static Result downloadSternbergSearch() throws IOException{
+        Workbook wb = new HSSFWorkbook();
+
+        models.sternbergSearch.Trial.exportToFile(wb);
+        models.sternbergSearch.Quiz.exportToFile(wb);
+        models.sternbergSearch.Question.exportToFile(wb);
+        models.sternbergSearch.Answer.exportToFile(wb);
+
+        File file = new File("sternberg_search.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+    }
+
+    public static Result downloadStroopEffect() throws IOException{
+        Workbook wb = new HSSFWorkbook();
+
+        models.stroopEffect.Trial.exportToFile(wb);
+        models.stroopEffect.Quiz.exportToFile(wb);
+        models.stroopEffect.Question.exportToFile(wb);
+        models.stroopEffect.Answer.exportToFile(wb);
+
+        File file = new File("stroop_effect.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+    }
+
+    public static Result downloadVisualSearch() throws IOException{
+        Workbook wb = new HSSFWorkbook();
+
+        models.visualSearch.Trial.exportToFile(wb);
+        models.visualSearch.Quiz.exportToFile(wb);
+        models.visualSearch.Question.exportToFile(wb);
+        models.visualSearch.Answer.exportToFile(wb);
+
+        File file = new File("visual_search.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+    }
+
+    public static Result downloadUser() throws IOException{
+        Workbook wb = new HSSFWorkbook();
+
+        User.exportToFile(wb);
+        File file = new File("Users.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+    }
+
+    public static Result downloadTimeLog() throws IOException{
+        Workbook wb = new HSSFWorkbook();
+
+        TimeLog.exportToFile(wb);
+        File file = new File("TimeLog.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
+    }
+
+    public static Result downloadExperimentSchedule() throws IOException{
+        Workbook wb = new HSSFWorkbook();
+
+        ExperimentSchedule.exportToFile(wb);
+        File file = new File("ExperimentSchedule.xls");
+        FileOutputStream out = new FileOutputStream(file);
+        wb.write(out);
+        out.close();
+
+        return ok(file);
     }
 
 }

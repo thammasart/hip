@@ -12,6 +12,22 @@ import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import play.db.DB;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 @Entity
 @Table (name="stroop_answer")
 public class Answer extends Model implements AnswerResult{
@@ -27,6 +43,79 @@ public class Answer extends Model implements AnswerResult{
     public User user;
     @ManyToOne
     public Quiz quiz;
+
+    public static void exportToFile(Workbook wb){
+
+        try{
+            int headerRowIndex = 0;
+            int col = 0;
+            //wb = new HSSFWorkbook();
+            Sheet userSheet = wb.createSheet("Answer");
+
+            Row headerRow = userSheet.createRow(headerRowIndex++);
+
+            Cell someCell = headerRow.createCell(0);
+            someCell.setCellValue("Stroop Effect Answer");
+
+            headerRow = userSheet.createRow(headerRowIndex++);
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("ID");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Answer");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("IsCorrect");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Used time");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("UserName");
+
+            someCell = headerRow.createCell(col++);
+            someCell.setCellValue("Quiz Id");
+
+            List<Answer> tempList = find.all();
+
+            int listSize = tempList.size();
+            for(int row=headerRowIndex;row-headerRowIndex<listSize;row++){
+                Answer temp = tempList.get(row-headerRowIndex);
+                col = 0;
+                Row dataRow = userSheet.createRow(row);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.id);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.answer);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.isCorrect);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.usedTime);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.user.username);
+
+                someCell = dataRow.createCell(col++);
+                someCell.setCellValue(temp.quiz.id);
+
+            }
+
+            //File file = new File("brown_peterson_user.xls");
+            //FileOutputStream out = new FileOutputStream(file);
+            //wb.write(out);
+            //out.close();
+            //return file;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            //return null;
+        }
+    }
 
     public Answer(String answer,double usedTime){
         this.answer = answer;
