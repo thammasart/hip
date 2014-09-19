@@ -49,43 +49,43 @@ public class ExperimentSchedule extends Model{
     public ScheduleStatus status = ScheduleStatus.CLOSE;
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
+    public List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.brownPeterson.Trial> browntrials = new ArrayList<models.brownPeterson.Trial>();
+    public List<models.brownPeterson.Trial> browntrials = new ArrayList<models.brownPeterson.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.changeBlindness.Trial> changeBlindnesstrials = new ArrayList<models.changeBlindness.Trial>();
+    public List<models.changeBlindness.Trial> changeBlindnesstrials = new ArrayList<models.changeBlindness.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.garnerInterference.Trial> garnertrials = new ArrayList<models.garnerInterference.Trial>();
+    public List<models.garnerInterference.Trial> garnertrials = new ArrayList<models.garnerInterference.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.magicNumber7.Trial> magic7trials = new ArrayList<models.magicNumber7.Trial>();
+    public List<models.magicNumber7.Trial> magic7trials = new ArrayList<models.magicNumber7.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.mullerLayer.Trial> mullertrials = new ArrayList<models.mullerLayer.Trial>();
+    public List<models.mullerLayer.Trial> mullertrials = new ArrayList<models.mullerLayer.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.positionError.Trial> positionErrortrials = new ArrayList<models.positionError.Trial>();
+    public List<models.positionError.Trial> positionErrortrials = new ArrayList<models.positionError.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.signalDetection.Trial> signaltrials = new ArrayList<models.signalDetection.Trial>();
+    public List<models.signalDetection.Trial> signaltrials = new ArrayList<models.signalDetection.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.simonEffect.Trial> simontrials = new ArrayList<models.simonEffect.Trial>();
+    public List<models.simonEffect.Trial> simontrials = new ArrayList<models.simonEffect.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.sternbergSearch.Trial> sternbergSearchtrials = new ArrayList<models.sternbergSearch.Trial>();
+    public List<models.sternbergSearch.Trial> sternbergSearchtrials = new ArrayList<models.sternbergSearch.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
+    public List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    private List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
+    public List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
 
     @OneToMany(mappedBy="exp", cascade=CascadeType.ALL)
-    private List<TimeLog> timelog = new ArrayList<TimeLog>();
+    public List<TimeLog> timelog = new ArrayList<TimeLog>();
 
 
     public static void exportToFile(Workbook wb){

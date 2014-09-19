@@ -91,6 +91,124 @@ public class Admin extends Controller {
         return answers;
     }
 
+    //Method ไว้ดึง Object AnswerResult จาก Schedule ที่กำหนด
+    public static List<AnswerResult> getResultByExp(List<ExperimentSchedule> exps,String type){
+
+        List<AnswerResult> answers = new ArrayList<AnswerResult>();
+        int size = exps.size();
+        for (int i =0;i< size ;i++){
+
+            if (type.equalsIgnoreCase("Attention Blink")){
+                List<models.attentionBlink.Trial> trials = exps.get(i).attentionTrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.attentionBlink.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.attentionBlink.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Brown Peterson")){
+                List<models.brownPeterson.Trial> trials = exps.get(i).browntrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.brownPeterson.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.brownPeterson.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Change Blindness")){
+                List<models.changeBlindness.Trial> trials = exps.get(i).changeBlindnesstrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.changeBlindness.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.changeBlindness.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Garner Interference")){
+                List<models.garnerInterference.Trial> trials = exps.get(i).garnertrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.garnerInterference.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.garnerInterference.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Magic Number 7")){
+                List<models.magicNumber7.Trial> trials = exps.get(i).magic7trials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.magicNumber7.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.magicNumber7.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Muller Layer")){
+                List<models.mullerLayer.Trial> trials = exps.get(i).mullertrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.mullerLayer.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.mullerLayer.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Position Error")){
+                List<models.positionError.Trial> trials = exps.get(i).positionErrortrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.positionError.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.positionError.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Signal Detection")){
+                List<models.signalDetection.Trial> trials = exps.get(i).signaltrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.signalDetection.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.signalDetection.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Simon Effect")){
+                List<models.simonEffect.Trial> trials = exps.get(i).simontrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.simonEffect.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.simonEffect.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Sternberg Search")){
+                List<models.sternbergSearch.Trial> trials = exps.get(i).sternbergSearchtrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.sternbergSearch.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.sternbergSearch.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Stroop Effect")){
+                List<models.stroopEffect.Trial> trials = exps.get(i).stroopTrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    List<models.stroopEffect.Quiz> quizzes = trials.get(j).quizzes;
+                    for (int k=0;k<quizzes.size();k++)
+                        answers.addAll(models.stroopEffect.Answer.find.where().eq("quiz" ,quizzes.get(k)).findList());
+                }
+            }
+            else if (type.equalsIgnoreCase("Visual Search")){
+                List<models.visualSearch.Trial> trials = exps.get(i).visualSearchTrials;
+                int trialSize = trials.size();
+                for (int j=0;j<trialSize;j++){
+                    answers.addAll(models.visualSearch.Answer.find.where().eq("quiz" ,trials.get(j).quiz).findList());
+                }
+            }
+
+        }
+
+        return answers;
+    }
 
     //แสดงหน้าเพิ่ม user
     @Security.Authenticated(Secured.class)
@@ -101,8 +219,90 @@ public class Admin extends Controller {
     public static Result RenderAdminFindResult() {
         return ok(find_result.render(User.getAllUser()));
     }
-    @Security.Authenticated(Secured.class)
-    public static Result RenderAdminFindResultPost() {
+
+    public static Result resultByExp(){
+        DynamicForm  stringForm = Form.form().bindFromRequest();
+        String name = stringForm.get("scheduleName");
+        String typeString = stringForm.get("expType");
+        String startString = stringForm.get("startDate");
+        String expireString = stringForm.get("expireDate");
+        ExperimentType expType = ExperimentType.ATTENTIONBLINK;
+        if (typeString.equalsIgnoreCase("Attention Blink")){
+            expType = ExperimentType.ATTENTIONBLINK;
+        }
+        else if (typeString.equalsIgnoreCase("Brown Peterson")){
+            expType = ExperimentType.BROWNPETERSON;
+        }
+        else if (typeString.equalsIgnoreCase("Change Blindness")){
+            expType = ExperimentType.CHANGEBLINDNESS;
+        }
+        else if (typeString.equalsIgnoreCase("Garner Interference")){
+            expType = ExperimentType.GARNERINTERFERENCE;
+        }
+        else if (typeString.equalsIgnoreCase("Magic Number 7")){
+            expType = ExperimentType.MAGICNUMBER7;
+        }
+        else if (typeString.equalsIgnoreCase("Muller Layer")){
+            expType = ExperimentType.MULLERLAYER;
+        }
+        else if (typeString.equalsIgnoreCase("Position Error")){
+            expType = ExperimentType.POSITIONERROR;
+        }
+        else if (typeString.equalsIgnoreCase("Signal Detection")){
+            expType = ExperimentType.SIGNALDETECTION;
+        }
+        else if (typeString.equalsIgnoreCase("Simon Effect")){
+            expType = ExperimentType.SIMONEFFECT;
+        }
+        else if (typeString.equalsIgnoreCase("Sternberg Search")){
+            expType = ExperimentType.STERNBERGSEARCH;
+        }
+        else if (typeString.equalsIgnoreCase("Stroop Effect")){
+            expType = ExperimentType.STROOPEFFECT;
+        }
+        else if (typeString.equalsIgnoreCase("Visual Search")){
+            expType = ExperimentType.VISUALSEARCH;
+        }
+
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date startDate;
+        Date expireDate;
+        List<ExperimentSchedule> expList;
+        try {
+            startDate = df.parse(startString);
+            expireDate = df.parse(expireString);
+            expireDate = new Date(expireDate.getTime() + 86400000 - 1);
+            if (typeString.equalsIgnoreCase("All Type")){
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .ge("startDate", startDate)
+                        .le("expireDate", expireDate)
+                        .findList();
+            }
+            else{
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .eq("experimentType",expType)
+                        .ge("startDate", startDate)
+                        .le("expireDate", expireDate)
+                        .findList();
+            }
+        } catch (ParseException e) {
+            if (typeString.equalsIgnoreCase("All Type")){
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .findList();
+            }
+            else{
+                expList = ExperimentSchedule.find.where().icontains("name", name)
+                        .eq("experimentType",expType)
+                        .findList();
+            }
+        }
+        //flash("savedSuccess","Filter Search Successfully!");
+        //return ok(views.html.admin.experiment.main.render(expList));
+        return ok(experiment_result.render(getResultByExp(expList,typeString)));
+    }
+
+    public static Result resultByUser(){
         DynamicForm stringForm = Form.form().bindFromRequest();
         String username = stringForm.get("username");
 
@@ -113,35 +313,35 @@ public class Admin extends Controller {
         //    users.add(User.find.where().eq("username",username).findUnique());
         //    return ok(experiment_result.render(getResultByUser(users)));
         //}else{
-            boolean isFirst = true;
-            String oql ="  find  user ";
-            String firstName = stringForm.get("firstname");
-            String lastName = stringForm.get("lastname");
-            String email = stringForm.get("eMail");
-            String gender = stringForm.get("gender");
-            if (gender == null)
-                gender = "";
-            String status = stringForm.get("status");
-            UserRole role = null;
-            if (status.equals("Admin")){
-                role = UserRole.ADMIN;
-            }else if (status.equals("Student")){
-                role = UserRole.STUDENT;
-            }else if (status.equals("Guest")){
-                role = UserRole.GUEST;
-            }else if (status.equals("TA")){
-                role = UserRole.TA;
-            }
-            String section = stringForm.get("section");
-            String semester = stringForm.get("semester");
-            String academicYear = stringForm.get("academicYear");
-            String faculty = stringForm.get("faculty");
-            String department = stringForm.get("department");
+        boolean isFirst = true;
+        String oql ="  find  user ";
+        String firstName = stringForm.get("firstname");
+        String lastName = stringForm.get("lastname");
+        String email = stringForm.get("eMail");
+        String gender = stringForm.get("gender");
+        if (gender == null)
+            gender = "";
+        String status = stringForm.get("status");
+        UserRole role = null;
+        if (status.equals("Admin")){
+            role = UserRole.ADMIN;
+        }else if (status.equals("Student")){
+            role = UserRole.STUDENT;
+        }else if (status.equals("Guest")){
+            role = UserRole.GUEST;
+        }else if (status.equals("TA")){
+            role = UserRole.TA;
+        }
+        String section = stringForm.get("section");
+        String semester = stringForm.get("semester");
+        String academicYear = stringForm.get("academicYear");
+        String faculty = stringForm.get("faculty");
+        String department = stringForm.get("department");
 
-            if (stringForm.get("birthDate").equals("")){
+        if (stringForm.get("birthDate").equals("")){
 
-                if (role == null){
-                    if (stringForm.get("year").equals("")){
+            if (role == null){
+                if (stringForm.get("year").equals("")){
                     users = User.find.where().icontains("username", username)
                             .icontains("firstName", firstName)
                             .icontains("lastName", lastName)
@@ -153,127 +353,136 @@ public class Admin extends Controller {
                             .icontains("faculty", faculty)
                             .icontains("department", department)
                             .findList();
-                    }else{
-                        int year = Integer.valueOf(stringForm.get("year")).intValue();
-                        users = User.find.where().icontains("username", username)
-                                .icontains("firstName", firstName)
-                                .icontains("lastName",lastName)
-                                .istartsWith("gender", gender)
-                                .icontains("eMail", email)
-                                .eq("year",year)
-                                .icontains("section",section)
-                                .icontains("semester",semester)
-                                .icontains("academicYear",academicYear)
-                                .icontains("faculty",faculty)
-                                .icontains("department",department)
-                                .findList();
-                    }
                 }else{
-                    if (stringForm.get("year").equals("")){
-                        users = User.find.where().icontains("username", username)
-                                .icontains("firstName", firstName)
-                                .icontains("lastName", lastName)
-                                .eq("status",role)
-                                .istartsWith("gender", gender)
-                                .icontains("eMail", email)
-                                .icontains("section", section)
-                                .icontains("semester", semester)
-                                .icontains("academicYear", academicYear)
-                                .icontains("faculty", faculty)
-                                .icontains("department", department)
-                                .findList();
-                    }else{
-                        int year = Integer.valueOf(stringForm.get("year")).intValue();
-                        users = User.find.where().icontains("username", username)
-                                .icontains("firstName", firstName)
-                                .icontains("lastName",lastName)
-                                .eq("status",role)
-                                .istartsWith("gender", gender)
-                                .icontains("eMail", email)
-                                .eq("year",year)
-                                .icontains("section",section)
-                                .icontains("semester",semester)
-                                .icontains("academicYear",academicYear)
-                                .icontains("faculty",faculty)
-                                .icontains("department",department)
-                                .findList();
-                    }
+                    int year = Integer.valueOf(stringForm.get("year")).intValue();
+                    users = User.find.where().icontains("username", username)
+                            .icontains("firstName", firstName)
+                            .icontains("lastName",lastName)
+                            .istartsWith("gender", gender)
+                            .icontains("eMail", email)
+                            .eq("year",year)
+                            .icontains("section",section)
+                            .icontains("semester",semester)
+                            .icontains("academicYear",academicYear)
+                            .icontains("faculty",faculty)
+                            .icontains("department",department)
+                            .findList();
+                }
+            }else{
+                if (stringForm.get("year").equals("")){
+                    users = User.find.where().icontains("username", username)
+                            .icontains("firstName", firstName)
+                            .icontains("lastName", lastName)
+                            .eq("status",role)
+                            .istartsWith("gender", gender)
+                            .icontains("eMail", email)
+                            .icontains("section", section)
+                            .icontains("semester", semester)
+                            .icontains("academicYear", academicYear)
+                            .icontains("faculty", faculty)
+                            .icontains("department", department)
+                            .findList();
+                }else{
+                    int year = Integer.valueOf(stringForm.get("year")).intValue();
+                    users = User.find.where().icontains("username", username)
+                            .icontains("firstName", firstName)
+                            .icontains("lastName",lastName)
+                            .eq("status",role)
+                            .istartsWith("gender", gender)
+                            .icontains("eMail", email)
+                            .eq("year",year)
+                            .icontains("section",section)
+                            .icontains("semester",semester)
+                            .icontains("academicYear",academicYear)
+                            .icontains("faculty",faculty)
+                            .icontains("department",department)
+                            .findList();
                 }
             }
-            else{
-                Date dob;
-                try{
-                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                    dob = dateFormat.parse(stringForm.get("birthDate"));
-                }catch (ParseException e){
-                    dob = new Date();
-                }
-                if (role == null){
-                    if (stringForm.get("year").equals("")){
-                        users = User.find.where().icontains("username", username)
-                                .icontains("firstName", firstName)
-                                .icontains("lastName", lastName)
-                                .istartsWith("gender", gender)
-                                .icontains("eMail", email)
-                                .eq("birthDate",dob)
-                                .icontains("section", section)
-                                .icontains("semester", semester)
-                                .icontains("academicYear", academicYear)
-                                .icontains("faculty", faculty)
-                                .icontains("department", department)
-                                .findList();
-                    }else{
-                        int year = Integer.valueOf(stringForm.get("year")).intValue();
-                        users = User.find.where().icontains("username", username)
-                                .icontains("firstName", firstName)
-                                .icontains("lastName",lastName)
-                                .istartsWith("gender", gender)
-                                .icontains("eMail", email)
-                                .eq("birthDate", dob)
-                                .eq("year", year)
-                                .icontains("section",section)
-                                .icontains("semester",semester)
-                                .icontains("academicYear",academicYear)
-                                .icontains("faculty",faculty)
-                                .icontains("department",department)
-                                .findList();
-                    }
+        }
+        else{
+            Date dob;
+            try{
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                dob = dateFormat.parse(stringForm.get("birthDate"));
+            }catch (ParseException e){
+                dob = new Date();
+            }
+            if (role == null){
+                if (stringForm.get("year").equals("")){
+                    users = User.find.where().icontains("username", username)
+                            .icontains("firstName", firstName)
+                            .icontains("lastName", lastName)
+                            .istartsWith("gender", gender)
+                            .icontains("eMail", email)
+                            .eq("birthDate",dob)
+                            .icontains("section", section)
+                            .icontains("semester", semester)
+                            .icontains("academicYear", academicYear)
+                            .icontains("faculty", faculty)
+                            .icontains("department", department)
+                            .findList();
                 }else{
-                    if (stringForm.get("year").equals("")){
-                        users = User.find.where().icontains("username", username)
-                                .icontains("firstName", firstName)
-                                .icontains("lastName", lastName)
-                                .eq("status", role)
-                                .istartsWith("gender", gender)
-                                .icontains("eMail", email)
-                                .eq("birthDate", dob)
-                                .icontains("section", section)
-                                .icontains("semester", semester)
-                                .icontains("academicYear", academicYear)
-                                .icontains("faculty", faculty)
-                                .icontains("department", department)
-                                .findList();
-                    }else{
-                        int year = Integer.valueOf(stringForm.get("year")).intValue();
-                        users = User.find.where().icontains("username", username)
-                                .icontains("firstName", firstName)
-                                .icontains("lastName",lastName)
-                                .eq("status", role)
-                                .istartsWith("gender", gender)
-                                .icontains("eMail", email)
-                                .eq("birthDate", dob)
-                                .eq("year", year)
-                                .icontains("section",section)
-                                .icontains("semester",semester)
-                                .icontains("academicYear",academicYear)
-                                .icontains("faculty",faculty)
-                                .icontains("department",department)
-                                .findList();
-                    }
+                    int year = Integer.valueOf(stringForm.get("year")).intValue();
+                    users = User.find.where().icontains("username", username)
+                            .icontains("firstName", firstName)
+                            .icontains("lastName",lastName)
+                            .istartsWith("gender", gender)
+                            .icontains("eMail", email)
+                            .eq("birthDate", dob)
+                            .eq("year", year)
+                            .icontains("section",section)
+                            .icontains("semester",semester)
+                            .icontains("academicYear",academicYear)
+                            .icontains("faculty",faculty)
+                            .icontains("department",department)
+                            .findList();
+                }
+            }else{
+                if (stringForm.get("year").equals("")){
+                    users = User.find.where().icontains("username", username)
+                            .icontains("firstName", firstName)
+                            .icontains("lastName", lastName)
+                            .eq("status", role)
+                            .istartsWith("gender", gender)
+                            .icontains("eMail", email)
+                            .eq("birthDate", dob)
+                            .icontains("section", section)
+                            .icontains("semester", semester)
+                            .icontains("academicYear", academicYear)
+                            .icontains("faculty", faculty)
+                            .icontains("department", department)
+                            .findList();
+                }else{
+                    int year = Integer.valueOf(stringForm.get("year")).intValue();
+                    users = User.find.where().icontains("username", username)
+                            .icontains("firstName", firstName)
+                            .icontains("lastName",lastName)
+                            .eq("status", role)
+                            .istartsWith("gender", gender)
+                            .icontains("eMail", email)
+                            .eq("birthDate", dob)
+                            .eq("year", year)
+                            .icontains("section",section)
+                            .icontains("semester",semester)
+                            .icontains("academicYear",academicYear)
+                            .icontains("faculty",faculty)
+                            .icontains("department",department)
+                            .findList();
                 }
             }
-            return ok(experiment_result.render(getResultByUser(users)));
+        }
+        return ok(experiment_result.render(getResultByUser(users)));
         //}
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result RenderAdminFindResultPost(int type) {
+        if (type == 1)
+            return resultByExp();
+        else if (type == 2)
+            return resultByUser();
+        else return redirect(routes.Admin.RenderAdminFindResult());
     }
 
     //ทำการเพิ่ม user account ใหม่เข้าไปในระบบ
@@ -484,6 +693,7 @@ public class Admin extends Controller {
         DynamicForm  stringForm = Form.form().bindFromRequest();
         String name = stringForm.get("scheduleName");
         String typeString = stringForm.get("expType");
+        String status = stringForm.get("expStatus");
         String startString = stringForm.get("startDate");
         String expireString = stringForm.get("expireDate");
         ExperimentType expType = ExperimentType.ATTENTIONBLINK;
@@ -529,32 +739,127 @@ public class Admin extends Controller {
         Date startDate;
         Date expireDate;
         List<ExperimentSchedule> expList;
+
         try {
             startDate = df.parse(startString);
             expireDate = df.parse(expireString);
             expireDate = new Date(expireDate.getTime() + 86400000 - 1);
-            if (typeString.equalsIgnoreCase("All Type")){
-                expList = ExperimentSchedule.find.where().icontains("name", name)
-                        .ge("startDate", startDate)
-                        .le("expireDate", expireDate)
-                        .findList();
+            if (status.equalsIgnoreCase("All")){
+                if (typeString.equalsIgnoreCase("All Type")){
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .ge("startDate", startDate)
+                            .le("expireDate", expireDate)
+                            .findList();
+                }
+                else{
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("experimentType",expType)
+                            .ge("startDate", startDate)
+                            .le("expireDate", expireDate)
+                            .findList();
+                }
             }
-            else{
-                expList = ExperimentSchedule.find.where().icontains("name", name)
-                        .eq("experimentType",expType)
-                        .ge("startDate", startDate)
-                        .le("expireDate", expireDate)
-                        .findList();
+            else if (status.equalsIgnoreCase("Opened")){
+                if (typeString.equalsIgnoreCase("All Type")){
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .ge("startDate", startDate)
+                            .le("expireDate", expireDate)
+                            .eq("status", ScheduleStatus.OPEN)
+                            .findList();
+                }
+                else{
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("experimentType",expType)
+                            .ge("startDate", startDate)
+                            .le("expireDate", expireDate)
+                            .eq("status", ScheduleStatus.OPEN)
+                            .findList();
+                }
+            }
+            else if (status.equalsIgnoreCase("Closed")){
+                if (typeString.equalsIgnoreCase("All Type")){
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .ge("startDate", startDate)
+                            .le("expireDate", expireDate)
+                            .eq("status", ScheduleStatus.CLOSE)
+                            .findList();
+                }
+                else{
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("experimentType",expType)
+                            .ge("startDate", startDate)
+                            .le("expireDate", expireDate)
+                            .eq("status", ScheduleStatus.CLOSE)
+                            .findList();
+                }
+            }
+            else {
+                if (typeString.equalsIgnoreCase("All Type")){
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .ge("startDate", startDate)
+                            .le("expireDate", expireDate)
+                            .eq("status", ScheduleStatus.DISABLED)
+                            .findList();
+                }
+                else{
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("experimentType",expType)
+                            .ge("startDate", startDate)
+                            .le("expireDate", expireDate)
+                            .eq("status", ScheduleStatus.DISABLED)
+                            .findList();
+                }
             }
         } catch (ParseException e) {
-            if (typeString.equalsIgnoreCase("All Type")){
-                expList = ExperimentSchedule.find.where().icontains("name", name)
-                        .findList();
+            if (status.equalsIgnoreCase("All")){
+                if (typeString.equalsIgnoreCase("All Type")){
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .findList();
+                }
+                else{
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("experimentType",expType)
+                            .findList();
+                }
             }
-            else{
-                expList = ExperimentSchedule.find.where().icontains("name", name)
-                        .eq("experimentType",expType)
-                        .findList();
+            else if (status.equalsIgnoreCase("Opened")){
+                if (typeString.equalsIgnoreCase("All Type")){
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("status", ScheduleStatus.OPEN)
+                            .findList();
+                }
+                else{
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("experimentType",expType)
+                            .eq("status", ScheduleStatus.OPEN)
+                            .findList();
+                }
+            }
+            else if (status.equalsIgnoreCase("Closed")){
+                if (typeString.equalsIgnoreCase("All Type")){
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("status", ScheduleStatus.CLOSE)
+                            .findList();
+                }
+                else{
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("experimentType",expType)
+                            .eq("status", ScheduleStatus.CLOSE)
+                            .findList();
+                }
+            }
+            else {
+                if (typeString.equalsIgnoreCase("All Type")){
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("status", ScheduleStatus.DISABLED)
+                            .findList();
+                }
+                else{
+                    expList = ExperimentSchedule.find.where().icontains("name", name)
+                            .eq("experimentType",expType)
+                            .eq("status", ScheduleStatus.DISABLED)
+                            .findList();
+                }
             }
         }
         flash("savedSuccess","Filter Search Successfully!");

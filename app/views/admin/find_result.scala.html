@@ -11,14 +11,14 @@
     <div class="adminFindResultTabContainer">
         <ul class="nav nav-tabs">
           <li class="active"><a id="tab1"href="#0" data-toggle="tab">By User</a></li>
-          <li class=""><a id="tab2" href="#1" data-toggle="tab">By Trial</a></li>
+          <li class=""><a id="tab2" href="#1" data-toggle="tab">By Schedule</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
               <div class="tab-pane active" id="0"> 
                   <div class="adminFindByUser"> 
-                    <form class="form-horizontal" role="form" style="font-size:18px" action="@routes.Admin.RenderAdminFindResultPost()" method="post">
+                    <form class="form-horizontal" role="form" style="font-size:18px" action="@routes.Admin.RenderAdminFindResultPost(2)" method="post">
                         <div class="RowCointainer" style="margin-left:15%">
                           <div class="form-group findUserInput">
                             <label for="inputUsername" class="col-sm-2 control-label">Username</label>
@@ -145,102 +145,83 @@
               <div class="tab-pane" id="1">
                 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css ")">
                 <div class="adminFindByUser" style="font-size:18px;">
-                    
-                      <form role="form" class="form-horizontal">
-                          <div class="RowCointainer" style="margin-left:15%;width:40%;">
-                                <div class = "form-group">
-                                    <label class="col-sm-4 control-label">
-                                        Experiment
-                                    </label>
-                                        <div class="btn-group col-sm-6">
-                                            <button id="expName" data-toggle="dropdown" class=" dropdown-toggle"style="width:100%;"> Select Experiment <span class="caret"></span></button>
-                                            <ul class="dropdown-menu dropdownSize">
-                                                <li class="dropdownHeader" >ATTENTION</li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Attentional Blink</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Simon Effect</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Stroop Effect</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Visual Search</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdownHeader">SHOR-TERM MEMORY</li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Brown-Peterson Task</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Magic Number 7</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Position Error</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Sternberg Search (Exhaustive)</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Sternberg Search (Parallel)</a></li>
-                                                <li class="divider"></li>
-                                                <li class="dropdownHeader">PERCEPTION</li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Change Blindness</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Garner Interference</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Muller-Lyer Illusion</a></li>
-                                                <li class="dropdownLi" ><a href="#" onclick="selEx(this.innerHTML)">Signal Detection</a></li>
-                                                <li class="divider"></li>
-                                            </ul>
-                                        </div>
-                                    </div>  
 
-                                    <div class="form-group" >
-                                        <label class="col-sm-4 control-label"> Parameter Type</label>
-                                        <div class="col-sm-6">
-                                            <button id="paraName" data-toggle="dropdown" class=" dropdown-toggle"style="width:100%;" disabled> Select Parameter<span class="caret"></span></button>
-                                            <ul class="dropdown-menu dropdownSize">
-                                                <li class="dropdownLi" ><a href="#"id="para1" onclick="selParaName(this.innerHTML)"></a></li>
-                                                <li class="dropdownLi" ><a href="#"id="para2" onclick="selParaName(this.innerHTML)"></a></li>
-                                                <li class="dropdownLi" ><a href="#"id="para3" onclick="selParaName(this.innerHTML)"></a></li>
-                                                <li class="dropdownLi" ><a href="#"id="para4" onclick="selParaName(this.innerHTML)"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                
-                                    <div class="form-group ">
-                                      <label  class="col-sm-4 control-label">Active on</label>
-                                          <div class="col-sm-6">
-                                            <div class="input-group date" id="activeOn-picker">
-                                                <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" id="birthInputBoxShow" placeholder="dd/mm/yyyy" disabled>
-                                                <input type="text" name="birthDate" id="birthInputBox" hidden>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                          </div>
-                                          <script type="text/javascript">
-                                              $(function () {
-                                                  $('#activeOn-picker').datetimepicker()
-                                              });
-                                          </script>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="inputDOB" class="col-sm-4 control-label">To </label>
-                                          <div class="col-sm-6" >
-                                            <div class="input-group date" id="activeTo-picker">
-                                                <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" id="birthInputBoxShow" placeholder="dd/mm/yyyy" disabled>
-                                                <input type="text" name="birthDate" id="birthInputBox" hidden>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                          </div>
-                                          <script type="text/javascript">
-                                              $(function () {
-                                                  $('#activeTo-picker').datetimepicker()
-                                              });
-                                          </script>
-                                    </div>
-                          </div>
-                                <div class="divider"></div>
-                                <div class ="adminFindByUserBtn" style="margin-right:20%;">
-                                        <a href="" style="margin-left:10%;">
-                                            <button class="btn-lg btn btn-primary">
-                                                <span class="glyphicon glyphicon-search">
-                                                </span>&nbsp;&nbsp;Find by Trial
-                                            </button>
-                                        </a>
-                                </div> 
-                                                    </form>
-                                <div class ="adminFindByUserBtn">
-                                         <a href="@routes.Admin.RenderAdminExperimentResult()">
-                                            <button class="btn-lg btn btn-default" onclick="goBack()">
-                                                <span class="glyphicon glyphicon-chevron-left">
-                                                </span>&nbsp; cancel
-                                            </button>
-                                        </a>
+                    <form id="answerForm" action="@routes.Admin.RenderAdminFindResultPost(1)" method="post" >
+                        <div class="findExpInput">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">
+                                    Experiment Type
+                                </label>
+                                <select id="typeInput">
+
+                                    <option value="All_Type">All Type</option>
+                                    <option value="attention_blink">Attention Blink</option>
+                                    <option value="brown_peterson">Brown Peterson</option>
+                                    <option value="change_blindness">Change Blindness</option>
+                                    <option value="garner_interference">Garner Interference</option>
+                                    <option value="magic_number7">Magic Number 7</option>
+                                    <option value="Muller_layer">Muller Layer</option>
+                                    <option value="position_error">Position Error</option>
+                                    <option value="signal_detection">Signal Detection</option>
+                                    <option value="simon_effect">Simon Effect</option>
+                                    <option value="sternberg_search">Sternberg Search</option>
+                                    <option value="stroop_effect">Stroop Effect</option>
+                                    <option value="visual_search">Visual Search</option>
+
+                                </select>
+                                <input type="text" id="expType" name = "expType" hidden>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">
+                                    Schedule Name
+                                </label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" autocomplete="off" name="scheduleName" id="scheduleName">
                                 </div>
-                      </form>
+                                <div>
+                                    <label class="alertText" id="nameAlert"  > <i> *  Please enter Schedule Name</i></label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">
+                                    Active on
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="input-group date" id="startdate-picker">
+                                        <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="startDate" id="startInputBox" placeholder="dd/mm/yyyy">
+
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+                                <label class="col-sm-1 control-label">
+                                    to
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="input-group date" id="enddate-picker">
+                                        <input type="text" class="form-control" data-format="DD/MM/YYYY" autocomplete="off" name="expireDate" id="endInputBox" placeholder="dd/mm/yyyy">
+
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <p width="100%">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+
+                                </div>
+                                <script type="text/javascript">
+                            $(function () {
+                                $('#startdate-picker').datetimepicker();
+                                $('#enddate-picker').datetimepicker()
+                            });
+                </script>
+                            </div>
+                        </div>
+                    </form>
+                    <hr class="dividerUserInfo">
+                    <div align="right">
+                        <a href="@routes.Admin.RenderAdminFindResult()" type="button" class="cancelNewUserButton btn btn-default glyphicon"> Cancel</a>
+                        <button type="button"class="submitNewUserButton btn btn-primary glyphicon glyphicon-search" onclick="submitFindExp()"> Find Exp.Schedule</button>
+                    </div>
                 </div>
 
 
@@ -250,6 +231,15 @@
           $(function () {
             $('#myTab a:last').tab('show')
           })
+
+        function submitFindExp(){
+            var e = document.getElementById("typeInput");
+            var statusUser = e.options[e.selectedIndex].text;
+            document.getElementById("expType").value = statusUser;
+            document.forms["answerForm"].submit();
+        }
+
         </script>
+
 </div>
 @adminfooter()
