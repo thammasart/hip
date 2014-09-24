@@ -121,6 +121,11 @@ public class MagicNumber7 extends Controller{
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         if(isPreview){
+            for(Answer ans : answers){
+                if(ans.getTimeLogObject() == null){
+                    ans.delete();
+                }
+            }
             return ok(reportPreview.render(answers,totalUsedTime, "Report", user));
         }
         else{

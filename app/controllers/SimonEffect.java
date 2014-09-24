@@ -144,6 +144,11 @@ public class SimonEffect extends Controller {
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
         if(isPreview){
+            for(Answer ans : answers){
+                if(ans.getTimeLogObject() == null){
+                    ans.delete();
+                }
+            }
             return ok(reportPreview.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
         }
         else{

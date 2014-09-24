@@ -107,8 +107,14 @@ public class AttentionBlink extends Controller {
         List<Answer> answers = Answer.findInvolving(user, trial.quizzes);
         double totalUsedTime = Answer.calculateTotalUsedTime(answers);
         int score = Answer.calculateTotalScore(answers);
-        if(isPreview)
+        if(isPreview){
+            for(Answer ans : answers){
+                if(ans.getTimeLogObject() == null){
+                    ans.delete();
+                }
+            }
             return ok(reportPreview.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
+        }
         else
             return ok(report.render(score,totalUsedTime,trial.quizzes.size(), "Report", user));
     }
