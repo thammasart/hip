@@ -99,7 +99,7 @@ public class Admin extends Controller {
         for (int i =0;i< size ;i++){
 
             if (type.equalsIgnoreCase("Attention Blink")){
-                List<models.attentionBlink.Trial> trials = exps.get(i).attentionTrials;
+                List<models.attentionBlink.Trial> trials = exps.get(i).findattentionTrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.attentionBlink.Quiz> quizzes = trials.get(j).quizzes;
@@ -108,7 +108,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Brown Peterson")){
-                List<models.brownPeterson.Trial> trials = exps.get(i).browntrials;
+                List<models.brownPeterson.Trial> trials = exps.get(i).findbrowntrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.brownPeterson.Quiz> quizzes = trials.get(j).quizzes;
@@ -117,7 +117,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Change Blindness")){
-                List<models.changeBlindness.Trial> trials = exps.get(i).changeBlindnesstrials;
+                List<models.changeBlindness.Trial> trials = exps.get(i).findchangeBlindnesstrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.changeBlindness.Quiz> quizzes = trials.get(j).quizzes;
@@ -126,7 +126,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Garner Interference")){
-                List<models.garnerInterference.Trial> trials = exps.get(i).garnertrials;
+                List<models.garnerInterference.Trial> trials = exps.get(i).findgarnertrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.garnerInterference.Quiz> quizzes = trials.get(j).quizzes;
@@ -135,7 +135,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Magic Number 7")){
-                List<models.magicNumber7.Trial> trials = exps.get(i).magic7trials;
+                List<models.magicNumber7.Trial> trials = exps.get(i).findmagic7trials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.magicNumber7.Quiz> quizzes = trials.get(j).quizzes;
@@ -144,7 +144,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Muller Layer")){
-                List<models.mullerLayer.Trial> trials = exps.get(i).mullertrials;
+                List<models.mullerLayer.Trial> trials = exps.get(i).findmullertrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.mullerLayer.Quiz> quizzes = trials.get(j).quizzes;
@@ -153,7 +153,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Position Error")){
-                List<models.positionError.Trial> trials = exps.get(i).positionErrortrials;
+                List<models.positionError.Trial> trials = exps.get(i).findpositionErrortrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.positionError.Quiz> quizzes = trials.get(j).quizzes;
@@ -162,7 +162,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Signal Detection")){
-                List<models.signalDetection.Trial> trials = exps.get(i).signaltrials;
+                List<models.signalDetection.Trial> trials = exps.get(i).findsignaltrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.signalDetection.Quiz> quizzes = trials.get(j).quizzes;
@@ -171,7 +171,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Simon Effect")){
-                List<models.simonEffect.Trial> trials = exps.get(i).simontrials;
+                List<models.simonEffect.Trial> trials = exps.get(i).findsimontrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.simonEffect.Quiz> quizzes = trials.get(j).quizzes;
@@ -180,7 +180,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Sternberg Search")){
-                List<models.sternbergSearch.Trial> trials = exps.get(i).sternbergSearchtrials;
+                List<models.sternbergSearch.Trial> trials = exps.get(i).findsternbergSearchtrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.sternbergSearch.Quiz> quizzes = trials.get(j).quizzes;
@@ -189,7 +189,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Stroop Effect")){
-                List<models.stroopEffect.Trial> trials = exps.get(i).stroopTrials;
+                List<models.stroopEffect.Trial> trials = exps.get(i).findstroopTrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     List<models.stroopEffect.Quiz> quizzes = trials.get(j).quizzes;
@@ -198,7 +198,7 @@ public class Admin extends Controller {
                 }
             }
             else if (type.equalsIgnoreCase("Visual Search")){
-                List<models.visualSearch.Trial> trials = exps.get(i).visualSearchTrials;
+                List<models.visualSearch.Trial> trials = exps.get(i).findvisualSearchTrials();
                 int trialSize = trials.size();
                 for (int j=0;j<trialSize;j++){
                     answers.addAll(models.visualSearch.Answer.find.where().eq("quiz" ,trials.get(j).quiz).findList());
@@ -744,6 +744,14 @@ public class Admin extends Controller {
             startDate = df.parse(startString);
             expireDate = df.parse(expireString);
             expireDate = new Date(expireDate.getTime() + 86400000 - 1);
+           ScheduleStatus sstatus;
+            if (status.equalsIgnoreCase("Opened")){
+                sstatus = ScheduleStatus.OPEN;
+            }else if (status.equalsIgnoreCase("Closed")){
+                sstatus = ScheduleStatus.CLOSE;
+            }else{
+                sstatus = ScheduleStatus.DISABLED;
+            }
             if (status.equalsIgnoreCase("All")){
                 if (typeString.equalsIgnoreCase("All Type")){
                     expList = ExperimentSchedule.find.where().icontains("name", name)
@@ -759,46 +767,12 @@ public class Admin extends Controller {
                             .findList();
                 }
             }
-            else if (status.equalsIgnoreCase("Opened")){
-                if (typeString.equalsIgnoreCase("All Type")){
-                    expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .ge("startDate", startDate)
-                            .le("expireDate", expireDate)
-                            .eq("status", ScheduleStatus.OPEN)
-                            .findList();
-                }
-                else{
-                    expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .eq("experimentType",expType)
-                            .ge("startDate", startDate)
-                            .le("expireDate", expireDate)
-                            .eq("status", ScheduleStatus.OPEN)
-                            .findList();
-                }
-            }
-            else if (status.equalsIgnoreCase("Closed")){
-                if (typeString.equalsIgnoreCase("All Type")){
-                    expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .ge("startDate", startDate)
-                            .le("expireDate", expireDate)
-                            .eq("status", ScheduleStatus.CLOSE)
-                            .findList();
-                }
-                else{
-                    expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .eq("experimentType",expType)
-                            .ge("startDate", startDate)
-                            .le("expireDate", expireDate)
-                            .eq("status", ScheduleStatus.CLOSE)
-                            .findList();
-                }
-            }
             else {
                 if (typeString.equalsIgnoreCase("All Type")){
                     expList = ExperimentSchedule.find.where().icontains("name", name)
                             .ge("startDate", startDate)
                             .le("expireDate", expireDate)
-                            .eq("status", ScheduleStatus.DISABLED)
+                            .eq("status", sstatus)
                             .findList();
                 }
                 else{
@@ -806,11 +780,19 @@ public class Admin extends Controller {
                             .eq("experimentType",expType)
                             .ge("startDate", startDate)
                             .le("expireDate", expireDate)
-                            .eq("status", ScheduleStatus.DISABLED)
+                            .eq("status", sstatus)
                             .findList();
                 }
             }
         } catch (ParseException e) {
+            ScheduleStatus sstatus;
+            if (status.equalsIgnoreCase("Opened")){
+                sstatus = ScheduleStatus.OPEN;
+            }else if (status.equalsIgnoreCase("Closed")){
+                sstatus = ScheduleStatus.CLOSE;
+            }else{
+                sstatus = ScheduleStatus.DISABLED;
+            }
             if (status.equalsIgnoreCase("All")){
                 if (typeString.equalsIgnoreCase("All Type")){
                     expList = ExperimentSchedule.find.where().icontains("name", name)
@@ -822,42 +804,16 @@ public class Admin extends Controller {
                             .findList();
                 }
             }
-            else if (status.equalsIgnoreCase("Opened")){
-                if (typeString.equalsIgnoreCase("All Type")){
-                    expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .eq("status", ScheduleStatus.OPEN)
-                            .findList();
-                }
-                else{
-                    expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .eq("experimentType",expType)
-                            .eq("status", ScheduleStatus.OPEN)
-                            .findList();
-                }
-            }
-            else if (status.equalsIgnoreCase("Closed")){
-                if (typeString.equalsIgnoreCase("All Type")){
-                    expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .eq("status", ScheduleStatus.CLOSE)
-                            .findList();
-                }
-                else{
-                    expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .eq("experimentType",expType)
-                            .eq("status", ScheduleStatus.CLOSE)
-                            .findList();
-                }
-            }
             else {
                 if (typeString.equalsIgnoreCase("All Type")){
                     expList = ExperimentSchedule.find.where().icontains("name", name)
-                            .eq("status", ScheduleStatus.DISABLED)
+                            .eq("status", sstatus)
                             .findList();
                 }
                 else{
                     expList = ExperimentSchedule.find.where().icontains("name", name)
                             .eq("experimentType",expType)
-                            .eq("status", ScheduleStatus.DISABLED)
+                            .eq("status", sstatus)
                             .findList();
                 }
             }

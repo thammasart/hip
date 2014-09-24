@@ -49,44 +49,92 @@ public class ExperimentSchedule extends Model{
     public ScheduleStatus status = ScheduleStatus.CLOSE;
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
+    private List<models.attentionBlink.Trial> attentionTrials = new ArrayList<models.attentionBlink.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.brownPeterson.Trial> browntrials = new ArrayList<models.brownPeterson.Trial>();
+    private List<models.brownPeterson.Trial> browntrials = new ArrayList<models.brownPeterson.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.changeBlindness.Trial> changeBlindnesstrials = new ArrayList<models.changeBlindness.Trial>();
+    private List<models.changeBlindness.Trial> changeBlindnesstrials = new ArrayList<models.changeBlindness.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.garnerInterference.Trial> garnertrials = new ArrayList<models.garnerInterference.Trial>();
+    private List<models.garnerInterference.Trial> garnertrials = new ArrayList<models.garnerInterference.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.magicNumber7.Trial> magic7trials = new ArrayList<models.magicNumber7.Trial>();
+    private List<models.magicNumber7.Trial> magic7trials = new ArrayList<models.magicNumber7.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.mullerLayer.Trial> mullertrials = new ArrayList<models.mullerLayer.Trial>();
+    private List<models.mullerLayer.Trial> mullertrials = new ArrayList<models.mullerLayer.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.positionError.Trial> positionErrortrials = new ArrayList<models.positionError.Trial>();
+    private List<models.positionError.Trial> positionErrortrials = new ArrayList<models.positionError.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.signalDetection.Trial> signaltrials = new ArrayList<models.signalDetection.Trial>();
+    private List<models.signalDetection.Trial> signaltrials = new ArrayList<models.signalDetection.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.simonEffect.Trial> simontrials = new ArrayList<models.simonEffect.Trial>();
+    private List<models.simonEffect.Trial> simontrials = new ArrayList<models.simonEffect.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.sternbergSearch.Trial> sternbergSearchtrials = new ArrayList<models.sternbergSearch.Trial>();
+    private List<models.sternbergSearch.Trial> sternbergSearchtrials = new ArrayList<models.sternbergSearch.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
+    private List<models.stroopEffect.Trial> stroopTrials = new ArrayList<models.stroopEffect.Trial>();
 
     @OneToMany(mappedBy="schedule", cascade=CascadeType.REMOVE)
-    public List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
+    private List<models.visualSearch.Trial> visualSearchTrials = new ArrayList<models.visualSearch.Trial>();
 
     @OneToMany(mappedBy="exp", cascade=CascadeType.ALL)
-    public List<TimeLog> timelog = new ArrayList<TimeLog>();
+    private List<TimeLog> timelog = new ArrayList<TimeLog>();
 
+
+    public List<models.attentionBlink.Trial> findattentionTrials(){
+        return attentionTrials;
+    }
+
+    public List<models.brownPeterson.Trial> findbrowntrials(){
+        return browntrials;
+    }
+
+    public List<models.changeBlindness.Trial> findchangeBlindnesstrials(){
+        return changeBlindnesstrials;
+    }
+
+    public List<models.garnerInterference.Trial> findgarnertrials(){
+        return garnertrials;
+    }
+
+    public List<models.magicNumber7.Trial> findmagic7trials(){
+        return magic7trials;
+    }
+
+    public List<models.mullerLayer.Trial> findmullertrials(){
+        return mullertrials;
+    }
+
+    public List<models.positionError.Trial> findpositionErrortrials(){
+        return positionErrortrials;
+    }
+
+    public List<models.signalDetection.Trial> findsignaltrials(){
+        return signaltrials;
+    }
+
+    public List<models.simonEffect.Trial> findsimontrials(){
+        return simontrials;
+    }
+
+    public List<models.sternbergSearch.Trial> findsternbergSearchtrials(){
+        return sternbergSearchtrials;
+    }
+
+    public List<models.stroopEffect.Trial> findstroopTrials(){
+        return stroopTrials;
+    }
+
+    public List<models.visualSearch.Trial> findvisualSearchTrials(){
+        return visualSearchTrials;
+    }
 
     public static void exportToFile(Workbook wb){
 

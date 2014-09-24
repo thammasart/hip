@@ -121,9 +121,6 @@ public class Quiz extends Model{
             Cell questionCell = headerRow.createCell(col++);
             questionCell.setCellValue("Question Id");
 
-            Cell answerId = headerRow.createCell(col++);
-            answerId.setCellValue("Answer Ids");
-
             List<Quiz> tempList = find.all();
 
             int listSize = tempList.size();
@@ -148,20 +145,6 @@ public class Quiz extends Model{
 
                 Cell data4 = dataRow.createCell(col++);
                 data4.setCellValue(temp.question.id);
-
-
-                String answers_id = "";
-
-                int subListSize = temp.answers.size();
-
-                for (int i=0;i<subListSize;i++){
-                    if (i < subListSize-1)
-                        answers_id = answers_id + String.valueOf( temp.answers.get(i).id) + ",";
-                    else
-                        answers_id = answers_id + String.valueOf( temp.answers.get(i).id);
-                }
-                Cell data5 = dataRow.createCell(col++);
-                data5.setCellValue(answers_id);
 
             }
 
