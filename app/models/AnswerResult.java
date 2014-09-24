@@ -13,4 +13,6 @@ public interface AnswerResult {
     public String getIsCorrectString();
     public double getUsedTimeDouble();
     public TimeLog getTimeLogObject();
+    public String getStartTimeToString();
+    public String getEndTimeToString();
 }

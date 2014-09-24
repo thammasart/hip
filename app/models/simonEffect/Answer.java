@@ -175,6 +175,33 @@ public class Answer extends Model implements AnswerResult{
     public TimeLog getTimeLogObject(){
         return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
     }
+
+    public String getStartTimeToString(){
+        TimeLog timelog = getTimeLogObject();
+        if(timelog == null){
+            return "-- null --";
+        }
+        else if(timelog.startTime == null){
+            return "-- null --";
+        }
+        else{
+            return timelog.startTime.getDate()+"/"+timelog.startTime.getMonth()+"/"+timelog.startTime.getMonth();
+        }
+    }
+
+    public String getEndTimeToString(){
+        TimeLog timelog = getTimeLogObject();
+        if(timelog == null){
+            return "-- null --";
+        }
+        else if(timelog.endTime == null){
+            return "-- null --";
+        }
+        else{
+            return timelog.endTime.getDate()+"/"+timelog.endTime.getMonth()+"/"+timelog.endTime.getMonth();
+        }
+    }
+    
     @SuppressWarnings("unchecked")
 	public static Finder<Long,Answer> find = new Finder(Long.class,Answer.class);
 

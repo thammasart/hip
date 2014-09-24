@@ -107,6 +107,32 @@ public class Answer extends Model implements AnswerResult{
         return TimeLog.findByUserAndTrialId(this.user,new Long(this.quiz.trial.id),this.quiz.trial.schedule);
     }
 
+    public String getStartTimeToString(){
+        TimeLog timelog = getTimeLogObject();
+        if(timelog == null){
+            return "-- null --";
+        }
+        else if(timelog.startTime == null){
+            return "-- null --";
+        }
+        else{
+            return timelog.startTime.getDate()+"/"+timelog.startTime.getMonth()+"/"+timelog.startTime.getMonth();
+        }
+    }
+
+    public String getEndTimeToString(){
+        TimeLog timelog = getTimeLogObject();
+        if(timelog == null){
+            return "-- null --";
+        }
+        else if(timelog.endTime == null){
+            return "-- null --";
+        }
+        else{
+            return timelog.endTime.getDate()+"/"+timelog.endTime.getMonth()+"/"+timelog.endTime.getMonth();
+        }
+    }
+
     public static void exportToFile(Workbook wb){
 
         try{
