@@ -18,3 +18,4 @@ conf/evolutions/*
 conf/b_application.conf
 conf/application.conf
 *~
+*.xls
