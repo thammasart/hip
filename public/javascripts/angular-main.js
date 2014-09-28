@@ -1,4 +1,12 @@
-angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
+angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
+    .controller('changeController', function($scope, $rootScope){
+        $rootScope.isChange = false;
+
+        $scope.click = function(){
+            if($rootScope.isChange)
+                console.log('change!!');
+        }
+    })
     .controller('ExController', function($scope, $rootScope, $http){
         $scope.word = /^[a-zA-Z0-9ก-๙_ \-]*$/;
         $scope.value = 3;
@@ -116,7 +124,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         $scope.wordThai = [];
         $scope.wordEnglish = [];
         $scope.inProcess = false;
-        $rootScope.exp = {};
+
+        $rootScope.isChange = false;
 
         $scope.init = function(expId) {
             $scope.inProcess = true;
@@ -134,12 +143,18 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         }
 
         $scope.refresh = function(trial){
+            $rootScope.isChange = true;
             for(var i=0; i<trial.quizzes.length; i++){
                 trial.quizzes[i].question = findQuestion(trial.trigramType, trial.trigramLanguage);
             }
         }
         $scope.randomQuestion = function(quiz, trigramType, trigramLanguage){
+            $scope.change();
             quiz.question = findQuestion(trigramType, trigramLanguage);
+        }
+
+        $scope.change = function(){
+            $rootScope.isChange = true;
         }
 
         $scope.saveAll = function(){
@@ -174,7 +189,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         $scope.trials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
-
+        $rootScope.isChange = false;
         $scope.questionTypes = ['THAI','ENGLISH','NUMBER'];
 
         $scope.init = function(expId) {
@@ -187,6 +202,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
             });
         }
 
+        $scope.change = function(){
+            $rootScope.isChange = true;
+        }
+
         $scope.refresh = function(trial){
             for(var i=0; i<trial.quizzes.length; i++){
                 $scope.generateQuestion(trial.quizzes[i], trial.questionType);
@@ -194,6 +213,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         }
 
         $scope.generateQuestion = function(quiz, questionType){
+            $scope.change();
             var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             var THAI_CASE = "กขคฆงจฉชฌญฎฐฒณดถทธนบผพภมยรลวศษสหฬอ";
             var NUMBER_CASE = '0123456789';

@@ -35,16 +35,19 @@
                                         <tr ng-repeat="quiz in trial.quizzes">
                                             <td>{{$index + 1}}</td>
                                             <td><div>
-                                                <input type="number" min="13" max="20" class="form-control center-block input-two-word "
+                                                <input type="number" min="13" max="20" ng-change="change()"
+                                                       class="form-control center-block input-two-word "
                                                     ng-model="quiz.length" required></div></td>
                                             <td><div>
-                                                <input type="number" min="1" max="3" class="form-control center-block input-two-word"
+                                                <input type="number" min="1" max="3" ng-change="change()"
+                                                       class="form-control center-block input-two-word"
                                                        ng-model="quiz.numberOfTarget" required></div></td>
 
                                             <td><input  type="checkbox" ng-model="quiz.isCorrect">
                                             </td>
                                             <td><div>
                                                 <input type="text" class="form-control center-block input-two-word"
+                                                       ng-change="change()"
                                                        ng-pattern="word" ng-model="quiz.blinkTime"
                                                        required ></div></td>
                                         </tr>
@@ -78,7 +81,7 @@
                         </div>
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Question Type</h4>
-                            <select class="form-control" ng-model="trial.questionType" style="width:120px"
+                            <select ng-change="change()" class="form-control" ng-model="trial.questionType" style="width:120px"
                             ng-options="value for value in questionTypes"></select>
                             <button style="margin-top:20px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
                         </div>

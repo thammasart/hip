@@ -3,7 +3,7 @@
 @import views.html.admin.experiment._
 @import views.html.form._
 
-<div class="container" ng-app="ExperimentCreator">
+<div class="container" >
     <form role="form" name="parameter" class="form-horizontal">
 
         @exp_edit(exp)
@@ -31,12 +31,13 @@
                             <div class="form-group" ng-repeat="quiz in trial.quizzes">
                                 <label class="control-label col-sm-4">คำถามที่ {{$index + 1}} :  ตัวเลขเริ่มนับถอยหลัง</label>
                                 <div class="col-sm-2 form-invalid">
-                                    <input type="number" min="1" max="999" class="form-control"
+                                    <input type="number" min="1" max="999" class="form-control" ng-change="change()"
                                            ng-model="quiz.initCountdown" ng-pattern="regIneger" required>
                                 </div>
                                 <label class="control-label col-sm-4">จำนวนวินาทีนับถอยหลัง</label>
                                 <div class="col-sm-2 form-invalid">
-                                    <input type="number" min="1" max="20" class="form-control" ng-model="quiz.flashTime" ng-pattern="regIneger" required>
+                                    <input type="number" min="1" max="20" ng-change="change()"
+                                           class="form-control" ng-model="quiz.flashTime" ng-pattern="regIneger" required>
                                 </div>
                             </div>
                             <div class="row">
