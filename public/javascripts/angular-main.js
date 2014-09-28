@@ -421,7 +421,6 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
                     $scope.isEditable[i].push(false);
                 }
             }
-            console.log($scope.isEditable);
         }
 
         $scope.edit = function(i, j){
@@ -494,18 +493,35 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         $scope.trials = [];
         $scope.inProcess = false;
         $scope.regIneger = /^(0|[1-9][0-9]*)$/;
+        $scope.isEditable = [];
 
         $scope.init = function(expId) {
             $scope.inProcess = true;
             $http({method: 'GET', url: 'sternbergInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
                 $rootScope.exp = $scope.trials[0].schedule;
+                initEditable();
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
+        }
+
+        function initEditable(){
+            for(var i=0; i<$scope.trials.length; i++){
+                $scope.isEditable.push(false);
+            }
+        }
+
+        $scope.edit = function(index, trial){
+            if($scope.isEditable[index]){
+                generateQuiz(trial);
+            }
+            $scope.isEditable[index] = !$scope.isEditable[index];
+        }
+
+        $scope.editText = function(index){
+            return $scope.isEditable[index] ? 'ok' : 'edit';
         }
 
         $scope.generateQuestion = function(trial){
@@ -720,18 +736,38 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster'])
         $scope.trials = [];
         $scope.inProcess = false;
         $scope.regIneger = /^(0|[1-9][0-9]*)$/;
+        $scope.isEditable = [];
 
         $scope.init = function(expId) {
             $scope.inProcess = true;
             $http({method: 'GET', url: 'MagicSevenInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
                 $rootScope.exp = $scope.trials[0].schedule;
+                initEditable();
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
+        }
+
+        function initEditable(){
+            for(var i=0; i<$scope.trials.length; i++){
+                $scope.isEditable.push([]);
+                for(var j=0; j<$scope.trials[i].quizzes.length; j++){
+                    $scope.isEditable[i].push(false);
+                }
+            }
+        }
+
+        $scope.edit = function(i, j){
+            $scope.isEditable[i][j] = !$scope.isEditable[i][j];
+        }
+
+        $scope.editText = function(i, j){
+            if($scope.isEditable[i][j]){
+                return 'ok';
+            }
+            return 'edit';
         }
 
         $scope.generateQuestion = function(quiz, questionType){
@@ -1735,7 +1771,7 @@ var ModalInstanceCtrl = function ($scope, $rootScope, $modalInstance, sharps, wi
                     $scope.sharps.push(obj);
             }
         }
-        if(trial.quiz.target == 'SQAURE_GREEN'){
+        if(trial.quiz.target != 'SQAURE_GREEN'){
             for(var i = 0; i < trial.quiz.squareGreen;i++){
 
                 var obj = createSharp('green','square');
@@ -1743,7 +1779,7 @@ var ModalInstanceCtrl = function ($scope, $rootScope, $modalInstance, sharps, wi
                     $scope.sharps.push(obj);
             }
         }
-        if(trial.quiz.target == 'CIRCLE_BLUE'){
+        if(trial.quiz.target != 'CIRCLE_BLUE'){
             for(var i = 0; i < trial.quiz.circleBlue; i++){
 
                 var obj = createSharp('blue', 'circle');
