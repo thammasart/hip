@@ -38,15 +38,15 @@
                                     <tbody>
                                     <tr ng-repeat="quiz in trial.quizzes" style="height: 52px">
                                         <td style="width:100px">{{$index + 1}}</td>
-                                        <td><select style="margin:auto;width:80px" class="form-control" ng-model="quiz.length" ng-options="value for value in memorySet"></td>
+                                        <td><select ng-change="changingData()" style="margin:auto;width:80px" class="form-control" ng-model="quiz.length" ng-options="value for value in memorySet"></td>
                                         <td style="width:200px" class="form-invalid" ng-switch="isEditable[$parent.$index][$index]">
                                             <span ng-switch-when="false" style="width:100%;display: block">{{quiz.question.memorySet}}</span>
                                             <input ng-switch-when="true" class="form-control" type="text"
-                                                   ng-minlength="3" ng-maxlength="12"
+                                                   ng-minlength="3" ng-maxlength="12" ng-change="changingData()"
                                                    ng-model="quiz.question.memorySet" required >
                                         </td>
-                                        <td style="width:100px"><button ng-disabled="parameter.$invalid" class="btn btn-primary btn-xs" ng-click="edit($parent.$index, $index)" >{{editText($parent.$index,$index)}}</button></td>
-                                        <td style="width:100px"><button ng-disabled="parameter.$invalid" class="btn btn-primary btn-xs" ng-click="generateQuestion(quiz, trial.questionType)" >random</button></td>
+                                        <td style="width:100px"><button ng-disabled="parameter.$invalid" class="btn btn-primary btn-xs" ng-click="edit($parent.$index, $index);changingData()" >{{editText($parent.$index,$index)}}</button></td>
+                                        <td style="width:100px"><button ng-disabled="parameter.$invalid" class="btn btn-primary btn-xs" ng-click="generateQuestion(quiz, trial.questionType);changingData()" >random</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -55,13 +55,13 @@
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <h4>Memory Set Language</h4>
-                            <select class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
+                            <select ng-change="changingData()" class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
                             <div class="form-group" style="margin-top:10px">
                                 <label class="col-sm-3 col-md-3">Flash Speed</label>
                                 <div class="col-sm-3 col-md-2 form-invalid">
                                     <input type="text" class="form-control center-block input-two-word"
                                            ng-pattern="word" class="form-control"
-                                           ng-model="trial.flashSpeed"
+                                           ng-model="trial.flashSpeed" ng-change="changingData()"
                                            required>
                                 </div>
                             </div>
@@ -70,11 +70,11 @@
                                 <div class="col-sm-3 col-md-2">
                                     <input type="text" class="form-control center-block input-two-word"
                                            ng-pattern="word" class="form-control"
-                                           ng-model="trial.delayTime"
+                                           ng-model="trial.delayTime" ng-change="changingData()"
                                            required>
                                 </div>
                             </div>
-                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial)" ng-disabled="parameter.$invalid" >
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial);changingData()" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
                             <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-book"> </span> Tutorial</button>

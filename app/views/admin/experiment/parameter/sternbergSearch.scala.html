@@ -47,23 +47,27 @@
                                     <tr>
                                         <td class="form-invalid">
                                             <input type="number" min="1" max="6"  class="form-control center-block input-two-word "
-                                                   ng-pattern="regIneger"
+                                                   ng-pattern="regIneger" ng-change="changingData()"
                                                   ng-model="trial.length" required></td>
                                         <td class="form-invalid">
-                                            <input type="number" min="0" max="{{trial.length}}"  class="form-control center-block input-two-word "
+                                            <input type="number" min="0" max="{{trial.length}}" ng-change="changingData()"
+                                                   class="form-control center-block input-two-word "
                                                    ng-model="trial.oneCharIsCorrect" ng-pattern="regIneger" required></td>
                                         <td class="form-invalid">
-                                            <input type="number" min="0" max="10"  class="form-control center-block input-two-word "
+                                            <input type="number" min="0" max="10" ng-change="changingData()"
+                                                   class="form-control center-block input-two-word "
                                                    ng-model="trial.oneCharIsInCorrect" ng-pattern="regIneger" required></td>
                                         <td class="form-invalid">
-                                            <input type="number" min="0" max="{{trial.length - 1}}"  class="form-control center-block input-two-word "
+                                            <input type="number" min="0" max="{{trial.length - 1}}" ng-change="changingData()"
+                                                   class="form-control center-block input-two-word "
                                                    ng-model="trial.twoCharIsCorrect" ng-pattern="regIneger" required></td>
                                         <td class="form-invalid">
-                                            <input type="number" min="0" max="10" class="form-control center-block input-two-word "
+                                            <input type="number" min="0" max="10" ng-change="changingData()"
+                                                   class="form-control center-block input-two-word "
                                                    ng-model="trial.twoCharIsInCorrect" ng-pattern="regIneger" required></td>
                                         <td class="form-invalid">
                                             <input type="text" class="form-control center-block input-two-word"
-                                                   ng-pattern="word"
+                                                   ng-pattern="word" ng-change="changingData()"
                                                    ng-model="trial.blinkTime"
                                                    required></td>
                                     </tr>
@@ -72,7 +76,7 @@
                         </div>
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Memory Set Language</h4>
-                            <select class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
+                            <select ng-change="changingData()" class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
                             <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
@@ -85,11 +89,12 @@
                                     <span ng-switch-when="false" class="text-center"
                                           style="width:100%;display: block;font-size:30px;">{{trial.quizzes[0].question.memorySet}}</span>
                                     <input ng-switch-when="true" class="form-control text-center" type="text" style="font-size:20px;width:200px;margin:auto"
+                                           ng-change="changingData()"
                                            ng-model="trial.quizzes[0].question.memorySet" required >{{trial.length}}
                                         <span class="btn btn-primary btn-xs pull-right" style="margin-top:-28px;"
-                                              ng-click="generateQuestion(trial)" ng-disabled="parameter.$invalid">random</span>
+                                              ng-click="generateQuestion(trial);changingData()" ng-disabled="parameter.$invalid">random</span>
                                         <span class="btn btn-warning btn-xs pull-right" style="margin-top:-28px;margin-right:70px"
-                                              ng-click="edit($index, trial)" ng-disabled="parameter.$invalid">{{editText($index)}}</span>
+                                              ng-click="edit($index, trial);changingData()" ng-disabled="parameter.$invalid">{{editText($index)}}</span>
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary" ng-click="showQuiz = !showQuiz" ng-disabled="parameter.$invalid">แสดงคำถาม</button>

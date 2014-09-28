@@ -39,15 +39,15 @@
                                 <tbody>
                                     <tr>
                                         <td>จำนวนข้อจริง</td>
-                                        <td class="form-invalid"><input required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfColorQuestion" ></td>
-                                        <td class="form-invalid"><input required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfSizeQuestion" ></td>
-                                        <td class="form-invalid"><input required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfBiDimensionQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfColorQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfSizeQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfBiDimensionQuestion" ></td>
                                     </tr>
                                     <tr>
                                         <td>จำนวนข้อลวง</td>
-                                        <td class="form-invalid"><input required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeColorQuestion" ></td>
-                                        <td class="form-invalid"><input required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeSizeQuestion" ></td>
-                                        <td class="form-invalid"><input required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeBiDimentsionQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeColorQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeSizeQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeBiDimentsionQuestion" ></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -56,11 +56,11 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="row form-invalid" style="margin-bottom: 10px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดเล็ก </span>
-                                        <input required style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control " type="text" ng-model="trial.lengthSmallSquare" > cm</div>
+                                        <input ng-change="changingData()" required style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control " type="text" ng-model="trial.lengthSmallSquare" > cm</div>
                                     <div class="row form-invalid" style="margin-bottom: 20px"><span>ความยาวด้านสี่เหลี่ยมจตุรัสขนาดใหญ่ </span>
-                                        <input required style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" ng-model="trial.lengthBigSquare" > cm</div>
+                                        <input ng-change="changingData()" required style="display: inline;width:80px" ng-pattern="floatPattern" class="form-control" type="text" ng-model="trial.lengthBigSquare" > cm</div>
                                     <div class="row">
-                                        <select class="form-control" style="width:100px; display:inline" ng-model="trial.color" ng-options="color for color in colors" ng-change="generateColor(trial, $index)">
+                                        <select class="form-control" style="width:100px; display:inline" ng-model="trial.color" ng-options="color for color in colors" ng-change="generateColor(trial, $index);changingData()">
                                         </select>
                                         <span style="margin: 0px 5px 0px 20px">สีเข้ม </span>
                                         <button ng-disabled="parameter.$invalid" class="btn" style="background-color: #{{trial.colorDark.colorCode}}" ng-click="show(trial.color, trial.colorDark, $index, DARK)">
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <button style="margin-top:20px;padding: 6px 33px" ng-disabled="generateSuccess[$index]|| parameter.$invalid"
-                                            class="btn btn-primary" ng-click="generateQuestion(trial, $index)">Generate Question</button>
+                                            class="btn btn-primary" ng-click="generateQuestion(trial, $index);changingData()">Generate Question</button>
                                     <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
                                         <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                                     <div style="margin-top:10px" class="alert alert-success"
@@ -88,7 +88,7 @@
                                             <button ng-repeat="color in showColors[$index].colors | orderBy:'saturation'"
                                             ng-class="{'border-active': color.id == targets[$parent.$index].id}"
                                             class="btn" style="background-color: #{{color.colorCode}}; margin-right:8px"
-                                            ng-click="changeColor(trial, color, $parent.$index)">
+                                            ng-click="changeColor(trial, color, $parent.$index);changingData()">
                                                 <span class="glyphicon glyphicon-adjust"></span></button>
                                         </div>
                                     </accordion-group>

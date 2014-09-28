@@ -39,12 +39,15 @@
                                         <td>{{$index + 1}}</td>
                                         <td class="form-invalid">
                                             <input type="number" min="3" max="12"  class="form-control center-block input-two-word "
+                                                   ng-change="changingData()"
                                                    ng-pattern="regIneger" ng-model="quiz.length" required></td>
                                         <td class="form-invalid">
-                                            <input type="number" min="0" max="{{quiz.length}}"  class="form-control center-block input-two-word "
+                                            <input type="number" min="0" max="{{quiz.length}}"  ng-change="changingData()"
+                                                   class="form-control center-block input-two-word "
                                                    ng-pattern="regIneger" ng-model="quiz.chunkSize" required></td>
                                         <td class="form-invalid">
                                             <input type="text" class="form-control center-block input-two-word"
+                                                   ng-change="changingData()"
                                                    ng-pattern="word"
                                                    ng-model="quiz.displayTime"
                                                    required>
@@ -55,8 +58,8 @@
                         </div>
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Memory Set Language</h4>
-                            <select class="form-control" ng-model="trial.questionType" ng-options="value for value in questionTypes" style="width: 150px"></select>
-                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial)" ng-disabled="parameter.$invalid" >
+                            <select ng-change="changingData()" class="form-control" ng-model="trial.questionType" ng-options="value for value in questionTypes" style="width: 150px"></select>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial);changingData()" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
                             <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
@@ -82,11 +85,11 @@
                                             <td style="width:200px" class="form-invalid" ng-switch="isEditable[$parent.$index][$index]">
                                                 <span ng-switch-when="false" style="width:100%;display: block">{{quiz.question.memorySet}}</span>
                                                 <input ng-switch-when="true" class="form-control" type="text"
-                                                       ng-minlength="3" ng-maxlength="12"
+                                                       ng-minlength="3" ng-maxlength="12" ng-change="changingData()"
                                                        ng-model="quiz.question.memorySet" required >
                                             </td>
-                                            <td style="width:100px"><button ng-disabled="parameter.$invalid" class="btn btn-warning btn-xs" ng-click="edit($parent.$index, $index)" >{{editText($parent.$index,$index)}}</button></td>
-                                            <td><button ng-disabled="parameter.$invalid" class="btn btn-xs btn-primary" ng-click="generateQuestion(quiz, trial.questionType)">random</button></td>
+                                            <td style="width:100px"><button ng-disabled="parameter.$invalid" class="btn btn-warning btn-xs" ng-click="edit($parent.$index, $index);changingData()" >{{editText($parent.$index,$index)}}</button></td>
+                                            <td><button ng-disabled="parameter.$invalid" class="btn btn-xs btn-primary" ng-click="generateQuestion(quiz, trial.questionType);changingData()">random</button></td>
                                         </tr>
                                     </tbody>
                                 </table>

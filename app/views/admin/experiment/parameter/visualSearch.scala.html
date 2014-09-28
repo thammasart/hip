@@ -27,10 +27,10 @@
                         <div class="col-md-offset-0 col-sm-offset-0 col-md-9 col-sm-8">
                             <div class="col-md-3">
                                 <h4>Frame Size</h4>
-                                <select class="form-control" style="margin-bottom:15px" ng-model="trial.quiz.frameSize" ng-options="value for value in frameSizes">
+                                <select ng-change="changingData()" class="form-control" style="margin-bottom:15px" ng-model="trial.quiz.frameSize" ng-options="value for value in frameSizes">
                                 </select>
                                 <h4>Target</h4>
-                                <select class="form-control" style="margin-bottom:15px" ng-model="trial.quiz.target" ng-options="value for value in targets" ng-change="changeTargetValue(trial)" >
+                                <select class="form-control" style="margin-bottom:15px" ng-model="trial.quiz.target" ng-options="value for value in targets" ng-change="changeTargetValue(trial);changingData()" >
                                 </select>
                                 <p>Width: {{width(trial)}}</p>
                                 <p>Height: {{height(trial)}}</p>
@@ -45,7 +45,7 @@
                                         <label class="control-label col-md-4">Red Square</label>
                                         <div class="col-md-3" style="margin-top:6px">
                                             <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareRed" 
-                                            ng-disabled="trial.quiz.target=='SQAURE_RED'">
+                                            ng-disabled="trial.quiz.target=='SQAURE_RED'"  ng-change="changingData()">
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                         <label class="control-label col-md-4">Blue Square</label>
                                         <div class="col-md-3" style="margin-top:6px">
                                             <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareBlue" 
-                                            ng-disabled="trial.quiz.target=='SQAURE_BLUE'">
+                                            ng-disabled="trial.quiz.target=='SQAURE_BLUE'"  ng-change="changingData()">
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                         <label class="control-label col-md-4">Green Square</label>
                                         <div class="col-md-3" style="margin-top:6px">
                                             <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.squareGreen" 
-                                            ng-disabled="trial.quiz.target=='SQAURE_GREEN'">
+                                            ng-disabled="trial.quiz.target=='SQAURE_GREEN'"  ng-change="changingData()">
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                         <label class="control-label col-md-4">Red Circle</label>
                                         <div class="col-md-3" style="margin-top:6px">
                                             <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleRed" 
-                                            ng-disabled="trial.quiz.target=='CIRCLE_RED'">
+                                            ng-disabled="trial.quiz.target=='CIRCLE_RED'"  ng-change="changingData()">
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                         <div class="col-md-3" style="margin-top:6px">
                                             <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleGreen"
 
-                                            ng-disabled="trial.quiz.target=='CIRCLE_GREEN'">
+                                            ng-disabled="trial.quiz.target=='CIRCLE_GREEN'"  ng-change="changingData()">
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                         <label class="control-label col-md-4" >Blue Circle</label>
                                         <div class="col-md-3" style="margin-top:6px">
                                             <input type="number" class="form-control" min="0" max="{{max(trial)}}" ng-model="trial.quiz.circleBlue" 
-                                            ng-disabled="trial.quiz.target=='CIRCLE_BLUE'">
+                                            ng-disabled="trial.quiz.target=='CIRCLE_BLUE'"  ng-change="changingData()">
                                         </div>
                                     </div>
                                 </div>

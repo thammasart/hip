@@ -44,17 +44,20 @@
                             <tbody>
                                 <tr ng-repeat="quiz in trial.quizzes">
                                     <td>คำถามที่ {{$index + 1}}</td>
-                                    <td class="form-invalid"><input style="width:100px;margin:auto;" class="form-control" type="text" ng-pattern="floatPattern" ng-model="quiz.differLength" required />
+                                    <td class="form-invalid">
+                                        <input style="width:100px;margin:auto;" class="form-control" type="text" ng-change="changingData()"
+                                               ng-pattern="floatPattern" ng-model="quiz.differLength" required />
 
                                     </td>
                                     <td><span>{{quiz.differLength * 38 | number:0}}px</span></td>
-                                    <td><input type="radio" ng-model="quiz.isPositive" ng-value="true"  /> + / <input type="radio" ng-model="quiz.isPositive" ng-value="false"   /> -</td>
+                                    <td><input type="radio" ng-model="quiz.isPositive" ng-value="true" ng-change="changingData()"  /> + /
+                                        <input type="radio" ng-model="quiz.isPositive" ng-value="false"  ng-change="changingData()"  /> -</td>
                                     <td>
-                                        <select style="width:110px;margin:auto;" class="form-control" ng-model="quiz.lengthType" ng-options="value for value in lengthTypes">
+                                        <select ng-change="changingData()" style="width:110px;margin:auto;" class="form-control" ng-model="quiz.lengthType" ng-options="value for value in lengthTypes">
                                         </select>
                                     </td>
                                     <td>
-                                        <select style="width:60px;margin:auto;" class="form-control" ng-model="quiz.noOfChoice" ng-options="value for value in noOfChoices" ng-change="calculateDifferChoice(quiz)">
+                                        <select style="width:60px;margin:auto;" class="form-control" ng-model="quiz.noOfChoice" ng-options="value for value in noOfChoices" ng-change="calculateDifferChoice(quiz);changingData()">
                                         </select>
                                     </td>
                                     <td><button class="btn btn-xs btn-info" ng-disabled="parameter.$invalid" ng-click="open(quiz)">Show Question</button></td>
@@ -65,7 +68,7 @@
                     <div class="col-md-3">
                         <h4>เวลาในการทำโจทย์</h4>
                         <input type="number" min="0" max="60" style="width:100px" ng-pattern="regIneger"
-                               ng-model="trial.displayTime" class="form-control" required>
+                               ng-model="trial.displayTime" class="form-control" ng-change="changingData()" required>
                         <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
                             <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                     </div>

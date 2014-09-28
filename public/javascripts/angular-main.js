@@ -2,9 +2,14 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
     .controller('changeController', function($scope, $rootScope){
         $rootScope.isChange = false;
 
+        $rootScope.changingData = function(){
+            $rootScope.isChange = true;
+        }
+
         $scope.click = function(){
-            if($rootScope.isChange)
-                console.log('change!!');
+            if($rootScope.isChange){
+                alert("are you sure?");
+            }
         }
     })
     .controller('ExController', function($scope, $rootScope, $http){
@@ -162,6 +167,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveBrownPetersonTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
                     $scope.inProcess = false;
@@ -234,6 +240,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
                     $scope.inProcess = false;
@@ -272,6 +279,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
         $rootScope.exp = {};
         $scope.trials = [];
         $scope.inProcess = false;
+        $rootScope.isChange = false;
 
         $scope.init = function(expId) {
             $http({method: 'GET', url: 'signalDetectionInit', params: {expId: expId}}).success(function (result) {
@@ -283,11 +291,16 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             });
         }
 
+        $scope.change = function(){
+            $rootScope.isChange = true;
+        }
+
         $scope.saveAll = function(){
             $scope.inProcess = true;
             $http({method:'PUT',url:'saveSignalDetectionTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
                     $scope.inProcess = false;
@@ -346,6 +359,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveStroofEffectTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
 
                 }).error(function(result){
@@ -422,6 +436,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
         $scope.inProcess = false;
         $scope.isEditable = [];
 
+        $rootScope.isChange = false;
+
         $scope.init = function(expId) {
             $scope.inProcess = true;
             $http({method: 'GET', url: 'PositionErrorInit', params: {expId: expId}}).success(function (result) {
@@ -434,6 +450,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             });
         }
 
+        $scope.change = function(){
+            $rootScope.isChange = true;
+        }
+
         function initEditable(){
             for(var i=0; i<$scope.trials.length; i++){
                 $scope.isEditable.push([]);
@@ -444,11 +464,6 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
         }
 
         $scope.edit = function(i, j){
-            if($scope.isEditable[i][j]){
-                console.log('save');
-            }else{
-                console.log('edit');
-            }
             $scope.isEditable[i][j] = !$scope.isEditable[i][j];
         }
 
@@ -481,6 +496,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'savePositionErrorTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
                     $scope.inProcess = false;
@@ -720,6 +736,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveSternBergTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
                     $scope.inProcess = false;
@@ -812,6 +829,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveMagicSevenTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
                     $scope.inProcess = false;
@@ -878,6 +896,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveSimonEffectTrials',data:$scope.trials})
                 .success(function(result){
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
+                    $rootScope.isChange = false;
                     $scope.inProcess = false;
                 }).error(function(result){
                 toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
@@ -930,6 +949,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
                 if(isSaveSuccess && index == length - 1){
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                 }
             }).error(function(result){
                 isSaveSuccess = false;
@@ -991,7 +1011,9 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             modalInstance.result.then(function (result){
                trial.quiz.positionYofTarget = result.top;
                trial.quiz.positionXofTarget = result.left;
+               $rootScope.changingData();
             });
+
         };
 
         $scope.max = function(trial){
@@ -1082,6 +1104,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
                 }
 
             });
+
+            modalInstance.result.then(function (){
+                $rootScope.changingData();
+            });
         };
 
         $scope.openSummary = function(){
@@ -1107,6 +1133,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveMullerTrial',data:$scope.trials})
             .success(function(result){
                 $scope.inProcess = false;
+                $rootScope.isChange = false;
                 toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
             }).error(function(result){
                 $scope.inProcess = false;
@@ -1193,6 +1220,7 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveGarnerTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.isChange = false;
                     toaster.pop('success', 'บันทึกข้อมูลสำเร็จ!', '', 5000);
                 }).error(function(result){
                     toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
@@ -1416,9 +1444,8 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
             $http({method:'PUT',url:'saveChangeBlindnessTrials',data:trials})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
+                    $rootScope.isChange = false;
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
                 });
         }
@@ -1435,6 +1462,10 @@ angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp'])
                 }
 
             });
+            modalInstance.result.then(function (){
+                $rootScope.changingData();
+            });
+
         };
         function initTrials(trials, questions){
             for(var i=0; i<trials.length; i++){
