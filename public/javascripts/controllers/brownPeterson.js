@@ -1,8 +1,7 @@
 /**
  * Created by ohmini on 5/8/2557.
  */
-angular.module('BrownPetersonApp', ['ui.bootstrap','toaster'])
-    .controller('BrownPetersonQuestionCtrl', function($scope, $http, $modal, toaster){
+    ExpApp.controller('BrownPetersonQuestionCtrl', function($scope, $http, $modal, toaster){
         $scope.inProcess = false;
         $scope.questions = [];
 

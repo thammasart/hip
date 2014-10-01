@@ -3,19 +3,19 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand homeButton" ng-click="click()" style="color:white;" href="@routes.Application.home()">Home</a>
+      <a class="navbar-brand homeButton" style="cursor:pointer" ng-click="click('/')" style="color:white;">Home</a>
     </div>
     <div class="adminNavBar" align="center"> 
-      <span class="adminNavBarText" ><a style="color:white;" ng-click="click()"  href="#routes.Admin.renderUserInfo" >User Info.</a>&nbsp; | &nbsp;</span>
-      <span class="adminNavBarText" ><a style="color:white;" ng-click="click()" href="@routes.Admin.RenderAdminExperimentResult()" >Experimental Result</a> &nbsp; | &nbsp;</span>
-      <span  class="adminNavBarText"><a style="color:white;" ng-click="click()" href="@routes.Admin.displayExperimentList()" >Experiment Schedule</a>&nbsp; | &nbsp;</span>
+      <span class="adminNavBarText" ><a style="color:white;cursor:pointer" ng-click="click('/userInfo')" >User Info.</a>&nbsp; | &nbsp;</span>
+      <span class="adminNavBarText" ><a style="color:white;cursor:pointer" ng-click="click('/admin/experimentResult')" >Experimental Result</a> &nbsp; | &nbsp;</span>
+      <span  class="adminNavBarText"><a style="color:white;cursor:pointer" ng-click="click('/admin/experiment')" >Experiment Schedule</a>&nbsp; | &nbsp;</span>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <div class="nav navbar-nav navbar-right">
         <span style="color:white;" class="admin-name">@session().get("username") </span>
-        <a href="@routes.Application.logout()"><button ng-click="click()" type="button" class="btn btn-default navbar-btn">logout</button></a>
+        <a><button ng-click="click('/logout')" type="button" class="btn btn-default navbar-btn">logout</button></a>
       </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

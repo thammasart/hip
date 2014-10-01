@@ -15,9 +15,11 @@
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
                 <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
-                <a href="@routes.Admin.addBrownPetersonQuestion(exp.id)" class="btn btn-xs btn-default pull-right" style="margin-right: 10px;margin-top:8px">
-                    <span class="glyphicon glyphicon-plus"></span> add question</a>
-                <a href="@routes.Admin.displayBrownPetersonQuestionList(exp.id)" class="btn btn-xs btn-default pull-right" style="margin-right: 10px;margin-top:8px;" >
+                <a
+                   class="btn btn-xs btn-default pull-right" ng-click="click('/admin/experiment/brown-peterson/question?id=@exp.id')" style="margin-right: 10px;margin-top:8px;cursor:pointer">
+                    <span class="glyphicon glyphicon-plus" ></span> add question</a>
+                <a
+                   class="btn btn-xs btn-default pull-right" ng-click="click('/admin/experiment/brown-peterson/question?id=@exp.id')" style="margin-right: 10px;margin-top:8px;cursor:pointer" >
                     <span class="glyphicon glyphicon-th-list"></span> show question</a>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">

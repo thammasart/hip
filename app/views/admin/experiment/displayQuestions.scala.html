@@ -5,7 +5,7 @@
 @head_admin("List of Brown-Peterson Task Question")
 
 @nav_admin()
-<div class="container" ng-app="BrownPetersonApp" ng-controller="BrownPetersonQuestionCtrl" ng-init="init()">
+<div class="container" ng-controller="BrownPetersonQuestionCtrl" ng-init="init()">
     @if(flash.containsKey("success")){
             <div class="alert alert-success">@flash.get("success")</div>
         }
@@ -113,6 +113,4 @@
     </script>
     <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
 </div>
-@angular()
-<script type="text/javascript" src="@routes.Assets.at("javascripts/controllers/brownPeterson.js")"></script>
 @adminfooter()
