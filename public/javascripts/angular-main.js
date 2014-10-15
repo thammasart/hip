@@ -1,4 +1,4 @@
-var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster', 'NavbarApp']);
+var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
     ExpApp.controller('changeController', function($scope, $rootScope){
         $rootScope.isChange = false;
         $rootScope.isInEditParameter = false;
