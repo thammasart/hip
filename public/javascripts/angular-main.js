@@ -13,6 +13,8 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     window.location.assign(path);
             }else if(!$rootScope.isInEditParameter){
                 window.location.assign(path);
+            }else{
+                window.location.assign(path);
             }
         }
     })
