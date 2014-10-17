@@ -6,13 +6,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.ExperimentSchedule;
-
+import models.ScheduleStatus;
 import models.TimeLog;
 import play.*;
 import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
 
+import models.UserRole;
+import models.ScheduleStatus;
 import models.User;
 import models.changeBlindness.*;
 
@@ -82,8 +84,15 @@ public class ChangeBlindness extends Controller{
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo, boolean isPreview){
+        User user = User.find.byId(session().get("username"));
         Trial trial = Trial.find.byId(trialId);
-        return ok(inst.render(trial,questionNo,isPreview));
+        if(trial.schedule.status == ScheduleStatus.OPEN){
+            return ok(inst.render(trial,questionNo,isPreview));
+        }
+        else if(user.status == UserRole.ADMIN && isPreview){
+            return ok(exp.render(trial, questionNo, isPreview));
+        }
+        return redirect(routes.Application.chooseTrial("CHANGEBLINDNESS"));
     }
 
     //แสดงหน้าการทดลอง

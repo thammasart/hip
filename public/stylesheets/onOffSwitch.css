@@ -20,15 +20,27 @@
     -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-    content: "closed";
-    padding-left: 10px;
-    background-color: #EEEEEE; color: #999999;
-}
-.onoffswitch-inner:after {
     content: "Opened";
     padding-right: 10px;
     background-color: #2FCCFF; color: #FFFFFF;
     text-align: right;
+}
+.onoffswitch-inner:after {
+    
+    content: "closed";
+    padding-left: 10px;
+    background-color: #EEEEEE; color: #999999;
+}
+.onOffOpen{
+    content: "Opened";
+    padding-right: 10px;
+    background-color: #2FCCFF; color: #FFFFFF;
+    text-align: right;
+}
+.onOffClose{
+    content: "closed";
+    padding-left: 10px;
+    background-color: #EEEEEE; color: #999999;
 }
 .onoffswitch-switch {
     display: block; width: 18px; margin: 6px;

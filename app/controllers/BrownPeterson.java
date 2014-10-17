@@ -90,7 +90,15 @@ public class BrownPeterson extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId, int questionNo, boolean isPreview){
-        return ok(exp.render(Trial.find.byId(trialId), questionNo, isPreview));
+        User user = User.find.byId(session().get("username"));
+        Trial trial = Trial.find.byId(trialId);
+        if(trial.schedule.status == ScheduleStatus.OPEN){
+            return ok(exp.render(Trial.find.byId(trialId), questionNo, isPreview));
+        }
+        else if(user.status == UserRole.ADMIN && isPreview){
+            return ok(exp.render(trial, questionNo, isPreview));
+        }
+        return redirect(routes.Application.chooseTrial("BROWNPETERSON"));
     }
 
     @Security.Authenticated(Secured.class)

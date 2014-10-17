@@ -8,8 +8,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.ExperimentSchedule;
 import models.TimeLog;
 import models.User;
+import models.UserRole;
 import models.garnerInterference.*;
-
+import models.ScheduleStatus;
 import models.garnerInterference.Answer;
 import models.garnerInterference.Trial;
 import play.*;
@@ -79,7 +80,15 @@ public class GarnerInterference extends Controller {
     //แสดงหน้าการทดลอง
     @Security.Authenticated(Secured.class)
     public static Result experiment(long trialId,int questionNo, boolean isPreview){
-        return ok(exp.render(Trial.find.byId(trialId), questionNo, isPreview));
+        User user = User.find.byId(session().get("username"));
+        Trial trial = Trial.find.byId(trialId);
+        if(trial.schedule.status == ScheduleStatus.OPEN){
+            return ok(exp.render(trial, questionNo, isPreview));
+        }
+        else if(user.status == UserRole.ADMIN && isPreview){
+            return ok(exp.render(trial, questionNo, isPreview));
+        }
+        return redirect(routes.Application.chooseTrial("GARNERINTERFERENCE"));
     }
 
     @Security.Authenticated(Secured.class)

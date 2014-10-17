@@ -467,7 +467,7 @@ public class Application extends Controller {
     }
 
     @BodyParser.Of(BodyParser.Json.class)
-    public static Result saveExperiment(Long id, String name, Long startDate, Long expireDate) {
+    public static Result saveExperiment(Long id, String name, Long startDate, Long expireDate, String status) {
         ObjectNode result = Json.newObject();
         try {
             ExperimentSchedule exp = ExperimentSchedule.find.byId(id);
@@ -479,6 +479,13 @@ public class Application extends Controller {
             }
             if (expireDate != -1) {
                 exp.expireDate = LocalDate.fromDateFields(new Date(expireDate)).toDateMidnight().toDate();
+            }
+            if(!status.isEmpty()){
+                switch(status){
+                    case "CLOSE" : exp.status = ScheduleStatus.CLOSE;break;
+                    case "OPEN" : exp.status = ScheduleStatus.OPEN;break;
+                    case "DISABLED" : exp.status = ScheduleStatus.DISABLED;break;
+                }
             }
             exp.update();
             result.put("message", "success");

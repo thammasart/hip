@@ -29,6 +29,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.today = new Date();
         $scope.dl = new Date();
         $rootScope.exp = {}
+        $scope.status = 'CLOSE';
 
         $scope.init = function() {
             $rootScope.$watch('exp', function () {
@@ -38,8 +39,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 if($rootScope.exp.startDate) {
                     $scope.startDate = new Date($rootScope.exp.startDate);
                 }
+                if($rootScope.exp){
+                    $scope.status = $rootScope.exp.status;
+                    console.log($rootScope.exp);
+                    console.log($scope.status);
+                }
             });
             $rootScope.isInEditParameter = true;
+
         }
 
         $scope.getInputStatus = function(input){
@@ -49,6 +56,23 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 return 0;
             return 1;
         };
+        $scope.changeStatus = function(){
+            if($scope.status == 'CLOSE'){
+                $scope.status = 'OPEN';
+            }else if($scope.status == 'OPEN'){
+                $scope.status = 'DISABLED';
+            }
+            var startDate = new Date($rootScope.exp.startDate).getTime();
+            var expireDate = new Date($rootScope.exp.expireDate).getTime();
+            $http({method:'PUT',url:'saveExperiment',params:{id:$rootScope.exp.id,name:$rootScope.exp.name, startDate:startDate, expireDate:expireDate, status: $scope.status}})
+                .success(function(result){
+                    $scope.inProcess = false;
+                    console.log(result);
+                }).error(function(result){
+                    console.log('error:' + result);
+                    $scope.inProcess = false;
+                });
+        }
 
         $scope.checkDisabled = function(disabled){
             return disabled ? 'disabled' : '';

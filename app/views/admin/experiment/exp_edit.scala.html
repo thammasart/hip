@@ -48,13 +48,14 @@
         <div class="form-group"> 
             <label class="col-sm-3 control-label"> status</label>
             <div class="col-sm-4">
-                <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                <!--<div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-change="changeStatus()" ng-true-value="'OPEN'" ng-model="status" ng-false-value="'CLOSE'">
                     <label class="onoffswitch-label" for="myonoffswitch">
-                        <span class="onoffswitch-inner"></span>
+                        <span class="onOffClose" ng-class="{'onOffClose': status == 'CLOSE'}"></span>
                         <span class="onoffswitch-switch"></span>
                     </label>
-                </div>
+                </div>-->
+                <button class="btn" ng-class="{'btn-primary' : status == 'OPEN', 'btn-danger' : status == 'CLOSE'}" ng-click="changeStatus()" ng-disabled="status == 'DISABLED'">{{status}}</button>
             </div>
         </div>
     </div>
