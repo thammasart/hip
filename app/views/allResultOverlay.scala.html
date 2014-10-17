@@ -13,29 +13,13 @@
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content">
+                <div class="tab-content" style="overflow-y:overlay; height:485px">
                 <!-- tab pane 1 --------------------------------------------------------------------------------------------------!>
                   <div class="tab-pane active" id="0"> 
 
-                    <div class="trialInputContainer" >
-                       <div class = "OverlayTagSize">
-                            Find trials active on
-                       </div>  
-                       <div class = " OverlayTextBoxContainer" >
-                            <input type="text" class="form-control trialTag" placeholder="start date" autocomplete="off"  style="float:left;"disabled>
-                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
-                       </div>  
-                       <div class = "OverlayTagSize" style="width:5%; margin-left:0;">
-                            To
-                       </div>  
-                       <div class = "OverlayTextBoxContainer" >
-                            <input type="text" class="form-control trialTag" placeholder="end date" autocomplete="off" style="float:left;" disabled>
-                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
-                       </div>  
-                    </div>
 
                     <div class="">
-                        <table class="table table-striped overlayTable">
+                        <table id="t1" class="table table-striped overlayTable">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -53,7 +37,7 @@
                                     <td>{{trial.schedule.expireDate | date :"yyyy-MM-dd"}}</td>
                                     <td>{{trial.schedule.name}}</td>
                                     <td>{{trial.id}}</td>
-                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial.totalScore,trial.totalUsedTime,trial.totalUser,$index,1)">select</button></td>
+                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial.totalScore,trial.totalUsedTime,trial.totalUser,$index,1,trial.schedule.name,trial.id)">select</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -75,22 +59,6 @@
                 <!-- tab pane 2 --------------------------------------------------------------------------------------------------!>
                   <div class="tab-pane" id="1">
 
-                    <div class="trialInputContainer" >
-                       <div class = "OverlayTagSize">
-                            Find trials active on
-                       </div>  
-                       <div class = " OverlayTextBoxContainer" >
-                            <input type="text" class="form-control trialTag" placeholder="start date" autocomplete="off"  style="float:left;"disabled>
-                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
-                       </div>  
-                       <div class = "OverlayTagSize" style="width:5%; margin-left:0;">
-                            To
-                       </div>  
-                       <div class = "OverlayTextBoxContainer" >
-                            <input type="text" class="form-control trialTag" placeholder="end date" autocomplete="off" style="float:left;" disabled>
-                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
-                       </div>  
-                    </div>
 
                     <div class="">
                         <table class="table table-striped overlayTable">
@@ -131,22 +99,6 @@
                   </div>
 
                   <div class="tab-pane" id="2">
-                    <div class="trialInputContainer" >
-                       <div class = "OverlayTagSize">
-                            Find trials active on
-                       </div>  
-                       <div class = " OverlayTextBoxContainer" >
-                            <input type="text" class="form-control trialTag" placeholder="start date" autocomplete="off"  style="float:left;"disabled>
-                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
-                       </div>  
-                       <div class = "OverlayTagSize" style="width:5%; margin-left:0;">
-                            To
-                       </div>  
-                       <div class = "OverlayTextBoxContainer" >
-                            <input type="text" class="form-control trialTag" placeholder="end date" autocomplete="off" style="float:left;" disabled>
-                            <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
-                       </div>  
-                    </div>
 
                     <div class="">
                         <table class="table table-striped overlayTable">
@@ -187,22 +139,6 @@
                   </div>
 
                   <div class="tab-pane" id="3">
-                        <div class="trialInputContainer" >
-                           <div class = "OverlayTagSize">
-                                Find trials active on
-                           </div>  
-                           <div class = " OverlayTextBoxContainer" >
-                                <input type="text" class="form-control trialTag" placeholder="start date" autocomplete="off"  style="float:left;"disabled>
-                                <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
-                           </div>  
-                           <div class = "OverlayTagSize" style="width:5%; margin-left:0;">
-                                To
-                           </div>  
-                           <div class = "OverlayTextBoxContainer" >
-                                <input type="text" class="form-control trialTag" placeholder="end date" autocomplete="off" style="float:left;" disabled>
-                                <button class="glyphicon glyphicon-list gear" style="float:left;"></button>
-                           </div>  
-                        </div>
 
                         <div class="">
                             <table class="table table-striped overlayTable">

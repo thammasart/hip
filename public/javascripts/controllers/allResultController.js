@@ -120,7 +120,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
 
     // Get the size of an object
 
-        $scope.sel = function (totalScore,totalUsedTime,totalUser,trialIndex,qTypeNumber) {
+        $scope.sel = function (totalScore,totalUsedTime,totalUser,trialIndex,qTypeNumber,tName,tId) {
             if(qTypeNumber == 1){
                 var size = Object.size(trials[trialIndex].quizzes);
             }else if(qTypeNumber ==2){
@@ -135,6 +135,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
             console.log(size);
             console.log(questionTypes);
             if(gNumber == 1){
+                document.getElementById("t1Name").value = tName + ":" + tId;
                 document.getElementById("graphUser1").innerHTML = totalUser;
                 document.getElementById("graphTime1").innerHTML = totalUsedTime;
                 document.getElementById("graphScore1").innerHTML = totalScore;
