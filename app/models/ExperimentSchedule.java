@@ -390,6 +390,7 @@ public class ExperimentSchedule extends Model{
 		this.startDate = startDate;
 		this.expireDate = expireDate;
 		this.experimentType = experimentType;
+        this.status = ScheduleStatus.CLOSE;
 	}
 
 	public static List<ExperimentSchedule> findAllWorkingExperiments() {

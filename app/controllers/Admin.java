@@ -682,6 +682,7 @@ public class Admin extends Controller {
         ExperimentSchedule exp = boundForm.get();
         exp.startDate = LocalDate.fromDateFields(exp.startDate).toDateTimeAtStartOfDay().toDate();
         exp.expireDate = LocalDate.fromDateFields(exp.expireDate).toDateMidnight().toDate();
+        exp.status = ScheduleStatus.CLOSE;
         exp.save();
         flash("savedSuccess","Experiment Schedule added!");
         exp.generateTrials();
