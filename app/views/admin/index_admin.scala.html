@@ -1,6 +1,167 @@
 @(user : List[User])
 
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/allResult.css")">
+<script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/ui/ui-bootstrap-tpls-0.11.0.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/controllers/allResultController.js")"></script>
+<script src="@routes.Assets.at("javascripts/allResult.js")"></script>
+
 @head_admin("Admin Panel")
 
-@nav_admin()
+<body >
+    @nav_admin()
+<div class="fixSize" ng-app="AllResultApp" ng-controller="AllResultController">
+    <!-- Page Header -->
+   <div class = "graphContainer" id = "">
+
+        <div class = "experimentName" id = "expNameHeader">
+             Experiment name
+        </div>  
+        <div class = "graphBox" id = "">
+            <div class = "graphLineTag" style= "bottom:-3.5%;">0%</div>
+            <div class = "graphLineTag" style= "bottom:17%;">20%</div>
+            <div class = "graphLineTag" style= "bottom:37%;">40%</div>
+            <div class = "graphLineTag" style= "bottom:57%;">60%</div>
+            <div class = "graphLineTag" style= "bottom:77%;">80%</div>
+            <div class = "graphLineTag" style= "bottom:96%;">100%</div>
+
+            <div class = "graphLine" style= "bottom:0%;"></div>
+            <div class = "graphLine" style= "bottom:20%;"></div>
+            <div class = "graphLine" style= "bottom:40%;"></div>
+            <div class = "graphLine" style= "bottom:60%;"></div>
+            <div class = "graphLine" style= "bottom:80%;"></div>
+            <div class = "graphLine" style= "bottom:100%;"></div>
+
+             <div id="sBeam1" class = "beam beam1" style= "margin-left:20%;"></div>
+             <div id="sBeam2" class = "beam beam2" style= "margin-left:40%;"></div>
+             <div id="sBeam3" class = "beam beam3" style= "margin-left:60%;"></div>
+             <div id="sBeam4" class = "beam beam4" style= "margin-left:80%;"></div>
+
+        </div>        
+        <div class = "graphBox" style="margin-left:4%;" id = "">
+            <div id="line1" class = "graphLineTag" style= "bottom:-3.5%;">0</div>
+            <div id="line2" class = "graphLineTag" style= "bottom:17%;">20%</div>
+            <div id="line3" class = "graphLineTag" style= "bottom:37%;">40%</div>
+            <div id="line4" class = "graphLineTag" style= "bottom:57%;">60%</div>
+            <div id="line5" class = "graphLineTag" style= "bottom:77%;">80%</div>
+            <div id="line6" class = "graphLineTag" style= "bottom:96%;">100%</div>
+
+            <div class = "graphLine" style= "bottom:0%;"></div>
+            <div class = "graphLine" style= "bottom:20%;"></div>
+            <div class = "graphLine" style= "bottom:40%;"></div>
+            <div class = "graphLine" style= "bottom:60%;"></div>
+            <div class = "graphLine" style= "bottom:80%;"></div>
+            <div class = "graphLine" style= "bottom:100%;"></div>
+
+             <div id="tBeam1"class = "beam beam1" style= "margin-left:20%;"></div>
+             <div id="tBeam2"class = "beam beam2" style= "margin-left:40%;"></div>
+             <div id="tBeam3"class = "beam beam3" style= "margin-left:60%;"></div>
+             <div id="tBeam4"class = "beam beam4" style= "margin-left:80%;"></div>
+
+        </div>        
+        
+        <div class = "graphTag" id = "">
+            Score
+        </div>  
+        <div class = "graphTag" id = "">
+            Time
+        </div>  
+   </div>  
+    
+
+
+    <div class = "selectExResultBox" id = "">
+        <div class = "dropDownTag" id = "">
+            การทดลอง
+        </div>  
+        <div class = "dropDownContainer" id = "">
+            <div class="btn-group">
+                <button id="expName" data-toggle="dropdown" class=" dropdown-toggle"style="width:200%; border-radius:5px;"> Select Experiment <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdownSize">
+                    <li class="dropdownHeader" >ATTENTION</li>
+                    <li class="dropdownLi" ><a href="#attentionBlink" onclick="selectExperiment(this.innerHTML)">Attentional Blink</a></li>
+                    <li class="dropdownLi" ><a href="#simonEffect" onclick="selectExperiment(this.innerHTML)">Simon Effect</a></li>
+                    <li class="dropdownLi" ><a href="#stroopEffect" onclick="selectExperiment(this.innerHTML)">Stroop Effect</a></li>
+                    <li class="dropdownLi" ><a href="#visualSearch" onclick="selectExperiment(this.innerHTML)">Visual Search</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdownHeader">SHOR-TERM MEMORY</li>
+                    <li class="dropdownLi" ><a href="#brownPeterson" onclick="selectExperiment(this.innerHTML)">Brown-Peterson Task</a></li>
+                    <li class="dropdownLi" ><a href="#magicNumber7" onclick="selectExperiment(this.innerHTML)">Magic Number 7</a></li>
+                    <li class="dropdownLi" ><a href="#positionError" onclick="selectExperiment(this.innerHTML)">Position Error</a></li>
+                    <li class="dropdownLi" ><a href="#sternbergSearchExhaustive" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Exhaustive)</a></li>
+                    <li class="dropdownLi" ><a href="#sternbergSearchParallel" onclick="selectExperiment(this.innerHTML)">Sternberg Search (Parallel)</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdownHeader">PERCEPTION</li>
+                    <li class="dropdownLi" ><a href="#changeBlindness" onclick="selectExperiment(this.innerHTML)">Change Blindness</a></li>
+                    <li class="dropdownLi" ><a href="#garnerInterference" onclick="selectExperiment(this.innerHTML)">Garner Interference</a></li>
+                    <li class="dropdownLi" ><a href="#mullerLayer" onclick="selectExperiment(this.innerHTML)">Muller-Lyer Illusion</a></li>
+                    <li class="dropdownLi" ><a href="#signalDetection" onclick="selectExperiment(this.innerHTML)">Signal Detection</a></li>
+                    <li class="divider"></li>
+                </ul>
+            </div>
+        </div>   
+    </div>  
+
+
+
+   <div class = "panelContainer" id = "">
+        <div class = "panel panel-danger panelSize" id = "">
+            <div class="panel-heading"> Panel Heading 1 </div>
+            
+            <ul class="list-group">
+                <li class="list-group-item"> Trial 
+                    <button ng-click="open(1)" class="glyphicon glyphicon-cog gear" name="gearButton"></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" id="t1Name" disabled>
+                </li>  
+                               
+                <li class="list-group-item" > Patacipants <span id="graphUser1" class="graphValue"> n/a </span></li>  
+                <li class="list-group-item"> Avg.Score <span id="graphScore1" class="graphValue"> n/a </span></li>  
+                <li class="list-group-item"> Avg.Time<span id="graphTime1" class="graphValue"> n/a </span> </li>  
+            </ul>
+        </div>  
+        <div class = "panel panel-info panelSize" id = "">
+            <div class="panel-heading"> Panel Heading 2 </div>
+            
+            <ul class="list-group">
+                <li class="list-group-item"> Trial   
+                    <button ng-click="open(2)" class="glyphicon glyphicon-cog gear" name="gearButton"></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
+                <li class="list-group-item"> Patacipants <span id="graphUser2" class="graphValue"> n/a </span></li>  
+                <li class="list-group-item"> Avg.Score <span id="graphScore2" class="graphValue"> n/a </span></li>  
+                <li class="list-group-item"> Avg.Time <span id="graphTime2" class="graphValue"> n/a </span></li>  
+            </ul>
+        </div>  
+        <div class = "panel panel-success panelSize" id = "">
+            <div class="panel-heading"> Panel Heading 3 </div>
+            
+            <ul class="list-group">
+                <li class="list-group-item"> Trial   
+                    <button ng-click="open(3)" class="glyphicon glyphicon-cog gear" name="gearButton"></button>
+                    <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
+                <li class="list-group-item"> Patacipants <span id="graphUser3" class="graphValue"> n/a </span></li>  
+                <li class="list-group-item"> Avg.Score <span id="graphScore3" class="graphValue"> n/a </span></li>  
+                <li class="list-group-item"> Avg.Time <span id="graphTime3" class="graphValue"> n/a </span></li>  
+            </ul>
+        </div>  
+        <div class = "panel panel-warning panelSize" >
+            <div class="panel-heading" style="background-color:#fddf71;"> Panel Heading 4 </div>
+            
+            <ul class="list-group">
+                <li class="list-group-item"> Trial   
+                        <button ng-click="open(4)" class="glyphicon glyphicon-cog gear" name="gearButton"></button>
+                        <input type="text" class="form-control trialTag" placeholder="select trial " autocomplete="off" disabled>
+                </li>
+                <li class="list-group-item"> Patacipants <span id="graphUser4" class="graphValue"> n/a </span></li>  
+                <li class="list-group-item"> Avg.Score <span id="graphScore4" class="graphValue"> n/a </span></li>  
+                <li class="list-group-item"> Avg.Time <span id="graphTime4" class="graphValue"> n/a </span></li>  
+            </ul>
+        </div>  
+   </div>  
+
+    @allResultOverlay()
+
+    </div>
+
 @adminfooter()
