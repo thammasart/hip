@@ -25,18 +25,31 @@ function calculateTimeLeft()
 function delay(){
     clearInterval(delayTime);
     clearInterval(showTimerTime);
-    document.getElementById("word").innerHTML="";
+    document.getElementById("word").innerHTML= " มีเวลาทำการทดลอง 10 วินาที" ;
     delayTime2 = setInterval(function(){showQuestion()},1000);
 }
+
+function showExpTime() { 
+    count--;
+    document.getElementById("word").innerHTML= " เหลือเวลาอีก " + (count-1) +" วินาที" ;
+    if(count == 1){
+        done(99);
+        document.getElementById("answerForm").submit();
+    }
+} 
+
 function showQuestion(){
     clearInterval(delayTime2);
+    count = 12;  
     d = new Date();
     expDuration = d.getTime();
+    expTime = setInterval(function(){showExpTime()},1000);
     document.getElementById("mc").style.visibility = "visible";  
     document.getElementById("ic").style.visibility = "visible";  
 }
-
+var expTime;
 function done(choice){
+    clearInterval(showExpTime);
     d = new Date();
     expDuration = (d.getTime()-expDuration)/1000;
     document.getElementById("usedTime").value = expDuration;
