@@ -15,7 +15,6 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 <script >
     window.addEventListener('scroll',function(e){ alert(window.pageXOffset});
 </script>
-<script src="@routes.Assets.at("javascripts/mullerLayer.js")"></script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/mullerLayer.css")">
 <body onload="setUp(@trial.quizzes(questionNo).differLength,@trial.quizzes(questionNo).differChoice)">
@@ -23,6 +22,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
     <!-- Page Header -->
     <script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
     <script src="@routes.Assets.at("javascripts/controllers/mullerLayer.js")"></script>
+    <script src="@routes.Assets.at("javascripts/mullerLayer.js")"></script>
     <div class="">
           <h3 class="hipTitle"align="center"style="margin-top:30px;">Human Information Processing Lab</h3>
           <!-- Dashed line-->
@@ -49,6 +49,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
                 <input id="usedTime" name="usedTime" hidden/>
                 <input id="choice" name="choice"  hidden />
+                <input id="displayTime" name="displayTime" value="10"  hidden />
             </form>
         </div>
     </div>

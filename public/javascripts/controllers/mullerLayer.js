@@ -11,6 +11,7 @@ angular.module('MullerLayerApp',[])
             $scope.quiz = {};
             $http({method:'GET',url:'findQuestion',params:{trialId:trialId, questionNo: questionNo}}).success(function(result){
                 $scope.quiz = result.quiz;
+                document.getElementById("displayTime").value = result.displayTime;
                 drawCanvas()
             }).error(function(result){
                 console.log('error:' + result);

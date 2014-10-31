@@ -118,6 +118,7 @@ public class Trial extends Model{
 
     public Trial(ExperimentSchedule schedule){
     	this.schedule = schedule;
+        this.displayTime = 10;
     }
 
     public void updateResult(){

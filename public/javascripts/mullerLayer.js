@@ -10,6 +10,7 @@ var lenghtType ;
 var differentLenght ; 
 var lineLength = "5%";
 var score = 0 ;
+var displayTime = 10;
 
 function showTimer(){
     clearInterval(startTimer);
@@ -23,16 +24,17 @@ function calculateTimeLeft()
     document.getElementById("word").innerHTML= " โจทย์จะเริ่มในอีก " + (count-1) +" วินาที" ;
 }
 function delay(){
+    displayTime = parseInt(document.getElementById("displayTime").value)  ;
     clearInterval(delayTime);
     clearInterval(showTimerTime);
-    document.getElementById("word").innerHTML= " มีเวลาทำการทดลอง 10 วินาที" ;
+    document.getElementById("word").innerHTML= " มีเวลาทำการทดลอง "+displayTime+" วินาที" ;
     delayTime2 = setInterval(function(){showQuestion()},1000);
 }
 
 function showExpTime() { 
-    count--;
-    document.getElementById("word").innerHTML= " เหลือเวลาอีก " + (count-1) +" วินาที" ;
-    if(count == 1){
+    displayTime--;
+    document.getElementById("word").innerHTML= " เหลือเวลาอีก " + displayTime +" วินาที" ;
+    if(displayTime == 0){
         done(99);
         document.getElementById("answerForm").submit();
     }
@@ -40,7 +42,6 @@ function showExpTime() {
 
 function showQuestion(){
     clearInterval(delayTime2);
-    count = 12;  
     d = new Date();
     expDuration = d.getTime();
     expTime = setInterval(function(){showExpTime()},1000);

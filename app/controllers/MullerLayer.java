@@ -193,6 +193,7 @@ public class MullerLayer extends Controller {
             result.put("message", "success");
             result.put("status", "ok");
             result.put("quiz", json);
+            result.put("displayTime",trial.displayTime);
         }catch(RuntimeException e){
             result.put("message", e.getMessage());
             result.put("status", "error");
