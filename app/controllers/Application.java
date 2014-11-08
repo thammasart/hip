@@ -481,11 +481,12 @@ public class Application extends Controller {
                 exp.expireDate = LocalDate.fromDateFields(new Date(expireDate)).toDateMidnight().toDate();
             }
             if(!status.isEmpty()){
-                switch(status){
-                    case "CLOSE" : exp.status = ScheduleStatus.CLOSE;break;
-                    case "OPEN" : exp.status = ScheduleStatus.OPEN;break;
-                    case "DISABLED" : exp.status = ScheduleStatus.DISABLED;break;
-                }
+                if (status.equals("CLOSE"))
+                    exp.status = ScheduleStatus.CLOSE;
+                else if (status.equals("OPEN"))
+                    exp.status = ScheduleStatus.OPEN;
+                else if (status.equals("DISABLED"))
+                    exp.status = ScheduleStatus.DISABLED;
             }
             exp.update();
             result.put("message", "success");
