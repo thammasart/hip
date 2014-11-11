@@ -239,7 +239,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
 
@@ -328,7 +328,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
     })
@@ -369,7 +369,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
     })
@@ -495,7 +495,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
     })
@@ -591,7 +591,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
 
@@ -845,7 +845,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
     })
@@ -935,7 +935,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
     })
@@ -1003,7 +1003,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
     })
@@ -1081,9 +1081,10 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         $scope.open = function(trial){
+            console.log("in open");
             var modalInstance = $modal.open({
                 templateUrl: 'preview.html',
-                controller: ModalInstanceCtrl,
+                controller: VisualSearchModalInstanceCtrl,
                 size: 'lg',
                 resolve: {
                     sharps : function(){
@@ -1166,7 +1167,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
 
@@ -1248,7 +1249,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl
             });
         };
     })
@@ -1521,7 +1522,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.openTutorial = function(){
             $modal.open({
                 templateUrl: 'tutorial.html',
-                controller: TutorailModalInstanceCtrl,
+                controller: TutorialModalInstanceCtrl,
             });
         };
     })
@@ -1835,7 +1836,7 @@ var MullerModalInstanceCtrl = function($scope, $rootScope, $modalInstance, quiz)
     }
 }
 
-var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height, trial) {
+var VisualSearchModalInstanceCtrl = function ($scope, $modal, $modalInstance, sharps, width, height, trial) {
 
     $scope.sharps = sharps;
     $scope.width = width;
@@ -1875,6 +1876,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
     }
 
     $scope.init = function(){
+        console.log("in init");
         var row = Math.floor($scope.height / 30);
         var column = Math.floor($scope.width / 30);
         x_offset = Math.floor(100/column);
@@ -1900,6 +1902,13 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height,
         }
         $scope.sharps = angular.fromJson(trial.quiz.question.sharps);
     }
+
+    $scope.openGenerateTutorial = function(){
+        $modal.open({
+            templateUrl: 'tutorialInGenerate.html',
+            controller: TutorialModalInstanceCtrl
+        });
+    };
 
     var generateSharps = function(trial){
         $scope.sharps = [];
@@ -2180,7 +2189,7 @@ var DeleteModalInstanceCtrl = function ($scope,$modalInstance, questions) {
 };
 
 
-var TutorailModalInstanceCtrl = function($scope, $modalInstance){
+var TutorialModalInstanceCtrl = function($scope, $modalInstance){
     $scope.ok = function () {
         $modalInstance.close();
     };

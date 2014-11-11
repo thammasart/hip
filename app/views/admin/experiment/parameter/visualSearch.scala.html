@@ -136,7 +136,7 @@
                             </div>
                             <div class="modal-footer" style="text-align:center">
                                 <button class="btn btn-primary" ng-disabled="parameter.$invalid" ng-click="generate()">Generate</button>
-                                <button class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                <button class="btn btn-warning" ng-disabled="parameter.$invalid" ng-click="openGenerateTutorial()" >
                                     <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                                 <button class="btn btn-primary pull-right" ng-disabled="parameter.$invalid"  ng-click="ok()">Confirm</button>
                                 <button class="btn btn-warning pull-right" ng-disabled="parameter.$invalid" ng-click="cancel()">Cancel</button>
@@ -164,6 +164,21 @@
                 <p>Framesize แต่ละขนาด จะกำหนดจำนวน Noise สูงสุดได้ไม่เท่ากัน ตรวจสอบจำนวนสูงสุดได้ที่มุมขวา<br/>
                 หาก Noise ประเภทใด ๆ เป็น 0 หมายความว่าในโจทย์จะไม่มี Noise ประเภทนั้น ๆ<br/>
                 กด Generate Question เพื่อตั้งค่าโจทย์</p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="tutorialInGenerate.html">
+                <div class="modal-header">
+                <h3>Tutorial</h3>
+                </div>
+                <div class="modal-body">
+                <p>กด Generate เพื่อสร้างโจทย์<br/>
+                ปรับตำแหน่ง Target โดยใช้ Range Slider ของ Target<br/>
+                ปรับตำแหน่ง Noise โดยคลิกเลือก Noise ที่ต้องการปรับ และใช้ Range Slider ของ Noise<br/>
+                กด Confirm เพื่อยืนยันการตั้งค่า<br/>
+                กด Cancel เพื่อยกเลิก์</p>
                 </div>
                 <div class="modal-footer">
                 <button class="btn btn-primary" ng-click="ok()">close</button>
