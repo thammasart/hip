@@ -1081,7 +1081,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         $scope.open = function(trial){
-            console.log("in open");
             var modalInstance = $modal.open({
                 templateUrl: 'preview.html',
                 controller: VisualSearchModalInstanceCtrl,
@@ -1876,7 +1875,6 @@ var VisualSearchModalInstanceCtrl = function ($scope, $modal, $modalInstance, sh
     }
 
     $scope.init = function(){
-        console.log("in init");
         var row = Math.floor($scope.height / 30);
         var column = Math.floor($scope.width / 30);
         x_offset = Math.floor(100/column);
