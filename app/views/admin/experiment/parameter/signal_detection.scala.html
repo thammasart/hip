@@ -63,7 +63,7 @@
                                     </table>
                                 </div>
                                 <div class="col-md-4 col-sm-4">
-                                    <button style="margin-top:50px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                    <button style="margin-top:50px;padding: 6px 60px" class="btn btn-warning" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
                                         <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                                 </div>
                             </div>
@@ -74,6 +74,20 @@
                 <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
+            <script type="text/ng-template" id="tutorial.html">
+                <div class="modal-header">
+                <h3>Tutorial</h3>
+                </div>
+                <div class="modal-body">
+                <p>ระบุ Target และ Noise เป็นตัวเลขหรืออักษรเดี่ยว<br/>
+                ความยาวของโจทย์ระบุได้ตั้งแต่ 1 -60  ตัวอักษร<br/>
+                จำนวน Target ระบุได้ตั้งแต่ 0 ถึง (ความยาวโจทย์ - 1)<br/>
+                ตั้งระยะเวลาได้สูงสุดที่ 10 วินาที (ไม่สามารถเป็น 0 ได้)</p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
             <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>

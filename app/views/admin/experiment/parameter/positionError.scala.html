@@ -76,7 +76,7 @@
                             </div>
                             <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial);changingData()" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
-                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
@@ -86,6 +86,21 @@
                 <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
+            <script type="text/ng-template" id="tutorial.html">
+                <div class="modal-header">
+                <h3>Tutorial</h3>
+                </div>
+                <div class="modal-body">
+                <p>กด Random เพื่อสุ่มเลือกคำถามแต่ละข้อใหม่<br />
+                หากเปลี่ยน Memory Set Language ให้กด Refresh เพื่อสร้างคำถามใหม่ทุกครั้ง<br />
+                กด edit เพื่อกำหนดคำถามเอง  สามารถกำหนดได้ตั้งแต่ 3 - 12 ตัวอักษร<br/>
+                ตั้ง Flash Speed ได้สูงสุดที่ 5 วินาที (ไม่สามารถเป็น 0 ได้)<br/>
+                ตั้ง Delay Time ได้สูงสุดที่ 5 วินาที (ไม่สามารถเป็น 0 ได้)</p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
             <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>

@@ -73,7 +73,7 @@
                                 <div class="col-md-5">
                                     <button style="margin-top:20px;padding: 6px 33px" ng-disabled="generateSuccess[$index]|| parameter.$invalid"
                                             class="btn btn-primary" ng-click="generateQuestion(trial, $index);changingData()">Generate Question</button>
-                                    <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                                    <button style="margin-top:20px;padding: 6px 60px" ng-click="openTutorial()" class="btn btn-warning" ng-disabled="parameter.$invalid" >
                                         <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                                     <div style="margin-top:10px" class="alert alert-success"
                                          role="alert" ng-show="generateSuccess[$index]">สร้างคำถามใหม่สำเร็จ
@@ -135,6 +135,22 @@
                 <button class="btn btn-success" style="padding: 6px 60px;float:right;margin-bottom:20px" ng-disabled="parameter.$invalid" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
+            <script type="text/ng-template" id="tutorial.html">
+                <div class="modal-header">
+                <h3>Tutorial</h3>
+                </div>
+                <div class="modal-body">
+                <p>เมื่อตั้งค่า parameter แล้ว ต้องกด Generate  เพื่อสร้างคำถามทุกครั้ง<br/>
+                สี หมายถึงถามเฉพาะเรื่องสี   ขนาด หมายถึงถามเฉพาะเรื่องขนาด<br/>
+                Bi Dimension หมายถึงถามทั้งเรื่องสีและขนาด<br/>
+                สามารถกำหนเจำนวนคำถามแต่ละประเภทได้สูงสุดที่ 5 คำถาม<br/>
+                จำนวนคำถามรวมต้องไม่เท่ากับ 0<br/>
+                สามารถกด Overview เพื่อดูคำถามทั้งหมดได้</p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
             <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>

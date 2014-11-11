@@ -77,7 +77,7 @@
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Memory Set Language</h4>
                             <select ng-change="changingData()" class="form-control" style="width:150px" ng-model="trial.questionType" ng-options="value for value in questionTypes"></select>
-                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
@@ -113,6 +113,23 @@
                 <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
+            <script type="text/ng-template" id="tutorial.html">
+                <div class="modal-header">
+                <h3>Tutorial</h3>
+                </div>
+                <div class="modal-body">
+                <p>กด Random เพื่อสุ่มเลือกคำถามแต่ละข้อใหม่<br />
+                หากเปลี่ยน Memory Set Language ให้กด Refresh เพื่อสร้างคำถามใหม่ทุกครั้ง<br/>
+                กำหนด length ได้ตั้งแต่ 1 - 6  ตัวอักษร<br/>
+                กด edit เพื่อกำหนดคำถามเอง  สามารถกำหนดได้ตั้งแต่ 1 - 6 ตัวอักษร<br/>
+                คำถาม correct มีจำนวนสูงสุดได้น้อยกว่า length อยู่ 1<br/>
+                แบบ Parallel Search จะมีเฉพาะข้อ correct (incorrect ของทั้ง 2 ประเภทเป็น 0)<br/>
+                แบบ exhaustive ไม่มีคำถามแบบ 2 chars</p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
             <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>

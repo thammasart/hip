@@ -237,14 +237,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         $scope.openTutorial = function(){
-            var modalInstance = $modal.open({
+            $modal.open({
                 templateUrl: 'tutorial.html',
                 controller: TutorailModalInstanceCtrl,
             });
         };
 
     })
-    .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http, toaster){
+    .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.trials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
@@ -325,8 +325,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             }
             return text;
         }
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
     })
-    .controller('SignalDetectionCtrl', function($scope, $rootScope, $http, toaster){
+    .controller('SignalDetectionCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
         $rootScope.exp = {};
@@ -360,8 +366,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
         }
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
     })
-    .controller('StroofEffectCtrl', function($scope, $rootScope, $http, toaster){
+    .controller('StroofEffectCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.regIneger = /^(0|[1-9][0-9]*)$/;
         $scope.questionTypes = ['THAI', 'ENGLISH'];
         $scope.trials = [];
@@ -480,8 +492,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             }
 
         }
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
     })
-    .controller('PositionErrorCtrl', function($scope, $rootScope, $http, toaster){
+    .controller('PositionErrorCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.memorySet = [ 3, 5, 7, 10, 12];
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
@@ -570,9 +588,15 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 $scope.generateQuestion(trial.quizzes[i], trial.questionType);
             }
         }
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
 
     })
-    .controller('SternbergSearchCtrl', function($scope, $rootScope, $http, toaster){
+    .controller('SternbergSearchCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.showQuiz = true;
         var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -818,9 +842,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
             return array;
         }
-
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
     })
-    .controller('MagicNumber7Ctrl', function($scope, $rootScope, $http, toaster){
+    .controller('MagicNumber7Ctrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
@@ -903,8 +932,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 $scope.generateQuestion(trial.quizzes[i], trial.questionType);
             }
         }
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
     })
-    .controller('SimonEffectCtrl', function($scope, $rootScope, $http, toaster){
+    .controller('SimonEffectCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.trials = [];
         $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
 
@@ -965,6 +1000,12 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 }
             }
         }
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
     })
     .controller('VisualSearchCtrl', function($scope, $rootScope, $modal, $http, toaster){
 
@@ -1122,7 +1163,12 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             return 400;
         };
 
-
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
 
     })
     .controller('MullerLayerCtrl', function($scope, $rootScope, $http, $modal, toaster){
@@ -1199,6 +1245,12 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 quiz.differChoice = Math.floor((Math.random() * quiz.noOfChoice) + 1);
 
         }
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
     })
     .controller('GarnerController', function($scope, $rootScope, $http, $modal, toaster){
         $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
@@ -1466,7 +1518,12 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
             return array;
         }
-
+        $scope.openTutorial = function(){
+            $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
     })
     .controller('ChangeBlindnessController', function($scope, $rootScope, $http, $modal) {
         $scope.inProcess = false;
@@ -1778,7 +1835,7 @@ var MullerModalInstanceCtrl = function($scope, $rootScope, $modalInstance, quiz)
     }
 }
 
-var ModalInstanceCtrl = function ($scope, $rootScope, $modalInstance, sharps, width, height, trial) {
+var ModalInstanceCtrl = function ($scope, $modalInstance, sharps, width, height, trial) {
 
     $scope.sharps = sharps;
     $scope.width = width;

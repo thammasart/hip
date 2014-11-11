@@ -143,8 +143,9 @@
                             </div>
                         </script>
                         <div class="col-md-3 col-sm-4">
-                            <button ng-disabled="max(trial) < totalNoise(trial)" class="btn btn-primary" ng-click="open(trial)" style="margin-top:20px;padding:6px 33px;margin-left:auto;margin-right:auto">Generate Question</button>
-                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                            <button ng-disabled="max(trial) < totalNoise(trial)" class="btn btn-primary"
+                            ng-click="open(trial)" style="margin-top:20px;padding:6px 33px;margin-left:auto;margin-right:auto">Generate Question</button>
+                            <button style="margin-top:20px;padding: 6px 60px" ng-click="openTutorial()" class="btn btn-warning" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                             <p class="text-danger" ng-show="trial.quiz.question.sharps == null">Trial นี้ยังไม่ได้ทำการ generate noise</p>
                         </div>
@@ -155,6 +156,19 @@
                 <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
+            <script type="text/ng-template" id="tutorial.html">
+                <div class="modal-header">
+                <h3>Tutorial</h3>
+                </div>
+                <div class="modal-body">
+                <p>Framesize แต่ละขนาด จะกำหนดจำนวน Noise สูงสุดได้ไม่เท่ากัน ตรวจสอบจำนวนสูงสุดได้ที่มุมขวา<br/>
+                หาก Noise ประเภทใด ๆ เป็น 0 หมายความว่าในโจทย์จะไม่มี Noise ประเภทนั้น ๆ<br/>
+                กด Generate Question เพื่อตั้งค่าโจทย์</p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
             <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>

@@ -10,8 +10,11 @@
         @error()
 
         <div class="container" ng-controller="AttentionBlinkCtrl" ng-init="init(@exp.id)">
-            <div ng-hide="inProcess" class="row">
-                <button class="btn btn-success" ng-click="saveAll()">SAVE ALL</button>
+            <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid"
+                ng-click="saveAll()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <div ng-repeat="trial in trials" ng-hide="inProcess">
                 <h3>Trial - {{$index + 1}}<span> </span>
@@ -83,11 +86,30 @@
                             <h4>Question Type</h4>
                             <select ng-change="change()" class="form-control" ng-model="trial.questionType" style="width:120px"
                             ng-options="value for value in questionTypes"></select>
-                            <button style="margin-top:20px" class="btn btn-info" ng-click="refresh(trial)" >Refresh</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial);changingData()" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
+                                <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <script type="text/ng-template" id="tutorial.html">
+                <div class="modal-header">
+                <h3>Tutorial</h3>
+                </div>
+                <div class="modal-body">
+                <p>กด Random เพื่อสุ่มเลือกคำถามแต่ละข้อใหม่<br />
+                    หากเปลี่ยน Question Type ให้กด Refresh เพื่อสร้างคำถามใหม่ทุกครั้ง<br />
+                    ตั้งระยะเวลาได้สูงสุดที่ 10 วินาที (ไม่สามารถเป็น 0 ได้)<br/>
+                    กำหนดจำนวน Character ได้ตั้งแต่ 13 - 20 ตัวอักษร<br/>
+                    กำหนดจำนวน Target ได้ตั้งแต่ 1 - 3 ตัวอักษร</p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
+            <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>
 </div>
