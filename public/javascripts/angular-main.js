@@ -41,8 +41,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 }
                 if($rootScope.exp){
                     $scope.status = $rootScope.exp.status;
-                    console.log($rootScope.exp);
-                    console.log($scope.status);
                 }
             });
             $rootScope.isInEditParameter = true;
@@ -97,11 +95,18 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 name = $rootScope.exp.name;
             else if(field == 'date') {
                 $scope.isEditDate = false;
-                startDate = new Date($rootScope.exp.startDate).getTime();
-                expireDate = new Date($rootScope.exp.expireDate).getTime();
+                startDate = new Date($scope.startDate).getTime();
+                expireDate = new Date($scope.expireDate).getTime();
+                $rootScope.exp.startDate = $scope.startDate;
+                $rootScope.exp.expireDate = $scope.expireDate;
             }
 
-            $http({method:'PUT',url:'saveExperiment',params:{id:$rootScope.exp.id,name:name, startDate:startDate, expireDate:expireDate}})
+            $http({method:'PUT',url:'saveExperiment',
+                params:{id:$rootScope.exp.id,
+                    name:name,
+                    startDate:startDate,
+                    expireDate:expireDate,
+                    status:$scope.status}})
                 .success(function(result){
                     $scope.inProcess = false;
                     console.log(result);
