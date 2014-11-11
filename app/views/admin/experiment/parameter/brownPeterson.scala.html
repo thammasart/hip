@@ -74,7 +74,7 @@
                             <select class="form-control" ng-model="trial.trigramLanguage" ng-change="refresh(trial)" style="width:120px" ng-options="value for value in trigramLanguages"></select>
                             <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial)" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
-                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-disabled="parameter.$invalid" >
+                            <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
                         </div>
                     </div>
@@ -85,6 +85,19 @@
                 <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
+            <script type="text/ng-template" id="tutorial.html">
+                <div class="modal-header">
+                    <h3>Tutorial</h3>
+                </div>
+                <div class="modal-body">
+                    <p>กด Random เพื่อสุ่มเลือกคำถามแต่ละข้อใหม่<br />
+                    จำนวนวินาที ให้ระบุเป็นเลขจำนวนเต็ม (integer) ไม่สามารถเป็น 0 และทศนิยม ได้<br />
+                    ระบุตัวเลขเริ่มนับถอยหลังได้สูงสุดที่ 999</p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
             <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>
         </div>
     </form>

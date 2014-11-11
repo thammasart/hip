@@ -155,7 +155,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.format = $scope.formats[3];
 
     })
-    .controller('BrownPetersonCtrl', function($scope, $rootScope, $http, toaster){
+    .controller('BrownPetersonCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.regIneger = /^(0|[1-9][0-9]*)$/;
         $scope.trigramTypes = ['word', 'nonsense'];
         $scope.trigramLanguages = ['english','thai'];
@@ -235,6 +235,13 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 }
             }
         }
+
+        $scope.openTutorial = function(){
+            var modalInstance = $modal.open({
+                templateUrl: 'tutorial.html',
+                controller: TutorailModalInstanceCtrl,
+            });
+        };
 
     })
     .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http, toaster){
@@ -2088,7 +2095,7 @@ var ModalInstanceCtrl = function ($scope,$modalInstance, question, index) {
 };
 var DeleteModalInstanceCtrl = function ($scope,$modalInstance, questions) {
 
-    deleteQuestions = [];
+    var deleteQuestions = [];
     $scope.deleteText = 'คุณต้องการที่จะลบคำถาม ';
 
     $scope.init = function(){
@@ -2114,3 +2121,14 @@ var DeleteModalInstanceCtrl = function ($scope,$modalInstance, questions) {
         $modalInstance.dismiss('cancel');
     };
 };
+
+
+var TutorailModalInstanceCtrl = function($scope, $modalInstance){
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+}
