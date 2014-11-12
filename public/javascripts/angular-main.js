@@ -1012,7 +1012,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
         $scope.inProcess = false;
         $scope.overNoise = false;
-
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
         $scope.trials = [];
 
         $scope.init = function(expId){
@@ -1843,6 +1843,7 @@ var VisualSearchModalInstanceCtrl = function ($scope, $modal, $modalInstance, sh
     $scope.height = height;
     $scope.editSharp = {};
     $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
+    
     $scope.sequence = 1;
     $scope.target = {};
     $scope.editSharp = {};
