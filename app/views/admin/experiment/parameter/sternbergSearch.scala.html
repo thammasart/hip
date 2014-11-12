@@ -88,9 +88,9 @@
                                 <div class="panel-body form-invalid" ng-switch="isEditable[$index]">
                                     <span ng-switch-when="false" class="text-center"
                                           style="width:100%;display: block;font-size:30px;">{{trial.quizzes[0].question.memorySet}}</span>
-                                    <input ng-switch-when="true" class="form-control text-center" type="text" style="font-size:20px;width:200px;margin:auto"
+                                    <input ng-switch-when="true" class="form-control text-center" type="text" style="font-size:20px;width:200px;margin:auto" ng-maxlength="6"
                                            ng-change="changingData()"
-                                           ng-model="trial.quizzes[0].question.memorySet" required >{{trial.length}}
+                                           ng-model="trial.quizzes[0].question.memorySet" required >
                                         <span class="btn btn-primary btn-xs pull-right" style="margin-top:-28px;"
                                               ng-click="generateQuestion(trial);changingData()" ng-disabled="parameter.$invalid">random</span>
                                         <span class="btn btn-warning btn-xs pull-right" style="margin-top:-28px;margin-right:70px"

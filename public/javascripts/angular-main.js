@@ -598,7 +598,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
     })
     .controller('SternbergSearchCtrl', function($scope, $rootScope, $http, toaster, $modal){
-        $scope.word = /^[0-9]*\.?[0-9]+$/;
+        $scope.word = /^(?!0*(\.0+)?$)(\d+|\d*\.\d+)$/;
         $scope.showQuiz = true;
         var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         var THAI_CASE = "กขคฆงจฉชฌญฎฐฒณดถทธนบผพภมยรลวศษสหฬอ";
