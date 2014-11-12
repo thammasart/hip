@@ -1174,7 +1174,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
     })
     .controller('MullerLayerCtrl', function($scope, $rootScope, $http, $modal, toaster){
         $scope.inProcess = false;
-        $scope.floatPattern = /^[0-1]*\.?[0-9]+$/;
+        $scope.floatPattern = /^(?!0*(\.0+)?$)([0-5]|[0-4]\.\d+)$/;
         $scope.trials = [];
         $scope.regIneger = /^(0|[1-9][0-9]*)$/;
 

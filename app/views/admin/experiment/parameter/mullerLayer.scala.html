@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-md-3">
                         <h4>เวลาในการทำโจทย์</h4>
-                        <input type="number" min="0" max="60" style="width:100px" ng-pattern="regIneger"
+                        <input type="number" min="1" max="60" style="width:100px" ng-pattern="regIneger"
                                ng-model="trial.displayTime" class="form-control" ng-change="changingData()" required>
                         <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
                             <span class="glyphicon glyphicon-book"> </span> Tutorial</button>

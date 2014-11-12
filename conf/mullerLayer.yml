@@ -15,16 +15,22 @@
     status:         CLOSE
 #Trial
 - &round33 !!models.mullerLayer.Trial
+    displayTime:    5
     schedule: *ex17
 - &round34 !!models.mullerLayer.Trial
+    displayTime:    5
     schedule: *ex17
 - &round35 !!models.mullerLayer.Trial
+    displayTime:    5
     schedule: *ex17
 - &round36 !!models.mullerLayer.Trial
+    displayTime:    5
     schedule: *ex18
 - &round37 !!models.mullerLayer.Trial
+    displayTime:    5
     schedule: *ex18
 - &round38 !!models.mullerLayer.Trial
+    displayTime:    5
     schedule: *ex18
 #Question
 - &Question64 !!models.mullerLayer.Question
