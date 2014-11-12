@@ -42,7 +42,7 @@
                                                    ng-change="changingData()"
                                                    ng-pattern="regIneger" ng-model="quiz.length" required></td>
                                         <td class="form-invalid">
-                                            <input type="number" min="0" max="{{quiz.length}}"  ng-change="changingData()"
+                                            <input type="number" min="1" max="{{quiz.length}}"  ng-change="changingData()"
                                                    class="form-control center-block input-two-word "
                                                    ng-pattern="regIneger" ng-model="quiz.chunkSize" required></td>
                                         <td class="form-invalid">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-md-3 col-sm-4 trial-box-right">
                             <h4>Memory Set Language</h4>
-                            <select ng-change="changingData()" class="form-control" ng-model="trial.questionType" ng-options="value for value in questionTypes" style="width: 150px"></select>
+                            <select ng-change="changingData();refresh(trial);" class="form-control" ng-model="trial.questionType" ng-options="value for value in questionTypes" style="width: 150px"></select>
                             <button style="margin-top:20px;padding: 6px 60px" class="btn btn-info" ng-click="refresh(trial);changingData()" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
                             <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >

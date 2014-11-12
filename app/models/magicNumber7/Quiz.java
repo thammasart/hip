@@ -32,9 +32,9 @@ import java.sql.Statement;
 public class Quiz extends Model{
 	@Id
 	public long id;
-	public double displayTime;
-	public int chunkSize;
-    public int length;
+	public double displayTime = 3.0;
+	public int chunkSize = 3;
+    public int length = 9;
 	@ManyToOne
     @JsonBackReference
 	public Trial trial;

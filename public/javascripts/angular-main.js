@@ -851,7 +851,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         };
     })
     .controller('MagicNumber7Ctrl', function($scope, $rootScope, $http, toaster, $modal){
-        $scope.word = /^[0-9]*\.?[0-9]+$/;
+        $scope.word = /^(?!0*(\.0+)?$)(\d|\d\.\d+|10)$/;
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
         $scope.inProcess = false;
