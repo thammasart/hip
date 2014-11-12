@@ -501,7 +501,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         };
     })
     .controller('PositionErrorCtrl', function($scope, $rootScope, $http, toaster, $modal){
-        $scope.word = /^[0-9]*\.?[0-9]+$/;
+        $scope.word = /^(?!0*(\.0+)?$)([0-5]|[0-4]\.\d+)$/;
         $scope.memorySet = [ 3, 5, 7, 10, 12];
         $scope.questionTypes = ['THAI', 'ENGLISH', 'NUMBER'];
         $scope.trials = [];
