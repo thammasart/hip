@@ -12,7 +12,7 @@
         <div class="container" ng-controller="SimonEffectCtrl" ng-init="init(@exp.id)" >
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid"
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid || exp.status == 'OPEN' || exp.status == 'DISABLED'"
                         ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
@@ -63,8 +63,8 @@
                     </div>
                 </div>
             </div>
-            <div ng-hide="inProcess" class="row" style="margin-right: 30px;margin-bottom:20px">
-                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+            <div ng-hide="inProcess" class="row" style="margin-right: 30px">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid  || exp.status == 'OPEN' || exp.status == 'DISABLED'" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <script type="text/ng-template" id="tutorial.html">

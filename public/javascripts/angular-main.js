@@ -65,6 +65,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             $http({method:'PUT',url:'saveExperiment',params:{id:$rootScope.exp.id,name:$rootScope.exp.name, startDate:startDate, expireDate:expireDate, status: $scope.status}})
                 .success(function(result){
                     $scope.inProcess = false;
+                    $rootScope.exp.status = $scope.status;
                     console.log(result);
                 }).error(function(result){
                     console.log('error:' + result);
@@ -1843,7 +1844,7 @@ var VisualSearchModalInstanceCtrl = function ($scope, $modal, $modalInstance, sh
     $scope.height = height;
     $scope.editSharp = {};
     $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
-    
+
     $scope.sequence = 1;
     $scope.target = {};
     $scope.editSharp = {};

@@ -13,7 +13,7 @@
         <div class="container" ng-controller="GarnerController" ng-init="init(@exp.id)">
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" style="padding: 6px 60px;float:right;margin-left:20px" ng-disabled="parameter.$invalid"
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;margin-left:20px" ng-disabled="parameter.$invalid || exp.status == 'OPEN' || exp.status == 'DISABLED'"
                         ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
                 <button ng-disabled="parameter.$invalid" class="btn btn-primary pull-right" ng-click="openSummary()"><span class="glyphicon glyphicon-eye-open"> </span> Overview
@@ -136,7 +136,7 @@
                 </script>
             </div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" style="padding: 6px 60px;float:right;margin-bottom:20px" ng-disabled="parameter.$invalid" ng-click="saveAll()">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid || exp.status == 'OPEN' || exp.status == 'DISABLED'" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <script type="text/ng-template" id="tutorial.html">
