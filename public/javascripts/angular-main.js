@@ -54,6 +54,12 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 return 0;
             return 1;
         };
+        $scope.changeStatusComfirm = function(){
+            var r = confirm("Are You Comfirm To Change Experiment Status ?");
+            if(r == true){
+                $scope.changeStatus();
+            }
+        }
         $scope.changeStatus = function(){
             if($scope.status == 'CLOSE'){
                 $scope.status = 'OPEN';
