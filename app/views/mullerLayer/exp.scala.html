@@ -17,7 +17,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 </script>
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/TDM-demo.css")">
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/mullerLayer.css")">
-<body onload="setUp(@trial.quizzes(questionNo).differLength,@trial.quizzes(questionNo).differChoice)">
+<body >
 <div class="fixSize">
     <!-- Page Header -->
     <script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
@@ -47,6 +47,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
                     <button ng-if="quiz.noOfChoice > 4" type="submit" class="btn btn-success"  onclick="return done(5)" style="position: absolute;top:280px" >เลือก</button>
                 </div>
 
+                <input id="demo" name="demo" value="real" hidden/>
                 <input id="usedTime" name="usedTime" hidden/>
                 <input id="choice" name="choice"  hidden />
                 <input id="displayTime" name="displayTime" value="10"  hidden />
