@@ -39,15 +39,19 @@
                                 <tbody>
                                     <tr>
                                         <td>จำนวนข้อจริง</td>
-                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfColorQuestion" ></td>
-                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfSizeQuestion" ></td>
-                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfBiDimensionQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" 
+                                        ng-pattern="regIneger"
+                                        required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfColorQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" ng-pattern="regIneger" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfSizeQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" ng-pattern="regIneger" required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfBiDimensionQuestion" ></td>
                                     </tr>
                                     <tr>
                                         <td>จำนวนข้อลวง</td>
-                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeColorQuestion" ></td>
-                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeSizeQuestion" ></td>
-                                        <td class="form-invalid"><input ng-change="changingData()" required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeBiDimentsionQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" 
+                                            ng-pattern="regIneger"
+                                        required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeColorQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()"  ng-pattern="regIneger" required style="width:70%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeSizeQuestion" ></td>
+                                        <td class="form-invalid"><input ng-change="changingData()" ng-pattern="regIneger" required style="width:50%" class="form-control" type="number" min="0" max="5" ng-model="trial.noOfFakeBiDimentsionQuestion" ></td>
                                     </tr>
                                 </tbody>
                             </table>

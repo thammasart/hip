@@ -1254,7 +1254,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         };
     })
     .controller('GarnerController', function($scope, $rootScope, $http, $modal, toaster){
-        $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
+        $scope.floatPattern = /^(?!0*(\.0+)?$)(\d|\d\.\d+|10)$/;
         $scope.inProcess = false;
         $scope.trials = [];
         $scope.regIneger = /^(0|[1-9][0-9]*)$/;
