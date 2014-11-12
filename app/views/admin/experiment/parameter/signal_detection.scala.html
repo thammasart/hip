@@ -50,10 +50,10 @@
                                                     <input type="text" ng-pattern="single" ng-change="change()"
                                                            ng-model="quiz.question.noise" class="form-control center-block input-one-word" required></td>
                                                 <td class="form-invalid">
-                                                    <input type="number" min="1" max="60" ng-change="change()"
+                                                    <input type="number" min="1" max="60" ng-change="change()" ng-pattern="regIneger"
                                                            ng-model="quiz.length" class="form-control center-block input-two-word" required></td>
                                                 <td class="form-invalid">
-                                                    <input type="number" min="0" max="{{quiz.length - 1}}" ng-change="change()"
+                                                    <input type="number" min="0" max="{{quiz.length - 1}}" ng-change="change()" ng-pattern="regIneger"
                                                            ng-model="quiz.noOfTarget" class="form-control center-block input-two-word" required></td>
                                                 <td class="form-invalid">
                                                     <input type="text" ng-pattern="floatPattern" ng-change="change()"

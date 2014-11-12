@@ -334,7 +334,8 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
     })
     .controller('SignalDetectionCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
-        $scope.floatPattern = /^[0-9]*\.?[0-9]+$/;
+        $scope.regIneger = /^(0|[1-9][0-9]*)$/;
+        $scope.floatPattern = /^(?!0*(\.0+)?$)(\d+|\d*\.\d+)$/;
         $rootScope.exp = {};
         $scope.trials = [];
         $scope.inProcess = false;
