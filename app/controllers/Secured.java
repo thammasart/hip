@@ -16,7 +16,6 @@ public class Secured extends Security.Authenticator {
 		       	ctx.session().clear();
 		    }
         }
-        System.out.println("aghajkdg;asgyalughal;sdguvyashldfivguhasdfgjkyasguilhgg");
         return ctx.session().get("username");
     }
 
