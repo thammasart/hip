@@ -30,40 +30,46 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
 
         <div class="mainContainer" align="center" id="mc">
             <form action="@routes.MullerLayer.demoReport()" id="answerForm"  method="post">
-                <button class="arrowButton" type="submit" onclick="return doneDemo(this.name)" name="f">
+
+                <button class="arrowButton" disabled>
                     <div class="arrowContainer">
                         <div class="lineArrow" style="width:200px"></div>
                     </div>
-                </button >
+                </button>
+                <button  type="submit" class="btn btn-success"  onclick="return doneDemo('f')" style="position: absolute;top:340px;right:30%;box-shadow: 2px 2px 3px gray;" >เลือก</button>
 
-                <button class="arrowButton" type="submit" onclick="return doneDemo(this.name)" name="f">
+                <button class="arrowButton" disabled>
                     <div class="arrowContainer">
                         <div class="mullerArrow arrow-left" href=""></div>
                         <div class="lineArrow" style="width:200px"></div>
                         <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
                     </div>
                 </button >
-                <button class="arrowButton" type="submit" onclick="return doneDemo(this.name)" name="t">
+                <button  type="submit" class="btn btn-success"  onclick="return doneDemo('f')" style="position: absolute;top:425px;right:30%;box-shadow: 2px 2px 3px gray;" >เลือก</button>
+                <button class="arrowButton" disabled>
                     <div class="arrowContainer">
                         <div class="mullerArrow arrow-right" href=""></div>
                         <div class="lineArrow" style="width:190px"></div>
                         <div class="mullerArrow arrow-left" href="" style="margin-left:206.5px;"></div>
                     </div>
                 </button >
-                <button class="arrowButton" type="submit" onclick="return doneDemo(this.name)" name="f">
+                <button  type="submit" class="btn btn-success"  onclick="return doneDemo('t')" style="position: absolute;top:507px;right:30%;box-shadow: 2px 2px 3px gray;" >เลือก</button>
+                <button class="arrowButton" disabled>
                     <div class="arrowContainer">
                         <div class="mullerArrow arrow-right" href=""></div>
                         <div class="lineArrow" style="width:200px"></div>
                         <div class="mullerArrow arrow-right" href="" style="margin-left:200.5px;"></div>
                     </div>
                 </button >
-                <button class="arrowButton" type="submit" onclick="return doneDemo(this.name)" name="f">
+                <button  type="submit" class="btn btn-success"  onclick="return doneDemo('f')" style="position: absolute;top:590px;right:30%;box-shadow: 2px 2px 3px gray;" >เลือก</button>
+                <button class="arrowButton" disabled>
                     <div class="arrowContainer">
                         <div class="mullerArrow arrow-left" href=""></div>
                         <div class="lineArrow" style="width:200px"></div>
                         <div class="mullerArrow arrow-left" href="" style="margin-left:216.5px;"></div>
                     </div>
                 </button >
+                <button  type="submit" class="btn btn-success"  onclick="return doneDemo('f')" style="position: absolute;top:670px;right:30%;box-shadow: 2px 2px 3px gray;" >เลือก</button>
                 <input id="score" name="score" hidden/>
                 <input id="demo" name="demo" value="demo" hidden/>
                 <input id="time" name="time" hidden/>

@@ -78,7 +78,7 @@
                                     <td>{{trial2.schedule.expireDate| date :"yyyy-MM-dd"}}</td>
                                     <td>{{trial2.schedule.name}}</td>
                                     <td>{{trial2.id}}</td>
-                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial2.totalScore,trial2.totalUsedTime,trial2.totalUser,$index,2)">select</button></td>
+                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial2.totalScore,trial2.totalUsedTime,trial2.totalUser,$index,2,trial2.schedule.name,trial2.id)">select</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -118,7 +118,7 @@
                                     <td>{{trial3.schedule.expireDate| date :"yyyy-MM-dd"}}</td>
                                     <td>{{trial3.schedule.name}}</td>
                                     <td>{{trial3.id}}</td>
-                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial3.totalScore,trial3.totalUsedTime,trial3.totalUser,$index,3)">select</button></td>
+                                    <td><button class="btn btn-success btn-xs" ng-click="sel(trial3.totalScore,trial3.totalUsedTime,trial3.totalUser,$index,3,trial3.schedule.name,trial3.id)">select</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -158,7 +158,7 @@
                                         <td>{{trial4.schedule.expireDate| date :"yyyy-MM-dd"}}</td>
                                         <td>{{trial4.schedule.name}}</td>
                                         <td>{{trial4.id}}</td>
-                                        <td><button class="btn btn-success btn-xs" ng-click="sel(trial4.totalScore,trial4.totalUsedTime,trial4.totalUser,$index,4)">select</button></td>
+                                        <td><button class="btn btn-success btn-xs" ng-click="sel(trial4.totalScore,trial4.totalUsedTime,trial4.totalUser,$index,4,trial4.schedule.name,trial4.id)">select</button></td>
                                     </tr>
                                 </tbody>
                             </table>

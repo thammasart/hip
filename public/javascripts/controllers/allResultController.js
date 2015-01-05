@@ -135,7 +135,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
             console.log(size);
             console.log(questionTypes);
             if(gNumber == 1){
-                document.getElementById("t1Name").value = tName + ":" + tId;
+                document.getElementById("t1Name").innerHTML = tName + ":" + tId;
                 document.getElementById("graphUser1").innerHTML = totalUser;
                 document.getElementById("graphTime1").innerHTML = totalUsedTime;
                 document.getElementById("graphScore1").innerHTML = totalScore;
@@ -143,6 +143,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 gScore[0]=totalScore;
             }else
             if(gNumber == 2){
+                document.getElementById("t2Name").innerHTML = tName + ":" + tId;
                 document.getElementById("graphUser2").innerHTML = totalUser;
                 document.getElementById("graphTime2").innerHTML = totalUsedTime;
                 document.getElementById("graphScore2").innerHTML = totalScore;
@@ -150,6 +151,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 gScore[1]=totalScore;
             }else
             if(gNumber == 3){
+                document.getElementById("t3Name").innerHTML = tName + ":" + tId;
                 document.getElementById("graphUser3").innerHTML = totalUser;
                 document.getElementById("graphTime3").innerHTML = totalUsedTime;
                 document.getElementById("graphScore3").innerHTML = totalScore;
@@ -157,6 +159,7 @@ angular.module('AllResultApp', ['ui.bootstrap'])
                 gScore[2]=totalScore;
             }else
             if(gNumber == 4){
+                document.getElementById("t4Name").innerHTML = tName + ":" + tId;
                 document.getElementById("graphUser4").innerHTML = totalUser;
                 document.getElementById("graphTime4").innerHTML = totalUsedTime;
                 document.getElementById("graphScore4").innerHTML = totalScore;
