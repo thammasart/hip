@@ -61,6 +61,16 @@ create table stroop_answer (
   constraint pk_stroop_answer primary key (id))
 ;
 
+create table sternberg_search_answer (
+  id                        bigint not null AUTO_INCREMENT,
+  answer                    boolean,
+  used_time                 double,
+  is_correct                boolean,
+  user_username             varchar(20),
+  quiz_id                   bigint,
+  constraint pk_sternberg_search_answer primary key (id))
+;
+
 create table visual_search_answer (
   id                        bigint not null AUTO_INCREMENT,
   position_x                integer,
@@ -70,16 +80,6 @@ create table visual_search_answer (
   user_username             varchar(20),
   quiz_id                   bigint,
   constraint pk_visual_search_answer primary key (id))
-;
-
-create table sternberg_search_answer (
-  id                        bigint not null AUTO_INCREMENT,
-  answer                    boolean,
-  used_time                 double,
-  is_correct                boolean,
-  user_username             varchar(20),
-  quiz_id                   bigint,
-  constraint pk_sternberg_search_answer primary key (id))
 ;
 
 create table position_error_answer (
@@ -138,7 +138,9 @@ create table experiment_schedule (
   start_date                timestamp not null,
   expire_date               timestamp not null,
   experiment_type           integer,
+  status                    integer,
   constraint ck_experiment_schedule_experiment_type check (experiment_type in (0,1,2,3,4,5,6,7,8,9,10,11)),
+  constraint ck_experiment_schedule_status check (status in (0,1,2)),
   constraint pk_experiment_schedule primary key (id))
 ;
 
@@ -518,6 +520,7 @@ create table muller_layer_trial (
   total_score               double,
   total_used_time           double,
   total_user                integer,
+  display_time              integer,
   schedule_id               bigint,
   constraint pk_muller_layer_trial primary key (id))
 ;
