@@ -253,6 +253,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
     })
     .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.trials = [];
+            $scope.tempTrials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
         $scope.inProcess = false;
         $rootScope.isChange = false;
@@ -261,12 +262,42 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.init = function(expId) {
             $http({method: 'GET', url: 'attentionBlinkInit', params: {expId: expId}}).success(function (result) {
                 $scope.trials = result.trials;
+                $scope.tempTrials = angular.copy(result.trials);
+                initTempTrial();
+                console.log("finish init");
+                console.log($scope.tempTrials);
                 $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
             }).error(function (result) {
                 $scope.inProcess = false;
             });
         }
+
+            function initTempTrial(){
+                console.log("init temp");
+                for(var i=0; i<$scope.tempTrials.length; i++){
+                    for(var j=0; j<$scope.tempTrials[i].quizzes.length; j++){
+                        $scope.tempTrials[i].quizzes[j] = initLetters($scope.tempTrials[i].quizzes[j]);
+                    }
+                }
+            }
+            function initLetters(quiz){
+                console.log("initLetters");
+                quiz.letters = quiz.question.set.split("");
+                quiz.targets = quiz.question.letter.split("");
+                if(quiz.letters.length < 15){
+                    for(var i=quiz.letters.length; i< 15; i++){
+                        quiz.letters.push("");
+                    }
+                }
+                if(quiz.targets.length < 3){
+                    for(var i=quiz.targets.length; i< 3; i++){
+                        quiz.letters.push("");
+                    }
+                }
+                console.log(quiz);
+                return quiz;
+            }
 
         $scope.change = function(){
             $rootScope.isChange = true;

@@ -16,7 +16,7 @@
                 ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
-            <div ng-repeat="trial in trials" ng-hide="inProcess">
+            <div ng-repeat="trial in tempTrials" ng-hide="inProcess">
                 <h3>Trial - {{$index + 1}}<span> </span>
                     <a href="/attention-blink/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
                         Preview Trial</a></h3>
@@ -90,6 +90,86 @@
                                 <span class="glyphicon glyphicon-refresh"> </span> Refresh</button>
                             <button style="margin-top:20px;padding: 6px 60px" class="btn btn-warning" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
                                 <span class="glyphicon glyphicon-book"> </span> Tutorial</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <table class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th colspan="15">Memory Set</th>
+                                        <th colspan="3">Target</th>
+                                        <th>In mem.set</th>
+                                        <th>time</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>1</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>5</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>10</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>15</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="quiz in trial.quizzes">
+                                        <td>{{ $index + 1}}</td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[0]" ngRequired="true"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[1]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[2]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[3]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[4]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[5]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[6]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[7]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[8]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[9]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[10]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[11]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[12]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[13]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[14]"></td>
+
+
+
+
+                                        <td><input type="text" class="form-control center-block input-small-word text-center first-col" ng-model="quiz.targets[0]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.targets[1]"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.targets[2]"></td>
+
+
+                                        <td><input type="checkbox" class="checkbox-inline" ng-model="quiz.isCorrect"></td>
+
+                                        <td><input type="text" class="form-control center-block input-small-two-word" ng-model="quiz.blinkTime"></td>
+
+                                        <td><button class="btn btn-danger btn-xs" >reset</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-warning" style="margin-top : 80px ;" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
+                                Tutorial</button>
                         </div>
                     </div>
                 </div>

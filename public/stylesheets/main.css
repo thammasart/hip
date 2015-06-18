@@ -506,9 +506,21 @@ padding-top:8em;
 
 .input-two-word{
     width:60px;
+    text-align: center;
 }
 .input-one-word{
     width:40px;
+}
+.input-small-word{
+    width:25px;
+    padding : 0px;
+}
+.input-small-two-word{
+    width:50px;
+    text-align: center;
+}
+.first-col {
+    margin-left: 25px;
 }
 
 /*---------------------------------------- user profile ---------------------------------*/
