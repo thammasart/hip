@@ -67,6 +67,14 @@ public class Answer extends Model implements AnswerResult{
 		}
 	}
 
+    @Override
+    public void save(){
+        List<Answer> list = find.where().eq("user",user).eq("quiz",quiz).findList();
+        if(list.size() == 0){
+            super.save();
+        }
+    }
+
 	public static List<Answer> findInvolving(User user,List<Quiz> quizzes){
 		List<Answer> answers = new ArrayList<Answer>();
 		for(Quiz quiz:quizzes){

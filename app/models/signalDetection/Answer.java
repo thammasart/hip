@@ -117,6 +117,14 @@ public class Answer extends Model implements AnswerResult{
 		this.usedTime = usedTime;
 	}
 
+    @Override
+    public void save(){
+        List<Answer> list = find.where().eq("user",user).eq("quiz",quiz).findList();
+        if(list.size() == 0){
+            super.save();
+        }
+    }
+
 	public static Answer create(boolean answer, double usedTime, User user, Quiz quiz){
 		Answer newAnswer = new Answer(answer,usedTime);
 		newAnswer.user = user;

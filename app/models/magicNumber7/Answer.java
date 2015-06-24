@@ -45,6 +45,14 @@ public class Answer extends Model implements AnswerResult{
         this.quiz = quiz;
     }
 
+    @Override
+    public void save(){
+        List<Answer> list = find.where().eq("user",user).eq("quiz",quiz).findList();
+        if(list.size() == 0){
+            super.save();
+        }
+    }
+
     public static Answer create(User user, Quiz quiz, String answer, double usedTime, int score){
         Answer newAnswer = new Answer(user, quiz);
         newAnswer.answer = answer;
