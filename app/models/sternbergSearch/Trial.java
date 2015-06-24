@@ -173,18 +173,19 @@ public class Trial extends Model{
     }
 
     public void updateResult(){
-        this.totalScore = 0;
-        this.totalUsedTime = 0;
-        for(Quiz q:quizzes){
-            this.totalScore += Answer.calculateTotalScore(q.findAnswers());
-            this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
-        }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
-        this.totalScore /=totalUser;
-        this.totalUsedTime /=totalUser;
-        this.update();
+        if(totalUser > 0){
+            this.totalScore = 0;
+            this.totalUsedTime = 0;
+            for(Quiz q:quizzes){
+                this.totalScore += Answer.calculateTotalScore(q.findAnswers());
+                this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
+            }
+            this.totalScore /=totalUser;
+            this.totalUsedTime /=totalUser;
+            this.update();
+        }
     }
-
     public static Trial create(ExperimentSchedule schedule, int length, double blinkTime, int oneCharIsCorrect, int oneCharIsInCorrect, int twoCharIsCorrect, int twoCharIsInCorrect, QuestionType questionType){
     	Trial newTrial = new Trial(schedule);
     	newTrial.length = length;
