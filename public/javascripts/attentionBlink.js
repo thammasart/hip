@@ -28,11 +28,11 @@ function showInstruction (){
     trial_blinkTime = document.getElementById("blinkTime").innerHTML;
     genQuestion();
     if (question_letter.length == 1)
-        document.getElementById("word").innerHTML=" ค้นหา "+ question_letter.charAt(0);
+        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) = " หรือไม่";
     else if (question_letter.length == 2)
-        document.getElementById("word").innerHTML=" ค้นหา "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1) + " ที่อยู่ติดกัน";
+        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) +" ปรากฏหลัง " + question_letter.charAt(1) + " หรือไม่";
     else if (question_letter.length == 3)
-        document.getElementById("word").innerHTML=" ค้นหา "+ question_letter.charAt(0) +", " + question_letter.charAt(1)+ " และ " + question_letter.charAt(2) +" ที่อยู่ติดกัน";
+        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) +", " + question_letter.charAt(1)+ " หลัง " + question_letter.charAt(2) +" หรือไม่";
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
 function showTimer(){
