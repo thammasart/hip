@@ -12,7 +12,7 @@
         <div class="container big-container" ng-controller="AttentionBlinkCtrl" ng-init="init(@exp.id)">
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid||  exp.status == 'DISABLED' || formError"
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="exp.status == 'OPEN' || exp.status == 'DISABLED'"
                 ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
@@ -20,7 +20,7 @@
                 <h3>Trial - {{$index + 1}}<span> </span>
                     <a href="/attention-blink/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
                         Preview Trial</a></h3>
-                <div class="well">
+                <div class="well" ng-class="{ 'well-warning' : formError, 'well-success' : !formError }">
                     <div class="row">
                         <div class="col-md-11">
                             <table class="table text-center">
@@ -104,14 +104,14 @@
                             </table>
                         </div>
                         <div class="col-md-1">
-                            <button class="btn btn-warning" style="margin-top : 80px ;" ng-click="openTutorial()" ng-disabled="parameter.$invalid || formError" >
+                            <button class="btn btn-warning" style="margin-top : 80px ;" ng-click="openTutorial()" >
                                 Tutorial</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid  || exp.status == 'OPEN' || exp.status == 'DISABLED' || formError" ng-click="saveAll()">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled=" exp.status == 'OPEN' || exp.status == 'DISABLED' " ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <script type="text/ng-template" id="tutorial.html">

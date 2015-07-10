@@ -32,10 +32,10 @@ public class Quiz extends Model {
 
     @Id
     public long id;
-    public int length = 13;
-    public int numberOfTarget = 2;
+    public int length = 0;
+    public int numberOfTarget = 0;
     public double blinkTime = 0.1;
-    public boolean isCorrect = true;
+    public boolean isCorrect = false;
 
     @ManyToOne
     @JsonBackReference
@@ -49,8 +49,7 @@ public class Quiz extends Model {
 
     public static Quiz create(Trial trial) {
         Quiz quiz = new Quiz();
-        Question question = Question.generateQuestion(trial.questionType, quiz.length,
-                quiz.numberOfTarget, quiz.isCorrect);
+        Question question = Question.create();
         question.save();
         quiz.question = question;
         quiz.trial = trial;

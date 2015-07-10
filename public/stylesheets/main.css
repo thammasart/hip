@@ -64,6 +64,14 @@ width:631px;
 .big-container {
     width: 1400px;
 }
+.well-warning {
+    border-color:rgb(245, 185, 185);
+    border-width:4px;
+}
+.well-success {
+    border-color:rgb(172, 232, 165);
+    border-width:4px;
+}
 /*-----------------------Animation ------------------------------------------------------------*/
 
 /*---------------------home -------------------------------------------------------------------*/
