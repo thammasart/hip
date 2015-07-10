@@ -19,7 +19,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
     })
     .controller('ExController', function($scope, $rootScope, $http){
-        $scope.word = /^[a-zA-Z0-9ก-๙_ \-]*$/;
         $scope.value = 3;
         $scope.isEditName = false;
         $scope.isEditDate = false;
@@ -33,6 +32,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
         $scope.init = function() {
             $rootScope.$watch('exp', function () {
+                console.log($rootScope.exp);
                 if($rootScope.exp.expireDate) {
                     $scope.expireDate = new Date($rootScope.exp.expireDate);
                 }
@@ -255,6 +255,9 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.trials = [];
             $scope.tempTrials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
+            $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
+            $scope.regIneger = /^(0|[1-9][0-9]*)$/;
+            $scope.floatPattern = /^(?:10(?:\.0+)?|[1-9](?:\.[0-9]+)?|0?\.[1-9]+|0?\.0[1-9]+)$/;
         $scope.inProcess = false;
         $rootScope.isChange = false;
         $scope.questionTypes = ['THAI','ENGLISH','NUMBER'];
@@ -274,7 +277,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
             function initTempTrial(){
-                console.log("init temp");
                 for(var i=0; i<$scope.tempTrials.length; i++){
                     for(var j=0; j<$scope.tempTrials[i].quizzes.length; j++){
                         $scope.tempTrials[i].quizzes[j] = initLetters($scope.tempTrials[i].quizzes[j]);
@@ -282,7 +284,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 }
             }
             function initLetters(quiz){
-                console.log("initLetters");
                 quiz.letters = quiz.question.set.split("");
                 quiz.targets = quiz.question.letter.split("");
                 if(quiz.letters.length < 15){
@@ -295,7 +296,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                         quiz.letters.push("");
                     }
                 }
-                console.log(quiz);
                 return quiz;
             }
 

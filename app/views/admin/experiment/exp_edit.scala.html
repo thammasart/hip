@@ -6,7 +6,7 @@
         <div class="form-group">
             <label  class="col-sm-3 control-label">Experiment Schedual Name</label>
             <div class="col-sm-4">
-                <input ng-disabled="!isEditName" type="text" class="form-control" ng-model="exp.name" ng-pattern="word">
+                <input ng-disabled="!isEditName" type="text" class="form-control" ng-model="exp.name">
             </div>
             <button style="margin-top:5px;" ng-class="{'btn-primary':isEditName}" ng-hide="inProcess"
                     class="btn btn-xs" ng-click="editName()">{{textEdit(isEditName)}}</button>
