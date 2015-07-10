@@ -28,7 +28,7 @@ var question = new Array();
 
 function showInstruction (){
     clearInterval(startTimer);
-    document.getElementById("word").innerHTML=" ค้นหา A และ B ที่อยู่ติดกัน ";
+    document.getElementById("word").innerHTML=" เห็น B ปรากฏหลัง A หรือไม่ ";
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
 function showTimer(){
@@ -59,7 +59,7 @@ function showQuestionWord(){
     expDuration = d.getTime();
     document.getElementById("me").style.visibility = "visible";
     document.getElementById("maiMe").style.visibility = "visible";
-    document.getElementById("word").innerHTML = " มี A และ B ติดกันหรือไม่ " ;
+    document.getElementById("word").innerHTML = " เห็น B ปรากฏหลัง A หรือไม่ " ;
 }
 function done(name){
     d = new Date();

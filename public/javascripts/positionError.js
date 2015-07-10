@@ -156,7 +156,7 @@ function showInstruction (){
 
     question_correctAnswer = true;
     genQuestion();
-    document.getElementById("word").innerHTML=" จำลำดับตัวอักษรที่ปรากฎ";
+    document.getElementById("word").innerHTML="";
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
 

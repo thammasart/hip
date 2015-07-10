@@ -117,18 +117,16 @@ public class Trial extends Model{
     }
 
     public void updateResult(){
-        this.totalScore = 0;
-        this.totalUsedTime = 0;
-    //    for(Quiz q:quizzes){
-    //        this.totalScore += Answer.calculateTotalScore(q.findAnswers());
-    //        this.totalUsedTime += Answer.calculateTotalUsedTime(q.findAnswers());
-     //   }
         this.totalUser = TimeLog.calaulateTotalUserTakeExp(schedule,id);
-        this.totalScore /=totalUser;
-        this.totalUsedTime /=totalUser;
-        this.update();
+        if(totalUser > 0){
+            this.totalScore = Answer.calculateTotalScore(quiz.findAnswers());
+            this.totalUsedTime = Answer.calculateTotalUsedTime(quiz.findAnswers());
+            this.totalScore /=totalUser;
+            this.totalUsedTime /=totalUser;
+            this.update();
+        }
     }
-
+    
     public static Trial findById(long id){
         return find.byId(new Long(id));
     }

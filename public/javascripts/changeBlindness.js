@@ -28,7 +28,7 @@ function showInstruction (){
     question_answerAreaHeight = document.getElementById("question_answerAreaHeight").innerHTML;
     question_positionOfChangeX = document.getElementById("question_positionOfChangeX").innerHTML;
     question_positionOfChangeY = document.getElementById("question_positionOfChangeY").innerHTML;
-    document.getElementById("word").innerHTML=" ท่านมีเวลาในการมองหาจุดต่างในภาพโจทย์ " + quiz_displayTime + " วินาที";
+    document.getElementById("word").innerHTML="";
 
     document.getElementById("ansDiv").style.width = question_answerAreaWidth+"%";
     document.getElementById("ansDiv").style.height = question_answerAreaHeight+"%";

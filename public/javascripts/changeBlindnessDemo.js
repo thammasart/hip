@@ -17,7 +17,7 @@ var imgState = 2;
 
 function showInstruction (){
     clearInterval(startTimer);
-    document.getElementById("word").innerHTML=" ท่านมีเวลาในการมองหาจุดต่างในภาพโจทย์ 60 วินาที";
+    document.getElementById("word").innerHTML="";
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
 

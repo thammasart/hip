@@ -194,6 +194,10 @@ public class Quiz extends Model{
         this.trial = trial;
     }
 
+    public List<Answer> findAnswers(){
+        return answers;
+    }
+
     public static List<Quiz> findInvolving(Trial trial){
         return Quiz.find.where().eq("trial", trial).findList();
     }
