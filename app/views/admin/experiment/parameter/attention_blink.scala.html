@@ -98,7 +98,7 @@
 
                                         <td><input type="text" class="form-control center-block input-small-two-word" ng-model="quiz.blinkTime" ng-required="true" ng-pattern="floatPattern" ng-change="change()"></td>
 
-                                        <td><button class="btn btn-danger btn-xs" ng-click="resetParameter(quiz)">reset</button></td>
+                                        <td><button class="btn btn-danger btn-xs" ng-click="openResetPopup(quiz)">reset</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -127,6 +127,19 @@
                 </div>
                 <div class="modal-footer">
                 <button class="btn btn-primary" ng-click="ok()">close</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="resetAttentionBlinkValues.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Reset values to default?</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>The input will be reset to default values</h4>
+                    <h5 class="text-danger" style="margin-top:20px">Warning: **This action cannot be undone**</h5>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" ng-click="cancel()">Cancel</button>
+                    <button class="btn btn-danger" ng-click="ok()"><span class="glyphicon glyphicon-remove"> </span> Reset</button>
                 </div>
             </script>
             <toaster-container toaster-options="{'position-class':'toast-bottom-half-width'}" ></toaster-container>

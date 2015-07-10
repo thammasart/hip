@@ -412,7 +412,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     $scope.inProcess = false;
                     toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
-                
+
 
         }
         function generateTrials(){
@@ -496,6 +496,12 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             $modal.open({
                 templateUrl: 'tutorial.html',
                 controller: TutorialModalInstanceCtrl,
+            });
+        };
+        $scope.openResetPopup = function(quiz){
+            $modal.open({
+                templateUrl: 'resetAttentionBlinkValues.html',
+                controller: ResetAttentionBlinkValuesModalInstanceCtrl,
             });
         };
     })
@@ -2357,6 +2363,16 @@ var DeleteModalInstanceCtrl = function ($scope,$modalInstance, questions) {
 
 
 var TutorialModalInstanceCtrl = function($scope, $modalInstance){
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+}
+
+var ResetAttentionBlinkValuesModalInstanceCtrl = function($scope, $modalInstance){
     $scope.ok = function () {
         $modalInstance.close();
     };
