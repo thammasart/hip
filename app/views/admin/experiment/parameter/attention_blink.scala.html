@@ -3,16 +3,16 @@
 @import views.html.admin.experiment._
 @import views.html.form._
 
-<div class="container" ng-app="ExperimentCreator">
+<div class="container big-container" ng-app="ExperimentCreator">
     <form role="form" class="form-horizontal" name="parameter" >
         @exp_edit(exp)
         <hr>
         @error()
 
-        <div class="container" ng-controller="AttentionBlinkCtrl" ng-init="init(@exp.id)">
+        <div class="container big-container" ng-controller="AttentionBlinkCtrl" ng-init="init(@exp.id)">
             <div ng-show="inProcess" class="center-block text-center"><img src="@routes.Assets.at("images/loading.gif")" ></div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid||  exp.status == 'DISABLED'"
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid||  exp.status == 'DISABLED' || formError"
                 ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
@@ -27,7 +27,7 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th colspan="15">Memory Set</th>
+                                        <th colspan="20">Memory Set</th>
                                         <th colspan="3">Target</th>
                                         <th>In mem.set</th>
                                         <th>time</th>
@@ -54,6 +54,11 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
+                                        <th>20</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -61,22 +66,26 @@
                                 <tbody>
                                     <tr ng-repeat="quiz in trial.quizzes">
                                         <td>{{ $index + 1}}</td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[0]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[1]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[2]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[3]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[4]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[5]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[6]" ng-pattern="single" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[7]" ng-pattern="single" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[8]" ng-pattern="single" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[9]" ng-pattern="single" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[10]" ng-pattern="single" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[11]" ng-pattern="single" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[12]" ng-pattern="single" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[13]" ng-pattern="single" ng-change="change()"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[14]" ng-pattern="single" ng-change="change()"></td>
-
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[0]" ng-pattern="single" ng-required="true" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[1]" ng-pattern="single" ng-required="true" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[2]" ng-pattern="single" ng-required="true" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[3]" ng-pattern="single" ng-required="true" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[4]" ng-pattern="single" ng-required="true" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[5]" ng-pattern="single" ng-required="true" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[6]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[7]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[8]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[9]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[10]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[11]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[12]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[13]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[14]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[15]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[16]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[17]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[18]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[19]" ng-pattern="single" ng-change="change();validateLetters(quiz)"></td>
 
 
 
@@ -95,14 +104,14 @@
                             </table>
                         </div>
                         <div class="col-md-1">
-                            <button class="btn btn-warning" style="margin-top : 80px ;" ng-click="openTutorial()" ng-disabled="parameter.$invalid" >
+                            <button class="btn btn-warning" style="margin-top : 80px ;" ng-click="openTutorial()" ng-disabled="parameter.$invalid || formError" >
                                 Tutorial</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div ng-hide="inProcess" class="row" style="margin-right: 30px">
-                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid  || exp.status == 'OPEN' || exp.status == 'DISABLED'" ng-click="saveAll()">
+                <button class="btn btn-success" style="padding: 6px 60px;float:right;" ng-disabled="parameter.$invalid  || exp.status == 'OPEN' || exp.status == 'DISABLED' || formError" ng-click="saveAll()">
                     <span class="glyphicon glyphicon-floppy-disk"></span> SAVE ALL</button>
             </div>
             <script type="text/ng-template" id="tutorial.html">

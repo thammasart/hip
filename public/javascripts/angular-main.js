@@ -253,12 +253,13 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
     })
     .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.trials = [];
+        $scope.formError = false;
             $scope.tempTrials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
             $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
             $scope.regIneger = /^(0|[1-9][0-9]*)$/;
             $scope.floatPattern = /^(?:10(?:\.0+)?|[1-9](?:\.[0-9]+)?|0?\.[1-9]+|0?\.0[1-9]+)$/;
-        $scope.inProcess = false;
+        $scope.inProcess = true;
         $rootScope.isChange = false;
         $scope.questionTypes = ['THAI','ENGLISH','NUMBER'];
 
@@ -286,8 +287,8 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             function initLetters(quiz){
                 quiz.letters = quiz.question.set.split("");
                 quiz.targets = quiz.question.letter.split("");
-                if(quiz.letters.length < 15){
-                    for(var i=quiz.letters.length; i< 15; i++){
+                if(quiz.letters.length < 20){
+                    for(var i=quiz.letters.length; i< 20; i++){
                         quiz.letters.push("");
                     }
                 }
@@ -301,7 +302,26 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
         $scope.change = function(){
             $rootScope.isChange = true;
-            console.log("change!");
+        }
+        $scope.validateLetters = function(quiz){
+            console.log(quiz);
+            var isNoLetters = true;
+            for(var i=6; i<19; i++){
+                if(!quiz.letters[i]){
+                    for(var j=i+1;j<20;j++){
+                        if(quiz.letters[j]){
+                            isNoLetters = false;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            if(isNoLetters){
+                $scope.formError = false;
+            }else{
+                $scope.formError = true;
+            }
         }
 
         $scope.refresh = function(trial){
