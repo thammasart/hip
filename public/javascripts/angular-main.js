@@ -302,9 +302,51 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
         $scope.change = function(){
             $rootScope.isChange = true;
+            validateParameter();
         }
-        $scope.validateLetters = function(quiz){
-            console.log(quiz);
+
+        $scope.resetParameter = function(quiz){
+            for(var i=0; i<quiz.letters.length; i++){
+                quiz.letters[i] = '';
+            }
+            for(var i=0; i<quiz.targets.length; i++){
+                quiz.targets[i] = '';
+            }
+            quiz.isCorrect = false;
+            quiz.blinkTime = 0.1;
+        }
+
+        function validateParameter(){
+            var validate = true;
+            for(var i=0; i<$scope.tempTrials.length; i++){
+                for(var j=0; j < $scope.tempTrials[i].quizzes.length ; j++){
+                    var quiz = $scope.tempTrials[i].quizzes[j];
+                    validate = validateLetterAndTarget(quiz);
+                    if(!validate){
+                        $scope.formError = true;
+                        return;
+                    }
+                }
+            }
+            if(validate){
+                $scope.formError = false;
+            }
+        }
+
+        function validateLetterAndTarget(quiz){
+            var validate = isLettersCorrect(quiz);
+            if(!validate){
+                return false;
+            }else{
+                if(!isTargetCorrect(quiz)){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }
+
+        function isLettersCorrect(quiz){
             var isNoLetters = true;
             for(var i=6; i<19; i++){
                 if(!quiz.letters[i]){
@@ -318,10 +360,20 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 }
             }
             if(isNoLetters){
-                $scope.formError = false;
+                return true;
             }else{
-                $scope.formError = true;
+                return false;
             }
+        }
+
+
+        function isTargetCorrect(quiz){
+            if(quiz.targets[0] && quiz.targets[2]){
+                if(!quiz.targets[1]){
+                    return false;
+                }
+            }
+            return true;
         }
 
         $scope.refresh = function(trial){
@@ -348,8 +400,9 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         $scope.saveAll = function(){
-            $scope.inProcess = true;
-            $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
+            //$scope.inProcess = true;
+            generateTrials();
+            /* $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
                     $rootScope.isChange = false;
@@ -358,6 +411,31 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     $scope.inProcess = false;
                     toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
+                */
+        }
+        function generateTrials(){
+            for(var i=0; i<$scope.tempTrials.length; i++){
+                generateQuizzes($scope.trials[i].quizzes, $scope.tempTrials[i].quizzes);
+            }
+        }
+
+        function generateQuizzes(quizzes, newQuizzes){
+            for(var i=0; i<quizzes.length; i++){
+                quizzes[i].blinkTime = newQuizzes[i].blinkTime;
+                quizzes[i].isCorrect = newQuizzes[i].isCorrect;
+                quizzes[i].length = calculateLettersLength(newQuizzes[i]);
+                quizzes[i].numberOfTarget = calculateNumberOfTarget(newQuizzes[i]);
+                generateQuestion(quizzes[i].question, newQuizzes[i]);
+            }
+        }
+
+        function calculateLettersLength(quiz){
+            return 9;
+        }
+        function calculateNumberOfTarget(quiz){
+            return 9;
+        }
+        function generateQuestion(question, quiz){
         }
 
         function generateTextQuestion(quiz, CASE){
