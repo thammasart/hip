@@ -376,12 +376,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             return true;
         }
 
-        $scope.refresh = function(trial){
-            for(var i=0; i<trial.quizzes.length; i++){
-                $scope.generateQuestion(trial.quizzes[i], trial.questionType);
-            }
-        }
-
         $scope.generateQuestion = function(quiz, questionType){
             $scope.change();
             var ENGLISH_CASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -499,9 +493,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             });
         };
         $scope.openResetPopup = function(quiz){
-            $modal.open({
+            var modalInstance = $modal.open({
                 templateUrl: 'resetAttentionBlinkValues.html',
                 controller: ResetAttentionBlinkValuesModalInstanceCtrl,
+            });
+
+            modalInstance.result.then(function (result){
+               $scope.resetParameter(quiz);
+               $scope.change();
             });
         };
     })
