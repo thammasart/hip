@@ -61,33 +61,33 @@
                                 <tbody>
                                     <tr ng-repeat="quiz in trial.quizzes">
                                         <td>{{ $index + 1}}</td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[0]" ng-pattern="single" ng-required="true"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[1]" ng-pattern="single" ng-required="true"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[2]" ng-pattern="single" ng-required="true"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[3]" ng-pattern="single" ng-required="true"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[4]" ng-pattern="single" ng-required="true"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[5]" ng-pattern="single" ng-required="true"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[6]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[7]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[8]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[9]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[10]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[11]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[12]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[13]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[14]" ng-pattern="single"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[0]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[1]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[2]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[3]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[4]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[5]" ng-pattern="single" ng-required="true" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[6]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[7]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[8]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[9]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[10]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[11]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[12]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[13]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.letters[14]" ng-pattern="single" ng-change="change()"></td>
 
 
 
 
-                                        <td><input type="text" class="form-control center-block input-small-word text-center first-col" ng-model="quiz.targets[0]" ng-required="true" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.targets[1]" ng-pattern="single"></td>
-                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.targets[2]" ng-pattern="single"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center first-col" ng-model="quiz.targets[0]" ng-required="true" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.targets[1]" ng-pattern="single" ng-change="change()"></td>
+                                        <td><input type="text" class="form-control center-block input-small-word text-center" ng-model="quiz.targets[2]" ng-pattern="single" ng-change="change()"></td>
 
 
-                                        <td><input type="checkbox" class="checkbox-inline" ng-model="quiz.isCorrect"></td>
+                                        <td><input type="checkbox" class="checkbox-inline" ng-model="quiz.isCorrect" ng-change="change()"></td>
 
-                                        <td><input type="text" class="form-control center-block input-small-two-word" ng-model="quiz.blinkTime" ng-required="true" ng-pattern="floatPattern"></td>
+                                        <td><input type="text" class="form-control center-block input-small-two-word" ng-model="quiz.blinkTime" ng-required="true" ng-pattern="floatPattern" ng-change="change()"></td>
 
                                         <td><button class="btn btn-danger btn-xs" >reset</button></td>
                                     </tr>

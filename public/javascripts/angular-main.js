@@ -301,6 +301,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
         $scope.change = function(){
             $rootScope.isChange = true;
+            console.log("change!");
         }
 
         $scope.refresh = function(trial){
