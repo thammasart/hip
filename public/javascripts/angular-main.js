@@ -400,9 +400,10 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         $scope.saveAll = function(){
-            //$scope.inProcess = true;
+            $scope.inProcess = true;
             generateTrials();
-            /* $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
+            console.log($scope.trials);
+            $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
                     $rootScope.isChange = false;
@@ -411,7 +412,8 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     $scope.inProcess = false;
                     toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
-                */
+                
+
         }
         function generateTrials(){
             for(var i=0; i<$scope.tempTrials.length; i++){
@@ -430,12 +432,40 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         function calculateLettersLength(quiz){
-            return 9;
+            for(var i=6; i<quiz.letters.length; i++){
+                if(!quiz.letters[i] || quiz.letters[i] === ''){
+                    return i;
+                }
+            }
+            return 20;
         }
         function calculateNumberOfTarget(quiz){
-            return 9;
+            if(quiz.targets[2]){
+                return 3;
+            }else if(quiz.targets[1]){
+                return 2;
+            }
+            return 1;
         }
         function generateQuestion(question, quiz){
+            question.correctAnswer = quiz.isCorrect;
+            var letter = quiz.targets[0];
+            if(quiz.targets[1]){
+                letter += quiz.targets[1];
+            }
+            if(quiz.targets[2]){
+                letter += quiz.targets[2];
+            }
+            question.letter = letter;
+
+            var set = "";
+            for(var i=0; i<quiz.letters.length; i++){
+                if(quiz.letters[i]){
+                    set += quiz.letters[i];
+                }
+            }
+            question.set = set;
+
         }
 
         function generateTextQuestion(quiz, CASE){
