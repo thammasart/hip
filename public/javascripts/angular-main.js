@@ -29,10 +29,10 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.dl = new Date();
         $rootScope.exp = {}
         $scope.status = 'CLOSE';
+        $rootScope.enableStatusButton = true;
 
         $scope.init = function() {
             $rootScope.$watch('exp', function () {
-                console.log($rootScope.exp);
                 if($rootScope.exp.expireDate) {
                     $scope.expireDate = new Date($rootScope.exp.expireDate);
                 }
@@ -72,9 +72,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 .success(function(result){
                     $scope.inProcess = false;
                     $rootScope.exp.status = $scope.status;
-                    console.log(result);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
                 });
         }
@@ -116,9 +114,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     status:$scope.status}})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
                 });
         }
@@ -268,9 +264,8 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 $scope.trials = result.trials;
                 $scope.tempTrials = angular.copy(result.trials);
                 initTempTrial();
-                console.log("finish init");
-                console.log($scope.tempTrials);
                 $rootScope.exp = $scope.trials[0].schedule;
+                validateParameter();
                 $scope.inProcess = false;
             }).error(function (result) {
                 $scope.inProcess = false;
@@ -324,12 +319,14 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     validate = validateLetterAndTarget(quiz);
                     if(!validate){
                         $scope.formError = true;
+                        $rootScope.enableStatusButton = false;
                         return;
                     }
                 }
             }
             if(validate){
                 $scope.formError = false;
+                $rootScope.enableStatusButton = true;
             }
         }
 
@@ -347,27 +344,28 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         function isLettersCorrect(quiz){
-            var isNoLetters = true;
-            for(var i=6; i<19; i++){
-                if(!quiz.letters[i]){
-                    for(var j=i+1;j<20;j++){
-                        if(quiz.letters[j]){
-                            isNoLetters = false;
-                            break;
-                        }
-                    }
-                    break;
+            for(var i=0; i<6; i++){
+                if(!quiz.letters[i] || quiz.letters[i] === ''){
+                    return false;
                 }
             }
-            if(isNoLetters){
-                return true;
-            }else{
-                return false;
+            for(var i=6; i<19; i++){
+                if(!quiz.letters[i] || quiz.letters[i] === ''){
+                    for(var j=i+1;j<20;j++){
+                        if(quiz.letters[j]){
+                            return false;
+                        }
+                    }
+                }
             }
+            return true;
         }
 
 
         function isTargetCorrect(quiz){
+            if(!quiz.targets[0] || quiz.targets[0] === ''){
+                return false;
+            }
             if(quiz.targets[0] && quiz.targets[2]){
                 if(!quiz.targets[1]){
                     return false;
@@ -396,7 +394,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.saveAll = function(){
             $scope.inProcess = true;
             generateTrials();
-            console.log($scope.trials);
             $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
@@ -1193,9 +1190,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 $scope.trials = result.trials;
                 $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function(result){
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -1456,9 +1451,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 initOpen();
                 calculateAllColors(result.colors);
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function(result){
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -1584,9 +1577,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         function destroyAlert(index){
-            console.log('destroy alert - ' + index);
             $scope.generateSuccess[index] = false;
-            console.log($scope.generateSuccess);
         }
 
         function Quiz(questionType, isNotFake){
@@ -1758,7 +1749,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 }
                 $scope.trials.push(obj);
             }
-            console.log($scope.trials);
             initPictures(questions);
         }
 
@@ -2184,7 +2174,6 @@ var VisualSearchModalInstanceCtrl = function ($scope, $modal, $modalInstance, sh
 
     $scope.showSharp = function(sharp){
         $scope.editSharp = sharp;
-        console.log($scope.editSharp);
     }
 };
 
@@ -2210,7 +2199,6 @@ ExpApp.controller('BrownPetersonQuestionCtrl', function($scope, $http, $modal, t
                 calculateShowQuestions();
                 $scope.inProcess = false;
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -2297,7 +2285,6 @@ ExpApp.controller('BrownPetersonQuestionCtrl', function($scope, $http, $modal, t
               var end = begin + $scope.itemsPerPage;
 
               $scope.showQuestions = $scope.questions.slice(begin, end);
-              console.log($scope.showQuestions);
           };
           $scope.showPage = function(page) {
               $scope.currentPage = page;

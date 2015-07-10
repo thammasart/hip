@@ -55,7 +55,7 @@
                         <span class="onoffswitch-switch"></span>
                     </label>
                 </div>-->
-                <button class="btn" ng-class="{'btn-primary' : status == 'OPEN', 'btn-danger' : status == 'CLOSE'}" ng-click="changeStatusComfirm()" ng-disabled="status == 'DISABLED'">{{status}}</button>
+                <button class="btn" ng-class="{'btn-primary' : status == 'OPEN', 'btn-danger' : status == 'CLOSE'}" ng-click="changeStatusComfirm()" ng-disabled="status == 'DISABLED' || !enableStatusButton">{{status}}</button>
             </div>
         </div>
     </div>
