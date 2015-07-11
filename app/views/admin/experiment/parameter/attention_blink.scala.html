@@ -20,7 +20,7 @@
                 <h3>Trial - {{$index + 1}}<span> </span>
                     <a href="/attention-blink/preview?trialId={{trial.id}}" style="margin-left:30px" class="btn btn-default" onclick="window.open(this.href, 'mywin','fullscreen=yes,toolbar=1,resizable=0'); return false;" >
                         Preview Trial</a></h3>
-                <div class="well" ng-class="{ 'well-warning' : formError, 'well-success' : !formError }">
+                <div class="well" ng-class="{ 'well-warning' : formError[$index], 'well-success' : !formError[$index] }">
                     <div class="row">
                         <div class="col-md-11">
                             <table class="table text-center">

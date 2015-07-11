@@ -249,7 +249,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
     })
     .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.trials = [];
-        $scope.formError = false;
+        $scope.formError = [];
             $scope.tempTrials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
             $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
@@ -274,6 +274,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
             function initTempTrial(){
                 for(var i=0; i<$scope.tempTrials.length; i++){
+                    $scope.formError.push(false);
                     for(var j=0; j<$scope.tempTrials[i].quizzes.length; j++){
                         $scope.tempTrials[i].quizzes[j] = initLetters($scope.tempTrials[i].quizzes[j]);
                     }
@@ -312,22 +313,33 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         function validateParameter(){
-            var validate = true;
+
             for(var i=0; i<$scope.tempTrials.length; i++){
+                var validate = true;
                 for(var j=0; j < $scope.tempTrials[i].quizzes.length ; j++){
                     var quiz = $scope.tempTrials[i].quizzes[j];
                     validate = validateLetterAndTarget(quiz);
                     if(!validate){
-                        $scope.formError = true;
+                        $scope.formError[i] = true;
                         $rootScope.enableStatusButton = false;
-                        return;
+                        break;
                     }
+                }
+                if(validate){
+                    $scope.formError[i] = false;
+                }
+            }
+
+            var validate = true;
+            for(var i=0; i<$scope.formError.length; i++){
+                if($scope.formError[i]){
+                    validate = false;
                 }
             }
             if(validate){
-                $scope.formError = false;
                 $rootScope.enableStatusButton = true;
             }
+
         }
 
         function validateLetterAndTarget(quiz){
