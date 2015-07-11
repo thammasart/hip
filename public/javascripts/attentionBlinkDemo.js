@@ -28,7 +28,7 @@ var question = new Array();
 
 function showInstruction (){
     clearInterval(startTimer);
-    document.getElementById("word").innerHTML=" เห็น B ปรากฏหลัง A หรือไม่ ";
+    document.getElementById("word").innerHTML=" เป้าหมายคือ A และ B ";
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
 function showTimer(){

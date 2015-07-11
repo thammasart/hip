@@ -28,11 +28,11 @@ function showInstruction (){
     trial_blinkTime = document.getElementById("blinkTime").innerHTML;
     genQuestion();
     if (question_letter.length == 1)
-        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) + " หรือไม่";
+        document.getElementById("word").innerHTML=" เป้าหมายคือ "+ question_letter.charAt(0);
     else if (question_letter.length == 2)
-        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) +" ปรากฏหลัง " + question_letter.charAt(1) + " หรือไม่";
+        document.getElementById("word").innerHTML=" เป้าหมายคือ "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1);
     else if (question_letter.length == 3)
-        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) +", " + question_letter.charAt(1)+ " หลัง " + question_letter.charAt(2) +" หรือไม่";
+        document.getElementById("word").innerHTML=" เป้าหมายคือ "+ question_letter.charAt(0) +" , " + question_letter.charAt(1)+ " และ " + question_letter.charAt(2);
     showInstructionTime = setInterval(function(){showTimer()},5000);
 }
 function showTimer(){
@@ -65,11 +65,11 @@ function showQuestionWord(){
     document.getElementById("me").style.visibility = "visible";
     document.getElementById("maiMe").style.visibility = "visible";
     if (question_letter.length == 1)
-        document.getElementById("word").innerHTML=" มี "+ question_letter.charAt(0) + " อยู่หรือไม่";
+        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) + " อยู่หรือไม่";
     else if (question_letter.length == 2)
-        document.getElementById("word").innerHTML=" มี "+ question_letter.charAt(0) +" และ " + question_letter.charAt(1) + " ติดกันหรือไม่";
+        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(1) +" ปรากฏหลัง" + question_letter.charAt(0) + "หรือไม่ ";
     else if (question_letter.length == 3)
-        document.getElementById("word").innerHTML=" มี "+ question_letter.charAt(0) +", " + question_letter.charAt(1) + "และ" + question_letter.charAt(2) +" ติดกันหรือไม่";
+        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(2) +" ปรากฏหลัง " + question_letter.charAt(1) + " ," + question_letter.charAt(0) +" หรือไม่";
 
     d = new Date();
     expDuration = d.getTime();
