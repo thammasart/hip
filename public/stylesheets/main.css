@@ -1,8 +1,5 @@
 .fixSize{
-    border:solid;
-    border-color:red;
     height:780px;
-    border-width:1px;
 }
 .homeMainWindow{
     width:100%;
