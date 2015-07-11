@@ -28,7 +28,7 @@ function showInstruction (){
     trial_blinkTime = document.getElementById("blinkTime").innerHTML;
     genQuestion();
     if (question_letter.length == 1)
-        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) = " หรือไม่";
+        document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) + " หรือไม่";
     else if (question_letter.length == 2)
         document.getElementById("word").innerHTML=" เห็น "+ question_letter.charAt(0) +" ปรากฏหลัง " + question_letter.charAt(1) + " หรือไม่";
     else if (question_letter.length == 3)
