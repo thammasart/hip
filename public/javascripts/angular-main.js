@@ -19,7 +19,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
     })
     .controller('ExController', function($scope, $rootScope, $http){
-        $scope.word = /^[a-zA-Z0-9ก-๙_ \-]*$/;
         $scope.value = 3;
         $scope.isEditName = false;
         $scope.isEditDate = false;
@@ -30,6 +29,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         $scope.dl = new Date();
         $rootScope.exp = {}
         $scope.status = 'CLOSE';
+        $rootScope.enableStatusButton = true;
 
         $scope.init = function() {
             $rootScope.$watch('exp', function () {
@@ -72,9 +72,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 .success(function(result){
                     $scope.inProcess = false;
                     $rootScope.exp.status = $scope.status;
-                    console.log(result);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
                 });
         }
@@ -116,9 +114,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     status:$scope.status}})
                 .success(function(result){
                     $scope.inProcess = false;
-                    console.log(result);
                 }).error(function(result){
-                    console.log('error:' + result);
                     $scope.inProcess = false;
                 });
         }
@@ -253,9 +249,13 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
     })
     .controller('AttentionBlinkCtrl', function($scope, $rootScope, $http, toaster, $modal){
         $scope.trials = [];
+        $scope.formError = [];
             $scope.tempTrials = [];
         $scope.word = /^[0-9]*\.?[0-9]+$/;
-        $scope.inProcess = false;
+            $scope.single = /^[a-zA-Z0-9ก-ฮ]{1}$/;
+            $scope.regIneger = /^(0|[1-9][0-9]*)$/;
+            $scope.floatPattern = /^(?:10(?:\.0+)?|[1-9](?:\.[0-9]+)?|0?\.[1-9]+|0?\.0[1-9]+)$/;
+        $scope.inProcess = true;
         $rootScope.isChange = false;
         $scope.questionTypes = ['THAI','ENGLISH','NUMBER'];
 
@@ -264,9 +264,8 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 $scope.trials = result.trials;
                 $scope.tempTrials = angular.copy(result.trials);
                 initTempTrial();
-                console.log("finish init");
-                console.log($scope.tempTrials);
                 $rootScope.exp = $scope.trials[0].schedule;
+                validateParameter();
                 $scope.inProcess = false;
             }).error(function (result) {
                 $scope.inProcess = false;
@@ -274,19 +273,18 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
             function initTempTrial(){
-                console.log("init temp");
                 for(var i=0; i<$scope.tempTrials.length; i++){
+                    $scope.formError.push(false);
                     for(var j=0; j<$scope.tempTrials[i].quizzes.length; j++){
                         $scope.tempTrials[i].quizzes[j] = initLetters($scope.tempTrials[i].quizzes[j]);
                     }
                 }
             }
             function initLetters(quiz){
-                console.log("initLetters");
                 quiz.letters = quiz.question.set.split("");
                 quiz.targets = quiz.question.letter.split("");
-                if(quiz.letters.length < 15){
-                    for(var i=quiz.letters.length; i< 15; i++){
+                if(quiz.letters.length < 20){
+                    for(var i=quiz.letters.length; i< 20; i++){
                         quiz.letters.push("");
                     }
                 }
@@ -295,18 +293,97 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                         quiz.letters.push("");
                     }
                 }
-                console.log(quiz);
                 return quiz;
             }
 
         $scope.change = function(){
             $rootScope.isChange = true;
+            validateParameter();
         }
 
-        $scope.refresh = function(trial){
-            for(var i=0; i<trial.quizzes.length; i++){
-                $scope.generateQuestion(trial.quizzes[i], trial.questionType);
+        $scope.resetParameter = function(quiz){
+            for(var i=0; i<quiz.letters.length; i++){
+                quiz.letters[i] = '';
             }
+            for(var i=0; i<quiz.targets.length; i++){
+                quiz.targets[i] = '';
+            }
+            quiz.isCorrect = false;
+            quiz.blinkTime = 0.1;
+        }
+
+        function validateParameter(){
+
+            for(var i=0; i<$scope.tempTrials.length; i++){
+                var validate = true;
+                for(var j=0; j < $scope.tempTrials[i].quizzes.length ; j++){
+                    var quiz = $scope.tempTrials[i].quizzes[j];
+                    validate = validateLetterAndTarget(quiz);
+                    if(!validate){
+                        $scope.formError[i] = true;
+                        $rootScope.enableStatusButton = false;
+                        break;
+                    }
+                }
+                if(validate){
+                    $scope.formError[i] = false;
+                }
+            }
+
+            var validate = true;
+            for(var i=0; i<$scope.formError.length; i++){
+                if($scope.formError[i]){
+                    validate = false;
+                }
+            }
+            if(validate){
+                $rootScope.enableStatusButton = true;
+            }
+
+        }
+
+        function validateLetterAndTarget(quiz){
+            var validate = isLettersCorrect(quiz);
+            if(!validate){
+                return false;
+            }else{
+                if(!isTargetCorrect(quiz)){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }
+
+        function isLettersCorrect(quiz){
+            for(var i=0; i<6; i++){
+                if(!quiz.letters[i] || quiz.letters[i] === ''){
+                    return false;
+                }
+            }
+            for(var i=6; i<19; i++){
+                if(!quiz.letters[i] || quiz.letters[i] === ''){
+                    for(var j=i+1;j<20;j++){
+                        if(quiz.letters[j]){
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+
+        function isTargetCorrect(quiz){
+            if(!quiz.targets[0] || quiz.targets[0] === ''){
+                return false;
+            }
+            if(quiz.targets[0] && quiz.targets[2]){
+                if(!quiz.targets[1]){
+                    return false;
+                }
+            }
+            return true;
         }
 
         $scope.generateQuestion = function(quiz, questionType){
@@ -328,6 +405,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
 
         $scope.saveAll = function(){
             $scope.inProcess = true;
+            generateTrials();
             $http({method:'PUT',url:'saveAttentionBlinkTrials',data:$scope.trials})
                 .success(function(result){
                     $scope.inProcess = false;
@@ -337,6 +415,60 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                     $scope.inProcess = false;
                     toaster.pop('warning', 'บันทึกข้อมูลล้มเหลว!', '', 5000);
                 });
+
+
+        }
+        function generateTrials(){
+            for(var i=0; i<$scope.tempTrials.length; i++){
+                generateQuizzes($scope.trials[i].quizzes, $scope.tempTrials[i].quizzes);
+            }
+        }
+
+        function generateQuizzes(quizzes, newQuizzes){
+            for(var i=0; i<quizzes.length; i++){
+                quizzes[i].blinkTime = newQuizzes[i].blinkTime;
+                quizzes[i].isCorrect = newQuizzes[i].isCorrect;
+                quizzes[i].length = calculateLettersLength(newQuizzes[i]);
+                quizzes[i].numberOfTarget = calculateNumberOfTarget(newQuizzes[i]);
+                generateQuestion(quizzes[i].question, newQuizzes[i]);
+            }
+        }
+
+        function calculateLettersLength(quiz){
+            for(var i=6; i<quiz.letters.length; i++){
+                if(!quiz.letters[i] || quiz.letters[i] === ''){
+                    return i;
+                }
+            }
+            return 20;
+        }
+        function calculateNumberOfTarget(quiz){
+            if(quiz.targets[2]){
+                return 3;
+            }else if(quiz.targets[1]){
+                return 2;
+            }
+            return 1;
+        }
+        function generateQuestion(question, quiz){
+            question.correctAnswer = quiz.isCorrect;
+            var letter = quiz.targets[0];
+            if(quiz.targets[1]){
+                letter += quiz.targets[1];
+            }
+            if(quiz.targets[2]){
+                letter += quiz.targets[2];
+            }
+            question.letter = letter;
+
+            var set = "";
+            for(var i=0; i<quiz.letters.length; i++){
+                if(quiz.letters[i]){
+                    set += quiz.letters[i];
+                }
+            }
+            question.set = set;
+
         }
 
         function generateTextQuestion(quiz, CASE){
@@ -367,6 +499,17 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
             $modal.open({
                 templateUrl: 'tutorial.html',
                 controller: TutorialModalInstanceCtrl,
+            });
+        };
+        $scope.openResetPopup = function(quiz){
+            var modalInstance = $modal.open({
+                templateUrl: 'resetAttentionBlinkValues.html',
+                controller: ResetAttentionBlinkValuesModalInstanceCtrl,
+            });
+
+            modalInstance.result.then(function (result){
+               $scope.resetParameter(quiz);
+               $scope.change();
             });
         };
     })
@@ -1059,9 +1202,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 $scope.trials = result.trials;
                 $rootScope.exp = $scope.trials[0].schedule;
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function(result){
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -1322,9 +1463,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 initOpen();
                 calculateAllColors(result.colors);
                 $scope.inProcess = false;
-                console.log($scope.trials);
             }).error(function(result){
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -1450,9 +1589,7 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
 
         function destroyAlert(index){
-            console.log('destroy alert - ' + index);
             $scope.generateSuccess[index] = false;
-            console.log($scope.generateSuccess);
         }
 
         function Quiz(questionType, isNotFake){
@@ -1624,7 +1761,6 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
                 }
                 $scope.trials.push(obj);
             }
-            console.log($scope.trials);
             initPictures(questions);
         }
 
@@ -2050,7 +2186,6 @@ var VisualSearchModalInstanceCtrl = function ($scope, $modal, $modalInstance, sh
 
     $scope.showSharp = function(sharp){
         $scope.editSharp = sharp;
-        console.log($scope.editSharp);
     }
 };
 
@@ -2076,7 +2211,6 @@ ExpApp.controller('BrownPetersonQuestionCtrl', function($scope, $http, $modal, t
                 calculateShowQuestions();
                 $scope.inProcess = false;
             }).error(function (result) {
-                console.log('error:' + result);
                 $scope.inProcess = false;
             });
         }
@@ -2163,7 +2297,6 @@ ExpApp.controller('BrownPetersonQuestionCtrl', function($scope, $http, $modal, t
               var end = begin + $scope.itemsPerPage;
 
               $scope.showQuestions = $scope.questions.slice(begin, end);
-              console.log($scope.showQuestions);
           };
           $scope.showPage = function(page) {
               $scope.currentPage = page;
@@ -2228,6 +2361,16 @@ var DeleteModalInstanceCtrl = function ($scope,$modalInstance, questions) {
 
 
 var TutorialModalInstanceCtrl = function($scope, $modalInstance){
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+}
+
+var ResetAttentionBlinkValuesModalInstanceCtrl = function($scope, $modalInstance){
     $scope.ok = function () {
         $modalInstance.close();
     };

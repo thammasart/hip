@@ -51,6 +51,11 @@ public class Question extends Model{
         this.questionType = questionType; 
 	}
 
+    public static Question create(){
+        Question question = new Question("", "", false, QuestionType.ENGLISH);
+        return question;
+    }
+
     public static Question generateQuestion(QuestionType questionType, int length, int numberOfTarget, boolean isCorrect){
         StringBuffer setbuffer = new StringBuffer();
         String typeString = getQuestionTypeCase(questionType);
