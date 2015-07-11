@@ -185,13 +185,11 @@ public class AttentionBlink extends Controller {
                     Question question = Question.find.byId(quiz.question.id);
                     question.set = temp.question.set;
                     question.letter = temp.question.letter;
-                    question.questionType = temp.question.questionType;
+                    question.correctAnswer = temp.question.correctAnswer;
                     question.update();
                     quiz.update();
 
                 }
-                trial.questionType = obj.questionType;
-                trial.update();
             }
             result.put("message", "success");
             result.put("status", "ok");

@@ -1023,12 +1023,6 @@ public class Admin extends Controller {
         
         for(models.attentionBlink.Trial trial : trials){
             boolean isQuestionChange = false;
-            String questionType = requestData.get("questionType_" + trial.id);
-            if(!trial.questionType.toString().equals(questionType)){
-                trial.changeQuestionType(questionType);
-                isQuestionChange = true;
-                trial.update();
-            }
 
             for(models.attentionBlink.Quiz quiz : trial.quizzes){
                 boolean isCorrectChange = false;

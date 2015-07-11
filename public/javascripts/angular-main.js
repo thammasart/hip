@@ -452,6 +452,8 @@ var ExpApp = angular.module('ExperimentCreator', ['ui.bootstrap','toaster']);
         }
         function generateQuestion(question, quiz){
             question.correctAnswer = quiz.isCorrect;
+            console.log(question);
+            console.log(quiz);
             var letter = quiz.targets[0];
             if(quiz.targets[1]){
                 letter += quiz.targets[1];
