@@ -185,7 +185,6 @@ POST        /admin/experiment/brown-peterson/question/save          controllers.
 GET         /admin/experiment/brown-peterson/question/random        controllers.Admin.randomBrownPetersonQuestion(exp_id : Long, quiz_id : Long)
 GET         /admin/experiment/stroof-effect/question/change         controllers.Admin.switchStroopEffectQuestion(exp_id : Long, quiz_id : Long)
 POST        /admin/experiment/parameter/stroopEffect                controllers.Admin.saveStroopEffectParameter(exp_id : Long)
-POST        /admin/experiment/parameter/attention-blink             controllers.Admin.saveAttentionBlinkParameter(exp_id : Long)
 POST        /admin/experiment/parameter/signal-detection            controllers.Admin.saveSignalDetectionParameter(exp_id : Long)
 POST        /admin/experiment/parameter/simon-effect                controllers.Admin.saveSimonEffectParameter(exp_id : Long)
 
