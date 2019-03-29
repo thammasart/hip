@@ -36,7 +36,7 @@ window.onhashchange=function(){window.location.hash="no-back-button";}
    
   <h3 align="center" id="timeLeft"> &nbsp </h3>  
   <span class="headerBox" id="ansTag">คำตอบ</span>
-  <span class="headerNumberBox" id="numberTag">ใส่ตัวเลข</span>
+  <span class="headerNumberBox" id="numberTag" onkeypress="return event.keyCode != 13;">ใส่ตัวเลข</span>
         <form id = "answerForm" action="@routes.BrownPeterson.saveAnswer(trial.id, questionNo, isPreview)" method="post" name="answerForm" >
           <input class="inputBox" autocomplete="off" maxlength="20" id = "firstWord" name = "firstWord" type="text" placeholder="   คำตอบ" autofocus />
           <input class="inputBox"  autocomplete="off" maxlength="20"id = "secondWord" name = "secondWord" type="text" placeholder="   คำตอบ" />

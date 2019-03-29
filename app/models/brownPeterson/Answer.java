@@ -3,6 +3,7 @@ import models.*;
 import play.db.ebean.*;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -52,19 +53,25 @@ public class Answer extends Model implements AnswerResult{
 		this.user = user;
 		this.quiz = quiz;
 
-		Question q = quiz.question;
-		if(!q.firstWord.equalsIgnoreCase(firstWord) && !q.firstWord.equalsIgnoreCase(secondWord) && !q.firstWord.equalsIgnoreCase(thirdWord)){
-			this.isCorrect = false;
-		}
-		else if(!q.secondWord.equalsIgnoreCase(firstWord) && !q.secondWord.equalsIgnoreCase(secondWord) && !q.secondWord.equalsIgnoreCase(thirdWord)){
-			this.isCorrect = false;
-		}
-		else if(!q.thirdWord.equalsIgnoreCase(firstWord) && !q.thirdWord.equalsIgnoreCase(secondWord) && !q.thirdWord.equalsIgnoreCase(thirdWord)){
-			this.isCorrect = false;
-		}
-		else{
-			this.isCorrect = true;
-		}
+        Question q = quiz.question;
+        String questions[] = new String[3];
+        questions[0] = q.firstWord;
+        questions[1] = q.secondWord;
+        questions[2] = q.thirdWord;
+        Arrays.sort(questions);
+
+        String answers[] = new String[3];
+        answers[0] = firstWord;
+        answers[1] = secondWord;
+        answers[2] = thirdWord;
+        Arrays.sort(answers);
+
+        this.isCorrect = true;
+        for(int i=0; i<3; i++){
+            if(!questions[i].equalsIgnoreCase(answers[i])){
+                this.isCorrect = false;
+            }
+        }
 	}
 
     @Override
