@@ -8,16 +8,16 @@ import models.visualSearch.Trial;
 
 public class Global extends GlobalSettings {
 	@Override
-	public void onStart(Application app) {
+		public void onStart(Application app) {
 		if(User.find.findRowCount() == 0) {
 			Ebean.save((List) Yaml.load("initial-data.yml"));
-            Ebean.save((List) Yaml.load("sternbergSearch.yml"));
-            Ebean.save((List) Yaml.load("magicNumber7.yml"));
+			Ebean.save((List) Yaml.load("sternbergSearch.yml"));
+			Ebean.save((List) Yaml.load("magicNumber7.yml"));
 			Ebean.save((List) Yaml.load("simonEffect.yml"));
 			Ebean.save((List) Yaml.load("mullerLayer.yml"));
 			Ebean.save((List) Yaml.load("garnerInterference.yml"));
 			Ebean.save((List) Yaml.load("visualSearch.yml"));
-            Ebean.save((List) Yaml.load("changeBlindness.yml"));
+			Ebean.save((List) Yaml.load("changeBlindness.yml"));
 			Ebean.save((List) Yaml.load("user.yml"));
 		}
 	}
