@@ -45,11 +45,11 @@ public class Answer extends Model implements AnswerResult{
 	public Quiz quiz;
 
 	public Answer(String firstWord,String secondWord,String thirdWord,double usedTime,String countdownResult, User user, Quiz quiz){
-		this.firstWord = firstWord;
-		this.secondWord = secondWord;
-		this.thirdWord = thirdWord;
+		this.firstWord = firstWord.replaceAll("\\s+","");
+		this.secondWord = secondWord.replaceAll("\\s+","");
+		this.thirdWord = thirdWord.replaceAll("\\s+","");
 		this.usedTime = usedTime;
-		this.countdownResult = countdownResult;
+        this.countdownResult = countdownResult.replaceAll("\\s+","");
 		this.user = user;
 		this.quiz = quiz;
 
