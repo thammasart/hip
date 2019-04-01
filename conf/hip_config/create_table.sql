@@ -8,6 +8,8 @@ create table brown_peterson_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_brown_peterson_answer primary key (id))
 ;
 
@@ -18,6 +20,8 @@ create table muller_layer_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_muller_layer_answer primary key (id))
 ;
 
@@ -28,6 +32,8 @@ create table simon_effect_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_simon_effect_answer primary key (id))
 ;
 
@@ -38,6 +44,8 @@ create table attention_blink_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_attention_blink_answer primary key (id))
 ;
 
@@ -48,6 +56,8 @@ create table garner_interference_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_garner_interference_answer primary key (id))
 ;
 
@@ -58,6 +68,8 @@ create table stroop_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_stroop_answer primary key (id))
 ;
 
@@ -68,6 +80,8 @@ create table sternberg_search_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_sternberg_search_answer primary key (id))
 ;
 
@@ -79,6 +93,8 @@ create table visual_search_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_visual_search_answer primary key (id))
 ;
 
@@ -89,6 +105,8 @@ create table position_error_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_position_error_answer primary key (id))
 ;
 
@@ -99,6 +117,8 @@ create table magic_number_7_answer (
   score                     integer,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_magic_number_7_answer primary key (id))
 ;
 
@@ -109,6 +129,8 @@ create table signal_detection_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_signal_detection_answer primary key (id))
 ;
 
@@ -120,6 +142,8 @@ create table change_blindness_answer (
   is_correct                boolean,
   user_username             varchar(20),
   quiz_id                   bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_change_blindness_answer primary key (id))
 ;
 
@@ -128,6 +152,8 @@ create table garner_interference_color (
   color_code                varchar(255),
   color                     varchar(255),
   saturation                integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_garner_interference_color primary key (id))
 ;
 
@@ -135,10 +161,12 @@ create table experiment_schedule (
   id                        bigint not null AUTO_INCREMENT,
   name                      varchar(30) not null,
   no_of_trial               integer(2) not null,
-  start_date                timestamp not null,
-  expire_date               timestamp not null,
+  start_date                timestamp not null default now(),
+  expire_date               timestamp not null default now(),
   experiment_type           integer,
   status                    integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_experiment_schedule_experiment_type check (experiment_type in (0,1,2,3,4,5,6,7,8,9,10,11)),
   constraint ck_experiment_schedule_status check (status in (0,1,2)),
   constraint pk_experiment_schedule primary key (id))
@@ -151,6 +179,8 @@ create table brown_peterson_question (
   third_word                varchar(20) not null,
   trigram_type              varchar(255),
   trigram_language          varchar(255),
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_brown_peterson_question primary key (id))
 ;
 
@@ -159,6 +189,8 @@ create table stroop_engword_question (
   color_word                varchar(20) not null,
   ink_color                 varchar(20) not null,
   question_type             integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_stroop_engword_question_question_type check (question_type in (0,1,2)),
   constraint pk_stroop_engword_question primary key (id))
 ;
@@ -167,6 +199,8 @@ create table sternberg_search_question (
   id                        bigint not null AUTO_INCREMENT,
   memory_set                varchar(255),
   question_type             integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_sternberg_search_question_question_type check (question_type in (0,1,2)),
   constraint pk_sternberg_search_question primary key (id))
 ;
@@ -179,6 +213,8 @@ create table change_blindness_question (
   answer_area_height        double,
   position_of_change_x      double,
   position_of_change_y      double,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_change_blindness_question primary key (id))
 ;
 
@@ -186,6 +222,8 @@ create table magic_number_7_question (
   id                        bigint not null AUTO_INCREMENT,
   memory_set                varchar(255),
   question_type             integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_magic_number_7_question_question_type check (question_type in (0,1,2)),
   constraint pk_magic_number_7_question primary key (id))
 ;
@@ -197,6 +235,8 @@ create table muller_layer_question (
   line3                     integer,
   line4                     integer,
   line5                     integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_muller_layer_question_line1 check (line1 in (0,1,2,3,4)),
   constraint ck_muller_layer_question_line2 check (line2 in (0,1,2,3,4)),
   constraint ck_muller_layer_question_line3 check (line3 in (0,1,2,3,4)),
@@ -211,6 +251,8 @@ create table attention_blink_question (
   question_set              varchar(20) not null,
   correct_answer            boolean,
   question_type             integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_attention_blink_question_question_type check (question_type in (0,1,2)),
   constraint pk_attention_blink_question primary key (id))
 ;
@@ -219,6 +261,8 @@ create table position_error_question (
   id                        bigint not null AUTO_INCREMENT,
   memory_set                varchar(255),
   question_type             integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_position_error_question_question_type check (question_type in (0,1,2)),
   constraint pk_position_error_question primary key (id))
 ;
@@ -228,6 +272,8 @@ create table simon_effect_question (
   color                     varchar(255),
   alphabet                  varchar(255),
   direction                 varchar(255),
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_simon_effect_question primary key (id))
 ;
 
@@ -239,6 +285,8 @@ create table garner_interference_question (
   size_question             varchar(255),
   color_match               boolean,
   size_match                boolean,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_garner_interference_question primary key (id))
 ;
 
@@ -246,12 +294,16 @@ create table signal_detection_question (
   id                        bigint not null AUTO_INCREMENT,
   target                    varchar(255),
   noise                     varchar(255),
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_signal_detection_question primary key (id))
 ;
 
 create table visual_search_question (
   id                        bigint not null AUTO_INCREMENT,
   sharps                    TEXT,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_visual_search_question primary key (id))
 ;
 
@@ -260,6 +312,8 @@ create table garner_interference_quiz (
   question_type             integer,
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_garner_interference_quiz_question_type check (question_type in (0,1,2)),
   constraint pk_garner_interference_quiz primary key (id))
 ;
@@ -269,6 +323,8 @@ create table simon_effect_quiz (
   position                  varchar(255),
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_simon_effect_quiz primary key (id))
 ;
 
@@ -286,6 +342,8 @@ create table visual_search_quiz (
   frame_size                integer,
   question_id               bigint,
   trial_id                  bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_visual_search_quiz_target check (target in (0,1,2,3,4,5)),
   constraint ck_visual_search_quiz_frame_size check (frame_size in (0,1,2,3,4)),
   constraint pk_visual_search_quiz primary key (id))
@@ -295,6 +353,8 @@ create table change_blindness_quiz (
   id                        bigint not null AUTO_INCREMENT,
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_change_blindness_quiz primary key (id))
 ;
 
@@ -307,6 +367,8 @@ create table muller_layer_Quiz (
   is_positive               boolean,
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_muller_layer_Quiz_length_type check (length_type in (0,1,2)),
   constraint pk_muller_layer_Quiz primary key (id))
 ;
@@ -315,6 +377,8 @@ create table stroop_quiz (
   id                        bigint not null AUTO_INCREMENT,
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_stroop_quiz primary key (id))
 ;
 
@@ -325,6 +389,8 @@ create table signal_detection_quiz (
   length                    integer,
   question_id               bigint,
   trial_id                  bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_signal_detection_quiz primary key (id))
 ;
 
@@ -334,6 +400,8 @@ create table sternberg_search_quiz (
   is_true                   boolean,
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_sternberg_search_quiz primary key (id))
 ;
 
@@ -344,6 +412,8 @@ create table magic_number_7_quiz (
   length                    integer,
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_magic_number_7_quiz primary key (id))
 ;
 
@@ -355,6 +425,8 @@ create table attention_blink_quiz (
   is_correct                boolean,
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_attention_blink_quiz primary key (id))
 ;
 
@@ -364,6 +436,8 @@ create table brown_peterson_quiz (
   flash_time                integer(20),
   trial_id                  bigint,
   question_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_brown_peterson_quiz primary key (id))
 ;
 
@@ -372,16 +446,20 @@ create table position_error_quiz (
   length                    integer,
   question_id               bigint,
   trial_id                  bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_position_error_quiz primary key (id))
 ;
 
 create table time_log (
   id                        bigint not null AUTO_INCREMENT,
-  start_time                timestamp,
-  end_time                  timestamp,
+  start_time                timestamp default now(),
+  end_time                  timestamp default now(),
   user_username             varchar(20),
   trial_id                  bigint,
   exp_id                    bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_time_log primary key (id))
 ;
 
@@ -391,6 +469,8 @@ create table signal_detection_trial (
   total_score               double,
   total_used_time           double,
   total_user                integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_signal_detection_trial primary key (id))
 ;
 
@@ -402,6 +482,8 @@ create table stroop_trial (
   total_used_time           double,
   total_user                integer,
   schedule_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_stroop_trial_question_type check (question_type in (0,1,2)),
   constraint pk_stroop_trial primary key (id))
 ;
@@ -412,6 +494,8 @@ create table visual_search_trial (
   total_score               double,
   total_used_time           double,
   total_user                integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_visual_search_trial primary key (id))
 ;
 
@@ -423,6 +507,8 @@ create table brown_peterson_trial (
   trigram_type              varchar(20) not null,
   trigram_language          varchar(20) not null,
   schedule_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_brown_peterson_trial primary key (id))
 ;
 
@@ -434,6 +520,8 @@ create table attention_blink_trial (
   total_score               double,
   total_used_time           double,
   schedule_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_attention_blink_trial_question_type check (question_type in (0,1,2)),
   constraint pk_attention_blink_trial primary key (id))
 ;
@@ -448,6 +536,8 @@ create table position_error_trial (
   total_user                integer,
   number_of_quiz            integer,
   schedule_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_position_error_trial_question_type check (question_type in (0,1,2)),
   constraint pk_position_error_trial primary key (id))
 ;
@@ -459,6 +549,8 @@ create table change_blindness_trial (
   total_score               double,
   total_used_time           double,
   total_user                integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_change_blindness_trial primary key (id))
 ;
 
@@ -471,6 +563,8 @@ create table simon_effect_trial (
   total_user                integer,
   total_used_time           double,
   schedule_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_simon_effect_trial_question_type check (question_type in (0,1)),
   constraint pk_simon_effect_trial primary key (id))
 ;
@@ -488,6 +582,8 @@ create table sternberg_search_trial (
   two_char_is_in_correct    integer,
   question_type             integer,
   schedule_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_sternberg_search_trial_question_type check (question_type in (0,1,2)),
   constraint pk_sternberg_search_trial primary key (id))
 ;
@@ -510,6 +606,8 @@ create table garner_interference_trial (
   color_dark_id             bigint,
   color_light_id            bigint,
   schedule_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_garner_interference_trial_feature check (feature in (0,1)),
   constraint pk_garner_interference_trial primary key (id))
 ;
@@ -522,6 +620,8 @@ create table muller_layer_trial (
   total_user                integer,
   display_time              integer,
   schedule_id               bigint,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint pk_muller_layer_trial primary key (id))
 ;
 
@@ -533,6 +633,8 @@ create table magic_number_7_trial (
   question_type             integer,
   schedule_id               bigint,
   number_of_quiz            integer,
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_magic_number_7_trial_question_type check (question_type in (0,1,2)),
   constraint pk_magic_number_7_trial primary key (id))
 ;
@@ -552,6 +654,8 @@ create table user (
   e_mail                    varchar(255),
   faculty                   varchar(255),
   department                varchar(255),
+  created_at                timestamp not null default now(),
+  updated_at                timestamp not null default now() on update now(),
   constraint ck_user_status check (status in (0,1,2,3,4,5,6)),
   constraint pk_user primary key (username))
 ;
