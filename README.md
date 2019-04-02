@@ -17,7 +17,7 @@ PATH=$PATH:$PLAY_HOME
 export PLAY_HOME
 export JAVA_HOME
 export PATH
-```sh
+```
 
 ###  test run port 90
 ```sh
@@ -94,6 +94,7 @@ unzip hip-1.0-SNAPSHOT.zip
 # db.default.url="jdbc:mysql://localhost/[DATABASE_NAME]?characterEncoding=UTF-8"
 # db.default.user=[USERNAME]
 # db.default.password=["PASSWORD"]
+```
 
 ### setup corn job
 ##### open corn job
@@ -103,3 +104,4 @@ sudo crontab -e
 ##### add
 ```sh
 @reboot ( sleep 60 ; /home/hip/hip/target/universal/hip-1.0-SNAPSHOT/bin/hip -Dhttp.port=80 )
+```
