@@ -1,10 +1,23 @@
-This is your new Play application
-=====================================
-
-This file will be packaged with your application, when using `play dist`.
-
 
 # for Development
+
+### install JAVA
+```sh
+sudo apt-get install openjdk-8-jdk openjdk-8-jre
+```
+
+### set PATH
+##### edit /etc/profile
+```sh
+JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+PATH=$PATH:$JAVA_HOME
+PLAY_HOME="/home/hip/play/play-2.2.1"
+PATH=$PATH:$PLAY_HOME
+
+export PLAY_HOME
+export JAVA_HOME
+export PATH
+```sh
 
 ###  test run port 90
 ```sh
@@ -90,4 +103,3 @@ sudo crontab -e
 ##### add
 ```sh
 @reboot ( sleep 60 ; /home/hip/hip/target/universal/hip-1.0-SNAPSHOT/bin/hip -Dhttp.port=80 )
-```
