@@ -11,7 +11,7 @@ sudo apt-get install openjdk-8-jdk openjdk-8-jre
 ```sh
 JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 PATH=$PATH:$JAVA_HOME
-PLAY_HOME="/home/hip/play/play-2.2.1"
+PLAY_HOME="/home/hip/play/play-2.2.6"
 PATH=$PATH:$PLAY_HOME
 export JAVA_HOME
 export PLAY_HOME
@@ -19,7 +19,7 @@ export PATH
 ```
 ##### set play for root user edit /etc/sudoers  
 ```sh
-Defaults        secure_path="<old>:/home/hip/play/play-2.2.1"
+Defaults        secure_path="<old>:/home/hip/play/play-2.2.6"
 ```
 
 ### play
