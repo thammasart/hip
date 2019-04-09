@@ -55,15 +55,15 @@ public class Answer extends Model implements AnswerResult{
 
         Question q = quiz.question;
         String questions[] = new String[3];
-        questions[0] = q.firstWord;
-        questions[1] = q.secondWord;
-        questions[2] = q.thirdWord;
+        questions[0] = q.firstWord.toLowerCase();
+        questions[1] = q.secondWord.toLowerCase();
+        questions[2] = q.thirdWord.toLowerCase();
         Arrays.sort(questions);
 
         String answers[] = new String[3];
-        answers[0] = this.firstWord;
-        answers[1] = this.secondWord;
-        answers[2] = this.thirdWord;
+        answers[0] = this.firstWord.toLowerCase();
+        answers[1] = this.secondWord.toLowerCase();
+        answers[2] = this.thirdWord.toLowerCase();
         Arrays.sort(answers);
 
         this.isCorrect = true;
