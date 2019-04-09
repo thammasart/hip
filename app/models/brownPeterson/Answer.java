@@ -61,9 +61,9 @@ public class Answer extends Model implements AnswerResult{
         Arrays.sort(questions);
 
         String answers[] = new String[3];
-        answers[0] = firstWord;
-        answers[1] = secondWord;
-        answers[2] = thirdWord;
+        answers[0] = this.firstWord;
+        answers[1] = this.secondWord;
+        answers[2] = this.thirdWord;
         Arrays.sort(answers);
 
         this.isCorrect = true;
