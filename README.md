@@ -111,5 +111,5 @@ sudo crontab -e
 ```
 ##### add
 ```sh
-@reboot ( sleep 60 ; /home/hip/hip/target/universal/hip-1.0-SNAPSHOT/bin/hip -Dhttp.port=80 )
+@reboot ( sleep 60 ; rm /home/hip/hip-1.0-SNAPSHOT/RUNNING_PID ; /home/hip/hip-1.0-SNAPSHOT/bin/hip -Dhttp.port=80 )
 ```
